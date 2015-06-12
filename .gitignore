@@ -1,0 +1,15 @@
+.DS_Store
+.sass-cache
+build
+Desktop.ini
+node_modules
+bower_components
+**/*.log
+public
+plugins
+app/js/config.js
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

@@ -1,0 +1,46 @@
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-family: 'open-sans', sans-serif;
+}
+label, p {
+  color: #337ab7;
+  font-weight: 400;
+}
+h4 {
+  color: #3B3B3B;
+  font-weight: 200;
+  letter-spacing: 0.7;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.activate-container {
+  max-width: 800px;
+  height: auto;
+}
+.logo {
+  margin-top: 20px;
+  text-align: center;
+}
+.logo img {
+  width: 50%;
+  max-width: 300px;
+  height: auto;
+}
+.photos {
+  padding: 18px;
+  background-color: #eeeeee;
+  margin-bottom: 10px;
+}
+.profile-placeholder {
+  margin-top: 20px;
+}
+.choose-profile-photo {
+  text-align: left;
+}
+.avatar-choice {
+  max-height: 150px;
+  max-width: 100%;
+  height: auto;
+}

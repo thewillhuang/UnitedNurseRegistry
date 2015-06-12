@@ -1,0 +1,67 @@
+@import './themes/_dropzoneTheme.scss';
+
+.has-feedback label~.form-control-feedback {
+  top: 35px;
+}
+
+.modal-title {
+  color: white;
+}
+
+.elip {
+  color: #EB374C;
+}
+
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+    margin: 10px;
+    margin-top: 28px;
+    margin-left: -13px;
+}
+.fileUpload input.upload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+
+.circleOfTrustDataTitle {
+  font-family: 'open_sanssemibold';
+  color: $darkgrey;
+}
+
+.circleOfTrustName {
+  font-family: 'open_sanssemibold';
+}
+
+.modal-title {
+  color: $lifespeedPink;
+}
+
+.lifespeedPink {
+  color: $lifespeedPink;
+}
+
+.bellNumber {
+  font-weight: 100;
+  position: relative;
+  bottom: 2px;
+}
+
+#reactNavItems{
+  margin-right:0px;
+}
+
+.control-label {
+  color: #02658C;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active {
+  background-color: #02658C;
+}

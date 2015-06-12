@@ -1,0 +1,5 @@
+{
+	"directory": "app/plugins",
+	"analytics": false,
+	"interactive" : false
+}

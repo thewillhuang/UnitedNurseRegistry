@@ -1,0 +1,16 @@
+.DS_Store
+.sass-cache
+build
+Desktop.ini
+node_modules
+bower_components
+**/*.log
+public
+app/plugins
+app/js/config.js
+gulp/node_modules
+Dockerfile
+.dockerignore
+.git
+.gitignore
+README.md

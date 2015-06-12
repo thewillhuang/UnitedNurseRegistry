@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<!--
+Lifespeed.io
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+  <meta charset="utf-8" />
+  <title>Lifespeeed</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta content="" name="description" />
+  <meta content="" name="author" />
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" />
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+  <link href="../plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link href="../plugins/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css" />
+  <link href="../plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="../plugins/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/animate/animate.css" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/components.css" id="style_components" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/plugins.css" rel="stylesheet" type="text/css" />
+  <link href="../css/layout.css" rel="stylesheet" type="text/css" />
+  <link href="../css/themes/light2.css" rel="stylesheet" type="text/css" type="text/css" />
+  <link href="../css/custom.css" rel="stylesheet" type="text/css" />
+  <link href="../css/lifespeed.css" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/bootstrap-slider.css" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/bootstrap-tagsinput.css" rel="stylesheet" type="text/css" />
+  <link href="../plugins/sweetalert/lib/sweet-alert.css" rel="stylesheet" type="text/css" />
+  <link href="../css/boards.css" rel="stylesheet" type="text/css" />
+  <link href="../css/notes.css" rel="stylesheet" type="text/css" />
+  <link href="../css/viewer.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body class="page-header-fixed page-quick-sidebar-over-content page-style-square" id="LifespeedBodyTag">
+  <div class="page-header navbar navbar-fixed-top">
+    <div class="page-header-inner">
+      <div class="page-logo">
+        <a href="../pages/dashboard.html">
+          <img src="../images/headerlogo.jpg" style="width: 80%; display: inline" alt="logo" class="logo-default" />
+        </a>
+        <div class="menu-toggler sidebar-toggler hide" style="display: inline">
+        </div>
+      </div>
+
+      <a href="javascript:;" id="toggleMenu" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
+
+      <div class="top-menu">
+        <ul class="nav navbar-nav pull-right">
+          <!-- <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+              <i class="icon-bell"></i>
+              <span class="badge"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="external">
+                <h3>
+                  <span class="bold">0 pending</span> notifications</h3>
+                <a href="#">view all</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+              <i class="icon-envelope"></i>
+              <span class="badge"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="external">
+                <h3>You have
+                  <span class="bold">0 New</span> Messages</h3>
+                <a href="#">view all</a>
+              </li>
+            </ul>
+          </li> -->
+
+          <li class="dropdown dropdown-user">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+              <img id="headerAvatar" class="img-circle" src="../images/ProfilePlaceholder.png" />
+              <!-- <span id="userFirstName" class="username username-hide-on-mobile"></span> -->
+              <!-- <i class="fa fa-angle-down"></i> -->
+            </a>
+          </li>
+
+          <li>
+            <a href="#" id="logOutButton">Log Out <i class="fa fa-sign-out"></i></a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav pull-right" id="reactNavItems">
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix">
+  </div>
+  <div class="page-container">
+    <div class="page-sidebar-wrapper">
+      <div class="page-sidebar navbar-collapse collapse toggled" id="pageSidebar">
+        <ul id="page-sidebar-menu" class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+          <li class="sidebar-toggler-wrapper">
+            <div class="sidebar-toggler">
+            </div>
+          </li>
+
+          <li class="start ">
+            <a href="dashboard.html">
+              <i class="icon-home"></i>
+              <span class="title">Home</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="profile.html">
+              <i class="icon-user"></i>
+              <span class="title">Profile</span>
+              <!-- <span class="arrow "></span> -->
+            </a>
+          </li>
+
+          <!-- <li>
+            <a href="glimpse-landing.html">
+              <i class="icon-eye"></i>
+              <span class="title">Glimpse</span>
+            </a>
+          </li> -->
+
+          <li>
+            <a href="gallery-view.html">
+              <i class="icon-picture"></i>
+              <span class="title">Gallery</span>
+              <!-- <span class="arrow"></span> -->
+            </a>
+
+          </li>
+          <li>
+            <a href="boards.html">
+              <i class="icon-layers"></i>
+              <span class="title">Boards</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="user-file-uploader.html">
+              <i class="icon-cloud-upload"></i>
+              <span class="title">Upload</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="medical-record-request.html">
+              <i class="fa fa-user-md"></i>
+              <span class="title">Request Medical Records</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="clientValidate.html">
+              <i class="fa fa-check-circle-o"></i>
+              <span class="title">Inbound File Verification</span>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+
+    <div class="page-content-wrapper">
+      <div class="page-content">
+
+        <div class="row">
+          <div class="col-md-12">
+
+            <div id="noteModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content note-content">
+                  <div>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="row note-header">
+                      <h3 class="pull-left note-title">Notes</h3>
+                    </div>
+                    <div class="row note-links">
+                      <a id="viewNotesTab" class="active-note-link">View Notes</a>
+                      <a id="addNotesTab">Add Notes</a>
+                    </div>
+                  </div>
+                  <div class="modal-body row note-container">
+                    <div class="row" id="viewNotesRow">
+                      <div class="col-md-12" id="previousNotes">
+
+                      </div>
+                    </div>
+                    <div class="row" class="add-notes" id="addNotesRow" style="margin-left: 10px;">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div id="noteImage"></div>
+                        </div>
+                        <div class="row" class="add-notes">
+                          <div class="dropdown pull-left">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="noteDropdown" data-toggle="dropdown" aria-expanded="true" style="margin-bottom: 10px; margin-top: 10px; text-align: center; font-size: 1em;">
+                              Select Note Category
+                              <i class="fa fa-chevron-down"></i>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="noteDropdown" id="noteDropdownList">
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Freeform</a></li>
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Prescription</a></li>
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Current Medications</a></li>
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Medical History</a></li>
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Allergies</a></li>
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Medical Product Receipt</a></li>
+                              <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Medical Service Receipt</a></li>
+                            </ul>
+                          </div>
+                          <button type="button" class="btn btn-primary pull-right" id="addNoteBtn">Save</button>
+                        </div>
+                        <div class="row" id="addNoteArea">
+                          <div id="categoryForm">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div id="editBoardModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 style="text-align: center; color: #EB374C; font-weight: 400; font-size: 1.5em;">Edit Board</h4>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="editBoardName">Board Name</label>
+                          <input type="text" class="form-control" id="editBoardName" placeholder="">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="editBoardCategories">Add Tags</label>
+                          <div class="form-group">
+                            <input type="text" class="form-control" id="editBoardCategories" placeholder="" data-role="tagsinput">
+                          </div>
+                        </div>
+                        <div id="previousCategories"></div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-12">
+                        <label for="editBoardDescription">Description</label>
+                        <textarea class="form-control" id="editBoardDescription" rows="4" placeholder="Enter in notes or a messsage about this board"></textarea>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-danger" id="editBoardBtn">Edit Board</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <div id="boardGlimpseModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="glimpseModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h4 style="text-align: center; color: #3ba3d7; font-weight: 600;"><i class="fa fa-eye"></i>Create a Glimpse With Board Files</h2>
+                  </div>
+                  <div class="modal-body glimpse-modal-body" style="overflow: hidden;">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="glimpseLabel">Name</label>
+                          <input type="text" class="form-control" id="glimpseLabel" placeholder="">
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="glimpseCateogry">Categories</label>
+                          <div class="form-group">
+                            <input type="text" id="glimpseCategories" class="form-control" id="glimpseCategory" placeholder="" data-role="tagsinput">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <label>Recipients</label>
+                        <div class="form-group">
+                          <input class="form-control" id="glimpseRecipients" rows="4" placeholder="" data-role="tagsinput"></input>
+                        </div>
+                        <div id="glimpseCircleMembers" style="height: 50px; overflow: auto; margin-top: 0;">
+
+                        </div>
+                      </div>
+                      <div class="col-md-6">
+                        <label>Message</label>
+                        <textarea class="form-control" id="glimpseDescription" rows="4" placeholder="Enter in notes or a messsage about this glimpse"></textarea>
+                      </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px;">
+                      <div class="col-md-6">
+                        <p>How long would you like to share this glimpse? (Hours)</p>
+                        <input type="text" id="glimpseSlider" class="span2" value="2" data-slider-min="2" data-slider-max="200" data-slider-step="1" data-slider-value="2" data-slider-orientation="horizontal" data-slider-selection="after" style="width: 100%;">
+                      </div>
+                      <div class="col-md-6">
+                        <p>How urgent is this glimpse?</p>
+                        <select class="form-control" id="glimpseUrgency">
+                          <option value="normal">Normal</option>
+                          <option value="urgent">Urgent</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="row" style="margin-top: 10px; margin-bottom: 10px;">
+                      <p style="margin-left: 15px; color:#00a1d3; font-weight: 600;">Can those you are sharing this glimpse with...</p>
+                      <div class="col-md-4">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <p>Add files to this?</p>
+                            <form id="addObjects">
+                              <input type="radio" name="addObjectsRadio" id="yesAddObjects" value="true"> Yes
+                              <input type="radio" name="addObjectsRadio" id="noAddObjects" value="false"> No
+                            </form>
+                          </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px;">
+                          <div class="col-md-12">
+                            <p>Share this also?</p>
+                            <form id="canShare">
+                              <input type="radio" name="canShareRadio" id="yesShare" value="true"> Yes
+                              <input type="radio" name="canShareRadio" id="noShare" value="false"> No
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <p>View notes for this?</p>
+                            <form id="viewNotes">
+                              <input type="radio" name="viewNotesRadio" id="yesViewNotes" value="true"> Yes
+                              <input type="radio" name="viewNotesRadio" id="noViewNotes" value="false"> No
+                            </form>
+                          </div>
+                        </div>
+                        <div class="row" style="margin-top: 10px;">
+                          <div class="col-md-12">
+                            <p>Add notes for this?</p>
+                            <form id="addNotes">
+                              <input type="radio" name="addNotesRadio" id="yesAddNotes" value="true"> Yes
+                              <input type="radio" name="addNotesRadio" id="noAddNotes" value="false"> No
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <p>Edit notes for this?</p>
+                            <form id="editNotes">
+                              <input type="radio" name="editNotesRadio" id="yesEditNotes" value="true"> Yes
+                              <input type="radio" name="editNotesRadio" id="noEditNotes" value="false"> No
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button id="submitGlimpseBtn" type="button" class="btn btn-primary">Send Glimpse</button>
+                  </div>
+                </div>
+              </div>
+            </div> -->
+
+
+
+
+            <div id="dicomViewerModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dicomViewerModalLabel" aria-hidden="true" oncontextmenu="return false">
+              <div class="modal-dialog" style="width:90%">
+                <div class="modal-content" style="width:100%">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body" style="padding-top:0px">
+                    <form id="formDicomHTML5Viewer" runat="server" style="height:100%; width: auto; margin: 0 auto;">
+                      <div class="modal-dialog" style="width: 100%!important; height: 100%!important;">
+                        <div class="modal-content" style="width: 100%!important; height: 100%!important;  background-color: #AAAAAA;">
+                          <div class="modal-body" id="studyViewerRoot" style="width: 100%!important; height: 100%!important;">
+                            <div class="studyContainer" style="height: 100%;">
+                              <div class="dicom-studyRow" style="height: 100%;">
+                                <div class="dicomThumbnailSelector" style="height: 100%;">
+                                  <p>Select Series</p>
+                                  <div id="dicomThumbnailSelectorList" class="dicom-thumbnails dicom-list-group" style="height:100px; overflow: auto; margin-top: 0;">
+                                  </div>
+                                </div>
+                                <div id="DicomHTML5AntiScrollBox" class="dicom-viewer">
+                                  <div class="text-center">
+                                    <div class="btn-group">
+                                      <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="top" title="Window Level">
+                                        <span class="fa fa-sun-o"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="top" title="Invert">
+                                        <span class="fa fa-adjust"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="top" title="Zoom">
+                                        <span class="fa fa-search"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="top" title="Pan">
+                                        <span class="fa fa-arrows"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="top" title="Stack Scroll">
+                                        <span class="fa fa-bars"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="top" title="Length Measurement">
+                                        <span class="fa fa-arrows-v"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="top" title="Angle Measurement">
+                                        <span class="fa fa-angle-left"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="top" title="Pixel Probe">
+                                        <span class="fa fa-dot-circle-o"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="top" title="Elliptical ROI">
+                                        <span class="fa fa-circle-o"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="top" title="Rectangle ROI">
+                                        <span class="fa fa-square-o"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="top" title="Play Clip">
+                                        <span class="fa fa-play"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="top" title="Stop Clip">
+                                        <span class="fa fa-stop"></span>
+                                      </button>
+                                      <button type="button" class="btn btn-sm btn-default" data-container='body' data-toggle="tooltip" data-placement="top" title="Hidden Button" style="visibility:hidden!important;">
+                                        <span class="fa fa-sun-o"></span>
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <div class="imageViewer">
+                                    <div class="dicom-viewportWrapper cornerstone-enabled-image" style="width: 100%; height: 100%; position: relative; color: white; display: inline-block; background-color: black;" oncontextmenu="return false" unselectable='on' onselectstart='return false;'
+                                    onmousedown='return false;'>
+                                      <div id="DicomHTML5Viewport" class="dicom-viewport">
+                                        <div class="dicom-overlay" style="top: 0px; left: 0px">
+                                          <div></div>
+                                          <div></div>
+                                        </div>
+                                        <div class="dicom-overlay" style="top: 0px; right: 0px">
+                                          <div></div>
+                                          <div></div>
+                                        </div>
+
+                                        <div class="dicom-overlay" style="bottom: 0px; left: 0px">
+                                          <div class="fps"></div>
+                                          <div class="renderTime"></div>
+                                          <div class="currentImageAndTotalImages"></div>
+                                        </div>
+                                        <div class="dicom-overlay" style="bottom: 0px; right: 0px">
+                                          <div></div>
+                                          <div></div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="imageViewerModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" oncontextmenu="return false">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header" style="padding-bottom:0px">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div style="text-align:center;">
+                      <button id="imageViewerRotateLeftButton" type="button" class="fa fa-rotate-left" onclick="imageViewerRotateLeftButtonClicked()">
+                      </button>
+                      <button id="imageViewerRotateRightButton" type="button" class="fa fa-rotate-right" onclick="imageViewerRotateRightButtonClicked()">
+                      </button>
+                    </div>
+                  </div>
+                  <div class="modal-body">
+                    <div id="imageViewerImageDiv" style="pointer-events: none; margin-left: auto; margin-right: auto;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="container boards-container">
+              <div class="board-hr">
+                <h1 class="boards-title" id="myBoardsTitle" style="display:inline-block;">MY BOARDS</h1>
+              </div>
+              <div style="clear: both; padding-top: 20px;" id="filterArea">
+                <div class="dropdown" style="display: inline-block; float: left">
+                  <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="true" id="boardSortBtn">
+                    Filter By
+                    <span class="caret"></span>
+                  </button>
+                  <ul id="filterDropdown" class="dropdown-menu" role="menu" aria-labelledby="filterDropdown">
+                    <li role="presentation"><a id="fileType" role="menuitem" tabindex="-1" href="#">File Type</a></li>
+                    <li role="presentation"><a id="fileName" role="menuitem" tabindex="-1" href="#">File Name</a></li>
+                    <li role="presentation"><a id="categoryFilter" role="menuitem" tabindex="-1" href="#">Category</a></li>
+                    <li role="presentation"><a id="dateAdded" role="menuitem" tabindex="-1" href="#">Uploaded Before</a></li>
+                    <li role="presentation"><a id="dateAdded" role="menuitem" tabindex="-1" href="#">Uploaded After</a></li>
+                    <li role="presentation"><a id="dateAdded" role="menuitem" tabindex="-1" href="#">Uploaded Between</a></li>
+                  </ul>
+                </div>
+                <form class="form-inline" id="filterInputArea">
+                  <div style="display: inline-block; margin-left: 10px;" class="form-group" id="filterText">
+                    <label id="filterInputLabel"></label>
+                    <input type="text" class="form-control" id="filterTextInput" placeholder="Filter keyword">
+                    <button id="filterTextBtn" class="btn btn-primary filter-btn">Apply Filter</button>
+                    <button class="remove-filter btn btn-default">Remove Filter</button>
+                  </div>
+                  <div style="display: inline-block; margin-left: 10px;" class="form-group" id="filterDate">
+                    <label id="filterInputLabel2"></label>
+                    <input type="date" class="form-control" id="filterDateInput" placeholder="Filter keyword">
+                    <button id="filterDateBtn" class="btn btn-primary filter-btn">Apply Filter</button>
+                    <button class="remove-filter btn btn-default">Remove Filter</button>
+                  </div>
+                  <div style="display: inline-block; margin-left: 10px;" class="form-group" id="filterDate2">
+                    <label id="filterInputLabel3">Between</label>
+                    <input type="date" class="form-control" id="filterDateInput2" placeholder="Filter keyword"> and
+                    <input type="date" class="form-control" id="filterDateInput3" placeholder="Filter keyword">
+                    <button id="filterDatesBtn" class="btn btn-primary filter-btn">Apply Filter</button>
+                    <button class="remove-filter btn btn-default">Remove Filter</button>
+                  </div>
+                </form>
+              </div>
+              <div id="userBoardsArea">
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+
+  <div class="page-footer">
+    <div class="page-footer-inner">
+      2014 &copy;Lifespeed
+    </div>
+    <div class="scroll-to-top">
+      <i class="icon-arrow-up"></i>
+    </div>
+  </div>
+  <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom -->
+  <!--[if lt IE 9]>
+      <script src="<%=ReturnProperURL("/assets/global/plugins/respond.min.js")%>"></script>
+      <script src="<%=ReturnProperURL("/assets/global/plugins/excanvas.min.js")%>"></script>
+      <![endif]-->
+
+  <script type="text/javascript" src="../js/config.js"></script>
+  <script src="../plugins/jquery/dist/jquery.min.js"></script>
+  <script src="../js/vendor/jquery-migrate.min.js"></script>
+  <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
+  <script src="../plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+  <script src="../js/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+  <script src="../js/vendor/jquery.blockui.min.js"></script>
+  <script src="../js/vendor/jquery.cokie.min.js"></script>
+  <script src="../js/vendor/jquery.flip.min.js"></script>
+  <script src="../js/vendor/jquery-ui-1.10.3.custom.min.js"></script>
+  <script src="../plugins/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+  <script src="../js/vendor/metronic.js"></script>
+  <script src="../js/layout.js"></script>
+  <script src="../js/vendor/quick-sidebar.js"></script>
+  <script src="../js/demo.js"></script>
+  <script src="../js/platform.js"></script>
+  <script src="../js/vendor/imagesloaded.pkgd.min.js"></script>
+  <script src="../js/vendor/packery.min.js"></script>
+  <script src="../js/vendor/draggabilly.min.js"></script>
+  <script src="../js/vendor/bootstrap-slider.js"></script>
+  <script src="../js/vendor/bootstrap-tagsinput.min.js"></script>
+  <script src="../js/vendor/moment.min.js"></script>
+  <script src="../js/boards.js"></script>
+  <script src="../js/boards-events.js"></script>
+  <script src="../js/notes.js"></script>
+  <script src="../plugins/sweetalert/lib/sweet-alert.min.js"></script>
+  <script src="../js/vendor/cornerstone/jquery.hammer-full.js"></script>
+  <script src="../js/vendor/cornerstone/cornerstone.js"></script>
+  <script src="../js/vendor/cornerstone/cornerstoneMath.js"></script>
+  <script src="../js/vendor/cornerstone/cornerstoneTools.js"></script>
+  <script src="../js/vendor/cornerstone/lifespeedWebImageLoader.js"></script>
+  <script src="../js/vendor/cornerstone/dicomParser.js"></script>
+  <script src="../js/dicomViewer.js"></script>
+  <script src="../js/imageViewer.js"></script>
+
+  <script src="../common.js"></script>
+  <script src="../notification.js"></script>
+</body>
+
+</html>

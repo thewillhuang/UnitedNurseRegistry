@@ -1,0 +1,55 @@
+/* @import '../plugins/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss'; */
+@import '../plugins/font-awesome/scss/font-awesome.scss';
+@import './themes/dropzoneTheme.scss';
+.myHeader {
+  width: 100%;
+  height: 50px;
+  background-color: #f6f6f6;
+}
+.myLogoWrapper {
+  height: 40px;
+  width: auto;
+}
+.logo {
+  height: 100%;
+  width: auto;
+  margin: 5px 10px;
+}
+body {
+  background-color: #f6f6f6;
+}
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+div {
+  margin-bottom: 10px;
+}
+
+.inputLabel{
+  color: #027097;
+  margin-bottom: 10px;
+}
+
+input[type="checkbox"] {
+  margin-right: 5px;
+  margin-top:10px;
+}
+
+a {
+  color: #EE3F56;
+}
+
+label {
+  font-weight: normal;
+}
+
+.btn-pink {
+  color: white;
+  background-color: #EE3F56;
+}
+
+.terms{
+  font-size: smaller;
+}

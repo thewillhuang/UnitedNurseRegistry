@@ -1,0 +1,170 @@
+input {
+  border: 3px solid #e0e0e0;
+  display: inline-block;
+}
+
+/*
+Profile form row
+*/
+.profile-container {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #fff;
+  margin-left: 25px;
+  margin-top: 10px;
+  padding: 10px;
+}
+.profile-title-row {
+  margin-left: 10px;
+}
+.profile-title {
+  color: #EB374C;
+  font-weight: 500;
+  display: inline-block;
+  text-transform: uppercase;
+  margin-bottom: 0;
+}
+.page-hr {
+  margin-top: 5px;
+  color: #bdbdbd;
+  width: 100%;
+}
+.profile-link {
+  color: #337ab7;
+  font-weight: 600;
+  display: inline-block;
+  float: left;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 5px;
+  font-size: 1.1em;
+}
+.profile-link a:hover {
+  text-decoration: none;
+}
+.active-profile-link {
+  border-bottom: 2px solid #EB374C;
+}
+.profile-photo-div {
+  margin: 0 auto;
+}
+.profile-form-container {
+  background-color: #eeeeee;
+  border: 1px solid #e0e0e0;
+  padding: 15px;
+  margin: 20px;
+}
+.profile-form label, .update-password-container label {
+  margin-bottom: 10px;
+  color: #337ab7;
+  font-weight: 500;
+  font-size: 1.1em;
+}
+.profile-buttons {
+  margin-top: 20px;
+}
+.profile-button:first-child {
+  margin-right: 20px;
+}
+#changePhotoDiv {
+  clear: both;
+  margin-top: 15px;
+  position: relative;
+  width: 150px;
+  height: 35px;
+  overflow: hidden;
+}
+#profilePhotoPreview {
+  height: 150px;
+  width: 150px;
+  margin: 0 auto;
+  object-fit: cover;
+}
+.change-photo-btn {
+  position: absolute;
+  width: 150px;
+  max-width: 100%;
+  height: 100%;
+  background-color: #02658C;
+  cursor: pointer;
+}
+#profilePhotoUpload {
+  opacity:0;
+  filter: alpha(opacity=0);
+  position: absolute;
+  z-index: 1;
+  top:0;
+  right:0;
+  padding:0;
+  margin: 0;
+}
+
+/*
+Validation
+*/
+.red-error {
+  border: 1px solid red;
+}
+.green-ok {
+  border: 1px solid green;
+}
+.inp-val-4 {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  display: block;
+  margin-top: -27px;
+  margin-left: 90%;
+  text-align: right;
+  z-index: 100;
+}
+.inp-val-3 {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  display: block;
+  margin-top: -27px;
+  margin-left: 86%;
+  text-align: right;
+  z-index: 100;
+}
+.inp-val-6 {
+  position: relative;
+  width: 15px;
+  height: 15px;
+  display: block;
+  margin-top: -27px;
+  margin-left: 93%;
+  text-align: right;
+  z-index: 100;
+}
+.inp-val-weight {
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  margin-top: 7px;
+  margin-left: -32%;
+  text-align: right;
+  z-index: 100;
+}
+.inp-ok {
+  color: green;
+}
+.inp-error {
+  color: red;
+}
+
+/*
+Update password row
+*/
+.update-password-container {
+  font-family: 'Open Sans', sans-serif;
+  background-color: #ffffff;
+  padding: 10px;
+  margin: 20px;
+}
+.update-password-div {
+  background-color: #eeeeee;
+  padding: 25px;
+  border-radius: 5px;
+  border: 3px solid #e0e0e0;
+}

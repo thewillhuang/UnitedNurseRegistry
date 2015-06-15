@@ -1,6 +1,15 @@
 .DS_Store
 .sass-cache
-public
+build
 Desktop.ini
 node_modules
-app/assets/stylesheets/generated
+bower_components
+**/*.log
+public
+plugins
+app/js/config.js
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

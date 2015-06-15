@@ -1,0 +1,34 @@
+{
+  "name": "Platform",
+  "version": "0.0.1",
+  "homepage": "https://github.com/lifespeed/lifespeed.web",
+  "authors": [
+    "Elwend <elizabeth.wendling@gmail.com>"
+  ],
+  "description": "Lifespeed platform",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "client/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "font-awesome": "~4.3.0",
+    "bootstrap": "~3.3.4",
+    "jquery-ui": "~1.11.4",
+    "dropzone": "~4.0.1",
+    "simple-line-icons": "~1.0.0",
+    "bootstrap-hover-dropdown": "~2.1.3",
+    "bootstrap-switch": "~3.3.2",
+    "sweetalert": "~0.5.0",
+    "bootstrap-sass-official": "~3.3.4",
+    "moment": "~2.10.2",
+    "react": "~0.13.3",
+    "vanilla-masker": "~1.0.9"
+  }
+}

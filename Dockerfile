@@ -26,7 +26,7 @@ ENV NVM_DIR /usr/local/nvm
 # ENV NODE_VERSION v0.12
 # ENV NODE_BRANCH node/v0.12.2
 ENV NODE_VERSION iojs
-ENV NODE_BRANCH io.js/v2.2.1
+ENV NODE_BRANCH io.js/v2.3.0
 
 # Install nvm and use node version defined above.
 RUN git clone https://github.com/creationix/nvm.git $NVM_DIR && cd $NVM_DIR && git checkout `git describe --abbrev=0 --tags`

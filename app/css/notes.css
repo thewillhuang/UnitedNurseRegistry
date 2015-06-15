@@ -1,0 +1,173 @@
+.note-content {
+  padding: 20px;
+}
+
+.note-header {
+  margin-bottom: 10px;
+  border-bottom: 2px solid #eeeeee;
+}
+
+.note-links a {
+  color: #337ab7;
+  font-weight: 500;
+  display: inline-block;
+  float: left;
+  text-decoration: none;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 5px;
+  font-size: 1.5em;
+}
+
+.note-links a:hover {
+  text-decoration: none;
+}
+
+.note-title {
+  margin-top: 0px;
+  margin-left: 15px;
+  color: #EB374C;
+  font-weight: 500;
+}
+
+#addNoteArea {
+  margin: 0 auto;
+  padding-top: 10px;
+  text-align: right;
+}
+
+#categoryForm {
+  padding: 5px;
+}
+
+#categoryForm textarea {
+  width: 100%;
+  padding-right: 20px;
+}
+
+#categoryForm input {
+  padding: 15px;
+}
+
+.active-note-link {
+  border-bottom: 4px solid #EB374C;
+}
+.view-user-note {
+  width: 100%;
+  height: auto;
+}
+.note-area {
+  clear: both;
+  overflow: hidden;
+}
+.note-height {
+  max-height: 70px;
+}
+.note-div {
+  margin: 2%;
+  width: 46%;
+  display: inline-block;
+}
+.note-div textarea {
+  width: 100%;
+  clear: both;
+}
+.see-note-div {
+  margin: 1%;
+  width: 48%;
+  display: inline-block;
+}
+.expand-user-note {
+  margin-bottom: 10px;
+  font-size: 1.5em;
+}
+.expand-note {
+  height: auto;
+}
+.expand-icon {
+  margin-bottom: 10px;
+}
+.note-div, .see-note-div label {
+  color: #337ab7;
+  font-weight: 600;
+  text-align: left;
+}
+.note-div input {
+  width: 100%;
+}
+.note-h4{
+  color: #EB374C;
+  font-weight: 600;
+  display: inline-block;
+  float: left;
+}
+.get-note-desc {
+  clear: both;
+}
+#noteItemName {
+  text-align: center;
+  color: #00a1d3;
+  font-size: 1.5em;
+  font-weight: 600;
+}
+.note-input {
+  width: 46%;
+  display: inline-block;
+  float: left;
+  margin-right: 2%;
+  margin-bottom: 2%;
+}
+.previous-note-h3 {
+  font-family: 'open-sans', sans-serif;
+  font-size: 1.5em;
+  font-weight: 500;
+  text-align: center;
+  color: #00a1d3;
+}
+#previousNotes {
+  height: auto;
+  width: 100%;
+}
+#previousNotes a {
+  margin-top: 10px;
+}
+#previousNotes i {
+  color: #02658C;
+}
+#categoryForm {
+  max-height: 400px;
+}
+.note-hr {
+  color: #acacac;
+  clear: both;
+  margin-top: 10px;
+}
+#addNoteBtn {
+  margin-top: 10px;
+  margin-right: 25px;
+}
+#cancelEditBtn {
+  margin-left: 20px;
+}
+.edit-note textarea {
+  width: 100%;
+  padding-right: 20px;
+}
+.edit-note input {
+  padding: 15px;
+}
+.note-count {
+  margin-left: 2px;
+  color: #a8a8a8;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+.note-count-board {
+  margin-left: 2px;
+  color: #000000;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+#noteDropdown, #addNoteBtn {
+  background-color: #02658C;
+}

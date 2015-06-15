@@ -131,7 +131,7 @@ module.exports = {
     opts: {
       spare: true
     },
-    src: dest + '**/*.html',
+    src: dest + '/**/*.html',
     dest: dest
   }
 };

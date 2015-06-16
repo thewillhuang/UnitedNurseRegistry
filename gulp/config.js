@@ -9,7 +9,7 @@ module.exports = {
   browserSync: {
     server: {
       // Serve up our build folder
-      baseDir: dest,
+      baseDir: dest
       // middleware: [compression()]
     },
     reloadDelay: 3000

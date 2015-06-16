@@ -31,6 +31,8 @@ app.use(function *(){
   // else send other requested files
   yield send(this, this.path, opts);
 });
+
+// lastly, compress if not compressed
 app.use(compress());
 
 app.listen(port);

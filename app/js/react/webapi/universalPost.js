@@ -65,19 +65,17 @@ let post = (payload, url, callback, done) => {
     contentType: 'application/json; charset=utf8',
     success (data) {
       // console.log('url\n', uri, '\npayload\n', payload, '\nresponse\n', data);
+      sessionStorage.setItem('tokenKey', data.access_token);
 
       //retry on wrong profile guid or no profileguid
       if (data.Error) {
         // console.log(data.Error);
         let errorString = data.Error;
-        sessionStorage.setItem('tokenKey', data.access_token);
         // if error substring contains 'does not exist', set the profile guid.
         if (errorString.indexOf(DOES_NOT_EXIST) !== -1 || errorString.indexOf(NOT_PROVIDED) !== -1) {
           setActiveProfile(payload, url, callback, done);
         }
       }
-      //else
-      sessionStorage.setItem('tokenKey', data.access_token);
       callback(data);
       done();
     },

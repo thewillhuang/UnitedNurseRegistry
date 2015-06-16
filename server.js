@@ -11,18 +11,24 @@ const conditional = require('koa-conditional-get');
 const path = require('path');
 const app = koa();
 
+// logging
 app.use(logger());
+
+// returns status code 304 if etag is the same
 app.use(conditional());
+
+// add etag for cacheing
 app.use(etag());
+
+//prettyify json
 app.use(json());
+
+// static file server
 app.use(function *(){
-  const opts = {
-    root: path.join(__dirname, build),
-    gzip: true
-  };
-  if (this.path === '/') {
-    yield send(this, 'index.html', opts);
-  }
+  let opts = { root: path.join(__dirname, build)};
+  // serve index.html when the path is '/'
+  if (this.path === '/') {yield send(this, 'index.html', opts); }
+  // else send other requested files
   yield send(this, this.path, opts);
 });
 app.use(compress());

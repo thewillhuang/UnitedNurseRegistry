@@ -10,7 +10,7 @@ gulp.task('minifyHtml', function() {
   return gulp.src(config.src)
     .pipe(minifyHTML(config.opts))
     .pipe(gulp.dest(config.dest))
-    .pipe(gzip({threshold: true, gzipOptions: { level: 9 }}))
+    .pipe(gzip({threshold: 1400, gzipOptions: { level: 9 }}))
     .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({

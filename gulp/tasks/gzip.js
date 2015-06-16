@@ -8,7 +8,7 @@ var size = require('gulp-size');
 
 gulp.task('gzip', function() {
   return gulp.src(config.copy.src, config.copy.base)
-    .pipe(gzip({threshold: true, gzipOptions: { level: 9 }}))
+    .pipe(gzip({threshold: 1400, gzipOptions: { level: 9 }}))
     .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.copy.dest))
     .pipe(browserSync.reload({

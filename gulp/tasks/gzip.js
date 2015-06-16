@@ -3,11 +3,13 @@ var gulp = require('gulp');
 var config = require('../config');
 var browserSync = require('browser-sync');
 // var cache = require('gulp-cached');
-var changed = require('gulp-changed');
+var gzip = require('gulp-gzip');
+var size = require('gulp-size');
 
-gulp.task('copy', function() {
+gulp.task('gzip', function() {
   return gulp.src(config.copy.src, config.copy.base)
-    .pipe(changed(config.copy.dest)) // Ignore unchanged files
+    .pipe(gzip({threshold: true, gzipOptions: { level: 9 }}))
+    .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.copy.dest))
     .pipe(browserSync.reload({
       stream: true

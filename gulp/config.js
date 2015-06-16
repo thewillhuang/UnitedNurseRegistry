@@ -2,14 +2,15 @@
 var dest = '../public';
 var src = '../app';
 var gulp = './gulp';
+// var compression = require('compression');
 // var neat = require('node-neat').includePaths;
-var compression = require('compression');
+
 module.exports = {
   browserSync: {
     server: {
       // Serve up our build folder
       baseDir: dest,
-      middleware: [compression()]
+      // middleware: [compression()]
     },
     reloadDelay: 3000
       // port: 4004  // use *different* port than above

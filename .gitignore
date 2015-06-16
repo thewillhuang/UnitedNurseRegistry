@@ -7,7 +7,6 @@ bower_components
 **/*.log
 public
 plugins
-app/js/config.js
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*

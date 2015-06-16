@@ -5,10 +5,12 @@ var browserSync = require('browser-sync');
 // var cache = require('gulp-cached');
 var gzip = require('gulp-gzip');
 var size = require('gulp-size');
-
+var gulpFilter = require('gulp-filter');
 gulp.task('gzip', function() {
+  var filter = gulpFilter(config.gzip.filter);
   return gulp.src(config.copy.src, config.copy.base)
-    .pipe(gzip({threshold: 1400, gzipOptions: { level: 9 }}))
+    .pipe(filter)
+    .pipe(gzip(config.gzip.opts))
     .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.copy.dest))
     .pipe(browserSync.reload({

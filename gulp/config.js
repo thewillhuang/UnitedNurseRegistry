@@ -2,15 +2,13 @@
 var dest = '../public';
 var src = '../app';
 var gulp = './gulp';
-// var compression = require('compression');
 // var neat = require('node-neat').includePaths;
-
+// var compression = require('compression');
 module.exports = {
   browserSync: {
     server: {
       // Serve up our build folder
       baseDir: dest
-      // middleware: [compression()]
     },
     reloadDelay: 3000
       // port: 4004  // use *different* port than above
@@ -23,7 +21,7 @@ module.exports = {
       sourcemap: true,
       sourceComments: 'map',
       imagePath: '/images' // Used by the imlpage-url helper
-      // includePaths: ['styles'].concat(neat)
+        // includePaths: ['styles'].concat(neat)
     },
     sourcemap: {
       loadMaps: true
@@ -110,6 +108,25 @@ module.exports = {
         outputName: 'clientValidate.js',
         external: ['react', 'jquery']
       }
+    ]
+  },
+  gzip: {
+    opts: {
+      threshold: 1400,
+      gzipOptions: {
+        level: 9
+      }
+    },
+    filter: [
+      '**/*.js',
+      '**/*.html',
+      '**/*.css',
+      '**/*.svg',
+      '**/*.txt',
+      '**/*.json',
+      '**/*.ico',
+      '**/*.otf',
+      '**/*.ttf'
     ]
   },
   production: {

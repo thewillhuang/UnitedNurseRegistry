@@ -2,10 +2,10 @@
 var gulp = require('gulp');
 var config = require('../config');
 var browserSync = require('browser-sync');
-// var cache = require('gulp-cached');
 var gzip = require('gulp-gzip');
 var size = require('gulp-size');
 var gulpFilter = require('gulp-filter');
+
 gulp.task('gzip', function() {
   var filter = gulpFilter(config.gzip.filter);
   return gulp.src(config.copy.src, config.copy.base)

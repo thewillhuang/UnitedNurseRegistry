@@ -77,12 +77,12 @@ module.exports = {
         entries: src + '/js/common.js',
         dest: dest,
         outputName: 'common.js',
-        require: ['react', 'jquery', 'moment']
+        require: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap']
       }, {
         entries: src + '/js/notification.js',
         dest: dest,
         outputName: 'notification.js',
-        external: ['react', 'jquery', 'moment']
+        external: ['react', 'jquery', 'moment', 'react-bootstrap']
       }, {
         entries: src + '/js/activate.js',
         dest: dest,
@@ -92,7 +92,7 @@ module.exports = {
         entries: src + '/js/dashboardWidgets.js',
         dest: dest,
         outputName: 'dashboardWidgets.js',
-        external: ['react', 'jquery', 'moment']
+        external: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap']
       }, {
         entries: src + '/js/uploader.js',
         dest: dest,
@@ -101,12 +101,12 @@ module.exports = {
         entries: src + '/js/requestRecords.js',
         dest: dest,
         outputName: 'requestRecords.js',
-        external: ['react', 'jquery']
+        external: ['react', 'jquery', 'socket.io-client', 'react-bootstrap']
       }, {
         entries: src + '/js/clientValidate.js',
         dest: dest,
         outputName: 'clientValidate.js',
-        external: ['react', 'jquery']
+        external: ['react', 'jquery', 'socket.io-client', 'react-bootstrap']
       }
     ]
   },
@@ -137,7 +137,7 @@ module.exports = {
   production: {
     cssSrc: dest + '/**/*.css',
     jsSrc: [
-      dest + '/**/*.js'
+      dest + '/*.js'
       // dest + '/js/**/*.js',
       // '!' + dest + '/js/components/**/*',
       // '!' + dest + '/js/test/**/*',

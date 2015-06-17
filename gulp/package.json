@@ -14,7 +14,7 @@
   },
   "devDependencies": {
     "babelify": "^6.1.2",
-    "browser-sync": "^2.7.10",
+    "browser-sync": "^2.7.11",
     "browserify": "^10.2.4",
     "chalk": "^1.0.0",
     "compression": "^1.5.0",

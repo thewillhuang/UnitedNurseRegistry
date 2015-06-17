@@ -28,7 +28,7 @@ app.use(json());
 app.use(function *(){
   let opts = { root: path.join(__dirname, build)};
   // serve index.html when the path is '/'
-  if (this.path === '/') {yield send(this, 'index.html', opts); }
+  if (this.path === '/') { yield send(this, 'index.html', opts); }
   // else send other requested files
   yield send(this, this.path, opts);
 });

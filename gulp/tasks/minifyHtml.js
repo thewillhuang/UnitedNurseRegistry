@@ -6,7 +6,7 @@ var browserSync = require('browser-sync');
 var size = require('gulp-size');
 var gzip = require('gulp-gzip');
 
-gulp.task('minifyHtml', function() {
+gulp.task('minifyHtml', ['markup'], function() {
   return gulp.src(config.src)
     .pipe(minifyHTML(config.opts))
     .pipe(gulp.dest(config.dest))

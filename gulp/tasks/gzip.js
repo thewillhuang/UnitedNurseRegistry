@@ -6,7 +6,7 @@ var gzip = require('gulp-gzip');
 var size = require('gulp-size');
 var gulpFilter = require('gulp-filter');
 
-gulp.task('gzip', ['copyAll'], function() {
+gulp.task('gzip', ['copy'], function() {
   var filter = gulpFilter(config.gzip.filter);
   return gulp.src(config.copy.src, config.copy.base)
     .pipe(filter)

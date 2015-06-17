@@ -127,12 +127,17 @@ module.exports = {
       '**/*.ico',
       '**/*.otf',
       '**/*.ttf'
-    ]
+    ],
+    src: dest + '/**/*',
+    srcBase: {
+      base: dest
+    },
+    dest: dest
   },
   production: {
-    cssSrc: dest + '/*.css',
+    cssSrc: dest + '/**/*.css',
     jsSrc: [
-      dest + '/*.js'
+      dest + '/**/*.js'
       // dest + '/js/**/*.js',
       // '!' + dest + '/js/components/**/*',
       // '!' + dest + '/js/test/**/*',
@@ -140,6 +145,9 @@ module.exports = {
       // '!' + dest + '/js/cors/**/*',
       // '!' + dest + '/plugins/**/*.js'
     ],
+    jsBase: {
+      base: dest
+    },
     dest: dest,
     cssOpt: {
       keepSpecialComments: 0
@@ -150,6 +158,9 @@ module.exports = {
       spare: true
     },
     src: dest + '/**/*.html',
-    dest: dest
+    dest: dest,
+    srcBase: {
+      base: dest
+    }
   }
 };

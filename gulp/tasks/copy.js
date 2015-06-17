@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var config = require('../config');
 var browserSync = require('browser-sync');
 var changed = require('gulp-changed');
+// var size = require('gulp-size');
 
 gulp.task('copy', function() {
   return gulp.src(config.copy.src, config.copy.base)

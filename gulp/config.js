@@ -32,7 +32,8 @@ module.exports = {
       src + '/**/*',
       '!' + src + '/images/**/*',
       '!' + src + '/css/**/*.{sass,scss}',
-      '!' + src + '/**/*.html'
+      '!' + src + '/**/*.html',
+      '!' + src + '/**/*.jsx'
     ], // '!' must be a string
     dest: dest,
     base: {

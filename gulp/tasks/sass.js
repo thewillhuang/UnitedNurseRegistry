@@ -23,7 +23,7 @@ gulp.task('sass', function() {
     .pipe(sourcemaps.init(config.sourcemap))
     // Autoprefix properties
     .pipe(autoprefixer({
-      browsers: ['last 2 versions']
+      browsers: ['> 1%']
     }))
     // Write final .map file
     .pipe(sourcemaps.write())

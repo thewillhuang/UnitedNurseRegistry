@@ -1,7 +1,7 @@
 'use strict';
 
 const universalPost = require('./universalPost.js');
-const galleryObjectApi = {};
+let galleryObjectApi = {};
 
 //moveGalleryObjectToPersonalManifest
 galleryObjectApi.moveGalleryObjectToPersonalManifest = (objectGuid) => {

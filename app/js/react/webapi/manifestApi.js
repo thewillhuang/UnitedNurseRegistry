@@ -1,8 +1,8 @@
 'use strict';
 
 const universalPost = require('./universalPost.js');
-const manifestApi = {};
 const $ = require('jquery');
+let manifestApi = {};
 
 //submitRequestForMedicalRecords
 manifestApi.submitRequestForMedicalRecords = (providerEmail, expires, providerType, business, phone, urgent, providerFirstName, providerLastName, callback) => {

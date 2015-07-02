@@ -16,7 +16,7 @@ module.exports = {
   },
   sass: {
     src: src + '/css/**/*.{sass,scss}',
-    dest: dest,
+    dest: dest + '/css/',
     settings: {
       sourcemap: true,
       sourceComments: 'map',
@@ -33,7 +33,8 @@ module.exports = {
       '!' + src + '/images/**/*',
       '!' + src + '/css/**/*.{sass,scss}',
       '!' + src + '/**/*.html',
-      '!' + src + '/**/*.jsx'
+      '!' + src + '/**/*.jsx',
+      '!' + src + '/js/react/**/*'
     ], // '!' must be a string
     dest: dest,
     base: {
@@ -78,12 +79,12 @@ module.exports = {
         entries: src + '/js/common.js',
         dest: dest,
         outputName: 'common.js',
-        require: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap']
+        require: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
       }, {
         entries: src + '/js/notification.js',
         dest: dest,
         outputName: 'notification.js',
-        external: ['react', 'jquery', 'moment', 'react-bootstrap']
+        external: ['react', 'jquery', 'moment', 'react-bootstrap', 'socket.io-client', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
       }, {
         entries: src + '/js/activate.js',
         dest: dest,
@@ -93,7 +94,7 @@ module.exports = {
         entries: src + '/js/dashboardWidgets.js',
         dest: dest,
         outputName: 'dashboardWidgets.js',
-        external: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap']
+        external: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
       }, {
         entries: src + '/js/uploader.js',
         dest: dest,
@@ -102,12 +103,12 @@ module.exports = {
         entries: src + '/js/requestRecords.js',
         dest: dest,
         outputName: 'requestRecords.js',
-        external: ['react', 'jquery', 'socket.io-client', 'react-bootstrap']
+        external: ['react', 'jquery', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
       }, {
         entries: src + '/js/clientValidate.js',
         dest: dest,
         outputName: 'clientValidate.js',
-        external: ['react', 'jquery', 'socket.io-client', 'react-bootstrap']
+        external: ['react', 'jquery', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
       }
     ]
   },
@@ -136,7 +137,7 @@ module.exports = {
     dest: dest
   },
   production: {
-    cssSrc: dest + '/**/*.css',
+    cssSrc: dest + '/css/**/*.css',
     jsSrc: [
       dest + '/*.js'
       // dest + '/js/**/*.js',

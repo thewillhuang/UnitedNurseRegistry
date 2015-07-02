@@ -19,6 +19,8 @@ var handleErrors = require('../util/handleErrors');
 var source = require('vinyl-source-stream');
 var config = require('../config').browserify;
 var _ = require('lodash');
+var assign = require('lodash.assign');
+// var buffer = require('vinyl-buffer');
 
 var browserifyTask = function(devMode) {
 
@@ -26,12 +28,18 @@ var browserifyTask = function(devMode) {
 
     if (devMode) {
       // Add watchify args and debug (sourcemaps) option
-      _.extend(bundleConfig, watchify.args, {
+
+      // _.extend(bundleConfig, watchify.args, {
+      //   debug: true
+      // });
+
+      bundleConfig = assign({}, bundleConfig, watchify.args, {
         debug: true
       });
       // A watchify require/external bug that prevents proper recompiling,
       // so (for now) we'll ignore these options during development. Running
       // `gulp browserify` directly will properly require and externalize.
+
       bundleConfig = _.omit(bundleConfig, ['external', 'require']);
     }
 
@@ -49,6 +57,7 @@ var browserifyTask = function(devMode) {
         // stream gulp compatible. Specify the
         // desired output filename here.
         .pipe(source(bundleConfig.outputName))
+        // .pipe(buffer())
         // Specify the output destination
         .pipe(gulp.dest(bundleConfig.dest))
         .pipe(browserSync.reload({

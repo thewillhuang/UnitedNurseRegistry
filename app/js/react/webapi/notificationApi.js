@@ -2,8 +2,8 @@
 
 const universalPost = require('./universalPost.js');
 const io = require('socket.io-client');
-const notificationApi = {};
 const notificationAction = require('../actions/notificationAction.js');
+let notificationApi = {};
 
 notificationApi.subscribe = (callback) => {
   let url = 'api/notifications/getsubscriptionchannel';

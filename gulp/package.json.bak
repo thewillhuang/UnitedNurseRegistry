@@ -9,26 +9,26 @@
   },
   "devDependencies": {
     "babelify": "^6.1.2",
-    "browser-sync": "^2.7.12",
+    "browser-sync": "^2.7.11",
     "browserify": "^10.2.4",
     "chalk": "^1.0.0",
     "compression": "^1.5.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^2.3.1",
     "gulp-changed": "^1.2.1",
-    "gulp-concat": "^2.6.0",
+    "gulp-concat": "^2.5.2",
     "gulp-filter": "^2.0.2",
     "gulp-gzip": "^1.1.0",
-    "gulp-imagemin": "2.3.0",
+    "gulp-imagemin": "2.2.1",
     "gulp-minify-css": "^1.1.6",
     "gulp-minify-html": "^1.0.3",
     "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.0.1",
-    "gulp-size": "^1.2.2",
+    "gulp-size": "^1.2.1",
     "gulp-sourcemaps": "^1.5.2",
     "gulp-uglify": "^1.2.0",
-    "gulp-util": "^3.0.6",
+    "gulp-util": "^3.0.5",
     "handlebars": "^3.0.3",
     "hbsfy": "~2.2.1",
     "merge-stream": "^0.1.7",
@@ -36,20 +36,13 @@
     "node-neat": "^1.7.2",
     "pretty-hrtime": "~1.0.0",
     "require-dir": "^0.3.0",
-    "vinyl-buffer": "^1.0.0",
+    "should": "^6.0.3",
     "vinyl-source-stream": "~1.1.0",
-    "watchify": "^2.4.0"
+    "watchify": "^2.4.0",
+    "watchify": "^3.2.2"
   },
   "dependencies": {
     "lodash": "^3.9.3",
-    "lodash.assign": "^3.2.0",
     "moment": "^2.10.3"
-  },
-  "scripts": {
-    "version": "node -v",
-    "bower": "bower install --config.interactive=false",
-    "build": "cd .. && npm run build",
-    "start": "node server",
-    "production": "cd .. && npm run production"
   }
 }

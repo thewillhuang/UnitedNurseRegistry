@@ -63,7 +63,7 @@ let post = (payload, url, callback, done) => {
     dataType: 'json',
     contentType: 'application/json; charset=utf8',
     success (data) {
-      // console.log('url\n', uri, '\npayload\n', payload, '\nresponse\n', data);
+      console.log('url\n', uri, '\npayload\n', payload, '\nresponse\n', data);
       sessionStorage.setItem('tokenKey', data.access_token);
 
       //retry on wrong profile guid or no profileguid

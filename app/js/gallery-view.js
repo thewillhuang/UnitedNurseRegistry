@@ -18,15 +18,28 @@ $(document).ready(function() {
   $("#filterText").hide();
   $("#filterDate").hide();
   $("#filterDate2").hide();
+  $("#filterFileTypeDropdown").hide();
   // Get all data and display to user
   getGalleryObjectList(function(done, data) {
     if (done) {
+      // Scroll to load more
+      $(window).on('scroll', function(){
+        if (!galleryScrolled){
+          fillRemainingGallery();
+        }
+        galleryScrolled = true;
+      });
       layoutData(data);
     }
   });
   // To initiate tooltips for buttons where desired (add title)
   $('button').tooltip();
 
+});
+
+$(function(){
+  var opts = { language: "sp", pathPrefix: "../localization", skipLanguage: "en-US" };
+  $("[data-localize]").localize("gallery", opts)
 });
 
 //Global variables
@@ -42,6 +55,8 @@ var currentObjectLabels = "";
 var elems = '';
 var galleryCounter = 0;
 var currentFilter = "";
+var galleryScrolled = false;
+var currentNoteObjectGuid = "";
 
 function masonryLayout(callback) {
   // Append new blocks
@@ -98,7 +113,7 @@ function getGalleryObjectList(callback) {
 // Gallery object related methods
 //
 // Get each data object (file)
-function getGalleryObject(objectGuid, callback) {
+function getGalleryObject(objectGuid) {
   var newuri = API_ROOT + 'api/galleryobjects/getgalleryobject';
   var profileGuid = sessionStorage.getItem("activeProfile");
   var payload = {
@@ -121,9 +136,8 @@ function getGalleryObject(objectGuid, callback) {
           }
         }
         categories += ',';
-        labelHtml += '</div><div><input id="' + categories + '" type="text" class="newCategoryInput" placeholder="Add tag"></input></div>';
       } else {
-        labelHtml += '</div><div><input id="' + categories + '" type="text" class="newCategoryInput" placeholder="Add tag"></input></div>';
+        categories = "";
       }
       var noteCount;
       if (data.noteCount == 0){
@@ -132,10 +146,21 @@ function getGalleryObject(objectGuid, callback) {
         noteCount = data.noteCount;
       }
       var createdPretty = moment(data.createdDate).format('l');
-      var elem = '<div class="user-item" id="' + objectGuid + '"><div class="selected-overlay hide-overlay"><div class="selected-item-green"><i class="fa fa-check-circle-o unselect-item"></i></div></div><div class="item-thumbnail" id="' + data.type + '"><div class="img"><img class="user-item-thumbnail" id="' + createdPretty + '" src="data:image/jpg;base64,' + data.thumbnail + '" style="cursor: pointer;"><div class="overlay"><a href="#" class="expand"></a><a class="close-overlay hidden">x</a></div></div></div><div class="item-specs"><p>' + data.originalFileName + '</p></div><div class="item-controls" id="' + data.thumbnail + '"><a class="add-to" title="Select" href="#"><i class="fa fa-check-circle-o item-icon"></i></a><a href="" alt="Add or view notes" title="Add or view notes" class="add-note"><i class="fa fa-file-text-o item-icon"><span class="note-count">' + noteCount + '</span></i></a><a href="" alt="Download" class="download-item" alt="Download item" title="Download file"><i class="fa fa-download item-icon"></i></a><a class="delete-file" alt="Delete file" title="Delete file"><i class="fa fa-trash item-icon"></i></a></div><div class="item-categories">' + labelHtml + '</div></div>';
-      elems += elem;
+      var src = "data:image/jpg;base64," + data.thumbnail;
+      $("#"+objectGuid).show();
+      $("#"+objectGuid).find(".item-thumbnail").attr("id", data.type);
+      $("#"+objectGuid).find(".user-item-thumbnail").attr("id", createdPretty);
+      $("#"+objectGuid).find(".user-item-thumbnail").attr("src", src);
+      $("#"+objectGuid).find(".item-specs p").text(data.originalFileName);
+      $("#"+objectGuid).find(".item-controls").attr("id", data.thumbnail);
+      $("#"+objectGuid).find(".note-count").text(noteCount);
+      $("#"+objectGuid).find("input").attr("id", categories);
+      $("#"+objectGuid).find(".item-categories").append(labelHtml);
       $('a').tooltip();
-      callback(true);
+      $container.imagesLoaded(function() {
+        $container.masonry();
+        $container.masonry('reloadItems');
+      });
     }
   });
 }
@@ -147,14 +172,12 @@ function deleteGalleryObject(objectGuid) {
     'profileGuid': profileGuid,
     'objectGuid': objectGuid
   };
-  console.log(payload);
   ajaxPost(newuri, payload, function(data, done, message) {
-    console.log(data, done, message);
-    if (done) {
-      sweetAlert("Deleted file");
+    if (done && data.Success) {
+      sweetAlert(data.Success);
       var block = $("#" + objectGuid).remove();
     } else {
-      sweetAlert("Whoops!", "Couldn't delete file");
+      sweetAlert(data.Error);
     }
   });
 }
@@ -191,20 +214,30 @@ function addTagsToGalleryObject(objectGuid, labels) {
     'objectGuid': objectGuid,
     'categoryList': labels
   };
-  console.log(payload);
   ajaxPost(newuri, payload, function(data, done, message) {
+    console.log(data, done, message);
     if (done) {
-      console.log(data, done, message);
       var labelArr = labels.split(',');
       labelHtml = "";
       for (var i in labelArr) {
         labelHtml += '<span class="label label-primary" style="margin-right: 5px;">' + labelArr[i] + ' <a class="delete-label"><i class="fa fa-remove"></i></a></span>';
       }
       $("#" + objectGuid).find("div.item-categories").append(labelHtml);
+      deselectAll();
+      $(".bootstrap-tagsinput span").remove();
+      $(".bootstrap-tagsinput input").attr("size", "0");
     } else {
+      $(".bootstrap-tagsinput span").remove();
+      $(".bootstrap-tagsinput input").attr("size", "0");
       return false;
     }
   });
+}
+// Deselect items after actions
+function deselectAll(){
+  $(".user-item").find(".add-to").removeClass('board-clicked');
+  $(".user-item").find(".add-to i").removeClass('highlight');
+  $(".user-item").find(".selected-overlay").addClass("hide-overlay");
 }
 
 //
@@ -248,7 +281,6 @@ function getCircleOfTrustProfileCompound(circleGuid) {
         }
       });
       if (email != null) {
-        console.log(email);
         var html = '<div class="checkbox"><label style="margin-left: 20px;"><input type="checkbox" class="cotAdd" value="' + email + '">' + email + '</label></div>';
         $("#glimpseCircleMembers").append(html);
       }
@@ -303,7 +335,6 @@ var Glimpse = {
       };
       ajaxPost(newuri, payload, function(data, done, message) {
         if (done && data) {
-          console.log(data.glimpseGuids);
           Glimpse.glimpseGuids = data.glimpseGuids.split(',');
           for (var i in Glimpse.glimpseGuids) {
             var currentGlimpseGuid = Glimpse.glimpseGuids[i];
@@ -345,10 +376,8 @@ var Glimpse = {
       self.recipientList += ',';
       $.each($('.cotAdd:checkbox:checked'), function() {
         var add = $(this).val();
-        console.log(add);
         self.recipientList += add + ',';
       });
-      console.log(self.recipientList);
       this.categoryList = $("#glimpseCategories").val();
       this.expires = $("#datePicked").val();
       Date.prototype.addDays = function(days) {
@@ -383,11 +412,11 @@ var Glimpse = {
       ajaxPost(newuri, payload, function(data, done, message) {
         if (done && data.Success) {
           $('#glimpseModal').modal('hide');
-          sweetAlert("Glimpse sent!");
+          sweetAlert(data.Success);
         } else {
           return false;
           $('#glimpseModal').modal('hide');
-          sweetAlert("Glimpse could not be sent");
+          sweetAlert(data.Error);
         }
       });
     },
@@ -400,11 +429,11 @@ var Glimpse = {
         'galleryObjectList': objectList
       };
       ajaxPost(newuri, payload, function(data, done, message) {
-        if (done) {
-          sweetAlert("Added to glimpse!");
+        if (done && data.Success) {
+          sweetAlert(data.Success);
           $("#addToGlimpseModal").modal('hide');
         } else {
-          sweetAlert("You do not have permission to add to this glimpse!");
+          sweetAlert(data.Error);
         }
       });
     }
@@ -443,14 +472,15 @@ var Board = {
       'galleryObjectList': Board.objectGuids,
       'description': Board.description
     };
-    console.log(payload);
     ajaxPost(newuri, payload, function(data, done, message) {
-      if (done) {
-        sweetAlert("Board created!");
+      if (done && data.Success) {
+        sweetAlert(data.Success);
         $('#boardModal').modal('hide');
         Board.clearBoardModal();
+        deselectAll();
       } else {
-        sweetAlert("Whoops!", "Board could not be created");
+        sweetAlert(data.Error);
+        deselectAll();
       }
     });
   }
@@ -489,11 +519,9 @@ function getUserBoard(boardGuid) {
     'boardGuid': boardGuid
   };
   ajaxPost(newuri, payload, function(data, done, message) {
-    if (done) {
+    if (done && (!data.Error)) {
       var name = data.label;
       $("#addToBoardDropdown").append('<li role="presentation" id="' + boardGuid + '"><a role="menuitem" tabindex="-1" href="#">' + name + '</a></li>');
-    } else {
-      console.log("not done");
     }
   });
 }
@@ -508,12 +536,14 @@ function addObjectsToBoard(boardGuid, objectList) {
     'galleryObjectList': objectList
   };
   ajaxPost(newuri, payload, function(data, done, message) {
-    if (done) {
-      sweetAlert("Added items to board");
+    if (done && data.Success) {
+      sweetAlert(data.Success);
       $("#addToBoardModal").modal("hide");
+      deselectAll();
     } else {
-      sweetAlert("Whoops!", "Couldn't add items to board");
+      sweetAlert(data.Error);
       $("#addToBoardModal").modal("hide");
+      deselectAll();
     }
   });
 }
@@ -547,13 +577,11 @@ function filteredGalleryObjectList(currentFilter, userInput) {
       'category': userInput
     };
   }
-  console.log(payload);
   ajaxPost(newuri, payload, function(data, done, message) {
-    console.log(data, done, message);
     if (done && data.galleryObjectList) {
       layoutData(data);
     } else {
-      sweetAlert("No matching file found");
+      sweetAlert(data.Error);
     }
   });
 }
@@ -566,68 +594,47 @@ function filteredGalleryListDates(date1, date2) {
     'createdOnOrBefore': date2,
     'createdOnOrAfter': date1
   };
-  console.log(payload);
   ajaxPost(newuri, payload, function(data, done, message) {
-    console.log(data, done, message);
     if (done && data.galleryObjectList) {
       layoutData(data);
     } else {
-      sweetAlert("Sorry!", "No files found for those dates");
+      sweetAlert(data.Error);
     }
   });
 }
 
 function layoutData(data) {
-  console.log(data);
-  var galleryObjectGuids = $.parseJSON(data.galleryObjectList);
-  $("#fileCount").text(galleryObjectGuids.length);
+  $("#userDocs").empty();
   galleryObjects = [];
+  galleryObjectGuids = $.parseJSON(data.galleryObjectList);
+  $("#fileCount").text(galleryObjectGuids.length);
+  startLoadingAnimation();
   $.each(galleryObjectGuids, function(index, value) {
     galleryObjects.push(value);
-  });
-  $("#userDocs").empty();
-  galleryCounter = 0;
-  $container.masonry();
-  startLoadingAnimation();
-  for (var i in galleryObjects) {
-    getGalleryObject(galleryObjects[i], function(done) {
-      if (done) {
-        galleryCounter++
-        if (galleryCounter % 10 == 0) {
-          masonryLayout(function(done) {
-            if (done) {
-              elems = "";
-            }
-          });
-          if (galleryCounter === (galleryObjects.length)) {
-            masonryLayout(function(done) {
-              if (done) {
-                elems = "";
-                $container.masonry('reloadItems');
-                $container.masonry();
-                endLoadingAnimation();
-              }
-            });
-          }
-        } else if (galleryCounter === (galleryObjects.length)) {
-          masonryLayout(function(done) {
-            if (done) {
-              elems = "";
-              $container.masonry('reloadItems');
-              $container.masonry();
-              endLoadingAnimation();
-            }
-          });
-        }
-      }
+    var noteCountId = "notecount" + value;
+    var elem = '<div class="user-item" id="' + value + '"><div class="selected-overlay hide-overlay"><div class="selected-item-green"><i class="fa fa-check unselect-item"></i></div></div><div class="item-thumbnail"><div class="img"><img class="user-item-thumbnail" src="" style="cursor: pointer;"><div class="overlay"><a href="#" class="expand"></a><a class="close-overlay hidden">x</a></div></div></div><div class="item-specs"><p></p></div><div class="item-controls"><a class="add-to" title="Select" href="#"><i class="fa fa-check item-icon"></i></a><a href="" alt="Add or view notes" title="Add or view notes" class="add-note"><i class="fa fa-file-text-o item-icon"><span class="note-count" id="'+noteCountId+'"></span></i></a><a href="" alt="Download" class="download-item" alt="Download item" title="Download file"><i class="fa fa-download item-icon"></i></a><a class="delete-file" alt="Delete file" title="Delete file"><i class="fa fa-trash-o item-icon"></i></a></div><div class="item-categories"></div><div><input type="text" class="newCategoryInput" placeholder="Add tag"></input></div></div></div>';
+    $("#userDocs").append(elem);
+    $("#"+value).hide();
+    $elem = $(elem);
+    $container.imagesLoaded(function() {
+      $container.masonry('appended', $elem);
     });
+  });
+  for (var i=0; i<30; i++) {
+    getGalleryObject(galleryObjects[i]);
+  }
+  endLoadingAnimation();
+}
+// Get rest of gallery images/info
+function fillRemainingGallery(){
+  for (var i=30; i<galleryObjects.length; i++) {
+    getGalleryObject(galleryObjects[i]);
   }
 }
 
 function startLoadingAnimation(){
   $("#galleryCountSection").append("<div id='loadingSpinner'><span style='margin-right: 10px;'>Please wait while the files load</span><img src='../images/loading.gif'></div>");
 }
-
 function endLoadingAnimation(){
   $("#loadingSpinner").remove();
 }

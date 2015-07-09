@@ -26,10 +26,17 @@ Page Header
   color: #ffffff;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown .dropdown-toggle:hover {
-  background-color: #eeeeee;
+  background-color: transparent;
+}
+#logOutButton:hover {
+  background-color: transparent;
+  color: #EB374C;
+}
+#logOutButton:hover i {
+  color: #EB374C;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown .dropdown-toggle:hover > i {
-  color: #d0d0d0;
+  color: #EB374C;
 }
 .page-header.navbar .top-menu .navbar-nav > li.dropdown.open .dropdown-toggle {
   background-color: #eeeeee;
@@ -882,19 +889,58 @@ Page Footer
     /* Top menu */
   }
   .page-header.navbar .top-menu {
-    background-color: #F6F6F6;
+    background-color: #FFFFFF !important;
   }
   .page-header-fixed-mobile .page-header.navbar .top-menu {
     background-color: #E1E1E1;
   }
   .page-header.navbar .top-menu .navbar-nav > li.dropdown-user .dropdown-toggle {
-    background-color: #f0f0f0;
+    background-color: #FFFFFF !important;
   }
   .page-header-fixed-mobile .page-header.navbar .top-menu .navbar-nav > li.dropdown-user .dropdown-toggle {
     background: none;
   }
   .page-header.navbar .top-menu .navbar-nav > li.dropdown-user .dropdown-toggle:hover {
     background-color: #eeeeee;
+  }
+  .page-header.navbar .top-menu {
+    margin-top: 10px;
+  }
+  .page-header.navbar .page-logo {
+    height: 100%;
+    max-width: 60%;
+  }
+  .page-header.navbar .page-logo img {
+    max-width: 100% !important;
+    max-height: 100% !important;
+    height: auto;
+  }
+  .page-header.navbar .page-logo
+  #toggleMenu {
+    width: 15px !important;
+    margin-right: 0px !important;
+    margin-top: 11px !important;
+  }
+  #header_inbox_bar, .dropdown-dropdown-user {
+    text-align: left;
+  }
+  .page-header.navbar .page-logo {
+    width: 60%;
+  }
+  .top-menu {
+    width: 100% !important;
+  }
+ // .page-header.navbar .top-menu .navbar-nav {
+ //    width: 100% !important;
+ //  }
+  .page-header.navbar .top-menu .navbar-nav > li:last-child {
+    float: right !important;
+    padding: 0px !important;
+  }
+  #sortable_portlets {
+    margin-top: -20px !important;
+    margin-left: -20px !important;
+    margin-right: -20px !important;
   }
 }
 /****

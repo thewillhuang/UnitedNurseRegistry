@@ -35,11 +35,24 @@ galleryActions.getOne = (objectGuid) => {
   });
 };
 
-galleryActions.transferToInbox = (objectGuid, reactId) => {
-  galleryObjectApi.moveGalleryObjectToPersonalManifest(objectGuid);
+galleryActions.transferToInbox = (objectGuid, reactId, categoryList) => {
+  // console.log('categoryList', categoryList);
+  galleryObjectApi.addCategoryToGalleryObject(objectGuid, categoryList, () => {
+    // console.log('response from addCategoryToGalleryObject', data);
+  });
+  galleryObjectApi.moveGalleryObjectToPersonalManifest(objectGuid, () => {
+    AppDispatcher.dispatch({
+      actionType: galleryObjectConstants.GALLERY_DESTROY,
+      reactId: reactId
+    });
+  });
+};
+
+galleryActions.update = (reactId, payload) => {
   AppDispatcher.dispatch({
-    actionType: galleryObjectConstants.GALLERY_DESTROY,
-    reactId: reactId
+    actionType: galleryObjectConstants.GALLERY_UPDATE,
+    reactId: reactId,
+    payload: payload
   });
 };
 

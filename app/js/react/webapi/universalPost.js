@@ -1,7 +1,6 @@
 'use strict';
-const base = window.API_ROOT;
 const DOES_NOT_EXIST = 'does not exist';
-const NOT_PROVIDED = 'GetCircleOfTrustProfiles: A required value was not provided:';
+const NOT_PROVIDED = 'A required value was not provided:';
 const GET = 'get';
 const $ = require('jquery');
 
@@ -50,7 +49,7 @@ let post = (payload, url, callback, done) => {
   done = done || function() {};
   let token = sessionStorage.getItem('tokenKey');
   let profileGuid = sessionStorage.getItem('activeProfile');
-  let uri = base + url;
+  let uri = window.API_ROOT + url;
   let headers = {};
   if (token) {
     headers.Authorization = 'Bearer ' + token;
@@ -69,18 +68,23 @@ let post = (payload, url, callback, done) => {
 
       //retry on wrong profile guid or no profileguid
       if (data.Error) {
-        // console.log(data.Error);
         let errorString = data.Error;
+        // console.log(errorString);
         // if error substring contains 'does not exist', set the profile guid.
-        if (errorString.indexOf(DOES_NOT_EXIST) !== -1 || errorString.indexOf(NOT_PROVIDED) !== -1) {
+        if (errorString.indexOf(DOES_NOT_EXIST) !== -1) {
+          // console.log(DOES_NOT_EXIST);
+          setActiveProfile(payload, url, callback, done);
+        } else if (errorString.indexOf(NOT_PROVIDED) !== -1) {
+          // console.log(NOT_PROVIDED);
           setActiveProfile(payload, url, callback, done);
         }
       }
+      //else
       callback(data);
       done();
     },
-    error (data, success, error) {
-      console.log(error);
+    error (data) {
+      // console.log(error);
       if (data.access_token) {
         sessionStorage.setItem('tokenKey', data.access_token);
       }
@@ -89,7 +93,7 @@ let post = (payload, url, callback, done) => {
         sessionStorage.setItem('tokenKey', 'invalid');
         sessionStorage.setItem('activeProfile', 'invalid');
         sessionStorage.clear();
-        window.location.replace(GLOBAL_WEB_ROOT);
+        window.location.replace(window.GLOBAL_WEB_ROOT);
       }
     }
 

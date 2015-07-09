@@ -90,6 +90,7 @@ let circleListItem = React.createClass({
   },
 
   render() {
+    // console.log(this.props);
     let profilePhoto = '';
     if (this.props.payload.profilePhoto) {
       profilePhoto = 'data:image/jpeg;charset=utf-8;base64,' + this.props.payload.profilePhoto;
@@ -102,7 +103,7 @@ let circleListItem = React.createClass({
       if (this.props.payload.firstName || this.props.payload.lastName) {
         return (
           <div className="col-md-12 col-sm-12">
-            <a className='item-name primary-link circleOfTrustName' style={{marginLeft: '10', position: 'relative', top: '10'}}>{fullName}</a>
+            <a className='item-name primary-link' style={{marginLeft: '10', position: 'relative', top: '10'}}>{fullName}</a>
           </div>
         );
       }
@@ -144,7 +145,7 @@ let circleListItem = React.createClass({
                 </div>
               </div>
               <div className="col-md-4 col-sm-4">
-                <span className='label label-info pull-right' style={{ position: 'relative', top: '15'}}>{this.handleState()}</span>
+                <span className='label label-info pull-right' style={{ position: 'relative', top: '15', backgroundColor: '#02658c'}}>{this.handleState()}</span>
               </div>
             </div>
             <div className='row'>
@@ -224,7 +225,7 @@ let circleListItem = React.createClass({
           </div>
           <div className='row'>
             <OverlayTrigger placement='top' overlay={<Tooltip>Hide</Tooltip>}>
-              <i className="fa fa-ellipsis-v pull-right elip" onClick={this.handleToggle} style={{marginRight: '35', cursor: 'pointer'}}></i>
+              <i className="fa fa-ellipsis-v pull-right elip" onClick={this.handleToggle} style={{marginRight: '15', cursor: 'pointer'}}></i>
             </OverlayTrigger>
           </div>
         </div>

@@ -1,5 +1,5 @@
 /* @import '../plugins/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss'; */
-@import './themes/dropzoneTheme.scss';
+@import 'global';
 
 .app-background{
   background-color: white;
@@ -7,7 +7,7 @@
   margin-left: 15px;
   margin-right: 0px;
   margin-bottom: 10px;
-  box-shadow: 1px 1px 1px 1px $dropzoneBorder;
+  box-shadow: 1px 1px 1px 1px $lightMediumGrey;
 }
 .totalBar{
   padding-bottom: 10px;
@@ -27,8 +27,8 @@
 //dashed box
 .dashedBox {
   margin: 30px;
-  background-color: $dropZoneBg;
-  border: 3px dashed $dropzoneBorder;
+  background-color: $lightestGrey;
+  border: 3px dashed $lightMediumGrey;
   text-align: center;
   opacity: 0.4;
   -webkit-border-radius: 6px;
@@ -61,7 +61,7 @@
   border-radius: 6px;
   text-align: center;
   display: inline-block;
-  border: 2px solid $dropzoneBorder;
+  border: 2px solid $lightMediumGrey;
   list-style: none;
   margin: 10px;
   padding: 0px 5px;
@@ -77,7 +77,7 @@
 }
 //color of the auth form.
 .authForm {
-  color: $dropzonePink;
+  color: $darkPrimary;
 }
 //the div that holds the auth form link.
 .textBoxDiv {
@@ -89,7 +89,7 @@
 }
 //text box next to profile image
 .patientInfoBox {
-  color: $startButton;
+  color: $darkestSecondary;
   padding-left: 36px;
   font-family: "open_sanslight";
   margin-left: -15px;
@@ -97,7 +97,7 @@
 //blue bar with patient name
 .patientNameDiv {
   color: white;
-  background-color: $nameDivBar;
+  background-color: $lightSecondary;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -121,10 +121,10 @@
 .authLinkDiv {
   padding-top: 30px !important;
   margin-left: 4px;
-  color: $grey-text;
+  color: $mediumGrey;
   a {
     text-decoration: underline;
-    color: $nameDivBar;
+    color: $lightSecondary;
   }
 }
 //end of top right box css
@@ -139,30 +139,30 @@
 }
 //"Welcome to the Lifespeed Uploader"
 .greetings {
-  color: $startButton;
+  color: $darkestSecondary;
   font-weight: 400;
   font-size: larger;
 }
 //"the text after it"
 .greetings-text {
-  color: $grey-text;
+  color: $mediumGrey;
 }
 .btn-add {
-  background-color: $addFiles;
+  background-color: $lightThirdColor;
   margin-right: 30px;
   margin-bottom: 10px;
 }
 .btn-start {
-  background-color: $startButton;
+  background-color: $darkestSecondary;
   margin-right: 30px;
   margin-bottom: 10px;
 }
 .btn-cancel {
   background-color: white;
-  color: $grey-text;
+  color: $mediumGrey;
   border: 2px solid;
   margin-bottom: 10px;
-  border-color: $dropzoneBorder;
+  border-color: $lightGrey;
 }
 //bottom margin width
 .progress {
@@ -170,7 +170,7 @@
 }
 //end of top left box
 body {
-  background-color: $appBackground;
+  background-color: $lightMediumGrey;
   font-family: 'Open-Sans', sans-serif;
   height: 100%;
   letter-spacing: 0.6px;
@@ -178,14 +178,14 @@ body {
 //Request Date font and positioning
 .urgentTag {
   font-weight: 300;
-  color: $grey-text;
+  color: $mediumGrey;
   margin-top: 2px;
 }
 // label color and positioning
 .label-urgent {
   margin-left: 17px;
   padding: 9px 20px;
-  background-color: $dropzonePink;
+  background-color: $darkPrimary;
 }
 // div box box that has the Upload records and Request Date and urgent tags
 .page-title {
@@ -194,7 +194,7 @@ body {
 #title {
   margin-top: 3px;
   text-transform: uppercase;
-  color: $dropzonePink;
+  color: $darkPrimary;
 }
 //nav bar color
 .navigationbox {
@@ -215,7 +215,7 @@ body {
   border-radius: 4px; height: 20px;
 }
 .success {
-  background: $appBackground;
+  background: $lightestGrey;
 }
 .progress-striped .success {
   background-color: rgba(7, 166, 129, 0.82);

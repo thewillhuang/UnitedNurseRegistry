@@ -3859,6 +3859,7 @@ Portlets
 }
 .portlet.light > .portlet-title > .caption > .caption-subject {
   font-size: 0.8em;
+  text-transform: uppercase !important;
 }
 .portlet.light > .portlet-title > .caption > i {
   color: #777;

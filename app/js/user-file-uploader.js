@@ -1,5 +1,11 @@
 'use strict';
 
+//Init localization example
+$(function(){
+  var opts = { language: "sp", pathPrefix: "../localization", skipLanguage: "en-US" };
+  $("[data-localize]").localize("upload", opts)
+});
+
 var grabUrl = function(url, lastIndexStartString, lastIndexEndString) {
   var path = url;
   var startParseIndex = path.lastIndexOf(lastIndexStartString) + lastIndexStartString.length;
@@ -41,6 +47,7 @@ var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
 
 myDropzone.on("addedfile", function(file) {
   // Hookup the start button
+  document.querySelector("#total-progress .progress-bar").style.width = 0 + "%";
   file.previewElement.querySelector(".start").onclick = function() { myDropzone.enqueueFile(file); };
 });
 
@@ -58,7 +65,7 @@ myDropzone.on("sending", function(file) {
 
 // Hide the total progress bar when nothing's uploading anymore
 myDropzone.on("queuecomplete", function() {
-  document.querySelector("#total-progress").style.opacity = "0";
+  document.querySelector("#total-progress").style.opacity = "1";
 });
 
 // Setup the buttons for all transfers

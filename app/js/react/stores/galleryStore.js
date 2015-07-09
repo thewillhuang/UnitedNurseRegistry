@@ -4,6 +4,7 @@ const AppDispatcher = require('../dispatcher/appDispatcher.js');
 const EventEmitter = require('events').EventEmitter;
 const GalleryObjectConstants = require('../constants/galleryObjectConstants.js');
 const assign = require('object-assign');
+// const GalleryObjectApi = require('../webapi/galleryObjectApi.js');
 
 const CHANGE_EVENT = 'gallery';
 

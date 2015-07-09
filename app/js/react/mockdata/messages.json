@@ -1,0 +1,123 @@
+//all messages are initiated by sending an ajax post message to the api and are
+// received as real time socketio messages.
+
+// upon connection to socketio, the socket will send the history bundle, with a
+// pre-set fixed # of messages as not to over load the server
+// this should prob be initiated via an ajax call.
+
+// during subsequent messenging, all message and message types will be sent as
+// an ajax post message through the api stack and will be received
+// as the format under update (for message updates, typing, stop typing,
+// online, offline etc) or for messages under messages
+
+// each message will also have an id, time stamp, along with to and from guids
+// to the api to route the message to the right channel.
+// this also allows for paging so an api can be made to grab x number of messages
+// with increasing/decreasing timeStamp
+// for example, grab the next 5 messages after a certain time, fo the messages of x to y and it could come in as a history bundle.
+
+
+// the messages will look something like the bottom json.
+
+//updates
+{
+  "notificationType": "typing",
+  "profileGuid": "string of random guid",
+  "targetGuid": "string of random guid",
+  "time": "a sortable time of any format"
+}
+
+{
+  "notificationType": "stopTyping",
+  "profileGuid": "string of random guid",
+  "targetGuid": "string of random guid",
+  "time": "a sortable time of any format"
+}
+
+{
+  "notificationType": "online",
+  "profileGuid": "string of random guid",
+  "targetGuid": "string of random guid",
+  "time": "a sortable time of any format"
+}
+
+{
+  "notificationType": "offline",
+  "profileGuid": "string of random guid",
+  "targetGuid": "string of random guid",
+  "time": "a sortable time of any format"
+}
+
+// messages
+
+{
+  "notificationType": "messages",
+  "profileGuid": "",
+  "targetGuid": "",
+  "time": "",
+  "message": "any string format",
+  "read": true,
+  "id": "unique identifier for this particular message"
+}
+
+// history
+
+{
+  "messageBundle": [{
+    "notificationType": "message",
+    "profileGuid": "",
+    "targetGuid": "",
+    "time": "",
+    "message": "any string format",
+    "read": true,
+    "id": "unique identifier for this particular message"
+  }, {
+    "notificationType": "message",
+    "profileGuid": "",
+    "targetGuid": "",
+    "time": "",
+    "message": "any string format",
+    "read": true,
+    "id": "unique identifier for this particular message"
+  }, {
+    "notificationType": "message",
+    "profileGuid": "",
+    "targetGuid": "",
+    "time": "",
+    "message": "any string format",
+    "read": true,
+    "id": "unique identifier for this particular message"
+  }, {
+    "notificationType": "message",
+    "profileGuid": "",
+    "targetGuid": "",
+    "time": "",
+    "message": "any string format",
+    "read": false,
+    "id": "unique identifier for this particular message"
+  }, {
+    "notificationType": "message",
+    "profileGuid": "",
+    "targetGuid": "",
+    "time": "",
+    "message": "any string format",
+    "read": true,
+    "id": "unique identifier for this particular message"
+  }, {
+    "notificationType": "message",
+    "profileGuid": "",
+    "targetGuid": "",
+    "time": "",
+    "message": "any string format",
+    "read": false,
+    "id": "unique identifier for this particular message"
+  }, {
+    "notificationType": "message",
+    "profileGuid": "",
+    "targetGuid": "",
+    "time": "",
+    "message": "any string format",
+    "read": true,
+    "id": "unique identifier for this particular message"
+  }]
+}

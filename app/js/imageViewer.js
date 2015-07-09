@@ -1,3 +1,23 @@
+// Enable Popovers
+$(function() {
+  $('[data-toggle="popover"]').popover({
+    html : true,
+    viewport: '.page-content',
+    animation: true
+  });
+});
+
+$('body').on('click', function(e) {
+  $('[data-toggle="popover"]').each(function() {
+    //the 'is' for buttons that trigger popups
+    //the 'has' for icons within a button that triggers a popup
+    if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+      $(this).popover('hide');
+    }
+  });
+
+});
+
 var imageViewerSlices = [];
 var imageViewerRotation = 0;
 var imageViewerImageHeight = 0;
@@ -18,8 +38,10 @@ function imageViewerLoadStudy(objectGuid, objectType) {
       'seriesGuid': objectGuid,
     };
     $("#imageViewerImageDiv").empty();
+    $("#imageViewerFileInfo").attr("data-content", "");
     ajaxPost(newuri, payload, function(data, done, message) {
       if (done) {
+        imageViewerLoadFileInfo(data);
         var instanceList = $.parseJSON(data.galleryObjectList);
         imageViewerSlices.length = instanceList.length;
         for (i in instanceList) {
@@ -66,8 +88,10 @@ function imageViewerLoadStudy(objectGuid, objectType) {
       'includeImage': 'true'
     };
     $("#imageViewerImageDiv").empty();
+    $("#imageViewerFileInfo").attr("data-content", "");
     ajaxPost(newuri, payload, function(data, done, message) {
       if (done) {
+        imageViewerLoadFileInfo(data);
         var imgString = "data:image/jpeg;base64," + data.image;
         var img = $('<img>');
         img.on('load', function() {
@@ -84,6 +108,16 @@ function imageViewerLoadStudy(objectGuid, objectType) {
   imageViewerRotation = 0;
   rotatedImageViewerImageDivStyle(imageViewerRotation);
   $("#imageViewerModal").modal();
+}
+
+function imageViewerLoadFileInfo(data)
+{
+  var htmlString = "<span>Filename: " + data.originalFileName + "</span><br>";
+  htmlString += "<span>Type: " + data.type + "</span><br>";
+  htmlString += "<span>Date Added: " + new Date(data.createdDate).toDateString() + "</span><br>";
+  htmlString += "<span>Categories: " + data.categoryList + "</span><br>";
+  htmlString += "<span>Note Count: " + data.noteCount + "</span><br>";
+  $("#imageViewerFileInfo").attr("data-content",htmlString);
 }
 
 function imageViewerRotateLeftButtonClicked() {

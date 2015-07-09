@@ -2,6 +2,7 @@
 const React = require('react');
 const Urgent = require('./uploaderUrgentTag.jsx');
 const PatientInfo = require('./patientInfo.jsx');
+// const NotificationBell = require('./notificationBell.jsx');
 
 let grabUrl = (url, lastIndexStartString, lastIndexEndString) => {
   let startParseIndex = url.lastIndexOf(lastIndexStartString) + lastIndexStartString.length;
@@ -16,7 +17,7 @@ let grabToken = () => {
   return grabUrl(window.location.href, '?l=');
 };
 
-console.log('token', grabToken());
+// console.log('token', grabToken());
 
 React.render(
   <Urgent guid={grabToken()} />,
@@ -25,3 +26,5 @@ React.render(
 React.render(
   <PatientInfo guid={grabToken()} />,
   document.getElementById('reactPatientInfo'));
+
+// React.render(<NotificationBell />, document.getElementById('reactNavItems'));

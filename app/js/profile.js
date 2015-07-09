@@ -2,6 +2,7 @@ $(document).ready(function() {
   $("#updatePasswordForm").hide();
   // Check if new user - needs to fill out profile
   var newUser = sessionStorage.getItem("newUser");
+  console.log(newUser);
   if (newUser === "true") {
     User.status = "new";
     $("#profilePhotoDiv").hide();
@@ -22,8 +23,6 @@ $("#saveProfile").click(function(event) {
         validateRequired(function(done) {
           if (done) {
             createUserProfileCompound();
-          } else {
-            sweetAlert("Whoops!", "Please fill in all required fields!");
           }
         });
       }
@@ -35,6 +34,13 @@ $("#saveProfile").click(function(event) {
       }
     });
   }
+});
+
+$("#languageDrop li a").click(function(event){
+  event.preventDefault();
+  Profile.localization = $(this).attr("id");
+  var choice = $(this).text();
+  $("#langChoice").text(choice);
 });
 
 // User information objects
@@ -49,7 +55,8 @@ var Profile = {
   profilePhoto: '',
   height: '',
   weight: '',
-  dateOfBirth: ''
+  dateOfBirth: '',
+  localization: ''
 }
 var Address = {
   hasAddress: false,
@@ -82,6 +89,19 @@ function getFormFields(callback) {
     } else {
       Profile.avatarPath = "/images/femaleavatar.png";
     }
+    if (Profile.localization == "es"){
+      //Init localization example
+      $(function(){
+        var opts = { language: "sp", pathPrefix: "../localization", skipLanguage: "en-US" };
+        $("[data-localize]").localize("profile", opts)
+      });
+    } else {
+      //Init localization example
+      $(function(){
+        var opts = { language: "en", pathPrefix: "../localization" };
+        $("[data-localize]").localize("profile", opts)
+      });
+    }
     Address.address = $("#address").val();
     Address.address2 = $("#address2").val();
     Address.city = $("#city").val();
@@ -99,7 +119,9 @@ function getProfileCompound() {
       'profileGuid': profileGuid,
       'includePhoto': 'true'
     };
+    console.log(payload);
     ajaxPost(newuri, payload, function(data, done, message) {
+    console.log(data, message);
       if (done) {
         // Pass data to function to fill profile fields
         fillProfile(data);
@@ -128,6 +150,20 @@ function fillProfile(data) {
       $("#femaleRadio").attr("checked", true);
     } else {
       $("#maleRadio").attr("checked", true);
+    }
+    console.log(profile.localization);
+    if (profile.localization == "es"){
+      //Init localization example
+      $(function(){
+        var opts = { language: "sp", pathPrefix: "../localization", skipLanguage: "en-US" };
+        $("[data-localize]").localize("profile", opts)
+      });
+    } else {
+      //Init localization example
+      $(function(){
+        var opts = { language: "en", pathPrefix: "../localization" };
+        $("[data-localize]").localize("profile", opts)
+      });
     }
     // Address
     var primaryAddress;
@@ -222,14 +258,14 @@ function createUserProfileCompound() {
     'ContactMethodList': JSON.stringify(ContactMethodList)
   };
   ajaxPost(newuri, payload, function(data, done, message) {
-    if (done) {
+    if (done && data.Success) {
       sessionStorage.setItem("newUser", "false");
       User.status = "";
       sessionStorage.setItem("activeProfile", data.guid);
       $("#profilePhotoDiv").show();
-      sweetAlert("Created profile!");
+      sweetAlert(data.Success);
     } else {
-      return false;
+      sweetAlert(data.Error);
     }
   });
 }
@@ -381,22 +417,25 @@ function createContact(label, methodValue, type, callback) {
   }
   // Update existing profile
 function updateProfile() {
-    var profileGuid = sessionStorage.getItem("activeProfile");
-    var newuri = API_ROOT + 'api/profiles/updateprofile';
-    var payload = {
-      'profileGuid': profileGuid,
-      'firstName': Profile.firstName,
-      'middleName': Profile.middleName,
-      'lastName': Profile.lastName,
-      'avatarPath': Profile.avatarPath,
-      'profilePhoto': Profile.profilePhoto,
-      'height': Profile.height,
-      'weight': Profile.weight,
-      'dateOfBirth': Profile.dateOfBirth
-    };
-    ajaxPost(newuri, payload, function(data, done, message) {
-    });
-  }
+  var profileGuid = sessionStorage.getItem("activeProfile");
+  var newuri = API_ROOT + 'api/profiles/updateprofile';
+  var payload = {
+    'profileGuid': profileGuid,
+    'firstName': Profile.firstName,
+    'middleName': Profile.middleName,
+    'lastName': Profile.lastName,
+    'avatarPath': Profile.avatarPath,
+    'profilePhoto': Profile.profilePhoto,
+    'height': Profile.height,
+    'weight': Profile.weight,
+    'dateOfBirth': Profile.dateOfBirth,
+    'localization': Profile.localization
+  };
+  console.log(payload);
+  ajaxPost(newuri, payload, function(data, done, message) {
+    console.log(data, done, data.Error, data.Success);
+  });
+}
   // Update contact
 function updateContact(contactGuid, contactType, contactMethodValue) {
     var profileGuid = sessionStorage.getItem("activeProfile");
@@ -495,9 +534,9 @@ function updatePassword() {
 
   ajaxPost(newuri, payload, function(data, done, message) {
     if (done) {
-      sweetAlert("Sucess!", "Your password has been udpated");
+      sweetAlert(data.Success);
     } else {
-      return false;
+      sweetAlert(data.Error);
     }
   });
 }

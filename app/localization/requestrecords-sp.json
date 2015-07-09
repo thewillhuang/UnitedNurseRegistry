@@ -1,0 +1,23 @@
+{
+  "t-get-recoreds": "Obtener los Registros",
+  "t-terms-conds": "Términos y Condiciones",
+  "btn-submit": "Presenta",
+  "desc-indicate-urgent": "Haga clic aquí para indicar que se trata de una solicitud urgente",
+  "desc-terms-agree": "He leído y estoy de acuerdo con los Términos y Condiciones",
+  "desc-records-op1": "Opción 1: No tengo dirección de correo electrónico de mi proveedor",
+  "desc-records-op2": "Option 2: I do not have my provider’s email address",
+  "desc-get-records-long": "El siguiente URL es un enlace a una página donde los individuos u organizaciones pueden subir imágenes y documentos a su cuenta Lifespeed. Imágenes y documentos cargados a su cuenta se pueden revisar en la página 'Verificación de Archivos de Entrada'. Puede compartir la URL a través de su método preferido de comunicación: correo electrónico, mensajería instantánea, etc.",
+  "desc-records-obtain": "Utilice este formulario para obtener una copia de su historia clínica de su proveedor de atención médica.",
+  "btn-copy-clip": "Copiar al Portapapeles",
+  "form": {
+    "f-prov-fname": "Del Proveedor Nombre",
+    "f-prov-lname": "Provider's Last Name",
+    "f-prov-business": "Del proveedor Apellido",
+    "f-prov-phone": "Número de Teléfono del Proveedor",
+    "f-req-exp": "Solicitud de Caducidad (en días)",
+    "f-org": "Organización",
+    "f-relation": "Relación",
+    "f-primary-care": "Especialista en Atención Primaria",
+    "f-mobile": "Celular"
+  }
+}

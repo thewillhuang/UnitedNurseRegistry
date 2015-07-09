@@ -1,41 +1,24 @@
-/* Platform landing page platform-home.aspx */
+/* Dashboard styling */
+@import "global";
+
 .column {
   padding-left: 20px !important;
   padding-right: 20px !important;
 }
-.landing-row {
-  margin: 0 auto;
-}
 .portlet-top {
-  border-top: 3px solid #Eb374C;
+  border-top: 3px solid $darkPrimary;
 }
 .upload-portlet-body {
   width: 75%;
   height: auto;
   position: relative;
   margin: 0 auto;
-  margin-top: -40px;
+  margin-top: -25px;
 }
 .upload-body-img {
-  width: 100%;
+  width: auto;
+  max-width: 100%;
   height: auto;
-}
-.landingBodySmall {
-  width: 50%;
-  height: auto;
-}
-/* Containts the circle links and upload cloud */
-
-.landingRight {
-  position: relative;
-  margin-left: 260px;
-}
-.switch-user img {
-  width: 90%;
-  height: 90%;
-}
-.light-shadow {
-  box-shadow: 0 0 3px #B2B2B2;
 }
 .me {
   float: left;
@@ -45,63 +28,35 @@
   box-shadow: -2px 2px 2px 0 rgba( 178, 178, 178, .4);
   left: -9px;
 }
-/*.upload-portlet-body {
-  cursor: pointer;
-}*/
-/* Position links for body images - adults */
-
-.avatar-head {
+@mixin body-part {
   z-index: 5;
   position: absolute;
-  top: 5%;
+}
+.avatar-head {
+  @include body-part;
+  top: 3%;
   left: 47%;
 }
 .avatar-arm {
-  z-index: 5;
-  position: absolute;
+  @include body-part;
   top: 40%;
   left: 17%;
 }
 .avatar-leg {
-  z-index: 5;
-  position: absolute;
+  @include body-part;
   top: 73%;
   left: 36%;
 }
 .avatar-chest {
-  z-index: 5;
-  position: absolute;
+  @include body-part;
   top: 23%;
   left: 55%;
 }
-/* Position links for body images - kids */
-
-.avatar-head2 {
-  z-index: 5;
-  position: absolute;
-  top: 5%;
-  left: 23%;
-}
-.avatar-arm2 {
-  z-index: 5;
-  position: absolute;
-  top: 30%;
-  left: 10%;
-}
-.avatar-leg2 {
-  z-index: 5;
-  position: absolute;
-  top: 60%;
-  left: 16%;
-}
-.avatar-chest2 {
-  z-index: 5;
-  position: absolute;
-  top: 22%;
-  left: 26%;
-}
 .camera-icon-circle:hover {
-  background-color: #02658C;
+  background-color: $darkestSecondary;
+}
+.light-shadow {
+  box-shadow: 0 0 3px #B2B2B2;
 }
 .shadow {
   -webkit-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
@@ -113,22 +68,12 @@
   margin: 5px 5px;
   height: 270px;
   width: 315px;
-  color: #fff;
+  color: #ffffff;
 }
 .widgets img {
   height: 100%;
   width: 100%;
 }
-.user-media-container {
-  width: 100%;
-  height: auto;
-  margin: 0;
-}
-/*.user-item:hover {
-    z-index: 5;
-   -webkit-transform: scale(2);
-   -moz-transform: scale(2);
-}*/
 .user-item.is-expanded,
 .user-item.is-expanded .item-content {
   width: 400px;
@@ -139,7 +84,6 @@
   -moz-box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
   box-shadow: 1px 1px 5px 0px rgba(0, 0, 0, 0.75);
 }
-
 .user-item.is-expanded {
   z-index: 2;
 }
@@ -148,7 +92,7 @@
 }
 #galleryPortletBody{
   text-align: center;
-  max-height: 600px;
+  max-height: 500px;
 }
 .user-item-dashboard{
   width: 48%;
@@ -166,71 +110,6 @@
   display: block;
   width: 100%;
   margin-right: 5px;
-  height: auto;
-}
-.overlay {
-  position: absolute;
-  width: 100%;
-  height: auto;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, .75);
-  text-align: center;
-  opacity: 0;
-  -webkit-transition: opacity .25s ease;
-}
-.user-item:hover .overlay {
-  opacity: 1;
-}
-.overlay .plus:before {
-  margin: 0;
-  padding: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-}
-.plus {
-  padding: 5px;
-}
-.expandItemDesc.clicked .plus:before {
-  content: "-";
-}
-.user-item-description {
-  display: block;
-  position: absolute;
-  width: 100%;
-  height: 30%;
-  overflow-y: scroll;
-  background-color: #fff;
-  bottom: -30%;
-  text-align: center;
-  transition: bottom 0.25s ease;
-}
-.user-item-description:after {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 0;
-  left: 50%;
-  border-style: solid;
-  border-color: transparent transparent white transparent;
-  border-width: 16px;
-  top: 0;
-  -webkit-transform: translate(-50%, 100%);
-}
-.overlay.clicked + .user-item-description {
-  bottom: 0%;
-}
-.overlay.clicked + .user-item-description:after {
-  -webkit-transform: translate(-50%, -100%);
-}
-.plus-desc {
-  padding-top: 5px;
-}
-.user-doc {
-  width: 200px;
   height: auto;
 }
 .user-dicom {
@@ -256,20 +135,17 @@
   overflow-x: scroll;
   width: 100%;
 }
-#editGlimpseBody {
-  font-family: 'open-sans', sans-serif;
-}
 #editGlimpseBody h4 {
-  color: #EB374C;
+  color: $darkPrimary;
   margin: 0;
 }
 .user-glimpse {
   margin-bottom: 15px;
   margin-top: 5px;
-}
-.user-glimpse p {
-  margin: 1px;
-  color: #808080;
+  p {
+    margin: 1px;
+    color: #808080;
+  }
 }
 .glimpse-images {
   margin-top: 5px;
@@ -310,9 +186,9 @@
 }
 #glimpsePortletBody {
   margin-right: 10px;
-}
-#glimpsePortletBody p, h4 {
-  margin-left: 15px;
+  p, h4 {
+    margin-left: 15px;
+  }
 }
 #editGlimpseBody h4 {
   font-size: 1.2em;
@@ -340,7 +216,6 @@
   color: #337ab7;
   margin-top: 0;
 }
-
 /*Custom board portlet styles */
 .dashboard-user-board-item {
   display: inline-block;
@@ -350,7 +225,7 @@
   max-width: 200px;
   margin: 2%;
   overflow: hidden;
-  background-color: #fff;
+  background-color: #ffffff;
   -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.4);
   -moz-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.4);
   box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.4);
@@ -369,16 +244,35 @@
 .user-item-avatarSearch {
   display: inline-block;
   float: left;
-}
-.user-item-avatarSearch img {
-  width: 150px;
-  height: 150px;
-  padding: 5px;
-}
-
-@media (max-width: 850px) {
-  .landingRight {
-    margin: 0 auto;
-    clear: both;
+  img {
+    width: 150px;
+    height: 150px;
+    padding: 5px;
   }
+}
+#boardPortletBody {
+  height: auto;
+  max-height: 600px;
+  .user-board {
+    height: auto;
+    overflow: hidden;
+  }
+ .board-items {
+    height: auto;
+    overflow: hidden;
+  }
+}
+.show-more-board-items {
+  margin-right: 10px;
+  margin-top: 10px;
+  color: $darkPrimary;
+}
+.show-more-board-items:hover {
+  color: $darkPrimary;
+}
+.board-items-shorter {
+  height: 215px !important;
+}
+#imageViewerModal {
+  z-index: 10061;
 }

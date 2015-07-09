@@ -27,8 +27,7 @@ let RequestLink = React.createClass({
   },
 
   handleClick(){
-    // React.findDOMNode(this.refs.link).focus();
-    console.log(this.refs.link.state);
+    console.log(this.state);
   },
 
   render() {

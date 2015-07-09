@@ -33,12 +33,22 @@ let NotificationBell = React.createClass({
   },
 
   render() {
+    // console.log(this.state);
+    let labelNumber = () => {
+      let num = this.state.notification.length;
+      if (num > 0) {
+        return (
+          <span className="label label-danger bellNumber" style={{fontWeight: 100, position: 'relative', bottom: '8'}}>{num}</span>
+        );
+      }
+    };
+
     return (
       <li className="dropdown dropdown-extended dropdown-inbox">
         <a href="#" className="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
           <i className="icon-bell"></i>
           <span className="badge"></span>
-          <span className="label label-danger bellNumber" style={{fontWeight: 100, position: 'relative', bottom: '2'}}>{this.state.notification.length}</span>
+          {labelNumber()}
         </a>
         <NotificationList data={this.state.notification}/>
       </li>

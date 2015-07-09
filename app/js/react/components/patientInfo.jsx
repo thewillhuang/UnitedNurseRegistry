@@ -2,10 +2,6 @@
 const React = require('react');
 const manifestApi = require('../webapi/manifestApi.js');
 const $ = require('jquery');
-// let moment = require('moment');
-// let urgentTag;
-// let patientInfo;
-// let pageLinks;
 
 let PatientInfo = React.createClass({
 
@@ -33,7 +29,7 @@ let PatientInfo = React.createClass({
   componentDidMount() {
     let self = this;
     manifestApi.getRecordRequestDetails(this.props.guid, (data) => {
-      console.log(data);
+// console.log(data);
       let profilePhoto;
       if (data.profilePhoto === undefined) {
         profilePhoto = '../../../images/ProfilePlaceholder.png';
@@ -50,11 +46,11 @@ let PatientInfo = React.createClass({
           dateOfBirth: data.requestingUserDateOfBirth || ''
         });
         let requestingUserContactMethodList = $.parseJSON(data.requestingUserContactMethodList);
-        console.log('requestingUserContactMethodLIst', requestingUserContactMethodList);
-        $.each(requestingUserContactMethodList, (index, value)  => {
-          console.log(index);
+        // console.log('requestingUserContactMethodLIst', requestingUserContactMethodList);
+        $.each(requestingUserContactMethodList, (index, value) => {
+          // console.log(index);
           value = $.parseJSON(value);
-          console.log(value);
+          // console.log(value);
           self.setState({
             phone: value.contactMethodValue
           });
@@ -64,14 +60,14 @@ let PatientInfo = React.createClass({
   },
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div>
 
         <div className='row'>
 
           <div className='col-md-2 col-sm-2 profileImageWrapper'>
-            <img alt='profile image' className='img-circle' width='90' height='90'src={this.state.profilePhoto}/>
+            <img alt='profile image' className='img-circle' height='90' src={this.state.profilePhoto} width='90'/>
           </div>
 
           <div className='col-md-10 col-sm-10 patientInfoBox'>
@@ -79,11 +75,11 @@ let PatientInfo = React.createClass({
             <div className='row patientNameDiv'>
 
               <div className='col-md-6 col-sm-6'>
-              <p>First Name:
-                <span className='patientName patientInfoText'>
-                  {this.state.requestingUserFirstName}
-                </span>
-              </p>
+                <p>First Name:
+                  <span className='patientName patientInfoText'>
+                    {this.state.requestingUserFirstName}
+                  </span>
+                </p>
               </div>
 
               <div className='col-md-6 col-sm-6'>
@@ -96,43 +92,49 @@ let PatientInfo = React.createClass({
               </div>
             </div>
 
-            <div className='textBoxDiv'>
+            <div className='textBoxDiv'/>
 
+            <div className='row'>
+
+              <div className='col-md-6 col-sm-6'>
+
+                Date of Birth:
+                <span className='patientInfoText'>
+                  {this.state.dateOfBirth}
+                </span>
+              </div>
+              <div className='col-md-6 col-sm-6'>
+
+                Provider's Name:
+                <span className='patientInfoText'>
+                  {this.state.providerFirstName + ' ' + this.state.providerLastName}
+                </span>
+              </div>
             </div>
 
-              <div className='row'>
+            <div className='row'>
 
-                <div className='col-md-6 col-sm-6'>Date of Birth:
-                  <span className='patientInfoText'>
-                    {this.state.dateOfBirth}
-                  </span>
-                </div>
-
-                <div className='col-md-6 col-sm-6'>Provider's Name:
-                  <span className='patientInfoText'>
-                    {this.state.providerFirstName + ' ' + this.state.providerLastName}
-                  </span>
-                </div>
-
+              <div className='col-md-6'>
+                Phone Number:
+                <span className='patientInfoText'>
+                  {this.state.phone}
+                </span>
               </div>
-
-              <div className='row'>
-                <div className='col-md-6'>Phone Number:
-                  <span className='patientInfoText'>
-                    {this.state.phone}
-                  </span>
-                </div>
-              </div>
+            </div>
           </div>
-
         </div>
 
         <div className='row authLinkDiv'>
-          <p>There is an
-            <span className='authForm'> Authorized Medical Records Release Form</span>.
-            Click <a href='#'>here</a> to read it.</p>
-        </div>
 
+          <p>
+            There is an
+            <span className='authForm'>
+              Authorized Medical Records Release Form
+            </span>. Click
+            <a href='#'>
+              here</a>to read it.
+          </p>
+        </div>
       </div>
     );
   }

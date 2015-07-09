@@ -8,12 +8,31 @@ $(document).ready(function() {
   QuickSidebar.init(); // init quick sidebar
   Demo.init(); // init demo features
   setActiveTabColor();
+  setSidebarHeight();
 
   //Log out user button click event
   $("#logOutButton").click(function() {
     logOutUser();
   });
 
+});
+
+$(".sidebar-toggler").click(function(){
+  var page = window.location.href;
+  page = page.split('/').slice(-1).pop();
+  if (page === "dashboard.html"){
+    if ($("body").hasClass("page-sidebar-closed")){
+      $(".page-content-wrapper .page-content").addClass("dashboard-content-left");
+    } else {
+      $(".page-content-wrapper .page-content").removeClass("dashboard-content-left");
+    }
+  } else {
+    if ($("body").hasClass("page-sidebar-closed")){
+      $(".page-content-wrapper .page-content").addClass("content-left");
+    } else {
+      $(".page-content-wrapper .page-content").removeClass("content-left");
+    }
+  }
 });
 
 // Make page sidebar scroll with page
@@ -34,7 +53,18 @@ $(function() {
       });
     }
   });
+  $window.resize(function(){
+    setSidebarHeight();
+  });
 });
+
+function setSidebarHeight(){
+  var $window = $(window);
+  var headerHeight = $(".page-header").height();
+  var contentHeight = $window.height();
+  var sidebarHeight = contentHeight - headerHeight;
+  $("#page-sidebar-menu").css("height", sidebarHeight);
+}
 
 function setActiveTabColor(){
   var page = window.location.href;

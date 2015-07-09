@@ -1,7 +1,47 @@
 // Show single board view click event
 $(document).on('click', '.single-board-view', function() {
-  var boardGuid = $(this).closest(".user-board").find("div.board-items").attr("id");
+  var boardGuid = $(this).closest(".user-board").attr("id");
   showSingleBoardView(boardGuid);
+});
+// Highlight icon green if clicked
+$(document).on('click', '.add-to', function(event) {
+  event.preventDefault();
+  $(this).toggleClass('board-clicked');
+  $(this).children("i").toggleClass('highlight');
+  $(this).closest(".single-board-item").find(".selected-overlay").toggleClass("hide-overlay");
+});
+// Unselect item
+$(document).on('click', '.unselect-item', function(event){
+  $(this).closest(".single-board-item").find(".add-to").toggleClass('board-clicked');
+  $(this).closest(".single-board-item").find(".add-to i").toggleClass('highlight');
+  $(this).closest(".single-board-item").find(".selected-overlay").toggleClass("hide-overlay");
+});
+// Add tags to board
+$("#addTagsToBoard").click(function(event){
+  event.preventDefault();
+  noneSelected = true;
+  $(".add-to").each(function(){
+    if ($(this).hasClass("board-clicked")){
+      noneSelected = false;
+    }
+  });
+  if (noneSelected === false){
+    $("#addTagsBoardModal").modal('show');
+  } else {
+    return false;
+  }
+});
+$("#addTagsSubmit").click(function(){
+  addObjectGuids = "";
+  var labels = $("#addTagsInput").val();
+  $(".highlight").each(function() {
+    var checkedGuid = $(this).closest("div.single-board-item").attr("id");
+    addObjectGuids += checkedGuid + ",";
+  });
+  addObjectGuids = addObjectGuids.split(',');
+  for (var i in addObjectGuids){
+    addTagsToBoard(addObjectGuids[i], labels);
+  }
 });
 // Note dropdown event
 $(document).on('click', '#noteDropdownList li a', function(event) {
@@ -16,6 +56,7 @@ $(document).on('click', '.add-board-note', function(event) {
   $("#noteImage").empty();
   var boardGuid = $(this).closest("div.single-board").attr("id");
   currentNoteObject = boardGuid;
+  currentNoteObjectGuid = boardGuid;
   // Get any previous notes for the item
   $("#previousNotes").empty();
   getObjectNotes(boardGuid, 'Board');
@@ -56,6 +97,23 @@ $(document).on('click', '#boardBack', function() {
 });
 
 // Note modal
+//User submitting a note to add to gallery object
+$("#addNoteBtn").click(function() {
+  var objectGuid = $(".single-board").attr("id");
+  createNote(currentNoteObject, currentNoteType, category, function(done, data){
+    if (done){
+      var noteCountId = "notecount" + currentNoteObject;
+      var noteCount = $("#"+noteCountId).text();
+      noteCount = parseInt(noteCount);
+      if (noteCount){
+        noteCount += 1;
+      } else {
+        noteCount = 1;
+      }
+      $("#"+noteCountId).text(noteCount);
+    }
+  });
+});
 $(document).on('click', '.add-note', function(event) {
   event.preventDefault();
   $("#noteImage").empty();
@@ -66,6 +124,7 @@ $(document).on('click', '.add-note', function(event) {
   var noteImage = $(this).closest("div.item-controls").attr("id");
   var imageGuid = $(this).closest("div.user-board-item").attr("id");
   currentNoteObject = imageGuid;
+  currentNoteObjectGuid = imageGuid;
   currentNoteType = "GalleryObject";
   $(".note-container").attr("id", imageGuid);
   // Get any previous notes for the item
@@ -73,6 +132,13 @@ $(document).on('click', '.add-note', function(event) {
   getObjectNotes(imageGuid, 'GalleryObject');
   $('#noteModal').modal('show');
   $('#addNotesRow').hide();
+  $("#addNoteBtn").hide();
+});
+$(document).on('click', '#viewNotesTab', function(event){
+  $("#addNoteBtn").hide();
+});
+$(document).on('click', '#addNotesTab', function(event){
+  $("#addNoteBtn").show();
 });
 $(document).on('click', '.single-add-note', function(event) {
   event.preventDefault();
@@ -85,6 +151,7 @@ $(document).on('click', '.single-add-note', function(event) {
   var noteImage = $(this).closest("div.item-controls").attr("id");
   var imageGuid = $(this).closest("div.single-board-item").attr("id");
   currentNoteObject = imageGuid;
+  currentNoteObjectGuid = imageGuid;
   currentNoteType = "GalleryObject";
   $(".note-container").attr("id", imageGuid);
   // Get any previous notes for the item
@@ -97,7 +164,7 @@ $(document).on('click', '.single-add-note', function(event) {
 $(document).on('click', '.edit-board', function(event) {
   event.preventDefault();
   $("#previousCategories").empty();
-  var boardName = $(".single-board-title").html();
+  var boardName = $(".single-board-description").attr("id");
   var boardDescription = $(".single-board-description").html();
   var categories = $(this).attr("id");
   categories = categories.split(',');
@@ -133,8 +200,26 @@ $(document).on('click', '#noteDropdownList li a', function(event) {
 $(document).on('click', '.delete-this-note', function(event) {
   event.preventDefault();
   var noteGuid = $(this).attr("id");
-  var objectType = 'galleryobject';
-  deleteNote(noteGuid, objectType);
+  var noteCountId = "notecount" + currentNoteObjectGuid;
+  var objectType = currentNoteType;
+  deleteNote(noteGuid, objectType, function(done, data){
+    if (done){
+      console.log(data);
+      var noteCountId = "notecount" + currentNoteObjectGuid;
+      var noteCount = $("#"+noteCountId).text();
+      noteCount = parseInt(noteCount);
+      console.log(noteCount);
+      if (noteCount){
+        noteCount -= 1;
+        if (noteCount === 0){
+          noteCount = "";
+        }
+      } else {
+        noteCount = "";
+      }
+      $("#"+noteCountId).text(noteCount);
+    }
+  });
 });
 // Edit a note click
 $(document).on('click', '.edit-this-note', function(event) {
@@ -155,13 +240,14 @@ $(document).on('click', '#editNoteSubmit', function() {
   updateNote(noteGuid, 'Board', function(done) {
     if (done) {
       $("#previousNotes").empty();
+      $("#addNoteBtn").hide();
       getObjectNotes(imageGuid, 'Board');
     }
   })
 });
 // Delete gallery object
 $(document).on('click', '.delete-file', function() {
-  var boardGuid = $(this).closest(".board-items").attr("id");
+  var boardGuid = $(this).closest(".user-board").attr("id");
   var objectGuid = $(this).closest(".user-board-item").attr("id");
   deleteFromBoard(objectGuid, boardGuid);
 });
@@ -185,23 +271,26 @@ $(document).on('click', '.single-download-item', function(event) {
 $("#filterDropdown li a").click(function(){
   currentFilter = $(this).text();
   if (currentFilter === "File Name"){
+    $("#filterFileTypeDropdown").hide();
     $("#filterDate").hide();
     $("#filterDate2").hide();
     $("#filterText").show();
-    $("#filterTextInput").val("");
+    $("#filterTextInput").show().val("");
     $("#filterDateInput").val("");
     $("#filterInputLabel").text(currentFilter);
     $("#filterTextInput").attr("placeholder", "Original File Name");
   } else if (currentFilter === "Tag"){
+    $("#filterInputLabel").text(currentFilter);
     currentFilter = "Category";
+    $("#filterFileTypeDropdown").hide();
     $("#filterDate").hide();
     $("#filterDate2").hide();
     $("#filterText").show();
-    $("#filterTextInput").val("");
+    $("#filterTextInput").show().val("");
     $("#filterDateInput").val("");
-    $("#filterInputLabel").text(currentFilter);
     $("#filterTextInput").attr("placeholder", "e.g. head, torso");
   } else if (currentFilter === "Uploaded Before" || currentFilter === "Uploaded After"){
+    $("#filterFileTypeDropdown").hide();
     $("#filterText").hide();
     $("#filterDate2").hide();
     $("#filterDate").show();
@@ -209,6 +298,7 @@ $("#filterDropdown li a").click(function(){
     $("#filterDateInput").val("");
     $("#filterInputLabel2").text(currentFilter);
   } else if (currentFilter === "Uploaded Between"){
+    $("#filterFileTypeDropdown").hide();
     $("#filterText").hide();
     $("#filterDate").hide();
     $("#filterDate2").show();
@@ -217,15 +307,20 @@ $("#filterDropdown li a").click(function(){
     $("#filterDateInput").val("");
     $("#filterInputLabel2").text(currentFilter);
   } else if (currentFilter === "File Type"){
+    $("#filterFileTypeDropdown").hide();
     $("#filterDate").hide();
     $("#filterDate2").hide();
     $("#filterText").hide();
-    $("#filterText").show();
-    $("#filterTextInput").val("");
-    $("#filterDateInput").val("");
+    $("#filterTextInput").hide();
+    $("#filterFileTypeDropdown").show();
     $("#filterInputLabel").text(currentFilter);
     $("#filterTextInput").attr("placeholder", "e.g. JPEG, DICOM_STUDY");
   }
+});
+$("#fileTypeDropdown li a").click(function(){
+  var currentFilter = "File Type";
+  var userInput = $(this).text();
+  filteredGalleryObjectList(currentBoardGuid, currentFilter, userInput);
 });
 $("#filterTextInput").keypress(function(event){
   if ( event.which == 13 ) {
@@ -271,6 +366,7 @@ $(".remove-filter").click(function(event){
   $("#filterText").hide();
   $("#filterDate").hide();
   $("#filterDate2").hide();
+  $("#filterFileTypeDropdown").hide();
   showSingleBoardView(currentBoardGuid);
 });
 //

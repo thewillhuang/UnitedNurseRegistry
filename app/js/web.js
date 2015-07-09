@@ -3,6 +3,7 @@
 //Toggle view
 function showInvite() {
   $('#requestInvite').hide();
+  $('#loginCenter').hide();
   $('#userRegister').show();
 }
 
@@ -10,16 +11,18 @@ function hideOther() {
   $('#userRegister').hide();
   $('#forgotPassword').hide();
   $('#requestInvite').show();
+  $('#loginCenter').show();
 }
 
 function showForgotPassword() {
   $('#forgotPassword').show();
+  $('#loginCenter').hide();
 }
 
 //Login
 function login() {
   $('#loginBtn').attr('disabled', 'disabled');
-  var newuri = API_ROOT + 'api/users/login';
+  var newuri = window.API_ROOT + 'api/users/login';
   var payload = {
     'email': $('#userEmail').val(),
     'password': $('#userPassword').val()
@@ -38,7 +41,7 @@ function login() {
         $('#loginBtn').removeAttr('disabled');
       } else {
         sessionStorage.setItem('tokenKey', data.access_token);
-        window.location.replace(GLOBAL_WEB_ROOT + 'pages/dashboard.html');
+        window.location.replace(window.GLOBAL_WEB_ROOT + 'pages/dashboard.html');
       }
     },
     error: function(data, success, error) {
@@ -56,7 +59,7 @@ function login() {
 
 //Register User
 function registerUser(userEmail) {
-  var newuri = API_ROOT + 'api/users/registeruser';
+  var newuri = window.API_ROOT + 'api/users/registeruser';
   var id = userEmail;
 
   $.getJSON(newuri + '/' + id + '/')
@@ -75,7 +78,7 @@ function registerUser(userEmail) {
 }
 
 function forgotPassword() {
-  var newuri = API_ROOT + 'api/users/forgotpassword';
+  var newuri = window.API_ROOT + 'api/users/forgotpassword';
   var id = $('.forgot-email').val();
 
   $.getJSON(newuri + '/' + id + '/')

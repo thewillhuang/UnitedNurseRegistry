@@ -1,15 +1,17 @@
-/* @import '../plugins/bootstrap-sass-official/assets/stylesheets/_bootstrap.scss'; */
-/* @import '../plugins/simple-line-icons/scss/simple-line-icons.scss'; */
-/* @import '../plugins/font-awesome/scss/font-awesome.scss'; */
-@import './themes/dropzoneTheme.scss';
+@import 'global';
 
+.lifespeedPink {
+  color: $darkPrimary;
+}
 .form-control-feedback{
   top: 9px;
 }
-
+.dropdown-menu {
+  box-shadow: 0 0 rgba(102, 102, 102, 0.1);
+}
 .urlDiv {
   color: white;
-  background-color: $nameDivBar;
+  background-color: $secondaryColor;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -39,11 +41,11 @@
   padding-left: 60px;
 }
 body {
-  background-color: $appBackground;
+  background-color: $lightestGrey;
   font-family: 'open-sans', sans-serif;
   height: 100%;
   letter-spacing: 0.5px;
-  color: $grey-text;
+  color: $mediumGrey;
 }
 div{
   margin-bottom: 4px;
@@ -52,15 +54,15 @@ div{
   margin: 0px 0px 20px;
 }
 .form-header{
-  color: $startButton;
+  color: $lightPrimary;
   font-weight: bold;
 }
 .formHeader{
-  color: $indegoblue;
-  margin-bottom: -6px;
+  color: $darkestSecondary;
+  margin-bottom: 15px;
 }
 .terms{
-  color: $lifespeedPink;
+  color: $lightPrimary;
 }
 .terms-warning{
   margin-bottom: 20px;
@@ -68,34 +70,50 @@ div{
 }
 .app-background{
   background-color: white;
-  margin: 20px;
-  box-shadow: 1px 1px 1px 1px $dropzoneBorder;
+  margin-top: 10px;
+  margin-left: 20px;
+  box-shadow: 1px 1px 1px 1px $lightGrey;
 }
 
-.page-title {
+/* .page-title {
   margin: 15px 15px -9px;
+} */
+
+hr {
+  margin-top: 0;
+  margin-bottom: 15;
 }
+
 #title {
-  margin-top: 3px;
-  color: $dropzonePink;
+  /* margin-top: 3px; */
+  color: $lightPrimary;
   font-size: larger;
   letter-spacing: 0.5px;
+  margin-top: 15px;
+  margin-left: 5px;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  font-family: 'open-sans-bold', sans-serif;
+  font-weight: bold;
+}
+.title-font {
+  font-size: 19px;
 }
 .btn-start {
-  background-color: $startButton;
+  background-color: $darkestSecondary;
   margin-right: 30px;
   margin-bottom: 10px;
   color: white;
 }
 //"the text after it"
 .greetings-text {
-  color: $grey-text;
+  color: $mediumGrey;
   margin-left: -2px;
 }
 
 .terms-header{
   padding-left: 45px;
-  color: $lifespeedPink;
+  color: $lightPrimary;
 }
 .terms-and-conditions{
   padding-left: 45px;
@@ -107,4 +125,11 @@ div{
 
 .no-bottom-margin{
   margin-bottom: 0px;
+}
+
+.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+  position: absolute;
+  margin-top: 4px\9;
+  margin-left: -20px;
+  top: -3px;
 }

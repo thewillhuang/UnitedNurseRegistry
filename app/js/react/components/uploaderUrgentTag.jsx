@@ -31,7 +31,7 @@ let UrgentTag = React.createClass({
   },
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     let prettyDate = moment(this.state.expires).format('dddd, MMMM Do YYYY, h:mm:ss a');
     // let prettyDate = this.state.expires
     let notUrgent = (

@@ -13,23 +13,6 @@ $(document).ready(function() {
       type: 'personal'
     });
   }
-  // var myDropzone = new Dropzone("#userBodyAvatar", {
-  //   url: API_ROOT + "api/upload/upload",
-  //   headers: headers,
-  //   error: function(file, response) {
-  //     return false;
-  //   },
-  //   success: function(file, response) {
-  //     console.log("Files Uploaded!");
-  //   },
-  //   complete: function(file) {
-  //     console.log("Complete");
-  //   }
-  // });
-  // myDropzone.on("queuecomplete", function() {
-  //   fillGalleryPortlet();
-  //   fillAvatarPortlet();
-  // });
 
   //Initialize tooltips
   $("a").tooltip();
@@ -37,69 +20,89 @@ $(document).ready(function() {
 
 });
 
+//Init localization example
+// $(function(){
+//   var opts = { language: "sp", pathPrefix: "../../localization", skipLanguage: "en-US" };
+//   $("[data-localize]").localize("navbars", opts).localize("dashboard", opts)
+// });
+
 //Global variables
 var counter = 0;
 
 //Load up user dashboard process
 function loadReturnUserDashboard() {
-    //Get default user profile - if none, redirects to profile form
-    getUserDefaultProfile(function(loadedProfile) {
-      if (loadedProfile) {
-        Portlets.getDashboardColumns(function(gotColumns) {
-          if (gotColumns) {
-            Portlets.getEachColumn();
-            // Glimpse.fillGlimpsePortlet();
-            fillGalleryPortlet();
-            fillAvatarPortlet();
-            fillBoardPortlet();
-          } else {
-            // If user doesn't have saved column arrangement ... Place preset arrangement and create columns
-            Portlets.placePortlets(function(placedPortlets) {
-              if (placedPortlets) {
-                Portlets.createDashboardColumn(1, Portlets.portletCol1, function(done) {
-                  if (done) {
-                    Portlets.createDashboardColumn(2, Portlets.portletCol2, function(done) {
-                      if (done) {
-                        Portlets.createDashboardColumn(3, Portlets.portletCol3, function(done) {
-                          //console.log("done creating columns");
-                        });
-                      }
-                    });
-                  }
-                });
-              }
-            });
-          }
-        });
-      } else {
-        window.location.replace("profile.html");
-      }
-    });
-  }
-  //Get default profile
-function getUserDefaultProfile(callback) {
-    var token = sessionStorage.getItem("tokenKey");
-    var newuri = API_ROOT + 'api/profiles/getuserdefaultprofile';
-    var payload = {
-      'includePhoto': 'true'
-    }
-    ajaxPost(newuri, payload, function(data, done, message) {
-      if (done && data.firstName) {
-        sessionStorage.setItem("activeProfile", data.guid);
-        $("#userFirstName").text(data.firstName);
-        $("#userBodyAvatar").attr("src", data.avatarPath);
-        if (data.profilePhoto) {
-          $("#headerAvatar").attr("src", "data:image/jpeg;base64," + data.profilePhoto);
-          $("#sidebarAvatar").attr("src", "data:image/jpeg;base64," + data.profilePhoto);
+  //Get default user profile - if none, redirects to profile form
+  getUserDefaultProfile(function(loadedProfile) {
+    if (loadedProfile) {
+      Portlets.getDashboardColumns(function(gotColumns) {
+        if (gotColumns) {
+          Portlets.getEachColumn();
+          fillAvatarPortlet();
+          fillGalleryPortlet();
+          fillBoardPortlet();
+          // Glimpse.fillGlimpsePortlet();
+        } else {
+          // If user doesn't have saved column arrangement ... Place preset arrangement and create columns
+          Portlets.placePortlets(function(placedPortlets) {
+            if (placedPortlets) {
+              Portlets.createDashboardColumn(1, Portlets.portletCol1, function(done) {
+                if (done) {
+                  Portlets.createDashboardColumn(2, Portlets.portletCol2, function(done) {
+                    if (done) {
+                      Portlets.createDashboardColumn(3, Portlets.portletCol3, function(done) {
+                        //console.log("done creating columns");
+                      });
+                    }
+                  });
+                }
+              });
+            }
+          });
         }
-        callback(true);
-      } else {
-        sessionStorage.setItem("newUser", "true");
-        callback(false);
-      }
-    });
+      });
+    } else {
+      window.location.replace("profile.html");
+    }
+  });
+}
+// Find max height able to scale avatar svgs to based on user screen height
+function adjustAvatar(){
+  var windowHeight = window.innerHeight;
+  var maxHeight = windowHeight - 170;
+  $(".upload-body-img").css("max-height", maxHeight + "px");
+}
+
+//Get default profile
+function getUserDefaultProfile(callback) {
+  var token = sessionStorage.getItem("tokenKey");
+  var newuri = API_ROOT + 'api/profiles/getuserdefaultprofile';
+  var payload = {
+    'includePhoto': 'true'
   }
-  //Portlet object
+  ajaxPost(newuri, payload, function(data, done, message) {
+    if (done && data.firstName) {
+      sessionStorage.setItem("activeProfile", data.guid);
+      sessionStorage.setItem("newUser", "false");
+      $("#userFirstName").text(data.firstName);
+      console.log(data.avatarPath);
+      if (data.avatarPath == '/images/femaleavatar.png'){
+        $("#userBodyAvatar").attr("src", '/images/female.svg');
+      } else {
+        $("#userBodyAvatar").attr("src", '/images/male.svg');
+      }
+      if (data.profilePhoto) {
+        $("#headerAvatar").attr("src", "data:image/jpeg;base64," + data.profilePhoto);
+        $("#sidebarAvatar").attr("src", "data:image/jpeg;base64," + data.profilePhoto);
+      }
+      adjustAvatar();
+      callback(true);
+    } else {
+      sessionStorage.setItem("newUser", "true");
+      callback(false);
+    }
+  });
+}
+//Portlet object
 var Portlets = {
 
     col1Guid: '',
@@ -214,7 +217,6 @@ var Portlets = {
       var portletCol1Arr = portletCol1.split(',');
       var portletCol2Arr = portletCol2.split(',');
       var portletCol3Arr = portletCol3.split(',');
-      console.log(portletCol1, portletCol2, portletCol3);
 
       $.each(portletCol1Arr, function(index, value) {
         $('#col1').append($('#' + value));

@@ -1,0 +1,10 @@
+{
+  "t-accept-records": "Aceptar Registros",
+  "desc-accept-records": "Un proveedor te ha enviado registros, por favor revise ellos. Haga clic en las imágenes individuales para seleccionarlos. Expedientes no seleccionados se eliminarán automáticamente de forma periódica.",
+  "buttons": {
+    "btn-add-selected": "Agregar Elementos",
+    "btn-deselect-all": "Deseleccionar Todo",
+    "btn-select-all": "Seleccionar Todo",
+    "btn-delete-select": "Eliminar Seleccionados"
+  }
+}

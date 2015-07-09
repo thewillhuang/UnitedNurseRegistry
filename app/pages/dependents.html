@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<!--
+Lifespeed.io
+-->
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en" class="no-js">
+<!--<![endif]-->
+<!-- BEGIN HEAD -->
+
+<head>
+
+
+
+  <meta charset="utf-8" />
+  <title>Lifespeeed</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta content="width=device-width, initial-scale=1" name="viewport" />
+  <meta content="" name="description" />
+  <meta content="" name="author" />
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+  <link href="../plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link href="../plugins/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css" />
+  <link href="../plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+  <link href="../plugins/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/animate/animate.css" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/components.css" id="style_components" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/plugins.css" rel="stylesheet" type="text/css" />
+  <link href="../css/layout.css" rel="stylesheet" type="text/css" />
+  <link href="../css/themes/light2.css" rel="stylesheet" type="text/css" />
+  <link href="../css/custom.css" rel="stylesheet" type="text/css" />
+  <link href="../css/lifespeed.css" rel="stylesheet" type="text/css" />
+  <link href="../css/dependents.css" rel="stylesheet" type="text/css" />
+  <link href="../plugins/sweetalert/lib/sweet-alert.css" rel="stylesheet" type="text/css" />
+
+</head>
+
+<body class="page-header-fixed page-quick-sidebar-over-content page-style-square" id="LifespeedBodyTag">
+  <div class="page-header navbar navbar-fixed-top">
+    <div class="page-header-inner">
+      <div class="page-logo">
+        <a href="../pages/dashboard.html">
+          <img src="../images/headerlogo.jpg" style="width: 80%; display: inline" alt="logo" class="logo-default" />
+        </a>
+        <div class="menu-toggler sidebar-toggler hide" style="display: inline">
+        </div>
+      </div>
+
+      <a href="javascript:;" id="toggleMenu" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
+
+      <div class="top-menu">
+        <ul class="nav navbar-nav pull-right">
+          <!-- <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+              <i class="icon-bell"></i>
+              <span class="badge"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="external">
+                <h3>
+                  <span class="bold">0 pending</span> notifications</h3>
+                <a href="#">view all</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+              <i class="icon-envelope"></i>
+              <span class="badge"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="external">
+                <h3>You have
+                  <span class="bold">0 New</span> Messages</h3>
+                <a href="#">view all</a>
+              </li>
+            </ul>
+          </li> -->
+
+          <li class="dropdown dropdown-user">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+              <img id="headerAvatar" class="img-circle" src="../images/ProfilePlaceholder.png" />
+              <!-- <span id="userFirstName" class="username username-hide-on-mobile"></span> -->
+              <!-- <i class="fa fa-angle-down"></i> -->
+            </a>
+          </li>
+
+          <li>
+            <a href="#" id="logOutButton">Log Out <i class="fa fa-sign-out"></i></a>
+          </li>
+        </ul>
+        <ul class="nav navbar-nav pull-right" id="reactNavItems">
+        </ul>
+        <ul class="nav navbar-nav pull-right" id="messenging">
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix">
+  </div>
+  <div class="page-container">
+    <div class="page-sidebar-wrapper">
+      <div class="page-sidebar navbar-collapse collapse toggled" id="pageSidebar">
+        <ul id="page-sidebar-menu" class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+          <li class="sidebar-toggler-wrapper">
+            <div class="sidebar-toggler">
+            </div>
+          </li>
+
+          <li class="start ">
+            <a href="dashboard.html">
+              <i class="icon-home"></i>
+              <span class="title">Home</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="profile.html">
+              <i class="icon-user"></i>
+              <span class="title">Profile</span>
+              <!-- <span class="arrow "></span> -->
+            </a>
+          </li>
+
+          <!-- <li>
+            <a href="glimpse-landing.html">
+              <i class="icon-eye"></i>
+              <span class="title">Glimpse</span>
+            </a>
+          </li> -->
+
+          <li>
+            <a href="gallery-view.html">
+              <i class="icon-picture"></i>
+              <span class="title">Gallery</span>
+              <!-- <span class="arrow"></span> -->
+            </a>
+
+          </li>
+          <li>
+            <a href="boards.html">
+              <i class="icon-boards"></i>
+              <span class="title">Boards</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="user-file-uploader.html">
+              <i class="icon-cloud-upload"></i>
+              <span class="title">Upload</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="medical-record-request.html">
+              <i class="fa fa-user-md"></i>
+              <span class="title">Request Medical Records</span>
+            </a>
+          </li>
+
+          <li>
+            <a href="clientValidate.html">
+              <i class="fa fa-check-circle-o"></i>
+              <span class="title">Inbound File Verification</span>
+            </a>
+          </li>
+
+        </ul>
+
+      </div>
+    </div>
+
+    <div class="page-content-wrapper">
+      <div class="page-content">
+
+        <div class="row">
+          <div class="col-md-12">
+
+            <div id="addDependentModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header" style="border-bottom: 2px solid #bdbdbd;">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                    <h2 style="text-align: left; color: #EB374C; margin-top: 0;">Add a Dependent</h2>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row dependent-links">
+                      <a class="dependent-link" id="depUserLink">Lifespeed User</a>
+                      <a class="dependent-link" id="depNonUserLink">Non-Lifespeed User</a>
+                    </div>
+                    <div id="nonUserForm">
+                      <form id="dependentProfileForm" class="form">
+                        <div class="row">
+                          <div class="col-md-4 form-group">
+                            <label for="firstName" class="control-label">First Name
+                              <span style="color: red;">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="firstName" required>
+                          </div>
+                          <div class="col-md-4 form-group">
+                            <label for="middleName" class="control-label">Middle Name
+                            </label>
+                            <input type="text" class="form-control" id="middleName" required>
+                          </div>
+                          <div class="col-md-4 form-group">
+                            <label for="lastName" class="control-label">Last Name
+                              <span style="color: red;">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="lastName" required>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-4 form-group">
+                            <label for="dob" class="control-label">Date of Birth</label>
+                            <input type="date" class="form-control" id="dob">
+                          </div>
+                          <div class="col-md-4 form-group">
+                            <label for="height" class="control-label">Height</label>
+                            <input type="text" class="form-control" id="height">
+                          </div>
+                          <div class="col-md-4">
+                            <form class="form-inline">
+                              <div class="form-group">
+                                <label for="weight" class="control-label">Weight</label>
+                                <div class="input-group">
+                                  <input type="text" class="form-control" id="weight">
+                                  <div class="input-group-addon">lbs</div>
+                                </div>
+                              </div>
+                              <form>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6 col-xs-12" id="profilePhotoDiv">
+                            <div class="profile-photo-div">
+                              <img src="../images/profileplaceholder.png" id="profilePhotoPreview" class="img-thumbnail">
+                            </div>
+                            <div id="changePhotoDiv">
+                              <button class="btn call-action-btn change-photo-btn" data-localize="buttons.btn-change-pic">Choose Photo</button>
+                              <input id="profilePhotoUpload" type="file" name="userPhoto" onchange="PreviewImage();" />
+                            </div>
+                          </div>
+                          <div class="col-md-6 form-group">
+                            <label for="sex">Gender
+                              <span style="color: red;">*</span>
+                            </label>
+                            <div class="radio">
+                              <label>
+                                <input type="radio" name="sexradio" value="Male" id="maleRadio">Male</label>
+                              <label>
+                                <input type="radio" name="sexradio" value="Female" id="femaleRadio">Female</label>
+                            </div>
+                          </div>
+                        </div>
+                        </form>
+                    </div>
+                    <div id="isUserForm">
+                      <div class="row">
+                        <div class="col-md-12">
+                          <h3 id="subReqHeader"><i class="fa fa-envelope-o"></i> Send Subordination Request to a Lifespeed User</h3>
+                            <label class="dep-label">User's Lifespeed Email</label>
+                            <input class="form-control" type="email"></input>
+                            <button class="btn call-action-btn" id="sendSubReqEmail">Send Request</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn main-action-btn" id="submitBoardBtn">Save</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Start of dependents content -->
+
+            <div class="container lifespeed-page-container">
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="profile-hr">
+                    <i class="fa fa-users page-title-icon"></i>
+                    <h2 class="lifespeed-page-title">Dependents</h4>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12 dependent-links">
+                  <button class="btn call-action-btn" id="addDependentBtn">Add Dependent</button>
+                  <button class="btn main-action-btn" id="custRequestBtn">Custodian Request</button>
+                </div>
+              </div>
+              <div class="row" id="userDependents">
+                <div class="dependent-container">
+                  <div class="updated">
+                    <span class="last-updated pull-left">Last Updated: 04/20/15</span>
+                    <a class="edit-dependent pull-right"><i class="fa fa-pencil"></i></a>
+                  </div>
+                  <!-- <div class="row"> -->
+                  <div class="dependent-pic">
+                    <img src="../images/doctor1.jpg">
+                  </div>
+                  <div class="dependent-info">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h2 class="dependent-name">Josh Gibbs</h2>
+                      </div>
+                      <div class="col-md-6">
+                        <span class="dep-grey">DOB: </span>
+                        <span class="dep-blue">07/05/1974</span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <span class="dep-blue"><i class="dep-icon fa fa-envelope-o"></i> josh@lifespeed.io</span>
+                      </div>
+                      <div class="col-md-6">
+                        <span class="dep-grey">Blood Type: </span>
+                        <span class="dep-blue">AB+</span>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <span class="dep-blue"><i class="dep-icon icon-home"></i> 949-555-5555</span>
+                      </div>
+                      <div class="col-md-6">
+                        <span class="dep-pink">DIABETIC</span>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- </div> -->
+                  <div class="row more-hr">
+                    <div class="col-md-12">
+                      <a class="show-more pull-right"><i class="fa fa-ellipsis-h"></i></a>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-12">
+                      <h3 class="dependent-boards-title">Josh's Boards</h3>
+                    </div>
+                  </div>
+                  <div class="row dependents-boards">
+                    <div class="col-md-12">
+                      <div class="dependent-board">
+                      </div>
+                      <div class="dependent-board">
+                      </div>
+                      <div class="dependent-board">
+                      </div>
+                      <div class="dependent-board">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row navigate-boards">
+                    <div class="col-md-12 boards-nav">
+                      <a class="boards-left"><i class="fa fa-chevron-left"></i></a>
+                      <a class="boards-center"><i class="fa fa-circle"></i></a>
+                      <a class="boards-right"><i class="fa fa-chevron-right"></i></a>
+                    </div>
+                  </div>
+                  <div class="row" id="dependentAvatarRow">
+                    <div class="col-md-12">
+                      <div class="dependent-avatar">
+                        <img src="../images/female.svg">
+                        <a id="headSearch" class="avatar-head" title="Files tagged 'head'"><i class="fa fa-camera camera-icon-circle"></i></a>
+                        <a id="armSearch" class="avatar-arm" title="Files tagged 'arm'"><i class="fa fa-camera camera-icon-circle"></i></a>
+                        <a id="legSearch" class="avatar-leg" title="Files tagged 'leg'"><i class="fa fa-camera camera-icon-circle"></i></a>
+                        <a id="torsoSearch" class="avatar-chest" title="Files tagged 'torso'"><i class="fa fa-camera camera-icon-circle"></i></a>
+                      </div>
+                      <div class="body-sections">
+                        <div class="body-section">
+                          <div class="body-section-title">
+                            <h4 class="body-title pull-left">Head</h4><a class="pull-right show-body-images"><i class="fa fa-ellipsis-h"></i></a>
+                          </div>
+                        </div>
+                        <div class="body-section">
+                          <div class="body-section-title">
+                            <h4 class="body-title pull-left">Arms</h4><a class="pull-right show-body-images"><i class="fa fa-ellipsis-h"></i></a>
+                          </div>
+                        </div>
+                        <div class="body-section">
+                          <div class="body-section-title">
+                            <h4 class="body-title pull-left">Torso</h4><a class="pull-right show-body-images"><i class="fa fa-ellipsis-h"></i></a>
+                          </div>
+                        </div>
+                        <div class="body-section">
+                          <div class="body-section-title">
+                            <h4 class="body-title pull-left">Legs</h4><a class="pull-right show-body-images"><i class="fa fa-ellipsis-h"></i></a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="page-footer">
+          <div class="page-footer-inner">
+            2014 &copy;Lifespeed
+          </div>
+          <div class="scroll-to-top">
+            <i class="icon-arrow-up"></i>
+          </div>
+        </div>
+        <!-- BEGIN JAVASCRIPTS(Load javascripts at bottom -->
+        <!--[if lt IE 9]>
+<script src="<%=ReturnProperURL("/assets/global/plugins/respond.min.js")%>"></script>
+<script src="<%=ReturnProperURL("/assets/global/plugins/excanvas.min.js")%>"></script>
+<![endif]-->
+
+        <script type="text/javascript" src="../js/config.js"></script>
+        <script src="../plugins/jquery/dist/jquery.min.js"></script>
+        <script src="../js/vendor/jquery-migrate.min.js"></script>
+        <script src="../plugins/jquery-ui/jquery-ui.min.js"></script>
+        <script src="../plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+        <script src="../js/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+        <script src="../js/vendor/jquery.blockui.min.js"></script>
+        <script src="../js/vendor/jquery.cokie.min.js"></script>
+        <script src="../js/vendor/jquery.flip.min.js"></script>
+        <script src="../js/vendor/jquery-ui-1.10.3.custom.min.js"></script>
+        <script src="../plugins/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+        <script src="../js/vendor/jquery.localize.min.js"></script>
+        <script src="../js/vendor/metronic.js"></script>
+        <script src="../js/layout.js"></script>
+        <script src="../js/vendor/quick-sidebar.js"></script>
+        <script src="../js/demo.js"></script>
+        <script src="../js/vendor/validate.js"></script>
+        <script src="../plugins/sweetalert/lib/sweet-alert.min.js"></script>
+        <script src="../plugins/vanilla-masker/build/vanilla-masker.min.js"></script>
+        <script src="../js/platform.js"></script>
+        <script src="../js/dependents.js"></script>
+        <script src="../js/dependent-events.js"></script>
+        <!-- // <script src="../js/dependentsValidate.js"></script> -->
+        <script src="../common.js"></script>
+        <script src="../notification.js"></script>
+
+</body>
+
+</html>

@@ -9,12 +9,12 @@ const CHANGE_EVENT = 'notification';
 
 let _notificationItems = [];
 
-let createnotification = (reactId, payload) => {
+let createNotification = (reactId, payload) => {
   payload.reactId = reactId;
   _notificationItems.unshift(payload);
 };
 
-let updatenotification = (reactId, payload) => {
+let updateNotification = (reactId, payload) => {
   for (let i = 0; i < _notificationItems.length; i++) {
     if (_notificationItems[i].reactId === reactId) {
       _notificationItems[i] = assign(_notificationItems[i], payload);
@@ -22,7 +22,7 @@ let updatenotification = (reactId, payload) => {
   }
 };
 
-let deleteId = (reactId) => {
+let deleteNotificationById = (reactId) => {
   for (let i = 0; i < _notificationItems.length; i++) {
     if (_notificationItems[i].reactId === reactId) {
       _notificationItems.splice(i, 1);
@@ -53,22 +53,22 @@ let notificationStore = assign({}, EventEmitter.prototype, {
 });
 
 AppDispatcher.register((action) => {
-
+  // console.log(action);
   switch(action.actionType){
 
     case notificationConstants.NOTIFICATION_CREATE:
-      createnotification(action.reactId, action.payload);
+      createNotification(action.reactId, action.payload);
       notificationStore.emitChange();
       // console.log('notification store emit change called');
       break;
 
     case notificationConstants.NOTIFICATION_DESTROY:
-      deleteId(action.reactId);
+      deleteNotificationById(action.reactId);
       notificationStore.emitChange();
       break;
 
     case notificationConstants.NOTIFICATION_UPDATE:
-      updatenotification(action.reactId, action.payload);
+      updateNotification(action.reactId, action.payload);
       notificationStore.emitChange();
       break;
 

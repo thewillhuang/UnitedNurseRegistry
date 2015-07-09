@@ -1,3 +1,5 @@
+@import "global";
+
 .uploader-container {
   margin-right: 0;
   margin-top: 10px;
@@ -8,6 +10,9 @@
 .uploader-hr {
   border-bottom: 1px solid #eeeeee;
   margin-bottom: 10px;
+}
+.dropdown-menu {
+  box-shadow: 0 0 rgba(102, 102, 102, 0.1);
 }
 .uploader-title {
   color: #EB374C;
@@ -65,7 +70,7 @@
 .cloudIconDiv {
   font-size: 3em;
   margin-bottom: 20px;
-  margin-top: 100px;
+  margin-top: 50px;
 }
 /*on hover*/
 .dashedBox:hover {
@@ -116,7 +121,6 @@
 }
 /*text box next to profile image*/
 .patientInfoBox {
-  color: ;
   padding-left: 36px;
   font-family: "open_sanslight";
   margin-left: -15px;

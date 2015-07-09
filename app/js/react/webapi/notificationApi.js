@@ -15,7 +15,9 @@ notificationApi.subscribe = (callback) => {
 };
 
 notificationApi.completeSubscription = (subscriptionChannel) => {
-  let host = 'http://beta.lifespeed.io:943';
+  let host = window.SUB_ROOT + ':943';
+  // console.log(window.SUB_ROOT);
+  // console.log(host);
   // let host = 'http://10.0.10.124:3000';
   let socket = io(host);
 
@@ -34,7 +36,7 @@ notificationApi.completeSubscription = (subscriptionChannel) => {
   });
 
   socket.on('notificationMessage', (data) => {
-    // console.log(data);
+    // console.log('time', Date.now(), 'data', data);
     notificationAction.add(data);
   });
 

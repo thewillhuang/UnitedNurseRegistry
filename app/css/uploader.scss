@@ -1,11 +1,11 @@
 @import '../plugins/simple-line-icons/scss/simple-line-icons.scss';
 @import '../plugins/font-awesome/scss/font-awesome.scss';
-@import './themes/dropzoneTheme.scss';
+@import 'global';
 
 .myHeader{
   width: 100%;
   height: 50px;
-  background-color: #fff;
+  background-color: white;
 }
 .myLogoWrapper{
   height: 40px;
@@ -19,7 +19,7 @@
 .app-background{
   background-color: white;
   margin: 20px;
-  box-shadow: 1px 1px 1px 1px $dropzoneBorder;
+  box-shadow: 1px 1px 1px 1px $lightGrey;
 }
 .totalBar{
   padding-bottom: 10px;
@@ -44,8 +44,8 @@
 //dashed box
 .dashedBox {
   margin: 30px;
-  background-color: $dropZoneBg;
-  border: 3px dashed $dropzoneBorder;
+  background-color: $lightestGrey;
+  border: 3px dashed $lightGrey;
   text-align: center;
   opacity: 0.4;
   -webkit-border-radius: 6px;
@@ -78,7 +78,7 @@
   border-radius: 6px;
   text-align: center;
   display: inline-block;
-  border: 2px solid $dropzoneBorder;
+  border: 2px solid $lightGrey;
   list-style: none;
   margin: 10px;
   padding: 0px 5px;
@@ -94,7 +94,7 @@
 }
 //color of the auth form.
 .authForm {
-  color: $dropzonePink;
+  color: $darkPrimary;
 }
 //the div that holds the auth form link.
 .textBoxDiv {
@@ -106,15 +106,15 @@
 }
 //text box next to profile image
 .patientInfoBox {
-  color: $startButton;
+  color: $darkestSecondary;
   padding-left: 36px;
-  font-family: "open_sanslight";
+  font-family: "open-sans-regular";
   margin-left: -15px;
 }
 //blue bar with patient name
 .patientNameDiv {
   color: white;
-  background-color: $nameDivBar;
+  background-color: $lightSecondary;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -132,16 +132,16 @@
 //all the texts in the text box
 .patientInfoText {
   margin-left: 10px;
-  font-family: "open_sansregular";
+  font-family: "open-sans-regular";
 }
 //the div box containing the medical records relese form
 .authLinkDiv {
   padding-top: 30px !important;
   margin-left: 4px;
-  color: $grey-text;
+  color: $mediumGrey;
   a {
     text-decoration: underline;
-    color: $nameDivBar;
+    color: $lightSecondary;
   }
 }
 //end of top right box css
@@ -156,31 +156,31 @@
 }
 //"Welcome to the Lifespeed Uploader"
 .greetings {
-  color: $startButton;
+  color: $darkestSecondary;
   font-weight: 400;
   font-size: larger;
 }
 //"the text after it"
 .greetings-text {
-  color: $grey-text;
+  color: $mediumGrey;
   margin-left: -2px;
 }
 .btn-add {
-  background-color: $addFiles;
+  background-color: $darkThirdColor;
   margin-right: 30px;
   margin-bottom: 10px;
 }
 .btn-start {
-  background-color: $startButton;
+  background-color: $darkestSecondary;
   margin-right: 30px;
   margin-bottom: 10px;
 }
 .btn-cancel {
   background-color: white;
-  color: $grey-text;
+  color: $mediumGrey;
   border: 2px solid;
   margin-bottom: 10px;
-  border-color: $dropzoneBorder;
+  border-color: $lightGrey;
 }
 //bottom margin width
 .progress {
@@ -188,30 +188,33 @@
 }
 //end of top left box
 body {
-  background-color: $appBackground;
-  font-family: 'Open-Sans', sans-serif;
+  background-color: $lightestGrey;
+  font-family: 'open-sans-regular';
   height: 100%;
   letter-spacing: 0.6px;
 }
 //Request Date font and positioning
 .urgentTag {
   font-weight: 300;
-  color: $grey-text;
+  color: $mediumGrey;
   margin-top: 2px;
 }
 // label color and positioning
 .label-urgent {
   margin-left: 17px;
   padding: 9px 20px;
-  background-color: $dropzonePink;
+  background-color: $darkPrimary;
 }
 // div box box that has the Upload records and Request Date and urgent tags
-.page-title {
+.page-title-upload {
   margin: 15px 15px -9px;
+}
+.lifespeedPink{
+  color: $darkPrimary;
 }
 #title {
   margin-top: 3px;
-  color: $dropzonePink;
+  color: $darkPrimary;
   font-size: larger;
 }
 //nav bar color
@@ -233,7 +236,7 @@ body {
   border-radius: 4px; height: 20px;
 }
 .success {
-  background: $appBackground;
+  background: $lightestGrey;
 }
 .progress-striped .success {
   background-color: rgba(7, 166, 129, 0.82);
@@ -256,7 +259,7 @@ div.table .file-row > div {
   padding: 8px;
 }
 div.table .file-row:nth-child(odd) {
-  background: #f9f9f9;
+  background: $lightGrey;
 }
 /* The total progress gets shown by event listeners */
 #total-progress {

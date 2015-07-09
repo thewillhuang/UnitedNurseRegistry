@@ -1,0 +1,160 @@
+/*
+Style that pertains to all pages
+Conforms to Brisa's style guide
+*/
+
+/* Font Family */
+
+// Please write fonts as such:
+// Ex. font-family: 'open-sans-regular', sans-serif;
+
+@font-face {
+  font-family: 'open-sans-light';
+  src: url("../fonts/OpenSans-Light-webfont.eot");
+  src: url("../fonts/OpenSans-Light-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/OpenSans-Light-webfont.woff2") format('woff2'), url("../fonts/OpenSans-Light-webfont.woff") format('woff'), url("../fonts/OpenSans-Light-webfont.ttf") format('truetype'), url("../fonts/OpenSans-Light-webfont.svg#open_sanslight") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'open-sans-regular';
+  src: url("../fonts/OpenSans-Regular-webfont.eot");
+  src: url("../fonts/OpenSans-Regular-webfont.eot?#iefix") format('embedded-opentype'), url("../fonts/OpenSans-Regular-webfont.woff2") format('woff2'), url("../fonts/OpenSans-Regular-webfont.woff") format('woff'), url("../fonts/OpenSans-Regular-webfont.ttf") format('truetype'), url("../fonts/OpenSans-Regular-webfont.svg#open_sansregular") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'open-sans-bold';
+  src: url('../fonts/opensans-bold-webfont.eot');
+  src: url('../fonts/opensans-bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/opensans-bold-webfont.woff2') format('woff2'),
+       url('../fonts/opensans-bold-webfont.woff') format('woff'),
+       url('../fonts/opensans-bold-webfont.ttf') format('truetype'),
+       url('../fonts/opensans-bold-webfont.svg#open_sansbold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'open-sans-semibold';
+  src: url('../fonts/opensans-semibold-webfont.eot');
+  src: url('../fonts/opensans-semibold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('../fonts/opensans-semibold-webfont.woff2') format('woff2'),
+       url('../fonts/opensans-semibold-webfont.woff') format('woff'),
+       url('../fonts/opensans-semibold-webfont.ttf') format('truetype'),
+       url('../fonts/opensans-semibold-webfont.svg#open_sanssemibold') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Font Colors */
+
+$fontLight: #F2F2F2;
+$fontDark: #444444;
+$fontSecondaryDark: #02658C;
+$fontSecondaryLight: #00A1D3;
+$fontPrimary: #EB374C;
+
+/* Colors */
+
+$darkestGrey: #444444;
+$mediumDarkGrey: #515151;
+$mediumGrey: #858585;
+$lightMediumGrey: #A8A8A8;
+$lightGrey: #E9E9E9;
+$lightestGrey: #F5F5F5;
+
+$darkestSecondary: #02658C;
+$mediumSecondary: #0381B3;
+$secondaryColor: #00A1D3;
+$lightSecondary: #06BCEE;
+
+$darkPrimary: #EB374C;
+$lightPrimary: #FA5569;
+
+$darkThirdColor: #00ACAC;
+$lightThirdColor: #05CECE;
+
+/* Buttons */
+
+// To override bootstrap buttons with white text use class btn plus the relevant class below
+// Ex. <button class="btn call-action-btn"></button>
+//
+// To override bootstrap buttons with black text use class btn-default plus the relevant class below
+// Ex. <button class="btn btn-default negative-action-btn"></button>
+
+btn {
+  border-radius: 2px !important;
+}
+.call-action-btn,
+.call-action-btn:active {
+  color: #ffffff;
+  background-color: $darkestSecondary;
+}
+.call-action-btn:hover,
+.call-action-btn:focus {
+  color: #ffffff;
+  background-color: $secondaryColor;
+}
+.main-action-btn,
+.main-action-btn:active {
+  color: #ffffff;
+  background-color: $secondaryColor;
+}
+.main-action-btn:hover,
+.main-action-btn:focus {
+  color: #ffffff;
+  background-color: $lightSecondary;
+}
+.danger-action-btn,
+.danger-action-btn:active {
+  color: #ffffff;
+  background-color: $darkPrimary;
+}
+.danger-action-btn:hover,
+.danger-action-btn:focus {
+  color: #ffffff;
+  background-color: $lightPrimary;
+}
+.negative-action-btn,
+.negative-action-btn:active {
+  background-color: $lightestGrey;
+}
+.negative-action-btn:hover,
+.negative-action-btn:focus {
+  background-color: $lightGrey;
+}
+.secondary-action-btn,
+.secondary-action-btn:active {
+  color: #ffffff;
+  background-color: $darkThirdColor;
+}
+.secondary-action-btn:hover,
+.secondary-action-btn:focus {
+  color: #ffffff;
+  background-color: $lightThirdColor;
+}
+
+/* Headers */
+h1 {
+  font-size: 24px;
+  font-family: 'open-sans-regular', sans-serif;
+}
+h2 {
+  font-size: 18px;
+  font-family: 'open-sans-regular', sans-serif;
+}
+h3 {
+  font-size: 14px;
+  font-family: 'open-sans-bold', sans-serif;
+}
+p {
+  font-size: 12px;
+  font-color: $fontDark;
+}
+
+/* Necessary for toggling sidebar and page-content margin */
+.dashboard-content-left {
+  margin-left: 140px !important;
+}
+.content-left {
+  margin-left: 230px !important;
+}

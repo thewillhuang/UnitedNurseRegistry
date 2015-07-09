@@ -29,7 +29,7 @@ inboundheaders.Payload = JSON.stringify({
 console.log(inboundheaders);
 
 var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
-  url: API_ROOT + 'api/upload/publicupload', // Set the url
+  url: window.API_ROOT + 'api/upload/publicupload', // Set the url
   headers: inboundheaders,
   thumbnailWidth: 80,
   thumbnailHeight: 80,

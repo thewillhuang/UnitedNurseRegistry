@@ -101,7 +101,8 @@ let MyModal = React.createClass({
           // </div>
     return (
       <Modal onRequestHide={this.props.onRequestHide} bsStyle='default' title='Edit Contact' animation={true}>
-        <div className='modal-body'>
+        <hr className="center-block" style={{marginTop: -3, width: '95%'}}/>
+        <div className='modal-body' style={{padding: '0px 20px'}}>
           <div className='row'>
             <div className='col-md-3'>
 
@@ -274,8 +275,7 @@ let MyModal = React.createClass({
           </form>
         </div>
         <div className='modal-footer'>
-          <hr></hr>
-          <ButtonToolbar>
+          <ButtonToolbar className="pull-right">
             <Button onClick={this.props.onRequestHide}>Cancel</Button>
             <Button bsStyle='primary' onClick={this.handleEdit} type='submit'>Update</Button>
           </ButtonToolbar>

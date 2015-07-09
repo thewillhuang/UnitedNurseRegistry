@@ -80,7 +80,7 @@ let RequestForms = React.createClass({
   },
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <div>
         <div className='row'>
@@ -122,14 +122,14 @@ let RequestForms = React.createClass({
 
         <div className='selectType row'>
           <form>
-            <div className='col-md-2 col-sm-2'>
+            <div className='col-md-3 col-sm-3'>
               <Input type='radio'
                 name='providerType'
                 ref='PrimaryCare'
                 onChange={this.handleRadioChange}
                 label='Primary Care'/>
             </div>
-            <div className='col-md-2 col-sm-2'>
+            <div className='col-md-3 col-sm-3'>
               <Input
                 type='radio'
                 name='providerType'
@@ -137,15 +137,20 @@ let RequestForms = React.createClass({
                 onChange={this.handleRadioChange}
                 label='Specialist'/>
             </div>
-            <div className='col-md-2 col-sm-2'>
+            <div className='col-md-3 col-sm-3'>
               <Input type='radio'
                 name='providerType'
                 ref='Business'
                 onChange={this.handleRadioChange}
                 label='Business'/>
             </div>
-            <div className='col-md-4 col-sm-4'>
-              <Input type='text' name='providerType' ref='OtherText' onChange={this.handleChange} placeholder='Other'/>
+            <div className='col-md-3 col-sm-3'>
+              <Input type='radio'
+              name='providerType'
+              ref='Other'
+              onChange={this.handleRadioChange}
+              />
+            <Input type='text' name='providerType' ref='OtherText' onChange={this.handleChange} placeholder='Other' style={{position: 'relative', top: -11}}/>
             </div>
           </form>
         </div>
@@ -224,7 +229,7 @@ let RequestForms = React.createClass({
         </div>
 
       <div className='row'>
-        <div className='col-md-6 col-sm-6'>
+        <div className='col-md-3 col-sm-3'>
           <div className='row'>
             <div className='col-md-12 col-sm-12 formHeader'>Request Expiration (in days)</div>
           </div>
@@ -267,7 +272,6 @@ let RequestForms = React.createClass({
       </div>
     );
   }
-
 });
 
 // <div className='row'>

@@ -1,3 +1,14 @@
+input[type="text"]{
+    background-color: transparent;
+    border: 0px;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    width:5px;
+    color:transparent;
+    cursor:default;
+}
 html, body {
   padding: 0;
   margin: 0;
@@ -23,6 +34,9 @@ header .content {
 }
 header h1, header h2 {
   margin: 0;
+}
+h4 {
+  color: white;
 }
 header h2 {
   text-transform: uppercase;
@@ -69,7 +83,7 @@ header h2 {
 }
 .slogan {
   text-align: center;
-  margin-top: 130px;
+  margin-top: 100px;
 }
 .slogan h1 {
   font-weight: 600;
@@ -91,74 +105,39 @@ header h2 {
   width: 250px;
   margin: 20px auto;
 }
+.reset-pw {
+  text-align: right;
+}
 
 /*Media queries for responsive design*/
 
-@media (max-width: 900px) {
-  .logo {
-    width: 30%;
-    height: auto;
-  }
-  .logo img {
-    width: 90%;
-    height: auto;
-    margin: 0 auto;
-  }
-  .login {
-    width: 70%;
-    height: auto;
-    margin: 0 auto;
-  }
-  .slogan {
-    margin-top: 190px;
-  }
-  .slogan h1 {
-    font-size: 3em;
+@media (max-width: 987px) {
+  .reset-pw {
+    text-align: left;
   }
 }
-@media (max-width: 600px) {
-	.head {
-		padding: 0;
-	}
-  .logo {
+
+@media (max-width: 500px) {
+  .slogan {
+    margin-top: 25px;
     width: 100%;
-    float: center;
-  }
-  .login {
-    clear: both;
-		float: none;
     margin: 0 auto;
-    width: 100%;
-  }
-	.login-section {
-		width: 98%;
-		margin: 1%;
-		clear: both;
-		float: center;
-		display: block;
-	}
-  .login-btn {
-		float: none;
-		display: block;
-		margin: 0 auto;
-    width: 200px;
-		height: 50px;
-		margin-top: 10px;
-    display: block;
-    padding: 10px;
-    font-size: 1.5em;
-    text-align: center;
   }
   .slogan h1 {
-    display: none;
+    font-size: 2.5em;
+    font-weight: 400;
   }
   .btn-request {
-    width: 200px;
-		height: 50px;
-    font-size: 1.5em;
-    letter-spacing: 1;
+    padding: 0px;
   }
-	#rememberMeLbl, #rememberMe {
-		display: none;
-	}
+  .btn-request, login-btn {
+    font-size: 16px;
+    height: 35px;
+    width: 150px;
+  }
+  .reset-pw {
+    text-align: left;
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
 }

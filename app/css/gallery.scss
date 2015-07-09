@@ -1,18 +1,9 @@
-.item-modal-title{
-  font-family: 'open-sans', sans-serif;
-}
-.user-doc-info {
-  margin-left: 35px;
-  margin-right: 15px;
-  margin-top: 10px;
-  padding: 0px 30px 13px 30px;
-  background: #fff;
-  -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.3);
-}
+@import "global";
+@import "page-styles";
+@import "sweetalerts";
+
 .user-doc-info b {
-  color: #00a1d3;
+  color: $secondaryColor;
   font-weight: 400;
 }
 .user-doc-info h4 {
@@ -20,11 +11,13 @@
   font-weight: 600;
 }
 .doc-row {
-  background-color: #eeeeee;
+  margin: 5px;
+  background-color: $lightestGrey;
 }
 .user-docs {
   margin: 0;
-  height: auto;
+  min-height: 350px;
+  height: 100%;
   width: 100%;
   margin-right: 0;
 }
@@ -37,14 +30,14 @@
   margin: 10px;
   overflow: hidden;
   background-color: #fff;
-  -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.4);
-  -moz-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.4);
-  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.4);
-}
-.user-item p {
-  margin: 0;
-  padding: 0;
-  color: #a8a8a8;
+  -webkit-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2);
+  p {
+    margin: 0;
+    padding: 0;
+    color: $lightMediumGrey;
+  }
 }
 .item-thumbnail {
   height: 200px;
@@ -52,37 +45,38 @@
   display: inline-block;
   float: left;
   object-fit: cover;
-}
-
-.item-thumbnail img {
-  height: 100%;
-  width: 100%;
+  img {
+    height: 100%;
+    width: 100%;
+  }
 }
 .item-specs {
   width: 100%;
-  height: auto;
+  max-height: 40px;
   padding: 10px;
   clear: both;
   padding-top: 10px;
-  padding-bottom: 10px;
+  margin-bottom: 10px;
   font-weight: 500;
-}
-.item-specs p {
-  max-height: 40px;
-  color: #00a1d3;
-  /*white-space: nowrap;*/
-  word-wrap: break-word;
-  text-overflow: ellipsis;
+  p {
+    max-height: 40px;
+    line-height: 20px;
+    color: $secondaryColor;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
+  }
 }
 .item-controls {
   clear: both;
   width: 220px;
   padding: 10px;
   height: auto;
-}
-.item-controls i {
-  width: 40px;
-  font-size: 1.5em;
+  i {
+    width: 40px;
+    font-size: 1.5em;
+  }
 }
 .add-to i {
   margin-left: 1px;
@@ -100,7 +94,7 @@
   margin: 0px;
 }
 .item-icon {
-  color: #a8a8a8;
+  color: $lightMediumGrey;
 }
 .item-categories {
   height: auto;
@@ -109,13 +103,14 @@
   padding-right: 10px;
   overflow: auto;
   word-wrap: break-word;
-}
-.item-categories span {
-  width: auto;
-  display: inline-block;
-  float: left;
-  margin-bottom: 3px;
-  margin-right: 5px;
+  span {
+    background-color: $mediumSecondary;
+    width: auto;
+    display: inline-block;
+    float: left;
+    margin-bottom: 3px;
+    margin-right: 5px;
+  }
 }
 .newCategoryInput {
   margin-top: 5px;
@@ -125,29 +120,24 @@
   width: 180px;
 }
 .glimpse-modal-body label{
-  color: #00a1d3;
+  color: $secondaryColor;
   font-weight: 600;
   font-size: 1em;
 }
 #createGlimpseBtn {
-  background-color: #EB374C;
-  color: #fff;
+  background-color: $darkPrimary;
+  color: #ffffff;
   text-align: center;
   text-transform: uppercase;
 }
-#createBoardBtn, #selectAll {
-  background-color: #02658C;
-  color: #fff;
-  text-align: center;
-}
 .highlight {
-  color: #5db85b;
+  color: $darkThirdColor;
 }
 #boardFiles {
   overflow-x: scroll;
 }
 .board-clicked {
-  color: #EB374C;
+  color: $darkPrimary;
 }
 .glimpseImage {
   height: 100px;
@@ -169,23 +159,13 @@ Item image overlay details
   height: 200px;
   object-fit: cover;
 }
-/*.effects .img:nth-child(n) {
-  margin-right: 5px;
-}
-.effects .img:first-child {
-  margin-left: -15px;
-}
-.effects .img:last-child {
-  margin-right: 0;
-}*/
 .effects .img img {
-  display: block;
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 200px;
+    display: block;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 200px;
 }
-
 .overlay {
   display: block;
   position: absolute;
@@ -195,15 +175,14 @@ Item image overlay details
   transition: all 0.5s;
 }
 .selected-item-green {
-  color: #5db85b;
+  color: $darkThirdColor;
   margin: 0 auto;
   z-index: 2001;
 }
 .hide-overlay {
   display: none;
 }
-.selected-overlay
-{
+.selected-overlay {
   position: absolute;
   z-index: 2000;
   width: 100%;
@@ -211,15 +190,14 @@ Item image overlay details
   text-align: center;
   background: rgba(0, 0, 0, 0.7);
 }
-.selected-overlay i
-{
+.selected-overlay i {
   bottom: 50%;
   top: 50%;
   position: absolute;
   font-size: 5em;
   margin-left: -25px;
   margin-top: -25px;
-  color: #5db85b;
+  color: $darkThirdColor;
 }
 a.close-overlay {
   display: block;
@@ -231,10 +209,10 @@ a.close-overlay {
   height: 200px;
   font-size: 1em;
   font-weight: 700;
-  color: #fff;
+  color: #ffffff;
   line-height: 1;
   text-align: center;
-  background-color: #000;
+  background-color: #000000;
   cursor: pointer;
 }
 a.close-overlay.hidden {
@@ -251,7 +229,7 @@ a.expand {
   padding-top: 20px;
   text-align: left;
   text-decoration: none;
-  color: #fff;
+  color: #ffffff;
   line-height: 2;
   font-weight: 200;
   font-size: 1.4em;
@@ -272,14 +250,12 @@ a.expand {
 #userDocs .img.hover .overlay {
   height: 100%;
 }
+
 #boardModal label {
   margin-top: 10px;
   margin-bottom: 10px;
-  color: #337ab7;
+  color: $darkestSecondary;
   font-weight: 600;
-}
-#submitBoardBtn, #addTagsSubmit {
-  background-color: #02658C;
 }
 .form-hidden {
   visibility: hidden;
@@ -289,14 +265,36 @@ a.expand {
 }
 .filter-btn {
   margin-left: 5px;
-  background-color: #00a1d3;
+  background-color: $secondaryColor;
 }
 .remove-filter {
   margin-left: 5px;
 }
 #loadingSpinner {
   font-size: 1.2em;
-  color: #EB374C;
+  color: $darkPrimary;
   margin-left: 10px;
   display: inline-block;
+}
+#addToBoardBody {
+  padding: 15px;
+}
+
+@media (max-width: 480px) {
+
+  #galleryButtons {
+    margin-bottom: 0px !important;
+    div {
+      margin: 0 auto;
+      margin-bottom: 15px;
+      float: none;
+    }
+  }
+  #filterArea {
+    padding-top: 0px !important;
+  }
+  #deleteSelectedDiv {
+    margin-right: 5px !important;
+  }
+
 }

@@ -108,7 +108,7 @@ function createUserProfileCompound() {
   };
 
   universalPost(payload, url, function() {
-    window.location.replace(GLOBAL_WEB_ROOT + 'pages/dashboard.html');
+    window.location.replace(window.GLOBAL_WEB_ROOT + 'pages/dashboard.html');
   });
 }
 

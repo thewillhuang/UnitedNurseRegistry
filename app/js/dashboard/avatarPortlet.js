@@ -1,23 +1,3 @@
-// Enable Popovers
-$(function() {
-  $('[data-toggle="popover"]').popover({
-    html : true,
-    viewport: '.page-content',
-    animation: true
-  });
-});
-
-$('body').on('click', function(e) {
-  $('[data-toggle="popover"]').each(function() {
-    //the 'is' for buttons that trigger popups
-    //the 'has' for icons within a button that triggers a popup
-    if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
-      $(this).popover('hide');
-    }
-  });
-
-});
-
 // Flow for filling avatar portlet
 function fillAvatarPortlet() {
   // Empty portlet body --- necessary in case new photos uploaded

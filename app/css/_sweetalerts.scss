@@ -1,0 +1,29 @@
+/* Overriding SweetAlert colors */
+.sweet-alert {
+  font-family: 'open-sans-regular', sans-serif !important;
+  h2 {
+    color: $darkThirdColor !important;
+    font-size: 1.7em;
+  }
+  button {
+    background-color: $secondaryColor !important;
+    &:hover {
+      background-color: darken($secondaryColor, 3%);
+    }
+    &:active {
+      background-color: darken($secondaryColor, 10%);
+    }
+    &.cancel {
+      background-color: $lightMediumGrey !important;
+      &:hover {
+      background-color: darken($lightMediumGrey, 3%);
+      }
+      &:active {
+        background-color: darken($lightMediumGrey, 10%);
+      }
+      &:focus {
+        box-shadow: rgba(197, 205, 211, 0.8) 0px 0px 2px, rgba(0, 0, 0, 0.0470588) 0px 0px 0px 1px inset !important;
+      }
+    }
+  }
+}

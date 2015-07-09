@@ -3,17 +3,14 @@ $(document).ready(function() {
   getUserDefaultProfile();
   //Get user boards
   getBoards();
-  //Hide filters on multi-board view
-  // Hide filtering until use
+  //Init Tooltips
+  $("button").tooltip();
+  //Hide filtering until use
   $("#filterArea").hide();
   $("#filterText").hide();
   $("#filterDate").hide();
   $("#filterDate2").hide();
-  //User submitting a note to add to gallery object
-  $("#addNoteBtn").click(function() {
-    var objectGuid = $(".single-board").attr("id");
-    createNote(currentNoteObject, currentNoteType, category);
-  });
+  $("#filterFileTypeDropdown").hide();
   // // Glimpse share length slider
   // $("#glimpseSlider").slider({
   //   formatter: function(value) {
@@ -42,6 +39,9 @@ var currentNoteType = "";
 var singleBoardHtml = "";
 var boardGalleryCounter = 0;
 var currentNoteType = "";
+var addObjectGuids = "";
+var boardGuidArr = [];
+var boardsScrolled = false;
 
 //Glimpse
 var Glimpse = {
@@ -108,11 +108,11 @@ var Glimpse = {
     ajaxPost(newuri, payload, function(data, done, message) {
       if (done && data.Success) {
         $('#glimpseModal').modal('hide');
-        sweetAlert("Glimpse sent!");
+        sweetAlert(data.Success);
       } else {
         return false;
         $('#glimpseModal').modal('hide');
-        sweetAlert("Glimpse could not be sent, please try again.");
+        sweetAlert(data.Error);
       }
     });
   }
@@ -149,50 +149,89 @@ function getBoards() {
   };
   ajaxPost(newuri, payload, function(data, done, message) {
     if (done) {
+      boardGuidArr = [];
       var boardGuids = $.parseJSON(data.boardList);
       $.each(boardGuids, function(index, value) {
-        getBoard(value, function(done, data) {
-          if (done && data) {
-            var html = "";
-            var categories = data.categoryList.split(',');
-            var html = '<div class="user-board" id="' + data.description + '"><div class="row"><div class="board-info col-md-6"><a class="single-board-view" style="display: inline-block: margin-left: 5px; color: #00a1d3;" title="View board details"><i class="fa fa-chevron-right"></i></a><h2 style="display: inline-block;">' + data.label + '</h2></div><div class="board-labels col-md-6" id="' + categories + '">';
-            for (var i in categories) {
-              var cathtml = '<span class="label label-primary">' + categories[i] + '</span>';
-              html += cathtml;
-            }
-            html += '</div></div><div class="row board-desc-preview"><p>' + data.description + '</div><div class="row" id="' + data.label + '"><div class="board-items col-md-12" id="' + data.guid + '"></div></div></div>';
-            $("#userBoardsArea").append(html);
-            //Init cool scrollbar
-            $(function() {
-              $('.board-items').slimScroll({
-                height: '250px;'
-              });
-            });
-            $(function() {
-              $('.board-labels').slimScroll({
-                height: '40px;'
-              });
-            });
-            //Get all the images
-            var galleryObjects = $.parseJSON(data.galleryObjectList);
-            for (var i in galleryObjects) {
-              getBoardGalleryObject(galleryObjects[i], value, function(done, data) {
-                if (done) {
-                  var categories = data.categoryList;
-                  var createdPretty = moment(data.createdDate).format('dddd, MMMM Do, YYYY');
-                  var createdPretty = moment(data.createdDate).format('l');
-                  var elem = '<div class="user-board-item" id="' + data.guid + '"><div class="user-board-item-thumbnail" id="' + data.type + '"><div class="img"><img class="item-thumbnail" id="' + createdPretty + '" src="data:image/jpg;base64,' + data.image + '" style="cursor: pointer;"><div class="overlay"><a href="#" class="expand"></a><a class="close-overlay hidden">x</a></div></div></div><div class="item-specs"><p>' + data.originalFileName + '</p></div><div class="item-controls" id="' + data.image + '"><a href="" alt="Add or view notes" title="Add or view notes" class="add-note"><i class="fa fa-file-text-o item-icon"></i></a><a href="" alt="Download file" title="Download file" class="download-item"><i class="fa fa-download item-icon"></i></a><a alt="Delete file" title="Delete file" class="delete-file"><i class="fa fa-trash item-icon"></i></a></div></div>';
-                  $("#" + value).append(elem);
-                }
-              });
+        boardGuidArr.push(value);
+        var html = '<div class="user-board" id="' + value + '"></div>';
+        $("#userBoardsArea").append(html);
+      });
+      for (var i=0; i<3; i++){
+        getBoardAtIndex(boardGuidArr[i]);
+      }
+      // Scroll to load more
+      $(window).on('scroll', function(){
+        if (!boardsScrolled){
+          fillRemainingBoards();
+        }
+        boardsScrolled = true;
+      });
+    }
+  });
+}
+
+function fillRemainingBoards(){
+  for (var i=3; i<boardGuidArr.length; i++) {
+    getBoardAtIndex(boardGuidArr[i]);
+  }
+}
+
+function getBoardAtIndex(i){
+  var self = i;
+  getBoard(self, function(done, data) {
+    if (done && data) {
+      if (data.Error){
+        $("#"+self).remove();
+      } else {
+        var html = "";
+        if (data.categoryList){
+          var categories = data.categoryList.split(',');
+        } else {
+          var categories = "";
+        }
+        var html = '<div class="row"><div class="board-info col-md-6"><a class="single-board-view" style="display: inline-block: margin-left: 5px; color: #00a1d3;" title="View board details"><i class="fa fa-chevron-right"></i></a><h2>' + data.label + '</h2></div><div class="board-labels col-md-6" id="' + categories + '">';
+        for (var i in categories) {
+          var cathtml = '<span class="label label-primary">' + categories[i] + '</span>';
+          html += cathtml;
+        }
+        html += '</div></div><div class="row board-desc-preview"><p>' + data.description + '</div><div class="board-items col-md-12"></div></div>';
+        $("#" + self).append(html);
+        //Init cool scrollbar
+        $(function() {
+          $('.board-items').slimScroll({
+            height: '250px;'
+          });
+        });
+        //Get all the images
+        var galleryObjects = $.parseJSON(data.galleryObjectList);
+        for (var i in galleryObjects){
+          var elem = '<div class="user-board-item" id="' + galleryObjects[i] + '"></div>';
+          $("#"+self).find(".board-items").append(elem);
+          $("#"+self).find(".board-items").find("#"+galleryObjects[i]).hide();
+        }
+        for (var i in galleryObjects) {
+          getBoardGalleryObject(galleryObjects[i], self, function(done, data) {
+            if (done) {
+              var categories = data.categoryList;
+              var createdPretty = moment(data.createdDate).format('dddd, MMMM Do, YYYY');
+              var createdPretty = moment(data.createdDate).format('l');
+              var noteCount;
+              if (data.noteCount == 0){
+                noteCount = "";
+              } else {
+                noteCount = data.noteCount;
+              }
+              var noteCountId = "notecount" + data.guid;
+              var elem = '<div class="user-board-item-thumbnail" id="' + data.type + '"><div class="img"><img class="item-thumbnail" id="' + createdPretty + '" src="data:image/jpg;base64,' + data.image + '" style="cursor: pointer;"><div class="overlay"><a href="#" class="expand"></a><a class="close-overlay hidden">x</a></div></div></div><div class="item-specs"><p>' + data.originalFileName + '</p></div><div class="item-controls" id="' + data.image + '"><a href="" alt="Add or view notes" title="Add or view notes" class="add-note"><i class="fa fa-file-text-o item-icon"><span class="note-count" id="'+noteCountId+'">'+noteCount+'</span></i></a><a href="" alt="Download file" title="Download file" class="download-item"><i class="fa fa-download item-icon"></i></a><a alt="Delete file" title="Delete file" class="delete-file"><i class="fa fa-trash item-icon"></i></a></div>';
+              $("#"+self).find("#"+data.guid).show().append(elem);
               //Init tooltips
               $('a').tooltip();
             }
-          }
-        });
-      });
-    } else {
-      return false;
+          });
+        }
+        //Init tooltips
+        $('a').tooltip();
+      }
     }
   });
 }
@@ -224,10 +263,8 @@ function getBoardGalleryObject(objectGuid, boardGuid, callback) {
     'includeImage': 'true'
   };
   ajaxPost(newuri, payload, function(data, done, message) {
-    if (done && data) {
-      if (data.type !== undefined) {
-        callback(true, data);
-      }
+    if (done) {
+      callback(true, data);
     } else {
       return false;
     }
@@ -252,7 +289,8 @@ function showSingleBoardView(boardGuid) {
       } else {
         noteCount = data.noteCount;
       }
-      html2 = '<div class="single-board" id="' + boardGuid + '"><div class="single-board-title">' + data.label + '</div><div class="single-board-tools"><a class="add-board-note"><i class="fa fa-2x fa-file-text-o"><span class="note-count-board">' + noteCount + '</span></i></a><a class="edit-board" id="' + data.categoryList + '"><i class="fa fa-pencil-square-o fa-2x"></i></a><a class="delete-board"><i class="fa fa-2x fa-trash"></i></a></div><div class="single-board-description">' + data.description + '</div>';
+      noteCountId = "notecount" + boardGuid;
+      html2 = '<div class="single-board" id="' + boardGuid + '"><div class="single-board-description" id="' + data.label + '">' + data.description + '</div><div class="single-board-tools"><a class="add-board-note" title="Add Note to Board"><i class="fa fa-2x fa-file-text-o"><span class="note-count-board" id="'+ noteCountId +'">' + noteCount + '</span></i></a><a class="edit-board" title="Edit Board Details" id="' + data.categoryList + '"><i class="fa fa-pencil-square-o fa-2x"></i></a><a class="delete-board" title="Delete This Board"><i class="fa fa-2x fa-trash-o"></i></a></div>';
       html2 += '<div class="single-board-items"></div></div>';
       $("#userBoardsArea").append(html2);
       var galleryObjects = $.parseJSON(data.galleryObjectList);
@@ -260,17 +298,20 @@ function showSingleBoardView(boardGuid) {
       for (var i in galleryObjects) {
         getBoardGalleryObject(galleryObjects[i], boardGuid, function(done, data) {
           if (done) {
+            counter++
+          }
+          if (data.type !== undefined) {
             var noteCount;
             if (data.noteCount == 0){
               noteCount = "";
             } else {
               noteCount = data.noteCount;
             }
+            var noteCountId = "notecount" + data.guid;
             var createdPretty = moment(data.createdDate).format('dddd, MMMM Do, YYYY');
             var createdPretty = moment(data.createdDate).format('l');
-            var elem = '<div class="single-board-item" id="' + data.guid + '"><div class="single-board-item-thumbnail" id="' + data.type + '"><div class="img"><img class="item-thumbnail" id="' + createdPretty + '" src="data:image/jpg;base64,' + data.image + '" style="cursor: pointer;"><div class="overlay"><a href="#" class="expand"></a><a class="close-overlay hidden">x</a></div></div></div><div class="item-specs"><p>' + data.originalFileName + '</p></div><div class="item-controls" id="' + data.image + '"><a href="" alt="Add or view notes" title="Add or view notes" class="single-add-note"><i class="fa fa-file-text-o item-icon"><span class="note-count">' + noteCount + '</span></i></a><a href="" alt="Download file" title="Download file" class="single-download-item"><i class="fa fa-download item-icon"></i></a><a class="single-delete-file" alt="Delete file" title="Delete file"><i class="fa fa-trash item-icon"></i></a></div></div>';
+            var elem = '<div class="single-board-item" id="' + data.guid + '"><div class="selected-overlay hide-overlay"><div class="selected-item-green"><i class="fa fa-check-circle-o unselect-item"></i></div></div><div class="single-board-item-thumbnail" id="' + data.type + '"><div class="img"><img class="item-thumbnail" id="' + createdPretty + '" src="data:image/jpg;base64,' + data.image + '" style="cursor: pointer;"><div class="overlay"><a href="#" class="expand"></a><a class="close-overlay hidden">x</a></div></div></div><div class="item-specs"><p>' + data.originalFileName + '</p></div><div class="item-controls" id="' + data.image + '"><a class="add-to" title="Select" href="#"><i class="fa fa-check-circle-o item-icon"></i></a><a href="" alt="Add or view notes" title="Add or view notes" class="single-add-note"><i class="fa fa-file-text-o item-icon"><span class="note-count" id="'+noteCountId+'">' + noteCount + '</span></i></a><a href="" alt="Download file" title="Download file" class="single-download-item"><i class="fa fa-download item-icon"></i></a><a class="single-delete-file" alt="Delete file" title="Delete file"><i class="fa fa-trash item-icon"></i></a></div></div>';
             $(".single-board-items").append(elem);
-            counter++
             if (counter === galleryObjects.length) {
               var $container = $('.single-board-items').imagesLoaded(function() {
                 // initialize Packery after all images have loaded
@@ -306,7 +347,9 @@ function layoutBoardData(data) {
       if (done) {
         var createdPretty = moment(data.createdDate).format('dddd, MMMM Do, YYYY');
         var createdPretty = moment(data.createdDate).format('l');
-        var elem = '<div class="single-board-item" id="' + data.guid + '"><div class="single-board-item-thumbnail" id="' + data.type + '"><div class="img"><img class="item-thumbnail" id="' + createdPretty + '" src="data:image/jpg;base64,' + data.image + '" style="cursor: pointer;"><div class="overlay"><a href="#" class="expand"></a><a class="close-overlay hidden">x</a></div></div></div><div class="item-specs"><p>' + data.originalFileName + '</p></div><div class="item-controls" id="' + data.image + '"><a href="" alt="Add a note" class="single-add-note"><i class="fa fa-copy item-icon"></i></a><a href="" alt="Download" class="single-download-item"><i class="fa fa-download item-icon"></i></a><a class="single-delete-file"><i class="fa fa-trash item-icon"></i></a></div></div>';
+        var noteCount = data.noteCount;
+        var noteCountId = "notecount" + data.guid;
+        var elem = '<div class="single-board-item" id="' + data.guid + '"><div class="selected-overlay hide-overlay"><div class="selected-item-green"><i class="fa fa-check-circle-o unselect-item"></i></div></div><div class="single-board-item-thumbnail" id="' + data.type + '"><div class="img"><img class="item-thumbnail" id="' + createdPretty + '" src="data:image/jpg;base64,' + data.image + '" style="cursor: pointer;"><div class="overlay"><a href="#" class="expand"></a><a class="close-overlay hidden">x</a></div></div></div><div class="item-specs"><p>' + data.originalFileName + '</p></div><div class="item-controls" id="' + data.image + '"><a href="" alt="Add a note" class="single-add-note"><i class="fa fa-copy item-icon"><span class="note-count" id="' + noteCountId + '">' + noteCount + '</span></i></a><a href="" alt="Download" class="single-download-item"><i class="fa fa-download item-icon"></i></a><a class="single-delete-file"><i class="fa fa-trash item-icon"></i></a></div></div>';
         $(".single-board-items").append(elem);
         counter++
         if (counter === galleryObjects.length) {
@@ -339,11 +382,11 @@ function deleteBoard(boardGuid) {
     'boardGuid': boardGuid
   };
   ajaxPost(newuri, payload, function(data, done, message) {
-    if (done) {
-      sweetAlert("Board deleted!");
+    if (done && data.Success) {
+      sweetAlert(data.Success);
       location.reload();
     } else {
-      sweetAlert("Whoops!", "Failed to delete board");
+      sweetAlert(data.Error);
     }
   });
 }
@@ -357,11 +400,11 @@ function deleteFromBoard(objectGuid, boardGuid) {
     'galleryObjectList': objectGuid + ','
   };
   ajaxPost(newuri, payload, function(data, done, message) {
-    if (done) {
-      sweetAlert("Deleted item from board!");
+    if (done && data.Success) {
+      sweetAlert(data.Success);
       $("#" + objectGuid).remove();
     } else {
-      return false;
+      sweetAlert(data.Error);
     }
   });
 }
@@ -377,9 +420,14 @@ function updateBoard(boardGuid, label, description, categoryList) {
     'description': description
   };
   ajaxPost(newuri, payload, function(data, done, message) {
-    if (done) {
-      sweetAlert("Updated board!");
-      location.reload();
+    if (done && data.Success) {
+      sweetAlert(data.Success);
+      showSingleBoardView(boardGuid);
+      $("#editBoardModal").modal("hide");
+    } else {
+      sweetAlert(data.Error);
+      showSingleBoardView(boardGuid);
+      $("#editBoardModal").modal("hide");
     }
   });
 }
@@ -427,7 +475,7 @@ function filteredGalleryObjectList(currentBoardGuid, currentFilter, userInput) {
       if (done && data.galleryObjectList) {
         layoutBoardData(data);
       } else {
-        sweetAlert("No matching file found");
+        sweetAlert(data.Error);
       }
     });
   }
@@ -446,9 +494,40 @@ function filteredGalleryObjectList(currentBoardGuid, currentFilter, userInput) {
       if (done && data.galleryObjectList){
         layoutBoardData(data);
       } else {
-        sweetAlert("Sorry!", "No files found for those dates");
+        sweetAlert(data.Error);
       }
     });
+  }
+
+  // Update a gallery object
+  function addTagsToBoard(objectGuid, labels) {
+    var newuri = API_ROOT + 'api/galleryobjects/addcategorytogalleryobject';
+    var profileGuid = sessionStorage.getItem("activeProfile");
+    var payload = {
+      'profileGuid': profileGuid,
+      'objectGuid': objectGuid,
+      'categoryList': labels
+    };
+    ajaxPost(newuri, payload, function(data, done, message) {
+      if (done && data.Success){
+        $("#addTagsBoardModal").modal("hide");
+        sweetAlert(data.Sucess);
+        deselectAll();
+        $(".bootstrap-tagsinput span").remove();
+        $(".bootstrap-tagsinput input").attr("size", "0");
+      } else {
+        sweetAlert(data.Error);
+        $(".bootstrap-tagsinput span").remove();
+        $(".bootstrap-tagsinput input").attr("size", "0");
+      }
+    });
+  }
+
+  // Deselect items after actions
+  function deselectAll(){
+    $(".single-board-item").find(".add-to").removeClass('board-clicked');
+    $(".single-board-item").find(".add-to i").removeClass('highlight');
+    $(".single-board-item").find(".selected-overlay").addClass("hide-overlay");
   }
 
   //downloadGalleryObject

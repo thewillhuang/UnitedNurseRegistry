@@ -8,13 +8,18 @@ function fillGalleryPortlet() {
   galleryObjects.length = 0;
   getGalleryObjectList(function(done) {
     if (done) {
-      for (var i in galleryObjects) {
+      for (var i=0; i<10; i++) {
         getGalleryObject(galleryObjects[i]);
       }
     } else {
       return false;
     }
   });
+}
+function fillRemainingGalleryPortlet(){
+  for (var i=10; i<galleryObjects.length; i++) {
+    getGalleryObject(galleryObjects[i]);
+  }
 }
 // Get all data objects (files)
 function getGalleryObjectList(callback) {
@@ -27,14 +32,17 @@ function getGalleryObjectList(callback) {
     if (done) {
       var galleryObjectGuids = $.parseJSON(data.galleryObjectList);
       $.each(galleryObjectGuids, function(index, value) {
+        var html = '<div class="user-item-dashboard" id="' + value + '"></div>';
+        $("#galleryPortletBody").append(html);
         galleryObjects.push(value);
+        $("#"+value).hide();
       });
       callback(true);
       if (data){
         //Init cool scrollbar
         $(function() {
           $('#galleryPortletBody').slimScroll({
-            height: '600px;'
+            height: '500px;'
           });
         });
       }
@@ -55,7 +63,7 @@ function getGalleryObject(objectGuid) {
   };
   ajaxPost(newuri, payload, function(data, done, message) {
     if (done && data) {
-      var elem = $('<div class="user-item-dashboard"><img src="data:image/jpg;base64,' + data.thumbnail + '" style="width: 100%; height: 100%; cursor: pointer;">');
+      var elem = $('<img src="data:image/jpg;base64,' + data.thumbnail + '" style="width: 100%; height: 100%; cursor: pointer;">');
       $(elem).on('click', function() {
         if (data.type == "DICOM_STUDY") {
           dicomViewerLoadStudy(objectGuid);
@@ -63,7 +71,12 @@ function getGalleryObject(objectGuid) {
           imageViewerLoadStudy(objectGuid, data.type);
         }
       });
-      $("#galleryPortletBody").append(elem);
+      $("#"+objectGuid).show().append(elem);
     }
   });
 }
+// Scroll to load more
+$("#galleryPortletBody").scroll(function(){
+  fillRemainingGalleryPortlet();
+  $("#galleryPortletBody").unbind("scroll");
+});

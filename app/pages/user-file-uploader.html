@@ -66,6 +66,8 @@ Lifespeed.io
         </ul>
         <ul class="nav navbar-nav pull-right" id="reactNavItems">
         </ul>
+        <ul class="nav navbar-nav pull-right" id="messenging">
+        </ul>
       </div>
     </div>
   </div>
@@ -112,7 +114,7 @@ Lifespeed.io
           </li>
           <li>
             <a href="boards.html">
-              <i class="icon-layers"></i>
+              <i class="icon-boards"></i>
               <span class="title">Boards</span>
             </a>
           </li>
@@ -150,25 +152,25 @@ Lifespeed.io
 
             <div class="container uploader-container">
               <div class="uploader-hr">
-                <h1 class="uploader-title" id="uploaderTitle" style="display:inline-block;"><i class="icon-cloud-upload" style="margin-right: 5px;"></i>Upload Files</h1>
+                <h1 class="uploader-title" id="uploaderTitle" style="display:inline-block;"><i class="icon-cloud-upload" style="margin-right: 5px;" data-localize="t-upload-files"></i>Upload Files</h1>
               </div>
 
               <div class="row">
-                <p class="greetings">Welcome to the Lifespeed File Uploader</p>
+                <p class="greetings" data-localize="t-uploader-welcome">Welcome to the Lifespeed File Uploader</p>
               </div>
-              <div class="row greetings-text">
+              <div class="row greetings-text" data-localize="des-drag-drop-long">
                 Upload files by dragging and dropping on this page or by clicking the Add Files and Upload Buttons
               </div>
 
-              <div class="row" id="actions">
+              <div class="row col-md-4" id="actions">
                 <span class="btn btn-add fileinput-button">
                   <!-- <i class="glyphicon glyphicon-plus"></i> -->
-                  <span>Add files</span>
+                  <span data-localize="buttons.btn-add-files">Add files</span>
                 </span>
 
                 <button type="submit" class="btn btn-start start">
                   <!-- <i class="glyphicon glyphicon-upload"></i> -->
-                  <span>Start upload</span>
+                  <span data-localize="buttons.btn-start-upload">Start upload</span>
                 </button>
 
                 <button type="reset" class="btn btn-default btn-cancel cancel">
@@ -177,23 +179,21 @@ Lifespeed.io
               </div>
 
               <div class="row totalBar">
-                <h3 class="progress-h3">Total Progress:</h3>
-                <div id="total-progress" class="progress progress-striped success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+                <h3 class="progress-h3" data-localize="t-total-progress">Total Progress:</h3>
+                <div id="total-progress" class="progress progress-striped success" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" style="opacity:1; margin-right:10px;">
                   <div class="progress-bar success" style="width:0%;" data-dz-uploadprogress></div>
                 </div>
-                </span>
-                <div class="col-md-1 col-sm-1"></div>
               </div>
 
               <div id="uploadDashedBox" class="row dashed-box-row">
                 <div class="dashedBox dropzoneClickableTarget" style="cursor: pointer;">
 
                   <div class="row dropzoneTitleDiv">
-                    <h2 style="font-size:20px"><b>Drag and Drop your files or folders here to upload.</b></h2>
+                    <h2 style="font-size:20px" data-localize="desc-drag-drop"><b>Drag and Drop your files or folders here to upload.</b></h2>
                   </div>
 
                   <div class="row supportFormatsDiv">
-                    <h3 style="font-size:14px">Supported Formats</h3>
+                    <h3 style="font-size:14px" data-localize="t-supp-formats">Supported Formats</h3>
                   </div>
 
                   <div class="row extensionsDiv">
@@ -211,13 +211,13 @@ Lifespeed.io
                   </div>
 
                   <div class="row cloudIconDiv">
-                    <i class="fa fa-cloud-upload fa-5x"></i>
+                    <i class="fa fa-cloud-upload fa-3x"></i>
                   </div>
 
                 </div>
               </div>
               <div style="height:300px; overflow: auto; margin-top: 0;">
-                <div class="table table-striped" class="files" id="previews">
+                <div class="table table-striped files" id="previews">
 
                   <div id="template" class="file-row">
                     <!-- This is used as the file preview template -->
@@ -240,11 +240,11 @@ Lifespeed.io
                     <div style="vertical-align: middle;">
                       <button class="btn btn-primary start btn-start">
                         <!-- <i class="glyphicon glyphicon-upload"></i> -->
-                        <span>Start</span>
+                        <span data-localize="buttons.btn-start-upload">Start</span>
                       </button>
                       <button data-dz-remove class="btn btn-warning cancel btn-cancel">
                         <!-- <i class="glyphicon glyphicon-ban-circle"></i> -->
-                        <span>Cancel</span>
+                        <span data-localize="buttons.btn-cancel-upload">Cancel</span>
                       </button>
                       <button data-dz-remove class="btn btn-danger delete">
                         <!-- <i class="glyphicon glyphicon-remove"></i> -->
@@ -285,6 +285,7 @@ Lifespeed.io
       <script src="../js/vendor/jquery.flip.min.js"></script>
       <script src="../js/vendor/jquery-ui-1.10.3.custom.min.js"></script>
       <script src="../plugins/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
+      <script src="../js/vendor/jquery.localize.min.js"></script>
       <script src="../js/vendor/metronic.js"></script>
       <script src="../js/layout.js"></script>
       <script src="../js/vendor/quick-sidebar.js"></script>

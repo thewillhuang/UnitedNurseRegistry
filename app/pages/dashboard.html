@@ -10,9 +10,7 @@ Lifespeed.io
 <!-- BEGIN HEAD -->
 
 <head>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
+
   <meta charset="utf-8" />
   <title>Lifespeeed</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -37,8 +35,9 @@ Lifespeed.io
   <link href="../plugins/sweetalert/lib/sweet-alert.css" rel="stylesheet" type="text/css" />
   <link href="../css/vendor/bootstrap-slider.css" rel="stylesheet" type="text/css" />
   <link href="../css/viewer.css" rel="stylesheet" type="text/css" />
-  <link href="../dashboard.css" rel="stylesheet" type="text/css"/>
   <link href="../css/boards.css" rel="stylesheet" type="text/css" />
+
+  <link href="../css/dashboard.css" rel="stylesheet" type="text/css" />
 
 </head>
 
@@ -82,11 +81,14 @@ Lifespeed.io
           </li>
 
           <li>
-            <a href="#" id="logOutButton">Log Out <i class="fa fa-sign-out"></i></a>
+            <a href="#" id="logOutButton" data-localize="header.btn-logout">Log Out <i class="fa fa-sign-out"></i></a>
           </li>
         </ul>
 
         <ul class="nav navbar-nav pull-right" id="reactNavItems">
+        </ul>
+
+        <ul class="nav navbar-nav pull-right" id="messenging">
         </ul>
 
       </div>
@@ -106,14 +108,14 @@ Lifespeed.io
           <li class="start ">
             <a href="dashboard.html">
               <i class="icon-home"></i>
-              <span class="title">Home</span>
+              <span class="title" data-localize="sidebar.link-home">Home</span>
             </a>
           </li>
 
           <li>
             <a href="profile.html">
               <i class="icon-user"></i>
-              <span class="title">Profile</span>
+              <span class="title" data-localize="sidebar.link-profile">Profile</span>
               <!-- <span class="arrow "></span> -->
             </a>
           </li>
@@ -128,36 +130,36 @@ Lifespeed.io
           <li>
             <a href="gallery-view.html">
               <i class="icon-picture"></i>
-              <span class="title">Gallery</span>
+              <span class="title" data-localize="sidebar.link-gallery">Gallery</span>
               <!-- <span class="arrow"></span> -->
             </a>
 
           </li>
           <li>
             <a href="boards.html">
-              <i class="icon-layers"></i>
-              <span class="title">Boards</span>
+              <i class="icon-boards"></i>
+              <span class="title" data-localize="sidebar.link-boards">Boards</span>
             </a>
           </li>
 
           <li>
             <a href="user-file-uploader.html">
               <i class="icon-cloud-upload"></i>
-              <span class="title">Upload</span>
+              <span class="title" data-localize="sidebar.link-upload">Upload</span>
             </a>
           </li>
 
           <li>
             <a href="medical-record-request.html">
               <i class="fa fa-user-md"></i>
-              <span class="title">Request Medical Records</span>
+              <span class="title" data-localize="sidebar.link-req-records">Request Medical Records</span>
             </a>
           </li>
 
           <li>
             <a href="clientValidate.html">
               <i class="fa fa-check-circle-o"></i>
-              <span class="title">Inbound File Verification</span>
+              <span class="title" data-localize="sidebar.link-file-verify">Inbound File Verification</span>
             </a>
           </li>
 
@@ -382,6 +384,7 @@ Lifespeed.io
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header" style="padding-bottom:0px">
+                    <i id="imageViewerFileInfo" class="fa fa-info item-icon" style="float:left; cursor:pointer;" title="File Info" data-toggle="popover" data-content=""></i>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button>
@@ -399,7 +402,6 @@ Lifespeed.io
               </div>
             </div>
 
-
             <div class="page-content-wrapper">
               <div class="page-content" style="width: 100%; margin: 0 auto;">
                 <div class="row" id="sortable_portlets" style="margin-left: -20px; margin-right: -20px;">
@@ -410,11 +412,11 @@ Lifespeed.io
                       <div class="portlet-title">
                         <div class="caption">
                           <i class="fa fa-street-view font-red-flamingo"></i>
-                          <span class="caption-subject font-red-flamingo uppercase">Avatar</span>
+                          <span class="caption-subject font-red-flamingo uppercase" data-localize="avatar.t-avatar">Avatar</span>
                         </div>
                         <div class="tools">
                           <a href="" class="collapse"><i class="fa fa-arrows-v"></i></a>
-                          <a href="" class="fullscreen"><i class="fa fa-search-plus"></i></a>
+                          <a href="" class="fullscreen"><i class="fa fa-compress"></i></a>
                         </div>
                       </div>
 
@@ -445,17 +447,17 @@ Lifespeed.io
                       <div class="portlet-title">
                         <div class="caption">
                           <i class="icon-share font-red-flamingo"></i>
-                          <span class="caption-subject font-red-flamingo uppercase">Share Lifespeed </span>
+                          <span class="caption-subject font-red-flamingo uppercase" data-localize="share.t-share">Share Lifespeed </span>
                         </div>
                         <div class="tools">
                           <a href="" class="collapse"><i class="fa fa-arrows-v"></i></a>
-                          <a href="" class="fullscreen"><i class="fa fa-search-plus"></i></a>
+                          <a href="" class="fullscreen"><i class="fa fa-compress"></i></a>
                         </div>
                       </div>
                       <div class="portlet-body share-body">
                         <div style="margin-bottom: 40px;">
                           <div id="social-media" style="vertical-align: middle;">
-                            <div class="learn-more pull-left">Learn more at <a href="http://www.lifespeed.io/">Lifespeed.io</a>
+                            <div class="learn-more pull-left"><span data-localize="share.t-learn-more">Learn more at </span><a href="http://www.lifespeed.io/"> Lifespeed.io</a>
                             </div>
                             <a href="https://twitter.com/LifespeedNolan" target="_blank" class="pull-right">
                               <span class="fa fa-twitter fa-1x" style="margin-left: 20px;"></span>
@@ -474,11 +476,10 @@ Lifespeed.io
                       <div class="portlet-title">
                         <div class="caption">
                           <i class="icon-picture font-red-flamingo"></i>
-                          <span class="caption-subject font-red-flamingo uppercase">GALLERY QUICK VIEW</span>
+                          <span class="caption-subject font-red-flamingo uppercase" data-localize="gallery.t-gallery-quick">GALLERY QUICK VIEW</span>
                         </div>
                         <div class="tools">
-                          <a href="" class="collapse"><i class="fa fa-arrows-v"></i></a>
-                          <a href="" class="fullscreen"><i class="fa fa-search-plus"></i></a>
+                          <a href="" class="fullscreen"><i class="fa fa-compress"></i></a>
                         </div>
                       </div>
                       <div class="portlet-body" id="galleryPortletBody">
@@ -497,11 +498,11 @@ Lifespeed.io
                       <div class="portlet-title">
                         <div class="caption caption-md">
                           <i class="fa fa-circle-o font-red-flamingo"></i>
-                          <span class="caption-subject font-red-flamingo">CIRCLE OF TRUST</span>
+                          <span class="caption-subject font-red-flamingo" data-localize="circle.t-circle">CIRCLE OF TRUST</span>
                         </div>
                         <div class="tools">
                           <a href="" class="collapse"><i class="fa fa-arrows-v"></i></a>
-                          <a href="" class="fullscreen"><i class="fa fa-search-plus"></i></a>
+                          <a href="" class="fullscreen"><i class="fa fa-compress"></i></a>
                         </div>
                       </div>
                       <div class="portlet-body" id="reactCircleOfTrust"></div>
@@ -515,7 +516,7 @@ Lifespeed.io
                         </div>
                         <div class="tools">
                           <a href="" class="collapse"><i class="fa fa-arrows-v"></i></a>
-                          <a href="" class="fullscreen"><i class="fa fa-search-plus"></i></a>
+                          <a href="" class="fullscreen"><i class="fa fa-compress"></i></a>
                         </div>
                       </div>
                       <div class="portlet-body" id="glimpsePortletBody" style="font-family: 'open-sans', sans-serif;">
@@ -529,12 +530,11 @@ Lifespeed.io
                     <div class="portlet portlet-sortable light light-shadow portlet-top" id="boardPortlet">
                       <div class="portlet-title">
                         <div class="caption caption-md">
-                          <i class="icon-layers font-red-flamingo"></i>
-                          <span class="caption-subject font-red-flamingo">BOARDS QUICK VIEW</span>
+                          <i class="icon-boards font-red-flamingo"></i>
+                          <span class="caption-subject font-red-flamingo" data-localize="boards.t-boards-quick">BOARDS QUICK VIEW</span>
                         </div>
                         <div class="tools">
-                          <a href="" class="collapse"><i class="fa fa-arrows-v"></i></a>
-                          <a href="" class="fullscreen"><i class="fa fa-search-plus"></i></a>
+                          <a href="" class="fullscreen"><i class="fa fa-compress"></i></a>
                         </div>
                       </div>
                       <div class="portlet-body" id="boardPortletBody" style="font-family: 'open-sans', sans-serif; height: auto;">
@@ -593,6 +593,7 @@ Lifespeed.io
       <script src="../js/vendor/jquery.cokie.min.js"></script>
       <script src="../js/vendor/jquery.flip.min.js"></script>
       <script src="../js/vendor/jquery-ui-1.10.3.custom.min.js"></script>
+      <script src="../js/vendor/jquery.localize.min.js"></script>
       <script src="../plugins/bootstrap-switch/dist/js/bootstrap-switch.min.js"></script>
       <script src="../js/vendor/metronic.js"></script>
       <script src="../js/layout.js"></script>
@@ -601,15 +602,14 @@ Lifespeed.io
       <script src="../js/vendor/moment.min.js"></script>
       <script src="../js/vendor/bootstrap-slider.js"></script>
       <script src="../plugins/sweetalert/lib/sweet-alert.min.js"></script>
-      <script src="../common.js"></script>
-      <script src="../dashboardWidgets.js"></script>
       <script src="../js/platform.js"></script>
-      <script src="../js/dashboard/dashboard.js"></script>
       <script src="../js/dashboard/galleryPortlet.js"></script>
       <script src="../js/dashboard/avatarPortlet.js"></script>
       <script src="../js/dashboard/glimpsePortlet.js"></script>
       <script src="../js/dashboard/boardPortlet.js"></script>
-      <script src="../js/notes.js"></script>
+      <script src="../js/dashboard/dashboard.js"></script>
+      <script src="../common.js"></script>
+      <script src="../dashboardWidgets.js"></script>
       <script src="../js/vendor/cornerstone/jquery.hammer-full.js"></script>
       <script src="../js/vendor/cornerstone/cornerstone.js"></script>
       <script src="../js/vendor/cornerstone/cornerstoneMath.js"></script>

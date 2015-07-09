@@ -1,7 +1,7 @@
 'use strict';
 
 const universalPost = require('./universalPost.js');
-const uploaderApi = {};
+let uploaderApi = {};
 
 //getInboundGalleryObjectList
 // returns a bunch of guids seperated by ",";

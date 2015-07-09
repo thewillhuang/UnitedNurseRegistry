@@ -26,11 +26,11 @@ const ButtonsGroup = React.createClass({
     let stateContacts = (
       <div>
         <OverlayTrigger placement='top' overlay={<Tooltip>Delete Contact</Tooltip>}>
-          <i className="fa fa-lg fa-trash pull-right" onClick={this.props.handleDelete} style={{cursor: 'pointer', color: '#02658C'}}></i>
+          <i className="fa fa-lg fa-trash-o pull-right" onClick={this.props.handleDelete} style={{cursor: 'pointer', marginRight: 0, color: '#02658C'}}></i>
         </OverlayTrigger>
           <ModalTrigger modal={<EditModal payload={this.props.payload} handleEdit={this.props.handleEdit}/>}>
             <OverlayTrigger placement='top' overlay={<Tooltip>Edit Contact</Tooltip>}>
-            <i className="fa fa-lg fa-pencil pull-right" style={{marginRight: '10', cursor: 'pointer', color: '#02658C'}}></i>
+            <i className="fa fa-lg fa-pencil pull-right" style={{marginRight: 15, cursor: 'pointer', color: '#02658C'}}></i>
             </OverlayTrigger>
           </ModalTrigger>
       </div>

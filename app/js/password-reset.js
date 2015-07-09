@@ -15,7 +15,7 @@ var grabToken = function() {
 };
 
 function updateForgottenPassword() {
-  var newuri = API_ROOT + 'api/users/updateforgottenPassword';
+  var newuri = window.API_ROOT + 'api/users/updateforgottenPassword';
   var payload = {
     'lifeline': grabToken(),
     'newPassword': $('#updateForgottenPasswordNewPassword').val(),
@@ -25,27 +25,27 @@ function updateForgottenPassword() {
   console.log(payload);
 
   $.ajax({
-    type: "POST",
+    type: 'POST',
     url: newuri,
     data: JSON.stringify(payload),
     dataType: 'json',
     contentType: 'application/json; charset=utf-8',
-    success: function(data) {
-      alert(data.Success);
-      window.location.replace(GLOBAL_WEB_ROOT);
+    success: function() {
+      // alert(data.Success);
+      window.location.replace(window.GLOBAL_WEB_ROOT);
     },
-    error: function(data) {
-      alert(data.Error);
+    error: function() {
+      // alert(data.Error);
     }
   });
 }
 
-$("#signup").click(function(event) {
+$('#signup').click(function(event) {
   event.preventDefault();
   updateForgottenPassword();
 });
 
-$("#updateForgottenPasswordConfirmNewPassword").keypress(function(e) {
+$('#updateForgottenPasswordConfirmNewPassword').keypress(function(e) {
   if (e.which === 13) {
     updateForgottenPassword();
     return false;

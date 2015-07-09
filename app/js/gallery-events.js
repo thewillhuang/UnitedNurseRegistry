@@ -53,11 +53,21 @@ $(document).on('click', '.delete-label', function() {
 });
 // Add tags to objects
 $("#addTagsBtn").click(function(){
-  $("#addTagsModal").modal('show');
+  noneSelected = true;
+  $(".add-to").each(function(){
+    if ($(this).hasClass("board-clicked")){
+      noneSelected = false;
+    }
+  });
+  if (noneSelected === false){
+    $("#addTagsModal").modal('show');
+  } else {
+    return false;
+  }
 });
 
 $("#addTagsSubmit").click(function(){
-  addObjegitctGuids = "";
+  addObjectGuids = "";
   var labels = $("#addTagsInput").val();
   $(".highlight").each(function() {
     var checkedGuid = $(this).closest("div.user-item").attr("id");
@@ -78,7 +88,7 @@ $(document).on('click', '.delete-file', function() {
     deleteGalleryObject(objectGuid);
   });
 });
-// Highlight icon yellow if clicked
+// Highlight icon green if clicked
 $(document).on('click', '.add-to', function(event) {
   event.preventDefault();
   $(this).toggleClass('board-clicked');
@@ -181,44 +191,65 @@ $(document).on('click', '#addToBoardDropdown li a', function(event) {
 });
 // Add object to board
 $("#addToBoardBtn").click(function() {
-  addGalleryObjects = "";
-  addObjectGuids = "";
-  $("#addToBoardDropdown").empty();
-  $("#addToBoardImages").empty();
-  $(".board-clicked").each(function() {
-    var checkedGuid = $(this).closest("div.user-item").attr("id");
-    var checkedImg = $(this).closest("div.item-controls").attr("id");
-    addGalleryObjects += '<img src="data:image/jpg;base64,' + checkedImg + '" class="glimpseImage">';
-    addObjectGuids += checkedGuid + ",";
+  noneSelected = true;
+  $(".add-to").each(function(){
+    if ($(this).hasClass("board-clicked")){
+      noneSelected = false;
+    }
   });
-  $("#addToBoardImages").append(addGalleryObjects);
-  //Init cool scrollbar
-  $(function() {
-    $('#addToBoardImages').slimScroll({
-      height: '100px;'
+  if (noneSelected === false){
+    addGalleryObjects = "";
+    addObjectGuids = "";
+    $("#addToBoardDropdown").empty();
+    $("#addToBoardImages").empty();
+    $(".board-clicked").each(function() {
+      var checkedGuid = $(this).closest("div.user-item").attr("id");
+      var checkedImg = $(this).closest("div.item-controls").attr("id");
+      addGalleryObjects += '<img src="data:image/jpg;base64,' + checkedImg + '" class="glimpseImage">';
+      addObjectGuids += checkedGuid + ",";
     });
-  });
-  generateBoardList();
+    $("#addToBoardImages").append(addGalleryObjects);
+    //Init cool scrollbar
+    $(function() {
+      $('#addToBoardImages').slimScroll({
+        height: '100px;'
+      });
+    });
+    generateBoardList();
+  } else {
+    return false;
+  }
 });
 // Create a board click event
 $("#createBoardBtn").click(function() {
-  Board.galleryObjects = "";
-  Board.objectGuids = "";
-  $("#boardFiles").empty();
-  $(".board-clicked").each(function() {
-    var checkedGuid = $(this).closest("div.user-item").attr("id");
-    var checkedImg = $(this).closest("div.item-controls").attr("id");
-    Board.galleryObjects += '<img src="data:image/jpg;base64,' + checkedImg + '" class="glimpseImage img-thumbnail">';
-    Board.objectGuids += checkedGuid + ",";
+  noneSelected = true;
+  $(".add-to").each(function(){
+    if ($(this).hasClass("board-clicked")){
+      noneSelected = false;
+    }
   });
-  $("#boardFiles").append(Board.galleryObjects);
-  //Init cool scrollbar
-  $(function() {
-    $('#boardFiles').slimScroll({
-      height: '100px;'
+  if (noneSelected === false){
+    Board.galleryObjects = "";
+    Board.objectGuids = "";
+    $("#boardFiles").empty();
+    $(".board-clicked").each(function() {
+      var checkedGuid = $(this).closest("div.user-item").attr("id");
+      var checkedImg = $(this).closest("div.item-controls").attr("id");
+      Board.galleryObjects += '<img src="data:image/jpg;base64,' + checkedImg + '" class="glimpseImage img-thumbnail">';
+      Board.objectGuids += checkedGuid + ",";
     });
-  });
+    $("#boardFiles").append(Board.galleryObjects);
+    //Init cool scrollbar
+    $(function() {
+      $('#boardFiles').slimScroll({
+        height: '100px;'
+      });
+    });
+  } else {
+    return false;
+  }
 });
+// Submit board creation button
 $("#submitBoardBtn").click(function() {
   Board.getBoardFormFields(function(done) {
     if (done) {
@@ -235,7 +266,19 @@ $("#submitBoardBtn").click(function() {
 $("#addNoteBtn").click(function() {
   var objectType = 'GalleryObject';
   var objectGuid = $(".note-container").attr("id");
-  createNote(objectGuid, objectType, category);
+  createNote(objectGuid, objectType, category, function(done, data){
+    if (done){
+      var noteCountId = "notecount" + objectGuid;
+      var noteCount = $("#"+noteCountId).text();
+      noteCount = parseInt(noteCount);
+      if (noteCount){
+        noteCount += 1;
+      } else {
+        noteCount = 1;
+      }
+      $("#"+noteCountId).text(noteCount);
+    }
+  });
 });
 var $container = $('#userDocs');
 $container.on('click', '.user-item', function() {
@@ -253,12 +296,22 @@ $(document).on('click', '.add-note', function(event) {
   $("#noteImage").empty();
   var noteImage = $(this).closest("div.item-controls").attr("id");
   var imageGuid = $(this).closest("div.user-item").attr("id");
+  currentNoteObject = imageGuid;
+  currentNoteObjectGuid = imageGuid;
+  console.log(currentNoteObjectGuid);
   $(".note-container").attr("id", imageGuid);
   // Get any previous notes for the item
   $("#previousNotes").empty();
   getObjectNotes(imageGuid, 'GalleryObject');
   $('#noteModal').modal('show');
   $('#addNotesRow').hide();
+  $("#addNoteBtn").hide();
+});
+$(document).on('click', '#viewNotesTab', function(event){
+  $("#addNoteBtn").hide();
+});
+$(document).on('click', '#addNotesTab', function(event){
+  $("#addNoteBtn").show();
 });
 // Note dropdown event
 $(document).on('click', '#noteDropdownList li a', function(event) {
@@ -270,8 +323,25 @@ $(document).on('click', '#noteDropdownList li a', function(event) {
 $(document).on('click', '.delete-this-note', function(event) {
   event.preventDefault();
   var noteGuid = $(this).attr("id");
+  var noteCountId = "notecount" + currentNoteObjectGuid;
   var objectType = 'GalleryObject';
-  deleteNote(noteGuid, objectType);
+  deleteNote(noteGuid, objectType, function(done, data){
+    if (done){
+      var noteCountId = "notecount" + currentNoteObjectGuid;
+      var noteCount = $("#"+noteCountId).text();
+      noteCount = parseInt(noteCount);
+      console.log(noteCount);
+      if (noteCount){
+        noteCount -= 1;
+        if (noteCount === 0){
+          noteCount = "";
+        }
+      } else {
+        noteCount = "";
+      }
+      $("#"+noteCountId).text(noteCount);
+    }
+  });
 });
 // Edit a note click
 $(document).on('click', '.edit-this-note', function() {
@@ -285,6 +355,7 @@ $(document).on('click', '#editNoteSubmit', function() {
   updateNote(noteGuid, 'GalleryObject', function(done) {
     if (done) {
       $("#previousNotes").empty();
+      $("#addNoteBtn").hide();
       getObjectNotes(imageGuid, 'GalleryObject');
     }
   })
@@ -339,23 +410,28 @@ $(document).on('mouseleave', '.img', function() {
 $("#filterDropdown li a").click(function() {
   currentFilter = $(this).text();
   if (currentFilter === "File Name"){
+    $("#filterFileTypeDropdown").hide();
     $("#filterDate").hide();
     $("#filterDate2").hide();
     $("#filterText").show();
+    $("#filterTextInput").show();
     $("#filterTextInput").val("");
     $("#filterDateInput").val("");
     $("#filterInputLabel").text(currentFilter);
     $("#filterTextInput").attr("placeholder", "Original File Name");
   } else if (currentFilter === "Tag"){
     currentFilter = "Category";
+    $("#filterFileTypeDropdown").hide();
     $("#filterDate").hide();
     $("#filterDate2").hide();
     $("#filterText").show();
+    $("#filterTextInput").show();
     $("#filterTextInput").val("");
     $("#filterDateInput").val("");
     $("#filterInputLabel").text(currentFilter);
     $("#filterTextInput").attr("placeholder", "e.g. head, torso");
   } else if (currentFilter === "Uploaded Before" || currentFilter === "Uploaded After") {
+    $("#filterFileTypeDropdown").hide();
     $("#filterText").hide();
     $("#filterDate2").hide();
     $("#filterDate").show();
@@ -363,6 +439,7 @@ $("#filterDropdown li a").click(function() {
     $("#filterDateInput").val("");
     $("#filterInputLabel2").text(currentFilter);
   } else if (currentFilter === "Uploaded Between") {
+    $("#filterFileTypeDropdown").hide();
     $("#filterText").hide();
     $("#filterDate").hide();
     $("#filterDate2").show();
@@ -374,12 +451,16 @@ $("#filterDropdown li a").click(function() {
     $("#filterDate").hide();
     $("#filterDate2").hide();
     $("#filterText").hide();
-    $("#filterText").show();
-    $("#filterTextInput").val("");
-    $("#filterDateInput").val("");
+    $("#filterTextInput").hide();
+    $("#filterFileTypeDropdown").show();
     $("#filterInputLabel").text(currentFilter);
     $("#filterTextInput").attr("placeholder", "e.g. JPEG, DICOM_STUDY");
   }
+});
+$("#fileTypeDropdown li a").click(function(){
+  var currentFilter = "File Type";
+  var userInput = $(this).text();
+  filteredGalleryObjectList(currentFilter, userInput);
 });
 $("#filterTextInput").keypress(function(event) {
   if (event.which == 13) {
@@ -425,6 +506,7 @@ $(".remove-filter").click(function(event) {
   $("#filterText").hide();
   $("#filterDate").hide();
   $("#filterDate2").hide();
+  $("#filterFileTypeDropdown").hide();
   getGalleryObjectList(function(done, data) {
     if (done && data) {
       layoutData(data);

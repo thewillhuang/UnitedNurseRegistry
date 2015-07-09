@@ -1,7 +1,7 @@
 var noteHtml = "";
 
 // Create a note
-function createNote(objectGuid, objectType, category) {
+function createNote(objectGuid, objectType, category, callback) {
   var newuri = API_ROOT + 'api/notes/createnote';
   var profileGuid = sessionStorage.getItem("activeProfile");
   var jsonObj = {};
@@ -38,10 +38,7 @@ function createNote(objectGuid, objectType, category) {
     'objectType': objectType,
     'noteData': noteData
   };
-  console.log(payload);
   ajaxPost(newuri, payload, function(data, done, message) {
-    console.log(data.Error);
-    console.log(data);
     if (done) {
       $('#categoryForm').empty();
       $("#previousNotes").empty();
@@ -50,6 +47,8 @@ function createNote(objectGuid, objectType, category) {
       $("#addNotesTab").toggleClass("active-note-link");
       $("#addNotesRow").hide();
       $("#viewNotesRow").show();
+      $("#addNoteBtn").hide();
+      callback(true, data);
     } else {
       alert(data.Error);
     }
@@ -65,7 +64,6 @@ function getObjectNotes(objectGuid, objectType) {
     'objectType': objectType
   };
   ajaxPost(newuri, payload, function(data, done, message) {
-    console.log(data);
     if (done && data) {
       var noteGuids = $.parseJSON(data.noteList);
       $.each(noteGuids, function(index, value) {
@@ -88,7 +86,6 @@ function getNote(objectGuid, noteGuid, objectType) {
   };
   ajaxPost(newuri, payload, function(data, done, message) {
     if (done && data) {
-      console.log(data);
       var topDiv = $('#previousNotes');
       var sentFrom;
       var html = "";
@@ -99,7 +96,7 @@ function getNote(objectGuid, noteGuid, objectType) {
       sentFrom = noteSender[5];
       var noteType = data.category.split('^');
       var type = noteType[5];
-      html = '<div class="view-user-note"><h4 class="note-h4 pull-left">' + type + '</h4><a class="edit-this-note pull-right" style="margin-left: 15px;"><i class="fa fa-pencil fa-1x"></i></a><a id="' + noteGuid + '" class="delete-this-note pull-right"><i class="fa fa-trash fa-1x"></i></a><div class="note-area note-height">';
+      html = '<div class="view-user-note"><h4 class="note-h4 pull-left">' + type + '</h4><a class="edit-this-note pull-right" style="margin-left: 15px;"><i class="fa fa-pencil fa-1x"></i></a><a id="' + noteGuid + '" class="delete-this-note pull-right"><i class="fa fa-trash-o fa-1x"></i></a><div class="note-area note-height">';
       $.each(data, function(index, value) {
         if (index != 'category' && index != 'guid' && index != 'objectGuid' && index != 'createdByGuid' && index != 'editedByGuid' && index != 'createdDate' && index != 'editedDate') {
           var properties = value.split('^');
@@ -119,7 +116,7 @@ function getNote(objectGuid, noteGuid, objectType) {
       getProfile(sentFrom, function(firstName, lastName, photo) {
         if (firstName) {
           if (photo) {
-            html += '<img src="data:image/jpg;base64,' + photo + '" style="width: 40px; height: 40px; display: inline-block;" class="img img-circle"><p style="font-size: 1.2em; display: inline-block; margin-left: 10px;">' + firstName + ' ' + lastName + '</p><p class="expand-icon"><a class="expand-user-note pull-right" title="View More"><i class="fa fa-ellipsis-h" style="color: #EB374C;"></i></a></p></div><hr class="note-hr">';
+            html += '<img src="data:image/jpg;base64,' + photo + '" style="width: 40px; height: 40px; display: inline-block;" class="img img-circle"><p style="font-size: 1.2em; display: inline-block; margin-left: 10px;">' + firstName + ' ' + lastName + '</p><p class="expand-icon"><a class="expand-user-note pull-right" title="Show More"><i class="fa fa-ellipsis-h" style="color: #EB374C;"></i></a></p></div><hr class="note-hr">';
             topDiv.append(html);
           } else {
             html += '<img src="../images/ProfilePlaceholder.png" style="width: 40px; height: 40px; display: inline-block;" class="img img-circle"><p style="font-size: 1.2em; display: inline-block; margin-left: 10px;">' + firstName + ' ' + lastName + '</p><p class="expand-icon"><a class="expand-user-note pull-right" title="View More"><i class="fa fa-ellipsis-h" style="color: #EB374C;"></i></a></p></div><hr class="note-hr">';
@@ -140,7 +137,6 @@ function getCategory(category) {
     'category': category
   };
   ajaxPost(newuri, payload, function(data, done, message) {
-    console.log(data);
     if (done) {
       var topDiv = $('#categoryForm');
       $(function() {
@@ -171,7 +167,7 @@ function getCategory(category) {
         }
       });
     } else {
-      console.log("couldn't get category stuff");
+      return false;
     }
     topDiv.empty();
     topDiv.append(html);
@@ -184,18 +180,16 @@ function getProfile(profileGuid, callback) {
     'profileGuid': profileGuid,
     'includePhoto': 'true'
   };
-  console.log(payload);
   ajaxPost(newuri, payload, function(data, done, message) {
     if (done) {
-      console.log(data);
       callback(data.firstName, data.lastName, data.profilePhoto);
     } else {
-      console.log("whooops");
+      return false;
     }
   });
 }
 
-function deleteNote(noteGuid, objectType) {
+function deleteNote(noteGuid, objectType, callback) {
   var newuri = API_ROOT + 'api/notes/deletenote';
   var profileGuid = sessionStorage.getItem("activeProfile");
   var payload = {
@@ -203,12 +197,12 @@ function deleteNote(noteGuid, objectType) {
     'noteGuid': noteGuid,
     'objectType': objectType
   };
-  console.log(payload);
   ajaxPost(newuri, payload, function(data, done, message) {
-    console.log(data, done, message);
-    if (done) {
-      sweetAlert("Deleted Note");
-      $("#noteModal").modal('hide');
+    if (done && data.Success) {
+      sweetAlert(data.Success);
+      callback(true, data);
+    } else {
+      callback(false, data);
     }
   });
 }
@@ -230,7 +224,6 @@ function updateNote(noteGuid, objectType, callback) {
       } else {
         var val = $(this).val();
       }
-      console.log(val);
       jsonObj[id] = val;
     }
   );
@@ -242,16 +235,13 @@ function updateNote(noteGuid, objectType, callback) {
     }
   );
   var noteData = JSON.stringify(jsonObj);
-  console.log(noteData);
   var payload = {
     'profileGuid': profileGuid,
     'noteGuid': noteGuid,
     'objectType': objectType,
     'noteData': noteData
   };
-  console.log(payload);
   ajaxPost(newuri, payload, function(data, done, message) {
-    console.log(data, done, message);
     if (done) {
       callback(true);
     }
@@ -267,9 +257,7 @@ function getEditNote(objectGuid, noteGuid, objectType, callback) {
     'objectType': objectType,
     'noteGuid': noteGuid
   };
-  console.log(payload);
   ajaxPost(newuri, payload, function(data, done, message) {
-    console.log(data, done, message);
     var html = '';
 
     html += '<div class="edit-note" id="' + noteGuid + '">';
@@ -283,7 +271,6 @@ function getEditNote(objectGuid, noteGuid, objectType, callback) {
     } else {
 
       $.each(data, function(index, value) {
-        console.log(index);
         if (index != 'category' && index != 'guid' && index != 'objectGuid' && index != 'createdByGuid' && index != 'editedByGuid' && index != 'createdDate' && index != 'editedDate') {
           var properties = value.split('^');
           var DataType = properties[0];
@@ -311,7 +298,6 @@ function getEditNote(objectGuid, noteGuid, objectType, callback) {
 }
 
 function displayEditNote(objectGuid, noteGuid, type) {
-  console.log(objectGuid);
   getEditNote(objectGuid, noteGuid, type, function(done, html) {
     if (done) {
       noteHtml = $("#previousNotes").html();
@@ -352,8 +338,12 @@ $(document).on('click', '.expand-user-note', function() {
   var className = $(this).children("i").attr("class");
   if (className === "fa fa-ellipsis-h") {
     $(this).children("i").attr("class", "fa fa-ellipsis-v");
+    $(this).attr("data-original-title", "Hide");
+    $(this).attr("title", "Hide");
   } else {
     $(this).children("i").attr("class", "fa fa-ellipsis-h");
+    $(this).attr("data-original-title", "Show More");
+    $(this).attr("title", "Show More");
   }
   $(this).closest(".view-user-note").find(".note-area").toggleClass("expand-note").toggleClass("note-height");
 });

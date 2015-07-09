@@ -1,0 +1,37 @@
+{
+  "avatar": {
+    "t-avatar": "Avatar",
+    "desc-select-body": "Seleccione una parte del cuerpo para ver imágenes etiquetadas",
+    "t-files-arm": "Archivos Etiquetados con 'brazo'",
+    "t-files-head": "Archivos Etiquetados con 'cabeza'",
+    "t-files-torso": "Archivos Etiquetados con 'torso'",
+    "t-files-leg": "Archivos Etiquetados con 'pierna'"
+  },
+  "circle": {
+    "t-circle": "Círculo de Confianza",
+    "t-cot-add-contact": "Agregar Contacto a tu Círculo de Confianza",
+    "btn-create-contact": "Crear Contacto",
+    "btn-choose-picture": "Elija Una Imagen",
+    "f-fax": "Número de Fax"
+  },
+  "gallery": {
+    "t-gallery-quick": "Galería Vista Rápida"
+  },
+  "glimpse": {
+    "t-glimpse": "Vislumbre"
+  },
+  "boards": {
+    "t-boards-quick": "Pizarras Vista Rápida"
+  },
+  "share": {
+    "t-share": "Compartir Lifespeed",
+    "t-learn-more": "Aprender Más En",
+    "desc-share-with": "¿Tiene amigos o familiares que le encantaría Lifespeed?",
+    "btn-invite": "Invitar"
+  },
+  "tools": {
+    "tt-col-exp": "Colapso / Expandir",
+    "tt-show-more": "Mostrar Más",
+    "tt-hide": "Esconder"
+  }
+}

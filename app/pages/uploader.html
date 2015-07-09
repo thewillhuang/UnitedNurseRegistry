@@ -2,28 +2,100 @@
 <html lang="en">
 
 <head>
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
+
+
+
   <meta charset="UTF-8">
   <title>Lifespeed Uploader</title>
   <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+  <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+  <link href="../plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+  <link href="../plugins/simple-line-icons/css/simple-line-icons.css" rel="stylesheet" type="text/css" />
   <link href="../plugins/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="../uploader.css">
+  <link href="../plugins/bootstrap-switch/dist/css/bootstrap3/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/animate/animate.css" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/jquery-ui-1.10.3.custom.min.css" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/components.css" id="style_components" rel="stylesheet" type="text/css" />
+  <link href="../css/vendor/plugins.css" rel="stylesheet" type="text/css" />
+  <link href="../css/layout.css" rel="stylesheet" type="text/css" />
+  <link href="../css/themes/light2.css" rel="stylesheet" type="text/css" />
+  <link href="../css/custom.css" rel="stylesheet" type="text/css" />
+  <link href="../css/lifespeed.css" rel="stylesheet" type="text/css" />
+  <link href="../css/profile.css" rel="stylesheet" type="text/css" />
+  <link href="../plugins/sweetalert/lib/sweet-alert.css" rel="stylesheet" type="text/css" />
+
+  <link rel="stylesheet" href="../css/uploader.css">
 </head>
 
 <body>
   <!-- header -->
-  <header class="myHeader">
-    <div class="myLogoWrapper">
-      <img class="logo" src="../images/transparent_logo.png" alt="logo" />
+  <div class="page-header navbar navbar-fixed-top">
+    <div class="page-header-inner">
+      <div class="page-logo">
+        <a href="../pages/dashboard.html">
+          <img src="../images/headerlogo.jpg" style="width: 80%; display: inline" alt="logo" class="logo-default" />
+        </a>
+        <div class="menu-toggler sidebar-toggler hide" style="display: inline">
+        </div>
+      </div>
+
+      <a href="javascript:;" id="toggleMenu" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
+
+      <div class="top-menu">
+        <ul class="nav navbar-nav pull-right">
+          <!-- <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+              <i class="icon-bell"></i>
+              <span class="badge"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="external">
+                <h3>
+                  <span class="bold">0 pending</span> notifications</h3>
+                <a href="#">view all</a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="dropdown dropdown-extended dropdown-inbox" id="header_inbox_bar">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+              <i class="icon-envelope"></i>
+              <span class="badge"></span>
+            </a>
+            <ul class="dropdown-menu">
+              <li class="external">
+                <h3>You have
+                  <span class="bold">0 New</span> Messages</h3>
+                <a href="#">view all</a>
+              </li>
+            </ul>
+          </li> -->
+
+<!--           <li class="dropdown dropdown-user">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+    <img id="headerAvatar" class="img-circle" src="../images/ProfilePlaceholder.png" />
+    <span id="userFirstName" class="username username-hide-on-mobile"></span>
+    <i class="fa fa-angle-down"></i>
+  </a>
+</li>
+
+<li>
+  <a href="#" id="logOutButton">Log Out <i class="fa fa-sign-out"></i></a>
+</li> -->
+        </ul>
+        <ul class="nav navbar-nav pull-right" id="reactNavItems">
+        </ul>
+        <ul class="nav navbar-nav pull-right" id="messenging">
+        </ul>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <div class="container-fluid app-background">
+  <div class="container-fluid app-background" style="margin-top: 60px;">
 
-    <div class="row page-title">
-      <div class="col-md-6" id="title">
+    <div class="row page-title-upload ">
+      <div class="col-md-6 lifespeedPink">
         <i class="fa fa-user-md">  Upload Records</i>
       </div>
       <div class="col-md-6" id="reactUrgentTag"></div>

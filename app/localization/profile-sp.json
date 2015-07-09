@@ -1,0 +1,32 @@
+{
+  "form": {
+    "f-fname": "Nombre",
+    "f-mname": "Segundo Nombre",
+    "f-lname":  "Apellido",
+    "f-address": "Calle",
+    "f-address2": "Calle Dos",
+    "f-city": "Ciudad",
+    "f-state": "Estado",
+    "f-zip": "Código Postal",
+    "f-postal-code": "Código Postal",
+    "f-dob": "Fecha de Nacimiento",
+    "f-height": "Altura",
+    "f-weight": "Peso",
+    "f-gender": "Género",
+    "f-male": "Masculino",
+    "f-female": "Femenino",
+    "f-primary-ph": "Teléfono Principal",
+    "f-alt-email": "Correo Electrónico Alternativo",
+    "f-required-field": "Campo Requerido",
+    "f-language": "Idioma"
+  },
+  "links": {
+    "link-profile": "Perfil",
+    "link-current-profile": "Perfil Actual",
+    "f-change-pw": "Cambiar la Contraseña"
+  },
+  "buttons": {
+    "btn-change-pic": "Cambiar Fotografía",
+    "btn-save": "Guarda"
+  }
+}

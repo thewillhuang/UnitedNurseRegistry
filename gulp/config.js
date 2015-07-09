@@ -6,13 +6,22 @@ var gulp = './gulp';
 // var compression = require('compression');
 module.exports = {
   browserSync: {
-    server: {
-      // Serve up our build folder
-      baseDir: dest
-    },
+    proxy: 'http://localhost:3000',
+    port: 8080,
+    // server: {
+    //   // Serve up our build folder
+    //   baseDir: dest
+    // },
     reloadDelay: 1000
       // port: 4004  // use *different* port than above
       // proxy: 'localhost:3000',  // local node app address
+  },
+  nodemon: {
+    // nodemon our expressjs server
+    script: '../server.js',
+    // watch core server file(s) that require server restart on change
+    watch: ['../server.js', '../server/**/*', '../app/**/*'],
+    env: { 'NODE_ENV': 'development' }
   },
   sass: {
     src: src + '/css/**/*.{sass,scss}',

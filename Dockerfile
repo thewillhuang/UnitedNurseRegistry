@@ -26,7 +26,7 @@ ENV NVM_DIR /usr/local/nvm
 # ENV NODE_VERSION v0.12
 # ENV NODE_BRANCH node/v0.12.2
 ENV NODE_VERSION iojs
-ENV NODE_BRANCH io.js/v2.3.0
+ENV NODE_BRANCH io.js/v2.3.3
 
 # Install nvm and use node version defined above.
 RUN git clone https://github.com/creationix/nvm.git $NVM_DIR && cd $NVM_DIR && git checkout `git describe --abbrev=0 --tags`
@@ -50,7 +50,7 @@ EXPOSE $PORT
 
 # cache setup files and run faster.
 #alternatively, you may clone the repo, install it, and upon running the image, git pull updates and install
-RUN git clone https://c278a6a17c3ccf6ef136a4124404b0e0b02a63b9:x-oauth-basic@github.com/lifespeed/lifespeed.web.git /src
+RUN git clone https://7a7f0d9da87f1f218c309dcb903378776923d801:x-oauth-basic@github.com/thewillhuang/teacherfinder.git /src
 
 # add current directory from the host maching to docker WORKDIR
 #   s  dest
@@ -72,4 +72,4 @@ RUN npm install && npm run production
 
 # Alternative method
 # when the image is run, docker will pull from github, and install, using cached files, should be much faster then rebuilding from scrach each time.
-CMD git pull https://c278a6a17c3ccf6ef136a4124404b0e0b02a63b9:x-oauth-basic@github.com/lifespeed/lifespeed.web.git && npm install && npm run production
+CMD git pull https://7a7f0d9da87f1f218c309dcb903378776923d801:x-oauth-basic@github.com/thewillhuang/teacherfinder.git && npm install && npm run production

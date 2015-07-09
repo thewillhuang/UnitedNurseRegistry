@@ -32,6 +32,7 @@
     "gulp-util": "^3.0.6",
     "handlebars": "^3.0.3",
     "hbsfy": "~2.2.1",
+    "jest-cli": "^0.4.15",
     "merge-stream": "^0.1.8",
     "node-bourbon": "^4.2.3",
     "node-neat": "^1.7.2",
@@ -48,9 +49,10 @@
   },
   "scripts": {
     "version": "node -v",
-    "bower": "bower install --config.interactive=false",
+    "test": "cd .. && jest",
+    "bower": "cd .. && bower install --config.interactive=false",
     "build": "cd .. && npm run build",
-    "start": "node server",
+    "start": "cd .. && node server",
     "production": "cd .. && npm run production"
   }
 }

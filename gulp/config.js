@@ -168,7 +168,10 @@ module.exports = {
     opts: {
       spare: true
     },
-    src: dest + '/**/*.html',
+    src: [
+      dest + '/**/*.html',
+      '!' + dest + '/plugins/**/*.html'
+    ],
     dest: dest,
     srcBase: {
       base: dest

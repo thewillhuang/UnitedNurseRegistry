@@ -41,9 +41,6 @@ app.use(koaBody());
 // static file server
 app.use(function *(){
   let opts = { root: path.join(__dirname, build)};
-  console.log('this.url', this.url);
-  console.log('this.path', this.path);
-  console.log('this', this);
   if (this.path === '/') {
     yield send(this, 'index.html', opts);
   } else {

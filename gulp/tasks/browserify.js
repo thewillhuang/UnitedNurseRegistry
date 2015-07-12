@@ -19,7 +19,7 @@ var handleErrors = require('../util/handleErrors');
 var source = require('vinyl-source-stream');
 var config = require('../config').browserify;
 var _ = require('lodash');
-var assign = require('lodash.assign');
+var assign = _.assign;
 // var buffer = require('vinyl-buffer');
 
 var browserifyTask = function(devMode) {

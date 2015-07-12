@@ -41,12 +41,10 @@
     "require-dir": "^0.3.0",
     "vinyl-buffer": "^1.0.0",
     "vinyl-source-stream": "~1.1.0",
-    "watchify": "^3.2.3"
+    "watchify": "^2.4.0"
   },
   "dependencies": {
-    "lodash": "^3.10.0",
-    "lodash.assign": "^3.2.0",
-    "moment": "^2.10.3"
+    "lodash": "^3.10.0"
   },
   "scripts": {
     "version": "node -v",

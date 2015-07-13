@@ -65,6 +65,7 @@ module.exports = {
     dest: dest
   },
   browserify: {
+    dest: dest,
     // A separate bundle will be generated for each
     // bundle config in the list below
     bundleConfigs: [
@@ -84,12 +85,13 @@ module.exports = {
       //   // list of externally available modules to exclude from the bundle
       //   external: ['jquery', 'underscore']
       // },
+      // {
+      //   entries: src + '/js/common.js',
+      //   dest: dest,
+      //   outputName: 'common.js',
+      //   require: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
+      // },
       {
-        entries: src + '/js/common.js',
-        dest: dest,
-        outputName: 'common.js',
-        require: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
-      }, {
         entries: src + '/js/notification.js',
         dest: dest,
         outputName: 'notification.js',

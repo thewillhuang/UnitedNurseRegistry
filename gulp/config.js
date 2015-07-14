@@ -12,7 +12,8 @@ module.exports = {
     //   // Serve up our build folder
     //   baseDir: dest
     // },
-    reloadDelay: 1000
+    reloadDelay: 500,
+    browser: ['google chrome', 'firefox', 'safari']
       // port: 4004  // use *different* port than above
       // proxy: 'localhost:3000',  // local node app address
   },

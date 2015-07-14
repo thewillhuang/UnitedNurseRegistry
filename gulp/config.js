@@ -2,6 +2,7 @@
 var dest = '../public';
 var src = '../app';
 var gulp = './gulp';
+var jsDest = dest + '/js';
 // var neat = require('node-neat').includePaths;
 // var compression = require('compression');
 module.exports = {
@@ -12,8 +13,8 @@ module.exports = {
     //   // Serve up our build folder
     //   baseDir: dest
     // },
-    reloadDelay: 500,
-    browser: ['google chrome', 'firefox', 'safari']
+    reloadDelay: 500
+    // browser: ['google chrome', 'firefox', 'safari']
       // port: 4004  // use *different* port than above
       // proxy: 'localhost:3000',  // local node app address
   },
@@ -26,7 +27,8 @@ module.exports = {
   },
   sass: {
     src: src + '/css/**/*.{sass,scss}',
-    dest: dest + '/css/',
+    dest: dest,
+    base: {base: src},
     settings: {
       sourcemap: true,
       sourceComments: 'map',
@@ -60,7 +62,8 @@ module.exports = {
   },
   images: {
     src: src + '/images/**/*',
-    dest: dest + '/images/'
+    base: {base: src},
+    dest: dest
   },
   markup: {
     src: src + '/**/*.html',
@@ -89,37 +92,37 @@ module.exports = {
       // },
       {
         entries: src + '/js/common.js',
-        dest: dest,
+        dest: jsDest,
         outputName: 'common.js',
         require: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
       },
       {
         entries: src + '/js/notification.js',
-        dest: dest,
+        dest: jsDest,
         outputName: 'notification.js',
         external: ['react', 'jquery', 'moment', 'react-bootstrap', 'socket.io-client', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
       }, {
         entries: src + '/js/activate.js',
-        dest: dest,
+        dest: jsDest,
         outputName: 'activate.js',
         external: ['jquery']
       }, {
         entries: src + '/js/dashboardWidgets.js',
-        dest: dest,
+        dest: jsDest,
         outputName: 'dashboardWidgets.js',
         external: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
       }, {
         entries: src + '/js/uploader.js',
-        dest: dest,
+        dest: jsDest,
         outputName: 'uploader.js'
       }, {
         entries: src + '/js/requestRecords.js',
-        dest: dest,
+        dest: jsDest,
         outputName: 'requestRecords.js',
         external: ['react', 'jquery', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
       }, {
         entries: src + '/js/clientValidate.js',
-        dest: dest,
+        dest: jsDest,
         outputName: 'clientValidate.js',
         external: ['react', 'jquery', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
       }
@@ -152,15 +155,16 @@ module.exports = {
   },
   production: {
     cssSrc: dest + '/css/**/*.css',
-    cssDest: dest + '/css/',
+    cssDest: dest,
+    cssBase: {base: dest},
     jsSrc: [
       // dest + '/*.js'
       dest + '/**/*.js',
       '!' + dest + '/js/components/**/*',
       '!' + dest + '/js/test/**/*',
-      '!' + dest + '/js/vendor/**/*',
+      // '!' + dest + '/js/vendor/**/*',
       '!' + dest + '/js/cors/**/*',
-      '!' + dest + '/plugins/**/*.js'
+      '!' + dest + '/plugins/**/*'
     ],
     jsDest: dest + '/js/',
     jsBase: {

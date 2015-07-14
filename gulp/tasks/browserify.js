@@ -22,6 +22,7 @@ var _ = require('lodash');
 var assign = _.assign;
 var buffer = require('vinyl-buffer');
 var size = require('gulp-size');
+var sourcemaps = require('gulp-sourcemaps');
 
 var browserifyTask = function(devMode) {
 
@@ -59,8 +60,10 @@ var browserifyTask = function(devMode) {
         // desired output filename here.
         .pipe(source(bundleConfig.outputName))
         .pipe(buffer())
+        .pipe(sourcemaps.init({loadMaps: true, debug: true}))
         .pipe(size({showFiles: true}))
         // Specify the output destination
+        .pipe(sourcemaps.write('/'))
         .pipe(gulp.dest(bundleConfig.dest))
         .pipe(browserSync.reload({
           stream: true
@@ -90,7 +93,7 @@ var browserifyTask = function(devMode) {
 
 };
 
-gulp.task('browserify', function() {
+gulp.task('browserify', ['copy'], function() {
   return browserifyTask();
 });
 

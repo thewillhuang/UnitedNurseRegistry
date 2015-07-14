@@ -10,7 +10,7 @@ var changed = require('gulp-changed');
 var size = require('gulp-size');
 
 gulp.task('sass', function() {
-  return gulp.src(config.src)
+  return gulp.src(config.src, config.base)
     .pipe(changed(config.dest)) // Ignore unchanged files
     // Convert sass into css
     .pipe(sass(config.settings))
@@ -26,7 +26,7 @@ gulp.task('sass', function() {
       browsers: ['> 1%']
     }))
     // Write final .map file
-    .pipe(sourcemaps.write(config.dest))
+    .pipe(sourcemaps.write('/'), {sourceMappingURLPrefix: '/css/'})
     // Save the CSS
     .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.dest))

@@ -10,7 +10,7 @@ var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var gutil = require('gulp-util');
 
-gulp.task('uglifyJs', ['browserify'], function() {
+gulp.task('uglifyJs', ['browserify', 'copy'], function() {
   return gulp.src(config.jsSrc, config.jsBase)
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true, debug: true}))

@@ -14,7 +14,7 @@ var opt = {
 };
 
 gulp.task('images', function() {
-  return gulp.src(config.src)
+  return gulp.src(config.src, config.base)
     .pipe(changed(config.dest)) // Ignore unchanged files
     .pipe(imagemin(opt)) // Optimize
     // .pipe(size({showFiles: true}))

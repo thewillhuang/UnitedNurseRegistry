@@ -34,7 +34,8 @@ module.exports = {
         // includePaths: ['styles'].concat(neat)
     },
     sourcemap: {
-      loadMaps: true
+      loadMaps: true,
+      debug: true
     }
   },
   copy: {
@@ -151,15 +152,17 @@ module.exports = {
   },
   production: {
     cssSrc: dest + '/css/**/*.css',
+    cssDest: dest + '/css/',
     jsSrc: [
-      dest + '/*.js'
-      // dest + '/js/**/*.js',
-      // '!' + dest + '/js/components/**/*',
-      // '!' + dest + '/js/test/**/*',
-      // '!' + dest + '/js/vendor/**/*',
-      // '!' + dest + '/js/cors/**/*',
-      // '!' + dest + '/plugins/**/*.js'
+      // dest + '/*.js'
+      dest + '/**/*.js',
+      '!' + dest + '/js/components/**/*',
+      '!' + dest + '/js/test/**/*',
+      '!' + dest + '/js/vendor/**/*',
+      '!' + dest + '/js/cors/**/*',
+      '!' + dest + '/plugins/**/*.js'
     ],
+    jsDest: dest + '/js/',
     jsBase: {
       base: dest
     },

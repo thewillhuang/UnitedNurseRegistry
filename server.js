@@ -4,7 +4,7 @@ const port = process.env.PORT || 3000;
 const send = require('koa-send');
 const logger = require('koa-logger');
 const etag = require('koa-etag');
-const compress = require('koa-compress');
+// const compress = require('koa-compress');
 const build = '/public';
 const conditional = require('koa-conditional-get');
 const path = require('path');
@@ -49,7 +49,7 @@ app.use(function *(){
 });
 
 // compression
-app.use(compress());
+// app.use(compress());
 
 // initialize passport
 app.use(passport.initialize());

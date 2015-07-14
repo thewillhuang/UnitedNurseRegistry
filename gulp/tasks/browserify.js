@@ -22,9 +22,6 @@ var _ = require('lodash');
 var assign = _.assign;
 var buffer = require('vinyl-buffer');
 var size = require('gulp-size');
-var sourcemaps = require('gulp-sourcemaps');
-var gutil = require('gulp-util');
-
 
 var browserifyTask = function(devMode) {
 
@@ -62,11 +59,6 @@ var browserifyTask = function(devMode) {
         // desired output filename here.
         .pipe(source(bundleConfig.outputName))
         .pipe(buffer())
-
-        .pipe(sourcemaps.init({loadMaps: true}))
-
-        .on('error', gutil.log)
-        .pipe(sourcemaps.write(config.dest))
         .pipe(size({showFiles: true}))
         // Specify the output destination
         .pipe(gulp.dest(bundleConfig.dest))

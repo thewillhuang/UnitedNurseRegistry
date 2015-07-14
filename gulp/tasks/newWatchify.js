@@ -22,7 +22,7 @@ function write(name) {
     // filepath in scope as its basename.
     // console.log(name, content);
     return file(name, content, {
-        src: true
+        src: false
       })
       .on('error', gutil.log.bind(gutil, 'Factor-bundle Error'))
       .pipe(buffer())

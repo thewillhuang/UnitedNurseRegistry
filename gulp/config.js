@@ -139,7 +139,8 @@ module.exports = {
       '**/*.json',
       '**/*.ico',
       '**/*.otf',
-      '**/*.ttf'
+      '**/*.ttf',
+      '**/*.map'
     ],
     src: dest + '/**/*',
     srcBase: {

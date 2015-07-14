@@ -20,7 +20,7 @@ var source = require('vinyl-source-stream');
 var config = require('../config').browserify;
 var _ = require('lodash');
 var assign = _.assign;
-// var buffer = require('vinyl-buffer');
+var buffer = require('vinyl-buffer');
 
 var browserifyTask = function(devMode) {
 
@@ -57,7 +57,7 @@ var browserifyTask = function(devMode) {
         // stream gulp compatible. Specify the
         // desired output filename here.
         .pipe(source(bundleConfig.outputName))
-        // .pipe(buffer())
+        .pipe(buffer())
         // Specify the output destination
         .pipe(gulp.dest(bundleConfig.dest))
         .pipe(browserSync.reload({

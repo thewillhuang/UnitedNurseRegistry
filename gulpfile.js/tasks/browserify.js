@@ -45,8 +45,6 @@ var browserifyTask = function(devMode) {
     return b.bundle()
       .pipe(write('common.js'));
   };
-
-  // gulp.task('js', bundle); // so you can run `gulp js` to build the file
   // add transformations here
   // i.e. b.transform(coffeeify);
   b.on('update', bundle); // on any dep update, runs the bundler

@@ -3,8 +3,6 @@ var gulp = require('gulp');
 var config = require('../config/config').production;
 var size = require('gulp-size');
 var uglify = require('gulp-uglify');
-// var gzip = require('gulp-gzip');
-// var source = require('vinyl-source-stream');
 var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
@@ -19,7 +17,4 @@ gulp.task('uglifyJs', ['browserify', 'copy'], function() {
     .pipe(sourcemaps.write('./'))
     .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.dest));
-    // .pipe(gzip({threshold: 1400, gzipOptions: { level: 9 }}))
-    // .pipe(size({showFiles: true}))
-    // .pipe(gulp.dest(config.dest));
 });

@@ -12,10 +12,10 @@ var gutil = require('gulp-util');
 
 gulp.task('uglifyJs', ['browserify', 'copy'], function() {
   return gulp.src(config.jsSrc, config.jsBase)
+    .on('error', gutil.log)
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true, debug: true}))
     .pipe(uglify())
-    .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
     .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.dest));

@@ -3,7 +3,7 @@
 var changed = require('gulp-changed');
 var gulp = require('gulp');
 var imagemin = require('gulp-imagemin');
-var config = require('../config').images;
+var config = require('../config/config').images;
 var browserSync = require('browser-sync');
 var size = require('gulp-size');
 

@@ -1,7 +1,6 @@
 'use strict';
-var dest = '../public';
-var src = '../app';
-var gulp = './gulp';
+var dest = './public';
+var src = './app';
 var jsDest = dest + '/js';
 // important lesson, always just use the base directory for gulp.dest, anything else will fuck up sourcemaps
 // and or other weird settings, giving you useless grief
@@ -22,9 +21,9 @@ module.exports = {
   },
   nodemon: {
     // nodemon our expressjs server
-    script: '../server.js',
+    script: './server.js',
     // watch core server file(s) that require server restart on change
-    watch: ['../server.js', '../server/**/*'],
+    watch: ['./server.js', './server/**/*'],
     env: { 'NODE_ENV': 'development' }
   },
   sass: {
@@ -58,9 +57,6 @@ module.exports = {
   },
   changed: {
     src: src
-  },
-  gulp: {
-    src: gulp + '/**/*'
   },
   images: {
     src: src + '/images/**/*',
@@ -156,7 +152,7 @@ module.exports = {
     dest: dest
   },
   production: {
-    cssSrc: dest + '/**/*.css',
+    cssSrc: [dest + '/**/*.css', '!' + dest + '/plugins/**/*'],
     cssDest: dest,
     cssBase: {base: dest},
     jsSrc: [

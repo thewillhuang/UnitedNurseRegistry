@@ -1,6 +1,6 @@
 'use strict';
 var gulp = require('gulp');
-var config = require('../config').production;
+var config = require('../config/config').production;
 var size = require('gulp-size');
 var uglify = require('gulp-uglify');
 // var gzip = require('gulp-gzip');

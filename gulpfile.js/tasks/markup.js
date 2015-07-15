@@ -1,6 +1,6 @@
 'use strict';
 var gulp = require('gulp');
-var config = require('../config').markup;
+var config = require('../config/config').markup;
 var browserSync = require('browser-sync');
 var changed = require('gulp-changed');
 var size = require('gulp-size');

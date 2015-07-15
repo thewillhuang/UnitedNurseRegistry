@@ -1,10 +1,10 @@
 'use strict';
 var browserSync = require('browser-sync');
 var gulp = require('gulp');
-var config = require('../config').production;
+var config = require('../config/config').production;
 var minifyCSS = require('gulp-minify-css');
 var sourcemaps = require('gulp-sourcemaps');
-var sourcemapConfig = require('../config').sass.sourcemap;
+var sourcemapConfig = require('../config/config').sass.sourcemap;
 var size = require('gulp-size');
 var gutil = require('gulp-util');
 

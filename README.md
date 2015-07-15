@@ -8,11 +8,11 @@ npm install
 
 ##### run development build
 ```sh
-npm run build
+gulp
 ```
 
 ##### run production build
 ```sh
-npm run production
+gulp production
 node server
 ```

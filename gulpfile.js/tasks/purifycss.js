@@ -1,7 +1,7 @@
 // 'use strict';
 // var browserSync = require('browser-sync');
 // var gulp = require('gulp');
-// var config = require('../config');
+// var config = require('../config/config');
 // var size = require('gulp-filesize');
 // var purify = require('gulp-purify');
 //

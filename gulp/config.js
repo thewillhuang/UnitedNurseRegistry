@@ -3,6 +3,8 @@ var dest = '../public';
 var src = '../app';
 var gulp = './gulp';
 var jsDest = dest + '/js';
+// important lesson, always just use the base directory for gulp.dest, anything else will fuck up sourcemaps
+// and or other weird settings, giving you useless grief
 // var neat = require('node-neat').includePaths;
 // var compression = require('compression');
 module.exports = {
@@ -154,7 +156,7 @@ module.exports = {
     dest: dest
   },
   production: {
-    cssSrc: dest + '/css/**/*.css',
+    cssSrc: dest + '/**/*.css',
     cssDest: dest,
     cssBase: {base: dest},
     jsSrc: [
@@ -166,7 +168,7 @@ module.exports = {
       '!' + dest + '/js/cors/**/*',
       '!' + dest + '/plugins/**/*'
     ],
-    jsDest: dest + '/js/',
+    jsDest: dest,
     jsBase: {
       base: dest
     },

@@ -6,12 +6,12 @@ loyalties and more for free.
 npm install
 ```
 
-#### run development build
+##### run development build
 ```sh
 npm run build
 ```
 
-### run production build
+##### run production build
 ```sh
 npm run production
 node server

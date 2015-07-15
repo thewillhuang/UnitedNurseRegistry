@@ -20,34 +20,20 @@ function write(filepath) {
   return concat(function (content) {
     // create new vinyl file from content and use the basename of the
     // filepath in scope as its basename.
-    return file(path.basename(filepath), content, {
-        src: true
-      })
+    return file(path.basename(filepath), content, { src: true })
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(buffer())
-      .pipe(sourcemaps.init({
-        loadMaps: true,
-        debug: true
-      })) // loads map from browserify file
+      .pipe(sourcemaps.init({ loadMaps: true, debug: true })) // loads map from browserify file
       .pipe(sourcemaps.write('/')) // writes .map file
-      .pipe(size({
-        showFiles: true
-      }))
+      .pipe(size({ showFiles: true }))
       .pipe(gulp.dest(dest))
-      .pipe(browserSync.reload({
-        stream: true
-      }));
+      .pipe(browserSync.reload({ stream: true }));
   });
 }
 
 // add custom browserify options here
-var e = config.bundleConfigs.map(function (value) {
-  return value.entries;
-});
-var customOpts = {
-  entries: e,
-  debug: true
-};
+var e = config.bundleConfigs.map(function (value) { return value.entries; });
+var customOpts = { entries: e, debug: true };
 var opts = assign({}, watchify.args, customOpts);
 var b = watchify(browserify(opts));
 

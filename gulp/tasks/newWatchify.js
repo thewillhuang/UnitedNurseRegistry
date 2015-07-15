@@ -14,24 +14,17 @@ var file = require('gulp-file');
 var size = require('gulp-size');
 var config = require('../config').browserify;
 var dest = config.dest;
+var path = require('path');
 // var browserSync = require('browser-sync');
 
-function write(name) {
-  return concat(function (content) {
-    // create new vinyl file from content and use the basename of the
-    // filepath in scope as its basename.
-    // console.log(name, content);
-    return file(name, content, {
-        src: false
-      })
-      .on('error', gutil.log.bind(gutil, 'Factor-bundle Error'))
-      .pipe(buffer())
-      .pipe(sourcemaps.init({ loadMaps: true }))
-      .pipe(sourcemaps.write(dest))
-      .pipe(size({ showFiles: true }))
-      .pipe(gulp.dest(dest));
-      // .pipe(browserSync.reload({ stream: true }));
-  });
+function write (filepath) {
+    return concat(function (content) {
+        // create new vinyl file from content and use the basename of the
+        // filepath in scope as its basename.
+        return file(path.basename(filepath), content, { src: true })
+        // write content to build directory
+        .pipe(gulp.dest(dest));
+    });
 }
 
 // add custom browserify options here
@@ -45,17 +38,16 @@ var b = watchify(browserify(opts));
 // add transformations here
 // i.e. b.transform(coffeeify);
 
-var o = config.bundleConfigs.map(function (value) {
-  return write(value.dest + '/' + value.outputName);
-});
-
 gulp.task('js', bundle); // so you can run `gulp js` to build the file
 b.on('update', bundle); // on any dep update, runs the bundler
 b.on('log', gutil.log); // output build logs to terminal
-b.plugin('factor-bundle', { outputs: o });
+b.on('factor.pipeline', function (id, pipeline) {
+  console.log(id, pipeline);
+  pipeline.get('wrap').push(write(id));
+});
+b.plugin('factor-bundle');
 
 function bundle() {
-  b.plugin('factor-bundle', { outputs: o });
   return b.bundle()
     // log errors if they happen
     .on('error', gutil.log.bind(gutil, 'Browserify Error'))

@@ -31,28 +31,6 @@ var write = function(filepath) {
   });
 };
 
-// // add custom browserify options here
-// var e = config.bundleConfigs.map(function (value) { return value.entries; });
-// var customOpts = { entries: e, debug: true };
-// var opts = assign({}, watchify.args, customOpts);
-// var b = watchify(browserify(opts));
-
-// gulp.task('js', bundle); // so you can run `gulp js` to build the file
-// // add transformations here
-// // i.e. b.transform(coffeeify);
-// b.on('update', bundle); // on any dep update, runs the bundler
-// b.on('log', gutil.log); // output build logs to terminal
-// b.on('factor.pipeline', function (id, pipeline) {
-//   pipeline.get('wrap')
-//     .push(write(id));
-// });
-// b.plugin('factor-bundle');
-//
-// var bundle = function() {
-//   return b.bundle()
-//     .pipe(write('common.js'));
-// };
-
 var browserifyTask = function(devMode) {
   // add custom browserify options here
   var e = config.bundleConfigs.map(function (value) { return value.entries; });

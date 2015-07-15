@@ -132,7 +132,7 @@ module.exports = {
   },
   gzip: {
     opts: {
-      threshold: 1400,
+      threshold: 1000,
       gzipOptions: {
         level: 9
       }

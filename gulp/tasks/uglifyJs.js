@@ -16,7 +16,7 @@ gulp.task('uglifyJs', ['browserify', 'copy'], function() {
     .pipe(sourcemaps.init({loadMaps: true, debug: true}))
     .pipe(uglify())
     .on('error', gutil.log)
-    .pipe(sourcemaps.write('/'))
+    .pipe(sourcemaps.write('./'))
     .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.dest));
     // .pipe(gzip({threshold: 1400, gzipOptions: { level: 9 }}))

@@ -13,7 +13,7 @@ gulp.task('minifyCss', ['sass', 'copy'], function() {
     .pipe(sourcemaps.init(sourcemapConfig))
     .pipe(minifyCSS(config.cssOpt))
     .on('error', gutil.log)
-    .pipe(sourcemaps.write('/'))
+    .pipe(sourcemaps.write('./'))
     .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.cssDest))
     .pipe(browserSync.reload({

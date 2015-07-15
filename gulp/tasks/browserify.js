@@ -5,7 +5,6 @@ var browserify = require('browserify');
 var gulp = require('gulp');
 var buffer = require('vinyl-buffer');
 var gutil = require('gulp-util');
-var sourcemaps = require('gulp-sourcemaps');
 var _ = require('lodash');
 var assign = _.assign;
 var concat = require('concat-stream');
@@ -20,11 +19,9 @@ var write = function(filepath) {
   return concat(function (content) {
     // create new vinyl file from content and use the basename of the
     // filepath in scope as its basename.
-    return file(dest + '/js/' + path.basename(filepath), content, { src: true })
+    return file(path.join(dest, 'js', path.basename(filepath)), content, { src: true })
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(buffer())
-      .pipe(sourcemaps.init({ loadMaps: true, debug: true })) // loads map from browserify file
-      .pipe(sourcemaps.write('/')) // writes .map file
       .pipe(size({ showFiles: true }))
       .pipe(gulp.dest(dest))
       .pipe(browserSync.reload({ stream: true }));

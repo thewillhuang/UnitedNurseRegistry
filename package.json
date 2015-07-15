@@ -1,7 +1,7 @@
 {
-  "name": "Platform",
+  "name": "Swiftcard",
   "version": "0.0.1",
-  "description": "Lifespeed platform",
+  "description": "Swiftcard Loyalies",
   "main": "server.js",
   "browserify": {
     "transform": "babelify"

@@ -19,7 +19,7 @@ var write = function(filepath) {
   return concat(function (content) {
     // create new vinyl file from content and use the basename of the
     // filepath in scope as its basename.
-    return file(path.join(dest, 'js', path.basename(filepath)), content, { src: true })
+    return file(path.join('js', path.basename(filepath)), content, { src: true })
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(buffer())
       .pipe(size({ showFiles: true }))

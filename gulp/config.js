@@ -92,12 +92,12 @@ module.exports = {
       //   // list of externally available modules to exclude from the bundle
       //   external: ['jquery', 'underscore']
       // },
-      {
-        entries: src + '/js/common.js',
-        dest: jsDest,
-        outputName: 'common.js',
-        require: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
-      },
+      // {
+      //   entries: src + '/js/common.js',
+      //   dest: jsDest,
+      //   outputName: 'common.js',
+      //   require: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
+      // },
       {
         entries: src + '/js/notification.js',
         dest: jsDest,

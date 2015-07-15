@@ -16,6 +16,10 @@ gulp.task('nodemon', function (cb) {
         cb();
       }
     })
+    .on('error', function(error) {
+      console.error(error);
+      this.emit('end');
+    })
     .on('restart', function onRestart() {
       // reload connected browsers after a slight delay
       setTimeout(function reload() {

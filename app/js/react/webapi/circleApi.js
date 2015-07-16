@@ -3,7 +3,7 @@ const CircleServerActions = require('../actions/circleServerAction.js');
 const ContactApi = require('./contactsApi.js');
 const AddressApi = require('./addressApi.js');
 const $ = require('jquery');
-
+// console.log('from circle api');
 // takes a payload, url, callback as arguments
 const universalPost = require('./universalPost.js');
 //execute web api which will get activeProfileGuid and add it to payload then make the ajax

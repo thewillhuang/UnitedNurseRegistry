@@ -33,7 +33,11 @@ module.exports = {
       // sourceMapContents: true,
       // outFile: '/',
       // sourceMapEmbed: true,
-      sourceComments: true
+      includePaths: ['vendor', 'themes', '../fonts', 'images'],
+      sourceComments: true,
+      // sourceMap: true,
+      // sourceMapContents: true,
+      // sourceMapEmbed: true
       // imagePath: '/images' // Used by the imlpage-url helper
         // includePaths: ['styles'].concat(neat)
     },

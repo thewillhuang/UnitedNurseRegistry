@@ -14,6 +14,7 @@ var config = require('../config/config').browserify;
 var dest = config.dest;
 var path = require('path');
 var browserSync = require('browser-sync');
+var sourcemaps = require('gulp-sourcemaps');
 
 var write = function(filepath) {
   return concat(function (content) {
@@ -21,8 +22,10 @@ var write = function(filepath) {
     // filepath in scope as its basename.
     return file(path.join(config.baseDir, path.basename(filepath)), content, { src: true })
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+      .pipe(sourcemaps.init({loadMaps: true, debug: true}))
       .pipe(buffer())
       .pipe(size({ showFiles: true }))
+      .pipe(sourcemaps.write())
       .pipe(gulp.dest(dest))
       .pipe(browserSync.reload({ stream: true }));
   });

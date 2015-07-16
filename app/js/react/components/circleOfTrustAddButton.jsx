@@ -9,17 +9,17 @@ const ButtonToolbar = require('react-bootstrap').ButtonToolbar;
 let AddItem = React.createClass({
 
   render() {
-    // console.log('circleAddButton rendered');
-              // <ModalTrigger modal={<CircleAddMember/>}>
-              //   <Button className='pull-left' bsStyle='primary'>Add Member</Button>
-              // </ModalTrigger>
+// console.log('circleAddButton rendered');
+// <ModalTrigger modal={<CircleAddMember/>}>
+//   <Button className='pull-left' bsStyle='primary'>Add Member</Button>
+// </ModalTrigger>
     return (
       <div className='item' style={{borderBottom: '0'}}>
         <div className='item-head'>
           <div className='item-details' style={{width: '90%'}}>
             <ButtonToolbar>
               <ModalTrigger modal={<CircleOfTrustModal/>}>
-                <Button className='pull-left' bsStyle='primary'>Create Contact</Button>
+                <Button bsStyle='primary' className='pull-left'>Create Contact</Button>
               </ModalTrigger>
             </ButtonToolbar>
           </div>

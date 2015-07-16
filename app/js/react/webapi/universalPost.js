@@ -4,7 +4,6 @@ const NOT_PROVIDED = 'A required value was not provided:';
 const GET = 'get';
 const $ = require('jquery');
 
-console.log('hi from post');
 let _que = [];
 let processing = false;
 

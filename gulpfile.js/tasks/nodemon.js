@@ -17,6 +17,7 @@ gulp.task('nodemon', function (cb) {
       }
     })
     .on('crash', function(error) {
+      console.log('server crashed');
       console.error(error);
       this.emit('end');
     })
@@ -24,6 +25,7 @@ gulp.task('nodemon', function (cb) {
       console.log('server stopped');
     })
     .on('restart', function onRestart() {
+      console.log('reload server')
       // reload connected browsers after a slight delay
       setTimeout(function reload() {
         browserSync.reload({

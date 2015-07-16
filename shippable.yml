@@ -9,4 +9,4 @@ services:
   # - mongodb
 
 script:
-  - true
+  - gulp production

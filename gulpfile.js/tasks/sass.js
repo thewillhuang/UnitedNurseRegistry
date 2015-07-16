@@ -6,12 +6,12 @@ var sass = require('gulp-sass');
 var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var config = require('../config/config').sass;
-var changed = require('gulp-changed');
-var size = require('gulp-size');
+// var changed = require('gulp-changed');
+// var size = require('gulp-size');
 
 gulp.task('sass', function() {
   return gulp.src(config.src, config.base)
-    .pipe(changed(config.dest)) // Ignore unchanged files
+    // .pipe(changed(config.src)) // Ignore unchanged files
     // Convert sass into css
     .pipe(sass(config.settings))
     // Catch any SCSS errors and prevent them from crashing gulp
@@ -28,7 +28,7 @@ gulp.task('sass', function() {
     // Write final .map file
     .pipe(sourcemaps.write())
     // Save the CSS
-    .pipe(size({showFiles: true}))
+    // .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({
       stream: true

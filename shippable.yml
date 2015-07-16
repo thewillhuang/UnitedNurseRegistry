@@ -10,3 +10,11 @@ services:
 
 script:
   - gulp production
+
+before_install:
+  - source ~/.nvm/nvm.sh && nvm install $SHIPPABLE_NODE_VERSION
+  - node --version
+  - npm install -g gulp
+
+install:
+  - npm install

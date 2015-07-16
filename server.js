@@ -4,13 +4,13 @@ const port = process.env.PORT || 3000;
 const send = require('koa-send');
 const logger = require('koa-logger');
 const etag = require('koa-etag');
-// const compress = require('koa-compress');
 const build = '/public';
 const conditional = require('koa-conditional-get');
 const path = require('path');
 const app = koa();
-const passport = require('koa-passport');
 const koaBody = require('koa-better-body');
+// const passport = require('koa-passport');
+// const compress = require('koa-compress');
 // const Router = require('koa-router');
 
 // logging
@@ -52,8 +52,8 @@ app.use(function *(){
 // app.use(compress());
 
 // initialize passport
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 app.listen(port);
 console.log('server started on port:', port);

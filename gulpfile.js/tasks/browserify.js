@@ -19,7 +19,7 @@ var write = function(filepath) {
   return concat(function (content) {
     // create new vinyl file from content and use the basename of the
     // filepath in scope as its basename.
-    return file(path.join('js', path.basename(filepath)), content, { src: true })
+    return file(path.join(config.baseDir, path.basename(filepath)), content, { src: true })
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(buffer())
       .pipe(size({ showFiles: true }))
@@ -33,8 +33,8 @@ var browserifyTask = function(devMode) {
   var e = config.bundleConfigs.map(function (value) { return value.entries; });
   var customOpts = { entries: e, debug: true };
   var opts = assign({}, watchify.args, customOpts);
-  var b;
 
+  var b;
   if (devMode) {
     b = watchify(browserify(opts));
   } else {
@@ -45,6 +45,7 @@ var browserifyTask = function(devMode) {
     return b.bundle()
       .pipe(write('common.js'));
   };
+
   // add transformations here
   // i.e. b.transform(coffeeify);
   b.on('update', bundle); // on any dep update, runs the bundler

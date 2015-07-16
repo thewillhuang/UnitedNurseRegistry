@@ -69,6 +69,7 @@ module.exports = {
   },
   browserify: {
     dest: dest,
+    baseDir: 'js',
     // A separate bundle will be generated for each
     // bundle config in the list below
     bundleConfigs: [

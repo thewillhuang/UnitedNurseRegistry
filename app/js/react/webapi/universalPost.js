@@ -9,6 +9,7 @@ let processing = false;
 
 //all ajax gets routed here.
 let universalPost = (payload, url, callback) => {
+  console.log('called');
   // if this is not a get route, put the payload in the que because create and update must be a sync operation.
   if (url.indexOf(GET) === -1) {
     // console.log('create route detected, adding to que');

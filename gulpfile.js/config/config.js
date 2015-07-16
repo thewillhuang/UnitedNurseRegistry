@@ -8,16 +8,14 @@ var jsDest = dest + '/js';
 // var compression = require('compression');
 module.exports = {
   browserSync: {
-    proxy: 'http://localhost:3000',
-    port: 8080,
-    // server: {
-    //   // Serve up our build folder
-    //   baseDir: dest
-    // },
+    // port: 8080,  // use *different* port than above
+    // proxy: 'localhost:3000',  // local node app address
+    server: {
+      // Serve up our build folder
+      baseDir: dest
+    },
     reloadDelay: 500
     // browser: ['google chrome', 'firefox', 'safari']
-      // port: 4004  // use *different* port than above
-      // proxy: 'localhost:3000',  // local node app address
   },
   nodemon: {
     // nodemon our expressjs server

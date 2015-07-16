@@ -11,6 +11,7 @@ var config = require('../config/config').sass;
 
 gulp.task('sass', function() {
   return gulp.src(config.src, config.base)
+    .pipe(sourcemaps.init(config.sourcemap))
     // .pipe(changed(config.dest)) // Ignore unchanged files
     // Convert sass into css
     .pipe(sass(config.settings))
@@ -20,7 +21,6 @@ gulp.task('sass', function() {
       this.emit('end');
     })
     // Load existing internal sourcemap
-    .pipe(sourcemaps.init(config.sourcemap))
     // Autoprefix properties
     .pipe(autoprefixer({
       browsers: ['> 1%']

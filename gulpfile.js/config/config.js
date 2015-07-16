@@ -29,8 +29,12 @@ module.exports = {
     dest: dest,
     base: {base: src},
     settings: {
-      sourceMapEmbed: true,
-      imagePath: '/images' // Used by the imlpage-url helper
+      // sourceMap: true,
+      // sourceMapContents: true,
+      // outFile: '/',
+      // sourceMapEmbed: true,
+      sourceComments: true
+      // imagePath: '/images' // Used by the imlpage-url helper
         // includePaths: ['styles'].concat(neat)
     },
     sourcemap: {

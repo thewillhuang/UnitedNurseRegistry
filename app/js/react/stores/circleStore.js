@@ -4,6 +4,7 @@ const AppDispatcher = require('../dispatcher/appDispatcher.js');
 const EventEmitter = require('events').EventEmitter;
 const CircleConstants = require('../constants/circleOfTrustConstants.js');
 const assign = require('object-assign');
+console.log('test 1');
 
 let CHANGE_EVENT = 'circle';
 

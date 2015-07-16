@@ -4,7 +4,7 @@ const AppDispatcher = require('../dispatcher/appDispatcher.js');
 const EventEmitter = require('events').EventEmitter;
 const notificationConstants = require('../constants/notificationConstants.js');
 const assign = require('object-assign');
-
+console.log('test 2');
 const CHANGE_EVENT = 'notification';
 
 let _notificationItems = [];

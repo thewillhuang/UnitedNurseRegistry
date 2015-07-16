@@ -26,7 +26,7 @@ gulp.task('sass', function() {
       browsers: ['> 1%']
     }))
     // Write final .map file
-    .pipe(sourcemaps.write('./'))
+    .pipe(sourcemaps.write())
     // Save the CSS
     .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.dest))

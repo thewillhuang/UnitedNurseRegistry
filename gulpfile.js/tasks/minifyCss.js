@@ -10,9 +10,9 @@ var gutil = require('gulp-util');
 
 gulp.task('minifyCss', ['sass', 'copy'], function() {
   return gulp.src(config.cssSrc, config.cssBase)
+    .on('error', gutil.log)
     .pipe(sourcemaps.init(sourcemapConfig))
     .pipe(minifyCSS(config.cssOpt))
-    .on('error', gutil.log)
     .pipe(sourcemaps.write('./'))
     // .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.cssDest))

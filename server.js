@@ -9,8 +9,8 @@ const conditional = require('koa-conditional-get');
 const path = require('path');
 const app = koa();
 const koaBody = require('koa-better-body');
+const compress = require('koa-compress');
 // const passport = require('koa-passport');
-// const compress = require('koa-compress');
 // const Router = require('koa-router');
 
 // logging
@@ -49,11 +49,11 @@ app.use(function *(){
 });
 
 // compression
-// app.use(compress());
+app.use(compress());
 
 // initialize passport
 // app.use(passport.initialize());
 // app.use(passport.session());
 
 app.listen(port);
-console.log('server started on port:', port);
+console.log('server listening on port:', port);

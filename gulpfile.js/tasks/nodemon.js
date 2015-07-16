@@ -16,9 +16,12 @@ gulp.task('nodemon', function (cb) {
         cb();
       }
     })
-    .on('error', function(error) {
+    .on('crash', function(error) {
       console.error(error);
       this.emit('end');
+    })
+    .on('exit', function(){
+      console.log('server stopped');
     })
     .on('restart', function onRestart() {
       // reload connected browsers after a slight delay

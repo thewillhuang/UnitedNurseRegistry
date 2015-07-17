@@ -3,8 +3,7 @@ language: node_js
 
 # # version numbers, testing against two versions of node
 node_js:
-  - node
-  - iojs
+  - v0.12.7
 
 services:
   # - mongodb

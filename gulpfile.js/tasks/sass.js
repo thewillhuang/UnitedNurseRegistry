@@ -11,10 +11,10 @@ var config = require('../config/config').sass;
 
 gulp.task('sass', function() {
   return gulp.src(config.src, config.base)
-    .pipe(sourcemaps.init(config.sourcemap))
     // .pipe(changed(config.dest)) // Ignore unchanged files
     // Convert sass into css
     .pipe(sass(config.settings))
+    .pipe(sourcemaps.init(config.sourcemap))
     // Catch any SCSS errors and prevent them from crashing gulp
     .on('error', function(error) {
       console.error(error);

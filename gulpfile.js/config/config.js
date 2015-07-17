@@ -11,13 +11,13 @@ module.exports = {
   browserSync: {
     // port: 8080,  // use *different* port than above
     // proxy: 'localhost:3000',  // local node app address
+    // browser: ['google chrome', 'firefox', 'safari']
     server: {
       // Serve up our build folder
       baseDir: dest,
       middleware: [morgan('dev')]
     },
     reloadDelay: 500
-    // browser: ['google chrome', 'firefox', 'safari']
   },
   nodemon: {
     // nodemon our expressjs server

@@ -5,7 +5,7 @@ var browserSync = require('browser-sync');
 var changed = require('gulp-changed');
 // var size = require('gulp-size');
 
-gulp.task('copy', function() {
+gulp.task('copy', ['clean'], function() {
   return gulp.src(config.copy.src, config.copy.base)
     .pipe(changed(config.copy.dest)) // Ignore unchanged files
     .pipe(gulp.dest(config.copy.dest))

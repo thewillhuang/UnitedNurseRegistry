@@ -9,12 +9,12 @@ var config = require('../config/config').sass;
 // var changed = require('gulp-changed');
 // var size = require('gulp-size');
 
-gulp.task('sass', function() {
+gulp.task('sass', ['clean'], function() {
   return gulp.src(config.src, config.base)
     // .pipe(changed(config.dest)) // Ignore unchanged files
     // Convert sass into css
     .pipe(sass(config.settings))
-    .pipe(sourcemaps.init(config.sourcemap))
+    .pipe(sourcemaps.init({debug: true}))
     // Catch any SCSS errors and prevent them from crashing gulp
     .on('error', function(error) {
       console.error(error);

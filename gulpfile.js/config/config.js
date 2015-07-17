@@ -48,6 +48,9 @@ module.exports = {
       debug: true
     }
   },
+  clean: {
+    src: [dest + '/**/*.{js,css,map}']
+  },
   copy: {
     src: [
       src + '/**/*',

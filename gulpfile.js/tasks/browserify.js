@@ -63,7 +63,7 @@ var browserifyTask = function(devMode) {
 
 };
 
-gulp.task('browserify', ['copy'], function() {
+gulp.task('browserify', ['clean', 'copy'], function() {
   return browserifyTask();
 });
 

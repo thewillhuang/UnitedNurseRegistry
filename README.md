@@ -15,7 +15,7 @@ gulp
 
 ##### run production build
 ```sh
-gulp production
+gulp prod
 node server
 ```
 

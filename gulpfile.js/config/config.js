@@ -6,13 +6,15 @@ var jsDest = dest + '/js';
 // and or other weird settings, giving you useless grief
 // var neat = require('node-neat').includePaths;
 // var compression = require('compression');
+var morgan = require('morgan');
 module.exports = {
   browserSync: {
     // port: 8080,  // use *different* port than above
     // proxy: 'localhost:3000',  // local node app address
     server: {
       // Serve up our build folder
-      baseDir: dest
+      baseDir: dest,
+      middleware: [morgan('dev')]
     },
     reloadDelay: 500
     // browser: ['google chrome', 'firefox', 'safari']

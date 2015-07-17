@@ -49,7 +49,7 @@ module.exports = {
     }
   },
   clean: {
-    src: [dest + '/**/*.{js,css,map}']
+    src: [dest + '/**/*.{js,css,map,gz}']
   },
   copy: {
     src: [

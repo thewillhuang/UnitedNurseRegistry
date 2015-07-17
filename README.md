@@ -1,4 +1,5 @@
-https://api.shippable.com/projects/55a6ef89edd7f2c05270ba75/badge/master
+![Build Status][logo]
+[logo]: https://api.shippable.com/projects/55a6ef89edd7f2c05270ba75/badge/master
 # swiftcard
 loyalties and more for free.
 

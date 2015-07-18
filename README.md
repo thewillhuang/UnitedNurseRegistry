@@ -23,6 +23,6 @@ node server
 use gulper, it is nodemon but for gulp, it replaces gulp and gives you a restart ability by watching your gulp task changes.
 ```sh
 npm i -g gulper
-gulper production
+gulper prod
 gulper
 ```

@@ -1,0 +1,31 @@
+user table
+1. first name
+2. last name
+3. rn license table
+4. background-check data link
+5. location geohash
+6. work history table
+7. profile pic table
+8. user guid
+9. schedule table
+10. salary table
+11. rating table
+12.
+
+rn license table
+1. userid
+2. license state
+3. license number
+
+work history table
+1. userid
+2. location title
+3. address
+4. reference phone number 1
+5. reference phone number 2
+6. work length
+
+profile pic table
+1. userid
+2. profile pic thumbnail url link
+3. profile pic bigger url link

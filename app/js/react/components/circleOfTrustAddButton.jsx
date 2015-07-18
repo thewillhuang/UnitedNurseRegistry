@@ -1,3 +1,4 @@
+/* @flow */
 'use strict';
 const React = require('react');
 const Button = require('react-bootstrap').Button;

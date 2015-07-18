@@ -9,7 +9,7 @@ services:
   # - mongodb
 
 script:
-  - gulp production
+  - gulp prod
 
 before_install:
   - source ~/.nvm/nvm.sh && nvm install $SHIPPABLE_NODE_VERSION

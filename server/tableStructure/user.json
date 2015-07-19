@@ -20,21 +20,20 @@ rn license table
 
 work history table
 1. user_uuid
-2. work length
-3. resource_uuid
+2. facility_uuid
+3. work length
 
 phone number table
-1. resource_uuid
+1. user_uuid || address_uuid
 2. phone title
 3. phone number
 
 address table
-1. resource_uuid
+1. address_uuid
 2. address
 3. city
 4. zip
 5. state
-6. title
 
 profile pic table
 1. user_uuid
@@ -42,8 +41,8 @@ profile pic table
 3. profile pic bigger url link
 
 location geohash table
-1. geohash int
-2. resource_uuid
+1. user_uuid || address_uuid
+2. geohash int
 
 schedule table
 1. user_uuid
@@ -52,15 +51,14 @@ schedule table
 4. shift duration
 
 rating table
-1. user_uuid
+1. facility_uuid || user_uuid
 2. rating
-3. hospital_uuid
-5. date
-6. author
+3. date
+4. author_uuid (facility_uuid || user_uuid)
 
 comment table
 1. comment_uuid
-2. resource_uuid
+2. user_uuid || facility_uuid
 3. author_uuid
 4. comment date
 5. comment
@@ -69,14 +67,15 @@ comment tree
 1. parent_comment_uuid
 2. child_comment_uuid
 
-hospital table
-1. hospital_uuid
-2. hospital name
+facility table
+1. facility_uuid
+2. address_uuid
+3. facility name
 
-hospital units table
-1. hospital_uuid
+facility units table
+1. facility_uuid
 2. specialty_uuid
 
-hospital units list table
+facility units list table
 1. specialty_uuid
-2. hospital specialties
+2. facility specialties

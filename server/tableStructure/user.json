@@ -6,6 +6,11 @@ user table
 5. any government photo document url link
 6. sex
 7. min money per shift
+8. email
+
+user password
+1. user_id
+2. bcrypt hash
 
 rn license table
 1. user_id
@@ -69,4 +74,8 @@ hospital table
 
 hospital units table
 1. hospital_id
+2. specialty_id
+
+hospital units list table
+1. specialty_id
 2. hospital specialties

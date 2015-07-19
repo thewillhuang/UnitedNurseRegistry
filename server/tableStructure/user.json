@@ -1,5 +1,5 @@
 user table
-1. user_uuid
+1. user_uuid (primary key)
 2. first name
 3. last name
 4. background-check url link
@@ -29,7 +29,7 @@ phone number table
 3. phone number
 
 address table
-1. address_uuid
+1. address_uuid (primary key)
 2. address
 3. city
 4. zip
@@ -57,7 +57,7 @@ rating table
 4. author_uuid (facility_uuid || user_uuid)
 
 comment table
-1. comment_uuid
+1. comment_uuid (primary key)
 2. user_uuid || facility_uuid
 3. author_uuid
 4. comment date
@@ -68,7 +68,7 @@ comment tree
 2. child_comment_uuid
 
 facility table
-1. facility_uuid
+1. facility_uuid (primary key)
 2. address_uuid
 3. facility name
 
@@ -77,5 +77,5 @@ facility units table
 2. specialty_uuid
 
 facility units list table
-1. specialty_uuid
+1. specialty_uuid (primary key)
 2. facility specialties

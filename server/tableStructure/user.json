@@ -1,55 +1,72 @@
 user table
-1. userid
+1. user_id
 2. first name
 3. last name
 4. background-check url link
 5. any government photo document url link
 6. sex
-7. min salary per shift
+7. min money per shift
 
 rn license table
-1. userid
+1. user_id
 2. license state
 3. license number
 4. license status
 
 work history table
-1. userid
-2. location title
-3. address
-4. reference phone number 1
-5. reference phone number 2
-6. work length
+1. user_id
+2. work length
+3. resource_id
+
+phone number table
+1. resource_id
+2. phone title
+3. phone number
+
+address table
+1. resource_id
+2. address
+3. city
+4. zip
+5. state
+6. title
 
 profile pic table
-1. userid
+1. user_id
 2. profile pic thumbnail url link
 3. profile pic bigger url link
 
 location geohash table
 1. geohash int
-2. userid
+2. resource_id
 
 schedule table
-1. userid
-2. shift (day or night)
+1. user_id
+2. shift (7 or 19)
 3. availiable days
 
-user rating table
-1. userid
-2. rating 1-5 stars
-3. rater id
-4. hospital id
+rating table
+1. user_id
+2. rating
+3. hospital_id
+5. date
+6. author
 
-hospital rating table
-1. hospitalid
-2. rating 1-5 stars
-3. rater id
-4. hospital id
+comment table
+1. comment_id
+2. resource_id
+3. author_id
+4. comment date
+5. comment
+
+comment tree
+1. parent_comment_id
+2. child_comment_id
 
 hospital table
-1. hospital id
+1. hospital_id
 2. hospital name
-3. hospital address
-4. hospital geohash
-5. hospital phone number
+
+hospital units table
+1. hospital_id
+2. hospital specialties

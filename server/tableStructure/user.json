@@ -1,81 +1,108 @@
-user table
-1. user_uuid (primary key)
+User table
+1. user_id (primary key)
 2. first name
 3. last name
 4. background-check url link
 5. any government photo document url link
 6. gender
 7. min money per shift
+8. profile pic thumbnail url link
+9. profile pic bigger url link
+10. bcrypt hash
+11. user email
 
-accounts table
-1. user_uuid
-2. bcrypt hash
-3. user email
+one to many
+user to phone
+UserPhone table
+1. user_id (foreign key)
+2. phone_id (foreign key)
 
-rn license table
-1. user_uuid
+one to  many
+user to license
+License table
+1. user_id (foreign key)
 2. license state
 3. license number
 4. license status
 
-work history table
-1. user_uuid
-2. facility_uuid
+one to many
+user to work history
+UserWorkHistory table
+1. user_id (foreign key)
+2. facility_id (foreign key)
 3. work length
 
-phone number table
-1. user_uuid || address_uuid
-2. phone title
+many         to many
+user/facility to phone
+Phone table
+1. phone_id (primary key)
 3. phone number
 
-address table
-1. address_uuid (primary key)
+many to many
+Address table
+1. address_id (primary key)
 2. address
-3. city
-4. zip
-5. state
+3. address 2
+4. city
+5. zip
+6. state
 
-profile pic table
-1. user_uuid
-2. profile pic thumbnail url link
-3. profile pic bigger url link
-
-location geohash table
-1. user_uuid || address_uuid
-2. geohash int
-
-schedule table
-1. user_uuid
+User Schedule table
+1. user_id (foreign key)
 2. shift (7 or 19)
 3. availiable days
 4. shift duration
 
+Geohash table
+1. geohash_id (primary key)
+2. geohash int
+
+UserGeohash table
+1. user_id (foreign key)
+2. geohash_id (foreign key)
+
+AddressGeohash table
+1. geohash_id (foreign key)
+2. address_id (foreign key)
+
 rating table
-1. facility_uuid || user_uuid
+1. rating id (primary key)
 2. rating
 3. date
-4. author_uuid (facility_uuid || user_uuid)
 
-comment table
-1. comment_uuid (primary key)
-2. user_uuid || facility_uuid
-3. author_uuid
-4. comment date
+UserRating table
+1. user id (foreign key)
+2. rating id (foreign key)
+
+FacilityRating table
+1. facility id (foreign key)
+2. rating id (foreign key)
+
+Comment table
+1. comment_id (primary key)
+2. resource_id (foreign key)
+3. author_id (foreign key)
+4. comment datetime
 5. comment
 
-comment tree
-1. parent_comment_uuid
-2. child_comment_uuid
+CommentTree table
+1. parent_comment_id
+2. child_comment_id
 
-facility table
-1. facility_uuid (primary key)
-2. address_uuid
+FacilityPhone table
+1. facility_id (foreign key)
+2. phone_id (foreign key)
+
+Facility table
+1. facility_id (primary key)
+2. address_id (foreign key)
 3. facility name
+4. phone_id (foreign key)
 
-facility units table
-1. facility_uuid
-2. specialty_uuid
+FacilityUnits table
+1. facility_id (foreign key)
+2. specialty_id (foreign key)
 
-facility units list table
-1. specialty_uuid (primary key)
+Speciality table
+1. specialty_id  (primary key)
 2. facility specialties

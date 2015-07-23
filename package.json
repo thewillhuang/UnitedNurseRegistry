@@ -91,7 +91,8 @@
     "version": "node -v",
     "bower": "bower install --config.interactive=false",
     "start": "node server",
-    "test": "jest"
+    "test": "jest",
+    "mysql": "mysql -u root -p '' && mysql dbsetup.sql"
   },
   "repository": {
     "type": "git",

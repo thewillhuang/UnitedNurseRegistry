@@ -516,33 +516,6 @@ CREATE TABLE IF NOT EXISTS `UNRdb`.`FacilityAddress` (
 ENGINE = InnoDB;
 
 
--- -----------------------------------------------------
--- Table `UNRdb`.`Shift`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `UNRdb`.`Shift` ;
-
-CREATE TABLE IF NOT EXISTS `UNRdb`.`Shift` (
-  `shiftID` BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '',
-  `shiftHours` TINYINT(2) UNSIGNED NOT NULL COMMENT '',
-  `shiftDay` DATETIME NOT NULL COMMENT '',
-  UNIQUE INDEX `shiftID_UNIQUE` (`shiftID` ASC)  COMMENT '',
-  PRIMARY KEY (`shiftID`)  COMMENT '')
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `UNRdb`.`ShiftDetails`
--- -----------------------------------------------------
-DROP TABLE IF EXISTS `UNRdb`.`ShiftDetails` ;
-
-CREATE TABLE IF NOT EXISTS `UNRdb`.`ShiftDetails` (
-  `shiftHours` TINYINT(2) UNSIGNED NOT NULL COMMENT '',
-  `shiftType` VARCHAR(45) NOT NULL COMMENT '',
-  UNIQUE INDEX `shiftType_UNIQUE` (`shiftType` ASC)  COMMENT '',
-  UNIQUE INDEX `shiftHours_UNIQUE` (`shiftHours` ASC)  COMMENT '')
-ENGINE = InnoDB;
-
-
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

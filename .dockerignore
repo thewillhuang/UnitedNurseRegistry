@@ -14,3 +14,18 @@ Dockerfile
 .git
 .gitignore
 README.md
+
+.DS_Store
+.sass-cache
+build
+Desktop.ini
+node_modules
+bower_components
+**/*.log
+public
+plugins
+
+# Elastic Beanstalk Files
+.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml

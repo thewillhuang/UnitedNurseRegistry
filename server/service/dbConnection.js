@@ -6,12 +6,10 @@ const options = {
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'unrdb'
+  database: 'unrdb',
+  multipleStatements: true
 };
 const pool = mysql.createPool(options);
 const p = wrapper(pool);
 
-let client = {};
-client.pool = pool;
-client.p = p;
-module.exports = client;
+module.exports = p;

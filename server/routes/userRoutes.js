@@ -8,6 +8,16 @@ const client = require('../service/dbConnection');
 
 module.exports = function (app) {
   user
+    .post('/', function* () {
+      let requestJson = this.request.body.fields;
+      let q = {};
+      q.sql = 'INSERT INTO ?? SET ?';
+      q.values = ['user', requestJson];
+      this.body = yield client.query(q).catch(function(err){
+        console.log(err);
+      });
+    })
+
     .get('/:userID', function* () {
       let userID = this.params.userID;
       let q = {};
@@ -38,18 +48,7 @@ module.exports = function (app) {
       this.body = yield client.query(q).catch(function(err){
         console.log(err);
       });
-    })
-
-    .post('/', function* () {
-      let requestJson = this.request.body.fields;
-      let q = {};
-      q.sql = 'INSERT INTO ?? SET ?';
-      q.values = ['user', requestJson];
-      this.body = yield client.query(q).catch(function(err){
-        console.log(err);
-      });
     });
 
-  app.use(user.routes())
-    .use(user.allowedMethods());
+  app.use(user.routes()).use(user.allowedMethods());
 };

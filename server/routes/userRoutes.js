@@ -8,8 +8,6 @@ const client = require('../service/dbConnection');
 module.exports = function (app) {
   user
     .get('/:userId', function* () {
-      // let data = yield client.query('SELECT 1+1');
-      // this.body = data;
       this.body = yield client.query('SELECT 1+1').catch(function(err){
         console.log(err);
       });

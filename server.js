@@ -22,25 +22,21 @@ app.use(conditional());
 // enable proxy through another server
 // app.proxy = true;
 
-// add etag for cacheing
-app.use(etag());
-
 // body json parsing
 app.use(koaBody());
 
+
 // routers
-// let web = new Router();
-//
-// web.get('/', function *(){
-//   let opts = { root: path.join(__dirname, build)};
-//   yield send(this, 'index.html', opts);
-// });
-//
-// app.use(web.routes()).use(web.allowedMethods());
+require('./server/routes/userRoutes.js')(app);
+
+// add etag for cacheing
+app.use(etag());
 
 // static file server
-app.use(function *(){
-  let opts = { root: path.join(__dirname, build)};
+app.use(function* () {
+  let opts = {
+    root: path.join(__dirname, build)
+  };
   if (this.path === '/') {
     yield send(this, 'index.html', opts);
   } else {

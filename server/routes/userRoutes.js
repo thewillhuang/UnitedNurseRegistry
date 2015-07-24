@@ -20,13 +20,3 @@ module.exports = function (app) {
   app.use(user.routes())
     .use(user.allowedMethods());
 };
-
-
-// co(function* () {
-//   var result = yield Promise.resolve(true);
-//   return result;
-// }).then(function (value) {
-//   console.log(value);
-// }, function (err) {
-//   console.error(err.stack);
-// });

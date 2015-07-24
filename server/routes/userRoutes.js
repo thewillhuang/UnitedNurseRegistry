@@ -11,8 +11,30 @@ module.exports = function (app) {
     .get('/:userID', function* () {
       let userID = this.params.userID;
       let q = {};
-      q.sql = 'SELECT * FROM `user` WHERE userID = ?';
-      q.values = [userID];
+      q.sql = 'SELECT * FROM ?? WHERE userID = ?';
+      q.values = ['user', userID];
+      this.body = yield client.query(q).catch(function(err){
+        console.log(err);
+      });
+    })
+
+    .put('/:userID', function* (){
+      let requestJson = this.request.body.fields;
+      let userID = this.params.userID;
+      let q = {};
+      q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+      q.values = ['user', requestJson, 'userID', userID];
+      console.log(q);
+      this.body = yield client.query(q).catch(function(err){
+        console.log(err);
+      });
+    })
+
+    .delete('/:userID', function* (){
+      let userID = this.params.userID;
+      let q = {};
+      q.sql = 'DELETE from ?? WHERE ?? = ?';
+      q.values = ['user', 'userID', userID];
       this.body = yield client.query(q).catch(function(err){
         console.log(err);
       });
@@ -21,14 +43,11 @@ module.exports = function (app) {
     .post('/', function* () {
       let requestJson = this.request.body.fields;
       let q = {};
-      q.sql = 'INSERT INTO `user` SET ?; SELECT LAST_INSERT_ID();';
-      q.values = [requestJson];
-      let result = yield client.query(q).catch(function(err){
+      q.sql = 'INSERT INTO ?? SET ?';
+      q.values = ['user', requestJson];
+      this.body = yield client.query(q).catch(function(err){
         console.log(err);
       });
-      let res = {};
-      res.userID = result[1][0]['LAST_INSERT_ID()'];
-      this.body = res;
     });
 
   app.use(user.routes())

@@ -11,7 +11,6 @@ const app = koa();
 const koaBody = require('koa-better-body');
 const compress = require('koa-compress');
 // const passport = require('koa-passport');
-// const Router = require('koa-router');
 
 // logging
 app.use(logger());
@@ -20,11 +19,17 @@ app.use(logger());
 app.use(conditional());
 
 // enable proxy through another server
-// app.proxy = true;
+app.proxy = true;
 
 // body json parsing
 app.use(koaBody());
 
+// initialize passport
+// app.use(passport.initialize());
+// app.use(passport.session());
+
+// compression
+app.use(compress());
 
 // routers
 require('./server/routes/userRoutes.js')(app);
@@ -44,12 +49,7 @@ app.use(function* () {
   }
 });
 
-// compression
-app.use(compress());
 
-// initialize passport
-// app.use(passport.initialize());
-// app.use(passport.session());
 
 app.listen(port);
 console.log('server listening on port:', port);

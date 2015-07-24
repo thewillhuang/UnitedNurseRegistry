@@ -8,6 +8,8 @@ const client = require('../service/dbConnection');
 
 module.exports = function (app) {
   user
+
+    //create user
     .post('/', function* () {
       let requestJson = this.request.body.fields;
       let q = {};
@@ -18,6 +20,7 @@ module.exports = function (app) {
       });
     })
 
+    //grab user based on id
     .get('/:userID', function* () {
       let userID = this.params.userID;
       let q = {};
@@ -28,18 +31,19 @@ module.exports = function (app) {
       });
     })
 
+    // update user data
     .put('/:userID', function* (){
       let requestJson = this.request.body.fields;
       let userID = this.params.userID;
       let q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
       q.values = ['user', requestJson, 'userID', userID];
-      console.log(q);
       this.body = yield client.query(q).catch(function(err){
         console.log(err);
       });
     })
 
+    // delete user by id
     .delete('/:userID', function* (){
       let userID = this.params.userID;
       let q = {};

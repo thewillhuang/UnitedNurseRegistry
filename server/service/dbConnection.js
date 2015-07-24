@@ -11,4 +11,7 @@ const options = {
 const pool = mysql.createPool(options);
 const p = wrapper(pool);
 
-module.exports = p;
+let client = {};
+client.pool = pool;
+client.p = p;
+module.exports = client;

@@ -8,9 +8,10 @@ const client = require('../service/dbConnection');
 module.exports = function (app) {
   user
     .get('/:userId', function* () {
-      this.body = yield client.query('SELECT 1+1').catch(function(err){
+      this.body = yield client.p.query('SELECT 1+1').catch(function(err){
         console.log(err);
       });
+      client.pool.end();
     })
 
     .post('/:id', function* () {

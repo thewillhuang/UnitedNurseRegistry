@@ -2,9 +2,9 @@
 const pool = require('../service/dbConnection');
 // a function that takes query parameters
 const query = function(q) {
-  // makes a async connection for a pool.
+  // makes a db connection for a pool.
   return pool.getConnectionAsync().then(function(connection){
-    // grabs the db
+    // grabs the connection
     return connection.queryAsync(q).spread(function(rows){
       // release the connection after the query
       connection.release();

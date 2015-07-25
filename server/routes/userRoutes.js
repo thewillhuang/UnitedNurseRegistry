@@ -6,7 +6,6 @@ const user = new Router({
 });
 const query = require('../service/query');
 
-
 module.exports = function (app) {
   user
   // post routes ---------------
@@ -89,7 +88,7 @@ module.exports = function (app) {
   .get('/email/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'select ?? from ?? ?? join ?? ?? on (?? = ??) where ?? = ?';
+    q.sql = 'SELECT ?? FROM ?? AS ?? JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
     q.values = ['e.emailAddress', 'email', 'e', 'useremail', 'ue', 'ue.fk_UserEmail_emailID', 'e.emailID', 'ue.fk_UserEmail_userID', userID];
     this.body = yield query(q);
   })
@@ -98,7 +97,7 @@ module.exports = function (app) {
   .get('/phone/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'select ?? from ?? ?? join ?? ?? on (?? = ??) where ?? = ?';
+    q.sql = 'SELECT ?? FROM ?? AS ?? JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
     q.values = ['p.*', 'phone', 'p', 'userphone', 'up', 'up.fk_UserPhone_phoneID', 'p.phoneID', 'ue.fk_UserPhone_userID', userID];
     this.body = yield query(q);
   })

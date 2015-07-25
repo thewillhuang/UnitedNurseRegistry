@@ -28,9 +28,6 @@ app.use(koaBody());
 // app.use(passport.initialize());
 // app.use(passport.session());
 
-// compression
-app.use(compress());
-
 // routers
 require('./server/routes/userRoutes.js')(app);
 
@@ -49,7 +46,8 @@ app.use(function* () {
   }
 });
 
-
+// compression
+app.use(compress());
 
 app.listen(port);
 console.log('server listening on port:', port);

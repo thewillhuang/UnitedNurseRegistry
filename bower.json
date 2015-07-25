@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "homepage": "https://github.com/lifespeed/lifespeed.web",
   "authors": [
-    "Elwend <elizabeth.wendling@gmail.com>"
+    "william <will.h86@gmail.com>"
   ],
   "description": "Lifespeed platform",
   "license": "MIT",
@@ -19,6 +19,7 @@
   "dependencies": {
     "font-awesome": "*",
     "simple-line-icons": "*",
-    "vanilla-masker": "*"
+    "vanilla-masker": "*",
+    "bootstrap": "~3.3.5"
   }
 }

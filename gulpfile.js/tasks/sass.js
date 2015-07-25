@@ -7,7 +7,7 @@ var autoprefixer = require('gulp-autoprefixer');
 var sourcemaps = require('gulp-sourcemaps');
 var config = require('../config/config').sass;
 // var changed = require('gulp-changed');
-// var size = require('gulp-size');
+var size = require('gulp-size');
 
 gulp.task('sass', ['clean'], function() {
   return gulp.src(config.src, config.base)
@@ -28,7 +28,7 @@ gulp.task('sass', ['clean'], function() {
     // Write final .map file
     .pipe(sourcemaps.write())
     // Save the CSS
-    // .pipe(size({showFiles: true}))
+    .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({
       stream: true

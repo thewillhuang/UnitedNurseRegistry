@@ -1,14 +1,15 @@
 'use strict';
 
-const wrapper = require('co-mysql');
+const Promise = require('bluebird');
 const mysql = require('mysql');
 const options = {
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'unrdb'
+  database: 'unrdb',
+  multipleStatements: true
 };
+Promise.promisifyAll(require('mysql/lib/Pool').prototype);
+Promise.promisifyAll(require('mysql/lib/Connection').prototype);
 const pool = mysql.createPool(options);
-const p = wrapper(pool);
-
-module.exports = p;
+module.exports = pool;

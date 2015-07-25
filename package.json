@@ -7,6 +7,7 @@
     "transform": "babelify"
   },
   "dependencies": {
+    "bluebird": "^2.9.34",
     "debug": "^2.2.0",
     "flux": "^2.0.3",
     "jquery": "^2.1.4",

@@ -8,6 +8,7 @@ var changed = require('gulp-changed');
 gulp.task('copy', ['clean'], function() {
   return gulp.src(config.copy.src, config.copy.base)
     .pipe(changed(config.copy.dest)) // Ignore unchanged files
+    // .pipe(size({showFiles: true}))
     .pipe(gulp.dest(config.copy.dest))
     .pipe(browserSync.reload({
       stream: true

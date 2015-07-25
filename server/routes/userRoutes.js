@@ -35,7 +35,7 @@ module.exports = function (app) {
     let q2 = {};
     q2.sql = 'INSERT INTO ?? SET ?;';
     q2.values = ['useremail', userEmailJson];
-    this.body = yield query(q);
+    this.body = yield query(q2);
   })
 
   //create new user phone with user id
@@ -53,7 +53,7 @@ module.exports = function (app) {
     let q2 = {};
     q2.sql = 'INSERT INTO ?? SET ?';
     q2.values = ['userphone', userPhoneJson];
-    this.body = yield query(q);
+    this.body = yield query(q2);
   })
 
   //create new user address with user id
@@ -71,7 +71,7 @@ module.exports = function (app) {
     let q2 = {};
     q2.sql = 'INSERT INTO ?? SET ?';
     q2.values = ['Address', userAddressJson];
-    this.body = yield query(q);
+    this.body = yield query(q2);
   })
 
   // get routes ---------------

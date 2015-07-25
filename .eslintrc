@@ -5,6 +5,7 @@
     "node": true
   },
   "rules": {
+    "camelcase": [2, {"properties": "never"}],
     "quotes": [2, "single"],
     "eol-last": [0],
     "guard-for-in": 1,

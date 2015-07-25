@@ -6,8 +6,8 @@ const options = {
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'unrdb',
-  multipleStatements: true
+  database: 'unrdb'
+  // multipleStatements: true
 };
 Promise.promisifyAll(require('mysql/lib/Pool').prototype);
 Promise.promisifyAll(require('mysql/lib/Connection').prototype);

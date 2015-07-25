@@ -128,8 +128,9 @@ module.exports = function (app) {
   .get('/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ??, ??, ??, ?? FROM ?? WHERE ?? = ?';
-    q.values = ['firstName', 'middleName', 'lastName', 'userGeoHash', 'user', 'userID', userID];
+    q.sql = 'SELECT ??, ??, ??, ??, ?? FROM ?? WHERE ?? = ?';
+    let select = ['firstName', 'middleName', 'lastName', 'userGeoHash', 'dob'];
+    q.values = [select, 'user', 'userID', userID];
     this.body = yield query(q);
   })
 
@@ -156,7 +157,9 @@ module.exports = function (app) {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
-    q.values = ['s.specialty', 'specialty', 's', 'UserSpecialty', 'us', 'us.fk_UserSpecialty_specialtyID', 's.specialtyID', 'us.fk_UserSpecialty_userID', userID];
+    let on = ['us.fk_UserSpecialty_specialtyID', 's.specialtyID'];
+    let where = ['us.fk_UserSpecialty_userID', userID];
+    q.values = ['s.specialty', 'specialty', 's', 'UserSpecialty', 'us', on, where];
     this.body = yield query(q);
   })
 
@@ -188,7 +191,9 @@ module.exports = function (app) {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
-    q.values = ['p.*', 'phone', 'p', 'userphone', 'up', 'up.fk_UserPhone_phoneID', 'p.phoneID', 'ue.fk_UserPhone_userID', userID];
+    let on = ['up.fk_UserPhone_phoneID', 'p.phoneID'];
+    let where = ['ue.fk_UserPhone_userID', userID];
+    q.values = ['p.*', 'phone', 'p', 'userphone', 'up', on, where];
     this.body = yield query(q);
   })
 
@@ -197,7 +202,9 @@ module.exports = function (app) {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ?? FROM ?? ?? INNER JOIN ?? ?? ON (?? = ??) WHERE ?? = ?';
-    q.values = ['a.*', 'address', 'a', 'useraddress', 'ua', 'ua.fk_UserAddress_addressID', 'a.phoneID', 'ua.fk_UserAddress_userID', userID];
+    let on = ['ua.fk_UserAddress_addressID', 'a.addressID'];
+    let where = ['ua.fk_UserAddress_userID', userID];
+    q.values = ['a.*', 'address', 'a', 'useraddress', 'ua', on, where];
     this.body = yield query(q);
   })
 

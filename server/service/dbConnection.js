@@ -6,8 +6,7 @@ const options = {
   host: 'localhost',
   user: 'root',
   password: '',
-  database: 'unrdb',
-  multipleStatements: true
+  database: 'unrdb'
 };
 const pool = mysql.createPool(options);
 const p = wrapper(pool);

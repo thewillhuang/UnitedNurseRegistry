@@ -8,6 +8,8 @@ const client = require('../service/dbConnection');
 
 module.exports = function (app) {
   user
+  // post routes ---------------
+
   //create user
   .post('/', function* () {
     let requestJson = this.request.body.fields;
@@ -92,6 +94,8 @@ module.exports = function (app) {
       });
   })
 
+  // get routes ---------------
+
   //grab user table info based on user id
   .get('/:userID', function* () {
     let userID = this.params.userID;
@@ -139,6 +143,8 @@ module.exports = function (app) {
         console.log(err);
       });
   })
+
+  // put routes ---------------
 
   // update user data by user id
   .put('/:userID', function* () {
@@ -191,6 +197,8 @@ module.exports = function (app) {
         console.log(err);
       });
   })
+
+  // delete routes ---------------
 
   // delete user by user id
   .delete('/:userID', function* () {

@@ -31,7 +31,7 @@ module.exports = function (app) {
   })
 
   //create user schedule given user id
-  .post('/UserSchedule/:userID', function* () {
+  .post('/userschedule/:userID', function* () {
     let userID = this.params.userID;
     let requestJson = this.request.body.fields;
     let q = {};
@@ -42,7 +42,7 @@ module.exports = function (app) {
   })
 
   //create user schedule given user id
-  .post('/UserWorkHistory/:userID/:facilityID', function* () {
+  .post('/userworkhistory/:userID/:facilityID', function* () {
     let userID = this.params.userID;
     let facilityID = this.params.facilityID;
     let requestJson = this.request.body.fields;
@@ -134,7 +134,7 @@ module.exports = function (app) {
   })
 
   //grab user table info based on user id
-  .get('/UserSchedule/:userID', function* () {
+  .get('/userschedule/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ??, ??, ?? FROM ?? WHERE ?? = ?';
@@ -143,7 +143,7 @@ module.exports = function (app) {
   })
 
   //grab user table info based on user id
-  .get('/UserLicense/:userID', function* () {
+  .get('/userlicense/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ??, ??, ?? FROM ?? WHERE ?? = ?';
@@ -161,7 +161,7 @@ module.exports = function (app) {
   })
 
   //grab user work history based on user id
-  .get('/UserWorkHistory/:userID', function* () {
+  .get('/userworkhistory/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ??, ??, ??, ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';

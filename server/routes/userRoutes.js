@@ -134,12 +134,13 @@ module.exports = function (app) {
     this.body = yield query(q);
   })
 
-  //grab user table info based on user id
+  //grab user schedule info based on user id
   .get('/userschedule/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ??, ??, ?? FROM ?? WHERE ?? = ?';
-    q.values = ['shiftStart', 'shiftDuration', 'dayOfWeek', 'UserSchedule', 'fk_UserSchedule_userID', userID];
+    let select = ['shiftStart', 'shiftDuration', 'dayOfWeek'];
+    q.values = [select, 'UserSchedule', 'fk_UserSchedule_userID', userID];
     this.body = yield query(q);
   })
 
@@ -148,7 +149,8 @@ module.exports = function (app) {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ??, ??, ?? FROM ?? WHERE ?? = ?';
-    q.values = ['licenseNumber', 'licenseState', 'licensePhotoUrl', 'UserLicense', 'fk_UserLicense_userID', userID];
+    let select = ['licenseNumber', 'licenseState', 'licensePhotoUrl'];
+    q.values = [select, 'UserLicense', 'fk_UserLicense_userID', userID];
     this.body = yield query(q);
   })
 
@@ -217,6 +219,26 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['user', requestJson, 'userID', userID];
+    this.body = yield query(q);
+  })
+
+  // update user schedule by schedule id
+  .put('/userschedule/:scheduleID', function* () {
+    let requestJson = this.request.body.fields;
+    let scheduleID = this.params.scheduleID;
+    let q = {};
+    q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+    q.values = ['UserSchedule', requestJson, 'scheduleID', scheduleID];
+    this.body = yield query(q);
+  })
+
+  // update UserLicense by schedule id
+  .put('/userschedule/:scheduleID', function* () {
+    let requestJson = this.request.body.fields;
+    let scheduleID = this.params.scheduleID;
+    let q = {};
+    q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+    q.values = ['UserSchedule', requestJson, 'scheduleID', scheduleID];
     this.body = yield query(q);
   })
 

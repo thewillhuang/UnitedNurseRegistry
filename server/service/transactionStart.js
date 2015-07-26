@@ -1,7 +1,7 @@
 'use strict';
 const pool = require('../service/dbConnection');
 // a function that takes query parameters
-const transaction = function(q, q2) {
+const transaction = function(q, q2, primaryKeyColumn) {
   // makes a db connection for a pool.
   return pool.getConnectionAsync().then(function(connection){
     return connection.beginTransactionAsync().then(function(){
@@ -13,7 +13,8 @@ const transaction = function(q, q2) {
         return connection.rollback();
       });
 
-      console.log(result);
+      // add the insertId of the previous transaction to the specified column.
+      q2[primaryKeyColumn] = result.insertId;
 
       //start of q2
       return connection.queryAsync(q2).spread(function(rows){

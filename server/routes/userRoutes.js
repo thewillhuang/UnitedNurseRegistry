@@ -169,8 +169,8 @@ module.exports = function (app) {
   .get('/userworkhistory/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ??, ??, ??, ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
-    let select = ['f.facilityID', 'f.facilityName', 'uwh.months', 'uwh.referenceName', 'uwh.referencePhone'];
+    q.sql = 'SELECT ??, ??, ??, ??, ??, ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
+    let select = ['uwh.userHistoryID', 'f.facilityID', 'f.facilityName', 'uwh.months', 'uwh.referenceName', 'uwh.referencePhone'];
     let on = ['uwh.fk_UserWorkHistory_facilityID', 'f.facilityID'];
     let where = ['us.fk_UserWorkHistory_userID', userID];
     q.values = [select, 'UserWorkHistory', 'uwh', 'Facility', 'f', on, where];

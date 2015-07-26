@@ -128,7 +128,7 @@ module.exports = function (app) {
   .get('/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ??, ??, ??, ??, ?? FROM ?? WHERE ?? = ?';
+    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     let select = ['firstName', 'middleName', 'lastName', 'userGeoHash', 'dob'];
     q.values = [select, 'user', 'userID', userID];
     this.body = yield query(q);
@@ -138,7 +138,7 @@ module.exports = function (app) {
   .get('/userschedule/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ??, ??, ??, ?? FROM ?? WHERE ?? = ?';
+    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     let select = ['userScheduleID', 'shiftStart', 'shiftDuration', 'dayOfWeek'];
     q.values = [select, 'UserSchedule', 'fk_UserSchedule_userID', userID];
     this.body = yield query(q);
@@ -148,7 +148,7 @@ module.exports = function (app) {
   .get('/userlicense/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ??, ??, ?? FROM ?? WHERE ?? = ?';
+    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     let select = ['licenseNumber', 'licenseState', 'licensePhotoUrl'];
     q.values = [select, 'UserLicense', 'fk_UserLicense_userID', userID];
     this.body = yield query(q);
@@ -159,9 +159,7 @@ module.exports = function (app) {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
-    let on = ['us.fk_UserSpecialty_specialtyID', 's.specialtyID'];
-    let where = ['us.fk_UserSpecialty_userID', userID];
-    q.values = ['s.specialty', 'specialty', 's', 'UserSpecialty', 'us', on, where];
+    q.values = ['s.specialty', 'specialty', 's', 'UserSpecialty', 'us', 'us.fk_UserSpecialty_specialtyID', 's.specialtyID', 'us.fk_UserSpecialty_userID', userID];
     this.body = yield query(q);
   })
 
@@ -169,11 +167,9 @@ module.exports = function (app) {
   .get('/userworkhistory/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ??, ??, ??, ??, ??, ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
+    q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
     let select = ['uwh.userHistoryID', 'f.facilityID', 'f.facilityName', 'uwh.months', 'uwh.referenceName', 'uwh.referencePhone'];
-    let on = ['uwh.fk_UserWorkHistory_facilityID', 'f.facilityID'];
-    let where = ['us.fk_UserWorkHistory_userID', userID];
-    q.values = [select, 'UserWorkHistory', 'uwh', 'Facility', 'f', on, where];
+    q.values = [select, 'UserWorkHistory', 'uwh', 'Facility', 'f', 'uwh.fk_UserWorkHistory_facilityID', 'f.facilityID', 'us.fk_UserWorkHistory_userID', userID];
     this.body = yield query(q);
   })
 
@@ -182,9 +178,7 @@ module.exports = function (app) {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
-    let on = ['ue.fk_UserEmail_emailID', 'e.emailID'];
-    let where = ['ue.fk_UserEmail_userID', userID];
-    q.values = ['e.emailAddress', 'email', 'e', 'useremail', 'ue', on, where];
+    q.values = ['e.emailAddress', 'email', 'e', 'useremail', 'ue', 'ue.fk_UserEmail_emailID', 'e.emailID', 'ue.fk_UserEmail_userID', userID];
     this.body = yield query(q);
   })
 
@@ -193,9 +187,7 @@ module.exports = function (app) {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
-    let on = ['up.fk_UserPhone_phoneID', 'p.phoneID'];
-    let where = ['ue.fk_UserPhone_userID', userID];
-    q.values = ['p.*', 'phone', 'p', 'userphone', 'up', on, where];
+    q.values = ['p.*', 'phone', 'p', 'userphone', 'up', 'up.fk_UserPhone_phoneID', 'p.phoneID', 'ue.fk_UserPhone_userID', userID];
     this.body = yield query(q);
   })
 
@@ -203,10 +195,8 @@ module.exports = function (app) {
   .get('/address/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ?? FROM ?? ?? INNER JOIN ?? ?? ON (?? = ??) WHERE ?? = ?';
-    let on = ['ua.fk_UserAddress_addressID', 'a.addressID'];
-    let where = ['ua.fk_UserAddress_userID', userID];
-    q.values = ['a.*', 'address', 'a', 'useraddress', 'ua', on, where];
+    q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? ON (?? = ??) WHERE ?? = ?';
+    q.values = ['a.*', 'address', 'a', 'useraddress', 'ua', 'ua.fk_UserAddress_addressID', 'a.addressID', 'ua.fk_UserAddress_userID', userID];
     this.body = yield query(q);
   })
 

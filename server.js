@@ -8,6 +8,7 @@ const build = '/public';
 const path = require('path');
 const app = koa();
 const koaBody = require('koa-better-body');
+const compression = require('koa-compress');
 // const passport = require('koa-passport');
 
 // logging
@@ -22,6 +23,9 @@ app.proxy = true;
 
 // body json parsing
 app.use(koaBody());
+
+// compression
+app.use(compression());
 
 // initialize passport
 // app.use(passport.initialize());

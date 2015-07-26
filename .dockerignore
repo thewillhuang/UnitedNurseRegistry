@@ -14,6 +14,7 @@ Dockerfile
 .git
 .gitignore
 README.md
+**/*.mwb.bak
 
 .DS_Store
 .sass-cache

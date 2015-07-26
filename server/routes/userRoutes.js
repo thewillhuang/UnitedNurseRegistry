@@ -138,8 +138,8 @@ module.exports = function (app) {
   .get('/userschedule/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ??, ??, ?? FROM ?? WHERE ?? = ?';
-    let select = ['shiftStart', 'shiftDuration', 'dayOfWeek'];
+    q.sql = 'SELECT ??, ??, ??, ?? FROM ?? WHERE ?? = ?';
+    let select = ['userScheduleID', 'shiftStart', 'shiftDuration', 'dayOfWeek'];
     q.values = [select, 'UserSchedule', 'fk_UserSchedule_userID', userID];
     this.body = yield query(q);
   })
@@ -232,13 +232,34 @@ module.exports = function (app) {
     this.body = yield query(q);
   })
 
-  // update UserLicense by schedule id
-  .put('/userschedule/:scheduleID', function* () {
+  // update UserLicense by license id
+  .put('/UserLicense/:UserLicenseID', function* () {
     let requestJson = this.request.body.fields;
-    let scheduleID = this.params.scheduleID;
+    let userLicenseID = this.params.userLicenseID;
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-    q.values = ['UserSchedule', requestJson, 'scheduleID', scheduleID];
+    q.values = ['UserLicense', requestJson, 'userLicenseID', userLicenseID];
+    this.body = yield query(q);
+  })
+
+  // update user specialty by specialty id
+  .put('/UserSpecialty/:UserSpecialtyID/:newID', function* () {
+    // let requestJson = this.request.body.fields;
+    let UserSpecialtyID = this.params.UserSpecialtyID;
+    let newID = this.params.newID;
+    let q = {};
+    q.sql = 'UPDATE ?? SET ?? = ? WHERE ?? = ?';
+    q.values = ['UserSpecialty', 'fk_UserSpecialty_specialtyID', newID, 'fk_UserSpecialty_specialtyID', UserSpecialtyID];
+    this.body = yield query(q);
+  })
+
+  // update user email based on email ID
+  .put('/UserWorkHistory/:userHistoryID', function* () {
+    let requestJson = this.request.body.fields;
+    let userHistoryID = this.params.userHistoryID;
+    let q = {};
+    q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+    q.values = ['UserWorkHistory', requestJson, 'userHistoryID', userHistoryID];
     this.body = yield query(q);
   })
 
@@ -280,6 +301,43 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';
     q.values = ['user', 'userID', userID];
+    this.body = yield query(q);
+  })
+
+  // delete user schedule by schedule id
+  .delete('/UserSchedule/:userScheduleID', function* () {
+    let userScheduleID = this.params.userScheduleID;
+    let q = {};
+    q.sql = 'DELETE FROM ?? WHERE ?? = ?';
+    q.values = ['UserSchedule', 'userScheduleID', userScheduleID];
+    this.body = yield query(q);
+  })
+
+  // delete user license by license id
+  .delete('/UserLicense/:userLicenseID', function* () {
+    let userLicenseID = this.params.userLicenseID;
+    let q = {};
+    q.sql = 'DELETE FROM ?? WHERE ?? = ?';
+    q.values = ['UserLicense', 'userLicenseID', userLicenseID];
+    this.body = yield query(q);
+  })
+
+  // delete user specialty by user id and specialty id
+  .delete('/UserSpecialty/:userID/:specialtyID', function* () {
+    let userID = this.params.userID;
+    let specialtyID = this.params.specialtyID;
+    let q = {};
+    q.sql = 'DELETE FROM ?? WHERE ?? = ? AND ?? = ?';
+    q.values = ['UserSpecialty', 'fk_UserSpecialty_userID', userID, 'fk_UserSpecialty_specialtyID', specialtyID];
+    this.body = yield query(q);
+  })
+
+  // delete user specialty by user id and specialty id
+  .delete('/UserWorkHistory/:userHistoryID', function* () {
+    let userHistoryID = this.params.userHistoryID;
+    let q = {};
+    q.sql = 'DELETE FROM ?? WHERE ?? = ?';
+    q.values = ['UserWorkHistory', 'userHistoryID', userHistoryID];
     this.body = yield query(q);
   })
 

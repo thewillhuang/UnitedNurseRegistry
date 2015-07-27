@@ -1,5 +1,5 @@
 'use strict';
-const pool = require('../service/dbConnection');
+const pool = require('./dbConnection');
 // a function that takes query parameters
 const query = function(q) {
   // makes a db connection for a pool.

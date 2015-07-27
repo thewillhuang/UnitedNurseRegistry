@@ -34,20 +34,30 @@ app.use(compression());
 // unprotected routes
 
 // protected routes
-require('./server/routes/userRoutes.js')(app);
-
-// add etag for cacheing static files
-app.use(etag());
+require('./server/routes/user')(app);
+require('./server/routes/userAddress')(app);
+require('./server/routes/userEmail')(app);
+require('./server/routes/userLicense')(app);
+require('./server/routes/userPhone')(app);
+require('./server/routes/userSchedule')(app);
+require('./server/routes/userSpecialty')(app);
+require('./server/routes/userWorkHistory')(app);
 
 // static file server
-app.use(function* () {
+var staticServer = function* () {
   let opts = { root: path.join(__dirname, build) };
   if (this.path === '/') {
     yield send(this, 'index.html', opts);
   } else {
     yield send(this, this.path, opts);
   }
-});
+};
+
+// add etag for cacheing static files
+app.use(etag());
+
+// use static server
+app.use(staticServer);
 
 app.listen(port);
 console.log('server listening on port:', port);

@@ -10,7 +10,7 @@ module.exports = function (app) {
   userAddress
 
   //create new user address with user id
-  .post('/address/:userID', function* () {
+  .post('/:userID', function* () {
     let userID = this.params.userID;
     let requestJson = this.request.body.fields;
     let q = {};
@@ -27,7 +27,7 @@ module.exports = function (app) {
   })
 
   //grab user address based on user id
-  .get('/address/:userID', function* () {
+  .get('/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? ON (?? = ??) WHERE ?? = ?';
@@ -36,7 +36,7 @@ module.exports = function (app) {
   })
 
   // update user address based on address ID
-  .put('/address/:addressID', function* () {
+  .put('/:addressID', function* () {
     let requestJson = this.request.body.fields;
     let addressID = this.params.addressID;
     let q = {};
@@ -46,7 +46,7 @@ module.exports = function (app) {
   })
 
   // delete address by address id
-  .delete('/address/:addressID', function* () {
+  .delete('/:addressID', function* () {
     let addressID = this.params.addressID;
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';

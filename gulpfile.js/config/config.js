@@ -2,12 +2,16 @@
 var dest = './public';
 var src = './app';
 var jsDest = dest + '/js';
+var test = './test';
 // important lesson, always just use the base directory for gulp.dest, anything else will fuck up sourcemaps
 // and or other weird settings, giving you useless grief
 // var neat = require('node-neat').includePaths;
 // var compression = require('compression');
 var morgan = require('morgan');
 module.exports = {
+  mocha: {
+    src: test + '/**/*.js'
+  },
   browserSync: {
     // port: 8080,  // use *different* port than above
     // proxy: 'localhost:3000',  // local node app address

@@ -21,7 +21,7 @@ describe('user api', function () {
   });
 
   it('should respond with empty array with unknown user', function (done) {
-    request.get('/api/user/1')
+    request.get('/api/user/abc')
       .expect(200)
       .end(function (err, res) {
         expect(res.body).to.be.an('object');
@@ -33,6 +33,7 @@ describe('user api', function () {
       });
   });
 
+  let r1;
   it('should insert a new user given a correct object', function (done) {
     request.post('/api/user/')
       .send({
@@ -46,49 +47,36 @@ describe('user api', function () {
       })
       .expect(200)
       .end(function (err, res) {
-        console.log(res.body);
+        r1 = res.body.rows;
+        expect(r1).to.be.an('object');
+        // expect(r1).to.contain('insertId');
+        expect(r1.insertId).to.be.an('number');
+        expect(err).to.be.a('null');
         done();
       });
   });
 
-  // it('should respond with empty array with unknown user', function (done) {
-  //   request.get('/api/user/1')
-  //     .expect(200)
-  //     .end(function (err, res) {
-  //       expect(res.body).to.be.an('object');
-  //       expect(res.body.rows).to.be.empty;
-  //       expect(res.body.rows).to.be.an('array');
-  //       expect(res.body.fields).to.be.an('array');
-  //       expect(err).to.be.a('null');
-  //       done();
-  //     });
-  // });
-  //
-  // it('should respond with empty array with unknown user', function (done) {
-  //   request.get('/api/user/1')
-  //     .expect(200)
-  //     .end(function (err, res) {
-  //       expect(res.body).to.be.an('object');
-  //       expect(res.body.rows).to.be.empty;
-  //       expect(res.body.rows).to.be.an('array');
-  //       expect(res.body.fields).to.be.an('array');
-  //       expect(err).to.be.a('null');
-  //       done();
-  //     });
-  // });
-  //
-  // it('should respond with empty array with unknown user', function (done) {
-  //   request.get('/api/user/1')
-  //     .expect(200)
-  //     .end(function (err, res) {
-  //       expect(res.body).to.be.an('object');
-  //       expect(res.body.rows).to.be.empty;
-  //       expect(res.body.rows).to.be.an('array');
-  //       expect(res.body.fields).to.be.an('array');
-  //       expect(err).to.be.a('null');
-  //       done();
-  //     });
-  // });
+  it('should grab a user given a correct user id', function (done) {
+    request.get('/api/user/' + r1.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
 
+  it('should delete a user given a correct user id', function (done) {
+    request.delete('/api/user/' + r1.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
 
 });

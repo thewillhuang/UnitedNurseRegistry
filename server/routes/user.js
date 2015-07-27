@@ -12,7 +12,6 @@ module.exports = function (app) {
   //create user
   .post('/', function* () {
     let requestJson = this.request.body.fields;
-    console.log(this.request.body);
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['user', requestJson];

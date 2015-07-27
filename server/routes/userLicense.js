@@ -24,9 +24,8 @@ module.exports = function (app) {
   .get('/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    let select = ['licenseNumber', 'licenseState', 'licensePhotoUrl'];
-    q.values = [select, 'UserLicense', 'fk_UserLicense_userID', userID];
+    q.sql = 'SELECT ?? FROM ?? AS ?? WHERE ?? = ?';
+    q.values = ['ul.*', 'UserLicense', 'ul', 'fk_UserLicense_userID', userID];
     this.body = yield query(q);
   })
 

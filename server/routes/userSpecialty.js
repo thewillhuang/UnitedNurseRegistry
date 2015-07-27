@@ -35,14 +35,14 @@ module.exports = function (app) {
     this.body = yield query(q);
   })
 
-  // update user specialty by specialty id
-  .put('/:UserSpecialtyID/:newID', function* () {
-    // let requestJson = this.request.body.fields;
-    let UserSpecialtyID = this.params.UserSpecialtyID;
-    let newID = this.params.newID;
+  // update user specialty by userID, old specialty Id, new specialty ID
+  .put('/:userID/:oldSpecialtyID/:newSpecialtyID', function* () {
+    let userID = this.params.userID;
+    let oldSpecialtyID = this.params.oldSpecialtyID;
+    let newSpecialtyID = this.params.newSpecialtyID;
     let q = {};
-    q.sql = 'UPDATE ?? SET ?? = ? WHERE ?? = ?';
-    q.values = ['UserSpecialty', 'fk_UserSpecialty_specialtyID', newID, 'fk_UserSpecialty_specialtyID', UserSpecialtyID];
+    q.sql = 'UPDATE ?? SET ?? = ? WHERE ?? = ? AND ?? = ?';
+    q.values = ['UserSpecialty', 'fk_UserSpecialty_specialtyID', newSpecialtyID, 'fk_UserSpecialty_userID', userID, 'fk_UserSpecialty_specialtyID', oldSpecialtyID];
     this.body = yield query(q);
   })
 

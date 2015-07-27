@@ -4,7 +4,7 @@ const Router = require('koa-router');
 const userAddress = new Router({
   prefix: '/api/user/address'
 });
-const query = require('../services/query');
+const mysql = require('../services/mysql');
 
 module.exports = function (app) {
   userAddress
@@ -16,14 +16,14 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['address', requestJson];
-    let r1 = yield query(q);
+    let r1 = yield mysql(q);
     let address = {};
     address.fk_UserAddress_userID = userID;
     address.fk_UserAddress_phoneID = r1.insertId;
     let q2 = {};
     q2.sql = 'INSERT INTO ?? SET ?';
     q2.values = ['Address', userAddress];
-    this.body = yield query(q2);
+    this.body = yield mysql(q2);
   })
 
   //grab user address based on user id
@@ -32,7 +32,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? ON (?? = ??) WHERE ?? = ?';
     q.values = ['a.*', 'address', 'a', 'useraddress', 'ua', 'ua.fk_UserAddress_addressID', 'a.addressID', 'ua.fk_UserAddress_userID', userID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   })
 
   // update user address based on address ID
@@ -42,7 +42,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['address', requestJson, 'addressID', addressID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   })
 
   // delete address by address id
@@ -51,7 +51,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';
     q.values = ['address', 'addressID', addressID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   });
 
   app.use(userAddress.routes())

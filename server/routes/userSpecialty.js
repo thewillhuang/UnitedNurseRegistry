@@ -4,7 +4,7 @@ const Router = require('koa-router');
 const userSpecialty = new Router({
   prefix: '/api/user/specialty'
 });
-const query = require('../services/query');
+const mysql = require('../services/mysql');
 
 module.exports = function (app) {
   userSpecialty
@@ -16,14 +16,14 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?;';
     q.values = ['specialty', requestJson];
-    let r1 = yield query(q);
+    let r1 = yield mysql(q);
     let specialty = {};
     specialty.fk_UserSpecialty_userID = userID;
     specialty.fk_UserSpecialty_specialtyID = r1.insertId;
     let q2 = {};
     q2.sql = 'INSERT INTO ?? SET ?;';
     q2.values = ['UserSpecialty', userSpecialty];
-    this.body = yield query(q2);
+    this.body = yield mysql(q2);
   })
 
   //grab user specialty based on user id
@@ -32,7 +32,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
     q.values = ['s.specialty', 'specialty', 's', 'UserSpecialty', 'us', 'us.fk_UserSpecialty_specialtyID', 's.specialtyID', 'us.fk_UserSpecialty_userID', userID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   })
 
   // update user specialty by userID, old specialty Id, new specialty ID
@@ -43,7 +43,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'UPDATE ?? SET ?? = ? WHERE ?? = ? AND ?? = ?';
     q.values = ['UserSpecialty', 'fk_UserSpecialty_specialtyID', newSpecialtyID, 'fk_UserSpecialty_userID', userID, 'fk_UserSpecialty_specialtyID', oldSpecialtyID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   })
 
   // delete user specialty by user id and specialty id
@@ -53,7 +53,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ? AND ?? = ?';
     q.values = ['UserSpecialty', 'fk_UserSpecialty_userID', userID, 'fk_UserSpecialty_specialtyID', specialtyID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   });
 
   app.use(userSpecialty.routes())

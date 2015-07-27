@@ -4,7 +4,7 @@ const Router = require('koa-router');
 const userLicense = new Router({
   prefix: '/api/user/userLicense'
 });
-const query = require('../services/query');
+const mysql = require('../services/mysql');
 
 module.exports = function (app) {
   userLicense
@@ -17,7 +17,7 @@ module.exports = function (app) {
     requestJson.fk_UserLicense_userID = userID;
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['UserLicense', requestJson];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   })
 
   //grab user table info based on user id
@@ -26,7 +26,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'SELECT ?? FROM ?? AS ?? WHERE ?? = ?';
     q.values = ['ul.*', 'UserLicense', 'ul', 'fk_UserLicense_userID', userID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   })
 
   // update UserLicense by license id
@@ -36,7 +36,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['UserLicense', requestJson, 'userLicenseID', userLicenseID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   })
 
   // delete user license by license id
@@ -45,7 +45,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';
     q.values = ['UserLicense', 'userLicenseID', userLicenseID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   });
 
   app.use(userLicense.routes())

@@ -4,7 +4,7 @@ const Router = require('koa-router');
 const userEmail = new Router({
   prefix: '/api/user/email'
 });
-const query = require('../services/query');
+const mysql = require('../services/mysql');
 
 module.exports = function (app) {
   userEmail
@@ -16,14 +16,14 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?;';
     q.values = ['email', requestJson];
-    let r1 = yield query(q);
+    let r1 = yield mysql(q);
     let email = {};
     email.fk_UserEmail_userID = userID;
     email.fk_UserEmail_emailID = r1.insertId;
     let q2 = {};
     q2.sql = 'INSERT INTO ?? SET ?;';
     q2.values = ['useremail', userEmail];
-    this.body = yield query(q2);
+    this.body = yield mysql(q2);
   })
 
   //grab user emails based on user id
@@ -32,7 +32,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
     q.values = ['e.*', 'email', 'e', 'useremail', 'ue', 'ue.fk_UserEmail_emailID', 'e.emailID', 'ue.fk_UserEmail_userID', userID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   })
 
   // update user email based on email ID
@@ -42,7 +42,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['email', requestJson, 'emailID', emailID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   })
 
   // delete useremail by email id
@@ -51,7 +51,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';
     q.values = ['email', 'emailID', emailID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   });
 
   app.use(userEmail.routes())

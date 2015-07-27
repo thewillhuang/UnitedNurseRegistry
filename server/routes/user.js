@@ -4,7 +4,7 @@ const Router = require('koa-router');
 const user = new Router({
   prefix: '/api/user'
 });
-const query = require('../services/query');
+const mysql = require('../services/mysql');
 
 module.exports = function (app) {
   user
@@ -12,10 +12,11 @@ module.exports = function (app) {
   //create user
   .post('/', function* () {
     let requestJson = this.request.body.fields;
+    console.log(this.request.body);
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['user', requestJson];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   })
 
   //grab user table info based on user id
@@ -25,7 +26,7 @@ module.exports = function (app) {
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     let select = ['userID', 'firstName', 'middleName', 'lastName', 'userGeoHash', 'dob'];
     q.values = [select, 'user', 'userID', userID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   })
 
   // update user data by user id
@@ -35,7 +36,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['user', requestJson, 'userID', userID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   })
 
   // delete user by user id
@@ -44,7 +45,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';
     q.values = ['user', 'userID', userID];
-    this.body = yield query(q);
+    this.body = yield mysql(q);
   });
 
   app.use(user.routes())

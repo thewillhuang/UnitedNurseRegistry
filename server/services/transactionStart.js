@@ -1,12 +1,12 @@
 'use strict';
 const pool = require('./dbConnection');
-// a function that takes query parameters
+// a function that takes mysql parameters
 const transaction = function(q, q2, primaryKeyColumn) {
   // makes a db connection for a pool.
   return pool.getConnectionAsync().then(function(connection){
     return connection.beginTransactionAsync().then(function(){
       // start of q1
-      let result = connection.queryAsync(q).spread(function(rows){
+      let result = connection.mysqlAsync(q).spread(function(rows){
         return rows;
       }).catch(function(err){
         console.log(err);
@@ -17,8 +17,8 @@ const transaction = function(q, q2, primaryKeyColumn) {
       q2[primaryKeyColumn] = result.insertId;
 
       //start of q2
-      return connection.queryAsync(q2).spread(function(rows){
-        //commit the changes and release the connection on query success
+      return connection.mysqlAsync(q2).spread(function(rows){
+        //commit the changes and release the connection on mysql success
         connection.commit();
         connection.release();
         return rows;

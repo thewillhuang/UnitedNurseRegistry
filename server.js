@@ -34,14 +34,15 @@ app.use(compression());
 // unprotected routes
 
 // protected routes
-require('./server/routes/user')(app);
-require('./server/routes/userAddress')(app);
-require('./server/routes/userEmail')(app);
-require('./server/routes/userLicense')(app);
-require('./server/routes/userPhone')(app);
-require('./server/routes/userSchedule')(app);
-require('./server/routes/userSpecialty')(app);
-require('./server/routes/userWorkHistory')(app);
+require('./server/routes/userRoutes')(app);
+// require('./server/routes/user')(app);
+// require('./server/routes/userAddress')(app);
+// require('./server/routes/userEmail')(app);
+// require('./server/routes/userLicense')(app);
+// require('./server/routes/userPhone')(app);
+// require('./server/routes/userSchedule')(app);
+// require('./server/routes/userSpecialty')(app);
+// require('./server/routes/userWorkHistory')(app);
 
 // static file server
 var staticServer = function* () {

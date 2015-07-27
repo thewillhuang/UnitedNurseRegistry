@@ -36,21 +36,18 @@ app.use(compression());
 // protected routes
 require('./server/routes/userRoutes')(app);
 
-// static file server
-var staticServer = function* () {
+// add etag for cacheing static files
+app.use(etag());
+
+// use static server
+app.use(function* staticServer() {
   let opts = { root: path.join(__dirname, build) };
   if (this.path === '/') {
     yield send(this, 'index.html', opts);
   } else {
     yield send(this, this.path, opts);
   }
-};
-
-// add etag for cacheing static files
-app.use(etag());
-
-// use static server
-app.use(staticServer);
+});
 
 app.listen(port);
 console.log('server listening on port:', port);

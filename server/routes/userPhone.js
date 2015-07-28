@@ -10,7 +10,7 @@ module.exports = function (app) {
   userPhone
 
   //create new user phone with user id
-  .post('/:userID', function* () {
+  .post('/user/:userID', function* () {
     let userID = this.params.userID;
     let requestJson = this.request.body.fields;
     let q = {};
@@ -19,24 +19,25 @@ module.exports = function (app) {
     let r1 = yield mysql(q);
     let phone = {};
     phone.fk_UserPhone_userID = userID;
-    phone.fk_UserPhone_phoneID = r1.insertId;
+    phone.fk_UserPhone_phoneID = r1.rows.insertId;
     let q2 = {};
     q2.sql = 'INSERT INTO ?? SET ?';
-    q2.values = ['userphone', userPhone];
+    q2.values = ['userphone', phone];
+    console.log(userID, requestJson, r1, phone);
     this.body = yield mysql(q2);
   })
 
   //grab user phone based on user id
-  .get('/:userID', function* () {
+  .get('/user/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
-    q.values = ['p.*', 'phone', 'p', 'userphone', 'up', 'up.fk_UserPhone_phoneID', 'p.phoneID', 'ue.fk_UserPhone_userID', userID];
+    q.sql = 'SELECT p.* FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
+    q.values = ['phone', 'p', 'userphone', 'up', 'up.fk_UserPhone_phoneID', 'p.phoneID', 'ue.fk_UserPhone_userID', userID];
     this.body = yield mysql(q);
   })
 
   // update user phone based on phone ID
-  .put('/:phoneID', function* () {
+  .put('/phone/:phoneID', function* () {
     let requestJson = this.request.body.fields;
     let phoneID = this.params.phoneID;
     let q = {};
@@ -46,7 +47,7 @@ module.exports = function (app) {
   })
 
   // delete phone by phone id
-  .delete('/:phoneID', function* () {
+  .delete('/phone/:phoneID', function* () {
     let phoneID = this.params.phoneID;
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';

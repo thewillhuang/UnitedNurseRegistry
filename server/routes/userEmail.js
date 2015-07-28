@@ -10,7 +10,7 @@ module.exports = function (app) {
   userEmail
 
   //create new user email with user id
-  .post('/:userID', function* () {
+  .post('/user/:userID', function* () {
     let userID = this.params.userID;
     let requestJson = this.request.body.fields;
     let q = {};
@@ -19,24 +19,24 @@ module.exports = function (app) {
     let r1 = yield mysql(q);
     let email = {};
     email.fk_UserEmail_userID = userID;
-    email.fk_UserEmail_emailID = r1.insertId;
+    email.fk_UserEmail_emailID = r1.rows.insertId;
     let q2 = {};
     q2.sql = 'INSERT INTO ?? SET ?;';
-    q2.values = ['useremail', userEmail];
+    q2.values = ['useremail', email];
     this.body = yield mysql(q2);
   })
 
   //grab user emails based on user id
-  .get('/:userID', function* () {
+  .get('/user/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
-    q.values = ['e.*', 'email', 'e', 'useremail', 'ue', 'ue.fk_UserEmail_emailID', 'e.emailID', 'ue.fk_UserEmail_userID', userID];
+    q.sql = 'SELECT e.* FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
+    q.values = ['email', 'e', 'useremail', 'ue', 'ue.fk_UserEmail_emailID', 'e.emailID', 'ue.fk_UserEmail_userID', userID];
     this.body = yield mysql(q);
   })
 
   // update user email based on email ID
-  .put('/:emailID', function* () {
+  .put('/email/:emailID', function* () {
     let requestJson = this.request.body.fields;
     let emailID = this.params.emailID;
     let q = {};
@@ -46,7 +46,7 @@ module.exports = function (app) {
   })
 
   // delete useremail by email id
-  .delete('/:emailID', function* () {
+  .delete('/email/:emailID', function* () {
     let emailID = this.params.emailID;
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';

@@ -1,15 +1,15 @@
 'use strict';
 
-const chai = require('chai');
-const expect = chai.expect;
-const chaiAsPromised = require('chai-as-promised');
-const supertest = require('supertest');
-const app = require('../server');
-const request = supertest(app.listen());
-const uuid = require('node-uuid');
+var chai = require('chai');
+var expect = chai.expect;
+var chaiAsPromised = require('chai-as-promised');
+var supertest = require('supertest');
+var app = require('../server');
+var request = supertest(app.listen());
+var uuid = require('node-uuid');
 chai.use(chaiAsPromised);
 
-let r2;
+var r2;
 
 describe('user email api', function () {
 
@@ -84,7 +84,7 @@ describe('user email api', function () {
       });
   });
 
-  let a1;
+  var a1;
   it('should have 2 email addresses given a user id', function (done) {
     request.get('/api/useremail/user/' + r2.insertId)
       .expect(200)
@@ -101,7 +101,7 @@ describe('user email api', function () {
       });
   });
 
-  let newemail = uuid.v4();
+  var newemail = uuid.v4();
   it('should update an email given an email id', function (done) {
     request.put('/api/useremail/email/' + a1)
       .send({

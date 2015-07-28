@@ -10,7 +10,7 @@ module.exports = function (app) {
   userLicense
 
   //create user license given user id
-  .post('/:userID', function* () {
+  .post('/user/:userID', function* () {
     let userID = this.params.userID;
     let requestJson = this.request.body.fields;
     let q = {};
@@ -21,7 +21,7 @@ module.exports = function (app) {
   })
 
   //grab user table info based on user id
-  .get('/:userID', function* () {
+  .get('/user/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ?? FROM ?? AS ?? WHERE ?? = ?';
@@ -30,7 +30,7 @@ module.exports = function (app) {
   })
 
   // update UserLicense by license id
-  .put('/:UserLicenseID', function* () {
+  .put('/license/:UserLicenseID', function* () {
     let requestJson = this.request.body.fields;
     let userLicenseID = this.params.userLicenseID;
     let q = {};
@@ -40,7 +40,7 @@ module.exports = function (app) {
   })
 
   // delete user license by license id
-  .delete('/:userLicenseID', function* () {
+  .delete('/license/:userLicenseID', function* () {
     let userLicenseID = this.params.userLicenseID;
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';

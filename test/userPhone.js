@@ -1,15 +1,15 @@
 'use strict';
 
-const chai = require('chai');
-const expect = chai.expect;
-const chaiAsPromised = require('chai-as-promised');
-const supertest = require('supertest');
-const app = require('../server');
-const request = supertest(app.listen());
-const uuid = require('node-uuid');
+var chai = require('chai');
+var expect = chai.expect;
+var chaiAsPromised = require('chai-as-promised');
+var supertest = require('supertest');
+var app = require('../server');
+var request = supertest(app.listen());
+var uuid = require('node-uuid');
 chai.use(chaiAsPromised);
 
-let r2;
+var r2;
 
 describe('user phone api', function () {
 
@@ -27,7 +27,6 @@ describe('user phone api', function () {
     request.get('/api/userphone/user/abc')
       .expect(200)
       .end(function (err, res) {
-        console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.be.empty;
@@ -58,9 +57,11 @@ describe('user phone api', function () {
   });
 
   it('insert phone 1 given a user id', function (done) {
-    request.post('/api/userphone/phone/' + r2.insertId)
+    request.post('/api/userphone/user/' + r2.insertId)
       .send({
-        emailAddress: uuid.v4()
+        phoneNumber: 7146869860,
+        ext: 121,
+        phoneType: 'cell'
       })
       .expect(200)
       .end(function (err, res) {
@@ -74,7 +75,9 @@ describe('user phone api', function () {
   it('insert phone 2 given a user id', function (done) {
     request.post('/api/userphone/user/' + r2.insertId)
       .send({
-        emailAddress: uuid.v4()
+        phoneNumber: 7146740833,
+        ext: 1211,
+        phoneType: 'mobile'
       })
       .expect(200)
       .end(function (err, res) {
@@ -85,28 +88,29 @@ describe('user phone api', function () {
       });
   });
 
-  let a1;
+  var a1;
   it('should have 2 phone numbers given a user id', function (done) {
     request.get('/api/userphone/user/' + r2.insertId)
       .expect(200)
       .end(function (err, res) {
-        // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(2);
-        a1 = res.body.rows[0].emailID;
+        a1 = res.body.rows[0].phoneID;
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
   });
 
-  let newemail = uuid.v4();
+  var newPhone = '9095699742';
   it('should update a phone number given an phone id', function (done) {
     request.put('/api/userphone/phone/' + a1)
       .send({
-        emailAddress: newemail
+        phoneNumber: newPhone,
+        ext: 1337,
+        phoneType: 'cell'
       })
       .expect(200)
       .end(function (err, res) {
@@ -127,7 +131,7 @@ describe('user phone api', function () {
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(2);
-        expect(res.body.rows).to.have.deep.property('[0].emailAddress', newemail);
+        expect(res.body.rows).to.have.deep.property('[0].phoneNumber', newPhone);
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();

@@ -1,15 +1,15 @@
 'use strict';
 
-const chai = require('chai');
-const expect = chai.expect;
-const chaiAsPromised = require('chai-as-promised');
-const supertest = require('supertest');
-const app = require('../server');
-const request = supertest(app.listen());
-const uuid = require('node-uuid');
+var chai = require('chai');
+var expect = chai.expect;
+var chaiAsPromised = require('chai-as-promised');
+var supertest = require('supertest');
+var app = require('../server');
+var request = supertest(app.listen());
+var uuid = require('node-uuid');
 chai.use(chaiAsPromised);
 
-let r2;
+var r2;
 
 describe('user address api', function () {
 
@@ -91,7 +91,7 @@ describe('user address api', function () {
       });
   });
 
-  let a1;
+  var a1;
   it('should have 2 address given a user id', function (done) {
     request.get('/api/useraddress/user/' + r2.insertId)
       .expect(200)

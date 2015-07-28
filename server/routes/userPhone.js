@@ -23,7 +23,6 @@ module.exports = function (app) {
     let q2 = {};
     q2.sql = 'INSERT INTO ?? SET ?';
     q2.values = ['userphone', phone];
-    console.log(userID, requestJson, r1, phone);
     this.body = yield mysql(q2);
   })
 
@@ -32,7 +31,7 @@ module.exports = function (app) {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT p.* FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
-    q.values = ['phone', 'p', 'userphone', 'up', 'up.fk_UserPhone_phoneID', 'p.phoneID', 'ue.fk_UserPhone_userID', userID];
+    q.values = ['phone', 'p', 'userphone', 'up', 'up.fk_UserPhone_phoneID', 'p.phoneID', 'up.fk_UserPhone_userID', userID];
     this.body = yield mysql(q);
   })
 

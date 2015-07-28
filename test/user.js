@@ -1,12 +1,12 @@
 'use strict';
 
-const chai = require('chai');
-const expect = chai.expect;
-const chaiAsPromised = require('chai-as-promised');
-const supertest = require('supertest');
-const app = require('../server');
-const request = supertest(app.listen());
-const uuid = require('node-uuid');
+var chai = require('chai');
+var expect = chai.expect;
+var chaiAsPromised = require('chai-as-promised');
+var supertest = require('supertest');
+var app = require('../server');
+var request = supertest(app.listen());
+var uuid = require('node-uuid');
 chai.use(chaiAsPromised);
 
 // store primary key

@@ -92,6 +92,7 @@ describe('user address api', function () {
   });
 
   var a1;
+  var a2;
   it('should have 2 address given a user id', function (done) {
     request.get('/api/useraddress/user/' + r2.insertId)
       .expect(200)
@@ -102,6 +103,7 @@ describe('user address api', function () {
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(2);
         a1 = res.body.rows[0].addressID;
+        a2 = res.body.rows[1].addressID;
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
@@ -142,7 +144,7 @@ describe('user address api', function () {
       });
   });
 
-  it('should delete an user address given an address ID', function (done) {
+  it('should delete user address 1 given an address ID', function (done) {
     request.delete('/api/useraddress/address/' + a1)
       .expect(200)
       .end(function (err, res) {
@@ -151,6 +153,7 @@ describe('user address api', function () {
         done();
       });
   });
+
 
   it('should have 1 address instead of 2', function (done) {
     request.get('/api/useraddress/user/' + r2.insertId)
@@ -161,6 +164,31 @@ describe('user address api', function () {
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(1);
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should delete user address 2 given an address ID', function (done) {
+    request.delete('/api/useraddress/address/' + a2)
+      .expect(200)
+      .end(function (err, res) {
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should have 0 address instead of 1', function (done) {
+    request.get('/api/useraddress/user/' + r2.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.rows).to.have.length(0);
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();

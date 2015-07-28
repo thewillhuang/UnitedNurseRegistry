@@ -66,7 +66,9 @@ ENV HOME /usr/local/nonroot
 
 # install the files to cache them.
 RUN npm install \
-    && gulp prod;
+    && gulp prod \
+    && ls \
+    && mocha;
 
 
 # runs below command in WORKDIR when the images is ran.

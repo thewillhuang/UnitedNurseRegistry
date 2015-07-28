@@ -47,7 +47,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';
     q.values = ['UserLicense', 'userLicenseID', userLicenseID];
-    console.log(q);
+    // console.log(q);
     this.body = yield mysql(q);
   });
 

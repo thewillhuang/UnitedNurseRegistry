@@ -1,7 +1,7 @@
 {
-  "name": "Swiftcard",
+  "name": "United Nurses",
   "version": "0.0.1",
-  "description": "Swiftcard Loyalies",
+  "description": "United Nurses",
   "main": "server.js",
   "browserify": {
     "transform": "babelify"
@@ -97,12 +97,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/thewillhuang/swiftcard"
+    "url": "https://github.com/thewillhuang/UnitedNurseRegistry"
   },
   "author": "William Huang",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thewillhuang/swiftcard/issues"
+    "url": "https://github.com/thewillhuang/UnitedNurseRegistry/issues"
   },
-  "homepage": "https://github.com/thewillhuang/swiftcard"
+  "homepage": "https://github.com/thewillhuang/UnitedNurseRegistry"
 }

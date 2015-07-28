@@ -13,9 +13,7 @@ const transaction = function(q, q2, setColumns) {
         return connection.rollback();
       });
 
-      let id = result.rows.insertId;
-      // add the insertId of the previous transaction to the specified column.
-      q2.values.push(setColumns);
+      console.log(result);
 
       //start of q2
       return connection.mysqlAsync(q2).spread(function(rows, fields){

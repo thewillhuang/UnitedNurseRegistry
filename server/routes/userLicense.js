@@ -24,18 +24,20 @@ module.exports = function (app) {
   .get('/user/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ?? FROM ?? AS ?? WHERE ?? = ?';
-    q.values = ['ul.*', 'UserLicense', 'ul', 'fk_UserLicense_userID', userID];
+    q.sql = 'SELECT ul.* FROM ?? AS ?? WHERE ?? = ?';
+    q.values = ['UserLicense', 'ul', 'fk_UserLicense_userID', userID];
     this.body = yield mysql(q);
   })
 
   // update UserLicense by license id
-  .put('/license/:UserLicenseID', function* () {
+  .put('/license/:userLicenseID', function* () {
     let requestJson = this.request.body.fields;
+    // console.log(requestJson);
     let userLicenseID = this.params.userLicenseID;
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['UserLicense', requestJson, 'userLicenseID', userLicenseID];
+    // console.log(q);
     this.body = yield mysql(q);
   })
 
@@ -45,6 +47,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';
     q.values = ['UserLicense', 'userLicenseID', userLicenseID];
+    console.log(q);
     this.body = yield mysql(q);
   });
 

@@ -10,7 +10,7 @@ var uuid = require('node-uuid');
 chai.use(chaiAsPromised);
 
 // store primary key
-let r1;
+var r1;
 
 describe('user api', function () {
 

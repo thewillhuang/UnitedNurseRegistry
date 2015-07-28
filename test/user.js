@@ -72,6 +72,26 @@ describe('user api', function () {
       });
   });
 
+  it('should update user info given a correct object and user id', function (done) {
+    request.put('/api/user/' + r1.insertId)
+      .send({
+        firstName: 'william',
+        lastName: 'huang',
+        middleName: 'w',
+        userGeoHash: 27898503349316,
+        userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
+        dob: '1986-04-08',
+        userName: uuid.v4()
+      })
+      .expect(200)
+      .end(function (err, res) {
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+
   it('should delete a user given a correct user id', function (done) {
     request.delete('/api/user/' + r1.insertId)
       .expect(200)

@@ -9,8 +9,6 @@ var request = supertest(app.listen());
 var uuid = require('node-uuid');
 chai.use(chaiAsPromised);
 
-var r2;
-
 describe('user phone api', function () {
 
   it('should reject invalid get requests', function (done) {
@@ -35,6 +33,7 @@ describe('user phone api', function () {
       });
   });
 
+  var r2;
   it('should create a user', function (done) {
     request.post('/api/user')
       .send({
@@ -89,7 +88,6 @@ describe('user phone api', function () {
   });
 
   var a1;
-  var a2;
   it('should have 2 phone numbers given a user id', function (done) {
     request.get('/api/userphone/user/' + r2.insertId)
       .expect(200)
@@ -99,7 +97,32 @@ describe('user phone api', function () {
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(2);
         a1 = res.body.rows[0].phoneID;
-        a2 = res.body.rows[1].phoneID;
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should delete an user phone given an phone ID', function (done) {
+    request.delete('/api/userphone/phone/' + a1)
+      .expect(200)
+      .end(function (err, res) {
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  var a2;
+  it('should have 1 phone number instead of 2', function (done) {
+    request.get('/api/userphone/user/' + r2.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        a2 = res.body.rows[0].phoneID;
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.rows).to.have.length(1);
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
@@ -108,7 +131,7 @@ describe('user phone api', function () {
 
   var newPhone = '9095699742';
   it('should update a phone number given an phone id', function (done) {
-    request.put('/api/userphone/phone/' + a1)
+    request.put('/api/userphone/phone/' + a2)
       .send({
         phoneNumber: newPhone,
         ext: 1337,
@@ -132,33 +155,8 @@ describe('user phone api', function () {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.rows).to.have.length(2);
-        expect(res.body.rows).to.have.deep.property('[0].phoneNumber', newPhone);
-        expect(res.body.fields).to.be.an('array');
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
-
-  it('should delete an user phone given an phone ID', function (done) {
-    request.delete('/api/userphone/phone/' + a1)
-      .expect(200)
-      .end(function (err, res) {
-        expect(res.body.rows.affectedRows).to.equal(1);
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
-
-  it('should have 1 phone number instead of 2', function (done) {
-    request.get('/api/userphone/user/' + r2.insertId)
-      .expect(200)
-      .end(function (err, res) {
-        // console.log(res.body);
-        expect(res.body).to.be.an('object');
-        expect(res.body.rows).to.be.not.empty;
-        expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(1);
+        expect(res.body.rows).to.have.deep.property('[0].phoneNumber', newPhone);
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();

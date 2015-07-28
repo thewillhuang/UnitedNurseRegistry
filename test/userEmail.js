@@ -9,8 +9,6 @@ var request = supertest(app.listen());
 var uuid = require('node-uuid');
 chai.use(chaiAsPromised);
 
-var r2;
-
 describe('user email api', function () {
 
   it('should reject invalid get requests', function (done) {
@@ -35,6 +33,7 @@ describe('user email api', function () {
       });
   });
 
+  var r2;
   it('should create a user', function (done) {
     request.post('/api/user')
       .send({
@@ -85,7 +84,6 @@ describe('user email api', function () {
   });
 
   var a1;
-  var a2;
   it('should have 2 email addresses given a user id', function (done) {
     request.get('/api/useremail/user/' + r2.insertId)
       .expect(200)
@@ -96,7 +94,33 @@ describe('user email api', function () {
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(2);
         a1 = res.body.rows[0].emailID;
-        a2 = res.body.rows[1].emailID;
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should delete email 1 given an email ID', function (done) {
+    request.delete('/api/useremail/email/' + a1)
+      .expect(200)
+      .end(function (err, res) {
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  var a2;
+  it('should have 1 email instead of 2', function (done) {
+    request.get('/api/useremail/user/' + r2.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.rows).to.have.length(1);
+        a2 = res.body.rows[0].emailID;
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
@@ -105,7 +129,7 @@ describe('user email api', function () {
 
   var newemail = uuid.v4();
   it('should update an email given an email id', function (done) {
-    request.put('/api/useremail/email/' + a1)
+    request.put('/api/useremail/email/' + a2)
       .send({
         emailAddress: newemail
       })
@@ -127,33 +151,8 @@ describe('user email api', function () {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.rows).to.have.length(2);
-        expect(res.body.rows).to.have.deep.property('[0].emailAddress', newemail);
-        expect(res.body.fields).to.be.an('array');
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
-
-  it('should delete email 1 given an email ID', function (done) {
-    request.delete('/api/useremail/email/' + a1)
-      .expect(200)
-      .end(function (err, res) {
-        expect(res.body.rows.affectedRows).to.equal(1);
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
-
-  it('should have 1 address instead of 2', function (done) {
-    request.get('/api/useremail/user/' + r2.insertId)
-      .expect(200)
-      .end(function (err, res) {
-        // console.log(res.body);
-        expect(res.body).to.be.an('object');
-        expect(res.body.rows).to.be.not.empty;
-        expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(1);
+        expect(res.body.rows).to.have.deep.property('[0].emailAddress', newemail);
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();

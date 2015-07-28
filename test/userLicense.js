@@ -34,7 +34,6 @@ describe('user license api', function () {
   });
 
   var r2;
-
   it('should create a user', function (done) {
     request.post('/api/user')
       .send({
@@ -89,7 +88,6 @@ describe('user license api', function () {
   });
 
   var a1;
-  var a2;
   it('should have 2 license given a user id', function (done) {
     request.get('/api/userlicense/user/' + r2.insertId)
       .expect(200)
@@ -100,7 +98,33 @@ describe('user license api', function () {
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(2);
         a1 = res.body.rows[0].userLicenseID;
-        a2 = res.body.rows[1].userLicenseID;
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should delete userlicense 1 given an userlicense ID', function (done) {
+    request.delete('/api/userlicense/license/' + a1)
+      .expect(200)
+      .end(function (err, res) {
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  var a2;
+  it('should have 1 userlicense instead of 2', function (done) {
+    request.get('/api/userlicense/user/' + r2.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        // console.log(res.body);
+        a2 = res.body.rows[0].userLicenseID;
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.rows).to.have.length(1);
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
@@ -109,7 +133,7 @@ describe('user license api', function () {
 
   var newLicense = 'D6262649';
   it('should update a userlicense given an userlicense id', function (done) {
-    request.put('/api/userlicense/license/' + a1)
+    request.put('/api/userlicense/license/' + a2)
       .send({
         licenseNumber: newLicense,
         licenseState: 'ca',
@@ -134,33 +158,8 @@ describe('user license api', function () {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.rows).to.have.length(2);
-        expect(res.body.rows).to.have.deep.property('[0].licenseNumber', newLicense);
-        expect(res.body.fields).to.be.an('array');
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
-
-  it('should delete userlicense 1 given an userlicense ID', function (done) {
-    request.delete('/api/userlicense/license/' + a1)
-      .expect(200)
-      .end(function (err, res) {
-        expect(res.body.rows.affectedRows).to.equal(1);
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
-
-  it('should have 1 userlicense instead of 2', function (done) {
-    request.get('/api/userlicense/user/' + r2.insertId)
-      .expect(200)
-      .end(function (err, res) {
-        // console.log(res.body);
-        expect(res.body).to.be.an('object');
-        expect(res.body.rows).to.be.not.empty;
-        expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(1);
+        expect(res.body.rows).to.have.deep.property('[0].licenseNumber', newLicense);
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();

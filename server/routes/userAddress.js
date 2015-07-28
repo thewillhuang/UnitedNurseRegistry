@@ -2,7 +2,7 @@
 
 const Router = require('koa-router');
 const userAddress = new Router({
-  prefix: '/api/user/address'
+  prefix: '/api/useraddress'
 });
 const mysql = require('../services/mysql');
 
@@ -10,7 +10,7 @@ module.exports = function (app) {
   userAddress
 
   //create new user address with user id
-  .post('/:userID', function* () {
+  .post('/user/:userID', function* () {
     let userID = this.params.userID;
     let requestJson = this.request.body.fields;
     let q = {};
@@ -19,24 +19,24 @@ module.exports = function (app) {
     let r1 = yield mysql(q);
     let address = {};
     address.fk_UserAddress_userID = userID;
-    address.fk_UserAddress_phoneID = r1.insertId;
+    address.fk_UserAddress_addressID = r1.rows.insertId;
     let q2 = {};
     q2.sql = 'INSERT INTO ?? SET ?';
-    q2.values = ['Address', userAddress];
+    q2.values = ['userAddress', address];
     this.body = yield mysql(q2);
   })
 
   //grab user address based on user id
-  .get('/:userID', function* () {
+  .get('/user/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? ON (?? = ??) WHERE ?? = ?';
-    q.values = ['a.*', 'address', 'a', 'useraddress', 'ua', 'ua.fk_UserAddress_addressID', 'a.addressID', 'ua.fk_UserAddress_userID', userID];
+    q.sql = 'SELECT a.* FROM ?? AS ?? INNER JOIN ?? AS ?? ON (?? = ??) WHERE ?? = ?';
+    q.values = ['address', 'a', 'useraddress', 'ua', 'ua.fk_UserAddress_addressID', 'a.addressID', 'ua.fk_UserAddress_userID', userID];
     this.body = yield mysql(q);
   })
 
   // update user address based on address ID
-  .put('/:addressID', function* () {
+  .put('/address/:addressID', function* () {
     let requestJson = this.request.body.fields;
     let addressID = this.params.addressID;
     let q = {};
@@ -46,7 +46,7 @@ module.exports = function (app) {
   })
 
   // delete address by address id
-  .delete('/:addressID', function* () {
+  .delete('/address/:addressID', function* () {
     let addressID = this.params.addressID;
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';

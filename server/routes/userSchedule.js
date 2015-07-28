@@ -2,7 +2,7 @@
 
 const Router = require('koa-router');
 const userSchedule = new Router({
-  prefix: '/api/user/userSchedule'
+  prefix: '/api/userschedule'
 });
 const mysql = require('../services/mysql');
 

@@ -5,6 +5,8 @@ const mysql = function(q) {
   // makes a db connection for a pool.
   return pool.getConnectionAsync().then(function(connection){
     // grabs the connection
+    // var query = connection.query(q);
+    // console.log(query.sql);
     return connection.queryAsync(q).spread(function(rows, fields){
       // release the connection after the mysql
       connection.release();

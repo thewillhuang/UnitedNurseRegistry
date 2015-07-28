@@ -2,7 +2,7 @@
 
 const Router = require('koa-router');
 const userLicense = new Router({
-  prefix: '/api/user/userLicense'
+  prefix: '/api/userlicense'
 });
 const mysql = require('../services/mysql');
 

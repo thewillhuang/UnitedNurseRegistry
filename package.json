@@ -80,6 +80,7 @@
     "morgan": "^1.6.1",
     "node-bourbon": "^4.2.3",
     "node-neat": "^1.7.2",
+    "node-uuid": "^1.4.3",
     "require-dir": "^0.3.0",
     "supertest": "^1.0.1",
     "vinyl-buffer": "^1.0.0",

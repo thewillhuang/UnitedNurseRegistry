@@ -92,8 +92,7 @@
     "version": "node -v",
     "bower": "bower install --config.interactive=false",
     "start": "node server",
-    "test": "./node_modules/.bin/mocha --harmony",
-    "mysql": "mysql -u root -p '' && mysql dbsetup.sql"
+    "test": "./node_modules/.bin/mocha --harmony"
   },
   "repository": {
     "type": "git",

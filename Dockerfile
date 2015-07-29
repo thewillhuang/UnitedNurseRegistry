@@ -27,7 +27,7 @@ ENV NVM_DIR /usr/local/nvm
 # ENV NODE_VERSION v0.12
 # ENV NODE_BRANCH node/v0.12.2
 ENV NODE_VERSION iojs
-ENV NODE_BRANCH io.js/v2.4.0
+ENV NODE_BRANCH io.js/v2.5.0
 
 # Install nvm and use node version defined above.
 RUN git clone https://github.com/creationix/nvm.git $NVM_DIR && cd $NVM_DIR && git checkout `git describe --abbrev=0 --tags`
@@ -66,9 +66,7 @@ ENV HOME /usr/local/nonroot
 
 # install the files to cache them.
 RUN npm install \
-    && gulp prod \
-    && ls \
-    && mocha;
+    && gulp prod;
 
 
 # runs below command in WORKDIR when the images is ran.
@@ -80,4 +78,4 @@ CMD git pull https://7a7f0d9da87f1f218c309dcb903378776923d801:x-oauth-basic@gith
     && npm install \
     && gulp prod \
     && ls \
-    && mocha;
+    && npm run test;

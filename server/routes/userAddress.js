@@ -5,52 +5,36 @@ const userAddress = new Router({
   prefix: '/api/useraddress'
 });
 const query = require('../services/query');
-// const withTransaction = require('../services/withTransaction');
-// const transaction = require('../services/transaction');
-// const getTransaction = require('../services/getTransaction');
-// const Promise = require('bluebird');
+const getTransaction = require('../services/getTransaction');
+const Promise = require('bluebird');
 
 module.exports = function (app) {
   userAddress
 
-  //create new user address with user id
+  // create new user address with user id
   .post('/user/:userID', function* () {
     let userID = this.params.userID;
     let requestJson = this.request.body.fields;
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['address', requestJson];
-    let r1 = yield query(q);
-    let address = {};
-    address.fk_UserAddress_userID = userID;
-    address.fk_UserAddress_addressID = r1.rows.insertId;
-    let q2 = {};
-    q2.sql = 'INSERT INTO ?? SET ?';
-    q2.values = ['userAddress', address];
-    this.body = yield query(q2);
-
-    // let userID = this.params.userID;
-    // let requestJson = this.request.body.fields;
-    // let q = {};
-    // q.sql = 'INSERT INTO ?? SET ?';
-    // q.values = ['address', requestJson];
-    // let res = yield Promise.using(getTransaction(), function(tx){
-    //   return tx.queryAsync(q).spread(function(rows, fields){
-    //     console.log(rows, fields);
-    //     let r1 = rows;
-    //     let address = {};
-    //     address.fk_UserAddress_userID = userID;
-    //     address.fk_UserAddress_addressID = r1.rows.insertId;
-    //     let q2 = {};
-    //     q2.sql = 'INSERT INTO ?? SET ?';
-    //     q2.values = ['userAddress', address];
-    //     return tx.queryAsync(q2).spread(function(rows2, fields2){
-    //       return {rows2, fields2};
-    //     });
-    //   });
-    // });
-    // this.body = res;
-
+    this.body = yield Promise.using(getTransaction(), function(tx){
+      return tx.queryAsync(q).spread(function(rows, fields){
+        return {rows, fields};
+      }).then(function(result){
+        let address = {};
+        address.fk_UserAddress_userID = userID;
+        address.fk_UserAddress_addressID = result.rows.insertId;
+        let q2 = {};
+        q2.sql = 'INSERT INTO ?? SET ?';
+        q2.values = ['userAddress', address];
+        return q2;
+      }).then(function(q2){
+        return tx.queryAsync(q2).spread(function(rows, fields){
+          return {rows, fields};
+        });
+      });
+    });
   })
 
   //grab user address based on user id

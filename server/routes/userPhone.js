@@ -5,6 +5,8 @@ const userPhone = new Router({
   prefix: '/api/userphone'
 });
 const query = require('../services/query');
+const getTransaction = require('../services/getTransaction');
+const Promise = require('bluebird');
 
 module.exports = function (app) {
   userPhone
@@ -16,14 +18,23 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['phone', requestJson];
-    let r1 = yield query(q);
-    let phone = {};
-    phone.fk_UserPhone_userID = userID;
-    phone.fk_UserPhone_phoneID = r1.rows.insertId;
-    let q2 = {};
-    q2.sql = 'INSERT INTO ?? SET ?';
-    q2.values = ['userphone', phone];
-    this.body = yield query(q2);
+    this.body = yield Promise.using(getTransaction(), function(tx){
+      return tx.queryAsync(q).spread(function(rows, fields){
+        return {rows, fields};
+      }).then(function(result){
+        let phone = {};
+        phone.fk_UserPhone_userID = userID;
+        phone.fk_UserPhone_phoneID = result.rows.insertId;
+        let q2 = {};
+        q2.sql = 'INSERT INTO ?? SET ?';
+        q2.values = ['userphone', phone];
+        return q2;
+      }).then(function(q2){
+        return tx.queryAsync(q2).spread(function(rows, fields){
+          return {rows, fields};
+        });
+      });
+    });
   })
 
   //grab user phone based on user id

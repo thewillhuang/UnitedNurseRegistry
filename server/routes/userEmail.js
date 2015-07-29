@@ -5,6 +5,8 @@ const userEmail = new Router({
   prefix: '/api/useremail'
 });
 const query = require('../services/query');
+const getTransaction = require('../services/getTransaction');
+const Promise = require('bluebird');
 
 module.exports = function (app) {
   userEmail
@@ -16,14 +18,23 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?;';
     q.values = ['email', requestJson];
-    let r1 = yield query(q);
-    let email = {};
-    email.fk_UserEmail_userID = userID;
-    email.fk_UserEmail_emailID = r1.rows.insertId;
-    let q2 = {};
-    q2.sql = 'INSERT INTO ?? SET ?;';
-    q2.values = ['useremail', email];
-    this.body = yield query(q2);
+    this.body = yield Promise.using(getTransaction(), function(tx){
+      return tx.queryAsync(q).spread(function(rows, fields){
+        return {rows, fields};
+      }).then(function(result){
+        let email = {};
+        email.fk_UserEmail_userID = userID;
+        email.fk_UserEmail_emailID = result.rows.insertId;
+        let q2 = {};
+        q2.sql = 'INSERT INTO ?? SET ?;';
+        q2.values = ['useremail', email];
+        return q2;
+      }).then(function(q2){
+        return tx.queryAsync(q2).spread(function(rows, fields){
+          return {rows, fields};
+        });
+      });
+    });
   })
 
   //grab user emails based on user id

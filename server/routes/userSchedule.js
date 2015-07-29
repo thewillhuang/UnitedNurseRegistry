@@ -4,7 +4,7 @@ const Router = require('koa-router');
 const userSchedule = new Router({
   prefix: '/api/userschedule'
 });
-const mysql = require('../services/mysql');
+const query = require('../services/query');
 
 module.exports = function (app) {
   userSchedule
@@ -17,7 +17,7 @@ module.exports = function (app) {
     requestJson.fk_UserSchedule_userID = userID;
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['UserSchedule', requestJson];
-    this.body = yield mysql(q);
+    this.body = yield query(q);
   })
 
   //grab user schedule info based on user id
@@ -27,7 +27,7 @@ module.exports = function (app) {
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     let select = ['userScheduleID', 'shiftStart', 'shiftDuration', 'dayOfWeek'];
     q.values = [select, 'UserSchedule', 'fk_UserSchedule_userID', userID];
-    this.body = yield mysql(q);
+    this.body = yield query(q);
   })
 
   // update user schedule by schedule id
@@ -37,7 +37,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['UserSchedule', requestJson, 'scheduleID', scheduleID];
-    this.body = yield mysql(q);
+    this.body = yield query(q);
   })
 
   // delete user schedule by schedule id
@@ -46,7 +46,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';
     q.values = ['UserSchedule', 'userScheduleID', userScheduleID];
-    this.body = yield mysql(q);
+    this.body = yield query(q);
   });
 
   app.use(userSchedule.routes())

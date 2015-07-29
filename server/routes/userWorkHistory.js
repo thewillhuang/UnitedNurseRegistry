@@ -4,7 +4,7 @@ const Router = require('koa-router');
 const userWorkHistory = new Router({
   prefix: '/api/userworkhistory'
 });
-const mysql = require('../services/mysql');
+const query = require('../services/query');
 
 module.exports = function (app) {
   userWorkHistory
@@ -19,7 +19,7 @@ module.exports = function (app) {
     requestJson.fk_UserWorkHistory_facilityID = facilityID;
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['UserSchedule', requestJson];
-    this.body = yield mysql(q);
+    this.body = yield query(q);
   })
 
   //grab user work history based on user id
@@ -29,7 +29,7 @@ module.exports = function (app) {
     q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
     let select = ['uwh.userHistoryID', 'f.facilityID', 'f.facilityName', 'uwh.months', 'uwh.referenceName', 'uwh.referencePhone'];
     q.values = [select, 'UserWorkHistory', 'uwh', 'Facility', 'f', 'uwh.fk_UserWorkHistory_facilityID', 'f.facilityID', 'us.fk_UserWorkHistory_userID', userID];
-    this.body = yield mysql(q);
+    this.body = yield query(q);
   })
 
   // update user email based on email ID
@@ -39,7 +39,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['UserWorkHistory', requestJson, 'userHistoryID', userHistoryID];
-    this.body = yield mysql(q);
+    this.body = yield query(q);
   })
 
   // delete user specialty by user id and specialty id
@@ -48,7 +48,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';
     q.values = ['UserWorkHistory', 'userHistoryID', userHistoryID];
-    this.body = yield mysql(q);
+    this.body = yield query(q);
   });
 
   app.use(userWorkHistory.routes())

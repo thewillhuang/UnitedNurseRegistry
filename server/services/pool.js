@@ -10,7 +10,7 @@ const options = {
   connectionLimit: 10,
   multipleStatements: true
 };
-Promise.promisifyAll(mysql);
+// Promise.promisifyAll(mysql);
 Promise.promisifyAll(require('mysql/lib/Pool').prototype);
 Promise.promisifyAll(require('mysql/lib/Connection').prototype);
 // long stack trace for debug

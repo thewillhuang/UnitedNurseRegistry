@@ -10,7 +10,7 @@ module.exports = function (app) {
   userSpecialty
 
   //create new user specialty with user id
-  .post('/:userID', function* () {
+  .post('/user/:userID', function* () {
     let userID = this.params.userID;
     let requestJson = this.request.body.fields;
     let q = {};
@@ -27,7 +27,7 @@ module.exports = function (app) {
   })
 
   //grab user specialty based on user id
-  .get('/:userID', function* () {
+  .get('/user/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
@@ -36,7 +36,7 @@ module.exports = function (app) {
   })
 
   // update user specialty by userID, old specialty Id, new specialty ID
-  .put('/:userID/:oldSpecialtyID/:newSpecialtyID', function* () {
+  .put('/user/:userID/old/:oldSpecialtyID/new/:newSpecialtyID', function* () {
     let userID = this.params.userID;
     let oldSpecialtyID = this.params.oldSpecialtyID;
     let newSpecialtyID = this.params.newSpecialtyID;
@@ -47,7 +47,7 @@ module.exports = function (app) {
   })
 
   // delete user specialty by user id and specialty id
-  .delete('/:userID/:specialtyID', function* () {
+  .delete('/user/:userID/specialty/:specialtyID', function* () {
     let userID = this.params.userID;
     let specialtyID = this.params.specialtyID;
     let q = {};

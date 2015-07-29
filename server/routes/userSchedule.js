@@ -10,7 +10,7 @@ module.exports = function (app) {
   userSchedule
 
   //create user schedule given user id
-  .post('/:userID', function* () {
+  .post('/user/:userID', function* () {
     let userID = this.params.userID;
     let requestJson = this.request.body.fields;
     let q = {};
@@ -21,7 +21,7 @@ module.exports = function (app) {
   })
 
   //grab user schedule info based on user id
-  .get('/:userID', function* () {
+  .get('/user/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
@@ -31,17 +31,17 @@ module.exports = function (app) {
   })
 
   // update user schedule by schedule id
-  .put('/:scheduleID', function* () {
+  .put('/schedule/:scheduleID', function* () {
     let requestJson = this.request.body.fields;
     let scheduleID = this.params.scheduleID;
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-    q.values = ['UserSchedule', requestJson, 'scheduleID', scheduleID];
+    q.values = ['UserSchedule', requestJson, 'userScheduleID', scheduleID];
     this.body = yield query(q);
   })
 
   // delete user schedule by schedule id
-  .delete('/:userScheduleID', function* () {
+  .delete('/schedule/:userScheduleID', function* () {
     let userScheduleID = this.params.userScheduleID;
     let q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';

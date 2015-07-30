@@ -100,6 +100,22 @@ describe('user schedule api', function () {
       });
   });
 
+  it('should 304 given same id', function (done) {
+    request.get('/api/userspecialty/user/' + r2.insertId)
+      .expect(304)
+      .end(function (err, res) {
+        // console.log(res.body.rows);
+        a1 = res.body.rows[0].specialtyID;
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.rows).to.have.length(2);
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
   it('should delete an user schedule given an schedule ID', function (done) {
     request.delete('/api/userspecialty/user/' + r2.insertId + '/specialty/' + a1)
       .expect(200)

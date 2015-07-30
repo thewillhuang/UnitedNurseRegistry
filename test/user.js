@@ -72,6 +72,20 @@ describe('user api', function () {
       });
   });
 
+  it('should return a 304 for the same data', function (done) {
+    request.get('/api/user/' + r1.insertId)
+      .expect(304)
+      .end(function (err, res) {
+        console.log(res);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
   it('should update user info given a correct object and user id', function (done) {
     request.put('/api/user/' + r1.insertId)
       .send({

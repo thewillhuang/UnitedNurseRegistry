@@ -103,6 +103,21 @@ describe('user phone api', function () {
       });
   });
 
+  it('should 304 given same data', function (done) {
+    request.get('/api/userphone/user/' + r2.insertId)
+      .expect(304)
+      .end(function (err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.rows).to.have.length(2);
+        a1 = res.body.rows[0].phoneID;
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
   it('should delete an user phone given an phone ID', function (done) {
     request.delete('/api/userphone/phone/' + a1)
       .expect(200)

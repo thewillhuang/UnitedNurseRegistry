@@ -107,6 +107,22 @@ describe('user address api', function () {
       });
   });
 
+  it('should return 304 given the same data', function (done) {
+    request.get('/api/useraddress/user/' + r2.insertId)
+      .expect(304)
+      .end(function (err, res) {
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.rows).to.have.length(2);
+        a1 = res.body.rows[0].addressID;
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
 
   it('should delete user address 1 given an address ID', function (done) {
     request.delete('/api/useraddress/address/' + a1)

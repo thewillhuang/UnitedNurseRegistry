@@ -100,6 +100,22 @@ describe('user email api', function () {
       });
   });
 
+  it('should 304 for same request', function (done) {
+    request.get('/api/useremail/user/' + r2.insertId)
+      .expect(304)
+      .end(function (err, res) {
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.rows).to.have.length(2);
+        a1 = res.body.rows[0].emailID;
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
   it('should delete email 1 given an email ID', function (done) {
     request.delete('/api/useremail/email/' + a1)
       .expect(200)

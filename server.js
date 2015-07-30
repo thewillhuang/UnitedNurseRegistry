@@ -8,7 +8,6 @@ const build = '/public';
 const path = require('path');
 const app = koa();
 const koaBody = require('koa-better-body');
-const compression = require('koa-compress');
 const conditional = require('koa-conditional-get');
 // const passport = require('koa-passport');
 
@@ -24,19 +23,14 @@ app.use(conditional());
 // add etag for hash of request body
 app.use(etag());
 
-// compression
-app.use(compression());
-
 // static server
 app.use(function* staticServer(next) {
   let opts = { root: path.join(__dirname, build) };
   if (this.path === '/') {
-    this.compress = false;
     yield send(this, 'index.html', opts);
   } else if (~this.path.indexOf('api')){
     yield next;
   } else {
-    this.compress = false;
     yield send(this, this.path, opts);
   }
 });

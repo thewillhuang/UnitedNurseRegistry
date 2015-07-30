@@ -5,6 +5,8 @@ const userSpecialty = new Router({
   prefix: '/api/userspecialty'
 });
 const query = require('../services/query');
+const getTransaction = require('../services/getTransaction');
+const Promise = require('bluebird');
 
 module.exports = function (app) {
   userSpecialty
@@ -15,23 +17,45 @@ module.exports = function (app) {
     let requestJson = this.request.body.fields;
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?;';
-    q.values = ['specialty', requestJson];
-    let r1 = yield query(q);
-    let specialty = {};
-    specialty.fk_UserSpecialty_userID = userID;
-    specialty.fk_UserSpecialty_specialtyID = r1.insertId;
-    let q2 = {};
-    q2.sql = 'INSERT INTO ?? SET ?;';
-    q2.values = ['UserSpecialty', userSpecialty];
-    this.body = yield query(q2);
+    q.values = ['Specialty', requestJson];
+    let q1 = {};
+    q1.sql = 'SELECT * FROM ?? WHERE ?';
+    q1.values = ['specialty', requestJson];
+    this.body = yield Promise.using(getTransaction(), function(tx){
+      return tx.queryAsync(q1).spread(function(rows, fields){
+        // result from the select to see if theres a duplicate
+        return {rows, fields};
+      }).then(function(result){
+        // if there is a specialtyID, return the result,
+        return result.rows[0].specialtyID ? result :
+        // else make another query to get an insert id
+        tx.queryAsync(q).spread(function(rows, fields){
+          return {rows, fields};
+        });
+      }).then(function(result){
+        // construct the query to make the next intersection table
+        let specialty = {};
+        specialty.fk_UserSpecialty_userID = userID;
+        specialty.fk_UserSpecialty_specialtyID = result.rows.insertId || result.rows[0].specialtyID;
+        let q2 = {};
+        q2.sql = 'INSERT INTO ?? SET ?';
+        q2.values = ['UserSpecialty', specialty];
+        return q2;
+      }).then(function(q2){
+        // make the query and return the final result
+        return tx.queryAsync(q2).spread(function(rows, fields){
+          return {rows, fields};
+        });
+      });
+    });
   })
 
   //grab user specialty based on user id
   .get('/user/:userID', function* () {
     let userID = this.params.userID;
     let q = {};
-    q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
-    q.values = ['s.specialty', 'specialty', 's', 'UserSpecialty', 'us', 'us.fk_UserSpecialty_specialtyID', 's.specialtyID', 'us.fk_UserSpecialty_userID', userID];
+    q.sql = 'SELECT s.* FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
+    q.values = ['specialty', 's', 'UserSpecialty', 'us', 'us.fk_UserSpecialty_specialtyID', 's.specialtyID', 'us.fk_UserSpecialty_userID', userID];
     this.body = yield query(q);
   })
 

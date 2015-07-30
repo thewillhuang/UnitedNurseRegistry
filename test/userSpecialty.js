@@ -55,12 +55,10 @@ describe('user schedule api', function () {
       });
   });
 
-  it('insert schedule 1 given a user id', function (done) {
+  it('insert specialty 1 given a user id', function (done) {
     request.post('/api/userspecialty/user/' + r2.insertId)
       .send({
-        shiftStart: 7,
-        shiftDuration: 12,
-        dayOfWeek: 1
+        specialty: 'icu'
       })
       .expect(200)
       .end(function (err, res) {
@@ -71,12 +69,10 @@ describe('user schedule api', function () {
       });
   });
 
-  it('insert schedule 2 given a user id', function (done) {
+  it('insert specialty 2 given a user id', function (done) {
     request.post('/api/userspecialty/user/' + r2.insertId)
       .send({
-        shiftStart: 7,
-        shiftDuration: 12,
-        dayOfWeek: 1
+        specialty: 'med surg'
       })
       .expect(200)
       .end(function (err, res) {
@@ -88,16 +84,16 @@ describe('user schedule api', function () {
   });
 
   var a1;
-  it('should have 2 schedule given a user id', function (done) {
+  it('should have 2 specialty given a user id', function (done) {
     request.get('/api/userspecialty/user/' + r2.insertId)
       .expect(200)
       .end(function (err, res) {
         // console.log(res.body.rows);
+        a1 = res.body.rows[0].specialtyID;
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(2);
-        a1 = res.body.rows[0].userScheduleID;
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
@@ -105,7 +101,7 @@ describe('user schedule api', function () {
   });
 
   it('should delete an user schedule given an schedule ID', function (done) {
-    request.delete('/api/userspecialty/schedule/' + a1)
+    request.delete('/api/userspecialty/user/' + r2.insertId + '/specialty/' + a1)
       .expect(200)
       .end(function (err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
@@ -119,7 +115,7 @@ describe('user schedule api', function () {
     request.get('/api/userspecialty/user/' + r2.insertId)
       .expect(200)
       .end(function (err, res) {
-        a2 = res.body.rows[0].userScheduleID;
+        a2 = res.body.rows[0].specialtyID;
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
@@ -130,14 +126,8 @@ describe('user schedule api', function () {
       });
   });
 
-  var newSchedule = 7;
   it('should update a schedule given an schedule id', function (done) {
-    request.put('/api/userspecialty/schedule/' + a2)
-      .send({
-        shiftStart: 7,
-        shiftDuration: 12,
-        dayOfWeek: newSchedule
-      })
+    request.put('/api/userspecialty/user/' + r2.insertId + '/old/' + a1 + '/new/' + a2)
       .expect(200)
       .end(function (err, res) {
         // console.log(res.body);
@@ -157,7 +147,7 @@ describe('user schedule api', function () {
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(1);
-        expect(res.body.rows).to.have.deep.property('[0].dayOfWeek', newSchedule);
+        expect(res.body.rows).to.have.deep.property('[0].specialtyID', a2);
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
@@ -165,7 +155,7 @@ describe('user schedule api', function () {
   });
 
   it('should delete user schedule 1 given an schedule ID', function (done) {
-    request.delete('/api/userspecialty/specialty/' + a2)
+    request.delete('/api/userspecialty/user/' + r2.insertId + '/specialty/' + a2)
       .expect(200)
       .end(function (err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);

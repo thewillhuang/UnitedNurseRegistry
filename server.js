@@ -12,43 +12,45 @@ const compression = require('koa-compress');
 const conditional = require('koa-conditional-get');
 // const passport = require('koa-passport');
 
+// enable proxy through another server
+app.proxy = true;
+
 // logging
 app.use(logger());
 
 // returns status code 304 if etag is the same
 app.use(conditional());
 
-// add etag for cacheing static files
+// add etag for hash of request body
 app.use(etag());
-
-// enable proxy through another server
-app.proxy = true;
-
-// body json parsing
-app.use(koaBody());
 
 // compression
 app.use(compression());
 
-// use static server
+// static server
 app.use(function* staticServer(next) {
   let opts = { root: path.join(__dirname, build) };
   if (this.path === '/') {
+    this.compress = false;
     yield send(this, 'index.html', opts);
   } else if (~this.path.indexOf('api')){
     yield next;
   } else {
+    this.compress = false;
     yield send(this, this.path, opts);
   }
 });
 
+// body json parsing
+app.use(koaBody());
+
 // initialize passport
-// app.use(passport.initialize());
 // app.use(passport.session());
+// app.use(passport.initialize());
 
 // unprotected routes
 
-// is authed checker
+// is authed checker that ensures no unauthroized request can make it pass to secured routes
 
 // secured routes
 require('./server/routes/userRoutes')(app);

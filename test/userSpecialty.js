@@ -100,9 +100,9 @@ describe('user schedule api', function () {
       });
   });
 
-  it('should 304 given same id', function (done) {
+  it('should 200 given same id', function (done) {
     request.get('/api/userspecialty/user/' + r2.insertId)
-      .expect(304)
+      .expect(200)
       .end(function (err, res) {
         // console.log(res.body.rows);
         a1 = res.body.rows[0].specialtyID;

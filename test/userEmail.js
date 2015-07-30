@@ -100,9 +100,9 @@ describe('user email api', function () {
       });
   });
 
-  it('should 304 for same request', function (done) {
+  it('should 200 for same request', function (done) {
     request.get('/api/useremail/user/' + r2.insertId)
-      .expect(304)
+      .expect(200)
       .end(function (err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');

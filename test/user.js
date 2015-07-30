@@ -72,11 +72,11 @@ describe('user api', function () {
       });
   });
 
-  it('should return a 304 for the same data', function (done) {
+  it('should return a 200 for the same data', function (done) {
     request.get('/api/user/' + r1.insertId)
-      .expect(304)
+      .expect(200)
       .end(function (err, res) {
-        console.log(res);
+        // console.log(res);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');

@@ -104,9 +104,9 @@ describe('user schedule api', function () {
       });
   });
 
-  it('should 304 given same data', function (done) {
+  it('should 200 given same data', function (done) {
     request.get('/api/userschedule/user/' + r2.insertId)
-      .expect(304)
+      .expect(200)
       .end(function (err, res) {
         // console.log(res.body.rows);
         expect(res.body).to.be.an('object');

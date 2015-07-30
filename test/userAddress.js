@@ -107,9 +107,9 @@ describe('user address api', function () {
       });
   });
 
-  it('should return 304 given the same data', function (done) {
+  it('should return 200 given the same data', function (done) {
     request.get('/api/useraddress/user/' + r2.insertId)
-      .expect(304)
+      .expect(200)
       .end(function (err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');

@@ -26,16 +26,15 @@ module.exports = function (app) {
         // result from the select to see if theres a duplicate
         return {rows, fields};
       }).then(function(result){
-        console.log(result);
         // if there is a specialtyID, return the result,
-        return (result.rows.length !== 0) ? result :
+        return (result.rows.length !== 0)
+        ? result
         // else make another query to get an insert id
-        tx.queryAsync(q).spread(function(rows, fields){
-          return {rows, fields};
-        });
+        : tx.queryAsync(q).spread(function(rows, fields){
+            return {rows, fields};
+          });
       }).then(function(result){
-        console.log(result);
-        // construct the query to make the next intersection table
+        // construct the query to make the intersection table
         let specialty = {};
         specialty.fk_UserSpecialty_userID = userID;
         specialty.fk_UserSpecialty_specialtyID = result.rows.insertId || result.rows[0].specialtyID;

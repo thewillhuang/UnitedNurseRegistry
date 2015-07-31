@@ -44,7 +44,8 @@ describe('facility api', function () {
       .send({
         facilityName: uuid.v4(),
         facilityGeoHash: 27898503349316,
-        facilityPwHash: uuid.v4()
+        facilityPwHash: uuid.v4(),
+        facilityEMR: uuid.v4()
       })
       .expect(200)
       .end(function (err, res) {
@@ -90,7 +91,8 @@ describe('facility api', function () {
       .send({
         facilityName: uuid.v4(),
         facilityGeoHash: 27898503349316,
-        facilityPwHash: uuid.v4()
+        facilityPwHash: uuid.v4(),
+        facilityEMR: uuid.v4()
       })
       .expect(200)
       .end(function (err, res) {

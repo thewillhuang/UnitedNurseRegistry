@@ -9,7 +9,7 @@ var request = supertest(app.listen());
 var uuid = require('node-uuid');
 chai.use(chaiAsPromised);
 
-describe('user schedule api', function () {
+describe('user specialty api', function () {
 
   it('should reject invalid get requests', function (done) {
     request.get('/api/userspecialty/user/')
@@ -62,6 +62,7 @@ describe('user schedule api', function () {
       })
       .expect(200)
       .end(function (err, res) {
+        console.log(res.body);
         expect(res).to.be.an('object');
         expect(res.body.rows.insertId).to.be.an('number');
         expect(err).to.be.a('null');

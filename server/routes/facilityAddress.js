@@ -44,7 +44,7 @@ module.exports = function (app) {
     let facilityID = this.params.facilityID;
     let q = {};
     q.sql = 'SELECT a.* FROM ?? AS ?? INNER JOIN ?? AS ?? ON (?? = ??) WHERE ?? = ?';
-    q.values = ['address', 'a', 'facilityaddress', 'fa', 'fa.fk_facilityAddress_addressID', 'a.addressID', 'fa.fk_facilityAddress_userID', facilityID];
+    q.values = ['address', 'a', 'facilityaddress', 'fa', 'fa.fk_facilityAddress_addressID', 'a.addressID', 'fa.fk_facilityAddress_facilityID', facilityID];
     this.body = yield query(q);
   })
 

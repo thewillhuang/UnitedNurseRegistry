@@ -26,11 +26,12 @@ module.exports = function (app) {
         // result from the select to see if theres a duplicate
         return {rows, fields};
       }).then(function(result){
-        // if there is a specialtyID, return the result,
+        // if there is a an existing specialty, return the result,
         return (result.rows.length !== 0)
         ? result
         // else make another query to get an insert id
         : tx.queryAsync(q).spread(function(rows, fields){
+          // return that for the next promise
             return {rows, fields};
           });
       }).then(function(result){

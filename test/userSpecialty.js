@@ -62,7 +62,7 @@ describe('user specialty api', function () {
       })
       .expect(200)
       .end(function (err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res).to.be.an('object');
         expect(res.body.rows.insertId).to.be.an('number');
         expect(err).to.be.a('null');

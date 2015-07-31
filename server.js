@@ -48,6 +48,7 @@ app.use(koaBody());
 
 // secured routes
 require('./server/routes/userRoutes')(app);
+require('./server/routes/facilityRoutes')(app);
 
 app.listen(port);
 console.log('server listening on port:', port);

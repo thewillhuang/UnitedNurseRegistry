@@ -1,19 +1,19 @@
 'use strict';
 
 const Router = require('koa-router');
-const userAddress = new Router({
-  prefix: '/api/useraddress'
+const facilityAddress = new Router({
+  prefix: '/api/facilityAddress'
 });
 const query = require('../services/query');
 const getTransaction = require('../services/getTransaction');
 const Promise = require('bluebird');
 
 module.exports = function (app) {
-  userAddress
+  facilityAddress
 
-  // create new user address with user id
-  .post('/user/:userID', function* () {
-    let userID = this.params.userID;
+  // create new facility address with facility id
+  .post('/facility/:facilityID', function* () {
+    let facilityID = this.params.facilityID;
     let requestJson = this.request.body.fields;
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?';
@@ -23,11 +23,11 @@ module.exports = function (app) {
         return {rows, fields};
       }).then(function(result){
         let address = {};
-        address.fk_UserAddress_userID = userID;
-        address.fk_UserAddress_addressID = result.rows.insertId;
+        address.fk_FacilityAddress_facilityID = facilityID;
+        address.fk_FacilityAddress_addressID = result.rows.insertId;
         let q2 = {};
         q2.sql = 'INSERT INTO ?? SET ?';
-        q2.values = ['userAddress', address];
+        q2.values = ['facilityAddress', address];
         return q2;
       }).then(function(q2){
         return tx.queryAsync(q2).spread(function(rows, fields){
@@ -39,12 +39,12 @@ module.exports = function (app) {
     });
   })
 
-  //grab user address based on user id
-  .get('/user/:userID', function* () {
-    let userID = this.params.userID;
+  //grab facility address based on facility id
+  .get('/facility/:facilityID', function* () {
+    let facilityID = this.params.facilityID;
     let q = {};
     q.sql = 'SELECT a.* FROM ?? AS ?? INNER JOIN ?? AS ?? ON (?? = ??) WHERE ?? = ?';
-    q.values = ['address', 'a', 'useraddress', 'ua', 'ua.fk_UserAddress_addressID', 'a.addressID', 'ua.fk_UserAddress_userID', userID];
+    q.values = ['address', 'a', 'facilityaddress', 'fa', 'fa.fk_facilityAddress_addressID', 'a.addressID', 'fa.fk_facilityAddress_userID', facilityID];
     this.body = yield query(q);
   })
 
@@ -67,6 +67,6 @@ module.exports = function (app) {
     this.body = yield query(q);
   });
 
-  app.use(userAddress.routes())
-    .use(userAddress.allowedMethods());
+  app.use(facilityAddress.routes())
+    .use(facilityAddress.allowedMethods());
 };

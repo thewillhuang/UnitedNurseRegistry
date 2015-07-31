@@ -9,14 +9,18 @@ module.exports = function acquireTransaction() {
     });
   }).disposer(function(connection, promise) {
     if (promise.isFulfilled()) {
+      // console.log('commit transaction');
       return connection.commitAsync().then(function () {
         connection.release();
-      }, function () {
+      }).catch(function(e){
+        // console.log('commit failed', e);
         return connection.rollbackAsync().then(function () {
           connection.release();
+          return e;
         });
       });
     } else {
+      // console.log('query failed, rollback');
       return connection.rollbackAsync().then(function () {
         connection.release();
       });

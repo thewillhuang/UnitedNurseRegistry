@@ -33,6 +33,8 @@ module.exports = function (app) {
         return tx.queryAsync(q2).spread(function(rows, fields){
           return {rows, fields};
         });
+      }).catch(function(error){
+        return error;
       });
     });
   })

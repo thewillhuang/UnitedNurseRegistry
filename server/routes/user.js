@@ -23,7 +23,7 @@ module.exports = function (app) {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    let select = ['userID', 'firstName', 'middleName', 'lastName', 'userGeoHash', 'dob'];
+    let select = ['userID', 'firstName', 'middleName', 'lastName', 'userGeoHash', 'dob', 'userName'];
     q.values = [select, 'user', 'userID', userID];
     this.body = yield query(q);
   })

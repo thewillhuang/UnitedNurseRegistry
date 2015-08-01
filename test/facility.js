@@ -86,13 +86,14 @@ describe('facility api', function () {
       });
   });
 
+  let updateinfo = uuid.v4();
   it('should update facility info given a correct object and facility id', function (done) {
     request.put('/api/facility/' + r1.insertId)
       .send({
         facilityName: uuid.v4(),
         facilityGeoHash: 27898503349316,
         facilityPwHash: uuid.v4(),
-        facilityEMR: uuid.v4()
+        facilityEMR: updateinfo
       })
       .expect(200)
       .end(function (err, res) {
@@ -102,6 +103,19 @@ describe('facility api', function () {
       });
   });
 
+  it('should get an updated facility info', function (done) {
+    request.get('/api/facility/' + r1.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        expect(res.body.rows[0].facilityEMR).to.equal(updateinfo);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
 
   it('should delete a facility given a correct facility id', function (done) {
     request.delete('/api/facility/' + r1.insertId)

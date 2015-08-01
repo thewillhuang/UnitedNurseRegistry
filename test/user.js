@@ -86,6 +86,7 @@ describe('user api', function () {
       });
   });
 
+  let updateinfo = uuid.v4();
   it('should update user info given a correct object and user id', function (done) {
     request.put('/api/user/' + r1.insertId)
       .send({
@@ -95,11 +96,25 @@ describe('user api', function () {
         userGeoHash: 27898503349316,
         userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
         dob: '1986-04-08',
-        userName: uuid.v4()
+        userName: updateinfo
       })
       .expect(200)
       .end(function (err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should get an updated user info', function (done) {
+    request.get('/api/user/' + r1.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        expect(res.body.rows[0].userName).to.equal(updateinfo);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });

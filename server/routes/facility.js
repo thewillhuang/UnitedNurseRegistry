@@ -25,7 +25,7 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     // console.log(q);
-    let select = ['facilityName', 'facilityGeohash'];
+    let select = ['facilityName', 'facilityGeohash', 'facilityEMR'];
     q.values = [select, 'facility', 'facilityID', facilityID];
     this.body = yield query(q);
   })

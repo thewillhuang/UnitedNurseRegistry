@@ -9,7 +9,7 @@ var request = supertest(app.listen());
 var uuid = require('node-uuid');
 chai.use(chaiAsPromised);
 
-describe('user schedule api', function () {
+describe('user work history api', function () {
 
   it('should reject invalid get requests', function (done) {
     request.get('/api/userworkhistory/user/')
@@ -57,7 +57,7 @@ describe('user schedule api', function () {
   });
 
   let f1;
-  it('should insert a new facility given a correct object', function (done) {
+  it('should insert a new work history given a correct object', function (done) {
     request.post('/api/facility/')
       .send({
         facilityName: uuid.v4(),
@@ -67,7 +67,7 @@ describe('user schedule api', function () {
       })
       .expect(200)
       .end(function (err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         f1 = res.body.rows;
         expect(f1).to.be.an('object');
         expect(f1.insertId).to.be.an('number');
@@ -110,11 +110,11 @@ describe('user schedule api', function () {
   });
 
   var a1;
-  it('should have 2 schedule given a user id', function (done) {
+  it('should have 2 work history given a user id', function (done) {
     request.get('/api/userworkhistory/user/' + r1.insertId)
       .expect(200)
       .end(function (err, res) {
-        console.log(res.body.rows);
+        // console.log(res.body.rows);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
@@ -142,7 +142,7 @@ describe('user schedule api', function () {
       });
   });
 
-  it('should delete an user schedule given an schedule ID', function (done) {
+  it('should delete an user work history given an history ID', function (done) {
     request.delete('/api/userworkhistory/history/' + a1)
       .expect(200)
       .end(function (err, res) {
@@ -153,7 +153,7 @@ describe('user schedule api', function () {
   });
 
   var a2;
-  it('should have 1 schedule instead of 2', function (done) {
+  it('should have 1 work history instead of 2', function (done) {
     request.get('/api/userworkhistory/user/' + r1.insertId)
       .expect(200)
       .end(function (err, res) {
@@ -169,7 +169,7 @@ describe('user schedule api', function () {
   });
 
   var newWorkHistory =  uuid.v4();
-  it('should update a schedule given an schedule id', function (done) {
+  it('should update a work history given an history id', function (done) {
     request.put('/api/userworkhistory/history/' + a2)
       .send({
         months: 3,
@@ -187,7 +187,7 @@ describe('user schedule api', function () {
       });
   });
 
-  it('should have an updated schedule', function (done) {
+  it('should have an updated work history', function (done) {
     request.get('/api/userworkhistory/user/' + r1.insertId)
       .expect(200)
       .end(function (err, res) {
@@ -202,7 +202,7 @@ describe('user schedule api', function () {
       });
   });
 
-  it('should delete user schedule 1 given an schedule ID', function (done) {
+  it('should delete user work history 1 given an history ID', function (done) {
     request.delete('/api/userworkhistory/history/' + a2)
       .expect(200)
       .end(function (err, res) {
@@ -212,7 +212,7 @@ describe('user schedule api', function () {
       });
   });
 
-  it('should have 0 phone number instead of 1', function (done) {
+  it('should have 0 work history instead of 1', function (done) {
     request.get('/api/userworkhistory/user/' + r1.insertId)
       .expect(200)
       .end(function (err, res) {

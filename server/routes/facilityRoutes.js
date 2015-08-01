@@ -6,4 +6,5 @@ module.exports = function(app) {
   require('./facilityAddress')(app);
   require('./facilityEmail')(app);
   require('./facilityPhone')(app);
+  require('./facilityUser')(app);
 };

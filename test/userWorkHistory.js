@@ -25,7 +25,7 @@ describe('user work history api', function () {
     request.get('/api/userworkhistory/user/abc')
       .expect(200)
       .end(function (err, res) {
-        // console.log(res.body);
+        // console.log(res.header);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.be.empty;

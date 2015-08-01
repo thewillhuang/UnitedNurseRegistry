@@ -6,7 +6,6 @@ const $ = require('jquery');
 
 let _que = [];
 let processing = false;
-
 //all ajax gets routed here.
 let universalPost = (payload, url, callback) => {
   // console.log('called');

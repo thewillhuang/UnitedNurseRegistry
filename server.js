@@ -9,6 +9,7 @@ const path = require('path');
 const app = koa();
 const koaBody = require('koa-better-body');
 const conditional = require('koa-conditional-get');
+const helmet = require('koa-helmet');
 // const passport = require('koa-passport');
 
 // enable proxy through another server
@@ -17,6 +18,8 @@ app.proxy = true;
 // logging
 app.use(logger());
 
+// use helmet
+app.use(helmet());
 // returns status code 304 if etag is the same
 app.use(conditional());
 
@@ -49,6 +52,7 @@ app.use(koaBody());
 // secured routes
 require('./server/routes/userRoutes')(app);
 require('./server/routes/facilityRoutes')(app);
+require('./server/routes/shiftRoutes')(app);
 
 app.listen(port);
 console.log('server listening on port:', port);

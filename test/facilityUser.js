@@ -178,8 +178,8 @@ describe('facility user api', function () {
     request.get('/api/facilityuser/facility/' + r2.insertId)
       .expect(200)
       .end(function (err, res) {
-        console.log(res.body);
-        console.log(newuser);
+        // console.log(res.body);
+        // console.log(newuser);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');

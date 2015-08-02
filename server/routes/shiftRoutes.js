@@ -2,7 +2,7 @@
 
 // all user related routes
 module.exports = function(app) {
-  // require('./user')(app);
+  require('./shift')(app);
   // require('./userAddress')(app);
   // require('./userEmail')(app);
   // require('./userLicense')(app);

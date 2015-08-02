@@ -7,8 +7,8 @@ const options = {
   user: 'root',
   password: '',
   database: 'unrdb',
-  connectionLimit: 10,
-  multipleStatements: true
+  connectionLimit: 100,
+  // ssl: 'Amazon RDS'
 };
 Promise.promisifyAll(mysql);
 Promise.promisifyAll(require('mysql/lib/Pool').prototype);

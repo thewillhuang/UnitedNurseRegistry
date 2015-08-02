@@ -117,7 +117,7 @@ describe('user specialty api', function () {
       });
   });
 
-  it('should delete an user schedule given an schedule ID', function (done) {
+  it('should delete an user specialty given an specialty ID', function (done) {
     request.delete('/api/userspecialty/user/' + r2.insertId + '/specialty/' + a1)
       .expect(200)
       .end(function (err, res) {
@@ -128,7 +128,7 @@ describe('user specialty api', function () {
   });
 
   var a2;
-  it('should have 1 schedule instead of 2', function (done) {
+  it('should have 1 specialty instead of 2', function (done) {
     request.get('/api/userspecialty/user/' + r2.insertId)
       .expect(200)
       .end(function (err, res) {
@@ -143,7 +143,7 @@ describe('user specialty api', function () {
       });
   });
 
-  it('should update a schedule given an schedule id', function (done) {
+  it('should update a specialty given an specialty id', function (done) {
     request.put('/api/userspecialty/user/' + r2.insertId + '/old/' + a1 + '/new/' + a2)
       .expect(200)
       .end(function (err, res) {
@@ -156,7 +156,7 @@ describe('user specialty api', function () {
       });
   });
 
-  it('should have an updated schedule', function (done) {
+  it('should have an updated specialty', function (done) {
     request.get('/api/userspecialty/user/' + r2.insertId)
       .expect(200)
       .end(function (err, res) {
@@ -171,7 +171,7 @@ describe('user specialty api', function () {
       });
   });
 
-  it('should delete user schedule 1 given an schedule ID', function (done) {
+  it('should delete user specialty 1 given an specialty ID', function (done) {
     request.delete('/api/userspecialty/user/' + r2.insertId + '/specialty/' + a2)
       .expect(200)
       .end(function (err, res) {

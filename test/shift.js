@@ -118,7 +118,8 @@ describe('shift api', function () {
         shiftStartHour: 7,
         date: '2015-09-13',
         payPerHour: 40.60,
-        specialtyID: sp1
+        specialtyID: sp1,
+        shiftDuration: 12
       })
       .expect(200)
       .end(function (err, res) {
@@ -168,11 +169,12 @@ describe('shift api', function () {
         shiftStartHour: 7,
         date: '2015-09-13',
         payPerHour: updateinfo,
-        specialtyID: sp1
+        specialtyID: sp1,
+        shiftDuration: 12
       })
       .expect(200)
       .end(function (err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
         done();

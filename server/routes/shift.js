@@ -53,13 +53,14 @@ module.exports = function (app) {
     q.values = ['shift', 'fk_Shift_userID', userID];
   })
 
+  //TODO node geohash function
   // view all the open shifts by location and based on distance --> returns shift information, including facility info
   // get
   .get('/geohash/:geoHash', function* (){
     let geoHash = this.params.geoHash;
     let q = {};
     q.sql = 'SELECT * FROM ?? INNER JOIN ?? ON (?? = ??) WHERE ?? = ?';
-    q.values = ['shift', 'facility', 'facility.facilityGeohash', geoHash, 'shift.open', 1];
+    q.values = ['shift', 'facility', 'facility.facilityID', 'shift.fk_Shift_facilityID', 'shift.open', 1];
     this.body = yield query(q);
   })
 

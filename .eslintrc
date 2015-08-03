@@ -2,11 +2,9 @@
   "parser": "babel-eslint",
   "env": {
     "browser": true,
-    "node": true,
-    "mocha": true
+    "node": true
   },
   "rules": {
-    "camelcase": [2, {"properties": "never"}],
     "quotes": [2, "single"],
     "eol-last": [0],
     "guard-for-in": 1,
@@ -29,11 +27,6 @@
     "react/self-closing-comp": 1,
     "react/sort-comp": 1,
     "react/wrap-multilines": 1
-  },
-  "globals": {
-    "GLOBAL_WEB_ROOT": true,
-    "API_ROOT": true,
-    "$": true
   },
   "plugins": [
     "react"

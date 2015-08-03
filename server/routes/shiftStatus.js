@@ -11,83 +11,75 @@ module.exports = function (app) {
 
   // grab the shift status by shift id --> rturns open, pending or completed
   // get
-  .get('/shiftID', function* (){
+  .get('/shift/:shiftID', function* (){
     let shiftID = this.params.shiftID;
     let q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?'
-    q.values = ['shiftStatus', 'shift', 'shiftID', shiftID];
-    let res = query(q);
-    if (res.rows.shiftStatus == 0) {
-      console.log(res);
-      this.body = 'open';
-    } else if (res.rows.shiftStatus == 1) {
-      console.log(res);
-      this.body = 'pending';
-    } else {
-      console.log(res);
-      this.body = 'completed';
-    }
-  })
-
-  // view all the open shifts by location and based on distance --> returns shift information, including facility info
-  // get
-  .get('/shiftID/')
-
-  // view all open shifts by hospital id --> return a list of shift information
-  // get
-
-  // view all open shifts by userID --> returns a list of shift information
-  // get
-
-  // reject an open shift by shiftID --> reject an open shift with shift ID
-  // post
-
-  // accept an open shift by shiftID -->  accept the shift and move it to pending shift with shift ID
-  // post
-
-  // view %viewed status by shiftID  --> returns number of views, and number of rejected views based on shift ID
-  // get
-
-  // view all scheduled shifts by hospital id --> returns a list of shift information
-  // get
-
-  // view all scheduled shifts by userID --> returns a list of shift information
-  // get
-
-  // mark shift as completed by shiftID
-  // post
-
-  //grab shiftStatus info based on shift id
-  .get('/:shiftID', function* () {
-    let shiftID = this.params.shiftID;
-    let q = {};
-    q.sql = 'SELECT * FROM ?? WHERE ?? = ?';
-    q.values = ['openshifts', 'fk_OpenShifts_shiftID', shiftID];
-    let openShifts = yield query(q);
-    console.log(openShifts);
-    // this.body = yield query(q);
-  })
-
-  // update shiftStatus data by shiftStatus id
-  .put('/:shiftStatusID', function* () {
-    let requestJson = this.request.body.fields;
-    let specialtyID = requestJson.specialtyID;
-    delete requestJson.specialtyID;
-    requestJson.fk_shiftStatus_specialtyID = specialtyID;
-    let shiftStatusID = this.params.shiftStatusID;
-    let q = {};
-    q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-    q.values = ['shiftStatus', requestJson, 'shiftStatusID', shiftStatusID];
-    // console.log(q);
+    let select = ['open', 'pending', 'completed'];
+    q.values = [select, 'shift', 'shiftID', shiftID];
     this.body = yield query(q);
   })
 
-  // delete shiftStatus by shiftStatus id
-  .delete('/:shiftStatusID', function* () {
-    let shiftStatusID = this.params.shiftStatusID;
+  // view count by shiftID  --> returns number of views, and number of rejected views based on shift ID
+  // get
+  .get('/viewed/shift/:shiftID', function* (){
+    let shiftID = this.params.shiftID;
     let q = {};
-    q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-    q.values = ['shiftStatus', 'shiftStatusID', shiftStatusID];
+    q.sql = 'SELECT count(*) FROM ?? WHERE ?? = ?'
+    q.values = ['ShiftViewed', 'fk_ShiftViewed_shiftID', shiftID];
+  })
+
+  // mark shift as completed by shiftID
+  // post
+  .post('/completed/shift/:shiftID', function*(){
+    let userID = this.params.userID;
+    let q = {};
+    q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+    let set = {open: 0, pending: 0, completed: 1};
+    q.values = ['shift', set, 'shiftID', shiftID];
+    this.body = yield query(q);
+  })
+
+  // mark shift as pending by shiftID
+  // post
+  .post('/pending/shift/:shiftID/user/:userID', function*(){
+    let userID = this.params.userID;
+    let shiftID = this.params.shiftID;
+    let q = {};
+    q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+    let set = {open: 0, pending: 1, completed: 0, fk_Shift_userID: userID};
+    q.values = ['shift', set, 'shiftID', shiftID];
+    this.body = yield query(q);
+  })
+
+  // mark shift as open by shiftID
+  // post
+  .post('/open/shift/:shiftID', function*(){
+    let userID = this.params.userID;
+    let q = {};
+    q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+    let set = {open: 1, pending: 0, completed: 0};
+    q.values = ['shift', set, 'shiftID', shiftID];
+    this.body = yield query(q);
+  })
+
+  // view all open shifts by hospital id --> return a list of shift information
+  // get
+  .get('/open/facility/:facilityID', function*(){
+    let facilityID = this.params.facilityID;
+    let q = {};
+    q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?'
+    q.values = ['shift', 'open', 1, 'fk_Shift_facilityID', facilityID];
+    this.body = yield query(q);
+  })
+
+  // view all open shifts by userID --> returns a list of shift information
+  // get
+  .get('/open/user/:userID', function*(){
+    let userID = this.params.userID;
+    let q = {}
+    q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?'
+    q.values = ['shift', 'open', 1, 'fk_Shift_userID', userID];
     this.body = yield query(q);
   });
 

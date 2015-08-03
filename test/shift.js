@@ -124,7 +124,6 @@ describe('shift api', function () {
       })
       .expect(200)
       .end(function (err, res) {
-        console.log(res.body);
         s1 = res.body.rows;
         // console.log(s1);
         expect(s1).to.be.an('object');

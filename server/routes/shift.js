@@ -13,7 +13,10 @@ module.exports = function (app) {
   .post('/', function* () {
     let requestJson = this.request.body.fields;
     let specialtyID = requestJson.specialtyID;
+    let facilityID = requestJson.facilityID;
     delete requestJson.specialtyID;
+    delete requestJson.facilityID;
+    requestJson.fk_Shift_facilityID = facilityID;
     requestJson.fk_Shift_specialtyID = specialtyID;
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?';
@@ -36,13 +39,20 @@ module.exports = function (app) {
   .put('/:shiftID', function* () {
     let requestJson = this.request.body.fields;
     let specialtyID = requestJson.specialtyID;
-    delete requestJson.specialtyID;
-    requestJson.fk_Shift_specialtyID = specialtyID;
+    let facilityID = requestJson.facilityID;
+    if (specialtyID) {
+      delete requestJson.specialtyID;
+      requestJson.fk_Shift_specialtyID = specialtyID;
+    }
+    if (facilityID) {
+      delete requestJson.facilityID;
+      requestJson.fk_Shift_facilityID = facilityID;
+    }
     let shiftID = this.params.shiftID;
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['shift', requestJson, 'shiftID', shiftID];
-    console.log(q);
+    // console.log(q);
     this.body = yield query(q);
   })
 

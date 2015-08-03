@@ -19,7 +19,8 @@ app.proxy = true;
 app.use(logger());
 
 // use helmet
-app.use(helmet());
+// app.use(helmet());
+
 // returns status code 304 if etag is the same
 app.use(conditional());
 

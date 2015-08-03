@@ -60,7 +60,8 @@ describe('user schedule api', function () {
       .send({
         shiftStart: 7,
         shiftDuration: 12,
-        dayOfWeek: 1
+        dayOfWeek: 1,
+        minimumPayPerHour: 40.52
       })
       .expect(200)
       .end(function (err, res) {
@@ -76,7 +77,8 @@ describe('user schedule api', function () {
       .send({
         shiftStart: 7,
         shiftDuration: 12,
-        dayOfWeek: 1
+        dayOfWeek: 1,
+        minimumPayPerHour: 40.51
       })
       .expect(200)
       .end(function (err, res) {

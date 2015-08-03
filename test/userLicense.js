@@ -60,7 +60,8 @@ describe('user license api', function () {
       .send({
         licenseNumber: uuid.v4(),
         licenseState: 'ca',
-        licensePhotoUrl: uuid.v4()
+        licensePhotoUrl: uuid.v4(),
+        expiration: '2015-04-08'
       })
       .expect(200)
       .end(function (err, res) {
@@ -76,7 +77,8 @@ describe('user license api', function () {
       .send({
         licenseNumber: uuid.v4(),
         licenseState: 'ca',
-        licensePhotoUrl: uuid.v4()
+        licensePhotoUrl: uuid.v4(),
+        expiration: '2015-04-08'
       })
       .expect(200)
       .end(function (err, res) {

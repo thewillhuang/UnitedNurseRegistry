@@ -11,7 +11,7 @@ chai.use(chaiAsPromised);
 
 // store primary key
 
-describe('shift api', function () {
+describe('shift status api', function () {
 
   it('should reject invalid get requests', function (done) {
     request.get('/api/shifts')
@@ -119,12 +119,11 @@ describe('shift api', function () {
         date: '2015-09-13',
         payPerHour: 40.60,
         specialtyID: sp1,
-        shiftDuration: 12,
-        facilityID: f1.insertId
+        shiftDuration: 12
       })
       .expect(200)
       .end(function (err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         s1 = res.body.rows;
         // console.log(s1);
         expect(s1).to.be.an('object');
@@ -167,11 +166,11 @@ describe('shift api', function () {
   it('should update shift info given a correct object and shift id', function (done) {
     request.put('/api/shift/' + s1.insertId)
       .send({
-        // shiftStartHour: 7,
-        // date: '2015-09-13',
+        shiftStartHour: 7,
+        date: '2015-09-13',
         payPerHour: updateinfo,
-        // specialtyID: sp1,
-        // shiftDuration: 12
+        specialtyID: sp1,
+        shiftDuration: 12
       })
       .expect(200)
       .end(function (err, res) {

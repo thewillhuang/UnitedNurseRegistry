@@ -61,6 +61,7 @@ module.exports = function (app) {
     let geohash = this.params.geohash;
     let requestJson = this.request.body.fields;
     let hashSet = requestJson.hashSet;
+    hashSet.push(geohash.substring(0, precision));
     let q = {};
     q.sql = 'SELECT ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (?)';
     let shift = ['shift.shiftID', 'shift.fk_Shift_specialtyID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date'];

@@ -223,6 +223,7 @@ describe('shift api', function () {
     request.delete('/api/facility/' + f1.insertId)
       .expect(200)
       .end(function (err, res) {
+        // console.log(res.body);
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
         done();

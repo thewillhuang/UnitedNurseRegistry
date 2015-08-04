@@ -56,11 +56,32 @@ module.exports = function (app) {
   //TODO node geohash function
   // view all the open shifts by location and based on distance --> returns shift information, including facility info
   // get
-  .get('/geohash/:geoHash', function* (){
-    let geoHash = this.params.geoHash;
+  .get('/geohash/:geohash/precision/:precision', function* (){
+    let precision = this.params.precision;
+    let geohash = this.params.geohash;
+    let requestJson = this.request.body.fields;
+    let hashSet = requestJson.hashSet;
     let q = {};
-    q.sql = 'SELECT * FROM ?? INNER JOIN ?? ON (?? = ??) WHERE ?? = ?';
-    q.values = ['shift', 'facility', 'facility.facilityID', 'shift.fk_Shift_facilityID', 'shift.open', 1];
+    q.sql = 'SELECT ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (??, ??, ??, ??, ??, ??, ??, ??)';
+    let shift = ['shift.shiftID', 'shift.fk_Shift_specialtyID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date'];
+    let facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR'];
+    q.values = [
+      shift,
+      facility,
+      'shift',
+      'facility',
+      'shift.fk_Shift_facilityID', 'facility.facilityID',
+      'shift.open', 1,
+      'facility.facilityGeohash', precision,
+      hashSet[0],
+      hashSet[1],
+      hashSet[2],
+      hashSet[3],
+      hashSet[4],
+      hashSet[5],
+      hashSet[6],
+      hashSet[7]
+    ];
     this.body = yield query(q);
   })
 

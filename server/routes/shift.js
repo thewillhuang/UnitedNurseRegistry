@@ -62,7 +62,7 @@ module.exports = function (app) {
     let requestJson = this.request.body.fields;
     let hashSet = requestJson.hashSet;
     let q = {};
-    q.sql = 'SELECT ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (??, ??, ??, ??, ??, ??, ??, ??)';
+    q.sql = 'SELECT ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (?)';
     let shift = ['shift.shiftID', 'shift.fk_Shift_specialtyID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date'];
     let facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR'];
     q.values = [
@@ -73,14 +73,7 @@ module.exports = function (app) {
       'shift.fk_Shift_facilityID', 'facility.facilityID',
       'shift.open', 1,
       'facility.facilityGeohash', precision,
-      hashSet[0],
-      hashSet[1],
-      hashSet[2],
-      hashSet[3],
-      hashSet[4],
-      hashSet[5],
-      hashSet[6],
-      hashSet[7]
+      hashSet
     ];
     this.body = yield query(q);
   })

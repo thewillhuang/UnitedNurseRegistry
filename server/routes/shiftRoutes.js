@@ -3,7 +3,7 @@
 // all user related routes
 module.exports = function(app) {
   require('./shift')(app);
-  // require('./userAddress')(app);
+  require('./shiftStatus')(app);
   // require('./userEmail')(app);
   // require('./userLicense')(app);
   // require('./userPhone')(app);

@@ -5,6 +5,7 @@ const shift = new Router({
   prefix: '/api/shift'
 });
 const query = require('../services/query');
+const _ = require('lodash');
 
 module.exports = function (app) {
   shift
@@ -73,6 +74,7 @@ module.exports = function (app) {
     let trimmedHashSet = hashSet.map(function(value){
       return value.substring(0, precision);
     });
+    let set = _.uniq(trimmedHashSet);
     let q = {};
     q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (?)';
     let shift = ['shift.shiftID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date', 'shift.open'];
@@ -87,9 +89,9 @@ module.exports = function (app) {
       'specialty.specialtyID', 'fk_Shift_specialtyID',
       'shift.open', 1,
       'facility.facilityGeohash', precision,
-      trimmedHashSet
+      set
     ];
-    // console.log(q);
+    console.log(q);
     this.body = yield query(q);
   })
 

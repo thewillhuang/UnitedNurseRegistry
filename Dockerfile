@@ -25,8 +25,8 @@ ENV NVM_DIR /usr/local/nvm
 
 # install node
 # ENV NODE_VERSION v0.12
-# ENV NODE_BRANCH node/v0.12.2
-ENV NODE_VERSION iojs
+# ENV NODE_BRANCH node/v0.12.7
+ENV NODE_VERSION 2.5.0
 ENV NODE_BRANCH io.js/v2.5.0
 
 # Install nvm and use node version defined above.
@@ -53,7 +53,7 @@ EXPOSE $PORT
 #alternatively, you may clone the repo, install it, and upon running the image, git pull updates and install
 RUN git clone https://7a7f0d9da87f1f218c309dcb903378776923d801:x-oauth-basic@github.com/thewillhuang/UnitedNurseRegistry.git /src
 
-# add current directory from the host maching to docker WORKDIR
+# add current directory from the host matching to docker WORKDIR
 #   s  dest
 # ADD . ./
 

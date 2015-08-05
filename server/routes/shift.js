@@ -68,12 +68,13 @@ module.exports = function (app) {
     let geohash = this.params.geohash;
     let requestJson = this.request.body.fields;
     let hashSet = requestJson.hashSet;
-    // push the current hashset into the array to query, total 9
+    // push the current hashset into the array to query, total 9 for proximity search
     hashSet.push(geohash);
     // trim every hashset to the same length as the percision
     let trimmedHashSet = hashSet.map(function(value){
       return value.substring(0, precision);
     });
+    // take of any elements that is not unique
     let set = _.uniq(trimmedHashSet);
     let q = {};
     q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (?)';
@@ -91,7 +92,7 @@ module.exports = function (app) {
       'facility.facilityGeohash', precision,
       set
     ];
-    console.log(q);
+    // console.log(q);
     this.body = yield query(q);
   })
 

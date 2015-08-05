@@ -20,6 +20,18 @@ module.exports = function (app) {
     this.body = yield query(q);
   })
 
+  .post('/viewed/shift/:shiftID/user/:userID', function* (){
+    let shiftID = this.params.shiftID;
+    let userID = this.params.userID;
+    let payload = {
+      fk_ShiftViewed_shiftID: shiftID,
+      fk_ShiftViewed_userID: userID
+    };
+    let q = {};
+    q.sql = 'INSERT INTO ?? SET ?';
+    q.values = ['ShiftViewed', payload];
+  })
+
   // view count by shiftID  --> returns number of views, and number of rejected views based on shift ID
   // get
   .get('/viewed/shift/:shiftID', function* (){

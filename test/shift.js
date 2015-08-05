@@ -9,8 +9,6 @@ const request = supertest(app.listen());
 const uuid = require('node-uuid');
 const geohash = require('ngeohash');
 
-// store primary key
-
 describe('shift api', function () {
 
   it('should reject invalid get requests', function (done) {

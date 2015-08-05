@@ -60,7 +60,6 @@ module.exports = function (app) {
     this.body = yield query(q);
   })
 
-  //TODO node geohash function
   // view all the open shifts by location and based on distance --> returns shift information, including facility info
   // get
   .post('/geohash/:geohash/precision/:precision', function* (){
@@ -90,6 +89,7 @@ module.exports = function (app) {
       'facility.facilityGeohash', precision,
       trimmedHashSet
     ];
+    // console.log(q);
     this.body = yield query(q);
   })
 

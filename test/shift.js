@@ -385,7 +385,7 @@ describe('shift api', function () {
 
   let hash = '9qh1';
   let hashset = geohash.neighbors(hash);
-  it('should return an array of 3 different shifts posted by the hospital', function (done) {
+  it('should return an array of 4 different open shifts posted by different hospitals', function (done) {
     request.post('/api/shift/geohash/' + hash + '/precision/' + 4)
       .send({
         hashSet: hashset
@@ -396,7 +396,7 @@ describe('shift api', function () {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.rows).to.have.length(3);
+        expect(res.body.rows).to.have.length(4);
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
@@ -415,6 +415,26 @@ describe('shift api', function () {
 
   it('should delete shift 3 given a correct shift id', function (done) {
     request.delete('/api/shift/' + s3.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should delete shift 4 given a correct shift id', function (done) {
+    request.delete('/api/shift/' + s4.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should delete shift 5 given a correct shift id', function (done) {
+    request.delete('/api/shift/' + s5.insertId)
       .expect(200)
       .end(function (err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
@@ -462,8 +482,56 @@ describe('shift api', function () {
       });
   });
 
-  it('should delete a facility given a correct facility id', function (done) {
+  it('the deleted shift 4 should not exist', function (done) {
+    request.get('/api/shift/' + s4.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('the deleted shift 5 should not exist', function (done) {
+    request.get('/api/shift/' + s5.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should delete facility 1 given a correct facility id', function (done) {
     request.delete('/api/facility/' + f1.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        // console.log(res.body);
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should delete facility 2 given a correct facility id', function (done) {
+    request.delete('/api/facility/' + f2.insertId)
+      .expect(200)
+      .end(function (err, res) {
+        // console.log(res.body);
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should delete facility 3 given a correct facility id', function (done) {
+    request.delete('/api/facility/' + f3.insertId)
       .expect(200)
       .end(function (err, res) {
         // console.log(res.body);

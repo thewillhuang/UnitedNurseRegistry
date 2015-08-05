@@ -50,8 +50,8 @@ function InitImageRepo() {
         //attach the handler for on-click functionality which differs based on the 'mode'
         $('.imgRepoNamed').click(OnClickImageRepoNamed);
         //load the glimpse modal content
-        //$('#glimpseModal').load(GLOBAL_WEB_ROOT + "modal/glimpse-send.html", function () {
-        $('#glimpseModal').load(GLOBAL_WEB_ROOT + "modal/glimpse-send.aspx", function () {
+        //$('#glimpseModal').load(GLOBAL_WEB_ROOT + "modal/glimpse-send.html", function() {
+        $('#glimpseModal').load(GLOBAL_WEB_ROOT + "modal/glimpse-send.aspx", function() {
             ComponentsjQueryUISliders.init();
         });
     }
@@ -76,13 +76,13 @@ function InitImageRepo() {
         url: GLOBAL_WEB_ROOT + 'webservices/dash.ashx?fc=savestudyname&studyguid=' + CurrentStudyGUID,
         type: 'text',
         pk: 1,
-        success: function (response, newValue) {
+        success: function(response, newValue) {
             ////logic for tweaking the UX based on values from the save response... 
             //if ($(this).attr('data-name') == 'firstname') {
             //    $('#profilePopoverFirstName').html(newValue);
             //    $('#lblFName').html(newValue);
         },
-        display: function (value, sourceData) {
+        display: function(value, sourceData) {
             $(this).html(value);
         }
     });
@@ -93,21 +93,21 @@ function InitImageRepo() {
         url: GLOBAL_WEB_ROOT + 'webservices/dash.ashx?fc=savestudydesc&studyguid=' + CurrentStudyGUID,
         type: 'textarea',
         pk: 1,
-        success: function (response, newValue) {
+        success: function(response, newValue) {
             ////logic for tweaking the UX based on values from the save response... 
             //if ($(this).attr('data-name') == 'firstname') {
             //    $('#profilePopoverFirstName').html(newValue);
             //    $('#lblFName').html(newValue);
         },
-        display: function (value, sourceData) {
+        display: function(value, sourceData) {
             $(this).html(value);
         }
     });
 
 
 
-    $('.ShowAllSeriesContents').click(function () {
-        $(this).parent().siblings().each(function () {
+    $('.ShowAllSeriesContents').click(function() {
+        $(this).parent().siblings().each(function() {
             //first remove the noshow class...
             $(this).removeClass('noshow');
 
@@ -126,7 +126,7 @@ function InitImageRepo() {
 
     //for each of the series that we created and rendered into the screen, call the AssignHTML5UploadHandlerToElementByID method, passing in that series panel-body DIV element's ID string... 
     //this is required because you can not bind based on class-name,... only based on #ID value... 
-    $('.imageRepoSeriesItems').each(function (index) {
+    $('.imageRepoSeriesItems').each(function(index) {
         var id = $(this).attr('id');
         AssignHTML5UploadHandlerToElementByID(id);
     });
@@ -151,7 +151,7 @@ function LoadSeriesList() {
         type: "GET",
         url: wsurl,
         dataType: "json",
-        success: function (data) {
+        success: function(data) {
             if (data.ResultCode == 'SUCCESS') {
                 $('#imageRepoSeriesList').empty();
                 var seriesList = data.Data["seriesList"];
@@ -184,7 +184,7 @@ function LoadStudyList()
         type: "GET",
         url: wsurl,
         dataType: "json",
-        success: function (data) {
+        success: function(data) {
             //alert(JSON.stringify(data));
             if (data.ResultCode == 'SUCCESS') {
                 var studyList = data.Data["studyList"];
@@ -210,7 +210,7 @@ function LoadSeriesThumbnail(seriesguid) {
         type: "GET",
         url: wsurl,
         dataType: "json",
-        success: function (data) {
+        success: function(data) {
             if (data.ResultCode == 'SUCCESS') {
                 var imageString = data.ResultMessage;
                 $('#thumbnail_series_' + seriesguid).append('<img src="data:image/jpg;base64,' + imageString + '"/>');
@@ -229,7 +229,7 @@ function LoadStudyThumbnail(studyguid) {
         type: "GET",
         url: wsurl,
         dataType: "json",
-        success: function (data) {
+        success: function(data) {
             if (data.ResultCode == 'SUCCESS') {
                 var imageString = "data:image/jpg;base64," + data.ResultMessage;
                 StudyThumbnailDictionary[studyguid] = imageString;
@@ -250,18 +250,18 @@ function ApplyXEditablePluginToAllSeries() {
         url: GLOBAL_WEB_ROOT + 'webservices/dash.ashx?fc=saveseriesname',
         type: 'text',
         pk: 1,
-        params: function (params) {
+        params: function(params) {
             //originally params contain pk, name and value... but here we add one more...
             params.seriesguid = $(this).attr('data-series-guid');
             return params;
         },
-        success: function (response, newValue) {
+        success: function(response, newValue) {
             ////logic for tweaking the UX based on values from the save response... 
             //if ($(this).attr('data-name') == 'firstname') {
             //    $('#profilePopoverFirstName').html(newValue);
             //    $('#lblFName').html(newValue);
         },
-        display: function (value, sourceData) {
+        display: function(value, sourceData) {
             $(this).html(value);
         }
     });
@@ -296,7 +296,7 @@ function AddNewSeries() {
         type: "GET",
         url: wsurl,
         dataType: "json",
-        success: function (data) {
+        success: function(data) {
             if (data.ResultCode == 'SUCCESS') {
 
                 //set the local javascript variable to be the result GUID from this recently saved/created entity...
@@ -362,14 +362,14 @@ function AddThumbnailToSeries(seriesGUID, thumbPath) {
 function AttachInputLoader() {
 
     //bind to a click event to upload a new file and save it...
-    $('#hdnInputFileUpload').delay(2000).bind('change', function () {
+    $('#hdnInputFileUpload').delay(2000).bind('change', function() {
         //this.files[0].size gets the size of your file.
         file = this.files[0];
         fileSize = this.files[0].size;
         var reader = new FileReader();
 
         //we can create a preview image...
-        reader.onload = function (e) {
+        reader.onload = function(e) {
             AddThumbnailToSeries(CurrentlyUploadingImagesIntoSeries,e.target.result);
         }
 

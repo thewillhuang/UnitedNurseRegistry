@@ -115,7 +115,7 @@ $("#addGlimpseRecipientField").click(function(){
 // Click to edit glimpse and launch modal
 $(document).on('click', '.edit-glimpse', function() {
   var glimpseGuid = $(this).closest("div.user-glimpse").attr('id');
-  fillGlimpseModal(glimpseGuid, function (done){
+  fillGlimpseModal(glimpseGuid, function(done){
     if (done){
       $("#glimpseEditModal").modal('show');
     }

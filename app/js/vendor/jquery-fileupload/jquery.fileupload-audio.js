@@ -12,7 +12,7 @@
 /* jshint nomen:false */
 /* global define, require, window, document */
 
-(function (factory) {
+(function(factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
         // Register as an anonymous AMD module:
@@ -34,7 +34,7 @@
             window.loadImage
         );
     }
-}(function ($, loadImage) {
+}(function($, loadImage) {
     'use strict';
 
     // Prepend to the default processQueue:
@@ -72,7 +72,7 @@
             // as audio element if the browser supports playing it.
             // Accepts the options fileTypes (regular expression)
             // and maxFileSize (integer) to limit the files to load:
-            loadAudio: function (data, options) {
+            loadAudio: function(data, options) {
                 if (options.disabled) {
                     return data;
                 }
@@ -98,7 +98,7 @@
             },
 
             // Sets the audio element as a property of the file object:
-            setAudio: function (data, options) {
+            setAudio: function(data, options) {
                 if (data.audio && !options.disabled) {
                     data.files[data.index][options.name || 'preview'] = data.audio;
                 }

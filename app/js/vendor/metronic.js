@@ -296,7 +296,7 @@ var Metronic = function() {
         });
 
         // remove ajax content and remove cache on modal closed 
-        $('body').on('hidden.bs.modal', '.modal:not(.modal-cached)', function () {
+        $('body').on('hidden.bs.modal', '.modal:not(.modal-cached)', function() {
             $(this).removeData('bs.modal');
         });
     };

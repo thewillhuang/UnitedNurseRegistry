@@ -6,7 +6,7 @@ const shiftStatus = new Router({
 });
 const query = require('../services/query');
 
-module.exports = function (app) {
+module.exports = function(app) {
   shiftStatus
 
   // grab the shift status by shift id --> rturns open, pending or completed

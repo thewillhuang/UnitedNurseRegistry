@@ -355,8 +355,8 @@
 		}
 	};
 
-	$.fn.slider = function ( option, val ) {
-		return this.each(function () {
+	$.fn.slider = function( option, val ) {
+		return this.each(function() {
 			var $this = $(this),
 				data = $this.data('slider'),
 				options = typeof option === 'object' && option;

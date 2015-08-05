@@ -6,7 +6,7 @@ const user = new Router({
 });
 const query = require('../services/query');
 
-module.exports = function (app) {
+module.exports = function(app) {
   user
 
   //create user

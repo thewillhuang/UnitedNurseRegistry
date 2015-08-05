@@ -17,7 +17,7 @@ var browserSync = require('browser-sync');
 var sourcemaps = require('gulp-sourcemaps');
 
 var write = function(filepath) {
-  return concat(function (content) {
+  return concat(function(content) {
     // create new vinyl file from content and use the basename of the
     // filepath in scope as its basename.
     return file(path.join(config.baseDir, path.basename(filepath)), content, { src: true })
@@ -33,7 +33,7 @@ var write = function(filepath) {
 
 var browserifyTask = function(devMode) {
   // add custom browserify options here
-  var e = config.bundleConfigs.map(function (value) { return value.entries; });
+  var e = config.bundleConfigs.map(function(value) { return value.entries; });
   var customOpts = { entries: e, debug: true };
   var opts = assign({}, watchify.args, customOpts);
 
@@ -53,7 +53,7 @@ var browserifyTask = function(devMode) {
   // i.e. b.transform(coffeeify);
   b.on('update', bundle); // on any dep update, runs the bundler
   b.on('log', gutil.log); // output build logs to terminal
-  b.on('factor.pipeline', function (id, pipeline) {
+  b.on('factor.pipeline', function(id, pipeline) {
     pipeline.get('wrap')
       .push(write(id));
   });

@@ -12,12 +12,12 @@ var uuid = require('node-uuid');
 // store primary key
 var r1;
 
-describe('facility api', function () {
+describe('facility api', function() {
 
-  it('should reject invalid get requests', function (done) {
+  it('should reject invalid get requests', function(done) {
     request.get('/api/facility/')
       .expect(405)
-      .end(function (err, res) {
+      .end(function(err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(err).to.be.a('null');
@@ -25,10 +25,10 @@ describe('facility api', function () {
       });
   });
 
-  it('should respond with empty array with unknown facility', function (done) {
+  it('should respond with empty array with unknown facility', function(done) {
     request.get('/api/facility/abc')
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
@@ -39,7 +39,7 @@ describe('facility api', function () {
       });
   });
 
-  it('should insert a new facility given a correct object', function (done) {
+  it('should insert a new facility given a correct object', function(done) {
     request.post('/api/facility/')
       .send({
         facilityName: uuid.v4(),
@@ -48,7 +48,7 @@ describe('facility api', function () {
         facilityEMR: uuid.v4()
       })
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         // console.log(res.body);
         r1 = res.body.rows;
         expect(r1).to.be.an('object');
@@ -59,10 +59,10 @@ describe('facility api', function () {
       });
   });
 
-  it('should grab a facility given a correct facility id', function (done) {
+  it('should grab a facility given a correct facility id', function(done) {
     request.get('/api/facility/' + r1.insertId)
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
@@ -72,10 +72,10 @@ describe('facility api', function () {
       });
   });
 
-  it('should return a 200 for the same data', function (done) {
+  it('should return a 200 for the same data', function(done) {
     request.get('/api/facility/' + r1.insertId)
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -87,7 +87,7 @@ describe('facility api', function () {
   });
 
   let updateinfo = uuid.v4();
-  it('should update facility info given a correct object and facility id', function (done) {
+  it('should update facility info given a correct object and facility id', function(done) {
     request.put('/api/facility/' + r1.insertId)
       .send({
         facilityName: uuid.v4(),
@@ -96,17 +96,17 @@ describe('facility api', function () {
         facilityEMR: updateinfo
       })
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
         done();
       });
   });
 
-  it('should get an updated facility info', function (done) {
+  it('should get an updated facility info', function(done) {
     request.get('/api/facility/' + r1.insertId)
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         expect(res.body.rows[0].facilityEMR).to.equal(updateinfo);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -117,20 +117,20 @@ describe('facility api', function () {
       });
   });
 
-  it('should delete a facility given a correct facility id', function (done) {
+  it('should delete a facility given a correct facility id', function(done) {
     request.delete('/api/facility/' + r1.insertId)
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
         done();
       });
   });
 
-  it('the deleted facility should not exist', function (done) {
+  it('the deleted facility should not exist', function(done) {
     request.get('/api/facility/' + r1.insertId)
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');

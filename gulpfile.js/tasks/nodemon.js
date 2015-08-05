@@ -6,7 +6,7 @@ var nodemon = require('gulp-nodemon');
 var config = require('../config/config.js');
 var BROWSER_SYNC_RELOAD_DELAY = 500;
 
-gulp.task('nodemon', function (cb) {
+gulp.task('nodemon', function(cb) {
   var called = false;
   return nodemon(config.nodemon)
     .on('start', function onStart() {

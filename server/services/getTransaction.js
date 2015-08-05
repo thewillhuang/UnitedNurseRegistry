@@ -9,15 +9,15 @@ module.exports = function acquireTransaction() {
     });
   }).disposer(function(connection, promise) {
     if (promise.isFulfilled()) {
-      return connection.commitAsync().then(function () {
+      return connection.commitAsync().then(function() {
         connection.release();
       }).catch(function(){
-        return connection.rollbackAsync().then(function () {
+        return connection.rollbackAsync().then(function() {
           connection.release();
         });
       });
     } else {
-      return connection.rollbackAsync().then(function () {
+      return connection.rollbackAsync().then(function() {
         connection.release();
       });
     }

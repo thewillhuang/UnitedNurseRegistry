@@ -1,9 +1,9 @@
 
-var ComponentsjQueryUISliders = function () {
+var ComponentsjQueryUISliders = function() {
 
     return {
         //main function to initiate the module
-        init: function () {
+        init: function() {
             // basic
             $(".slider-basic").slider(); // basic sliders
 
@@ -12,7 +12,7 @@ var ComponentsjQueryUISliders = function () {
                 isRTL: Metronic.isRTL(),
                 range: true,
                 values: [17, 67],
-                slide: function (event, ui) {
+                slide: function(event, ui) {
                     $("#slider-range-amount").text("$" + ui.values[0] + " - $" + ui.values[1]);
                 }
             });
@@ -24,7 +24,7 @@ var ComponentsjQueryUISliders = function () {
                 min: 1,
                 max: 30,
                 step: 1,
-                slide: function (event, ui) {                                        
+                slide: function(event, ui) {                                        
                     $("#sliderSnapIncAmount").text(ui.value);
                     //$("#hdnlifespanDays").text(ui.value);
                     //document.getElementById("sliderSnapIncAmount").value = ui.value;
@@ -44,7 +44,7 @@ var ComponentsjQueryUISliders = function () {
                 min: 0,
                 max: 500,
                 values: [75, 300],
-                slide: function (event, ui) {
+                slide: function(event, ui) {
                     $("#slider-range-amount").text("$" + ui.values[0] + " - $" + ui.values[1]);
                 }
             });
@@ -59,7 +59,7 @@ var ComponentsjQueryUISliders = function () {
                 min: 1,
                 max: 10,
                 value: 2,
-                slide: function (event, ui) {
+                slide: function(event, ui) {
                     $("#slider-range-max-amount").text(ui.value);
                 }
             });
@@ -73,7 +73,7 @@ var ComponentsjQueryUISliders = function () {
                 value: 37,
                 min: 1,
                 max: 700,
-                slide: function (event, ui) {
+                slide: function(event, ui) {
                     $("#slider-range-min-amount").text("$" + ui.value);
                 }
             });
@@ -88,7 +88,7 @@ var ComponentsjQueryUISliders = function () {
                 min: 0,
                 max: 100,
                 value: 60,
-                slide: function (event, ui) {
+                slide: function(event, ui) {
                     $("#slider-vertical-amount").text(ui.value);
                 }
             });
@@ -100,7 +100,7 @@ var ComponentsjQueryUISliders = function () {
                 orientation: "vertical",
                 range: true,
                 values: [17, 67],
-                slide: function (event, ui) {
+                slide: function(event, ui) {
                     $("#slider-range-vertical-amount").text("$" + ui.values[0] + " - $" + ui.values[1]);
                 }
             });

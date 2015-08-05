@@ -6,7 +6,7 @@ const userLicense = new Router({
 });
 const query = require('../services/query');
 
-module.exports = function (app) {
+module.exports = function(app) {
   userLicense
 
   //create user license given user id

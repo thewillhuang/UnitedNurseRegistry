@@ -1,6 +1,6 @@
 /*! cornerstoneMath - v0.1.1 - 2015-01-30 | (c) 2014 Chris Hafey | https://github.com/chafey/cornerstoneMath */
 // Begin Source: src/lineSegment.js
-var cornerstoneMath = (function (cornerstoneMath) {
+var cornerstoneMath = (function(cornerstoneMath) {
 
     "use strict";
 
@@ -59,7 +59,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 // Begin Source: src/math.js
 // Based on THREE.JS
 
-var cornerstoneMath = (function (cornerstoneMath) {
+var cornerstoneMath = (function(cornerstoneMath) {
 
     "use strict";
 
@@ -92,7 +92,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 // Begin Source: src/matrix4.js
 // Based on THREE.JS
 
-var cornerstoneMath = (function (cornerstoneMath) {
+var cornerstoneMath = (function(cornerstoneMath) {
 
     "use strict";
 
@@ -201,7 +201,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
         return this.multiplyMatrices(this, m);
     };
 
-    cornerstoneMath.Matrix4.prototype.getInverse = function ( m, throwOnInvertible ) {
+    cornerstoneMath.Matrix4.prototype.getInverse = function( m, throwOnInvertible ) {
 
         // based on http://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm
         var te = this.elements;
@@ -260,7 +260,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         var v1 = new cornerstoneMath.Vector3();
 
-        return function ( array, offset, length ) {
+        return function( array, offset, length ) {
 
             if ( offset === undefined ) offset = 0;
             if ( length === undefined ) length = array.length;
@@ -285,7 +285,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
     };
 
-    cornerstoneMath.Matrix4.prototype.makeTranslation = function ( x, y, z ) {
+    cornerstoneMath.Matrix4.prototype.makeTranslation = function( x, y, z ) {
 
         this.set(
 
@@ -299,7 +299,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
         return this;
 
     };
-    cornerstoneMath.Matrix4.prototype.multiplyScalar = function ( s ) {
+    cornerstoneMath.Matrix4.prototype.multiplyScalar = function( s ) {
 
         var te = this.elements;
 
@@ -311,7 +311,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
         return this;
 
     };
-    cornerstoneMath.Matrix4.prototype.set = function ( n11, n12, n13, n14, n21, n22, n23, n24, n31, n32, n33, n34, n41, n42, n43, n44 ) {
+    cornerstoneMath.Matrix4.prototype.set = function( n11, n12, n13, n14, n21, n22, n23, n24, n31, n32, n33, n34, n41, n42, n43, n44 ) {
 
         var te = this.elements;
 
@@ -324,7 +324,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
     };
 
-    cornerstoneMath.Matrix4.prototype.makeScale = function ( x, y, z ) {
+    cornerstoneMath.Matrix4.prototype.makeScale = function( x, y, z ) {
 
         this.set(
 
@@ -345,7 +345,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 // End Source; src/matrix4.js
 
 // Begin Source: src/point.js
-var cornerstoneMath = (function (cornerstoneMath) {
+var cornerstoneMath = (function(cornerstoneMath) {
 
     "use strict";
 
@@ -420,7 +420,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 // Begin Source: src/quaternion.js
 // Based on THREE.JS
 
-var cornerstoneMath = (function (cornerstoneMath) {
+var cornerstoneMath = (function(cornerstoneMath) {
 
     "use strict";
 
@@ -518,7 +518,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 // End Source; src/quaternion.js
 
 // Begin Source: src/rect.js
-var cornerstoneMath = (function (cornerstoneMath) {
+var cornerstoneMath = (function(cornerstoneMath) {
 
     "use strict";
 
@@ -612,7 +612,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 // Begin Source: src/vector3.js
 // Based on THREE.JS
 
-var cornerstoneMath = (function (cornerstoneMath) {
+var cornerstoneMath = (function(cornerstoneMath) {
 
     "use strict";
 
@@ -620,7 +620,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
         cornerstoneMath = {};
     }
 
-    cornerstoneMath.Vector3 = function ( x, y, z ) {
+    cornerstoneMath.Vector3 = function( x, y, z ) {
 
         this.x = x || 0;
         this.y = y || 0;
@@ -632,7 +632,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         constructor: cornerstoneMath.Vector3,
 
-        set: function ( x, y, z ) {
+        set: function( x, y, z ) {
 
             this.x = x;
             this.y = y;
@@ -642,7 +642,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        setX: function ( x ) {
+        setX: function( x ) {
 
             this.x = x;
 
@@ -650,7 +650,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        setY: function ( y ) {
+        setY: function( y ) {
 
             this.y = y;
 
@@ -658,7 +658,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        setZ: function ( z ) {
+        setZ: function( z ) {
 
             this.z = z;
 
@@ -666,7 +666,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        setComponent: function ( index, value ) {
+        setComponent: function( index, value ) {
 
             switch ( index ) {
 
@@ -679,7 +679,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        getComponent: function ( index ) {
+        getComponent: function( index ) {
 
             switch ( index ) {
 
@@ -692,7 +692,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        copy: function ( v ) {
+        copy: function( v ) {
 
             this.x = v.x;
             this.y = v.y;
@@ -702,7 +702,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        add: function ( v, w ) {
+        add: function( v, w ) {
 
             if ( w !== undefined ) {
 
@@ -719,7 +719,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        addScalar: function ( s ) {
+        addScalar: function( s ) {
 
             this.x += s;
             this.y += s;
@@ -729,7 +729,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        addVectors: function ( a, b ) {
+        addVectors: function( a, b ) {
 
             this.x = a.x + b.x;
             this.y = a.y + b.y;
@@ -739,7 +739,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        sub: function ( v, w ) {
+        sub: function( v, w ) {
 
             if ( w !== undefined ) {
 
@@ -756,7 +756,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        subVectors: function ( a, b ) {
+        subVectors: function( a, b ) {
 
             this.x = a.x - b.x;
             this.y = a.y - b.y;
@@ -766,7 +766,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        multiply: function ( v, w ) {
+        multiply: function( v, w ) {
 
             if ( w !== undefined ) {
 
@@ -783,7 +783,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        multiplyScalar: function ( scalar ) {
+        multiplyScalar: function( scalar ) {
 
             this.x *= scalar;
             this.y *= scalar;
@@ -793,7 +793,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        multiplyVectors: function ( a, b ) {
+        multiplyVectors: function( a, b ) {
 
             this.x = a.x * b.x;
             this.y = a.y * b.y;
@@ -804,11 +804,11 @@ var cornerstoneMath = (function (cornerstoneMath) {
         },
 
 
-        applyAxisAngle: function () {
+        applyAxisAngle: function() {
 
             var quaternion;
 
-            return function ( axis, angle ) {
+            return function( axis, angle ) {
 
                 if ( quaternion === undefined ) quaternion = new cornerstoneMath.Quaternion();
 
@@ -820,7 +820,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         }(),
 
-        applyMatrix3: function ( m ) {
+        applyMatrix3: function( m ) {
 
             var x = this.x;
             var y = this.y;
@@ -836,7 +836,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        applyMatrix4: function ( m ) {
+        applyMatrix4: function( m ) {
 
             // input: THREE.Matrix4 affine matrix
 
@@ -852,7 +852,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        applyProjection: function ( m ) {
+        applyProjection: function( m ) {
 
             // input: THREE.Matrix4 projection matrix
 
@@ -869,7 +869,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        applyQuaternion: function ( q ) {
+        applyQuaternion: function( q ) {
 
             var x = this.x;
             var y = this.y;
@@ -897,7 +897,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        transformDirection: function ( m ) {
+        transformDirection: function( m ) {
 
             // input: THREE.Matrix4 affine matrix
             // vector interpreted as a direction
@@ -916,7 +916,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        divide: function ( v ) {
+        divide: function( v ) {
 
             this.x /= v.x;
             this.y /= v.y;
@@ -926,7 +926,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        divideScalar: function ( scalar ) {
+        divideScalar: function( scalar ) {
 
             if ( scalar !== 0 ) {
 
@@ -948,7 +948,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        min: function ( v ) {
+        min: function( v ) {
 
             if ( this.x > v.x ) {
 
@@ -972,7 +972,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        max: function ( v ) {
+        max: function( v ) {
 
             if ( this.x < v.x ) {
 
@@ -996,7 +996,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        clamp: function ( min, max ) {
+        clamp: function( min, max ) {
 
             // This function assumes min < max, if this assumption isn't true it will not operate correctly
 
@@ -1034,11 +1034,11 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        clampScalar: ( function () {
+        clampScalar: ( function() {
 
             var min, max;
 
-            return function ( minVal, maxVal ) {
+            return function( minVal, maxVal ) {
 
                 if ( min === undefined ) {
 
@@ -1056,7 +1056,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         } )(),
 
-        floor: function () {
+        floor: function() {
 
             this.x = Math.floor( this.x );
             this.y = Math.floor( this.y );
@@ -1066,7 +1066,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        ceil: function () {
+        ceil: function() {
 
             this.x = Math.ceil( this.x );
             this.y = Math.ceil( this.y );
@@ -1076,7 +1076,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        round: function () {
+        round: function() {
 
             this.x = Math.round( this.x );
             this.y = Math.round( this.y );
@@ -1086,7 +1086,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        roundToZero: function () {
+        roundToZero: function() {
 
             this.x = ( this.x < 0 ) ? Math.ceil( this.x ) : Math.floor( this.x );
             this.y = ( this.y < 0 ) ? Math.ceil( this.y ) : Math.floor( this.y );
@@ -1096,43 +1096,43 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        negate: function () {
+        negate: function() {
 
             return this.multiplyScalar( - 1 );
 
         },
 
-        dot: function ( v ) {
+        dot: function( v ) {
 
             return this.x * v.x + this.y * v.y + this.z * v.z;
 
         },
 
-        lengthSq: function () {
+        lengthSq: function() {
 
             return this.x * this.x + this.y * this.y + this.z * this.z;
 
         },
 
-        length: function () {
+        length: function() {
 
             return Math.sqrt( this.x * this.x + this.y * this.y + this.z * this.z );
 
         },
 
-        lengthManhattan: function () {
+        lengthManhattan: function() {
 
             return Math.abs( this.x ) + Math.abs( this.y ) + Math.abs( this.z );
 
         },
 
-        normalize: function () {
+        normalize: function() {
 
             return this.divideScalar( this.length() );
 
         },
 
-        setLength: function ( l ) {
+        setLength: function( l ) {
 
             var oldLength = this.length();
 
@@ -1145,7 +1145,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        lerp: function ( v, alpha ) {
+        lerp: function( v, alpha ) {
 
             this.x += ( v.x - this.x ) * alpha;
             this.y += ( v.y - this.y ) * alpha;
@@ -1155,7 +1155,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        cross: function ( v, w ) {
+        cross: function( v, w ) {
 
             if ( w !== undefined ) {
 
@@ -1174,7 +1174,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        crossVectors: function ( a, b ) {
+        crossVectors: function( a, b ) {
 
             var ax = a.x, ay = a.y, az = a.z;
             var bx = b.x, by = b.y, bz = b.z;
@@ -1187,11 +1187,11 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        projectOnVector: function () {
+        projectOnVector: function() {
 
             var v1, dot;
 
-            return function ( vector ) {
+            return function( vector ) {
 
                 if ( v1 === undefined ) v1 = new cornerstoneMath.Vector3();
 
@@ -1205,11 +1205,11 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         }(),
 
-        projectOnPlane: function () {
+        projectOnPlane: function() {
 
             var v1;
 
-            return function ( planeNormal ) {
+            return function( planeNormal ) {
 
                 if ( v1 === undefined ) v1 = new cornerstoneMath.Vector3();
 
@@ -1221,14 +1221,14 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         }(),
 
-        reflect: function () {
+        reflect: function() {
 
             // reflect incident vector off plane orthogonal to normal
             // normal is assumed to have unit length
 
             var v1;
 
-            return function ( normal ) {
+            return function( normal ) {
 
                 if ( v1 === undefined ) v1 = new cornerstoneMath.Vector3();
 
@@ -1238,7 +1238,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         }(),
 
-        angleTo: function ( v ) {
+        angleTo: function( v ) {
 
             var theta = this.dot( v ) / ( this.length() * v.length() );
 
@@ -1248,13 +1248,13 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        distanceTo: function ( v ) {
+        distanceTo: function( v ) {
 
             return Math.sqrt( this.distanceToSquared( v ) );
 
         },
 
-        distanceToSquared: function ( v ) {
+        distanceToSquared: function( v ) {
 
             var dx = this.x - v.x;
             var dy = this.y - v.y;
@@ -1264,19 +1264,19 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        setEulerFromRotationMatrix: function ( m, order ) {
+        setEulerFromRotationMatrix: function( m, order ) {
 
             console.error( "REMOVED: Vector3\'s setEulerFromRotationMatrix has been removed in favor of Euler.setFromRotationMatrix(), please update your code.");
 
         },
 
-        setEulerFromQuaternion: function ( q, order ) {
+        setEulerFromQuaternion: function( q, order ) {
 
             console.error( "REMOVED: Vector3\'s setEulerFromQuaternion: has been removed in favor of Euler.setFromQuaternion(), please update your code.");
 
         },
 
-        getPositionFromMatrix: function ( m ) {
+        getPositionFromMatrix: function( m ) {
 
             console.warn( "DEPRECATED: Vector3\'s .getPositionFromMatrix() has been renamed to .setFromMatrixPosition(). Please update your code." );
 
@@ -1284,14 +1284,14 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        getScaleFromMatrix: function ( m ) {
+        getScaleFromMatrix: function( m ) {
 
             console.warn( "DEPRECATED: Vector3\'s .getScaleFromMatrix() has been renamed to .setFromMatrixScale(). Please update your code." );
 
             return this.setFromMatrixScale( m );
         },
 
-        getColumnFromMatrix: function ( index, matrix ) {
+        getColumnFromMatrix: function( index, matrix ) {
 
             console.warn( "DEPRECATED: Vector3\'s .getColumnFromMatrix() has been renamed to .setFromMatrixColumn(). Please update your code." );
 
@@ -1299,7 +1299,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        setFromMatrixPosition: function ( m ) {
+        setFromMatrixPosition: function( m ) {
 
             this.x = m.elements[ 12 ];
             this.y = m.elements[ 13 ];
@@ -1309,7 +1309,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        setFromMatrixScale: function ( m ) {
+        setFromMatrixScale: function( m ) {
 
             var sx = this.set( m.elements[ 0 ], m.elements[ 1 ], m.elements[  2 ] ).length();
             var sy = this.set( m.elements[ 4 ], m.elements[ 5 ], m.elements[  6 ] ).length();
@@ -1322,7 +1322,7 @@ var cornerstoneMath = (function (cornerstoneMath) {
             return this;
         },
 
-        setFromMatrixColumn: function ( index, matrix ) {
+        setFromMatrixColumn: function( index, matrix ) {
 
             var offset = index * 4;
 
@@ -1336,13 +1336,13 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        equals: function ( v ) {
+        equals: function( v ) {
 
             return ( ( v.x === this.x ) && ( v.y === this.y ) && ( v.z === this.z ) );
 
         },
 
-        fromArray: function ( array ) {
+        fromArray: function( array ) {
 
             this.x = array[ 0 ];
             this.y = array[ 1 ];
@@ -1352,13 +1352,13 @@ var cornerstoneMath = (function (cornerstoneMath) {
 
         },
 
-        toArray: function () {
+        toArray: function() {
 
             return [ this.x, this.y, this.z ];
 
         },
 
-        clone: function () {
+        clone: function() {
 
             return new cornerstoneMath.Vector3( this.x, this.y, this.z );
 

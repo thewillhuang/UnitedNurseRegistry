@@ -16,7 +16,7 @@ let ImageDiv = React.createClass({
     selected: React.PropTypes.bool
   },
 
-  getInitialState: function () {
+  getInitialState: function() {
     return {
       display: 'none',
       checkColor: '#a8a8a8',
@@ -25,7 +25,7 @@ let ImageDiv = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function (nextProps) {
+  componentWillReceiveProps: function(nextProps) {
 // console.log('nextProps', nextProps);
     if (nextProps.selected) {
       this.setState({

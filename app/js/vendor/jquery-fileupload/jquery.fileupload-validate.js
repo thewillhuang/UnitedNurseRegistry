@@ -11,7 +11,7 @@
 
 /* global define, require, window */
 
-(function (factory) {
+(function(factory) {
     'use strict';
     if (typeof define === 'function' && define.amd) {
         // Register as an anonymous AMD module:
@@ -28,7 +28,7 @@
             window.jQuery
         );
     }
-}(function ($) {
+}(function($) {
     'use strict';
 
     // Append to the default processQueue:
@@ -79,7 +79,7 @@
 
         processActions: {
 
-            validate: function (data, options) {
+            validate: function(data, options) {
                 if (options.disabled) {
                     return data;
                 }

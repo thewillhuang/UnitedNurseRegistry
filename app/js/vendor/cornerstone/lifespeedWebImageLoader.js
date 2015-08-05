@@ -3,7 +3,7 @@
 // This is a cornerstone image loader for web images such as PNG and JPEG
 //
 
-(function ($, cornerstone) {
+(function($, cornerstone) {
 
     "use strict";
 

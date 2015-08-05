@@ -8,7 +8,7 @@ const query = require('../services/query');
 const getTransaction = require('../services/getTransaction');
 const Promise = require('bluebird');
 
-module.exports = function (app) {
+module.exports = function(app) {
   facilityAddress
 
   // create new facility address with facility id

@@ -7,7 +7,7 @@ const shift = new Router({
 const query = require('../services/query');
 const _ = require('lodash');
 
-module.exports = function (app) {
+module.exports = function(app) {
   shift
 
   //create shift

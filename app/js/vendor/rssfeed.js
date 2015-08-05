@@ -1,7 +1,7 @@
 ﻿
 var userRssFeed;
 
-$("#submitRssChoice").click(function (event) {
+$("#submitRssChoice").click(function(event) {
     event.preventDefault();
     userRssFeed = $("#userRssFeed").val();
     var feed = getFeed(userRssFeed);

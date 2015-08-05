@@ -1,5 +1,5 @@
 /*! cornerstone - v0.7.3 - 2015-04-04 | (c) 2014 Chris Hafey | https://github.com/chafey/cornerstone */
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -42,7 +42,7 @@ var cornerstone = (function (cornerstone) {
 /**
  * This module is responsible for enabling an element to display images with cornerstone
  */
-var cornerstone = (function ($, cornerstone) {
+var cornerstone = (function($, cornerstone) {
 
     "use strict";
 
@@ -111,7 +111,7 @@ var cornerstone = (function ($, cornerstone) {
  * This module is responsible for immediately drawing an enabled element
  */
 
-var cornerstone = (function ($, cornerstone) {
+var cornerstone = (function($, cornerstone) {
 
     "use strict";
 
@@ -143,7 +143,7 @@ var cornerstone = (function ($, cornerstone) {
  * This module is responsible for drawing an image to an enabled elements canvas element
  */
 
-var cornerstone = (function ($, cornerstone) {
+var cornerstone = (function($, cornerstone) {
 
     "use strict";
 
@@ -190,7 +190,7 @@ var cornerstone = (function ($, cornerstone) {
  * This module is responsible for drawing invalidated enabled elements
  */
 
-var cornerstone = (function ($, cornerstone) {
+var cornerstone = (function($, cornerstone) {
 
     "use strict";
 
@@ -220,7 +220,7 @@ var cornerstone = (function ($, cornerstone) {
 /**
  * This module is responsible for enabling an element to display images with cornerstone
  */
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -255,7 +255,7 @@ var cornerstone = (function (cornerstone) {
 
     return cornerstone;
 }(cornerstone));
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -283,7 +283,7 @@ var cornerstone = (function (cornerstone) {
 
     return cornerstone;
 }(cornerstone));
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -340,7 +340,7 @@ var cornerstone = (function (cornerstone) {
  * This module will fit an image to fit inside the canvas displaying it such that all pixels
  * in the image are viewable
  */
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -374,7 +374,7 @@ var cornerstone = (function (cornerstone) {
  * This module generates a lut for an image
  */
 
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -450,7 +450,7 @@ var cornerstone = (function (cornerstone) {
  * a canvas element to display it in
  *
  */
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -509,7 +509,7 @@ var cornerstone = (function (cornerstone) {
 /**
  * This module returns a subset of the stored pixels of an image
  */
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -573,7 +573,7 @@ var cornerstone = (function (cornerstone) {
  * This module deals with caching images
  */
 
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -740,7 +740,7 @@ var cornerstone = (function (cornerstone) {
  * This module deals with ImageLoaders, loading images and caching images
  */
 
-var cornerstone = (function ($, cornerstone) {
+var cornerstone = (function($, cornerstone) {
 
     "use strict";
 
@@ -846,7 +846,7 @@ var cornerstone = (function ($, cornerstone) {
 /**
  * This module contains a function to make an image is invalid
  */
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -875,7 +875,7 @@ var cornerstone = (function (cornerstone) {
 /**
  * This module contains a function to immediately invalidate an image
  */
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -903,7 +903,7 @@ var cornerstone = (function (cornerstone) {
 /**
  * This module contains a helper function to covert page coordinates to pixel coordinates
  */
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -1006,7 +1006,7 @@ var cornerstone = (function (cornerstone) {
  * This module is responsible for drawing an image to an enabled elements canvas element
  */
 
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -1168,7 +1168,7 @@ var cornerstone = (function (cornerstone) {
  * This module is responsible for drawing a grayscale imageß
  */
 
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -1316,7 +1316,7 @@ var cornerstone = (function (cornerstone) {
  * This module is responsible for drawing an image to an enabled elements canvas element
  */
 
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -1382,7 +1382,7 @@ var cornerstone = (function (cornerstone) {
 /**
  * This module is responsible for enabling an element to display images with cornerstone
  */
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -1452,7 +1452,7 @@ var cornerstone = (function (cornerstone) {
  * making it easy to draw geometry on the image
  */
 
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -1533,7 +1533,7 @@ var cornerstone = (function (cornerstone) {
 /**
  * This module contains a function to convert stored pixel values to display pixel values using a LUT
  */
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -1620,7 +1620,7 @@ var cornerstone = (function (cornerstone) {
 /**
  * This module contains a function to immediately redraw an image
  */
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 
@@ -1650,7 +1650,7 @@ var cornerstone = (function (cornerstone) {
 /**
  * This module contains functions to deal with getting and setting the viewport for an enabled element
  */
-var cornerstone = (function (cornerstone) {
+var cornerstone = (function(cornerstone) {
 
     "use strict";
 

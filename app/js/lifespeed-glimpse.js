@@ -20,8 +20,8 @@ function ShowGlimpseModal() {
 }
 
 function ShowDicomHTML5ViewModal(seriesID) {
-    $('#dicomHTML5ViewModal').on('shown.bs.modal', function () { dicomHTML5LoadSeries(seriesID) });
-    $('#dicomHTML5ViewModal').on('hidden.bs.modal', function () {
+    $('#dicomHTML5ViewModal').on('shown.bs.modal', function() { dicomHTML5LoadSeries(seriesID) });
+    $('#dicomHTML5ViewModal').on('hidden.bs.modal', function() {
         var element = $('#studyViewerRoot').find('.viewport')[0];
         cornerstoneTools.stopClip(element);
         window.location.reload();

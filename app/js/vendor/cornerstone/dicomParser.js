@@ -1,5 +1,5 @@
 /*! dicomParser - v0.4.1 - 2014-11-11 | (c) 2014 Chris Hafey | https://github.com/chafey/dicomParser */
-(function (root, factory) {
+(function(root, factory) {
     if (typeof module !== 'undefined' && module.exports) {
         module.exports = factory();
     }
@@ -13,7 +13,7 @@
         }
         dicomParser = factory();
     }
-}(this, function () {
+}(this, function() {
 
     /**
      * Parses a DICOM P10 byte array and returns a DataSet object with the parsed elements
@@ -129,7 +129,7 @@
  * Internal helper functions for parsing different types from a byte array
  */
 
-var dicomParser = (function (dicomParser)
+var dicomParser = (function(dicomParser)
 {
     "use strict";
 
@@ -370,7 +370,7 @@ var dicomParser = (function (dicomParser)
  * UT = Strip trailing spaces
  *
  */
-var dicomParser = (function (dicomParser)
+var dicomParser = (function(dicomParser)
 {
     "use strict";
 
@@ -692,7 +692,7 @@ var dicomParser = (function (dicomParser)
  * Internal helper functions for for parsing DICOM elements
  */
 
-var dicomParser = (function (dicomParser)
+var dicomParser = (function(dicomParser)
 {
     "use strict";
 
@@ -754,7 +754,7 @@ var dicomParser = (function (dicomParser)
  *  var byteStream = new dicomParser.LittleEndianByteStream(byteArray);
  *
  * */
-var dicomParser = (function (dicomParser)
+var dicomParser = (function(dicomParser)
 {
     "use strict";
 
@@ -875,7 +875,7 @@ var dicomParser = (function (dicomParser)
  * Internal helper functions for parsing implicit and explicit DICOM data sets
  */
 
-var dicomParser = (function (dicomParser)
+var dicomParser = (function(dicomParser)
 {
     "use strict";
 
@@ -890,7 +890,7 @@ var dicomParser = (function (dicomParser)
      * @param maxPosition the maximum position to read up to (optional - only needed when reading sequence items)
      * @returns {dicomParser.DataSet}
      */
-    dicomParser.parseDicomDataSetExplicit = function (byteStream, maxPosition) {
+    dicomParser.parseDicomDataSetExplicit = function(byteStream, maxPosition) {
 
         maxPosition = (maxPosition === undefined) ? byteStream.byteArray.length : maxPosition ;
 
@@ -949,7 +949,7 @@ var dicomParser = (function (dicomParser)
  * Internal helper functions for for parsing DICOM elements
  */
 
-var dicomParser = (function (dicomParser)
+var dicomParser = (function(dicomParser)
 {
     "use strict";
 
@@ -1029,7 +1029,7 @@ var dicomParser = (function (dicomParser)
  * Internal helper functions for for parsing DICOM elements
  */
 
-var dicomParser = (function (dicomParser)
+var dicomParser = (function(dicomParser)
 {
     "use strict";
 
@@ -1090,7 +1090,7 @@ var dicomParser = (function (dicomParser)
  * Internal helper functions for for parsing DICOM elements
  */
 
-var dicomParser = (function (dicomParser)
+var dicomParser = (function(dicomParser)
 {
     "use strict";
 
@@ -1201,7 +1201,7 @@ var dicomParser = (function (dicomParser)
  * Internal helper functions for for parsing DICOM elements
  */
 
-var dicomParser = (function (dicomParser)
+var dicomParser = (function(dicomParser)
 {
     "use strict";
 
@@ -1311,7 +1311,7 @@ var dicomParser = (function (dicomParser)
  * Internal helper functions for for parsing DICOM elements
  */
 
-var dicomParser = (function (dicomParser)
+var dicomParser = (function(dicomParser)
 {
     "use strict";
 
@@ -1423,7 +1423,7 @@ var dicomParser = (function (dicomParser)
  * Internal helper functions for for parsing DICOM elements
  */
 
-var dicomParser = (function (dicomParser)
+var dicomParser = (function(dicomParser)
 {
     "use strict";
 
@@ -1463,7 +1463,7 @@ var dicomParser = (function (dicomParser)
  * Internal helper functions for for parsing DICOM elements
  */
 
-var dicomParser = (function (dicomParser)
+var dicomParser = (function(dicomParser)
 {
     "use strict";
 

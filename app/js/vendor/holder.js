@@ -9,7 +9,7 @@ Commercial use requires attribution.
 */
 
 var Holder = Holder || {};
-(function (app, win) {
+(function(app, win) {
 
 var preempted = false,
 fallback = false,
@@ -236,7 +236,7 @@ var settings = {
 app.flags = {
 	dimensions: {
 		regex: /^(\d+)x(\d+)$/,
-		output: function (val) {
+		output: function(val) {
 			var exec = this.regex.exec(val);
 			return {
 				width: +exec[1],
@@ -246,7 +246,7 @@ app.flags = {
 	},
 	fluid: {
 		regex: /^([0-9%]+)x([0-9%]+)$/,
-		output: function (val) {
+		output: function(val) {
 			var exec = this.regex.exec(val);
 			return {
 				width: exec[1],
@@ -256,7 +256,7 @@ app.flags = {
 	},
 	colors: {
 		regex: /#([0-9a-f]{3,})\:#([0-9a-f]{3,})/i,
-		output: function (val) {
+		output: function(val) {
 			var exec = this.regex.exec(val);
 			return {
 				size: settings.themes.gray.size,
@@ -267,13 +267,13 @@ app.flags = {
 	},
 	text: {
 		regex: /text\:(.*)/,
-		output: function (val) {
+		output: function(val) {
 			return this.regex.exec(val)[1];
 		}
 	},
 	font: {
 		regex: /font\:(.*)/,
-		output: function (val) {
+		output: function(val) {
 			return this.regex.exec(val)[1];
 		}
 	},
@@ -284,17 +284,17 @@ app.flags = {
 
 for (var flag in app.flags) {
 	if (!app.flags.hasOwnProperty(flag)) continue;
-	app.flags[flag].match = function (val) {
+	app.flags[flag].match = function(val) {
 		return val.match(this.regex)
 	}
 }
 
-app.add_theme = function (name, theme) {
+app.add_theme = function(name, theme) {
 	name != null && theme != null && (settings.themes[name] = theme);
 	return app;
 };
 
-app.add_image = function (src, el) {
+app.add_image = function(src, el) {
 	var node = selector(el);
 	if (node.length) {
 		for (var i = 0, l = node.length; i < l; i++) {
@@ -306,7 +306,7 @@ app.add_image = function (src, el) {
 	return app;
 };
 
-app.run = function (o) {
+app.run = function(o) {
 	var options = extend(settings, o),
 	    images = [], imageNodes = [], bgnodes = [];
 	    
@@ -400,7 +400,7 @@ app.run = function (o) {
 	return app;
 };
 
-contentLoaded(win, function () {
+contentLoaded(win, function() {
 	if (window.addEventListener) {
 		window.addEventListener("resize", fluid_update, false);
 		window.addEventListener("orientationchange", fluid_update, false);
@@ -411,7 +411,7 @@ contentLoaded(win, function () {
 });
 
 if (typeof define === "function" && define.amd) {
-	define("Holder", [], function () {
+	define("Holder", [], function() {
 		return app;
 	});
 }

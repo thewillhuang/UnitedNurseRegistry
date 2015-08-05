@@ -6,7 +6,7 @@ const facility = new Router({
 });
 const query = require('../services/query');
 
-module.exports = function (app) {
+module.exports = function(app) {
   facility
 
   //create facility

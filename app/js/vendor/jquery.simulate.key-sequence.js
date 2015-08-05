@@ -289,7 +289,7 @@
 		 * @author Daniel Wachsstock, julrich
 		 * @since 1.0
 		 */
-		simplechar: function (rng, s, opts){
+		simplechar: function(rng, s, opts){
 			rng.text(s, 'end');
 			if (opts.triggerKeyEvents) {
 				for (var i =0; i < s.length; i += 1){
@@ -311,7 +311,7 @@
 		 * @author Daniel Wachsstock, julrich
 		 * @since 1.0
 		 */
-		'{{}': function (rng, s, opts){
+		'{{}': function(rng, s, opts){
 			$.simulate.prototype.simulateKeySequence.defaults.simplechar(rng, '{', opts);
 		},
 		
@@ -323,7 +323,7 @@
 		 * @author Daniel Wachsstock, julrich
 		 * @since 1.0
 		 */
-		'{enter}': function (rng, s, opts){
+		'{enter}': function(rng, s, opts){
 			rng.insertEOL();
 			rng.select();
 			if (opts.triggerKeyEvents === true) {
@@ -341,7 +341,7 @@
 		 * @author Daniel Wachsstock, julrich
 		 * @since 1.0
 		 */
-		'{backspace}': function (rng, s, opts){
+		'{backspace}': function(rng, s, opts){
 			var b = rng.bounds();
 			if (b[0] === b[1]) { rng.bounds([b[0]-1, b[0]]); } // no characters selected; it's just an insertion point. Remove the previous character
 			rng.text('', 'end'); // delete the characters and update the selection
@@ -359,7 +359,7 @@
 		 * @author Daniel Wachsstock, julrich
 		 * @since 1.0
 		 */
-		'{del}': function (rng, s, opts){
+		'{del}': function(rng, s, opts){
 			var b = rng.bounds();
 			if (b[0] === b[1]) { rng.bounds([b[0], b[0]+1]); } // no characters selected; it's just an insertion point. Remove the next character
 			rng.text('', 'end'); // delete the characters and update the selection
@@ -377,7 +377,7 @@
 		 * @author Daniel Wachsstock, julrich
 		 * @since 1.0
 		 */
-		'{rightarrow}':  function (rng, s, opts){
+		'{rightarrow}':  function(rng, s, opts){
 			var b = rng.bounds();
 			if (b[0] === b[1]) { b[1] += 1; } // no characters selected; it's just an insertion point. Move to the right
 			rng.bounds([b[1], b[1]]).select();
@@ -395,7 +395,7 @@
 		 * @author Daniel Wachsstock, julrich
 		 * @since 1.0
 		 */
-		'{leftarrow}': function (rng, s, opts){
+		'{leftarrow}': function(rng, s, opts){
 			var b = rng.bounds();
 			if (b[0] === b[1]) { b[0] -= 1; } // no characters selected; it's just an insertion point. Move to the left
 			rng.bounds([b[0], b[0]]).select();
@@ -411,7 +411,7 @@
 		 * @author Daniel Wachsstock, julrich
 		 * @since 1.0
 		 */
-		'{selectall}' : function (rng){
+		'{selectall}' : function(rng){
 			rng.bounds('all').select();
 		}
 	};

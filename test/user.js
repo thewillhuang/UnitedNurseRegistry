@@ -12,22 +12,22 @@ var uuid = require('node-uuid');
 // store primary key
 var r1;
 
-describe('user api', function () {
+describe('user api', function() {
 
-  it('should reject invalid get requests', function (done) {
+  it('should reject invalid get requests', function(done) {
     request.get('/api/users')
       .expect(404)
-      .end(function (err, res) {
+      .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(err).to.be.a('null');
         done();
       });
   });
 
-  it('should respond with empty array with unknown user', function (done) {
+  it('should respond with empty array with unknown user', function(done) {
     request.get('/api/user/abc')
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
@@ -37,7 +37,7 @@ describe('user api', function () {
       });
   });
 
-  it('should insert a new user given a correct object', function (done) {
+  it('should insert a new user given a correct object', function(done) {
     request.post('/api/user/')
       .send({
         firstName: 'william',
@@ -49,7 +49,7 @@ describe('user api', function () {
         userName: uuid.v4()
       })
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         r1 = res.body.rows;
         expect(r1).to.be.an('object');
         // expect(r1).to.contain('insertId');
@@ -59,10 +59,10 @@ describe('user api', function () {
       });
   });
 
-  it('should grab a user given a correct user id', function (done) {
+  it('should grab a user given a correct user id', function(done) {
     request.get('/api/user/' + r1.insertId)
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
@@ -72,10 +72,10 @@ describe('user api', function () {
       });
   });
 
-  it('should return a 200 for the same data', function (done) {
+  it('should return a 200 for the same data', function(done) {
     request.get('/api/user/' + r1.insertId)
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         // console.log(res);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -87,7 +87,7 @@ describe('user api', function () {
   });
 
   let updateinfo = uuid.v4();
-  it('should update user info given a correct object and user id', function (done) {
+  it('should update user info given a correct object and user id', function(done) {
     request.put('/api/user/' + r1.insertId)
       .send({
         firstName: 'william',
@@ -99,17 +99,17 @@ describe('user api', function () {
         userName: updateinfo
       })
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
         done();
       });
   });
 
-  it('should get an updated user info', function (done) {
+  it('should get an updated user info', function(done) {
     request.get('/api/user/' + r1.insertId)
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         expect(res.body.rows[0].userName).to.equal(updateinfo);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -121,20 +121,20 @@ describe('user api', function () {
   });
 
 
-  it('should delete a user given a correct user id', function (done) {
+  it('should delete a user given a correct user id', function(done) {
     request.delete('/api/user/' + r1.insertId)
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
         done();
       });
   });
 
-  it('the deleted user should not exist', function (done) {
+  it('the deleted user should not exist', function(done) {
     request.get('/api/user/' + r1.insertId)
       .expect(200)
-      .end(function (err, res) {
+      .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');

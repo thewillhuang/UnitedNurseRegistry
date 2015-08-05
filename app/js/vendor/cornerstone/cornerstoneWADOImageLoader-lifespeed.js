@@ -7,7 +7,7 @@
 // the following on your WADO url: &transferSyntax=1.2.840.10008.1.2.1
 //
 
-var cornerstoneWADOImageLoader = (function ($, cornerstone, cornerstoneWADOImageLoader) {
+var cornerstoneWADOImageLoader = (function($, cornerstone, cornerstoneWADOImageLoader) {
 
     "use strict";
 
@@ -95,7 +95,7 @@ var cornerstoneWADOImageLoader = (function ($, cornerstone, cornerstoneWADOImage
         oReq.responseType = "arraybuffer";
         //oReq.setRequestHeader("Accept", "multipart/related; type=application/dicom");
 
-        oReq.onreadystatechange = function (oEvent) {
+        oReq.onreadystatechange = function(oEvent) {
             // TODO: consider sending out progress messages here as we receive the pixel data
             if (oReq.readyState === 4)
             {
@@ -158,7 +158,7 @@ var cornerstoneWADOImageLoader = (function ($, cornerstone, cornerstoneWADOImage
 }($, cornerstone, cornerstoneWADOImageLoader));
 /**
  */
-var cornerstoneWADOImageLoader = (function (cornerstoneWADOImageLoader) {
+var cornerstoneWADOImageLoader = (function(cornerstoneWADOImageLoader) {
 
     "use strict";
 
@@ -193,7 +193,7 @@ var cornerstoneWADOImageLoader = (function (cornerstoneWADOImageLoader) {
 }(cornerstoneWADOImageLoader));
 /**
  */
-var cornerstoneWADOImageLoader = (function (cornerstoneWADOImageLoader) {
+var cornerstoneWADOImageLoader = (function(cornerstoneWADOImageLoader) {
 
     "use strict";
 
@@ -229,7 +229,7 @@ var cornerstoneWADOImageLoader = (function (cornerstoneWADOImageLoader) {
 
     return cornerstoneWADOImageLoader;
 }(cornerstoneWADOImageLoader));
-var cornerstoneWADOImageLoader = (function (cornerstoneWADOImageLoader) {
+var cornerstoneWADOImageLoader = (function(cornerstoneWADOImageLoader) {
 
     "use strict";
 
@@ -263,7 +263,7 @@ var cornerstoneWADOImageLoader = (function (cornerstoneWADOImageLoader) {
 
     return cornerstoneWADOImageLoader;
 }(cornerstoneWADOImageLoader));
-var cornerstoneWADOImageLoader = (function (cornerstoneWADOImageLoader) {
+var cornerstoneWADOImageLoader = (function(cornerstoneWADOImageLoader) {
 
     "use strict";
 
@@ -299,7 +299,7 @@ var cornerstoneWADOImageLoader = (function (cornerstoneWADOImageLoader) {
 
     return cornerstoneWADOImageLoader;
 }(cornerstoneWADOImageLoader));
-var cornerstoneWADOImageLoader = (function (cornerstoneWADOImageLoader) {
+var cornerstoneWADOImageLoader = (function(cornerstoneWADOImageLoader) {
 
     "use strict";
 
@@ -338,7 +338,7 @@ var cornerstoneWADOImageLoader = (function (cornerstoneWADOImageLoader) {
 
     return cornerstoneWADOImageLoader;
 }(cornerstoneWADOImageLoader));
-var cornerstoneWADOImageLoader = (function ($, cornerstone, cornerstoneWADOImageLoader) {
+var cornerstoneWADOImageLoader = (function($, cornerstone, cornerstoneWADOImageLoader) {
 
     "use strict";
 
@@ -513,7 +513,7 @@ var cornerstoneWADOImageLoader = (function ($, cornerstone, cornerstoneWADOImage
 
     return cornerstoneWADOImageLoader;
 }($, cornerstone, cornerstoneWADOImageLoader));
-var cornerstoneWADOImageLoader = (function ($, cornerstone, cornerstoneWADOImageLoader) {
+var cornerstoneWADOImageLoader = (function($, cornerstone, cornerstoneWADOImageLoader) {
 
     "use strict";
 

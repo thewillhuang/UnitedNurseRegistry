@@ -106,7 +106,7 @@ Range.prototype = {
 			return this._nativeGetText(this._nativeRange(this.bounds()));
 		}
 	},
-	insertEOL: function (){
+	insertEOL: function(){
 		this._nativeEOL();
 		this._bounds = [this._bounds[0]+1, this._bounds[0]+1]; // move past the EOL marker
 		return this;
@@ -116,7 +116,7 @@ Range.prototype = {
 
 function IERange(){}
 IERange.prototype = new Range();
-IERange.prototype._nativeRange = function (bounds){
+IERange.prototype._nativeRange = function(bounds){
 	var rng;
 	if (this._el.tagName == 'INPUT'){
 		// IE 8 is very inconsistent; textareas have createTextRange but it doesn't work
@@ -137,10 +137,10 @@ IERange.prototype._nativeRange = function (bounds){
 	}
 	return rng;					
 };
-IERange.prototype._nativeSelect = function (rng){
+IERange.prototype._nativeSelect = function(rng){
 	rng.select();
 };
-IERange.prototype._nativeSelection = function (){
+IERange.prototype._nativeSelection = function(){
 	// returns [start, end] for the selection constrained to be in element
 	var rng = this._nativeRange(); // range of the element to constrain to
 	var len = this.length();
@@ -156,10 +156,10 @@ IERange.prototype._nativeSelection = function (){
 		return (sel.parentElement().sourceIndex < this._el.sourceIndex) ? [0,0] : [len, len];
 	}
 };
-IERange.prototype._nativeGetText = function (rng){
+IERange.prototype._nativeGetText = function(rng){
 	return rng.text.replace(/\r/g, ''); // correct for IE's CrLf weirdness
 };
-IERange.prototype._nativeSetText = function (text, rng){
+IERange.prototype._nativeSetText = function(text, rng){
 	rng.text = text;
 };
 IERange.prototype._nativeEOL = function(){
@@ -193,7 +193,7 @@ InputRange.prototype = new Range();
 InputRange.prototype._nativeRange = function(bounds) {
 	return bounds || [0, this.length()];
 };
-InputRange.prototype._nativeSelect = function (rng){
+InputRange.prototype._nativeSelect = function(rng){
 	this._el.setSelectionRange(rng[0], rng[1]);
 };
 InputRange.prototype._nativeSelection = function(){
@@ -212,7 +212,7 @@ InputRange.prototype._nativeEOL = function(){
 
 function W3CRange(){}
 W3CRange.prototype = new Range();
-W3CRange.prototype._nativeRange = function (bounds){
+W3CRange.prototype._nativeRange = function(bounds){
 	var rng = document.createRange();
 	rng.selectNodeContents(this._el);
 	if (bounds){
@@ -222,11 +222,11 @@ W3CRange.prototype._nativeRange = function (bounds){
 	}
 	return rng;					
 };
-W3CRange.prototype._nativeSelect = function (rng){
+W3CRange.prototype._nativeSelect = function(rng){
 	window.getSelection().removeAllRanges();
 	window.getSelection().addRange (rng);
 };
-W3CRange.prototype._nativeSelection = function (){
+W3CRange.prototype._nativeSelection = function(){
 		// returns [start, end] for the selection constrained to be in element
 		var rng = this._nativeRange(); // range of the element to constrain to
 		if (window.getSelection().rangeCount == 0) return [this.length(), this.length()]; // append to the end
@@ -236,10 +236,10 @@ W3CRange.prototype._nativeSelection = function (){
 			w3cend (sel, rng)
 		];
 	};
-W3CRange.prototype._nativeGetText = function (rng){
+W3CRange.prototype._nativeGetText = function(rng){
 	return rng.toString();
 };
-W3CRange.prototype._nativeSetText = function (text, rng){
+W3CRange.prototype._nativeSetText = function(text, rng){
 	rng.deleteContents();
 	rng.insertNode (document.createTextNode(text));
 	this._el.normalize(); // merge the text with the surrounding text
@@ -328,15 +328,15 @@ NothingRange.prototype = new Range();
 NothingRange.prototype._nativeRange = function(bounds) {
 	return bounds || [0,this.length()];
 };
-NothingRange.prototype._nativeSelect = function (rng){ // do nothing
+NothingRange.prototype._nativeSelect = function(rng){ // do nothing
 };
 NothingRange.prototype._nativeSelection = function(){
 	return [0,0];
 };
-NothingRange.prototype._nativeGetText = function (rng){
+NothingRange.prototype._nativeGetText = function(rng){
 	return this._el[this._textProp].substring(rng[0], rng[1]);
 };
-NothingRange.prototype._nativeSetText = function (text, rng){
+NothingRange.prototype._nativeSetText = function(text, rng){
 	var val = this._el[this._textProp];
 	this._el[this._textProp] = val.substring(0, rng[0]) + text + val.substring(rng[1]);
 };

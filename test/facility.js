@@ -1,19 +1,14 @@
 'use strict';
 
-var chai = require('chai');
-var expect = chai.expect;
-var chaiAsPromised = require('chai-as-promised');
-var supertest = require('supertest');
-var app = require('../server');
-var request = supertest(app.listen());
-var uuid = require('node-uuid');
-
+const chai = require('chai');
+const expect = chai.expect;
+const supertest = require('supertest');
+const app = require('../server');
+const request = supertest(app.listen());
+const uuid = require('node-uuid');
 
 // store primary key
-var r1;
-
 describe('facility api', function() {
-
   it('should reject invalid get requests', function(done) {
     request.get('/api/facility/')
       .expect(405)
@@ -39,13 +34,14 @@ describe('facility api', function() {
       });
   });
 
+  let r1;
   it('should insert a new facility given a correct object', function(done) {
     request.post('/api/facility/')
       .send({
         facilityName: uuid.v4(),
         facilityGeoHash: 27898503349316,
         facilityPwHash: uuid.v4(),
-        facilityEMR: uuid.v4()
+        facilityEMR: uuid.v4(),
       })
       .expect(200)
       .end(function(err, res) {
@@ -86,14 +82,14 @@ describe('facility api', function() {
       });
   });
 
-  let updateinfo = uuid.v4();
+  const updateinfo = uuid.v4();
   it('should update facility info given a correct object and facility id', function(done) {
     request.put('/api/facility/' + r1.insertId)
       .send({
         facilityName: uuid.v4(),
         facilityGeoHash: 27898503349316,
         facilityPwHash: uuid.v4(),
-        facilityEMR: updateinfo
+        facilityEMR: updateinfo,
       })
       .expect(200)
       .end(function(err, res) {
@@ -117,7 +113,7 @@ describe('facility api', function() {
       });
   });
 
-  it('should delete a facility given a correct facility id', function(done) {
+  it('should deconste a facility given a correct facility id', function(done) {
     request.delete('/api/facility/' + r1.insertId)
       .expect(200)
       .end(function(err, res) {
@@ -127,7 +123,7 @@ describe('facility api', function() {
       });
   });
 
-  it('the deleted facility should not exist', function(done) {
+  it('the deconsted facility should not exist', function(done) {
     request.get('/api/facility/' + r1.insertId)
       .expect(200)
       .end(function(err, res) {
@@ -139,5 +135,4 @@ describe('facility api', function() {
         done();
       });
   });
-
 });

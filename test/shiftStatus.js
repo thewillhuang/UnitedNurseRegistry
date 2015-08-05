@@ -2,7 +2,6 @@
 
 const chai = require('chai');
 const expect = chai.expect;
-const chaiAsPromised = require('chai-as-promised');
 const supertest = require('supertest');
 const app = require('../server');
 const request = supertest(app.listen());
@@ -10,7 +9,6 @@ const uuid = require('node-uuid');
 const geohash = require('ngeohash');
 
 describe('shift api', function() {
-
   it('should reject invalid get requests', function(done) {
     request.get('/api/shifts')
       .expect(404)
@@ -44,7 +42,7 @@ describe('shift api', function() {
         userGeoHash: 27898503349316,
         userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
         dob: '1986-04-08',
-        userName: uuid.v4()
+        userName: uuid.v4(),
       })
       .expect(200)
       .end(function(err, res) {
@@ -64,7 +62,7 @@ describe('shift api', function() {
         facilityName: uuid.v4(),
         facilityGeoHash: '9qh0b55sd',
         facilityPwHash: uuid.v4(),
-        facilityEMR: uuid.v4()
+        facilityEMR: uuid.v4(),
       })
       .expect(200)
       .end(function(err, res) {
@@ -85,7 +83,7 @@ describe('shift api', function() {
         facilityName: uuid.v4(),
         facilityGeoHash: '9qh109',
         facilityPwHash: uuid.v4(),
-        facilityEMR: uuid.v4()
+        facilityEMR: uuid.v4(),
       })
       .expect(200)
       .end(function(err, res) {
@@ -106,7 +104,7 @@ describe('shift api', function() {
         facilityName: uuid.v4(),
         facilityGeoHash: '9qh0b5',
         facilityPwHash: uuid.v4(),
-        facilityEMR: uuid.v4()
+        facilityEMR: uuid.v4(),
       })
       .expect(200)
       .end(function(err, res) {
@@ -123,7 +121,7 @@ describe('shift api', function() {
   it('insert specialty 1 given a user id', function(done) {
     request.post('/api/userspecialty/user/' + u1.insertId)
       .send({
-        specialty: 'icu'
+        specialty: 'icu',
       })
       .expect(200)
       .end(function(err, res) {
@@ -160,7 +158,7 @@ describe('shift api', function() {
         payPerHour: 40.60,
         specialtyID: sp1,
         shiftDuration: 12,
-        facilityID: f1.insertId
+        facilityID: f1.insertId,
       })
       .expect(200)
       .end(function(err, res) {
@@ -202,7 +200,7 @@ describe('shift api', function() {
       });
   });
 
-  let updateinfo = 45.62;
+  const updateinfo = 45.62;
   it('should update shift info given a correct object and shift id', function(done) {
     request.put('/api/shift/' + s1.insertId)
       .send({
@@ -231,13 +229,13 @@ describe('shift api', function() {
       });
   });
 
-  let updateinfo2 = 34.43
+  const updateinfo2 = 34.43;
   it('should disregard an update to the status of the shift with the shift id', function(done) {
     request.put('/api/shift/' + s1.insertId)
       .send({
         payPerHour: updateinfo2,
         facilityPaid: 1,
-        open: 0
+        open: 0,
       })
       .expect(200)
       .end(function(err, res) {
@@ -273,7 +271,7 @@ describe('shift api', function() {
         payPerHour: 41.60,
         specialtyID: sp1,
         shiftDuration: 12,
-        facilityID: f1.insertId
+        facilityID: f1.insertId,
       })
       .expect(200)
       .end(function(err, res) {
@@ -296,7 +294,7 @@ describe('shift api', function() {
         payPerHour: 60.60,
         specialtyID: sp1,
         shiftDuration: 12,
-        facilityID: f1.insertId
+        facilityID: f1.insertId,
       })
       .expect(200)
       .end(function(err, res) {
@@ -344,7 +342,7 @@ describe('shift api', function() {
         payPerHour: 60.60,
         specialtyID: sp1,
         shiftDuration: 12,
-        facilityID: f2.insertId
+        facilityID: f2.insertId,
       })
       .expect(200)
       .end(function(err, res) {
@@ -367,7 +365,7 @@ describe('shift api', function() {
         payPerHour: 60.60,
         specialtyID: sp1,
         shiftDuration: 12,
-        facilityID: f3.insertId
+        facilityID: f3.insertId,
       })
       .expect(200)
       .end(function(err, res) {
@@ -381,12 +379,12 @@ describe('shift api', function() {
       });
   });
 
-  let hash = '9qh1';
-  let hashset = geohash.neighbors(hash);
+  const hash = '9qh1';
+  const hashset = geohash.neighbors(hash);
   it('should return an array of 4 different open shifts posted by different hospitals matching the search area', function(done) {
     request.post('/api/shift/geohash/' + hash + '/precision/' + 4)
       .send({
-        hashSet: hashset
+        hashSet: hashset,
       })
       .expect(200)
       .end(function(err, res) {
@@ -578,5 +576,4 @@ describe('shift api', function() {
         done();
       });
   });
-
 });

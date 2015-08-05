@@ -3,6 +3,7 @@
     "mocha": true
   },
   "rules": {
-    "camelcase": [2, {"properties": "always"}]
+    "camelcase": [2, {"properties": "always"}],
+    "func-names": 0
   }
 }

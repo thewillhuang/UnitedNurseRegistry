@@ -2,19 +2,19 @@
 
 const Router = require('koa-router');
 const shift = new Router({
-  prefix: '/api/shift'
+  prefix: '/api/shift',
 });
 const query = require('../services/query');
 const _ = require('lodash');
 
-module.exports = function(app) {
+module.exports = function shiftRoutes(app) {
   shift
 
-  //create shift
-  .post('/', function* () {
-    let requestJson = this.request.body.fields;
-    let specialtyID = requestJson.specialtyID;
-    let facilityID = requestJson.facilityID;
+  // create shift
+  .post('/', function* createShift() {
+    const requestJson = this.request.body.fields;
+    const specialtyID = requestJson.specialtyID;
+    const facilityID = requestJson.facilityID;
     delete requestJson.specialtyID;
     delete requestJson.facilityID;
     delete requestJson.open;
@@ -24,17 +24,17 @@ module.exports = function(app) {
     delete requestJson.userPaid;
     requestJson.fk_Shift_facilityID = facilityID;
     requestJson.fk_Shift_specialtyID = specialtyID;
-    let q = {};
+    const q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['shift', requestJson];
     // console.log(q);
     this.body = yield query(q);
   })
 
-  //grab shift table info based on shift id
-  .get('/:shiftID', function* () {
-    let shiftID = this.params.shiftID;
-    let q = {};
+  // grab shift table info based on shift id
+  .get('/:shiftID', function* getShiftInfo() {
+    const shiftID = this.params.shiftID;
+    const q = {};
     q.sql = 'SELECT * FROM ?? WHERE ?? = ?';
     q.values = ['shift', 'shiftID', shiftID];
     // console.log(q);
@@ -43,46 +43,46 @@ module.exports = function(app) {
 
   // view all scheduled shifts by hospital id --> returns a list of shift information
   // get
-  .get('/facility/:facilityID', function* (){
-    let facilityID = this.params.facilityID;
-    let q = {};
-    q.sql = 'SELECT * FROM ?? WHERE ?? = ?'
+  .get('/facility/:facilityID', function* grabShiftInfoByFacility() {
+    const facilityID = this.params.facilityID;
+    const q = {};
+    q.sql = 'SELECT * FROM ?? WHERE ?? = ?';
     q.values = ['shift', 'fk_Shift_facilityID', facilityID];
     this.body = yield query(q);
   })
 
   // view all scheduled shifts by userID --> returns a list of shift information
   // get
-  .get('/user/:userID', function* (){
-    let userID = this.params.userID;
-    let q = {};
-    q.sql = 'SELECT * FROM ?? WHERE ?? = ?'
+  .get('/user/:userID', function* grabShiftInfoByUserId() {
+    const userID = this.params.userID;
+    const q = {};
+    q.sql = 'SELECT * FROM ?? WHERE ?? = ?';
     q.values = ['shift', 'fk_Shift_userID', userID];
     this.body = yield query(q);
   })
 
   // view all the open shifts by location and based on distance --> returns shift information, including facility info
   // get
-  .post('/geohash/:geohash/precision/:precision', function* (){
-    let precision = this.params.precision;
-    let geohash = this.params.geohash;
-    let requestJson = this.request.body.fields;
-    let hashSet = requestJson.hashSet;
+  .post('/geohash/:geohash/precision/:precision', function* grabOpenShiftByGeohash() {
+    const precision = this.params.precision;
+    const geohash = this.params.geohash;
+    const requestJson = this.request.body.fields;
+    const hashSet = requestJson.hashSet;
     // push the current hashset into the array to query, total 9 for proximity search
     hashSet.push(geohash);
     // trim every hashset to the same length as the percision
-    let trimmedHashSet = hashSet.map(function(value){
+    const trimmedHashSet = hashSet.map(function trimHash(value) {
       return value.substring(0, precision);
     });
     // take of any elements that is not unique
-    let set = _.uniq(trimmedHashSet);
-    let q = {};
+    const set = _.uniq(trimmedHashSet);
+    const q = {};
     q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (?)';
-    let shift = ['shift.shiftID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date', 'shift.open'];
-    let specialty = ['specialty.specialty'];
-    let facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR', 'facility.facilityGeohash'];
+    const selectShift = ['shift.shiftID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date', 'shift.open'];
+    const specialty = ['specialty.specialty'];
+    const facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR', 'facility.facilityGeohash'];
     q.values = [
-      shift, facility, specialty,
+      selectShift, facility, specialty,
       'shift',
       'facility',
       'shift.fk_Shift_facilityID', 'facility.facilityID',
@@ -90,17 +90,17 @@ module.exports = function(app) {
       'specialty.specialtyID', 'fk_Shift_specialtyID',
       'shift.open', 1,
       'facility.facilityGeohash', precision,
-      set
+      set,
     ];
     // console.log(q);
     this.body = yield query(q);
   })
 
   // update shift data by shift id
-  .put('/:shiftID', function* () {
-    let requestJson = this.request.body.fields;
-    let specialtyID = requestJson.specialtyID;
-    let facilityID = requestJson.facilityID;
+  .put('/:shiftID', function* updateShiftByShiftID() {
+    const requestJson = this.request.body.fields;
+    const specialtyID = requestJson.specialtyID;
+    const facilityID = requestJson.facilityID;
     if (specialtyID) {
       delete requestJson.specialtyID;
       requestJson.fk_Shift_specialtyID = specialtyID;
@@ -114,8 +114,8 @@ module.exports = function(app) {
     delete requestJson.completed;
     delete requestJson.facilityPaid;
     delete requestJson.userPaid;
-    let shiftID = this.params.shiftID;
-    let q = {};
+    const shiftID = this.params.shiftID;
+    const q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['shift', requestJson, 'shiftID', shiftID];
     // console.log(q);
@@ -123,9 +123,9 @@ module.exports = function(app) {
   })
 
   // delete shift by shift id
-  .delete('/:shiftID', function* () {
-    let shiftID = this.params.shiftID;
-    let q = {};
+  .delete('/:shiftID', function* deleteShiftByShiftID() {
+    const shiftID = this.params.shiftID;
+    const q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';
     q.values = ['shift', 'shiftID', shiftID];
     this.body = yield query(q);

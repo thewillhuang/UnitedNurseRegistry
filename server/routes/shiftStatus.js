@@ -35,7 +35,7 @@ module.exports = function shiftStatusRoutes(app) {
 
   // view count by shiftID  --> returns number of views, and number of rejected views based on shift ID
   // get
-  .get('/viewed/shift/:shiftID', function* views() {
+  .get('/viewed/shift/:shiftID', function* returnUniqueViews() {
     const shiftID = this.params.shiftID;
     const q = {};
     q.sql = 'SELECT count(*) FROM ?? WHERE ?? = ?';
@@ -44,7 +44,7 @@ module.exports = function shiftStatusRoutes(app) {
 
   // mark shift as completed by shiftID
   // post
-  .post('/completed/shift/:shiftID', function* markComplete() {
+  .post('/completed/shift/:shiftID', function* markAsComplete() {
     const shiftID = this.params.shiftID;
     const q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
@@ -55,7 +55,7 @@ module.exports = function shiftStatusRoutes(app) {
 
   // mark shift as pending by shiftID
   // post
-  .post('/pending/shift/:shiftID/user/:userID', function* markPending() {
+  .post('/pending/shift/:shiftID/user/:userID', function* markAsPending() {
     const userID = this.params.userID;
     const shiftID = this.params.shiftID;
     const q = {};
@@ -67,7 +67,7 @@ module.exports = function shiftStatusRoutes(app) {
 
   // mark shift as open by shiftID
   // post
-  .post('/open/shift/:shiftID', function* markOpen() {
+  .post('/open/shift/:shiftID', function* markAsOpen() {
     const shiftID = this.params.shiftID;
     const q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';

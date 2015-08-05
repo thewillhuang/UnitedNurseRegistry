@@ -6,7 +6,6 @@ const supertest = require('supertest');
 const app = require('../server');
 const request = supertest(app.listen());
 const uuid = require('node-uuid');
-const geohash = require('ngeohash');
 
 describe('shift api', function() {
   it('should reject invalid get requests', function(done) {
@@ -374,30 +373,6 @@ describe('shift api', function() {
         expect(s1).to.be.an('object');
         // expect(s1).to.contain('insertId');
         expect(s1.insertId).to.be.an('number');
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
-
-  const hash = '9qh1';
-  const hashset = geohash.neighbors(hash);
-  it('should return an array of 4 different open shifts posted by different hospitals matching the search area', function(done) {
-    request.post('/api/shift/geohash/' + hash + '/precision/' + 4)
-      .send({
-        hashSet: hashset,
-      })
-      .expect(200)
-      .end(function(err, res) {
-        // console.log(res.body.rows[0]);
-        expect(res.body).to.be.an('object');
-        expect(res.body.rows).to.be.not.empty;
-        expect(res.body.rows[0].open).to.equal(1);
-        expect(res.body.rows[1].open).to.equal(1);
-        expect(res.body.rows[2].open).to.equal(1);
-        expect(res.body.rows[3].open).to.equal(1);
-        expect(res.body.rows).to.be.an('array');
-        expect(res.body.rows).to.have.length(4);
-        expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });

@@ -7,7 +7,7 @@
 // const app = require('../server');
 // const request = supertest(app.listen());
 // const uuid = require('node-uuid');
-// chai.use(chaiAsPromised);
+// 
 //
 // // store primary key
 //

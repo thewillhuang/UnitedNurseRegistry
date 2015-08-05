@@ -58,7 +58,7 @@ module.exports = function (app) {
     let userID = this.params.userID;
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-    let set = {open: 1, pending: 0, completed: 0};
+    let set = {open: 1, pending: 0, completed: 0, fk_Shift_userID: null};
     q.values = ['shift', set, 'shiftID', shiftID];
     this.body = yield query(q);
   })

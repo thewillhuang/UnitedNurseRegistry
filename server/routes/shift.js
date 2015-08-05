@@ -16,6 +16,11 @@ module.exports = function (app) {
     let facilityID = requestJson.facilityID;
     delete requestJson.specialtyID;
     delete requestJson.facilityID;
+    delete requestJson.open;
+    delete requestJson.pending;
+    delete requestJson.completed;
+    delete requestJson.facilityPaid;
+    delete requestJson.userPaid;
     requestJson.fk_Shift_facilityID = facilityID;
     requestJson.fk_Shift_specialtyID = specialtyID;
     let q = {};
@@ -37,11 +42,12 @@ module.exports = function (app) {
 
   // view all scheduled shifts by hospital id --> returns a list of shift information
   // get
-  .get('/hospital/:hospitalID', function* (){
+  .get('/facility/:facilityID', function* (){
     let facilityID = this.params.facilityID;
     let q = {};
     q.sql = 'SELECT * FROM ?? WHERE ?? = ?'
     q.values = ['shift', 'fk_Shift_facilityID', facilityID];
+    this.body = yield query(q);
   })
 
   // view all scheduled shifts by userID --> returns a list of shift information
@@ -51,30 +57,38 @@ module.exports = function (app) {
     let q = {};
     q.sql = 'SELECT * FROM ?? WHERE ?? = ?'
     q.values = ['shift', 'fk_Shift_userID', userID];
+    this.body = yield query(q);
   })
 
   //TODO node geohash function
   // view all the open shifts by location and based on distance --> returns shift information, including facility info
   // get
-  .get('/geohash/:geohash/precision/:precision', function* (){
+  .post('/geohash/:geohash/precision/:precision', function* (){
     let precision = this.params.precision;
     let geohash = this.params.geohash;
     let requestJson = this.request.body.fields;
     let hashSet = requestJson.hashSet;
-    hashSet.push(geohash.substring(0, precision));
+    // push the current hashset into the array to query, total 9
+    hashSet.push(geohash);
+    // trim every hashset to the same length as the percision
+    let trimmedHashSet = hashSet.map(function(value){
+      return value.substring(0, precision);
+    });
     let q = {};
-    q.sql = 'SELECT ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (?)';
-    let shift = ['shift.shiftID', 'shift.fk_Shift_specialtyID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date'];
-    let facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR'];
+    q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (?)';
+    let shift = ['shift.shiftID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date'];
+    let specialty = ['specialty.specialty'];
+    let facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR', 'facility.facilityGeohash'];
     q.values = [
-      shift,
-      facility,
+      shift, facility, specialty,
       'shift',
       'facility',
       'shift.fk_Shift_facilityID', 'facility.facilityID',
+      'Specialty',
+      'specialty.specialtyID', 'fk_Shift_specialtyID',
       'shift.open', 1,
       'facility.facilityGeohash', precision,
-      hashSet
+      trimmedHashSet
     ];
     this.body = yield query(q);
   })
@@ -92,6 +106,11 @@ module.exports = function (app) {
       delete requestJson.facilityID;
       requestJson.fk_Shift_facilityID = facilityID;
     }
+    delete requestJson.open;
+    delete requestJson.pending;
+    delete requestJson.completed;
+    delete requestJson.facilityPaid;
+    delete requestJson.userPaid;
     let shiftID = this.params.shiftID;
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';

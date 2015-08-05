@@ -2,7 +2,6 @@
 
 const chai = require('chai');
 const expect = chai.expect;
-const chaiAsPromised = require('chai-as-promised');
 const supertest = require('supertest');
 const app = require('../server');
 const request = supertest(app.listen());
@@ -206,7 +205,7 @@ describe('shift api', function () {
   it('should update shift info given a correct object and shift id', function (done) {
     request.put('/api/shift/' + s1.insertId)
       .send({
-        payPerHour: updateinfo,
+        payPerHour: updateinfo
       })
       .expect(200)
       .end(function (err, res) {

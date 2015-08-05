@@ -1,9 +1,8 @@
 {
-  "parser": "babel-eslint",
   "env": {
     "mocha": true
   },
   "rules": {
-    "camelcase": [2, {"properties": "never"}]
+    "camelcase": [2, {"properties": "always"}]
   }
 }

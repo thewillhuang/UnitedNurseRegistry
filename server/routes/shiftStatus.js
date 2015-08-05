@@ -20,6 +20,7 @@ module.exports = function (app) {
     this.body = yield query(q);
   })
 
+  // insert view count by unique userID
   .post('/viewed/shift/:shiftID/user/:userID', function* (){
     let shiftID = this.params.shiftID;
     let userID = this.params.userID;
@@ -44,7 +45,7 @@ module.exports = function (app) {
   // mark shift as completed by shiftID
   // post
   .post('/completed/shift/:shiftID', function*(){
-    let userID = this.params.userID;
+    let shiftID = this.params.shiftID;
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     let set = {open: 0, pending: 0, completed: 1};
@@ -67,7 +68,7 @@ module.exports = function (app) {
   // mark shift as open by shiftID
   // post
   .post('/open/shift/:shiftID', function*(){
-    let userID = this.params.userID;
+    let shiftID = this.params.shiftID;
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     let set = {open: 1, pending: 0, completed: 0, fk_Shift_userID: null};

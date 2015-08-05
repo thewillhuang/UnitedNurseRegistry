@@ -8,7 +8,6 @@ var app = require('../server');
 var request = supertest(app.listen());
 var uuid = require('node-uuid');
 
-
 describe('user license api', function () {
 
   it('should reject invalid get requests', function (done) {

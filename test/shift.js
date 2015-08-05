@@ -385,16 +385,20 @@ describe('shift api', function () {
 
   let hash = '9qh1';
   let hashset = geohash.neighbors(hash);
-  it('should return an array of 4 different open shifts posted by different hospitals', function (done) {
+  it('should return an array of 4 different open shifts posted by different hospitals matching the search area', function (done) {
     request.post('/api/shift/geohash/' + hash + '/precision/' + 4)
       .send({
         hashSet: hashset
       })
       .expect(200)
       .end(function (err, res) {
-        // console.log(res.body);
+        // console.log(res.body.rows[0]);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows[0].open).to.equal(1);
+        expect(res.body.rows[1].open).to.equal(1);
+        expect(res.body.rows[2].open).to.equal(1);
+        expect(res.body.rows[3].open).to.equal(1);
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(4);
         expect(res.body.fields).to.be.an('array');

@@ -9,6 +9,7 @@ const query = require('../services/query');
 module.exports = function shiftReviewRoutes(app) {
   shiftReview
 
+  // user reviews
   .post('/user/:userID/shift/:shiftID', function* createUserReview() {
     const userID = this.params.userID;
     const shiftID = this.params.shiftID;
@@ -57,6 +58,7 @@ module.exports = function shiftReviewRoutes(app) {
     this.body = yield query(q);
   })
 
+  // facility reviews
   .post('/facility/:facilityID/shift/:shiftID', function* createFacilityReview() {
     const facilityID = this.params.facilityID;
     const shiftID = this.params.shiftID;

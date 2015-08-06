@@ -58,12 +58,12 @@ require('./server/routes/shiftRoutes')(app);
 
 // start http and https servers
 app.listen(port);
-console.log('server listening on port:', port);
+console.log('http listening on port:', port);
 const https = require('https');
 const fs = require('fs');
 const options = {
-  key: fs.readFileSync('./privKey.pem'),
-  cert: fs.readFileSync('./privKeyCert.pem'),
+  key: fs.readFileSync('privKey.pem'),
+  cert: fs.readFileSync('privKeyCert.pem'),
 };
 https.createServer(options, app.callback()).listen(port2);
-console.log('https server listening on port:', port2);
+console.log('https listening on port:', port2);

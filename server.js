@@ -62,8 +62,9 @@ console.log('http listening on port:', port);
 const https = require('https');
 const fs = require('fs');
 const options = {
-  key: fs.readFileSync('privKey.pem'),
-  cert: fs.readFileSync('privKeyCert.pem'),
+  key: fs.readFileSync('unr-key.pem'),
+  cert: fs.readFileSync('unr-cert.pem'),
+  dhparam: fs.readFileSync('dhparam.pem'),
 };
 https.createServer(options, app.callback()).listen(port2);
 console.log('https listening on port:', port2);

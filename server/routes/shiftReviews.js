@@ -19,6 +19,7 @@ module.exports = function shiftReviewRoutes(app) {
     const q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['ShiftReviewOnUser', requestJson];
+    // console.log(q);
     this.body = yield query(q);
   })
 
@@ -44,8 +45,8 @@ module.exports = function shiftReviewRoutes(app) {
   .get('/avg/user/:userID', function* getAvgUserReview() {
     const userID = this.params.userID;
     const q = {};
-    q.sql = 'SELECT AVG(??) FROM ?? WHERE ?? = ?';
-    q.values = ['review', 'ShiftReviewOnUser', 'fk_ShiftReviewOnUser_userID', userID];
+    q.sql = 'SELECT AVG(??) AS ?? FROM ?? WHERE ?? = ?';
+    q.values = ['review', 'avgReview', 'ShiftReviewOnUser', 'fk_ShiftReviewOnUser_userID', userID];
     this.body = yield query(q);
   })
 
@@ -87,14 +88,15 @@ module.exports = function shiftReviewRoutes(app) {
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ? AND ?? = ?';
     q.values = ['review', 'ShiftReviewOnFacility', 'fk_ShiftReviewOnFacility_facilityID', facilityID, 'fk_ShiftReviewOnFacility_shiftID', shiftID];
+    // console.log(q);
     this.body = yield query(q);
   })
 
   .get('/avg/facility/:facilityID', function* getAvgFacilityReview() {
     const facilityID = this.params.facilityID;
     const q = {};
-    q.sql = 'SELECT AVG(??) FROM ?? WHERE ?? = ?';
-    q.values = ['review', 'ShiftReviewOnFacility', 'fk_ShiftReviewOnFacility_facilityID', facilityID];
+    q.sql = 'SELECT AVG(??) AS ?? FROM ?? WHERE ?? = ?';
+    q.values = ['review', 'avgReview', 'ShiftReviewOnFacility', 'fk_ShiftReviewOnFacility_facilityID', facilityID];
     this.body = yield query(q);
   })
 

@@ -12,11 +12,11 @@ const conditional = require('koa-conditional-get');
 const helmet = require('koa-helmet');
 // const passport = require('koa-passport');
 
-// enable proxy through another server
-app.proxy = true;
-
 // logging
 app.use(logger());
+
+// enable proxy through another server
+app.proxy = true;
 
 // use helmet
 app.use(helmet());

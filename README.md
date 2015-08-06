@@ -27,12 +27,13 @@ gulper prod
 gulper
 ```
 
+
+### docker commands, good to know
 run below bash script.
 ```bash
 docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)
 ```
 
-### docker commands, good to know
 view all currently running docker containers on a system
 ```bash
 docker ps

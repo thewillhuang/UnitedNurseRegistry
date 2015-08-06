@@ -1,12 +1,13 @@
 'use strict';
 const koa = require('koa');
 const port = process.env.PORT || 3000;
+const port2 = process.env.PORT2 || 3001;
 const send = require('koa-send');
 const logger = require('koa-logger');
 const etag = require('koa-etag');
 const build = '/public';
 const path = require('path');
-const app = koa();
+const app = module.exports = koa();
 const koaBody = require('koa-better-body');
 const conditional = require('koa-conditional-get');
 const helmet = require('koa-helmet');
@@ -55,6 +56,14 @@ require('./server/routes/userRoutes')(app);
 require('./server/routes/facilityRoutes')(app);
 require('./server/routes/shiftRoutes')(app);
 
+// start http and https servers
 app.listen(port);
 console.log('server listening on port:', port);
-module.exports = app;
+const https = require('https');
+const fs = require('fs');
+const options = {
+  key: fs.readFileSync('./privKey.pem'),
+  cert: fs.readFileSync('./privKeyCert.pem'),
+};
+https.createServer(options, app.callback()).listen(port2);
+console.log('https server listening on port:', port2);

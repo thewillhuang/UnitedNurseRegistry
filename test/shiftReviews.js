@@ -537,7 +537,7 @@ describe('shift reviews api', function() {
       });
   });
 
-  it('the deleted facility review 1 should not exist', function(done) {
+  it('the deleted facility review 1 by cascading foreign key should not exist', function(done) {
     request.get('/api/shiftreview/facility/' + f1.insertId + '/shift/' + s1.insertId)
       .expect(200)
       .end(function(err, res) {
@@ -550,7 +550,7 @@ describe('shift reviews api', function() {
       });
   });
 
-  it('the deleted facility review 2 should not exist', function(done) {
+  it('the deleted facility review 2 cascading foreign key should not exist', function(done) {
     request.get('/api/shiftreview/facility/' + f1.insertId + '/shift/' + s2.insertId)
       .expect(200)
       .end(function(err, res) {

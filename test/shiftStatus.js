@@ -327,9 +327,9 @@ describe('shift api', function() {
       .expect(200)
       .end(function(err, res) {
         u2 = res.body.rows;
-        expect(u1).to.be.an('object');
+        expect(u2).to.be.an('object');
         // expect(u1).to.contain('insertId');
-        expect(u1.insertId).to.be.an('number');
+        expect(u2.insertId).to.be.an('number');
         expect(err).to.be.a('null');
         done();
       });
@@ -522,6 +522,8 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
+        expect(res.body.rows[0].open).to.eql(1);
+        expect(res.body.rows[1].open).to.eql(1);
         expect(res.body.rows).to.have.length(2);
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
@@ -801,6 +803,29 @@ describe('shift api', function() {
 
   it('the deleted user should not exist', function(done) {
     request.get('/api/user/' + u1.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should delete a user given a correct user id', function(done) {
+    request.delete('/api/user/' + u2.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('the deleted user should not exist', function(done) {
+    request.get('/api/user/' + u2.insertId)
       .expect(200)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');

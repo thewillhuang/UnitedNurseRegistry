@@ -9,8 +9,7 @@ const query = require('../services/query');
 module.exports = function shiftStatusRoutes(app) {
   shiftStatus
 
-  // grab the shift status by shift id --> rturns open, pending or completed
-  // get
+  // grab the shift status by shift id --> returns open, pending or completed
   .get('/shift/:shiftID', function* getShiftStatus() {
     const shiftID = this.params.shiftID;
     const q = {};
@@ -31,19 +30,19 @@ module.exports = function shiftStatusRoutes(app) {
     const q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['ShiftViewed', payload];
+    this.body = yield query(q);
   })
 
   // view count by shiftID  --> returns number of views, and number of rejected views based on shift ID
-  // get
   .get('/viewed/shift/:shiftID', function* returnUniqueViews() {
     const shiftID = this.params.shiftID;
     const q = {};
-    q.sql = 'SELECT count(*) FROM ?? WHERE ?? = ?';
-    q.values = ['ShiftViewed', 'fk_ShiftViewed_shiftID', shiftID];
+    q.sql = 'SELECT count(*) AS ? FROM ?? WHERE ?? = ?';
+    q.values = ['unique', 'ShiftViewed', 'fk_ShiftViewed_shiftID', shiftID];
+    this.body = yield query(q);
   })
 
   // mark shift as completed by shiftID
-  // post
   .post('/completed/shift/:shiftID', function* markAsComplete() {
     const shiftID = this.params.shiftID;
     const q = {};
@@ -54,7 +53,6 @@ module.exports = function shiftStatusRoutes(app) {
   })
 
   // mark shift as pending by shiftID
-  // post
   .post('/pending/shift/:shiftID/user/:userID', function* markAsPending() {
     const userID = this.params.userID;
     const shiftID = this.params.shiftID;
@@ -66,7 +64,6 @@ module.exports = function shiftStatusRoutes(app) {
   })
 
   // mark shift as open by shiftID
-  // post
   .post('/open/shift/:shiftID', function* markAsOpen() {
     const shiftID = this.params.shiftID;
     const q = {};
@@ -77,7 +74,6 @@ module.exports = function shiftStatusRoutes(app) {
   })
 
   // view all open shifts by hospital id --> return a list of shift information
-  // get
   .get('/open/facility/:facilityID', function* viewOpenShiftByHospital() {
     const facilityID = this.params.facilityID;
     const q = {};
@@ -86,13 +82,12 @@ module.exports = function shiftStatusRoutes(app) {
     this.body = yield query(q);
   })
 
-  // view all open shifts by userID --> returns a list of shift information
-  // get
+  // view all shifts by userID --> returns a list of shift information
   .get('/open/user/:userID', function* viewOpenShiftByUser() {
     const userID = this.params.userID;
     const q = {};
-    q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-    q.values = ['shift', 'open', 1, 'fk_Shift_userID', userID];
+    q.sql = 'SELECT * FROM ?? WHERE ?? = ?';
+    q.values = ['shift', 'fk_Shift_userID', userID];
     this.body = yield query(q);
   });
 

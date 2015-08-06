@@ -541,8 +541,34 @@ describe('shift api', function() {
       });
   });
 
-  it('the deleted facility should not exist', function(done) {
+  it('the deleted facility 1 should not exist', function(done) {
     request.get('/api/facility/' + f1.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('the deleted facility 2 should not exist', function(done) {
+    request.get('/api/facility/' + f2.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('the deleted facility 3 should not exist', function(done) {
+    request.get('/api/facility/' + f3.insertId)
       .expect(200)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');

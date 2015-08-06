@@ -162,9 +162,7 @@ describe('shift api', function() {
       .expect(200)
       .end(function(err, res) {
         s1 = res.body.rows;
-        // console.log(s1);
         expect(s1).to.be.an('object');
-        // expect(s1).to.contain('insertId');
         expect(s1.insertId).to.be.an('number');
         expect(err).to.be.a('null');
         done();
@@ -176,20 +174,6 @@ describe('shift api', function() {
       .expect(200)
       .end(function(err, res) {
         // console.log(res.body);
-        expect(res.body).to.be.an('object');
-        expect(res.body.rows).to.be.not.empty;
-        expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
-
-  it('should return a 200 for the same data', function(done) {
-    request.get('/api/shift/' + s1.insertId)
-      .expect(200)
-      .end(function(err, res) {
-        // console.log(res);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
@@ -261,6 +245,123 @@ describe('shift api', function() {
       });
   });
 
+  it('should get the shift status info', function(done) {
+    request.get('/api/shiftStatus/shift/' + s1.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        // console.log(res.body);
+        expect(res.body.rows[0].completed).to.equal(0);
+        expect(res.body.rows[0].pending).to.equal(0);
+        expect(res.body.rows[0].open).to.equal(1);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should insert new unique views', function(done) {
+    request.post('/api/shiftstatus/viewed/shift/' + s1.insertId + '/user/' + u1.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(res.body.rows).to.be.an('object');
+        done();
+      });
+  });
+
+  it('should return count of 1 unique views', function(done) {
+    request.get('/api/shiftstatus/viewed/shift/' + s1.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.have.length(1);
+        expect(res.body.rows).to.be.an('array');
+        done();
+      });
+  });
+
+  it('should reject non unique views', function(done) {
+    request.post('/api/shiftstatus/viewed/shift/' + s1.insertId + '/user/' + u1.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.body.cause).to.be.not.empty;
+        expect(res.body.cause).to.be.an('object');
+        expect(res.body.cause.code).to.equal('ER_DUP_ENTRY');
+        done();
+      });
+  });
+
+  it('should still return count of 1 unique views', function(done) {
+    request.get('/api/shiftstatus/viewed/shift/' + s1.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.have.length(1);
+        expect(res.body.rows).to.be.an('array');
+        done();
+      });
+  });
+
+  let u2;
+  it('should insert a new user given a correct object', function(done) {
+    request.post('/api/user/')
+      .send({
+        firstName: 'william2',
+        lastName: 'huang2',
+        middleName: 'w2',
+        userGeoHash: 278985033419316,
+        userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
+        dob: '1986-04-08',
+        userName: uuid.v4(),
+      })
+      .expect(200)
+      .end(function(err, res) {
+        u2 = res.body.rows;
+        expect(u1).to.be.an('object');
+        // expect(u1).to.contain('insertId');
+        expect(u1.insertId).to.be.an('number');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should insert another unique view', function(done) {
+    request.post('/api/shiftstatus/viewed/shift/' + s1.insertId + '/user/' + u2.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(res.body.rows).to.be.an('object');
+        done();
+      });
+  });
+
+  it('should still return count of 2 unique views for that shift', function(done) {
+    request.get('/api/shiftstatus/viewed/shift/' + s1.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.have.length(1);
+        expect(res.body.rows[0].unique).to.equal(2);
+        expect(res.body.rows).to.be.an('array');
+        done();
+      });
+  });
+
   let s2;
   it('should insert shift 2 given a correct object', function(done) {
     request.post('/api/shift/')
@@ -279,6 +380,97 @@ describe('shift api', function() {
         expect(s1).to.be.an('object');
         // expect(s1).to.contain('insertId');
         expect(s1.insertId).to.be.an('number');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+
+  it('should update shift status to pending', function(done) {
+    request.post('/api/shiftstatus/pending/shift/' + s2.insertId + '/user/' + u1.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(res.body.rows).to.be.an('object');
+        done();
+      });
+  });
+
+  it('should get the pending shift info', function(done) {
+    request.get('/api/shift/' + s2.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body.rows[0].completed).to.equal(0);
+        expect(res.body.rows[0].pending).to.equal(1);
+        expect(res.body.rows[0].open).to.equal(0);
+        expect(res.body.rows[0].fk_Shift_userID).to.equal(u1.insertId);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should update shift status to open', function(done) {
+    request.post('/api/shiftstatus/open/shift/' + s2.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(res.body.rows).to.be.an('object');
+        done();
+      });
+  });
+
+  it('should get open shift info', function(done) {
+    request.get('/api/shift/' + s2.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body.rows[0].completed).to.equal(0);
+        expect(res.body.rows[0].pending).to.equal(0);
+        expect(res.body.rows[0].open).to.equal(1);
+        expect(res.body.rows[0].fk_Shift_userID).to.equal(null);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should update shift status to completed', function(done) {
+    request.post('/api/shiftstatus/completed/shift/' + s2.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(res.body.rows).to.be.an('object');
+        done();
+      });
+  });
+
+  it('should get the default shift info', function(done) {
+    request.get('/api/shift/' + s2.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        // console.log(res.body);
+        expect(res.body.rows[0].completed).to.equal(1);
+        expect(res.body.rows[0].pending).to.equal(0);
+        expect(res.body.rows[0].open).to.equal(0);
+        expect(res.body.rows[0].fk_Shift_userID).to.equal(null);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -316,6 +508,48 @@ describe('shift api', function() {
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(3);
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should return an array of 2 different shifts that is all open posted by the hospital', function(done) {
+    request.get('/api/shiftstatus/open/facility/' + f1.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.rows).to.have.length(2);
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should update shift status to pending', function(done) {
+    request.post('/api/shiftstatus/pending/shift/' + s2.insertId + '/user/' + u1.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(res.body.rows).to.be.an('object');
+        done();
+      });
+  });
+
+  it('should return an array of 1 shifts that is by the user', function(done) {
+    request.get('/api/shiftstatus/open/user/' + u1.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.not.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.rows).to.have.length(1);
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
@@ -518,6 +752,32 @@ describe('shift api', function() {
 
   it('the deleted facility should not exist', function(done) {
     request.get('/api/facility/' + f1.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('the deleted facility 2 should not exist', function(done) {
+    request.get('/api/facility/' + f2.insertId)
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('the deleted facility 3 should not exist', function(done) {
+    request.get('/api/facility/' + f3.insertId)
       .expect(200)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');

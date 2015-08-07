@@ -56,7 +56,14 @@ module.exports = function userRoutes(app) {
   // update user data by user id
   .put('/:userID', function* updateUser() {
     const requestJson = this.request.body.fields;
+    const password = requestJson.userPwHash;
     const userID = this.params.userID;
+    delete requestJson.userPwHash;
+    requestJson.userPwHash = yield bcrypt.hashAsync(password, 10).then(function(hash) {
+      return hash;
+    }).catch(function(err) {
+      return err;
+    });
     const q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['user', requestJson, 'userID', userID];

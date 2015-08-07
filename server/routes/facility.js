@@ -58,6 +58,13 @@ module.exports = function(app) {
   .put('/:facilityID', function* () {
     const requestJson = this.request.body.fields;
     const facilityID = this.params.facilityID;
+    const password = requestJson.facilityPwHash;
+    delete requestJson.facilityPwHash;
+    requestJson.facilityPwHash = yield bcrypt.hashAsync(password, 10).then(function(hash) {
+      return hash;
+    }).catch(function(err) {
+      return err;
+    });
     const q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['facility', requestJson, 'facilityID', facilityID];

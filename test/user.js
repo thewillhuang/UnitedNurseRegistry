@@ -1,19 +1,13 @@
 'use strict';
 
-var chai = require('chai');
-var expect = chai.expect;
-var chaiAsPromised = require('chai-as-promised');
-var supertest = require('supertest');
-var app = require('../server');
-var request = supertest(app.listen());
-var uuid = require('node-uuid');
-
-
-// store primary key
-var r1;
+const chai = require('chai');
+const expect = chai.expect;
+const supertest = require('supertest');
+const app = require('../server');
+const request = supertest(app.listen());
+const uuid = require('node-uuid');
 
 describe('user api', function() {
-
   it('should reject invalid get requests', function(done) {
     request.get('/api/users')
       .expect(404)
@@ -37,6 +31,9 @@ describe('user api', function() {
       });
   });
 
+  let r1;
+  const password = uuid.v4();
+  const userName = uuid.v4();
   it('should insert a new user given a correct object', function(done) {
     request.post('/api/user/')
       .send({
@@ -44,15 +41,31 @@ describe('user api', function() {
         lastName: 'huang',
         middleName: 'w',
         userGeoHash: 27898503349316,
-        userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
+        userPwHash: password,
         dob: '1986-04-08',
-        userName: uuid.v4()
+        userName: userName,
       })
       .expect(200)
       .end(function(err, res) {
         r1 = res.body.rows;
         expect(r1).to.be.an('object');
         // expect(r1).to.contain('insertId');
+        expect(r1.insertId).to.be.an('number');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should validate user password and user name', function(done) {
+    request.post('/api/user/validate/')
+      .send({
+        userPwHash: password,
+        userName: userName,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        console.log(res.body);
+        expect(r1).to.be.an('object');
         expect(r1.insertId).to.be.an('number');
         expect(err).to.be.a('null');
         done();
@@ -86,7 +99,7 @@ describe('user api', function() {
       });
   });
 
-  let updateinfo = uuid.v4();
+  const updateinfo = uuid.v4();
   it('should update user info given a correct object and user id', function(done) {
     request.put('/api/user/' + r1.insertId)
       .send({
@@ -96,7 +109,7 @@ describe('user api', function() {
         userGeoHash: 27898503349316,
         userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
         dob: '1986-04-08',
-        userName: updateinfo
+        userName: updateinfo,
       })
       .expect(200)
       .end(function(err, res) {
@@ -143,5 +156,4 @@ describe('user api', function() {
         done();
       });
   });
-
 });

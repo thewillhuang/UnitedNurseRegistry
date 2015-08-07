@@ -10,7 +10,7 @@ const options = {
   connectionLimit: 100,
   // ssl: 'Amazon RDS'
 };
-Promise.promisifyAll(mysql);
+// Promise.promisifyAll(mysql);
 Promise.promisifyAll(require('mysql/lib/Pool').prototype);
 Promise.promisifyAll(require('mysql/lib/Connection').prototype);
 // long stack trace for debug

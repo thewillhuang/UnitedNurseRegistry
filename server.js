@@ -1,5 +1,6 @@
 'use strict';
 const koa = require('koa');
+const app = module.exports = koa();
 const port = process.env.PORT || 3000;
 const port2 = process.env.PORT2 || 3001;
 const send = require('koa-send');
@@ -7,7 +8,6 @@ const logger = require('koa-logger');
 const etag = require('koa-etag');
 const build = '/public';
 const path = require('path');
-const app = module.exports = koa();
 const koaBody = require('koa-better-body');
 const conditional = require('koa-conditional-get');
 const helmet = require('koa-helmet');

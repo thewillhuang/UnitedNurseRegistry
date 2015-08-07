@@ -3,7 +3,8 @@
   "rules": {
     "quotes": [2, "single"],
     "strict": [2, "global"],
-    "no-console": 0
+    "no-console": 0,
+    "func-names": 0
   },
   "ecmaFeatures": {
     "modules": false,

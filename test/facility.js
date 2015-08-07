@@ -64,7 +64,7 @@ describe('facility api', function() {
       .expect(200)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
-        expect(res.body.validated).to.equal(true);
+        expect(res.body.valid).to.equal(true);
         expect(err).to.be.a('null');
         done();
       });

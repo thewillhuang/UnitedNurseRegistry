@@ -5,7 +5,8 @@ const facility = new Router({
   prefix: '/api/facility',
 });
 const query = require('../services/query');
-const bcrypt = require('../services/bcrypt');
+const validatePw = require('../services/validatePassword');
+const genHash = require('../services/genHash');
 
 module.exports = function(app) {
   facility
@@ -15,11 +16,7 @@ module.exports = function(app) {
     const requestJson = this.request.body.fields;
     const password = requestJson.facilityPwHash;
     delete requestJson.facilityPwHash;
-    requestJson.facilityPwHash = yield bcrypt.hashAsync(password, 10).then(function(hash) {
-      return hash;
-    }).catch(function(err) {
-      return err;
-    });
+    requestJson.facilityPwHash = yield genHash(password, 10);
     const q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['facility', requestJson];
@@ -36,11 +33,7 @@ module.exports = function(app) {
     q.values = ['facilityPwHash', 'facility', 'facilityName', facilityName];
     const result = yield query(q);
     const dbpwhash = result.rows[0].facilityPwHash;
-    this.body = yield bcrypt.compareAsync(password, dbpwhash).then(function(res) {
-      return {validated: res};
-    }).catch(function(err) {
-      return err;
-    });
+    this.body = yield validatePw(password, dbpwhash);
   })
 
   // grab user table info based on user id
@@ -60,11 +53,7 @@ module.exports = function(app) {
     const facilityID = this.params.facilityID;
     const password = requestJson.facilityPwHash;
     delete requestJson.facilityPwHash;
-    requestJson.facilityPwHash = yield bcrypt.hashAsync(password, 10).then(function(hash) {
-      return hash;
-    }).catch(function(err) {
-      return err;
-    });
+    requestJson.facilityPwHash = yield genHash(password, 10);
     const q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['facility', requestJson, 'facilityID', facilityID];

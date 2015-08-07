@@ -11,7 +11,7 @@ module.exports = function acquireTransaction() {
     if (promise.isFulfilled()) {
       return connection.commitAsync().then(function() {
         connection.release();
-      }).catch(function(){
+      }).catch(function() {
         return connection.rollbackAsync().then(function() {
           connection.release();
         });

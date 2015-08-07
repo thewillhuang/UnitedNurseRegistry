@@ -23,7 +23,6 @@ module.exports = function userRoutes(app) {
     const q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['user', requestJson];
-    console.log('post user', q);
     this.body = yield query(q);
   })
 
@@ -37,7 +36,6 @@ module.exports = function userRoutes(app) {
     q.values = ['userPwHash', 'user', 'userName', userName];
     const result = yield query(q);
     const dbpwhash = result.rows[0].userPwHash;
-    console.log('dbpwhash', dbpwhash);
     this.body = yield bcrypt.compareAsync(password, dbpwhash).then(function(res) {
       return {validated: res};
     }).catch(function(err) {

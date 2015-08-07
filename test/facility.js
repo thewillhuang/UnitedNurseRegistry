@@ -35,21 +35,36 @@ describe('facility api', function() {
   });
 
   let r1;
+  const facilityName = uuid.v4();
+  const facilityPwHash = uuid.v4();
   it('should insert a new facility given a correct object', function(done) {
     request.post('/api/facility/')
       .send({
-        facilityName: uuid.v4(),
+        facilityName: facilityName,
         facilityGeoHash: 27898503349316,
-        facilityPwHash: uuid.v4(),
+        facilityPwHash: facilityPwHash,
         facilityEMR: uuid.v4(),
       })
       .expect(200)
       .end(function(err, res) {
-        // console.log(res.body);
         r1 = res.body.rows;
         expect(r1).to.be.an('object');
-        // expect(r1).to.contain('insertId');
         expect(r1.insertId).to.be.an('number');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should validate facility password and facilityname', function(done) {
+    request.post('/api/facility/validate/')
+      .send({
+        facilityName: facilityName,
+        facilityPwHash: facilityPwHash,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.validated).to.equal(true);
         expect(err).to.be.a('null');
         done();
       });

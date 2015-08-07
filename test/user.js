@@ -64,9 +64,8 @@ describe('user api', function() {
       })
       .expect(200)
       .end(function(err, res) {
-        console.log(res.body);
-        expect(r1).to.be.an('object');
-        expect(r1.insertId).to.be.an('number');
+        expect(res.body).to.be.an('object');
+        expect(res.body.validated).to.equal(true);
         expect(err).to.be.a('null');
         done();
       });

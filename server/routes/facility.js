@@ -2,39 +2,63 @@
 
 const Router = require('koa-router');
 const facility = new Router({
-  prefix: '/api/facility'
+  prefix: '/api/facility',
 });
 const query = require('../services/query');
+const bcrypt = require('../services/bcrypt');
 
 module.exports = function(app) {
   facility
 
-  //create facility
+  // create facility
   .post('/', function* () {
-    let requestJson = this.request.body.fields;
-    // console.log(requestJson);
-    let q = {};
+    const requestJson = this.request.body.fields;
+    const password = requestJson.facilityPwHash;
+    delete requestJson.facilityPwHash;
+    requestJson.facilityPwHash = yield bcrypt.hashAsync(password, 10).then(function(hash) {
+      return hash;
+    }).catch(function(err) {
+      return err;
+    });
+    const q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['facility', requestJson];
     this.body = yield query(q);
   })
 
-  //grab user table info based on user id
+  // validate password return true or false
+  .post('/validate/', function* validateFacility() {
+    const requestJson = this.request.body.fields;
+    const password = requestJson.facilityPwHash;
+    const facilityName = requestJson.facilityName;
+    const q = {};
+    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
+    q.values = ['facilityPwHash', 'facility', 'facilityName', facilityName];
+    const result = yield query(q);
+    const dbpwhash = result.rows[0].facilityPwHash;
+    this.body = yield bcrypt.compareAsync(password, dbpwhash).then(function(res) {
+      return {validated: res};
+    }).catch(function(err) {
+      return err;
+    });
+  })
+
+  // grab user table info based on user id
   .get('/:facilityID', function* () {
-    let facilityID = this.params.facilityID;
-    let q = {};
+    const facilityID = this.params.facilityID;
+    const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     // console.log(q);
-    let select = ['facilityName', 'facilityGeohash', 'facilityEMR'];
+    const select = ['facilityName', 'facilityGeohash', 'facilityEMR'];
     q.values = [select, 'facility', 'facilityID', facilityID];
     this.body = yield query(q);
   })
 
   // update user data by user id
   .put('/:facilityID', function* () {
-    let requestJson = this.request.body.fields;
-    let facilityID = this.params.facilityID;
-    let q = {};
+    const requestJson = this.request.body.fields;
+    const facilityID = this.params.facilityID;
+    const q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['facility', requestJson, 'facilityID', facilityID];
     this.body = yield query(q);
@@ -42,8 +66,8 @@ module.exports = function(app) {
 
   // delete user by user id
   .delete('/:facilityID', function* () {
-    let facilityID = this.params.facilityID;
-    let q = {};
+    const facilityID = this.params.facilityID;
+    const q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';
     q.values = ['facility', 'facilityID', facilityID];
     this.body = yield query(q);

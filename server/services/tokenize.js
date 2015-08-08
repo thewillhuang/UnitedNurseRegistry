@@ -11,16 +11,18 @@ const options = {
   issuer: 'unr api',
 };
 
-console.log(jwt);
-
 tokenize.encryptSign = function(payload) {
-  return jwt.sign(payload, cert, options);
+  const string = JSON.stringify(payload);
+  return jwt.sign(crypto.encrypt(string), cert, options);
 };
 
 tokenize.verifyDecrypt = function(token) {
-  return jwt.verifyAsync(token, cert, options).then(function(decoded) {
-    return decoded;
-  }).catch(function(err) {
-    return err;
-  });
+  const decoded = jwt.verify(token, cert, options);
+  console.log(decoded);
+  return JSON.parse(crypto.decrypt(decoded.payload, decoded.iv));
 };
+
+const webtoken = tokenize.encryptSign({msg: 'testing'});
+console.log(webtoken);
+
+console.log(tokenize.verifyDecrypt(webtoken));

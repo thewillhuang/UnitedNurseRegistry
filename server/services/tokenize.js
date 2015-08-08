@@ -23,12 +23,12 @@ tokenize.verifyDecrypt = function(token) {
   return JSON.parse(crypto.decrypt(decoded.payload, decoded.iv));
 };
 
-// some testing for speed
+// // some testing for speed
 // console.time('encode');
 // const webtoken = tokenize.encryptSign({userName: 'leeroy_jenkins231'});
 // console.timeEnd('encode');
+// console.log('jwt', webtoken);
 //
-// console.log(webtoken);
 // console.time('decode');
 // console.log(tokenize.verifyDecrypt(webtoken));
 // console.timeEnd('decode');

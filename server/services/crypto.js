@@ -10,6 +10,7 @@ const key = crypto.randomBytes(32);
 
 aes.encrypt = function(string) {
   // iv must be a buffer, the length must be 16.
+  // every single iv for every single message that is encrypted will be different
   const iv = new Buffer(crypto.randomBytes(16));
   const cipher = crypto.createCipheriv(algorithm, key, iv);
   let crypted = cipher.update(string, 'utf8', 'hex');

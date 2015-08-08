@@ -18,11 +18,11 @@ aes.encrypt = function(payload) {
   return {payload: crypted, iv: iv.toString('hex')};
 };
 
-aes.decrypt = function(encrypted, iv) {
+aes.decrypt = function(payload, iv) {
   // convert iv from hex coding to a buffer, default is utf-8, will get error wrong length
   const ivbuf = new Buffer(iv, 'hex');
   const decipher = crypto.createDecipheriv(algorithm, key, ivbuf);
-  let dec = decipher.update(encrypted, 'hex', 'utf8');
+  let dec = decipher.update(payload, 'hex', 'utf8');
   dec += decipher.final('utf8');
   return dec;
 };

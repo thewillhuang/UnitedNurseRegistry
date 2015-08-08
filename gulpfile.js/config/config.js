@@ -1,16 +1,16 @@
 'use strict';
-var dest = './public';
-var src = './app';
-var jsDest = dest + '/js';
-var test = './test';
+const dest = './public';
+const src = './app';
+const jsDest = dest + '/js';
+const test = './test';
 // important lesson, always just use the base directory for gulp.dest, anything else will fuck up sourcemaps
 // and or other weird settings, giving you useless grief
-// var neat = require('node-neat').includePaths;
-// var compression = require('compression');
-var morgan = require('morgan');
+// const neat = require('node-neat').includePaths;
+// const compression = require('compression');
+const morgan = require('morgan');
 module.exports = {
   mocha: {
-    src: test + '/**/*.js'
+    src: test + '/**/*.js',
   },
   browserSync: {
     // port: 8080,  // use *different* port than above
@@ -19,16 +19,16 @@ module.exports = {
     server: {
       // Serve up our build folder
       baseDir: dest,
-      middleware: [morgan('dev')]
+      middleware: [morgan('dev')],
     },
-    reloadDelay: 500
+    reloadDelay: 500,
   },
   nodemon: {
     // nodemon our expressjs server
     script: './server.js',
     // watch core server file(s) that require server restart on change
     watch: ['./server.js', './server/**/*'],
-    env: { 'NODE_ENV': 'development' }
+    env: { 'NODE_ENV': 'development' },
   },
   sass: {
     src: src + '/css/**/*.{sass,scss}',
@@ -49,11 +49,11 @@ module.exports = {
     },
     sourcemap: {
       loadMaps: true,
-      debug: true
-    }
+      debug: true,
+    },
   },
   clean: {
-    src: [dest + '/**/*.{js,css,map,gz}']
+    src: [dest + '/**/*.{js,css,map,gz}'],
   },
   copy: {
     src: [
@@ -62,24 +62,24 @@ module.exports = {
       '!' + src + '/css/**/*.{sass,scss}',
       '!' + src + '/**/*.html',
       '!' + src + '/**/*.jsx',
-      '!' + src + '/js/react/**/*'
+      '!' + src + '/js/react/**/*',
     ], // '!' must be a string
     dest: dest,
     base: {
-      base: src
-    }
+      base: src,
+    },
   },
   changed: {
-    src: src
+    src: src,
   },
   images: {
     src: src + '/images/**/*',
     base: {base: src},
-    dest: dest
+    dest: dest,
   },
   markup: {
     src: src + '/**/*.html',
-    dest: dest
+    dest: dest,
   },
   browserify: {
     dest: dest,
@@ -113,40 +113,35 @@ module.exports = {
         entries: src + '/js/notification.js',
         dest: jsDest,
         outputName: 'notification.js',
-        external: ['react', 'jquery', 'moment', 'react-bootstrap', 'socket.io-client', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
       }, {
         entries: src + '/js/activate.js',
         dest: jsDest,
         outputName: 'activate.js',
-        external: ['jquery']
       }, {
         entries: src + '/js/dashboardWidgets.js',
         dest: jsDest,
         outputName: 'dashboardWidgets.js',
-        external: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
       }, {
         entries: src + '/js/uploader.js',
         dest: jsDest,
-        outputName: 'uploader.js'
+        outputName: 'uploader.js',
       }, {
         entries: src + '/js/requestRecords.js',
         dest: jsDest,
         outputName: 'requestRecords.js',
-        external: ['react', 'jquery', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
       }, {
         entries: src + '/js/clientValidate.js',
         dest: jsDest,
         outputName: 'clientValidate.js',
-        external: ['react', 'jquery', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
-      }
-    ]
+      },
+    ],
   },
   gzip: {
     opts: {
       threshold: 1000,
       gzipOptions: {
-        level: 9
-      }
+        level: 9,
+      },
     },
     filter: [
       '**/*.js',
@@ -158,13 +153,13 @@ module.exports = {
       '**/*.ico',
       '**/*.otf',
       '**/*.ttf',
-      '**/*.map'
+      '**/*.map',
     ],
     src: dest + '/**/*',
     srcBase: {
-      base: dest
+      base: dest,
     },
-    dest: dest
+    dest: dest,
   },
   production: {
     cssSrc: [dest + '/**/*.css', '!' + dest + '/plugins/**/*'],
@@ -177,28 +172,28 @@ module.exports = {
       '!' + dest + '/js/test/**/*',
       // '!' + dest + '/js/vendor/**/*',
       '!' + dest + '/js/cors/**/*',
-      '!' + dest + '/plugins/**/*'
+      '!' + dest + '/plugins/**/*',
     ],
     jsDest: dest,
     jsBase: {
-      base: dest
+      base: dest,
     },
     dest: dest,
     cssOpt: {
-      keepSpecialComments: 0
-    }
+      keepSpecialComments: 0,
+    },
   },
   minifyHtml: {
     opts: {
-      spare: true
+      spare: true,
     },
     src: [
       dest + '/**/*.html',
-      '!' + dest + '/plugins/**/*.html'
+      '!' + dest + '/plugins/**/*.html',
     ],
     dest: dest,
     srcBase: {
-      base: dest
-    }
-  }
+      base: dest,
+    },
+  },
 };

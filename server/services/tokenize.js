@@ -1,6 +1,6 @@
 'use strict';
 const tokenize = module.exports = {};
-const jwt = require('./jwt');
+const jwt = require('jsonwebtoken');
 const fs = require('fs');
 const cert = fs.readFileSync('../../jwt-key.pem');
 const crypto = require('./crypto');
@@ -11,18 +11,24 @@ const options = {
   issuer: 'unr api',
 };
 
+// takes a json, encrypt and sign it
 tokenize.encryptSign = function(payload) {
   const string = JSON.stringify(payload);
   return jwt.sign(crypto.encrypt(string), cert, options);
 };
 
+// returns a json from a token
 tokenize.verifyDecrypt = function(token) {
   const decoded = jwt.verify(token, cert, options);
-  console.log(decoded);
   return JSON.parse(crypto.decrypt(decoded.payload, decoded.iv));
 };
 
-const webtoken = tokenize.encryptSign({msg: 'testing'});
-console.log(webtoken);
-
-console.log(tokenize.verifyDecrypt(webtoken));
+// some testing for speed
+// console.time('encode');
+// const webtoken = tokenize.encryptSign({userName: 'leeroy_jenkins231'});
+// console.timeEnd('encode');
+//
+// console.log(webtoken);
+// console.time('decode');
+// console.log(tokenize.verifyDecrypt(webtoken));
+// console.timeEnd('decode');

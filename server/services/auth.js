@@ -3,95 +3,91 @@ const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
 // const pool = require('./pool');
 const bcrypt = require('./bcrypt');
-const mysql = require('mysql');
-const options = {
-  host: 'localhost',
-  user: 'root',
-  password: '',
-  database: 'unrdb',
-  connectionLimit: 100,
-  // ssl: 'Amazon RDS'
-};
-const pool = mysql.createPool(options);
+// const mysql = require('mysql');
+// const options = {
+//   host: 'localhost',
+//   user: 'root',
+//   password: '',
+//   database: 'unrdb',
+//   connectionLimit: 100,
+//   // ssl: 'Amazon RDS'
+// };
+// const pool = mysql.createPool(options);
+const query = require('./query');
 
 
-passport.use(new LocalStrategy(
+// promise version
+passport.use(new LocalStrategy({session: false},
   function(username, password, done) {
-    pool.getConnection(function(connectionError, connection) {
-      console.log('connection error', connectionError);
-      const q = {};
-      q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-      q.values = ['userPwHash', 'user', 'userName', username];
-      connection.query(q, function(err, rows) {
-        console.log('query error', err);
-        console.log('rows', rows);
-        if (err) {return done(err); }
-        if (!rows.length) {
-          return done(null, false, {message: 'Incorrect username.'});
-        }
-        const dbpwhash = rows[0].userPwHash;
-        bcrypt.compare(password, dbpwhash, function(hashError, match) {
-          console.log('hasherror', hashError);
-          if (match) { return done(null, {userName: username}); }
-          if (!match) {return done(null, false, {message: 'Incorrect password.'}); }
-        });
-        connection.close();
-      });
-      pool.end();
-    });
-    // User.findOne({ username: username }, function(err, user) {
-    //   if (err) { return done(err); }
-    //   if (!user) {
-    //     return done(null, false, { message: 'Incorrect username.' });
-    //   }
-    //   if (!user.validPassword(password)) {
-    //     return done(null, false, { message: 'Incorrect password.' });
-    //   }
-    //   return done(null, user);
-    // });
-  }
-));
-
-function test(username, password, done) {
-  pool.getConnection(function(connectionError, connection) {
-    console.log('connection error', connectionError);
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'user', 'userName', username];
-    connection.query(q, function(err, rows) {
-      console.log('query error', err);
-      console.log('rows', rows);
-      if (err) {return done(err); }
-      if (!rows.length) {
-        return done(null, false, {message: 'Incorrect username.'});
-      }
-      const dbpwhash = rows[0].userPwHash;
-      bcrypt.compare(password, dbpwhash, function(hashError, match) {
-        console.log('hasherror', hashError);
-        if (match) { return done(null, {userName: username}); }
-        if (!match) {return done(null, false, {message: 'Incorrect password.'}); }
-      });
-      connection.close();
+    query(q).then(function(result) {
+      if (!result.rows.length) { return done(null, false, {message: 'Incorrect username.'}); }
+      return result.rows[0].userPwHash;
+    }).then(function(dbpwhash) {
+      return bcrypt.compareAsync(password, dbpwhash);
+    }).then(function(isMatch) {
+      if (!isMatch) { return done(null, false, {message: 'Incorrect password.'}); }
+      return done(null, {userName: username});
+    }).catch(function(error) {
+      console.log(error);
     });
-    pool.end();
-  });
-  // User.findOne({ username: username }, function(err, user) {
-  //   if (err) { return done(err); }
-  //   if (!user) {
-  //     return done(null, false, { message: 'Incorrect username.' });
-  //   }
-  //   if (!user.validPassword(password)) {
-  //     return done(null, false, { message: 'Incorrect password.' });
-  //   }
-  //   return done(null, user);
-  // });
-}
+  }
+));
 
-test('fdafdsfdaf', 'fdafdasffd', function(a, b, c) {
-  console.log(a);
-  console.log(b);
-  console.log(c);
-});
+// // callback version
+// passport.use(new LocalStrategy({session: false},
+//   function(username, password, done) {
+//     pool.getConnection(function(connectionError, connection) {
+//       console.log('connection error', connectionError);
+//       const q = {};
+//       q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
+//       q.values = ['userPwHash', 'user', 'userName', username];
+//       connection.query(q, function(err, rows) {
+//         console.log('query error', err);
+//         console.log('rows', rows);
+//         if (err) {return done(err); }
+//         if (!rows.length) {
+//           return done(null, false, {message: 'Incorrect username.'});
+//         }
+//         const dbpwhash = rows[0].userPwHash;
+//         bcrypt.compare(password, dbpwhash, function(hashError, match) {
+//           console.log('hasherror', hashError);
+//           if (match) { return done(null, {userName: username}); }
+//           if (!match) {return done(null, false, {message: 'Incorrect password.'}); }
+//         });
+//         connection.close();
+//       });
+//       pool.end();
+//     });
+//   }
+// ));
+
+// test
+// const test = function(username, password, done) {
+//     // promise version
+//     const q = {};
+//     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
+//     q.values = ['userPwHash', 'user', 'userName', username];
+//     query(q).then(function(result) {
+//       if (!result.rows.length) { return done(null, false, {message: 'Incorrect username.'}); }
+//       return result.rows[0].userPwHash;
+//     }).then(function(dbpwhash) {
+//       return bcrypt.compareAsync(password, dbpwhash);
+//     }).then(function(isMatch) {
+//       if (!isMatch) { return done(null, false, {message: 'Incorrect password.'}); }
+//       return done(null, {userName: username});
+//     }).catch(function(error) {
+//       // console.log(error);
+//     });
+//   };
+//
+// test('afdsdfa', 'fdsafdsafds', function(a, b, c) {
+//   console.log(a);
+//   console.log(b);
+//   console.log(c);
+// });
 
 // const FacebookStrategy = require('passport-facebook').Strategy
 // passport.use(new FacebookStrategy({

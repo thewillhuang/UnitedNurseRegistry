@@ -11,6 +11,8 @@ module.exports = function authRoutes(app) {
     passport.authenticate('local', {
       successRedirect: '/app',
       failureRedirect: '/',
+      failureFlash: true,
+      session: false,
     })
   );
 

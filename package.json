@@ -31,6 +31,7 @@
     "node-uuid": "^1.4.3",
     "object-assign": "^3.0.0",
     "passport-github": "^0.1.5",
+    "passport-local": "^1.0.0",
     "react": "^0.13.3",
     "react-bootstrap": "^0.24.3",
     "react-zeroclipboard": "^2.0.1",

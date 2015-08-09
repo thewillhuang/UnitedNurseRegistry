@@ -74,7 +74,7 @@ module.exports = function shiftRoutes(app) {
     const trimmedHashSet = hashSet.map(function trimHash(value) {
       return value.substring(0, precision);
     });
-    // take of any elements that is not unique
+    // take off any elements that is not unique
     const set = _.uniq(trimmedHashSet);
     const q = {};
     q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (?)';

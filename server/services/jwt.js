@@ -30,5 +30,6 @@ tokenize.verifyDecrypt = function(token) {
 // console.log('jwt', webtoken);
 //
 // console.time('decode');
-// console.log(tokenize.verifyDecrypt(webtoken));
+// const decodedjwt = tokenize.verifyDecrypt(webtoken);
 // console.timeEnd('decode');
+// console.log(decodedjwt);

@@ -11,7 +11,7 @@ const path = require('path');
 const koaBody = require('koa-better-body');
 const conditional = require('koa-conditional-get');
 const helmet = require('koa-helmet');
-// const passport = require('koa-passport');
+const passport = require('koa-passport');
 
 // logging
 app.use(logger());
@@ -44,10 +44,11 @@ app.use(function* staticServer(next) {
 app.use(koaBody());
 
 // initialize passport
-// app.use(passport.session());
-// app.use(passport.initialize());
+require('./server/services/auth');
+app.use(passport.initialize());
 
 // unprotected routes
+require('./server/routes/authRoutes')(app);
 
 // is authed checker that ensures no unauthroized request can make it pass to secured routes
 
@@ -56,15 +57,16 @@ require('./server/routes/userRoutes')(app);
 require('./server/routes/facilityRoutes')(app);
 require('./server/routes/shiftRoutes')(app);
 
-// start http and https servers
+// start http server
 app.listen(port);
 console.log('http listening on port:', port);
+
+// start https server
 const https = require('https');
 const fs = require('fs');
 const options = {
   key: fs.readFileSync('unr-key.pem'),
   cert: fs.readFileSync('unr-cert.pem'),
-  dhparam: fs.readFileSync('dhparam.pem'),
 };
 https.createServer(options, app.callback()).listen(port2);
 console.log('https listening on port:', port2);

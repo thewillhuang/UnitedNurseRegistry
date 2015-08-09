@@ -65,7 +65,7 @@ describe('user api', function() {
       .expect(200)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
-        expect(res.body.valid).to.equal(true);
+        expect(res.body.success).to.equal(true);
         expect(err).to.be.a('null');
         done();
       });
@@ -131,7 +131,6 @@ describe('user api', function() {
         done();
       });
   });
-
 
   it('should delete a user given a correct user id', function(done) {
     request.delete('/api/user/' + r1.insertId)

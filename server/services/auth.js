@@ -1,8 +1,9 @@
 'use strict';
 const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
-// const pool = require('./pool');
+const query = require('./query');
 const bcrypt = require('./bcrypt');
+// const pool = require('./pool');
 // const mysql = require('mysql');
 // const options = {
 //   host: 'localhost',
@@ -13,7 +14,6 @@ const bcrypt = require('./bcrypt');
 //   // ssl: 'Amazon RDS'
 // };
 // const pool = mysql.createPool(options);
-const query = require('./query');
 
 
 // promise version

@@ -12,7 +12,6 @@ module.exports = function authRoutes(app) {
       successRedirect: '/app',
       failureRedirect: '/',
       failureFlash: true,
-      session: false,
     })
   );
 

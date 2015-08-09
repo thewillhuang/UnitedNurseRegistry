@@ -41,7 +41,7 @@ app.use(function* staticServer(next) {
 });
 
 // body json parsing
-app.use(koaBody());
+app.use(koaBody({fieldsKey: false}));
 
 // initialize passport
 require('./server/services/auth');

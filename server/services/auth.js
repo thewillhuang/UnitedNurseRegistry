@@ -19,6 +19,8 @@ const bcrypt = require('./bcrypt');
 // promise version
 passport.use(new LocalStrategy({session: false},
   function(username, password, done) {
+    console.log('username', username);
+    console.log('password', password);
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'user', 'userName', username];

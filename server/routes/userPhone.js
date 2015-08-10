@@ -14,7 +14,7 @@ module.exports = function(app) {
   //create new user phone with user id
   .post('/user/:userID', function* () {
     let userID = this.params.userID;
-    let requestJson = this.request.body.fields;
+    let requestJson = this.request.body;
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['phone', requestJson];
@@ -50,7 +50,7 @@ module.exports = function(app) {
 
   // update user phone based on phone ID
   .put('/phone/:phoneID', function* () {
-    let requestJson = this.request.body.fields;
+    let requestJson = this.request.body;
     let phoneID = this.params.phoneID;
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';

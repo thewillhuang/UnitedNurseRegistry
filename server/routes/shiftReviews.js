@@ -13,7 +13,7 @@ module.exports = function shiftReviewRoutes(app) {
   .post('/user/:userID/shift/:shiftID', function* createUserReview() {
     const userID = this.params.userID;
     const shiftID = this.params.shiftID;
-    const requestJson = this.request.body.fields;
+    const requestJson = this.request.body;
     requestJson.fk_ShiftReviewOnUser_userID = userID;
     requestJson.fk_ShiftReviewOnUser_shiftID = shiftID;
     const q = {};
@@ -26,7 +26,7 @@ module.exports = function shiftReviewRoutes(app) {
   .put('/user/:userID/shift/:shiftID', function* updateUserReview() {
     const userID = this.params.userID;
     const shiftID = this.params.shiftID;
-    const requestJson = this.request.body.fields;
+    const requestJson = this.request.body;
     const q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ? AND ?? = ?';
     q.values = ['ShiftReviewOnUser', requestJson, 'fk_ShiftReviewOnUser_userID', userID, 'fk_ShiftReviewOnUser_shiftID', shiftID];
@@ -63,7 +63,7 @@ module.exports = function shiftReviewRoutes(app) {
   .post('/facility/:facilityID/shift/:shiftID', function* createFacilityReview() {
     const facilityID = this.params.facilityID;
     const shiftID = this.params.shiftID;
-    const requestJson = this.request.body.fields;
+    const requestJson = this.request.body;
     requestJson.fk_ShiftReviewOnFacility_facilityID = facilityID;
     requestJson.fk_ShiftReviewOnFacility_shiftID = shiftID;
     const q = {};
@@ -75,7 +75,7 @@ module.exports = function shiftReviewRoutes(app) {
   .put('/facility/:facilityID/shift/:shiftID', function* updateFacilityReview() {
     const facilityID = this.params.facilityID;
     const shiftID = this.params.shiftID;
-    const requestJson = this.request.body.fields;
+    const requestJson = this.request.body;
     const q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ? AND ?? = ?';
     q.values = ['ShiftReviewOnFacility', requestJson, 'fk_ShiftReviewOnFacility_facilityID', facilityID, 'fk_ShiftReviewOnFacility_shiftID', shiftID];

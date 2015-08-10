@@ -13,7 +13,7 @@ module.exports = function userRoutes(app) {
 
   // create user
   .post('/', function* createUser() {
-    const requestJson = this.request.body.fields;
+    const requestJson = this.request.body;
     const password = requestJson.userPwHash;
     delete requestJson.userPwHash;
     requestJson.userPwHash = yield genHash(password, 10);
@@ -25,7 +25,7 @@ module.exports = function userRoutes(app) {
 
   // validate password return true or false
   .post('/validate/', function* validateUser() {
-    const requestJson = this.request.body.fields;
+    const requestJson = this.request.body;
     const password = requestJson.userPwHash;
     const userName = requestJson.userName;
     const q = {};
@@ -48,7 +48,7 @@ module.exports = function userRoutes(app) {
 
   // update user data by user id
   .put('/:userID', function* updateUser() {
-    const requestJson = this.request.body.fields;
+    const requestJson = this.request.body;
     const password = requestJson.userPwHash;
     const userID = this.params.userID;
     delete requestJson.userPwHash;

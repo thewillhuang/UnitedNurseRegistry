@@ -12,7 +12,7 @@ module.exports = function(app) {
   //create user license given user id
   .post('/user/:userID', function* () {
     let userID = this.params.userID;
-    let requestJson = this.request.body.fields;
+    let requestJson = this.request.body;
     let q = {};
     requestJson.fk_UserLicense_userID = userID;
     q.sql = 'INSERT INTO ?? SET ?';
@@ -31,7 +31,7 @@ module.exports = function(app) {
 
   // update UserLicense by license id
   .put('/license/:userLicenseID', function* () {
-    let requestJson = this.request.body.fields;
+    let requestJson = this.request.body;
     // console.log(requestJson);
     let userLicenseID = this.params.userLicenseID;
     let q = {};

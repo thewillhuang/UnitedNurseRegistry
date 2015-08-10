@@ -12,8 +12,8 @@ module.exports = function authRoutes(app) {
   auth
 
   .post('/', function*(next) {
-    console.log('this.request.body', this.request.body);
-    this.request.body = this.request.body.fields;
+    console.log(this.session);
+    console.log(this.passport);
     const ctx = this;
     yield passport.authenticate('local', function*(err, user, info) {
       console.log(err, user, info);
@@ -26,6 +26,8 @@ module.exports = function authRoutes(app) {
         ctx.body = { success: true };
       }
     }).call(this, next);
+    console.log(this.passport);
+    console.log(this.isAuthenticated());
   })
 
   .post('/login/',
@@ -34,7 +36,12 @@ module.exports = function authRoutes(app) {
       failureRedirect: '/',
       // failureFlash: true,
     })
-  );
+  )
+
+  .get('/logout', function*() {
+    this.logout();
+    this.redirect('/');
+  });
 
   app.use(auth.routes())
     .use(auth.allowedMethods());

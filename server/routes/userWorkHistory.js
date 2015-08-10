@@ -13,7 +13,7 @@ module.exports = function(app) {
   .post('/user/:userID/facility/:facilityID', function* () {
     let userID = this.params.userID;
     let facilityID = this.params.facilityID;
-    let requestJson = this.request.body.fields;
+    let requestJson = this.request.body;
     let q = {};
     requestJson.fk_UserWorkHistory_userID = userID;
     requestJson.fk_UserWorkHistory_facilityID = facilityID;
@@ -35,7 +35,7 @@ module.exports = function(app) {
 
   // update user email based on email ID
   .put('/history/:userHistoryID', function* () {
-    let requestJson = this.request.body.fields;
+    let requestJson = this.request.body;
     let userHistoryID = this.params.userHistoryID;
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';

@@ -14,7 +14,7 @@ module.exports = function(app) {
   //create new user specialty with user id
   .post('/user/:userID', function* () {
     let userID = this.params.userID;
-    let requestJson = this.request.body.fields;
+    let requestJson = this.request.body;
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?;';
     q.values = ['Specialty', requestJson];

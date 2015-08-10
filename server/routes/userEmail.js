@@ -14,7 +14,7 @@ module.exports = function(app) {
   //create new user email with user id
   .post('/user/:userID', function* () {
     let userID = this.params.userID;
-    let requestJson = this.request.body.fields;
+    let requestJson = this.request.body;
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?;';
     q.values = ['email', requestJson];
@@ -50,7 +50,7 @@ module.exports = function(app) {
 
   // update user email based on email ID
   .put('/email/:emailID', function* () {
-    let requestJson = this.request.body.fields;
+    let requestJson = this.request.body;
     let emailID = this.params.emailID;
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';

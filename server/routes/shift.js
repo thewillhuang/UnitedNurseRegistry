@@ -12,7 +12,7 @@ module.exports = function shiftRoutes(app) {
 
   // create shift
   .post('/', function* createShift() {
-    const requestJson = this.request.body.fields;
+    const requestJson = this.request.body;
     const specialtyID = requestJson.specialtyID;
     const facilityID = requestJson.facilityID;
     delete requestJson.specialtyID;
@@ -66,7 +66,7 @@ module.exports = function shiftRoutes(app) {
   .post('/geohash/:geohash/precision/:precision', function* grabOpenShiftByGeohash() {
     const precision = this.params.precision;
     const geohash = this.params.geohash;
-    const requestJson = this.request.body.fields;
+    const requestJson = this.request.body;
     const hashSet = requestJson.hashSet;
     // push the current hashset into the array to query, total 9 for proximity search
     hashSet.push(geohash);
@@ -98,7 +98,7 @@ module.exports = function shiftRoutes(app) {
 
   // update shift data by shift id
   .put('/:shiftID', function* updateShiftByShiftID() {
-    const requestJson = this.request.body.fields;
+    const requestJson = this.request.body;
     const specialtyID = requestJson.specialtyID;
     const facilityID = requestJson.facilityID;
     if (specialtyID) {

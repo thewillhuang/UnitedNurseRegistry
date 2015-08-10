@@ -13,7 +13,7 @@ module.exports = function(app) {
 
   // create facility
   .post('/', function* () {
-    const requestJson = this.request.body.fields;
+    const requestJson = this.request.body;
     const password = requestJson.facilityPwHash;
     delete requestJson.facilityPwHash;
     requestJson.facilityPwHash = yield genHash(password, 10);
@@ -25,7 +25,7 @@ module.exports = function(app) {
 
   // validate password return true or false
   .post('/validate/', function* validateFacility() {
-    const requestJson = this.request.body.fields;
+    const requestJson = this.request.body;
     const password = requestJson.facilityPwHash;
     const facilityName = requestJson.facilityName;
     const q = {};
@@ -49,7 +49,7 @@ module.exports = function(app) {
 
   // update user data by user id
   .put('/:facilityID', function* () {
-    const requestJson = this.request.body.fields;
+    const requestJson = this.request.body;
     const facilityID = this.params.facilityID;
     const password = requestJson.facilityPwHash;
     delete requestJson.facilityPwHash;

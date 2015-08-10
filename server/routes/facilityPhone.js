@@ -14,7 +14,7 @@ module.exports = function(app) {
   //create new facility phone with facility id
   .post('/facility/:facilityID', function* () {
     let facilityID = this.params.facilityID;
-    let requestJson = this.request.body.fields;
+    let requestJson = this.request.body;
     let q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['phone', requestJson];
@@ -51,7 +51,7 @@ module.exports = function(app) {
 
   // update facility phone based on phone ID
   .put('/phone/:phoneID', function* () {
-    let requestJson = this.request.body.fields;
+    let requestJson = this.request.body;
     let phoneID = this.params.phoneID;
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';

@@ -12,7 +12,7 @@ module.exports = function(app) {
   //create user schedule given user id
   .post('/user/:userID', function* () {
     let userID = this.params.userID;
-    let requestJson = this.request.body.fields;
+    let requestJson = this.request.body;
     let q = {};
     requestJson.fk_UserSchedule_userID = userID;
     q.sql = 'INSERT INTO ?? SET ?';
@@ -32,7 +32,7 @@ module.exports = function(app) {
 
   // update user schedule by schedule id
   .put('/schedule/:scheduleID', function* () {
-    let requestJson = this.request.body.fields;
+    let requestJson = this.request.body;
     let scheduleID = this.params.scheduleID;
     let q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';

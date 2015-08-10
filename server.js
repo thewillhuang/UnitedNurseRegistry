@@ -8,10 +8,11 @@ const logger = require('koa-logger');
 const etag = require('koa-etag');
 const build = '/public';
 const path = require('path');
-const koaBody = require('koa-better-body');
+const bodyParser = require('koa-bodyparser');
 const conditional = require('koa-conditional-get');
 const helmet = require('koa-helmet');
 const passport = require('koa-passport');
+const session = require('koa-session');
 
 // logging
 app.use(logger());
@@ -40,8 +41,10 @@ app.use(function* staticServer(next) {
   }
 });
 
-// body json parsing TODO {fieldsKey: false}
-app.use(koaBody());
+// set unsigned cookies as we are using a signed and encrypted jwt
+app.use(session({ signed: false }, app));
+
+app.use(bodyParser());
 
 // initialize passport
 require('./server/services/auth');
@@ -51,6 +54,11 @@ app.use(passport.initialize());
 require('./server/routes/authRoutes')(app);
 
 // is authed checker that ensures no unauthroized request can make it pass to secured routes
+app.use(function*(next) {
+  this.isAuthenticated() ?
+  yield next :
+  this.redirect('/');
+});
 
 // secured routes
 require('./server/routes/userRoutes')(app);

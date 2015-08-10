@@ -7,7 +7,6 @@ const auth = new Router({
 const passport = require('koa-passport');
 
 module.exports = function authRoutes(app) {
-  console.log('auth routes loaded');
   auth
 
   .get('/facebook',
@@ -16,8 +15,8 @@ module.exports = function authRoutes(app) {
 
   .get('/facebook/callback',
     passport.authenticate('facebook', {
-      successRedirect: '/',
-      failureRedirect: '/login',
+      successRedirect: '/app',
+      failureRedirect: '/',
     })
   )
 
@@ -40,8 +39,8 @@ module.exports = function authRoutes(app) {
 
   .post('/login/',
     passport.authenticate('local', {
-      successRedirect: '/',
-      failureRedirect: '/login',
+      successRedirect: '/app',
+      failureRedirect: '/',
       // failureFlash: true,
     })
   )

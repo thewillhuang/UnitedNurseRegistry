@@ -37,41 +37,16 @@ passport.use(new LocalStrategy({session: false},
   }
 ));
 
-// // callback version
-// passport.use(new LocalStrategy({session: false},
-//   function(username, password, done) {
-//     pool.getConnection(function(connectionError, connection) {
-//       console.log('connection error', connectionError);
-//       const q = {};
-//       q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-//       q.values = ['userPwHash', 'user', 'userName', username];
-//       connection.query(q, function(err, rows) {
-//         console.log('query error', err);
-//         console.log('rows', rows);
-//         if (err) {return done(err); }
-//         if (!rows.length) {
-//           return done(null, false, {message: 'Incorrect username.'});
-//         }
-//         const dbpwhash = rows[0].userPwHash;
-//         bcrypt.compare(password, dbpwhash, function(hashError, match) {
-//           console.log('hasherror', hashError);
-//           if (match) { return done(null, {userName: username}); }
-//           if (!match) {return done(null, false, {message: 'Incorrect password.'}); }
-//         });
-//         connection.close();
-//       });
-//       // pool.end();
-//     });
-//   }
-// ));
-
 passport.use(new FacebookStrategy({
+  auth_Type: 'rerequest',
+  profileFields: ['id', 'email', 'first_name', 'last_name'],
+  scope: ['email'],
   clientID: '881519185218872',
   clientSecret: 'ec4d29399a523f123cf079c3d66e29c6',
   callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/api/auth/facebook/callback',
 },
-  function(token, tokenSecret, profile, done) {
-    console.log(token, tokenSecret, profile);
+  function(token, refreshToken, profile, done) {
+    console.log(token, refreshToken, profile);
     // retrieve user ...
     done(null, user);
   }

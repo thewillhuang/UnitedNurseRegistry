@@ -49,6 +49,7 @@ app.use(bodyParser());
 // initialize passport
 require('./server/services/auth');
 app.use(passport.initialize());
+app.use(passport.session());
 
 // unprotected routes
 require('./server/routes/authRoutes')(app);

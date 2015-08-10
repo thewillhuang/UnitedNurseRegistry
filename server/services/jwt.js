@@ -2,7 +2,7 @@
 const tokenize = module.exports = {};
 const jwt = require('jsonwebtoken');
 const fs = require('fs');
-const cert = fs.readFileSync('../../jwt-key.pem');
+const cert = fs.readFileSync('./jwt-key.pem');
 const crypto = require('./crypto');
 const options = {
   algorithm: 'HS256',

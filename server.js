@@ -40,8 +40,8 @@ app.use(function* staticServer(next) {
   }
 });
 
-// body json parsing
-app.use(koaBody({fieldsKey: false}));
+// body json parsing TODO {fieldsKey: false}
+app.use(koaBody());
 
 // initialize passport
 require('./server/services/auth');

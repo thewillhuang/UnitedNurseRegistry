@@ -3,24 +3,22 @@ const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
 const query = require('./query');
 const bcrypt = require('./bcrypt');
+const jwt = require('./jwt');
 // const pool = require('./pool');
-// const mysql = require('mysql');
-// const options = {
-//   host: 'localhost',
-//   user: 'root',
-//   password: '',
-//   database: 'unrdb',
-//   connectionLimit: 100,
-//   // ssl: 'Amazon RDS'
-// };
-// const pool = mysql.createPool(options);
 
+passport.serializeUser(function(user, done) {
+  const token = jwt.encryptSign(user);
+  done(null, token);
+});
+
+passport.deserializeUser(function(token, done) {
+  const user = jwt.verifyDecrypt(token);
+  done(null, user);
+});
 
 // promise version
 passport.use(new LocalStrategy({session: false},
   function(username, password, done) {
-    console.log('username', username);
-    console.log('password', password);
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'user', 'userName', username];
@@ -31,7 +29,7 @@ passport.use(new LocalStrategy({session: false},
       return bcrypt.compareAsync(password, dbpwhash);
     }).then(function(isMatch) {
       if (!isMatch) { return done(null, false, {message: 'Incorrect password.'}); }
-      return done(null, {userName: username});
+      return done(null, {userName: username}, {message: 'Auth Success'});
     }).catch(function(error) {
       console.log(error);
     });
@@ -61,7 +59,7 @@ passport.use(new LocalStrategy({session: false},
 //         });
 //         connection.close();
 //       });
-//       pool.end();
+//       // pool.end();
 //     });
 //   }
 // ));

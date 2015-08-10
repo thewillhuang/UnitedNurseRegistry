@@ -12,9 +12,8 @@ module.exports = function authRoutes(app) {
   auth
 
   .post('/', function*(next) {
-    console.log(this);
-    console.log(this.req.body);
-    // this.request.body = this.request.fields;
+    console.log('this.request.body', this.request.body);
+    this.request.body = this.request.body.fields;
     const ctx = this;
     yield passport.authenticate('local', function*(err, user, info) {
       console.log(err, user, info);
@@ -38,6 +37,5 @@ module.exports = function authRoutes(app) {
   );
 
   app.use(auth.routes())
-    .use(auth.allowedMethods())
-      .use(auth.middleware());
+    .use(auth.allowedMethods());
 };

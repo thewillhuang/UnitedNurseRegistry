@@ -71,6 +71,38 @@ describe('user api', function() {
       });
   });
 
+  it('should login with /', function(done) {
+    request.post('/api/auth/')
+      .send({
+        password: password,
+        username: userName,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        console.log(res.body);
+        // expect(res.body).to.be.an('object');
+        // expect(res.body.success).to.equal(true);
+        // expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should login with /login', function(done) {
+    request.post('/api/auth/login')
+      .send({
+        password: password,
+        username: userName,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        console.log(res.body);
+        // expect(res.body).to.be.an('object');
+        // expect(res.body.success).to.equal(true);
+        // expect(err).to.be.a('null');
+        done();
+      });
+  });
+
   it('should grab a user given a correct user id', function(done) {
     request.get('/api/user/' + r1.insertId)
       .expect(200)

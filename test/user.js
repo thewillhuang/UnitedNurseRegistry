@@ -97,8 +97,8 @@ describe('user api', function() {
       })
       .expect(200)
       .end(function(err, res) {
-        console.log('body', res.body);
         console.log('headers', res.headers);
+        console.log('body', res.body);
         // expect(res.body).to.be.an('object');
         // expect(res.body.success).to.equal(true);
         // expect(err).to.be.a('null');
@@ -110,8 +110,8 @@ describe('user api', function() {
     request.get('/api/auth/logout')
       .expect(200)
       .end(function(err, res) {
-        console.log('body', res.body);
         console.log('headers', res.headers);
+        console.log('body', res.body);
         // expect(res.body).to.be.an('object');
         // expect(res.body.success).to.equal(true);
         // expect(err).to.be.a('null');

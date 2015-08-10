@@ -23,7 +23,7 @@ module.exports = function authRoutes(app) {
   .post('/', function*(next) {
     const ctx = this;
     yield passport.authenticate('local', function*(err, user, info) {
-      console.log(err, user, info);
+      console.log('err', err, 'user', user, 'info', info);
       if (err) throw err;
       if (user === false) {
         ctx.status = 401;

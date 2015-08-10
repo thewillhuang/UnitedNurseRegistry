@@ -1,8 +1,9 @@
 'use strict';
 const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
+const FacebookStrategy = require('passport-facebook').Strategy;
 const query = require('./query');
-const bcrypt = require('./bcrypt');
+const validatePw = require('./validatePassword');
 const jwt = require('./jwt');
 // const pool = require('./pool');
 
@@ -26,7 +27,7 @@ passport.use(new LocalStrategy({session: false},
       if (!result.rows.length) { return done(null, false, {message: 'Incorrect username.'}); }
       return result.rows[0].userPwHash;
     }).then(function(dbpwhash) {
-      return bcrypt.compareAsync(password, dbpwhash);
+      return validatePw(password, dbpwhash);
     }).then(function(isMatch) {
       if (!isMatch) { return done(null, false, {message: 'Incorrect password.'}); }
       return done(null, {userName: username}, {message: 'Auth Success'});
@@ -64,43 +65,18 @@ passport.use(new LocalStrategy({session: false},
 //   }
 // ));
 
-// test
-// const test = function(username, password, done) {
-//     // promise version
-//     const q = {};
-//     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-//     q.values = ['userPwHash', 'user', 'userName', username];
-//     query(q).then(function(result) {
-//       if (!result.rows.length) { return done(null, false, {message: 'Incorrect username.'}); }
-//       return result.rows[0].userPwHash;
-//     }).then(function(dbpwhash) {
-//       return bcrypt.compareAsync(password, dbpwhash);
-//     }).then(function(isMatch) {
-//       if (!isMatch) { return done(null, false, {message: 'Incorrect password.'}); }
-//       return done(null, {userName: username});
-//     }).catch(function(error) {
-//       // console.log(error);
-//     });
-//   };
-//
-// test('afdsdfa', 'fdsafdsafds', function(a, b, c) {
-//   console.log(a);
-//   console.log(b);
-//   console.log(c);
-// });
+passport.use(new FacebookStrategy({
+  clientID: '881519185218872',
+  clientSecret: 'ec4d29399a523f123cf079c3d66e29c6',
+  callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/api/auth/facebook/callback',
+},
+  function(token, tokenSecret, profile, done) {
+    console.log(token, tokenSecret, profile);
+    // retrieve user ...
+    done(null, user);
+  }
+));
 
-// const FacebookStrategy = require('passport-facebook').Strategy
-// passport.use(new FacebookStrategy({
-//     clientID: 'your-client-id',
-//     clientSecret: 'your-secret',
-//     callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/auth/facebook/callback'
-//   },
-//   function(token, tokenSecret, profile, done) {
-//     // retrieve user ...
-//     done(null, user)
-//   }
-// ))
-//
 // const TwitterStrategy = require('passport-twitter').Strategy
 // passport.use(new TwitterStrategy({
 //     consumerKey: 'your-consumer-key',
@@ -112,7 +88,7 @@ passport.use(new LocalStrategy({session: false},
 //     done(null, user)
 //   }
 // ))
-//
+
 // const GoogleStrategy = require('passport-google-auth').Strategy
 // passport.use(new GoogleStrategy({
 //     clientId: 'your-client-id',

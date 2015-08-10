@@ -4,16 +4,24 @@ const Router = require('koa-router');
 const auth = new Router({
   prefix: '/api/auth',
 });
-// const query = require('../services/query');
 const passport = require('koa-passport');
 
 module.exports = function authRoutes(app) {
   console.log('auth routes loaded');
   auth
 
+  .get('/facebook',
+    passport.authenticate('facebook')
+  )
+
+  .get('/facebook/callback',
+    passport.authenticate('facebook', {
+      successRedirect: '/',
+      failureRedirect: '/login',
+    })
+  )
+
   .post('/', function*(next) {
-    console.log(this.session);
-    console.log(this.passport);
     const ctx = this;
     yield passport.authenticate('local', function*(err, user, info) {
       console.log(err, user, info);
@@ -26,14 +34,14 @@ module.exports = function authRoutes(app) {
         ctx.body = { success: true };
       }
     }).call(this, next);
-    console.log(this.passport);
-    console.log(this.isAuthenticated());
+    console.log('this', this);
+    console.log('session', this.session);
   })
 
   .post('/login/',
     passport.authenticate('local', {
-      successRedirect: '/app',
-      failureRedirect: '/',
+      successRedirect: '/',
+      failureRedirect: '/login',
       // failureFlash: true,
     })
   )

@@ -33,7 +33,8 @@ module.exports = function userRoutes(app) {
     q.values = ['userPwHash', 'user', 'userName', userName];
     const result = yield query(q);
     const dbpwhash = result.rows[0].userPwHash;
-    this.body = yield validatePw(password, dbpwhash);
+    const success = yield validatePw(password, dbpwhash);
+    this.body = {success: success};
   })
 
   // grab user table info based on user id

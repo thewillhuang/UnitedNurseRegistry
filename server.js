@@ -54,11 +54,11 @@ app.use(passport.initialize());
 require('./server/routes/authRoutes')(app);
 
 // is authed checker that ensures no unauthroized request can make it pass to secured routes
-app.use(function*(next) {
-  this.isAuthenticated() ?
-  yield next :
-  this.redirect('/');
-});
+// app.use(function*(next) {
+//   this.isAuthenticated() ?
+//   yield next :
+//   this.redirect('/');
+// });
 
 // secured routes
 require('./server/routes/userRoutes')(app);

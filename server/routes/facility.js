@@ -33,7 +33,8 @@ module.exports = function(app) {
     q.values = ['facilityPwHash', 'facility', 'facilityName', facilityName];
     const result = yield query(q);
     const dbpwhash = result.rows[0].facilityPwHash;
-    this.body = yield validatePw(password, dbpwhash);
+    const success = yield validatePw(password, dbpwhash);
+    this.body = {success: success};
   })
 
   // grab user table info based on user id

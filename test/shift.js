@@ -42,7 +42,7 @@ describe('shift api', function() {
         userGeoHash: 27898503349316,
         userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
         dob: '1986-04-08',
-        userName: uuid.v4(),
+        email: uuid.v4(),
       })
       .expect(200)
       .end(function(err, res) {

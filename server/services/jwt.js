@@ -25,7 +25,7 @@ tokenize.verifyDecrypt = function(token) {
 
 // // some testing for speed
 // console.time('encode');
-// const webtoken = tokenize.encryptSign({userName: 'leeroy_jenkins231'});
+// const webtoken = tokenize.encryptSign({email: 'leeroy_jenkins231'});
 // console.timeEnd('encode');
 // console.log('jwt', webtoken);
 //

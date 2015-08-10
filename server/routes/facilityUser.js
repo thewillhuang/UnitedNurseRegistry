@@ -53,7 +53,7 @@ module.exports = function(app) {
       'u.lastName',
       'u.userGeoHash',
       'u.dob',
-      'u.userName'
+      'u.email'
     ];
     q.values = [select, 'user', 'u', 'facilityuser', 'fu', 'fu.fk_facilityuser_userID', 'u.userID', 'fu.fk_facilityuser_facilityID', facilityID];
     // console.log(q);

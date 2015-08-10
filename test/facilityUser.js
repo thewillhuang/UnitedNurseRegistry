@@ -62,7 +62,7 @@ describe('facility user api', function() {
         userGeoHash: 27898503349316,
         userPwHash: uuid.v4(),
         dob: '1986-04-08',
-        userName: uuid.v4()
+        email: uuid.v4()
       })
       .expect(200)
       .end(function(err, res) {
@@ -83,7 +83,7 @@ describe('facility user api', function() {
         userGeoHash: 27898503349316,
         userPwHash: uuid.v4(),
         dob: '1986-04-08',
-        userName: uuid.v4()
+        email: uuid.v4()
       })
       .expect(200)
       .end(function(err, res) {
@@ -161,7 +161,7 @@ describe('facility user api', function() {
         userGeoHash: 27898503349316,
         userPwHash: uuid.v4(),
         dob: '1986-04-08',
-        userName: newuser
+        email: newuser
       })
       .expect(200)
       .end(function(err, res) {
@@ -184,7 +184,7 @@ describe('facility user api', function() {
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(1);
-        expect(res.body.rows).to.have.deep.property('[0].userName', newuser);
+        expect(res.body.rows).to.have.deep.property('[0].email', newuser);
         expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();

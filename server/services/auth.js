@@ -18,19 +18,27 @@ passport.deserializeUser(function(token, done) {
 });
 
 // promise version
-passport.use(new LocalStrategy({session: false},
+passport.use(new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password',
+},
   function(username, password, done) {
+    // console.log(username);
+    // console.log(password);
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    q.values = ['userPwHash', 'user', 'userName', username];
+    q.values = ['userPwHash', 'user', 'email', username];
     query(q).then(function(result) {
-      if (!result.rows.length) { return done(null, false, {message: 'Incorrect username.'}); }
+      // console.log(result);
+      if (!result.rows.length) { return done(null, false, {message: 'Incorrect email.'}); }
       return result.rows[0].userPwHash;
     }).then(function(dbpwhash) {
+      // console.log(dbpwhash);
       return validatePw(password, dbpwhash);
     }).then(function(isMatch) {
+      // console.log(isMatch);
       if (!isMatch) { return done(null, false, {message: 'Incorrect password.'}); }
-      return done(null, {userName: username}, {message: 'Auth Success'});
+      return done(null, {email: username}, {message: 'Auth Success'});
     }).catch(function(error) {
       console.log(error);
     });

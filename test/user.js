@@ -33,7 +33,7 @@ describe('user api', function() {
 
   let r1;
   const password = uuid.v4();
-  const userName = uuid.v4();
+  const email = uuid.v4();
   it('should insert a new user given a correct object', function(done) {
     request.post('/api/user/')
       .send({
@@ -43,7 +43,7 @@ describe('user api', function() {
         userGeoHash: 27898503349316,
         userPwHash: password,
         dob: '1986-04-08',
-        userName: userName,
+        email: email,
       })
       .expect(200)
       .end(function(err, res) {
@@ -60,7 +60,7 @@ describe('user api', function() {
     request.post('/api/user/validate/')
       .send({
         userPwHash: password,
-        userName: userName,
+        email: email,
       })
       .expect(200)
       .end(function(err, res) {
@@ -75,7 +75,7 @@ describe('user api', function() {
     request.post('/api/auth/')
       .send({
         password: password,
-        username: userName,
+        email: email,
       })
       .expect(200)
       .end(function(err, res) {
@@ -93,7 +93,7 @@ describe('user api', function() {
     request.post('/api/auth/login')
       .send({
         password: password,
-        username: userName,
+        email: email,
       })
       .expect(200)
       .end(function(err, res) {
@@ -156,7 +156,7 @@ describe('user api', function() {
         userGeoHash: 27898503349316,
         userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
         dob: '1986-04-08',
-        userName: updateinfo,
+        email: updateinfo,
       })
       .expect(200)
       .end(function(err, res) {
@@ -170,7 +170,7 @@ describe('user api', function() {
     request.get('/api/user/' + r1.insertId)
       .expect(200)
       .end(function(err, res) {
-        expect(res.body.rows[0].userName).to.equal(updateinfo);
+        expect(res.body.rows[0].email).to.equal(updateinfo);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');

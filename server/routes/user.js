@@ -27,10 +27,10 @@ module.exports = function userRoutes(app) {
   .post('/validate/', function* validateUser() {
     const requestJson = this.request.body;
     const password = requestJson.userPwHash;
-    const userName = requestJson.userName;
+    const email = requestJson.email;
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    q.values = ['userPwHash', 'user', 'userName', userName];
+    q.values = ['userPwHash', 'user', 'email', email];
     const result = yield query(q);
     const dbpwhash = result.rows[0].userPwHash;
     const success = yield validatePw(password, dbpwhash);
@@ -42,7 +42,7 @@ module.exports = function userRoutes(app) {
     const userID = this.params.userID;
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    const select = ['userID', 'firstName', 'middleName', 'lastName', 'userGeoHash', 'dob', 'userName'];
+    const select = ['userID', 'firstName', 'middleName', 'lastName', 'userGeoHash', 'dob', 'email'];
     q.values = [select, 'user', 'userID', userID];
     this.body = yield query(q);
   })

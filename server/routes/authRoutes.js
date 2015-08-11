@@ -45,6 +45,14 @@ module.exports = function authRoutes(app) {
     })
   )
 
+  .post('/signup/',
+    passport.authenticate('local-signup', {
+      successRedirect: '/app',
+      failureRedirect: '/',
+      // failureFlash: true,
+    })
+  )
+
   .get('/logout', function*() {
     this.logout();
     this.redirect('/');

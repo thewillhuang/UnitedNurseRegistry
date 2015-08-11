@@ -71,6 +71,24 @@ describe('user api', function() {
       });
   });
 
+  it('should signup with /', function(done) {
+    request.post('/api/auth/signup')
+      .send({
+        password: 'leeroydawinnerhahahahaa',
+        email: 'leeroy@cloud9.com',
+      })
+      .expect(200)
+      .end(function(err, res) {
+        console.log('headers', res.headers);
+        console.log('body', res.body);
+        // console.log(res.body);
+        // expect(res.body).to.be.an('object');
+        // expect(res.body.success).to.equal(true);
+        // expect(err).to.be.a('null');
+        done();
+      });
+  });
+
   it('should login with /', function(done) {
     request.post('/api/auth/')
       .send({

@@ -4,6 +4,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const query = require('./query');
 const validatePw = require('./validatePassword');
+const genHash = require('./genHash');
 const jwt = require('./jwt');
 // const pool = require('./pool');
 
@@ -47,6 +48,43 @@ passport.use(new LocalStrategy({
   }
 ));
 
+passport.use('local-signup', new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password',
+  passReqToCallback: true,
+},
+  function(req, email, password, done) {
+    console.log('req', req);
+    // console.log(email);
+    // console.log(password);
+    const q = {};
+    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
+    q.values = ['userPwHash', 'user', 'email', email];
+    query(q).then(function(result) {
+      return !result.rows.length ?
+      true :
+      done(null, false, {message: 'Email taken'});
+    }).then(function() {
+      return genHash(password, 8);
+    }).then(function(pwhash) {
+      const q2 = {};
+      const userData = {};
+      userData.email = email;
+      userData.userPwHash = pwhash;
+      q2.sql = 'INSERT INTO ?? SET ?';
+      q2.values = ['user', userData];
+      return query(q2);
+    }).then(function(result) {
+      console.log(result);
+      done(null, {email: email}, {message: 'Registeration successful'});
+    }).catch(function(error) {
+      console.log(error);
+      done(error, false, {message: 'db error'});
+    });
+  }
+));
+
+
 passport.use(new FacebookStrategy({
   auth_Type: 'rerequest',
   profileFields: ['id', 'email', 'first_name', 'last_name'],
@@ -58,7 +96,9 @@ passport.use(new FacebookStrategy({
 },
   function(req, token, refreshToken, profile, done) {
     console.log('req', req);
-    console.log(token, refreshToken, profile);
+    console.log('token', token);
+    console.log('refereshToken', refreshToken);
+    console.log('profile', profile);
     // retrieve user ...
     done(null, user);
   }

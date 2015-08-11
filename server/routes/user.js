@@ -16,7 +16,7 @@ module.exports = function userRoutes(app) {
     const requestJson = this.request.body;
     const password = requestJson.userPwHash;
     delete requestJson.userPwHash;
-    requestJson.userPwHash = yield genHash(password, 10);
+    requestJson.userPwHash = yield genHash(password, 8);
     const q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['user', requestJson];

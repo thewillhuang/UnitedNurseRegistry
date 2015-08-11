@@ -54,7 +54,9 @@ app.use(passport.session());
 // unprotected routes
 require('./server/routes/authRoutes')(app);
 
-// is authed checker that ensures no unauthroized request can make it pass to secured routes
+// authorize routes that uses bearer tokens
+
+// // is authed checker that ensures no unauthroized request can make it pass to secured routes
 // app.use(function*(next) {
 //   this.isAuthenticated() ?
 //   yield next :

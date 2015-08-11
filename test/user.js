@@ -71,46 +71,28 @@ describe('user api', function() {
       });
   });
 
-  const email2 = uuid.v4();
-  const password2 = uuid.v4();
-  it('should signup with /', function(done) {
-    request.post('/api/auth/signup')
-      .send({
-        password: password2,
-        email: email2,
-      })
-      .expect(200)
-      .end(function(err, res) {
-        console.log('headers', res.headers);
-        console.log('body', res.body);
-        // console.log(res.body);
-        // expect(res.body).to.be.an('object');
-        // expect(res.body.success).to.equal(true);
-        // expect(err).to.be.a('null');
-        done();
-      });
-  });
-
-  it('should not signup with /signup', function(done) {
-    request.post('/api/auth/signup')
-      .send({
-        password: password,
-        email: email,
-      })
-      .expect(200)
-      .end(function(err, res) {
-        console.log('headers', res.headers);
-        console.log('body', res.body);
-        // console.log(res.body);
-        // expect(res.body).to.be.an('object');
-        // expect(res.body.success).to.equal(true);
-        // expect(err).to.be.a('null');
-        done();
-      });
-  });
-
-  // it('should login with /', function(done) {
-  //   request.post('/api/auth/')
+  // const email2 = uuid.v4();
+  // const password2 = uuid.v4();
+  // it('should signup with /', function(done) {
+  //   request.post('/api/auth/signup')
+  //     .send({
+  //       password: password2,
+  //       email: email2,
+  //     })
+  //     .expect(200)
+  //     .end(function(err, res) {
+  //       console.log('headers', res.headers);
+  //       console.log('body', res.body);
+  //       // console.log(res.body);
+  //       // expect(res.body).to.be.an('object');
+  //       // expect(res.body.success).to.equal(true);
+  //       // expect(err).to.be.a('null');
+  //       done();
+  //     });
+  // });
+  //
+  // it('should not signup with /signup', function(done) {
+  //   request.post('/api/auth/signup')
   //     .send({
   //       password: password,
   //       email: email,
@@ -126,6 +108,24 @@ describe('user api', function() {
   //       done();
   //     });
   // });
+
+  it('should login with /', function(done) {
+    request.post('/api/auth/')
+      .send({
+        password: password,
+        email: email,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        console.log('headers', res.headers);
+        console.log('body', res.body);
+        // console.log(res.body);
+        // expect(res.body).to.be.an('object');
+        // expect(res.body.success).to.equal(true);
+        // expect(err).to.be.a('null');
+        done();
+      });
+  });
 
   // it('should login with /login', function(done) {
   //   request.post('/api/auth/login')
@@ -143,7 +143,7 @@ describe('user api', function() {
   //       done();
   //     });
   // });
-
+  //
   // it('should logout with /logout', function(done) {
   //   request.get('/api/auth/logout')
   //     .expect(200)

@@ -31,20 +31,22 @@ passport.use(new LocalStrategy({
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'user', 'email', email];
-    query(q).then(function(result) {
-      // console.log(result);
-      if (!result.rows.length) { return done(null, false, {message: 'Incorrect email.'}); }
-      return result.rows[0].userPwHash;
+    query(q).bind({}).then(function(result) {
+      if (result.rows.length === 0) {
+        this.done = [false, {message: 'incorrect email'}];
+      } else {
+        return result.rows[0].userPwHash;
+      }
     }).then(function(dbpwhash) {
-      // console.log(dbpwhash);
       return validatePw(password, dbpwhash);
     }).then(function(isMatch) {
-      // console.log(isMatch);
-      if (!isMatch) { return done(null, false, {message: 'Incorrect password.'}); }
-      return done(null, {email: email}, {message: 'Auth Success'});
+      if (!isMatch) {
+        this.done = [false, {message: 'incorrect password'}];
+      } else {this.done = [{email: email}, {message: 'Auth Success'}]; }
+      return this.done;
     }).catch(function(error) {
-      console.log(error);
-    });
+      return error;
+    }).nodeify(done, {spread: true});
   }
 ));
 
@@ -61,7 +63,7 @@ passport.use('local-signup', new LocalStrategy({
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'user', 'email', email];
     query(q).then(function(result) {
-      console.log('result1', result);
+      // console.log('result1', result);
       if (result.rows.length === 0) {
         return true;
       }
@@ -78,7 +80,7 @@ passport.use('local-signup', new LocalStrategy({
       q2.values = ['user', userData];
       return query(q2);
     }).then(function(result) {
-      console.log('result2', result);
+      console.log('local-signup insert result', result);
       done(null, {email: email}, {message: 'Registeration successful'});
     }).catch(function(error) {
       done(error, false, {message: 'db error'});

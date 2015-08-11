@@ -16,7 +16,7 @@ module.exports = function(app) {
     const requestJson = this.request.body;
     const password = requestJson.facilityPwHash;
     delete requestJson.facilityPwHash;
-    requestJson.facilityPwHash = yield genHash(password, 8);
+    requestJson.facilityPwHash = yield genHash(password);
     const q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['facility', requestJson];
@@ -54,7 +54,7 @@ module.exports = function(app) {
     const facilityID = this.params.facilityID;
     const password = requestJson.facilityPwHash;
     delete requestJson.facilityPwHash;
-    requestJson.facilityPwHash = yield genHash(password, 10);
+    requestJson.facilityPwHash = yield genHash(password);
     const q = {};
     q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
     q.values = ['facility', requestJson, 'facilityID', facilityID];

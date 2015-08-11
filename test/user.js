@@ -127,6 +127,42 @@ describe('user api', function() {
       });
   });
 
+  it('should not login with wrong or no user /', function(done) {
+    request.post('/api/auth/')
+      .send({
+        password: password,
+        email: 'leeroyfdsalj23kjf',
+      })
+      .expect(200)
+      .end(function(err, res) {
+        console.log('headers', res.headers);
+        console.log('body', res.body);
+        // console.log(res.body);
+        // expect(res.body).to.be.an('object');
+        // expect(res.body.success).to.equal(true);
+        // expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should not login with wrong password /', function(done) {
+    request.post('/api/auth/')
+      .send({
+        password: 'fldakjsfdlasfkj',
+        email: email,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        console.log('headers', res.headers);
+        console.log('body', res.body);
+        // console.log(res.body);
+        // expect(res.body).to.be.an('object');
+        // expect(res.body.success).to.equal(true);
+        // expect(err).to.be.a('null');
+        done();
+      });
+  });
+
   // it('should login with /login', function(done) {
   //   request.post('/api/auth/login')
   //     .send({

@@ -8,14 +8,22 @@ const genHash = require('./genHash');
 const jwt = require('./jwt');
 // const pool = require('./pool');
 
+
+// custom error functions
+function NoUserError(message) {
+  this.message = message;
+  this.name = 'NoUserError';
+  Error.captureStackTrace(this, NoUserError);
+}
+NoUserError.prototype = Object.create(Error.prototype);
+NoUserError.prototype.constructor = NoUserError;
+
 passport.serializeUser(function(user, done) {
-  const token = jwt.encryptSign(user);
-  done(null, token);
+  done(null, jwt.encryptSign(user));
 });
 
 passport.deserializeUser(function(token, done) {
-  const user = jwt.verifyDecrypt(token);
-  done(null, user);
+  done(null, jwt.verifyDecrypt(token));
 });
 
 // promise version
@@ -25,27 +33,23 @@ passport.use(new LocalStrategy({
   passReqToCallback: true,
 },
   function(req, email, password, done) {
-    console.log('req', req);
-    // console.log(username);
-    // console.log(password);
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'user', 'email', email];
     query(q).bind({}).then(function(result) {
-      if (result.rows.length === 0) {
-        this.done = [false, {message: 'incorrect email'}];
-      } else {
-        return result.rows[0].userPwHash;
-      }
-    }).then(function(dbpwhash) {
-      return validatePw(password, dbpwhash);
+      console.log('result from query', result);
+      if (result.rows.length === 0) { throw new NoUserError('no such user found'); }
+      return validatePw(password, result.rows[0].userPwHash);
     }).then(function(isMatch) {
-      if (!isMatch) {
-        this.done = [false, {message: 'incorrect password'}];
-      } else {this.done = [{email: email}, {message: 'Auth Success'}]; }
+      console.log('isMatch', isMatch);
+      return !isMatch ?
+        this.done = [false, {message: 'incorrect password'}] :
+        this.done = [{email: email}, {message: 'Auth Success'}];
+    }).catch(NoUserError, function(error) {
+      console.log('custom error', error);
+      this.done = [false, {message: 'incorrect email'}];
+    }).then(function() {
       return this.done;
-    }).catch(function(error) {
-      return error;
     }).nodeify(done, {spread: true});
   }
 ));
@@ -70,7 +74,7 @@ passport.use('local-signup', new LocalStrategy({
       done(null, false, {message: 'Email taken'});
       throw new Error('email taken');
     }).then(function() {
-      return genHash(password, 8);
+      return genHash(password);
     }).then(function(pwhash) {
       const q2 = {};
       const userData = {};

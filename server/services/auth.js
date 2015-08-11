@@ -26,6 +26,7 @@ function EmailTaken(message) {
 EmailTaken.prototype = Object.create(Error.prototype);
 EmailTaken.prototype.constructor = EmailTaken;
 
+// passport serialization / deserialization
 passport.serializeUser(function(user, done) {
   done(null, jwt.encryptSign(user));
 });
@@ -34,7 +35,7 @@ passport.deserializeUser(function(token, done) {
   done(null, jwt.verifyDecrypt(token));
 });
 
-// promise version
+// local strategy
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
@@ -62,6 +63,7 @@ passport.use(new LocalStrategy({
   }
 ));
 
+// local signup
 passport.use('local-signup', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
@@ -96,7 +98,7 @@ passport.use('local-signup', new LocalStrategy({
   }
 ));
 
-
+// facebook
 passport.use(new FacebookStrategy({
   auth_Type: 'rerequest',
   profileFields: ['id', 'email', 'first_name', 'last_name'],

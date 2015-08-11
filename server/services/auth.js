@@ -18,6 +18,14 @@ function NoUserError(message) {
 NoUserError.prototype = Object.create(Error.prototype);
 NoUserError.prototype.constructor = NoUserError;
 
+function EmailTaken(message) {
+  this.message = message;
+  this.name = 'EmailTaken';
+  Error.captureStackTrace(this, EmailTaken);
+}
+EmailTaken.prototype = Object.create(Error.prototype);
+EmailTaken.prototype.constructor = EmailTaken;
+
 passport.serializeUser(function(user, done) {
   done(null, jwt.encryptSign(user));
 });
@@ -60,22 +68,16 @@ passport.use('local-signup', new LocalStrategy({
   passReqToCallback: true,
 },
   function(req, email, password, done) {
-    // console.log('req', req);
-    // console.log(email);
-    // console.log(password);
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'user', 'email', email];
-    query(q).then(function(result) {
-      // console.log('result1', result);
-      if (result.rows.length === 0) {
-        return true;
+    query(q).bind({}).then(function(result) {
+      if (result.rows.length !== 0) {
+        throw new EmailTaken('email taken');
       }
-      done(null, false, {message: 'Email taken'});
-      throw new Error('email taken');
-    }).then(function() {
       return genHash(password);
     }).then(function(pwhash) {
+      console.log('pwhash', pwhash);
       const q2 = {};
       const userData = {};
       userData.email = email;
@@ -85,10 +87,12 @@ passport.use('local-signup', new LocalStrategy({
       return query(q2);
     }).then(function(result) {
       console.log('local-signup insert result', result);
-      done(null, {email: email}, {message: 'Registeration successful'});
-    }).catch(function(error) {
-      done(error, false, {message: 'db error'});
-    });
+      this.done = [{email: email}, {message: 'Registeration successful'}];
+    }).catch(EmailTaken, function() {
+      this.done = [false, {message: 'email taken'}];
+    }).then(function() {
+      return this.done;
+    }).nodeify(done, {spread: true});
   }
 ));
 

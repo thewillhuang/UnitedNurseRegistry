@@ -37,6 +37,23 @@ module.exports = function authRoutes(app) {
     console.log('session', this.session);
   })
 
+  .post('/signup2', function*(next) {
+    const ctx = this;
+    yield passport.authenticate('local-signup', function*(err, user, info) {
+      console.log('err', err, 'user', user, 'info', info);
+      if (err) throw err;
+      if (user === false) {
+        ctx.status = 401;
+        ctx.body = { success: false };
+      } else {
+        yield ctx.login(user);
+        ctx.body = { success: true };
+      }
+    }).call(this, next);
+    console.log('this', this);
+    console.log('session', this.session);
+  })
+
   .post('/login/',
     passport.authenticate('local', {
       successRedirect: '/app',

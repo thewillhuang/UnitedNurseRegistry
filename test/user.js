@@ -71,43 +71,83 @@ describe('user api', function() {
       });
   });
 
-  // const email2 = uuid.v4();
-  // const password2 = uuid.v4();
-  // it('should signup with /', function(done) {
-  //   request.post('/api/auth/signup')
-  //     .send({
-  //       password: password2,
-  //       email: email2,
-  //     })
-  //     .expect(200)
-  //     .end(function(err, res) {
-  //       console.log('headers', res.headers);
-  //       console.log('body', res.body);
-  //       // console.log(res.body);
-  //       // expect(res.body).to.be.an('object');
-  //       // expect(res.body.success).to.equal(true);
-  //       // expect(err).to.be.a('null');
-  //       done();
-  //     });
-  // });
-  //
-  // it('should not signup with /signup', function(done) {
-  //   request.post('/api/auth/signup')
-  //     .send({
-  //       password: password,
-  //       email: email,
-  //     })
-  //     .expect(200)
-  //     .end(function(err, res) {
-  //       console.log('headers', res.headers);
-  //       console.log('body', res.body);
-  //       // console.log(res.body);
-  //       // expect(res.body).to.be.an('object');
-  //       // expect(res.body.success).to.equal(true);
-  //       // expect(err).to.be.a('null');
-  //       done();
-  //     });
-  // });
+  // ---- start of login and registeration testing -----------------------------
+
+  const email2 = uuid.v4();
+  const password2 = uuid.v4();
+  it('should signup with /', function(done) {
+    request.post('/api/auth/signup')
+      .send({
+        password: password2,
+        email: email2,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        console.log('headers', res.headers);
+        console.log('body', res.body);
+        // console.log(res.body);
+        // expect(res.body).to.be.an('object');
+        // expect(res.body.success).to.equal(true);
+        // expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  const email3 = uuid.v4();
+  const pw3 = uuid.v4();
+  it('should signup with /signup2', function(done) {
+    request.post('/api/auth/signup2')
+      .send({
+        password: pw3,
+        email: email3,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        console.log('headers', res.headers);
+        console.log('body', res.body);
+        // console.log(res.body);
+        // expect(res.body).to.be.an('object');
+        // expect(res.body.success).to.equal(true);
+        // expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should not signup with /signup', function(done) {
+    request.post('/api/auth/signup')
+      .send({
+        password: password,
+        email: email,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        console.log('headers', res.headers);
+        console.log('body', res.body);
+        // console.log(res.body);
+        // expect(res.body).to.be.an('object');
+        // expect(res.body.success).to.equal(true);
+        // expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should not signup with /signup', function(done) {
+    request.post('/api/auth/signup2')
+      .send({
+        password: password,
+        email: email,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        console.log('headers', res.headers);
+        console.log('body', res.body);
+        // console.log(res.body);
+        // expect(res.body).to.be.an('object');
+        // expect(res.body.success).to.equal(true);
+        // expect(err).to.be.a('null');
+        done();
+      });
+  });
 
   it('should login with /', function(done) {
     request.post('/api/auth/')
@@ -192,6 +232,9 @@ describe('user api', function() {
   //       done();
   //     });
   // });
+
+
+  // end of login / registeration testing ------------------------------------
 
   it('should grab a user given a correct user id', function(done) {
     request.get('/api/user/' + r1.insertId)

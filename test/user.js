@@ -71,11 +71,13 @@ describe('user api', function() {
       });
   });
 
+  const email2 = uuid.v4();
+  const password2 = uuid.v4();
   it('should signup with /', function(done) {
     request.post('/api/auth/signup')
       .send({
-        password: 'leeroydawinnerhahahahaa',
-        email: 'leeroy@cloud9.com',
+        password: password2,
+        email: email2,
       })
       .expect(200)
       .end(function(err, res) {
@@ -89,8 +91,8 @@ describe('user api', function() {
       });
   });
 
-  it('should login with /', function(done) {
-    request.post('/api/auth/')
+  it('should not signup with /signup', function(done) {
+    request.post('/api/auth/signup')
       .send({
         password: password,
         email: email,
@@ -107,35 +109,53 @@ describe('user api', function() {
       });
   });
 
-  it('should login with /login', function(done) {
-    request.post('/api/auth/login')
-      .send({
-        password: password,
-        email: email,
-      })
-      .expect(200)
-      .end(function(err, res) {
-        console.log('headers', res.headers);
-        console.log('body', res.body);
-        // expect(res.body).to.be.an('object');
-        // expect(res.body.success).to.equal(true);
-        // expect(err).to.be.a('null');
-        done();
-      });
-  });
+  // it('should login with /', function(done) {
+  //   request.post('/api/auth/')
+  //     .send({
+  //       password: password,
+  //       email: email,
+  //     })
+  //     .expect(200)
+  //     .end(function(err, res) {
+  //       console.log('headers', res.headers);
+  //       console.log('body', res.body);
+  //       // console.log(res.body);
+  //       // expect(res.body).to.be.an('object');
+  //       // expect(res.body.success).to.equal(true);
+  //       // expect(err).to.be.a('null');
+  //       done();
+  //     });
+  // });
 
-  it('should logout with /logout', function(done) {
-    request.get('/api/auth/logout')
-      .expect(200)
-      .end(function(err, res) {
-        console.log('headers', res.headers);
-        console.log('body', res.body);
-        // expect(res.body).to.be.an('object');
-        // expect(res.body.success).to.equal(true);
-        // expect(err).to.be.a('null');
-        done();
-      });
-  });
+  // it('should login with /login', function(done) {
+  //   request.post('/api/auth/login')
+  //     .send({
+  //       password: password,
+  //       email: email,
+  //     })
+  //     .expect(200)
+  //     .end(function(err, res) {
+  //       console.log('headers', res.headers);
+  //       console.log('body', res.body);
+  //       // expect(res.body).to.be.an('object');
+  //       // expect(res.body.success).to.equal(true);
+  //       // expect(err).to.be.a('null');
+  //       done();
+  //     });
+  // });
+
+  // it('should logout with /logout', function(done) {
+  //   request.get('/api/auth/logout')
+  //     .expect(200)
+  //     .end(function(err, res) {
+  //       console.log('headers', res.headers);
+  //       console.log('body', res.body);
+  //       // expect(res.body).to.be.an('object');
+  //       // expect(res.body.success).to.equal(true);
+  //       // expect(err).to.be.a('null');
+  //       done();
+  //     });
+  // });
 
   it('should grab a user given a correct user id', function(done) {
     request.get('/api/user/' + r1.insertId)

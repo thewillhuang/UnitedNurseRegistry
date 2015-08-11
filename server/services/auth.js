@@ -54,16 +54,19 @@ passport.use('local-signup', new LocalStrategy({
   passReqToCallback: true,
 },
   function(req, email, password, done) {
-    console.log('req', req);
+    // console.log('req', req);
     // console.log(email);
     // console.log(password);
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'user', 'email', email];
     query(q).then(function(result) {
-      return !result.rows.length ?
-      true :
+      console.log('result1', result);
+      if (result.rows.length === 0) {
+        return true;
+      }
       done(null, false, {message: 'Email taken'});
+      throw new Error('email taken');
     }).then(function() {
       return genHash(password, 8);
     }).then(function(pwhash) {
@@ -75,10 +78,9 @@ passport.use('local-signup', new LocalStrategy({
       q2.values = ['user', userData];
       return query(q2);
     }).then(function(result) {
-      console.log(result);
+      console.log('result2', result);
       done(null, {email: email}, {message: 'Registeration successful'});
     }).catch(function(error) {
-      console.log(error);
       done(error, false, {message: 'db error'});
     });
   }

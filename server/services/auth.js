@@ -127,7 +127,6 @@ passport.use(new FacebookStrategy({
     query(q).bind({}).then(function(result) {
       if (result.rows.length !== 0) {
         // skip to userExists block in catch
-        // console.log('search user', result);
         this.userID = result.rows[0].userID;
         throw new UserExist('fb user exists');
       }
@@ -147,11 +146,14 @@ passport.use(new FacebookStrategy({
     }).then(function(result) {
       const insertId = result.rows.insertId;
       this.done = [
-        {userID: insertID, scope: {userID: insertId}},
+        {userID: insertId, scope: {userID: insertId}},
         {message: 'Registeration successful'},
       ];
     }).catch(UserExist, function() {
-      this.done = [{userID: this.userID, scope: {userID: this.userID}}, {message: 'Auth successful'}];
+      this.done = [
+        {userID: this.userID, scope: {userID: this.userID}},
+        {message: 'Auth successful'},
+      ];
     }).then(function() {
       return this.done;
     }).nodeify(done, {spread: true});

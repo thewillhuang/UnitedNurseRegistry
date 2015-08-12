@@ -21,12 +21,12 @@ describe('authentication api', function() {
         password: password2,
         email: email2,
       })
-      .expect(200)
+      .expect(302)
       .end(function(err, res) {
         jwt = res.headers.authorization.split(' ').pop();
         console.log(jwt);
         expect(res.body).to.be.an('object');
-        expect(res.body).to.have.key('message');
+        expect(res.headers.location).to.equal('/app');
         expect(res.headers.authorization).to.be.a('string');
         expect(res.headers.authorization).to.contain('Bearer');
         expect(err).to.be.a('null');
@@ -43,10 +43,8 @@ describe('authentication api', function() {
       .expect(401)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
-        expect(res.body).to.have.key('message');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
-        expect(res.body).to.be.an('object');
         done();
       });
   });
@@ -57,10 +55,10 @@ describe('authentication api', function() {
         password: password2,
         email: email2,
       })
-      .expect(200)
+      .expect(302)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
-        expect(res.body).to.have.key('message');
+        expect(res.headers.location).to.equal('/app');
         expect(res.headers.authorization).to.be.a('string');
         expect(res.headers.authorization).to.contain('Bearer');
         expect(err).to.be.a('null');
@@ -77,10 +75,8 @@ describe('authentication api', function() {
       .expect(401)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
-        expect(res.body).to.have.key('message');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
-        expect(res.body).to.be.an('object');
         done();
       });
   });
@@ -94,10 +90,8 @@ describe('authentication api', function() {
       .expect(401)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
-        expect(res.body).to.have.key('message');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
-        expect(res.body).to.be.an('object');
         done();
       });
   });
@@ -107,11 +101,8 @@ describe('authentication api', function() {
       .expect(302)
       .end(function(err, res) {
         expect(res.headers.location).to.equal('/');
-        expect(res.body).to.be.an('object');
-        expect(res.body).to.have.key('message');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
-        expect(res.body).to.be.an('object');
         done();
       });
   });

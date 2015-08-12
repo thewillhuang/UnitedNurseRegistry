@@ -51,10 +51,10 @@ require('./server/services/auth');
 app.use(passport.initialize());
 // app.use(passport.session());
 
-// auth routes to obtain bearer tokens for different strategies
+// auth routes to set bearer tokens for different strategies
 require('./server/routes/authRoutes')(app);
 
-// authorize routes that uses bearer tokens
+// authorize routes that authenticates bearer tokens
 app.use(function* bearerAuthentication(next) {
   const ctx = this;
   yield passport.authenticate('bearer', { session: false }, function* (err, user) {
@@ -65,11 +65,13 @@ app.use(function* bearerAuthentication(next) {
   }).call(this, next);
 });
 
-// ensure all api calls are authenticated pass this middleware
+// ensure all api calls are authenticated pass this middleware or redirected.
 app.use(function* ensureAuthenticated(next) {
+  console.log(this.isAuthenticated());
+  console.log(this.headers);
   this.isAuthenticated() ?
   yield next :
-  this.redirect('/');
+  this.redirect('/login');
 });
 
 // secured routes

@@ -17,43 +17,51 @@ module.exports = function authRoutes(app) {
   .get('/facebook/callback', function* (next) {
     const ctx = this;
     yield passport.authenticate('facebook', {
-      // successRedirect: '/app',
-      failureRedirect: '/',
+      failureRedirect: '/login',
       session: false,
     }, function* (err, user, info) {
+      console.log(info);
       if (err) throw err;
-      ctx.passport.user = user;
-      ctx.set({ Authorization: 'Bearer ' + jwt.encryptSign(user) });
-      ctx.body = info;
+      if (user === false) {
+        ctx.status = 401;
+      } else {
+        ctx.passport.user = user;
+        const token = jwt.encryptSign(user);
+        ctx.set({ Authorization: 'Bearer ' + token });
+        ctx.redirect('/app');
+      }
     }).call(this, next);
   })
 
   .post('/login', function*(next) {
     const ctx = this;
     yield passport.authenticate('local', { session: false }, function*(err, user, info) {
+      console.log(info);
       if (err) throw err;
       if (user === false) {
         ctx.status = 401;
       } else {
-        // yield ctx.login(user);
+        const token = jwt.encryptSign(user);
         ctx.passport.user = user;
-        ctx.set({ Authorization: 'Bearer ' + jwt.encryptSign(user) });
+        ctx.set({ Authorization: 'Bearer ' + token });
+        ctx.redirect('/app');
       }
-      ctx.body = info;
     }).call(this, next);
   })
 
   .post('/signup', function*(next) {
     const ctx = this;
     yield passport.authenticate('local-signup',  { session: false }, function*(err, user, info) {
+      console.log(info);
       if (err) throw err;
       if (user === false) {
         ctx.status = 401;
       } else {
+        const token = jwt.encryptSign(user);
         ctx.passport.user = user;
-        ctx.set({ Authorization: 'Bearer ' + jwt.encryptSign(user) });
+        ctx.set({ Authorization: 'Bearer ' + token });
+        ctx.redirect('/app');
       }
-      ctx.body = info;
     }).call(this, next);
   })
 
@@ -61,8 +69,6 @@ module.exports = function authRoutes(app) {
     this.remove('Authorization');
     this.passport.user = null;
     this.redirect('/');
-    console.log(this.isAuthenticated());
-    this.body = {message: 'successfully logged out'};
   });
 
   app.use(auth.routes())

@@ -20,7 +20,10 @@ describe('authentication api', function() {
       })
       .expect(200)
       .end(function(err, res) {
+        console.log(res.header);
+        console.log(res.body);
         expect(res.body).to.be.an('object');
+        expect(res.body).to.have.key('message');
         expect(res.headers.authorization).to.be.a('string');
         expect(res.headers.authorization).to.contain('Bearer');
         expect(err).to.be.a('null');
@@ -37,6 +40,7 @@ describe('authentication api', function() {
       .expect(401)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
+        expect(res.body).to.have.key('message');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
         expect(res.body).to.be.an('object');
@@ -53,6 +57,7 @@ describe('authentication api', function() {
       .expect(200)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
+        expect(res.body).to.have.key('message');
         expect(res.headers.authorization).to.be.a('string');
         expect(res.headers.authorization).to.contain('Bearer');
         expect(err).to.be.a('null');
@@ -69,6 +74,7 @@ describe('authentication api', function() {
       .expect(401)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
+        expect(res.body).to.have.key('message');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
         expect(res.body).to.be.an('object');
@@ -85,6 +91,7 @@ describe('authentication api', function() {
       .expect(401)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
+        expect(res.body).to.have.key('message');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
         expect(res.body).to.be.an('object');
@@ -97,6 +104,7 @@ describe('authentication api', function() {
       .expect(302)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
+        expect(res.body).to.have.key('message');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
         expect(res.body).to.be.an('object');

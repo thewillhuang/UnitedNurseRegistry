@@ -35,7 +35,7 @@ EmailTaken.prototype.constructor = EmailTaken;
 //   done(null, jwt.verifyDecrypt(token));
 // });
 
-// local strategy
+// local strategy -- login
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
@@ -43,19 +43,18 @@ passport.use(new LocalStrategy({
 },
   function(email, password, done) {
     const q = {};
-    q.sql = 'SELECT ?? ?? FROM ?? WHERE ?? = ?';
+    q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'userID', 'user', 'email', email];
     query(q).bind({}).then(function(result) {
-      // console.log('result from query', result);
       if (result.rows.length === 0) { throw new NoUserError('no such user found'); }
-      this.userID = userID;
+      this.userID = result.rows[0].userID;
       return validatePw(password, result.rows[0].userPwHash);
     }).then(function(isMatch) {
-      // console.log('isMatch', isMatch);
+      // console.log(this.userID);
       return !isMatch ?
         this.done = [false, {message: 'incorrect password'}] :
         this.done = [
-          {email: email, scope: [{userID: this.userID}]},
+          {email: email, scope: {userID: this.userID}},
           {message: 'Auth Success'},
         ];
     }).catch(NoUserError, function() {
@@ -74,16 +73,14 @@ passport.use('local-signup', new LocalStrategy({
 },
   function(email, password, done) {
     const q = {};
-    q.sql = 'SELECT ?? ?? FROM ?? WHERE ?? = ?';
-    q.values = ['userPwHash', 'userID', 'user', 'email', email];
+    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
+    q.values = ['userPwHash', 'user', 'email', email];
     query(q).bind({}).then(function(result) {
       if (result.rows.length !== 0) {
         throw new EmailTaken('email taken');
       }
-      this.userID = userID;
       return genHash(password);
     }).then(function(pwhash) {
-      // console.log('pwhash', pwhash);
       const q2 = {};
       const userData = {};
       userData.email = email;
@@ -91,9 +88,10 @@ passport.use('local-signup', new LocalStrategy({
       q2.sql = 'INSERT INTO ?? SET ?';
       q2.values = ['user', userData];
       return query(q2);
-    }).then(function() {
+    }).then(function(result) {
+      const insertId = result.rows.insertId;
       this.done = [
-        {email: email, scope: [{userID: this.userID}]},
+        {email: email, scope: {userID: insertId}},
         {message: 'Registeration successful'},
       ];
     }).catch(EmailTaken, function() {

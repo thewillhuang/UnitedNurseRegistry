@@ -54,7 +54,7 @@ app.use(passport.initialize());
 // auth routes to set bearer tokens for different strategies
 require('./server/routes/authRoutes')(app);
 
-// authorize routes that authenticates bearer tokens
+// authorize routes that has valid bearer tokens
 app.use(function* bearerAuthentication(next) {
   const ctx = this;
   yield passport.authenticate('bearer', { session: false }, function* (err, user) {

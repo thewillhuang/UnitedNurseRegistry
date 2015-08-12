@@ -58,6 +58,8 @@ passport.use(new LocalStrategy({
         ];
     }).catch(NoUserError, function() {
       this.done = [false, {message: 'incorrect email'}];
+    }).catch(function(e) {
+      this.done = [false, {message: e}];
     }).then(function() {
       return this.done;
     }).nodeify(done, {spread: true});
@@ -75,9 +77,7 @@ passport.use('local-signup', new LocalStrategy({
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'user', 'email', email];
     query(q).bind({}).then(function(result) {
-      if (result.rows.length !== 0) {
-        throw new EmailTaken('email taken');
-      }
+      if (result.rows.length !== 0) { throw new EmailTaken('email taken'); }
       return genHash(password);
     }).then(function(pwhash) {
       const q2 = {};
@@ -95,6 +95,8 @@ passport.use('local-signup', new LocalStrategy({
       ];
     }).catch(EmailTaken, function() {
       this.done = [false, {message: 'email taken'}];
+    }).catch(function(e) {
+      this.done = [false, {message: e}];
     }).then(function() {
       return this.done;
     }).nodeify(done, {spread: true});
@@ -154,6 +156,8 @@ passport.use(new FacebookStrategy({
         {userID: this.userID, scope: {userID: this.userID}},
         {message: 'Auth successful'},
       ];
+    }).catch(function(e) {
+      this.done = [false, {message: e}];
     }).then(function() {
       return this.done;
     }).nodeify(done, {spread: true});

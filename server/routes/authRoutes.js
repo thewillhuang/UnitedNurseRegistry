@@ -14,12 +14,19 @@ module.exports = function authRoutes(app) {
     passport.authenticate('facebook')
   )
 
-  .get('/facebook/callback',
-    passport.authenticate('facebook', {
-      successRedirect: '/app',
+  .get('/facebook/callback', function* (next) {
+    const ctx = this;
+    yield passport.authenticate('facebook', {
+      // successRedirect: '/app',
       failureRedirect: '/',
-    })
-  )
+      session: false,
+    }, function* (err, user, info) {
+      if (err) throw err;
+      ctx.passport.user = user;
+      ctx.set({ Authorization: 'Bearer ' + jwt.encryptSign(user) });
+      ctx.body = info;
+    }).call(this, next);
+  })
 
   .post('/login', function*(next) {
     const ctx = this;
@@ -54,6 +61,7 @@ module.exports = function authRoutes(app) {
     this.remove('Authorization');
     this.passport.user = null;
     this.redirect('/');
+    console.log(this.isAuthenticated());
     this.body = {message: 'successfully logged out'};
   });
 

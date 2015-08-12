@@ -14,6 +14,7 @@ describe('authentication api', function() {
   const password2 = uuid.v4();
   const password = uuid.v4();
 
+  let jwt;
   it('should signup with /signup', function(done) {
     request.post('/api/auth/signup')
       .send({
@@ -22,8 +23,8 @@ describe('authentication api', function() {
       })
       .expect(200)
       .end(function(err, res) {
-        console.log(res.header);
-        console.log(res.body);
+        jwt = res.headers.authorization.split(' ').pop();
+        console.log(jwt);
         expect(res.body).to.be.an('object');
         expect(res.body).to.have.key('message');
         expect(res.headers.authorization).to.be.a('string');

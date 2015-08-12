@@ -67,11 +67,12 @@ app.use(function* bearerAuthentication(next) {
 
 // ensure all api calls are authenticated pass this middleware or redirected.
 app.use(function* ensureAuthenticated(next) {
-  console.log(this.isAuthenticated());
-  console.log(this.headers);
-  this.isAuthenticated() ?
-  yield next :
-  this.redirect('/login');
+  console.log('isAuthenticated', this.isAuthenticated());
+  if (this.isAuthenticated()) {
+    yield next;
+  } else {
+    this.redirect('/login');
+  }
 });
 
 // secured routes

@@ -24,11 +24,13 @@ module.exports = function authRoutes(app) {
       if (err) throw err;
       if (user === false) {
         ctx.status = 401;
+        yield next;
       } else {
+        ctx.status = 200;
         ctx.passport.user = user;
         const token = jwt.encryptSign(user);
         ctx.set({ Authorization: 'Bearer ' + token });
-        ctx.redirect('/app');
+        yield next;
       }
     }).call(this, next);
   })
@@ -40,11 +42,13 @@ module.exports = function authRoutes(app) {
       if (err) throw err;
       if (user === false) {
         ctx.status = 401;
+        yield next;
       } else {
+        ctx.status = 200;
         const token = jwt.encryptSign(user);
         ctx.passport.user = user;
         ctx.set({ Authorization: 'Bearer ' + token });
-        ctx.redirect('/app');
+        yield next;
       }
     }).call(this, next);
   })
@@ -56,11 +60,13 @@ module.exports = function authRoutes(app) {
       if (err) throw err;
       if (user === false) {
         ctx.status = 401;
+        yield next;
       } else {
+        ctx.status = 200;
         const token = jwt.encryptSign(user);
         ctx.passport.user = user;
         ctx.set({ Authorization: 'Bearer ' + token });
-        ctx.redirect('/app');
+        yield next;
       }
     }).call(this, next);
   })

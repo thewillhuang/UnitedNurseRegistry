@@ -14,19 +14,18 @@ describe('authentication api', function() {
   const password2 = uuid.v4();
   const password = uuid.v4();
 
-  let jwt;
   it('should signup with /signup', function(done) {
     request.post('/api/auth/signup')
       .send({
         password: password2,
         email: email2,
       })
-      .expect(302)
+      .expect(200)
       .end(function(err, res) {
-        jwt = res.headers.authorization.split(' ').pop();
-        console.log(jwt);
+        // console.log(res.headers.authorization.split(' ').pop());
+        // console.log(res.headers);
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
-        expect(res.headers.location).to.equal('/app');
         expect(res.headers.authorization).to.be.a('string');
         expect(res.headers.authorization).to.contain('Bearer');
         expect(err).to.be.a('null');
@@ -40,9 +39,12 @@ describe('authentication api', function() {
         password: password,
         email: email2,
       })
-      .expect(401)
+      .expect(302)
       .end(function(err, res) {
+        // console.log(res.headers);
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
+        expect(res.headers.location).to.be.equal('/login');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
         done();
@@ -55,10 +57,11 @@ describe('authentication api', function() {
         password: password2,
         email: email2,
       })
-      .expect(302)
+      .expect(200)
       .end(function(err, res) {
+        // console.log(res.headers);
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
-        expect(res.headers.location).to.equal('/app');
         expect(res.headers.authorization).to.be.a('string');
         expect(res.headers.authorization).to.contain('Bearer');
         expect(err).to.be.a('null');
@@ -72,9 +75,12 @@ describe('authentication api', function() {
         password: password,
         email: email,
       })
-      .expect(401)
+      .expect(302)
       .end(function(err, res) {
+        // console.log(res.headers);
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
+        expect(res.headers.location).to.be.equal('/login');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
         done();
@@ -87,9 +93,12 @@ describe('authentication api', function() {
         password: 'fldakjsfdlasfkj',
         email: email2,
       })
-      .expect(401)
+      .expect(302)
       .end(function(err, res) {
+        // console.log(res.headers);
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
+        expect(res.headers.location).to.be.equal('/login');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
         done();

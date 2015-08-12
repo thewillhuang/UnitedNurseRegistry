@@ -9,9 +9,11 @@ const uuid = require('node-uuid');
 
 
 describe('authentication api', function() {
+  const email = uuid.v4();
   const email2 = uuid.v4();
   const password2 = uuid.v4();
   const password = uuid.v4();
+
   it('should signup with /signup', function(done) {
     request.post('/api/auth/signup')
       .send({
@@ -69,7 +71,7 @@ describe('authentication api', function() {
     request.post('/api/auth/login')
       .send({
         password: password,
-        email: 'leeroyfdsalj23kjf',
+        email: email,
       })
       .expect(401)
       .end(function(err, res) {
@@ -103,6 +105,7 @@ describe('authentication api', function() {
     request.get('/api/auth/logout')
       .expect(302)
       .end(function(err, res) {
+        expect(res.headers.location).to.equal('/');
         expect(res.body).to.be.an('object');
         expect(res.body).to.have.key('message');
         expect(res.headers.authorization).to.be.undefined;

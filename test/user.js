@@ -8,9 +8,33 @@ const request = supertest(app.listen());
 const uuid = require('node-uuid');
 
 describe('user api', function() {
+  const email2 = uuid.v4();
+  const password2 = uuid.v4();
+  let jwt;
+  it('should signup with /signup', function(done) {
+    request.post('/api/auth/signup')
+      .send({
+        password: password2,
+        email: email2,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        jwt = { Authorization: res.headers.authorization };
+        // console.log(jwt);
+        // console.log(res.headers);
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.headers.authorization).to.be.a('string');
+        expect(res.headers.authorization).to.contain('Bearer');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
   it('should reject invalid get requests', function(done) {
     request.get('/api/users')
       .expect(404)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(err).to.be.a('null');
@@ -21,6 +45,7 @@ describe('user api', function() {
   it('should respond with empty array with unknown user', function(done) {
     request.get('/api/user/abc')
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
@@ -46,6 +71,7 @@ describe('user api', function() {
         email: email,
       })
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         r1 = res.body.rows;
         expect(r1).to.be.an('object');
@@ -63,6 +89,7 @@ describe('user api', function() {
         email: email,
       })
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.success).to.equal(true);
@@ -74,6 +101,7 @@ describe('user api', function() {
   it('should grab a user given a correct user id', function(done) {
     request.get('/api/user/' + r1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -87,6 +115,7 @@ describe('user api', function() {
   it('should return a 200 for the same data', function(done) {
     request.get('/api/user/' + r1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         // console.log(res);
         expect(res.body).to.be.an('object');
@@ -111,6 +140,7 @@ describe('user api', function() {
         email: updateinfo,
       })
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
@@ -121,6 +151,7 @@ describe('user api', function() {
   it('should get an updated user info', function(done) {
     request.get('/api/user/' + r1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body.rows[0].email).to.equal(updateinfo);
         expect(res.body).to.be.an('object');
@@ -135,6 +166,7 @@ describe('user api', function() {
   it('should delete a user given a correct user id', function(done) {
     request.delete('/api/user/' + r1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
@@ -145,6 +177,7 @@ describe('user api', function() {
   it('the deleted user should not exist', function(done) {
     request.get('/api/user/' + r1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;

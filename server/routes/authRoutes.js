@@ -21,7 +21,7 @@ module.exports = function authRoutes(app) {
       session: false,
     }, function* (err, user, info) {
       console.log(info);
-      if (err) throw err;
+      if (err) this.throw(err);
       if (user === false) {
         ctx.status = 401;
         yield next;
@@ -39,7 +39,7 @@ module.exports = function authRoutes(app) {
     const ctx = this;
     yield passport.authenticate('local', { session: false }, function*(err, user, info) {
       console.log(info);
-      if (err) throw err;
+      if (err) this.throw(err);
       if (user === false) {
         ctx.status = 401;
         yield next;
@@ -57,7 +57,7 @@ module.exports = function authRoutes(app) {
     const ctx = this;
     yield passport.authenticate('local-signup',  { session: false }, function*(err, user, info) {
       console.log(info);
-      if (err) throw err;
+      if (err) this.throw(err);
       if (user === false) {
         ctx.status = 401;
         yield next;

@@ -8,9 +8,33 @@ const request = supertest(app.listen());
 const uuid = require('node-uuid');
 
 describe('shift reviews api', function() {
+  const email2 = uuid.v4();
+  const password2 = uuid.v4();
+  let jwt;
+  it('should signup with /signup', function(done) {
+    request.post('/api/auth/signup')
+      .send({
+        password: password2,
+        email: email2,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        jwt = { Authorization: res.headers.authorization };
+        // console.log(jwt);
+        // console.log(res.headers);
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.headers.authorization).to.be.a('string');
+        expect(res.headers.authorization).to.contain('Bearer');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
   it('should reject invalid get requests', function(done) {
     request.get('/api/shiftReview')
       .expect(404)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(err).to.be.a('null');
@@ -21,6 +45,7 @@ describe('shift reviews api', function() {
   it('should respond with empty array with unknown shift', function(done) {
     request.get('/api/shiftReview/user/abc/shift/313')
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
@@ -34,6 +59,7 @@ describe('shift reviews api', function() {
   it('should respond with empty array with unknown shift', function(done) {
     request.get('/api/shiftReview/facility/abc/shift/313')
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
@@ -57,6 +83,7 @@ describe('shift reviews api', function() {
         email: uuid.v4(),
       })
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         u1 = res.body.rows;
         expect(u1).to.be.an('object');
@@ -76,6 +103,7 @@ describe('shift reviews api', function() {
         facilityEMR: uuid.v4(),
       })
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         f1 = res.body.rows;
         expect(f1).to.be.an('object');
@@ -91,6 +119,7 @@ describe('shift reviews api', function() {
         specialty: 'icu',
       })
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res).to.be.an('object');
         expect(res.body.rows.insertId).to.be.an('number');
@@ -103,6 +132,7 @@ describe('shift reviews api', function() {
   it('should have 1 specialty given a user id', function(done) {
     request.get('/api/userspecialty/user/' + u1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         sp1 = res.body.rows[0].specialtyID;
         expect(res.body).to.be.an('object');
@@ -127,6 +157,7 @@ describe('shift reviews api', function() {
         facilityID: f1.insertId,
       })
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         s1 = res.body.rows;
         expect(s1).to.be.an('object');
@@ -140,6 +171,7 @@ describe('shift reviews api', function() {
   it('should update shift status to pending', function(done) {
     request.post('/api/shiftstatus/pending/shift/' + s1.insertId + '/user/' + u1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -153,6 +185,7 @@ describe('shift reviews api', function() {
   it('should update shift status to completed', function(done) {
     request.post('/api/shiftstatus/completed/shift/' + s1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
@@ -167,10 +200,11 @@ describe('shift reviews api', function() {
   // user review tests
   it('should post a user review of 5', function(done) {
     request.post('/api/shiftreview/user/' + u1.insertId + '/shift/' + s1.insertId)
-      .expect(200)
       .send({
         review: 5,
       })
+      .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -184,6 +218,7 @@ describe('shift reviews api', function() {
   it('should get a user review of the same user back and it review should have a rating of 5', function(done) {
     request.get('/api/shiftreview/user/' + u1.insertId + '/shift/' + s1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -196,10 +231,11 @@ describe('shift reviews api', function() {
 
   it('should update a user review to 4', function(done) {
     request.put('/api/shiftreview/user/' + u1.insertId + '/shift/' + s1.insertId)
-      .expect(200)
       .send({
         review: 4,
       })
+      .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -213,6 +249,7 @@ describe('shift reviews api', function() {
   it('should get an updated user review of the same user back and it review should have a rating of 4', function(done) {
     request.get('/api/shiftreview/user/' + u1.insertId + '/shift/' + s1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -235,6 +272,7 @@ describe('shift reviews api', function() {
         facilityID: f1.insertId,
       })
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         s2 = res.body.rows;
         expect(s1).to.be.an('object');
@@ -247,10 +285,11 @@ describe('shift reviews api', function() {
 
   it('should post a user review of 1', function(done) {
     request.post('/api/shiftreview/user/' + u1.insertId + '/shift/' + s2.insertId)
-      .expect(200)
       .send({
         review: 1,
       })
+      .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -264,6 +303,7 @@ describe('shift reviews api', function() {
   it('should get a user review of the same user back and it review should have a rating of 1', function(done) {
     request.get('/api/shiftreview/user/' + u1.insertId + '/shift/' + s2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -277,6 +317,7 @@ describe('shift reviews api', function() {
   it('should get an user average review of 2.5, rating 1 and rating updated (4)', function(done) {
     request.get('/api/shiftreview/avg/user/' + u1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -291,10 +332,11 @@ describe('shift reviews api', function() {
 
   it('should post a facility review of 5', function(done) {
     request.post('/api/shiftreview/facility/' + f1.insertId + '/shift/' + s1.insertId)
-      .expect(200)
       .send({
         review: 1,
       })
+      .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -308,6 +350,7 @@ describe('shift reviews api', function() {
   it('should get a facility review back and it review should have a rating of 1', function(done) {
     request.get('/api/shiftreview/facility/' + f1.insertId + '/shift/' + s1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -320,10 +363,11 @@ describe('shift reviews api', function() {
 
   it('should update a user review to 5', function(done) {
     request.put('/api/shiftreview/facility/' + f1.insertId + '/shift/' + s1.insertId)
-      .expect(200)
       .send({
         review: 5,
       })
+      .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -337,6 +381,7 @@ describe('shift reviews api', function() {
   it('should get an updated facility review back and it review should have a rating of 4', function(done) {
     request.get('/api/shiftreview/facility/' + f1.insertId + '/shift/' + s1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
@@ -350,10 +395,11 @@ describe('shift reviews api', function() {
 
   it('should post a facility review of 1', function(done) {
     request.post('/api/shiftreview/facility/' + f1.insertId + '/shift/' + s2.insertId)
-      .expect(200)
       .send({
         review: 1,
       })
+      .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -367,6 +413,7 @@ describe('shift reviews api', function() {
   it('should get a facility review back and it review should have a rating of 1', function(done) {
     request.get('/api/shiftreview/facility/' + f1.insertId + '/shift/' + s2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -380,6 +427,7 @@ describe('shift reviews api', function() {
   it('should get an user average review of 3, rating 1 and rating updated (5)', function(done) {
     request.get('/api/shiftreview/avg/facility/' + f1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -393,6 +441,7 @@ describe('shift reviews api', function() {
   it('should delete a user review 1 given the correct parameters', function(done) {
     request.delete('/api/shiftreview/user/' + u1.insertId + '/shift/' + s1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
@@ -407,6 +456,7 @@ describe('shift reviews api', function() {
   it('should delete a user review 2 given the correct parameters', function(done) {
     request.delete('/api/shiftreview/user/' + u1.insertId + '/shift/' + s2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
@@ -421,6 +471,7 @@ describe('shift reviews api', function() {
   it('should delete shift 1 given a correct shift id', function(done) {
     request.delete('/api/shift/' + s1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
@@ -431,6 +482,7 @@ describe('shift reviews api', function() {
   it('should delete shift 2 given a correct shift id', function(done) {
     request.delete('/api/shift/' + s2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
@@ -441,6 +493,7 @@ describe('shift reviews api', function() {
   it('the deleted shift 1 should not exist', function(done) {
     request.get('/api/shift/' + s1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
@@ -454,6 +507,7 @@ describe('shift reviews api', function() {
   it('the deleted shift 2 should not exist', function(done) {
     request.get('/api/shift/' + s2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
@@ -467,6 +521,7 @@ describe('shift reviews api', function() {
   it('should delete facility 1 given a correct facility id', function(done) {
     request.delete('/api/facility/' + f1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         // console.log(res.body);
         expect(res.body.rows.affectedRows).to.equal(1);
@@ -478,6 +533,7 @@ describe('shift reviews api', function() {
   it('the deleted facility should not exist', function(done) {
     request.get('/api/facility/' + f1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
@@ -491,6 +547,7 @@ describe('shift reviews api', function() {
   it('should delete a user given a correct user id', function(done) {
     request.delete('/api/user/' + u1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
@@ -501,6 +558,7 @@ describe('shift reviews api', function() {
   it('the deleted user should not exist', function(done) {
     request.get('/api/user/' + u1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
@@ -514,6 +572,7 @@ describe('shift reviews api', function() {
   it('the deleted user review 1 should not exist', function(done) {
     request.get('/api/shiftreview/user/' + u1.insertId + '/shift/' + s1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
@@ -527,6 +586,7 @@ describe('shift reviews api', function() {
   it('the deleted user review 2 should not exist', function(done) {
     request.get('/api/shiftreview/user/' + u1.insertId + '/shift/' + s2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
@@ -540,6 +600,7 @@ describe('shift reviews api', function() {
   it('the deleted facility review 1 by cascading foreign key should not exist', function(done) {
     request.get('/api/shiftreview/facility/' + f1.insertId + '/shift/' + s1.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
@@ -553,6 +614,7 @@ describe('shift reviews api', function() {
   it('the deleted facility review 2 cascading foreign key should not exist', function(done) {
     request.get('/api/shiftreview/facility/' + f1.insertId + '/shift/' + s2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;

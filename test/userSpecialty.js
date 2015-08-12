@@ -1,19 +1,41 @@
 'use strict';
 
-var chai = require('chai');
-var expect = chai.expect;
-var chaiAsPromised = require('chai-as-promised');
-var supertest = require('supertest');
-var app = require('../server');
-var request = supertest(app.listen());
-var uuid = require('node-uuid');
+const chai = require('chai');
+const expect = chai.expect;
+const supertest = require('supertest');
+const app = require('../server');
+const request = supertest(app.listen());
+const uuid = require('node-uuid');
 
 
 describe('user specialty api', function() {
+  const email2 = uuid.v4();
+  const password2 = uuid.v4();
+  let jwt;
+  it('should signup with /signup', function(done) {
+    request.post('/api/auth/signup')
+      .send({
+        password: password2,
+        email: email2,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        jwt = { Authorization: res.headers.authorization };
+        // console.log(jwt);
+        // console.log(res.headers);
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.headers.authorization).to.be.a('string');
+        expect(res.headers.authorization).to.contain('Bearer');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
 
   it('should reject invalid get requests', function(done) {
     request.get('/api/userspecialty/user/')
       .expect(404)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(err).to.be.a('null');
@@ -24,6 +46,7 @@ describe('user specialty api', function() {
   it('should respond with empty array with unknown user', function(done) {
     request.get('/api/userspecialty/user/abc')
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.an('array');
@@ -33,7 +56,7 @@ describe('user specialty api', function() {
       });
   });
 
-  var r2;
+  let r2;
   it('should create a user', function(done) {
     request.post('/api/user')
       .send({
@@ -43,9 +66,10 @@ describe('user specialty api', function() {
         userGeoHash: 27898503349316,
         userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
         dob: '1986-04-08',
-        email: uuid.v4()
+        email: uuid.v4(),
       })
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         r2 = res.body.rows;
         expect(r2).to.be.an('object');
@@ -58,9 +82,10 @@ describe('user specialty api', function() {
   it('insert specialty 1 given a user id', function(done) {
     request.post('/api/userspecialty/user/' + r2.insertId)
       .send({
-        specialty: 'icu'
+        specialty: 'icu',
       })
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         // console.log(res.body);
         expect(res).to.be.an('object');
@@ -73,9 +98,10 @@ describe('user specialty api', function() {
   it('insert specialty 2 given a user id', function(done) {
     request.post('/api/userspecialty/user/' + r2.insertId)
       .send({
-        specialty: 'med surg'
+        specialty: 'med surg',
       })
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res).to.be.an('object');
         expect(res.body.rows.insertId).to.be.an('number');
@@ -84,10 +110,11 @@ describe('user specialty api', function() {
       });
   });
 
-  var a1;
+  let a1;
   it('should have 2 specialty given a user id', function(done) {
     request.get('/api/userspecialty/user/' + r2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         // console.log(res.body.rows);
         a1 = res.body.rows[0].specialtyID;
@@ -104,6 +131,7 @@ describe('user specialty api', function() {
   it('should 200 given same id', function(done) {
     request.get('/api/userspecialty/user/' + r2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         // console.log(res.body.rows);
         a1 = res.body.rows[0].specialtyID;
@@ -120,6 +148,7 @@ describe('user specialty api', function() {
   it('should delete an user specialty given an specialty ID', function(done) {
     request.delete('/api/userspecialty/user/' + r2.insertId + '/specialty/' + a1)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
@@ -127,10 +156,11 @@ describe('user specialty api', function() {
       });
   });
 
-  var a2;
+  let a2;
   it('should have 1 specialty instead of 2', function(done) {
     request.get('/api/userspecialty/user/' + r2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         a2 = res.body.rows[0].specialtyID;
         expect(res.body).to.be.an('object');
@@ -146,6 +176,7 @@ describe('user specialty api', function() {
   it('should update a specialty given an specialty id', function(done) {
     request.put('/api/userspecialty/user/' + r2.insertId + '/old/' + a1 + '/new/' + a2)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
@@ -159,6 +190,7 @@ describe('user specialty api', function() {
   it('should have an updated specialty', function(done) {
     request.get('/api/userspecialty/user/' + r2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -174,6 +206,7 @@ describe('user specialty api', function() {
   it('should delete user specialty 1 given an specialty ID', function(done) {
     request.delete('/api/userspecialty/user/' + r2.insertId + '/specialty/' + a2)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
@@ -184,6 +217,7 @@ describe('user specialty api', function() {
   it('should have 0 phone number instead of 1', function(done) {
     request.get('/api/userspecialty/user/' + r2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
@@ -199,6 +233,7 @@ describe('user specialty api', function() {
   it('should delete a user given a correct user id', function(done) {
     request.delete('/api/user/' + r2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
@@ -209,6 +244,7 @@ describe('user specialty api', function() {
   it('the deleted user should not exist', function(done) {
     request.get('/api/user/' + r2.insertId)
       .expect(200)
+      .set(jwt)
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
@@ -218,5 +254,4 @@ describe('user specialty api', function() {
         done();
       });
   });
-
 });

@@ -61,6 +61,7 @@ app.use(function* bearerAuthentication(next) {
     if (err) {throw new Error(err); }
     if (user) {
       ctx.passport.user = user;
+      ctx.set({Authorization: ctx.headers.authorization});
     }
     yield next;
   }).call(this, next);
@@ -68,7 +69,6 @@ app.use(function* bearerAuthentication(next) {
 
 // ensure all api calls are authenticated pass this middleware or redirected.
 app.use(function* ensureAuthenticated(next) {
-  console.log('isAuthenticated', this.isAuthenticated());
   if (this.isAuthenticated()) {
     yield next;
   } else {

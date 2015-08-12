@@ -1,9 +1,9 @@
 'use strict';
 const tokenize = module.exports = {};
 const jwt = require('jsonwebtoken');
-const fs = require('fs');
-const cert = fs.readFileSync('./jwt-key.pem');
 const crypto = require('./crypto');
+const cryptos = require('crypto');
+const cert = cryptos.randomBytes(32);
 const options = {
   algorithm: 'HS256',
   expiresInMinutes: 7 * 24 * 60,

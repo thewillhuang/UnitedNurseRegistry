@@ -1,13 +1,13 @@
 'use strict';
+
 const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
+const BearerStrategy = require('passport-http-bearer').Strategy;
 const query = require('./query');
 const validatePw = require('./validatePassword');
 const genHash = require('./genHash');
 const jwt = require('./jwt');
-// const pool = require('./pool');
-
 
 // custom error functions
 function NoUserError(message) {
@@ -27,36 +27,37 @@ EmailTaken.prototype = Object.create(Error.prototype);
 EmailTaken.prototype.constructor = EmailTaken;
 
 // passport serialization / deserialization
-passport.serializeUser(function(user, done) {
-  done(null, jwt.encryptSign(user));
-});
-
-passport.deserializeUser(function(token, done) {
-  done(null, jwt.verifyDecrypt(token));
-});
+// passport.serializeUser(function(user, done) {
+//   done(null, jwt.encryptSign(user));
+// });
+//
+// passport.deserializeUser(function(token, done) {
+//   done(null, jwt.verifyDecrypt(token));
+// });
 
 // local strategy
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
   passReqToCallback: true,
+  session: false,
 },
   function(req, email, password, done) {
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'user', 'email', email];
     query(q).bind({}).then(function(result) {
-      console.log('result from query', result);
+      // console.log('result from query', result);
       if (result.rows.length === 0) { throw new NoUserError('no such user found'); }
       return validatePw(password, result.rows[0].userPwHash);
     }).then(function(isMatch) {
-      console.log('isMatch', isMatch);
+      // console.log('isMatch', isMatch);
       return !isMatch ?
         this.done = [false, {message: 'incorrect password'}] :
         this.done = [{email: email}, {message: 'Auth Success'}];
     }).catch(NoUserError, function(error) {
-      console.log('custom error', error);
       this.done = [false, {message: 'incorrect email'}];
+      return error;
     }).then(function() {
       return this.done;
     }).nodeify(done, {spread: true});
@@ -68,6 +69,7 @@ passport.use('local-signup', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
   passReqToCallback: true,
+  session: false,
 },
   function(req, email, password, done) {
     const q = {};
@@ -79,7 +81,7 @@ passport.use('local-signup', new LocalStrategy({
       }
       return genHash(password);
     }).then(function(pwhash) {
-      console.log('pwhash', pwhash);
+      // console.log('pwhash', pwhash);
       const q2 = {};
       const userData = {};
       userData.email = email;
@@ -87,14 +89,21 @@ passport.use('local-signup', new LocalStrategy({
       q2.sql = 'INSERT INTO ?? SET ?';
       q2.values = ['user', userData];
       return query(q2);
-    }).then(function(result) {
-      console.log('local-signup insert result', result);
+    }).then(function() {
       this.done = [{email: email}, {message: 'Registeration successful'}];
     }).catch(EmailTaken, function() {
       this.done = [false, {message: 'email taken'}];
     }).then(function() {
       return this.done;
     }).nodeify(done, {spread: true});
+  }
+));
+
+// bearer strategy
+
+passport.use(new BearerStrategy(
+  function(token, done) {
+    done(null, jwt.verifyDecrypt(token));
   }
 ));
 
@@ -107,6 +116,7 @@ passport.use(new FacebookStrategy({
   clientSecret: 'ec4d29399a523f123cf079c3d66e29c6',
   callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/api/auth/facebook/callback',
   passReqToCallback: true,
+  session: false,
 },
   function(req, token, refreshToken, profile, done) {
     console.log('req', req);
@@ -117,27 +127,3 @@ passport.use(new FacebookStrategy({
     done(null, user);
   }
 ));
-
-// const TwitterStrategy = require('passport-twitter').Strategy
-// passport.use(new TwitterStrategy({
-//     consumerKey: 'your-consumer-key',
-//     consumerSecret: 'your-secret',
-//     callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/auth/twitter/callback'
-//   },
-//   function(token, tokenSecret, profile, done) {
-//     // retrieve user ...
-//     done(null, user)
-//   }
-// ))
-
-// const GoogleStrategy = require('passport-google-auth').Strategy
-// passport.use(new GoogleStrategy({
-//     clientId: 'your-client-id',
-//     clientSecret: 'your-secret',
-//     callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/auth/google/callback'
-//   },
-//   function(token, tokenSecret, profile, done) {
-//     // retrieve user ...
-//     done(null, user)
-//   }
-// ))

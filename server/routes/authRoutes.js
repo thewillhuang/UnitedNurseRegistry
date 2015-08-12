@@ -5,6 +5,7 @@ const auth = new Router({
   prefix: '/api/auth',
 });
 const passport = require('koa-passport');
+const jwt = require('../services/jwt');
 
 module.exports = function authRoutes(app) {
   auth
@@ -20,58 +21,50 @@ module.exports = function authRoutes(app) {
     })
   )
 
-  .post('/', function*(next) {
+  .post('/login', function*(next) {
     const ctx = this;
-    yield passport.authenticate('local', function*(err, user, info) {
+    yield passport.authenticate('local', { session: false }, function*(err, user, info) {
       console.log('err', err, 'user', user, 'info', info);
       if (err) throw err;
       if (user === false) {
         ctx.status = 401;
-        ctx.body = { success: false };
       } else {
-        yield ctx.login(user);
-        ctx.body = { success: true };
+        // yield ctx.login(user);
+        ctx.passport.user = user;
+        ctx.set({
+          Authorization: 'Bearer ' + jwt.encryptSign(user),
+        });
       }
+      ctx.body = info;
     }).call(this, next);
     console.log('this', this);
-    console.log('session', this.session);
+    console.log('this.isAuthenticated', this.isAuthenticated());
+    console.log('this.passport', this.passport);
   })
 
-  .post('/signup2', function*(next) {
+  .post('/signup', function*(next) {
     const ctx = this;
-    yield passport.authenticate('local-signup', function*(err, user, info) {
+    yield passport.authenticate('local-signup',  { session: false }, function*(err, user, info) {
       console.log('err', err, 'user', user, 'info', info);
       if (err) throw err;
       if (user === false) {
         ctx.status = 401;
-        ctx.body = { success: false };
       } else {
-        yield ctx.login(user);
-        ctx.body = { success: true };
+        ctx.passport.user = user;
+        ctx.set({
+          Authorization: 'Bearer ' + jwt.encryptSign(user),
+        });
       }
+      ctx.body = info;
     }).call(this, next);
     console.log('this', this);
-    console.log('session', this.session);
+    console.log('this.isAuthenticated', this.isAuthenticated());
+    console.log('this.passport', this.passport);
   })
-
-  .post('/login/',
-    passport.authenticate('local', {
-      successRedirect: '/app',
-      failureRedirect: '/',
-      // failureFlash: true,
-    })
-  )
-
-  .post('/signup/',
-    passport.authenticate('local-signup', {
-      successRedirect: '/app',
-      failureRedirect: '/',
-      // failureFlash: true,
-    })
-  )
 
   .get('/logout', function*() {
-    this.logout();
+    this.remove('Authorization');
+    this.passport.user = null;
     this.redirect('/');
   });
 

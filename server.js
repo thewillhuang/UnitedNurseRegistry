@@ -12,7 +12,7 @@ const bodyParser = require('koa-bodyparser');
 const conditional = require('koa-conditional-get');
 const helmet = require('koa-helmet');
 const passport = require('koa-passport');
-const session = require('koa-session');
+// const session = require('koa-session');
 
 // logging
 app.use(logger());
@@ -42,26 +42,36 @@ app.use(function* staticServer(next) {
 });
 
 // set unsigned cookies as we are using a signed and encrypted jwt
-app.use(session({ signed: false }, app));
+// app.use(session({ signed: false }, app));
 
 app.use(bodyParser());
 
 // initialize passport
 require('./server/services/auth');
 app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.session());
 
 // unprotected routes
 require('./server/routes/authRoutes')(app);
 
 // authorize routes that uses bearer tokens
+app.use(function* bearerAuthentication(next) {
+  const ctx = this;
+  yield passport.authenticate('bearer', { session: false }, function* (err, user) {
+    console.log(err, user);
+    if (err) {throw new Error(err); }
+    user ?
+    ctx.passport.user = user :
+    yield next;
+  }).call(this, next);
+});
 
 // // is authed checker that ensures no unauthroized request can make it pass to secured routes
-// app.use(function*(next) {
-//   this.isAuthenticated() ?
-//   yield next :
-//   this.redirect('/');
-// });
+app.use(function*(next) {
+  this.isAuthenticated() ?
+  yield next :
+  this.redirect('/');
+});
 
 // secured routes
 require('./server/routes/userRoutes')(app);

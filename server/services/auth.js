@@ -103,7 +103,7 @@ passport.use('local-signup', new LocalStrategy({
 
 passport.use(new BearerStrategy(
   function(token, done) {
-    done(null, jwt.verifyDecrypt(token));
+    jwt.verifyDecrypt(token, done);
   }
 ));
 

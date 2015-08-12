@@ -6,7 +6,7 @@ const cryptos = require('crypto');
 const cert = cryptos.randomBytes(32);
 const options = {
   algorithm: 'HS256',
-  expiresInMinutes: 7 * 24 * 60,
+  expiresInMinutes: 10,
   audience: 'unr clients',
   issuer: 'unr api',
 };
@@ -18,18 +18,20 @@ tokenize.encryptSign = function(payload) {
 };
 
 // returns a json from a token
-tokenize.verifyDecrypt = function(token) {
-  const decoded = jwt.verify(token, cert, options);
-  return JSON.parse(crypto.decrypt(decoded.payload, decoded.iv));
+tokenize.verifyDecrypt = function(token, done) {
+  jwt.verify(token, cert, options, function(err, decoded) {
+    done(err, JSON.parse(crypto.decrypt(decoded.payload, decoded.iv)));
+  });
 };
 
-// // some testing for speed
+// some testing for speed
 // console.time('encode');
 // const webtoken = tokenize.encryptSign({email: 'leeroy_jenkins231'});
 // console.timeEnd('encode');
 // console.log('jwt', webtoken);
 //
 // console.time('decode');
-// const decodedjwt = tokenize.verifyDecrypt(webtoken);
-// console.timeEnd('decode');
-// console.log(decodedjwt);
+// tokenize.verifyDecrypt(webtoken, function(err, user) {
+//   console.timeEnd('decode');
+//   console.log(err, user);
+// });

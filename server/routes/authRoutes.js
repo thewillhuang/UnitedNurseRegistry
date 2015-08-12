@@ -24,48 +24,37 @@ module.exports = function authRoutes(app) {
   .post('/login', function*(next) {
     const ctx = this;
     yield passport.authenticate('local', { session: false }, function*(err, user, info) {
-      console.log('err', err, 'user', user, 'info', info);
       if (err) throw err;
       if (user === false) {
         ctx.status = 401;
       } else {
         // yield ctx.login(user);
         ctx.passport.user = user;
-        ctx.set({
-          Authorization: 'Bearer ' + jwt.encryptSign(user),
-        });
+        ctx.set({ Authorization: 'Bearer ' + jwt.encryptSign(user) });
       }
       ctx.body = info;
     }).call(this, next);
-    console.log('this', this);
-    console.log('this.isAuthenticated', this.isAuthenticated());
-    console.log('this.passport', this.passport);
   })
 
   .post('/signup', function*(next) {
     const ctx = this;
     yield passport.authenticate('local-signup',  { session: false }, function*(err, user, info) {
-      console.log('err', err, 'user', user, 'info', info);
       if (err) throw err;
       if (user === false) {
         ctx.status = 401;
       } else {
         ctx.passport.user = user;
-        ctx.set({
-          Authorization: 'Bearer ' + jwt.encryptSign(user),
-        });
+        ctx.set({ Authorization: 'Bearer ' + jwt.encryptSign(user) });
       }
       ctx.body = info;
     }).call(this, next);
-    console.log('this', this);
-    console.log('this.isAuthenticated', this.isAuthenticated());
-    console.log('this.passport', this.passport);
   })
 
   .get('/logout', function*() {
     this.remove('Authorization');
     this.passport.user = null;
     this.redirect('/');
+    this.body = {message: 'successfully logged out'};
   });
 
   app.use(auth.routes())

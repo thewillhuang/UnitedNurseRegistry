@@ -59,8 +59,9 @@ app.use(function* bearerAuthentication(next) {
   const ctx = this;
   yield passport.authenticate('bearer', { session: false }, function* (err, user) {
     if (err) {throw new Error(err); }
-    user ?
-    ctx.passport.user = user :
+    if (user) {
+      ctx.passport.user = user;
+    }
     yield next;
   }).call(this, next);
 });

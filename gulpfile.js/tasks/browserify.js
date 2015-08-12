@@ -1,22 +1,22 @@
 'use strict';
 
-var watchify = require('watchify');
-var browserify = require('browserify');
-var gulp = require('gulp');
-var buffer = require('vinyl-buffer');
-var gutil = require('gulp-util');
-var _ = require('lodash');
-var assign = _.assign;
-var concat = require('concat-stream');
-var file = require('gulp-file');
-var size = require('gulp-size');
-var config = require('../config/config').browserify;
-var dest = config.dest;
-var path = require('path');
-var browserSync = require('browser-sync');
-var sourcemaps = require('gulp-sourcemaps');
+const watchify = require('watchify');
+const browserify = require('browserify');
+const gulp = require('gulp');
+const buffer = require('vinyl-buffer');
+const gutil = require('gulp-util');
+const _ = require('lodash');
+const assign = _.assign;
+const concat = require('concat-stream');
+const file = require('gulp-file');
+const size = require('gulp-size');
+const config = require('../config/config').browserify;
+const dest = config.dest;
+const path = require('path');
+const browserSync = require('browser-sync');
+const sourcemaps = require('gulp-sourcemaps');
 
-var write = function(filepath) {
+const write = function(filepath) {
   return concat(function(content) {
     // create new vinyl file from content and use the basename of the
     // filepath in scope as its basename.
@@ -31,20 +31,20 @@ var write = function(filepath) {
   });
 };
 
-var browserifyTask = function(devMode) {
+const browserifyTask = function(devMode) {
   // add custom browserify options here
-  var e = config.bundleConfigs.map(function(value) { return value.entries; });
-  var customOpts = { entries: e, debug: true };
-  var opts = assign({}, watchify.args, customOpts);
+  const e = config.bundleConfigs.map(function(value) { return value.entries; });
+  const customOpts = { entries: e, debug: true };
+  const opts = assign({}, watchify.args, customOpts);
 
-  var b;
+  let b;
   if (devMode) {
     b = watchify(browserify(opts));
   } else {
     b = browserify(customOpts);
   }
 
-  var bundle = function() {
+  const bundle = function() {
     return b.bundle()
       .pipe(write('common.js'));
   };
@@ -60,7 +60,6 @@ var browserifyTask = function(devMode) {
   b.plugin('factor-bundle');
 
   return bundle();
-
 };
 
 gulp.task('browserify', ['clean', 'copy'], function() {

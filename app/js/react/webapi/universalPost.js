@@ -4,6 +4,9 @@ const NOT_PROVIDED = 'A required value was not provided:';
 const GET = 'get';
 const $ = require('jquery');
 
+
+// console.log('test');
+
 let _que = [];
 let processing = false;
 //all ajax gets routed here.

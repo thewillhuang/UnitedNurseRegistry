@@ -6,7 +6,7 @@ const cryptos = require('crypto');
 const cert = cryptos.randomBytes(32);
 const options = {
   algorithm: 'HS256',
-  expiresInMinutes: 10,
+  expiresInMinutes: 60 * 24 * 7,
   audience: 'unr clients',
   issuer: 'unr api',
 };

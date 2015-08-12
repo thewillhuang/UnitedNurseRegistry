@@ -51,14 +51,13 @@ require('./server/services/auth');
 app.use(passport.initialize());
 // app.use(passport.session());
 
-// unprotected routes
+// auth routes to obtain bearer tokens for different strategies
 require('./server/routes/authRoutes')(app);
 
 // authorize routes that uses bearer tokens
 app.use(function* bearerAuthentication(next) {
   const ctx = this;
   yield passport.authenticate('bearer', { session: false }, function* (err, user) {
-    console.log(err, user);
     if (err) {throw new Error(err); }
     user ?
     ctx.passport.user = user :
@@ -66,8 +65,8 @@ app.use(function* bearerAuthentication(next) {
   }).call(this, next);
 });
 
-// // is authed checker that ensures no unauthroized request can make it pass to secured routes
-app.use(function*(next) {
+// ensure all api calls are authenticated pass this middleware
+app.use(function* ensureAuthenticated(next) {
   this.isAuthenticated() ?
   yield next :
   this.redirect('/');

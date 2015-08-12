@@ -43,17 +43,21 @@ passport.use(new LocalStrategy({
 },
   function(email, password, done) {
     const q = {};
-    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    q.values = ['userPwHash', 'user', 'email', email];
+    q.sql = 'SELECT ?? ?? FROM ?? WHERE ?? = ?';
+    q.values = ['userPwHash', 'userID', 'user', 'email', email];
     query(q).bind({}).then(function(result) {
       // console.log('result from query', result);
       if (result.rows.length === 0) { throw new NoUserError('no such user found'); }
+      this.userID = userID;
       return validatePw(password, result.rows[0].userPwHash);
     }).then(function(isMatch) {
       // console.log('isMatch', isMatch);
       return !isMatch ?
         this.done = [false, {message: 'incorrect password'}] :
-        this.done = [{email: email}, {message: 'Auth Success'}];
+        this.done = [
+          {email: email, scope: [{userID: this.userID}]},
+          {message: 'Auth Success'},
+        ];
     }).catch(NoUserError, function() {
       this.done = [false, {message: 'incorrect email'}];
     }).then(function() {
@@ -70,12 +74,13 @@ passport.use('local-signup', new LocalStrategy({
 },
   function(email, password, done) {
     const q = {};
-    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    q.values = ['userPwHash', 'user', 'email', email];
+    q.sql = 'SELECT ?? ?? FROM ?? WHERE ?? = ?';
+    q.values = ['userPwHash', 'userID', 'user', 'email', email];
     query(q).bind({}).then(function(result) {
       if (result.rows.length !== 0) {
         throw new EmailTaken('email taken');
       }
+      this.userID = userID;
       return genHash(password);
     }).then(function(pwhash) {
       // console.log('pwhash', pwhash);
@@ -87,7 +92,10 @@ passport.use('local-signup', new LocalStrategy({
       q2.values = ['user', userData];
       return query(q2);
     }).then(function() {
-      this.done = [{email: email}, {message: 'Registeration successful'}];
+      this.done = [
+        {email: email, scope: [{userID: this.userID}]},
+        {message: 'Registeration successful'},
+      ];
     }).catch(EmailTaken, function() {
       this.done = [false, {message: 'email taken'}];
     }).then(function() {

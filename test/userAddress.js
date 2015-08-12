@@ -1,14 +1,13 @@
 'use strict';
 
-var chai = require('chai');
-var expect = chai.expect;
-var supertest = require('supertest');
-var app = require('../server');
-var request = supertest(app.listen());
-var uuid = require('node-uuid');
+const chai = require('chai');
+const expect = chai.expect;
+const supertest = require('supertest');
+const app = require('../server');
+const request = supertest(app.listen());
+const uuid = require('node-uuid');
 
 describe('user address api', function() {
-
   it('should reject invalid get requests', function(done) {
     request.get('/api/useraddress/user/')
       .expect(404)
@@ -31,7 +30,7 @@ describe('user address api', function() {
       });
   });
 
-  var r2;
+  let r2;
   it('should create a user', function(done) {
     request.post('/api/user')
       .send({
@@ -41,7 +40,7 @@ describe('user address api', function() {
         userGeoHash: 27898503349316,
         userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
         dob: '1986-04-08',
-        email: uuid.v4()
+        email: uuid.v4(),
       })
       .expect(200)
       .end(function(err, res) {
@@ -59,7 +58,7 @@ describe('user address api', function() {
         address: '2950 arboridge ct.',
         city: 'fullerton',
         state: 'ca',
-        zip: '92835'
+        zip: '92835',
       })
       .expect(200)
       .end(function(err, res) {
@@ -76,7 +75,7 @@ describe('user address api', function() {
         address: '2952 arboridge ct.',
         city: 'fullerton',
         state: 'ca',
-        zip: '92835'
+        zip: '92835',
       })
       .expect(200)
       .end(function(err, res) {
@@ -88,7 +87,7 @@ describe('user address api', function() {
       });
   });
 
-  var a1;
+  let a1;
   it('should have 2 address given a user id', function(done) {
     request.get('/api/useraddress/user/' + r2.insertId)
       .expect(200)
@@ -132,7 +131,7 @@ describe('user address api', function() {
       });
   });
 
-  var a2;
+  let a2;
   it('should have 1 address instead of 2', function(done) {
     request.get('/api/useraddress/user/' + r2.insertId)
       .expect(200)
@@ -155,7 +154,7 @@ describe('user address api', function() {
         address: '2952 arboridge ct.',
         city: 'irvine',
         state: 'ca',
-        zip: '92835'
+        zip: '92835',
       })
       .expect(200)
       .end(function(err, res) {
@@ -230,5 +229,4 @@ describe('user address api', function() {
         done();
       });
   });
-
 });

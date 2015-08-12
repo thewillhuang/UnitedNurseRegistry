@@ -39,10 +39,9 @@ EmailTaken.prototype.constructor = EmailTaken;
 passport.use(new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
-  passReqToCallback: true,
   session: false,
 },
-  function(req, email, password, done) {
+  function(email, password, done) {
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'user', 'email', email];
@@ -55,9 +54,8 @@ passport.use(new LocalStrategy({
       return !isMatch ?
         this.done = [false, {message: 'incorrect password'}] :
         this.done = [{email: email}, {message: 'Auth Success'}];
-    }).catch(NoUserError, function(error) {
+    }).catch(NoUserError, function() {
       this.done = [false, {message: 'incorrect email'}];
-      return error;
     }).then(function() {
       return this.done;
     }).nodeify(done, {spread: true});
@@ -68,10 +66,9 @@ passport.use(new LocalStrategy({
 passport.use('local-signup', new LocalStrategy({
   usernameField: 'email',
   passwordField: 'password',
-  passReqToCallback: true,
   session: false,
 },
-  function(req, email, password, done) {
+  function(email, password, done) {
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'user', 'email', email];
@@ -100,7 +97,6 @@ passport.use('local-signup', new LocalStrategy({
 ));
 
 // bearer strategy
-
 passport.use(new BearerStrategy(
   function(token, done) {
     jwt.verifyDecrypt(token, done);
@@ -115,10 +111,9 @@ passport.use(new FacebookStrategy({
   clientID: '881519185218872',
   clientSecret: 'ec4d29399a523f123cf079c3d66e29c6',
   callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/api/auth/facebook/callback',
-  passReqToCallback: true,
   session: false,
 },
-  function(req, token, refreshToken, profile, done) {
+  function(token, refreshToken, profile, done) {
     console.log('req', req);
     console.log('token', token);
     console.log('refereshToken', refreshToken);

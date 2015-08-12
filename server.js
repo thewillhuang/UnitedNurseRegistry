@@ -46,7 +46,7 @@ app.use(function* staticServer(next) {
 
 app.use(bodyParser());
 
-// initialize passport
+// load strategies and initialize passport
 require('./server/services/auth');
 app.use(passport.initialize());
 // app.use(passport.session());

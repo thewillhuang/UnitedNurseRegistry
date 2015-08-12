@@ -26,15 +26,6 @@ function EmailTaken(message) {
 EmailTaken.prototype = Object.create(Error.prototype);
 EmailTaken.prototype.constructor = EmailTaken;
 
-// passport serialization / deserialization
-// passport.serializeUser(function(user, done) {
-//   done(null, jwt.encryptSign(user));
-// });
-//
-// passport.deserializeUser(function(token, done) {
-//   done(null, jwt.verifyDecrypt(token));
-// });
-
 // local strategy -- login
 passport.use(new LocalStrategy({
   usernameField: 'email',
@@ -128,3 +119,12 @@ passport.use(new FacebookStrategy({
     done(null, user);
   }
 ));
+
+// passport serialization / deserialization
+// passport.serializeUser(function(user, done) {
+//   done(null, jwt.encryptSign(user));
+// });
+//
+// passport.deserializeUser(function(token, done) {
+//   done(null, jwt.verifyDecrypt(token));
+// });

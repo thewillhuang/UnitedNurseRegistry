@@ -72,7 +72,8 @@ app.use(function* ensureAuthenticated(next) {
   if (this.isAuthenticated()) {
     yield next;
   } else {
-    this.redirect('/login');
+    this.status = 401;
+    this.body = {message: 'Invalid Authorization'};
   }
 });
 

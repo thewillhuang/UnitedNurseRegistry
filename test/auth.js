@@ -39,12 +39,11 @@ describe('authentication api', function() {
         password: password,
         email: email2,
       })
-      .expect(302)
+      .expect(401)
       .end(function(err, res) {
         // console.log(res.headers);
         // console.log(res.body);
         expect(res.body).to.be.an('object');
-        expect(res.headers.location).to.be.equal('/login');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
         done();
@@ -75,12 +74,11 @@ describe('authentication api', function() {
         password: password,
         email: email,
       })
-      .expect(302)
+      .expect(401)
       .end(function(err, res) {
         // console.log(res.headers);
         // console.log(res.body);
         expect(res.body).to.be.an('object');
-        expect(res.headers.location).to.be.equal('/login');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
         done();
@@ -93,12 +91,11 @@ describe('authentication api', function() {
         password: 'fldakjsfdlasfkj',
         email: email2,
       })
-      .expect(302)
+      .expect(401)
       .end(function(err, res) {
         // console.log(res.headers);
         // console.log(res.body);
         expect(res.body).to.be.an('object');
-        expect(res.headers.location).to.be.equal('/login');
         expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
         done();

@@ -19,12 +19,12 @@ module.exports = function authRoutes(app) {
     yield passport.authenticate('facebook', {
       failureRedirect: '/login',
       session: false,
+      authType: 'rerequest',
     }, function* (err, user, info) {
-      console.log(info);
-      if (err) this.throw(err);
+      if (err) console.log('error', err);
       if (user === false) {
         ctx.status = 401;
-        yield next;
+        ctx.body = {message: info};
       } else {
         ctx.status = 200;
         ctx.passport.user = user;
@@ -38,11 +38,10 @@ module.exports = function authRoutes(app) {
   .post('/login', function*(next) {
     const ctx = this;
     yield passport.authenticate('local', { session: false }, function*(err, user, info) {
-      console.log(info);
-      if (err) this.throw(err);
+      if (err) console.log('error', err);
       if (user === false) {
         ctx.status = 401;
-        yield next;
+        ctx.body = {message: info};
       } else {
         ctx.status = 200;
         const token = jwt.encryptSign(user);
@@ -56,11 +55,10 @@ module.exports = function authRoutes(app) {
   .post('/signup', function*(next) {
     const ctx = this;
     yield passport.authenticate('local-signup',  { session: false }, function*(err, user, info) {
-      console.log(info);
-      if (err) this.throw(err);
+      if (err) console.log('error', err);
       if (user === false) {
         ctx.status = 401;
-        yield next;
+        ctx.body = {message: info};
       } else {
         ctx.status = 200;
         const token = jwt.encryptSign(user);

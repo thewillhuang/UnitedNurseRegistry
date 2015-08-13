@@ -117,6 +117,7 @@ passport.use(new FacebookStrategy({
   scope: ['email'],
   clientID: '881519185218872',
   clientSecret: 'ec4d29399a523f123cf079c3d66e29c6',
+  enableProof: true,
   callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/api/auth/facebook/callback',
   session: false,
 },

@@ -49,7 +49,7 @@ describe('facility api', function() {
       .set(jwt)
       .expect(200)
       .end(function(err, res) {
-        // console.log(res.body);
+        console.log(res.headers);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');

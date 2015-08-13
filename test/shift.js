@@ -434,6 +434,8 @@ describe('shift api', function() {
       .set(jwt)
       .end(function(err, res) {
         // console.log(res.body.rows[0]);
+        console.log(res.headers);
+        console.log(res.body.rows);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows[0].open).to.equal(1);

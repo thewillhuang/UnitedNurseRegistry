@@ -12,6 +12,7 @@ const bodyParser = require('koa-bodyparser');
 const conditional = require('koa-conditional-get');
 const helmet = require('koa-helmet');
 const passport = require('koa-passport');
+const compress = require('koa-compress');
 // const jwt = require('./server/services/jwt');
 // const session = require('koa-session');
 
@@ -20,6 +21,7 @@ app.use(logger());
 
 app.proxy = true;
 app.use(helmet());
+app.use(helmet.noCache());
 app.use(conditional());
 app.use(etag());
 
@@ -38,6 +40,7 @@ app.use(function* staticServer(next) {
 // set unsigned cookies as we are using a signed and encrypted jwt
 // app.use(session({ signed: false }, app));
 
+app.use(compress());
 app.use(bodyParser());
 
 // load strategies and initialize passport
@@ -54,10 +57,10 @@ app.use(function* bearerAuthentication(next) {
   yield passport.authenticate('bearer', { session: false }, function* (err, user) {
     if (err) {throw new Error(err); }
     if (user) {
-      // const token = jwt.encryptSign(user);
+      // const token = 'Bearer ' + jwt.encryptSign(user);
       const token = ctx.header.authorization;
       ctx.passport.user = user;
-      ctx.set({ Authorization: 'Bearer ' + token });
+      ctx.set({ Authorization: token });
     }
     yield next;
   }).call(this, next);

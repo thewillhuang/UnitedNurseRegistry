@@ -12,24 +12,18 @@ const bodyParser = require('koa-bodyparser');
 const conditional = require('koa-conditional-get');
 const helmet = require('koa-helmet');
 const passport = require('koa-passport');
+// const jwt = require('./server/services/jwt');
 // const session = require('koa-session');
 
 // logging
 app.use(logger());
 
-// enable proxy through another server
 app.proxy = true;
-
-// use helmet
 app.use(helmet());
-
-// returns status code 304 if etag is the same
 app.use(conditional());
-
-// add etag for hash of request body
 app.use(etag());
 
-// static server
+// static file server
 app.use(function* staticServer(next) {
   const opts = { root: path.join(__dirname, build) };
   if (this.path === '/') {
@@ -60,8 +54,10 @@ app.use(function* bearerAuthentication(next) {
   yield passport.authenticate('bearer', { session: false }, function* (err, user) {
     if (err) {throw new Error(err); }
     if (user) {
+      // const token = jwt.encryptSign(user);
+      const token = ctx.header.authorization;
       ctx.passport.user = user;
-      ctx.set({Authorization: ctx.headers.authorization});
+      ctx.set({ Authorization: 'Bearer ' + token });
     }
     yield next;
   }).call(this, next);

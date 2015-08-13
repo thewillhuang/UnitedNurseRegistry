@@ -22,7 +22,7 @@ module.exports = function authRoutes(app) {
       authType: 'rerequest',
     }, function* (err, user, info) {
       if (err) console.log('error', err);
-      if (user === false) {
+      if (!user) {
         ctx.status = 401;
         ctx.body = {message: info};
       } else {
@@ -39,7 +39,7 @@ module.exports = function authRoutes(app) {
     const ctx = this;
     yield passport.authenticate('local', { session: false }, function*(err, user, info) {
       if (err) console.log('error', err);
-      if (user === false) {
+      if (!user) {
         ctx.status = 401;
         ctx.body = {message: info};
       } else {
@@ -56,7 +56,7 @@ module.exports = function authRoutes(app) {
     const ctx = this;
     yield passport.authenticate('local-signup',  { session: false }, function*(err, user, info) {
       if (err) console.log('error', err);
-      if (user === false) {
+      if (!user) {
         ctx.status = 401;
         ctx.body = {message: info};
       } else {

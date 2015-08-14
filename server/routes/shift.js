@@ -12,7 +12,7 @@ module.exports = function shiftRoutes(app) {
 
   // create shift
   .post('/', function* createShift() {
-    console.log(this.passport.user);
+    // console.log(this.passport.user);
     const requestJson = this.request.body;
     const specialtyID = requestJson.specialtyID;
     const facilityID = requestJson.facilityID;

@@ -28,10 +28,11 @@ app.use(etag());
 // static file server
 app.use(function* staticServer(next) {
   const opts = { root: path.join(__dirname, build) };
-  if (this.path === '/') {
-    yield send(this, 'index.html', opts);
-  } else if (~this.path.indexOf('api')) {
+  // if (this.path === '/') {
+  if (this.path.indexOf('api') !== -1) {
     yield next;
+  } else if (this.path === '/') {
+    yield send(this, 'index.html', opts);
   } else {
     yield send(this, this.path, opts);
   }

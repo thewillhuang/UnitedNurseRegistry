@@ -20,7 +20,12 @@ module.exports = function(app) {
     const q = {};
     q.sql = 'INSERT INTO ?? SET ?';
     q.values = ['facility', requestJson];
-    this.body = yield query(q);
+    const user = this.passport.user;
+    if (user.scope.facilityID !== facilityID) {
+      this.body = {message: 'no permission'};
+    } else {
+      this.body = yield query(q);
+    }
   })
 
   // validate password return true or false
@@ -31,10 +36,15 @@ module.exports = function(app) {
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['facilityPwHash', 'facility', 'facilityName', facilityName];
-    const result = yield query(q);
-    const dbpwhash = result.rows[0].facilityPwHash;
-    const success = yield validatePw(password, dbpwhash);
-    this.body = {success: success};
+    const user = this.passport.user;
+    if (user.scope.facilityID !== facilityID) {
+      this.body = {message: 'no permission'};
+    } else {
+      const result = yield query(q);
+      const dbpwhash = result.rows[0].facilityPwHash;
+      const success = yield validatePw(password, dbpwhash);
+      this.body = {success: success};
+    }
   })
 
   // grab user table info based on user id
@@ -45,7 +55,12 @@ module.exports = function(app) {
     // console.log(q);
     const select = ['facilityName', 'facilityGeohash', 'facilityEMR'];
     q.values = [select, 'facility', 'facilityID', facilityID];
-    this.body = yield query(q);
+    const user = this.passport.user;
+    if (user.scope.facilityID !== facilityID) {
+      this.body = {message: 'no permission'};
+    } else {
+      this.body = yield query(q);
+    }
   })
 
   // update user data by user id

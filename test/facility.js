@@ -84,7 +84,7 @@ describe('facility api', function() {
   it('should validate facility password and facilityname', function(done) {
     request.post('/api/facility/validate/')
       .send({
-        facilityName: facilityName,
+        facilityID: r1.insertId,
         facilityPwHash: facilityPwHash,
       })
       .set(jwt)

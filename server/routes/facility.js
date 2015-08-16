@@ -50,15 +50,21 @@ module.exports = function(app) {
 
   // update user data by user id
   .put('/:facilityID', function* () {
+    console.log(this.passport.user);
+    const user = this.passport.user;
     const requestJson = this.request.body;
     const facilityID = this.params.facilityID;
     const password = requestJson.facilityPwHash;
-    delete requestJson.facilityPwHash;
-    requestJson.facilityPwHash = yield genHash(password);
-    const q = {};
-    q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-    q.values = ['facility', requestJson, 'facilityID', facilityID];
-    this.body = yield query(q);
+    if (user.scope.facilityID !== facilityID) {
+      this.body = {message: 'no permission'};
+    } else {
+      delete requestJson.facilityPwHash;
+      requestJson.facilityPwHash = yield genHash(password);
+      const q = {};
+      q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+      q.values = ['facility', requestJson, 'facilityID', facilityID];
+      this.body = yield query(q);
+    }
   })
 
   // delete user by user id

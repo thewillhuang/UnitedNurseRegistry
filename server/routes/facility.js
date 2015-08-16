@@ -14,9 +14,7 @@ module.exports = function(app) {
   // create facility
   .post('/', function* () {
     const user = this.passport.user;
-    if (user.scope.facilityID !== facilityID) {
-      this.body = {message: 'no permission'};
-    } else {
+    if (user.scope.facilityID === facilityID) {
       const requestJson = this.request.body;
       const password = requestJson.facilityPwHash;
       delete requestJson.facilityPwHash;
@@ -25,15 +23,15 @@ module.exports = function(app) {
       q.sql = 'INSERT INTO ?? SET ?';
       q.values = ['facility', requestJson];
       this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
     }
   })
 
   // validate password return true or false
   .post('/validate/', function* validateFacility() {
     const user = this.passport.user;
-    if (user.scope.facilityID !== facilityID) {
-      this.body = {message: 'no permission'};
-    } else {
+    if (user.scope.facilityID === facilityID) {
       const requestJson = this.request.body;
       const password = requestJson.facilityPwHash;
       const facilityName = requestJson.facilityName;
@@ -44,15 +42,15 @@ module.exports = function(app) {
       const dbpwhash = result.rows[0].facilityPwHash;
       const success = yield validatePw(password, dbpwhash);
       this.body = {success: success};
+    } else {
+      this.body = {message: 'no permission'};
     }
   })
 
   // grab user table info based on user id
   .get('/:facilityID', function* () {
     const user = this.passport.user;
-    if (user.scope.facilityID !== facilityID) {
-      this.body = {message: 'no permission'};
-    } else {
+    if (user.scope.facilityID === facilityID) {
       const facilityID = this.params.facilityID;
       const q = {};
       q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
@@ -60,15 +58,15 @@ module.exports = function(app) {
       const select = ['facilityName', 'facilityGeohash', 'facilityEMR'];
       q.values = [select, 'facility', 'facilityID', facilityID];
       this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
     }
   })
 
   // update user data by user id
   .put('/:facilityID', function* () {
     const user = this.passport.user;
-    if (user.scope.facilityID !== facilityID) {
-      this.body = {message: 'no permission'};
-    } else {
+    if (user.scope.facilityID === facilityID) {
       const requestJson = this.request.body;
       const facilityID = this.params.facilityID;
       const password = requestJson.facilityPwHash;
@@ -78,6 +76,8 @@ module.exports = function(app) {
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
       q.values = ['facility', requestJson, 'facilityID', facilityID];
       this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
     }
   })
 

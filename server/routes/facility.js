@@ -50,11 +50,10 @@ module.exports = function(app) {
 
   // update user data by user id
   .put('/:facilityID', function* () {
-    console.log(this.passport.user);
-    const user = this.passport.user;
     const requestJson = this.request.body;
     const facilityID = this.params.facilityID;
     const password = requestJson.facilityPwHash;
+    const user = this.passport.user;
     if (user.scope.facilityID !== facilityID) {
       this.body = {message: 'no permission'};
     } else {
@@ -73,7 +72,12 @@ module.exports = function(app) {
     const q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';
     q.values = ['facility', 'facilityID', facilityID];
-    this.body = yield query(q);
+    const user = this.passport.user;
+    if (user.scope.facilityID !== facilityID) {
+      this.body = {message: 'no permission'};
+    } else {
+      this.body = yield query(q);
+    }
   });
 
   app.use(facility.routes())

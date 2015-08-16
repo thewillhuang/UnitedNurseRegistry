@@ -13,33 +13,33 @@ module.exports = function(app) {
 
   // create facility
   .post('/', function* () {
-    const requestJson = this.request.body;
-    const password = requestJson.facilityPwHash;
-    delete requestJson.facilityPwHash;
-    requestJson.facilityPwHash = yield genHash(password);
-    const q = {};
-    q.sql = 'INSERT INTO ?? SET ?';
-    q.values = ['facility', requestJson];
     const user = this.passport.user;
     if (user.scope.facilityID !== facilityID) {
       this.body = {message: 'no permission'};
     } else {
+      const requestJson = this.request.body;
+      const password = requestJson.facilityPwHash;
+      delete requestJson.facilityPwHash;
+      requestJson.facilityPwHash = yield genHash(password);
+      const q = {};
+      q.sql = 'INSERT INTO ?? SET ?';
+      q.values = ['facility', requestJson];
       this.body = yield query(q);
     }
   })
 
   // validate password return true or false
   .post('/validate/', function* validateFacility() {
-    const requestJson = this.request.body;
-    const password = requestJson.facilityPwHash;
-    const facilityName = requestJson.facilityName;
-    const q = {};
-    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    q.values = ['facilityPwHash', 'facility', 'facilityName', facilityName];
     const user = this.passport.user;
     if (user.scope.facilityID !== facilityID) {
       this.body = {message: 'no permission'};
     } else {
+      const requestJson = this.request.body;
+      const password = requestJson.facilityPwHash;
+      const facilityName = requestJson.facilityName;
+      const q = {};
+      q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
+      q.values = ['facilityPwHash', 'facility', 'facilityName', facilityName];
       const result = yield query(q);
       const dbpwhash = result.rows[0].facilityPwHash;
       const success = yield validatePw(password, dbpwhash);
@@ -49,29 +49,29 @@ module.exports = function(app) {
 
   // grab user table info based on user id
   .get('/:facilityID', function* () {
-    const facilityID = this.params.facilityID;
-    const q = {};
-    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    // console.log(q);
-    const select = ['facilityName', 'facilityGeohash', 'facilityEMR'];
-    q.values = [select, 'facility', 'facilityID', facilityID];
     const user = this.passport.user;
     if (user.scope.facilityID !== facilityID) {
       this.body = {message: 'no permission'};
     } else {
+      const facilityID = this.params.facilityID;
+      const q = {};
+      q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
+      // console.log(q);
+      const select = ['facilityName', 'facilityGeohash', 'facilityEMR'];
+      q.values = [select, 'facility', 'facilityID', facilityID];
       this.body = yield query(q);
     }
   })
 
   // update user data by user id
   .put('/:facilityID', function* () {
-    const requestJson = this.request.body;
-    const facilityID = this.params.facilityID;
-    const password = requestJson.facilityPwHash;
     const user = this.passport.user;
     if (user.scope.facilityID !== facilityID) {
       this.body = {message: 'no permission'};
     } else {
+      const requestJson = this.request.body;
+      const facilityID = this.params.facilityID;
+      const password = requestJson.facilityPwHash;
       delete requestJson.facilityPwHash;
       requestJson.facilityPwHash = yield genHash(password);
       const q = {};
@@ -83,14 +83,14 @@ module.exports = function(app) {
 
   // delete user by user id
   .delete('/:facilityID', function* () {
-    const facilityID = this.params.facilityID;
-    const q = {};
-    q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-    q.values = ['facility', 'facilityID', facilityID];
     const user = this.passport.user;
     if (user.scope.facilityID !== facilityID) {
       this.body = {message: 'no permission'};
     } else {
+      const facilityID = this.params.facilityID;
+      const q = {};
+      q.sql = 'DELETE FROM ?? WHERE ?? = ?';
+      q.values = ['facility', 'facilityID', facilityID];
       this.body = yield query(q);
     }
   });

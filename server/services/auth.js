@@ -77,6 +77,7 @@ passport.use('facility-login', new LocalStrategy({
     q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
     q.values = ['facilityPwHash', 'facilityID', 'Facility', 'facilityEmail', email];
     query(q).bind({}).then(function(result) {
+      // console.log('facility result', result);
       if (result.rows.length === 0) { throw new NoAccountError('no such facility found'); }
       this.facilityID = result.rows[0].facilityID;
       return validatePw(password, result.rows[0].facilityPwHash);
@@ -105,10 +106,12 @@ passport.use('facility-signup', new LocalStrategy({
   session: false,
 },
   function(email, password, done) {
+    // console.log(email, password);
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    q.values = ['facilityPwHash', 'Facility', 'email', email];
+    q.values = ['facilityPwHash', 'facility', 'facilityemail', email];
     query(q).bind({}).then(function(result) {
+      // console.log('facility result', result);
       if (result.rows.length !== 0) { throw new EmailTaken('email taken'); }
       return genHash(password);
     }).then(function(pwhash) {
@@ -120,6 +123,7 @@ passport.use('facility-signup', new LocalStrategy({
       q2.values = ['Facility', userData];
       return query(q2);
     }).then(function(result) {
+      // console.log('facility q2', result);
       const insertId = result.rows.insertId;
       this.done = [
         {email: email, scope: {facilityID: insertId}},

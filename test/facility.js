@@ -13,7 +13,7 @@ describe('facility api', function() {
   const password2 = uuid.v4();
   let jwt;
   it('should signup with /signup', function(done) {
-    request.post('/api/auth/signup')
+    request.post('/api/auth/facility/signup')
       .send({
         password: password2,
         email: email2,

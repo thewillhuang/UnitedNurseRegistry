@@ -10,9 +10,11 @@ const uuid = require('node-uuid');
 
 describe('authentication api', function() {
   const email = uuid.v4();
+  const password = uuid.v4();
   const email2 = uuid.v4();
   const password2 = uuid.v4();
-  const password = uuid.v4();
+  const email3 = uuid.v4();
+  const password3 = uuid.v4();
 
   it('should signup with /signup', function(done) {
     request.post('/api/auth/signup')
@@ -28,6 +30,42 @@ describe('authentication api', function() {
         expect(res.body).to.be.an('object');
         expect(res.headers.authorization).to.be.a('string');
         expect(res.headers.authorization).to.contain('Bearer');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should signup facility with /signup', function(done) {
+    request.post('/api/auth/facility/signup')
+      .send({
+        password: password3,
+        email: email3,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        // console.log(res.headers.authorization.split(' ').pop());
+        // console.log(res.headers);
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.headers.authorization).to.be.a('string');
+        expect(res.headers.authorization).to.contain('Bearer');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should not signup facility with /signup due to email taken', function(done) {
+    request.post('/api/auth/facility/signup')
+      .send({
+        password: password,
+        email: email3,
+      })
+      .expect(401)
+      .end(function(err, res) {
+        // console.log(res.headers);
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.headers.authorization).to.be.undefined;
         expect(err).to.be.a('null');
         done();
       });
@@ -68,6 +106,41 @@ describe('authentication api', function() {
       });
   });
 
+  it('should login with facility/login', function(done) {
+    request.post('/api/auth/facility/login')
+      .send({
+        password: password3,
+        email: email3,
+      })
+      .expect(200)
+      .end(function(err, res) {
+        // console.log(res.headers);
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.headers.authorization).to.be.a('string');
+        expect(res.headers.authorization).to.contain('Bearer');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should not login facility with wrong or no user /', function(done) {
+    request.post('/api/auth/facility/login')
+      .send({
+        password: password,
+        email: email2,
+      })
+      .expect(401)
+      .end(function(err, res) {
+        // console.log(res.headers);
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.headers.authorization).to.be.undefined;
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
   it('should not login with wrong or no user /', function(done) {
     request.post('/api/auth/login')
       .send({
@@ -90,6 +163,23 @@ describe('authentication api', function() {
       .send({
         password: 'fldakjsfdlasfkj',
         email: email2,
+      })
+      .expect(401)
+      .end(function(err, res) {
+        // console.log(res.headers);
+        // console.log(res.body);
+        expect(res.body).to.be.an('object');
+        expect(res.headers.authorization).to.be.undefined;
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should not login facility with wrong password /', function(done) {
+    request.post('/api/auth/login')
+      .send({
+        password: 'fldakjsfdlasfkj',
+        email: email3,
       })
       .expect(401)
       .end(function(err, res) {

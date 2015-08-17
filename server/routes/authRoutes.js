@@ -52,6 +52,40 @@ module.exports = function authRoutes(app) {
     }).call(this, next);
   })
 
+  .post('/facility/login', function*(next) {
+    const ctx = this;
+    yield passport.authenticate('facility-login', { session: false }, function*(err, user, info) {
+      if (err) console.log('error', err);
+      if (!user) {
+        ctx.status = 401;
+        ctx.body = {message: info};
+      } else {
+        ctx.status = 200;
+        const token = jwt.encryptSign(user);
+        ctx.passport.user = user;
+        ctx.set({ Authorization: 'Bearer ' + token });
+        ctx.body = {message: info};
+      }
+    }).call(this, next);
+  })
+
+  .post('/facility/signup', function*(next) {
+    const ctx = this;
+    yield passport.authenticate('facility-signup',  { session: false }, function*(err, user, info) {
+      if (err) console.log('error', err);
+      if (!user) {
+        ctx.status = 401;
+        ctx.body = {message: info};
+      } else {
+        ctx.status = 200;
+        const token = jwt.encryptSign(user);
+        ctx.passport.user = user;
+        ctx.set({ Authorization: 'Bearer ' + token });
+        ctx.body = {message: info};
+      }
+    }).call(this, next);
+  })
+
   .post('/signup', function*(next) {
     const ctx = this;
     yield passport.authenticate('local-signup',  { session: false }, function*(err, user, info) {

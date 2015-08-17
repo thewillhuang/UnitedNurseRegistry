@@ -10,13 +10,13 @@ const genHash = require('./genHash');
 const jwt = require('./jwt');
 
 // custom error functions
-function NoUserError(message) {
+function NoAccountError(message) {
   this.message = message;
-  this.name = 'NoUserError';
-  Error.captureStackTrace(this, NoUserError);
+  this.name = 'NoAccountError';
+  Error.captureStackTrace(this, NoAccountError);
 }
-NoUserError.prototype = Object.create(Error.prototype);
-NoUserError.prototype.constructor = NoUserError;
+NoAccountError.prototype = Object.create(Error.prototype);
+NoAccountError.prototype.constructor = NoAccountError;
 
 function EmailTaken(message) {
   this.message = message;
@@ -45,7 +45,7 @@ passport.use(new LocalStrategy({
     q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'userID', 'user', 'email', email];
     query(q).bind({}).then(function(result) {
-      if (result.rows.length === 0) { throw new NoUserError('no such user found'); }
+      if (result.rows.length === 0) { throw new NoAccountError('no such user found'); }
       this.userID = result.rows[0].userID;
       return validatePw(password, result.rows[0].userPwHash);
     }).then(function(isMatch) {
@@ -56,8 +56,77 @@ passport.use(new LocalStrategy({
           {email: email, scope: {userID: this.userID}},
           {message: 'Auth Success'},
         ];
-    }).catch(NoUserError, function() {
+    }).catch(NoAccountError, function() {
       this.done = [false, {message: 'incorrect email'}];
+    }).catch(function(e) {
+      this.done = [false, {message: e}];
+    }).then(function() {
+      return this.done;
+    }).nodeify(done, {spread: true});
+  }
+));
+
+// local strategy -- facility login
+passport.use('facility-login', new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password',
+  session: false,
+},
+  function(email, password, done) {
+    const q = {};
+    q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
+    q.values = ['facilityPwHash', 'facilityID', 'Facility', 'facilityEmail', email];
+    query(q).bind({}).then(function(result) {
+      if (result.rows.length === 0) { throw new NoAccountError('no such facility found'); }
+      this.facilityID = result.rows[0].facilityID;
+      return validatePw(password, result.rows[0].facilityPwHash);
+    }).then(function(isMatch) {
+      // console.log(this.userID);
+      return !isMatch ?
+        this.done = [false, {message: 'incorrect password'}] :
+        this.done = [
+          {email: email, scope: {facilityID: this.facilityID}},
+          {message: 'Auth Success'},
+        ];
+    }).catch(NoAccountError, function() {
+      this.done = [false, {message: 'incorrect email'}];
+    }).catch(function(e) {
+      this.done = [false, {message: e}];
+    }).then(function() {
+      return this.done;
+    }).nodeify(done, {spread: true});
+  }
+));
+
+// local -- signup
+passport.use('facility-signup', new LocalStrategy({
+  usernameField: 'email',
+  passwordField: 'password',
+  session: false,
+},
+  function(email, password, done) {
+    const q = {};
+    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
+    q.values = ['facilityPwHash', 'Facility', 'email', email];
+    query(q).bind({}).then(function(result) {
+      if (result.rows.length !== 0) { throw new EmailTaken('email taken'); }
+      return genHash(password);
+    }).then(function(pwhash) {
+      const q2 = {};
+      const userData = {};
+      userData.facilityEmail = email;
+      userData.facilityPwHash = pwhash;
+      q2.sql = 'INSERT INTO ?? SET ?';
+      q2.values = ['Facility', userData];
+      return query(q2);
+    }).then(function(result) {
+      const insertId = result.rows.insertId;
+      this.done = [
+        {email: email, scope: {facilityID: insertId}},
+        {message: 'Registeration successful'},
+      ];
+    }).catch(EmailTaken, function() {
+      this.done = [false, {message: 'email taken'}];
     }).catch(function(e) {
       this.done = [false, {message: e}];
     }).then(function() {
@@ -164,12 +233,3 @@ passport.use(new FacebookStrategy({
     }).nodeify(done, {spread: true});
   }
 ));
-
-// passport serialization / deserialization
-// passport.serializeUser(function(user, done) {
-//   done(null, jwt.encryptSign(user));
-// });
-//
-// passport.deserializeUser(function(token, done) {
-//   done(null, jwt.verifyDecrypt(token));
-// });

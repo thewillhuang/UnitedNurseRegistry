@@ -10,7 +10,7 @@ const _ = require('lodash');
 module.exports = function shiftRoutes(app) {
   shift
 
-  // create shift
+  // create shift -- TODO validate facility
   .post('/', function* createShift() {
     // console.log(this.passport.user);
     const requestJson = this.request.body;
@@ -97,7 +97,7 @@ module.exports = function shiftRoutes(app) {
     this.body = yield query(q);
   })
 
-  // update shift data by shift id
+  // update shift data by shift id -- TODO validate facility ID
   .put('/:shiftID', function* updateShiftByShiftID() {
     const requestJson = this.request.body;
     const specialtyID = requestJson.specialtyID;
@@ -121,16 +121,16 @@ module.exports = function shiftRoutes(app) {
     q.values = ['shift', requestJson, 'shiftID', shiftID];
     // console.log(q);
     this.body = yield query(q);
-  })
-
-  // delete shift by shift id
-  .delete('/:shiftID', function* deleteShiftByShiftID() {
-    const shiftID = this.params.shiftID;
-    const q = {};
-    q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-    q.values = ['shift', 'shiftID', shiftID];
-    this.body = yield query(q);
   });
+
+  // // delete shift by shift id
+  // .delete('/:shiftID', function* deleteShiftByShiftID() {
+  //   const shiftID = this.params.shiftID;
+  //   const q = {};
+  //   q.sql = 'DELETE FROM ?? WHERE ?? = ?';
+  //   q.values = ['shift', 'shiftID', shiftID];
+  //   this.body = yield query(q);
+  // });
 
   app.use(shift.routes())
     .use(shift.allowedMethods());

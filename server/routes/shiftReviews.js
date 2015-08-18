@@ -9,7 +9,7 @@ const query = require('../services/query');
 module.exports = function shiftReviewRoutes(app) {
   shiftReview
 
-  // user reviews
+  // user reviews TODO validate user ID
   .post('/user/:userID/shift/:shiftID', function* createUserReview() {
     const userID = this.params.userID;
     const shiftID = this.params.shiftID;
@@ -23,6 +23,7 @@ module.exports = function shiftReviewRoutes(app) {
     this.body = yield query(q);
   })
 
+  // TODO validate userID
   .put('/user/:userID/shift/:shiftID', function* updateUserReview() {
     const userID = this.params.userID;
     const shiftID = this.params.shiftID;
@@ -50,6 +51,7 @@ module.exports = function shiftReviewRoutes(app) {
     this.body = yield query(q);
   })
 
+  // TODO validate userID
   .delete('/user/:userID/shift/:shiftID', function* deleteUserReview() {
     const userID = this.params.userID;
     const shiftID = this.params.shiftID;
@@ -59,7 +61,7 @@ module.exports = function shiftReviewRoutes(app) {
     this.body = yield query(q);
   })
 
-  // facility reviews
+  // facility reviews TODO validate facility ID
   .post('/facility/:facilityID/shift/:shiftID', function* createFacilityReview() {
     const facilityID = this.params.facilityID;
     const shiftID = this.params.shiftID;
@@ -72,6 +74,7 @@ module.exports = function shiftReviewRoutes(app) {
     this.body = yield query(q);
   })
 
+  // TODO validate facility ID
   .put('/facility/:facilityID/shift/:shiftID', function* updateFacilityReview() {
     const facilityID = this.params.facilityID;
     const shiftID = this.params.shiftID;
@@ -100,6 +103,7 @@ module.exports = function shiftReviewRoutes(app) {
     this.body = yield query(q);
   })
 
+  // TODO validate facility ID
   .delete('/facility/:facilityID/shift/:shiftID', function* deleteFacilityReview() {
     const facilityID = this.params.facilityID;
     const shiftID = this.params.shiftID;

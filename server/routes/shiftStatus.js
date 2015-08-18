@@ -19,7 +19,7 @@ module.exports = function shiftStatusRoutes(app) {
     this.body = yield query(q);
   })
 
-  // insert view count by unique userID
+  // insert view count by unique userID TODO validate userID
   .post('/viewed/shift/:shiftID/user/:userID', function* addViews() {
     const shiftID = this.params.shiftID;
     const userID = this.params.userID;
@@ -42,7 +42,7 @@ module.exports = function shiftStatusRoutes(app) {
     this.body = yield query(q);
   })
 
-  // mark shift as completed by shiftID
+  // mark shift as completed by shiftID TODO validate facility ID
   .post('/completed/shift/:shiftID', function* markAsComplete() {
     const shiftID = this.params.shiftID;
     const q = {};
@@ -52,7 +52,7 @@ module.exports = function shiftStatusRoutes(app) {
     this.body = yield query(q);
   })
 
-  // mark shift as pending by shiftID
+  // mark shift as pending by shiftID TODO validate facility ID
   .post('/pending/shift/:shiftID/user/:userID', function* markAsPending() {
     const userID = this.params.userID;
     const shiftID = this.params.shiftID;
@@ -63,7 +63,7 @@ module.exports = function shiftStatusRoutes(app) {
     this.body = yield query(q);
   })
 
-  // mark shift as open by shiftID
+  // mark shift as open by shiftID TODO validate facility ID
   .post('/open/shift/:shiftID', function* markAsOpen() {
     const shiftID = this.params.shiftID;
     const q = {};

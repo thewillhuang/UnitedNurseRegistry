@@ -12,8 +12,9 @@ describe('facility address api', function() {
   const email2 = uuid.v4();
   const password2 = uuid.v4();
   let jwt;
+  let r1;
   it('should signup with /signup', function(done) {
-    request.post('/api/auth/signup')
+    request.post('/api/auth/facility/signup')
       .send({
         password: password2,
         email: email2,
@@ -21,6 +22,7 @@ describe('facility address api', function() {
       .expect(200)
       .end(function(err, res) {
         jwt = { Authorization: res.headers.authorization };
+        r1 = res.body.message.scope.facilityID;
         // console.log(jwt);
         // console.log(res.headers);
         // console.log(res.body);
@@ -56,28 +58,28 @@ describe('facility address api', function() {
       });
   });
 
-  let r2;
-  it('should create a facility', function(done) {
-    request.post('/api/facility')
-      .send({
-        facilityName: uuid.v4(),
-        facilityGeoHash: 27898503349316,
-        facilityPwHash: uuid.v4(),
-        facilityEMR: uuid.v4(),
-      })
-      .set(jwt)
-      .expect(200)
-      .end(function(err, res) {
-        r2 = res.body.rows;
-        expect(r2).to.be.an('object');
-        expect(r2.insertId).to.be.an('number');
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
+  // let r2;
+  // it('should create a facility', function(done) {
+  //   request.post('/api/facility')
+  //     .send({
+  //       facilityName: uuid.v4(),
+  //       facilityGeoHash: 27898503349316,
+  //       facilityPwHash: uuid.v4(),
+  //       facilityEMR: uuid.v4(),
+  //     })
+  //     .set(jwt)
+  //     .expect(200)
+  //     .end(function(err, res) {
+  //       r2 = res.body.rows;
+  //       expect(r2).to.be.an('object');
+  //       expect(r2.insertId).to.be.an('number');
+  //       expect(err).to.be.a('null');
+  //       done();
+  //     });
+  // });
 
   it('insert address 1 given a facility id', function(done) {
-    request.post('/api/facilityaddress/facility/' + r2.insertId)
+    request.post('/api/facilityaddress/facility/' + r1)
       .send({
         address: '2950 arboridge ct.',
         city: 'fullerton',
@@ -95,7 +97,7 @@ describe('facility address api', function() {
   });
 
   it('insert address 2 given a facility id', function(done) {
-    request.post('/api/facilityaddress/facility/' + r2.insertId)
+    request.post('/api/facilityaddress/facility/' + r1)
       .send({
         address: '2952 arboridge ct.',
         city: 'fullerton',
@@ -115,7 +117,7 @@ describe('facility address api', function() {
 
   let a1;
   it('should have 2 address given a facility id', function(done) {
-    request.get('/api/facilityaddress/facility/' + r2.insertId)
+    request.get('/api/facilityaddress/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -132,7 +134,7 @@ describe('facility address api', function() {
   });
 
   it('should return 200 given the same data', function(done) {
-    request.get('/api/facilityaddress/facility/' + r2.insertId)
+    request.get('/api/facilityaddress/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -150,10 +152,11 @@ describe('facility address api', function() {
 
 
   it('should delete facility address 1 given an address ID', function(done) {
-    request.delete('/api/facilityaddress/address/' + a1)
+    request.delete('/api/facilityaddress/facility/' + r1 + '/address/' + a1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
+        // console.log(res.body);
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
         done();
@@ -162,7 +165,7 @@ describe('facility address api', function() {
 
   let a2;
   it('should have 1 address instead of 2', function(done) {
-    request.get('/api/facilityaddress/facility/' + r2.insertId)
+    request.get('/api/facilityaddress/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -179,7 +182,7 @@ describe('facility address api', function() {
   });
 
   it('should update an address given an address id', function(done) {
-    request.put('/api/facilityaddress/address/' + a2)
+    request.put('/api/facilityaddress/facility/' + r1 + '/address/' + a2)
       .send({
         address: '2952 arboridge ct.',
         city: 'irvine',
@@ -199,7 +202,7 @@ describe('facility address api', function() {
   });
 
   it('should have an updated address', function(done) {
-    request.get('/api/facilityaddress/facility/' + r2.insertId)
+    request.get('/api/facilityaddress/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -215,7 +218,7 @@ describe('facility address api', function() {
   });
 
   it('should delete facility address 2 given an address ID', function(done) {
-    request.delete('/api/facilityaddress/address/' + a2)
+    request.delete('/api/facilityaddress/facility/' + r1 + '/address/' + a2)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -226,7 +229,7 @@ describe('facility address api', function() {
   });
 
   it('should have 0 address instead of 1', function(done) {
-    request.get('/api/facilityaddress/facility/' + r2.insertId)
+    request.get('/api/facilityaddress/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -242,7 +245,7 @@ describe('facility address api', function() {
   });
 
   it('should delete a facility given a correct facility id', function(done) {
-    request.delete('/api/facility/' + r2.insertId)
+    request.delete('/api/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -253,7 +256,7 @@ describe('facility address api', function() {
   });
 
   it('the deleted facility should not exist', function(done) {
-    request.get('/api/facility/' + r2.insertId)
+    request.get('/api/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {

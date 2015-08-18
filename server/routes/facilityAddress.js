@@ -2,7 +2,7 @@
 
 const Router = require('koa-router');
 const facilityAddress = new Router({
-  prefix: '/api/facilityAddress'
+  prefix: '/api/facilityAddress',
 });
 const query = require('../services/query');
 const getTransaction = require('../services/getTransaction');
@@ -13,58 +13,75 @@ module.exports = function(app) {
 
   // create new facility address with facility id
   .post('/facility/:facilityID', function* () {
-    let facilityID = this.params.facilityID;
-    let requestJson = this.request.body;
-    let q = {};
-    q.sql = 'INSERT INTO ?? SET ?';
-    q.values = ['address', requestJson];
-    this.body = yield Promise.using(getTransaction(), function(tx){
-      return tx.queryAsync(q).spread(function(rows, fields){
-        return {rows, fields};
-      }).then(function(result){
-        let address = {};
-        address.fk_FacilityAddress_facilityID = facilityID;
-        address.fk_FacilityAddress_addressID = result.rows.insertId;
-        let q2 = {};
-        q2.sql = 'INSERT INTO ?? SET ?';
-        q2.values = ['facilityAddress', address];
-        return q2;
-      }).then(function(q2){
-        return tx.queryAsync(q2).spread(function(rows, fields){
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID.toString() === facilityID) {
+      const requestJson = this.request.body;
+      const q = {};
+      q.sql = 'INSERT INTO ?? SET ?';
+      q.values = ['address', requestJson];
+      this.body = yield Promise.using(getTransaction(), function(tx) {
+        return tx.queryAsync(q).spread(function(rows, fields) {
           return {rows, fields};
+        }).then(function(result) {
+          const address = {};
+          address.fk_FacilityAddress_facilityID = facilityID;
+          address.fk_FacilityAddress_addressID = result.rows.insertId;
+          const q2 = {};
+          q2.sql = 'INSERT INTO ?? SET ?';
+          q2.values = ['facilityAddress', address];
+          return q2;
+        }).then(function(q2) {
+          return tx.queryAsync(q2).spread(function(rows, fields) {
+            return {rows, fields};
+          });
+        }).catch(function(error) {
+          return error;
         });
-      }).catch(function(error){
-        return error;
       });
-    });
+    } else {
+      this.body = {message: 'no permission'};
+    }
   })
 
-  //grab facility address based on facility id
+  // grab facility address based on facility id
   .get('/facility/:facilityID', function* () {
-    let facilityID = this.params.facilityID;
-    let q = {};
+    const facilityID = this.params.facilityID;
+    const q = {};
     q.sql = 'SELECT a.* FROM ?? AS ?? INNER JOIN ?? AS ?? ON (?? = ??) WHERE ?? = ?';
     q.values = ['address', 'a', 'facilityaddress', 'fa', 'fa.fk_facilityAddress_addressID', 'a.addressID', 'fa.fk_facilityAddress_facilityID', facilityID];
     this.body = yield query(q);
   })
 
   // update user address based on address ID
-  .put('/address/:addressID', function* () {
-    let requestJson = this.request.body;
-    let addressID = this.params.addressID;
-    let q = {};
-    q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-    q.values = ['address', requestJson, 'addressID', addressID];
-    this.body = yield query(q);
+  .put('/facility/:facilityID/address/:addressID', function* () {
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID.toString() === facilityID) {
+      const requestJson = this.request.body;
+      const addressID = this.params.addressID;
+      const q = {};
+      q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+      q.values = ['address', requestJson, 'addressID', addressID];
+      this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
+    }
   })
 
   // delete address by address id
-  .delete('/address/:addressID', function* () {
-    let addressID = this.params.addressID;
-    let q = {};
-    q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-    q.values = ['address', 'addressID', addressID];
-    this.body = yield query(q);
+  .delete('/facility/:facilityID/address/:addressID', function* () {
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID.toString() === facilityID) {
+      const addressID = this.params.addressID;
+      const q = {};
+      q.sql = 'DELETE FROM ?? WHERE ?? = ?';
+      q.values = ['address', 'addressID', addressID];
+      this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
+    }
   });
 
   app.use(facilityAddress.routes())

@@ -7,7 +7,7 @@ const app = require('../server');
 const request = supertest(app.listen());
 const uuid = require('node-uuid');
 
-describe('shift api', function() {
+describe('shift status api', function() {
   const email2 = uuid.v4();
   const password2 = uuid.v4();
   let jwt;

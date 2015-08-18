@@ -19,10 +19,10 @@ const compress = require('koa-compress');
 // logging
 app.use(logger());
 
+app.use(conditional());
 app.proxy = true;
 app.use(helmet());
 app.use(helmet.noCache());
-app.use(conditional());
 app.use(etag());
 
 // static file server
@@ -49,7 +49,7 @@ require('./server/services/auth');
 app.use(passport.initialize());
 // app.use(passport.session());
 
-// auth routes to set bearer tokens for different strategies
+// Set bearer tokens for different strategies
 require('./server/routes/authRoutes')(app);
 
 // authorize routes that has valid bearer tokens and set the token back
@@ -59,6 +59,7 @@ app.use(function* bearerAuthentication(next) {
     if (err) {throw new Error(err); }
     if (user) {
       // const token = 'Bearer ' + jwt.encryptSign(user);
+      // copy the token and send it right back
       const token = ctx.header.authorization;
       ctx.passport.user = user;
       ctx.set({ Authorization: token });
@@ -67,7 +68,6 @@ app.use(function* bearerAuthentication(next) {
   }).call(this, next);
 });
 
-// ensure all api calls are authenticated pass this middleware or redirected.
 app.use(function* ensureAuthenticated(next) {
   if (this.isAuthenticated()) {
     yield next;

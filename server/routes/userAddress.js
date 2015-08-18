@@ -13,30 +13,35 @@ module.exports = function(app) {
 
   // create new user address with user id
   .post('/user/:userID', function* () {
+    const user = this.passport.user;
     const userID = this.params.userID;
-    const requestJson = this.request.body;
-    const q = {};
-    q.sql = 'INSERT INTO ?? SET ?';
-    q.values = ['address', requestJson];
-    this.body = yield Promise.using(getTransaction(), function(tx) {
-      return tx.queryAsync(q).spread(function(rows, fields) {
-        return {rows, fields};
-      }).then(function(result) {
-        const address = {};
-        address.fk_UserAddress_userID = userID;
-        address.fk_UserAddress_addressID = result.rows.insertId;
-        const q2 = {};
-        q2.sql = 'INSERT INTO ?? SET ?';
-        q2.values = ['userAddress', address];
-        return q2;
-      }).then(function(q2) {
-        return tx.queryAsync(q2).spread(function(rows, fields) {
+    if (user.scope.userID.toString() === userID) {
+      const requestJson = this.request.body;
+      const q = {};
+      q.sql = 'INSERT INTO ?? SET ?';
+      q.values = ['address', requestJson];
+      this.body = yield Promise.using(getTransaction(), function(tx) {
+        return tx.queryAsync(q).spread(function(rows, fields) {
           return {rows, fields};
+        }).then(function(result) {
+          const address = {};
+          address.fk_UserAddress_userID = userID;
+          address.fk_UserAddress_addressID = result.rows.insertId;
+          const q2 = {};
+          q2.sql = 'INSERT INTO ?? SET ?';
+          q2.values = ['userAddress', address];
+          return q2;
+        }).then(function(q2) {
+          return tx.queryAsync(q2).spread(function(rows, fields) {
+            return {rows, fields};
+          });
+        }).catch(function(error) {
+          return error;
         });
-      }).catch(function(error) {
-        return error;
       });
-    });
+    } else {
+      this.body = {message: 'no permission'};
+    }
   })
 
   // grab user address based on user id
@@ -49,22 +54,34 @@ module.exports = function(app) {
   })
 
   // update user address based on address ID
-  .put('/address/:addressID', function* () {
-    const requestJson = this.request.body;
-    const addressID = this.params.addressID;
-    const q = {};
-    q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-    q.values = ['address', requestJson, 'addressID', addressID];
-    this.body = yield query(q);
+  .put('/user/:userID/address/:addressID', function* () {
+    const user = this.passport.user;
+    const userID = this.params.userID;
+    if (user.scope.userID.toString() === userID) {
+      const requestJson = this.request.body;
+      const addressID = this.params.addressID;
+      const q = {};
+      q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+      q.values = ['address', requestJson, 'addressID', addressID];
+      this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
+    }
   })
 
   // delete address by address id
-  .delete('/address/:addressID', function* () {
-    const addressID = this.params.addressID;
-    const q = {};
-    q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-    q.values = ['address', 'addressID', addressID];
-    this.body = yield query(q);
+  .delete('/user/:userID/address/:addressID', function* () {
+    const user = this.passport.user;
+    const userID = this.params.userID;
+    if (user.scope.userID.toString() === userID) {
+      const addressID = this.params.addressID;
+      const q = {};
+      q.sql = 'DELETE FROM ?? WHERE ?? = ?';
+      q.values = ['address', 'addressID', addressID];
+      this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
+    }
   });
 
   app.use(userAddress.routes())

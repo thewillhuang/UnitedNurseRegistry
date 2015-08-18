@@ -12,6 +12,7 @@ describe('user email api', function() {
   const email2 = uuid.v4();
   const password2 = uuid.v4();
   let jwt;
+  let r1;
   it('should signup with /signup', function(done) {
     request.post('/api/auth/signup')
       .send({
@@ -21,6 +22,7 @@ describe('user email api', function() {
       .expect(200)
       .end(function(err, res) {
         jwt = { Authorization: res.headers.authorization };
+        r1 = res.body.message.scope.userID;
         // console.log(jwt);
         // console.log(res.headers);
         // console.log(res.body);
@@ -56,31 +58,31 @@ describe('user email api', function() {
       });
   });
 
-  let r2;
-  it('should create a user', function(done) {
-    request.post('/api/user')
-      .send({
-        firstName: 'william',
-        lastName: 'huang',
-        middleName: 'w',
-        userGeoHash: 27898503349316,
-        userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
-        dob: '1986-04-08',
-        email: uuid.v4(),
-      })
-      .expect(200)
-      .set(jwt)
-      .end(function(err, res) {
-        r2 = res.body.rows;
-        expect(r2).to.be.an('object');
-        expect(r2.insertId).to.be.an('number');
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
+  // let r2;
+  // it('should create a user', function(done) {
+  //   request.post('/api/user')
+  //     .send({
+  //       firstName: 'william',
+  //       lastName: 'huang',
+  //       middleName: 'w',
+  //       userGeoHash: 27898503349316,
+  //       userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
+  //       dob: '1986-04-08',
+  //       email: uuid.v4(),
+  //     })
+  //     .expect(200)
+  //     .set(jwt)
+  //     .end(function(err, res) {
+  //       r2 = res.body.rows;
+  //       expect(r2).to.be.an('object');
+  //       expect(r1).to.be.an('number');
+  //       expect(err).to.be.a('null');
+  //       done();
+  //     });
+  // });
 
   it('insert email 1 given a user id', function(done) {
-    request.post('/api/useremail/user/' + r2.insertId)
+    request.post('/api/useremail/user/' + r1)
       .send({
         emailAddress: uuid.v4(),
       })
@@ -95,7 +97,7 @@ describe('user email api', function() {
   });
 
   it('insert email 2 given a user id', function(done) {
-    request.post('/api/useremail/user/' + r2.insertId)
+    request.post('/api/useremail/user/' + r1)
       .send({
         emailAddress: uuid.v4(),
       })
@@ -111,7 +113,7 @@ describe('user email api', function() {
 
   let a1;
   it('should have 2 email addresses given a user id', function(done) {
-    request.get('/api/useremail/user/' + r2.insertId)
+    request.get('/api/useremail/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -128,7 +130,7 @@ describe('user email api', function() {
   });
 
   it('should 200 for same request', function(done) {
-    request.get('/api/useremail/user/' + r2.insertId)
+    request.get('/api/useremail/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -145,7 +147,7 @@ describe('user email api', function() {
   });
 
   it('should delete email 1 given an email ID', function(done) {
-    request.delete('/api/useremail/email/' + a1)
+    request.delete('/api/useremail/user/' + r1 + '/email/' + a1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -157,7 +159,7 @@ describe('user email api', function() {
 
   let a2;
   it('should have 1 email instead of 2', function(done) {
-    request.get('/api/useremail/user/' + r2.insertId)
+    request.get('/api/useremail/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -175,7 +177,7 @@ describe('user email api', function() {
 
   const newemail = uuid.v4();
   it('should update an email given an email id', function(done) {
-    request.put('/api/useremail/email/' + a2)
+    request.put('/api/useremail/user/' + r1 + '/email/' + a2)
       .send({
         emailAddress: newemail,
       })
@@ -192,7 +194,7 @@ describe('user email api', function() {
   });
 
   it('should have an updated email', function(done) {
-    request.get('/api/useremail/user/' + r2.insertId)
+    request.get('/api/useremail/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -208,7 +210,7 @@ describe('user email api', function() {
   });
 
   it('should delete email 2 given an email ID', function(done) {
-    request.delete('/api/useremail/email/' + a2)
+    request.delete('/api/useremail/user/' + r1 + '/email/' + a2)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -219,7 +221,7 @@ describe('user email api', function() {
   });
 
   it('should have 0 address instead of 1', function(done) {
-    request.get('/api/useremail/user/' + r2.insertId)
+    request.get('/api/useremail/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -235,7 +237,7 @@ describe('user email api', function() {
   });
 
   it('should delete a user given a correct user id', function(done) {
-    request.delete('/api/user/' + r2.insertId)
+    request.delete('/api/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -246,7 +248,7 @@ describe('user email api', function() {
   });
 
   it('the deleted user should not exist', function(done) {
-    request.get('/api/user/' + r2.insertId)
+    request.get('/api/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {

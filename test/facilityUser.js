@@ -50,7 +50,7 @@ describe('facility user api', function() {
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.message).to.be.a('string');
         expect(res.body.message).to.be.equal('no permission');

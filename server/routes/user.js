@@ -1,14 +1,14 @@
 'use strict';
 
 const Router = require('koa-router');
-const user = new Router({
+const users = new Router({
   prefix: '/api/user',
 });
 const query = require('../services/query');
 const genHash = require('../services/genHash');
 
 module.exports = function userRoutes(app) {
-  user
+  users
 
   // // create user
   // .post('/', function* createUser() {
@@ -48,26 +48,36 @@ module.exports = function userRoutes(app) {
 
   // update user data by user id
   .put('/:userID', function* updateUser() {
-    const requestJson = this.request.body;
-    const password = requestJson.userPwHash;
+    const user = this.passport.user;
     const userID = this.params.userID;
-    delete requestJson.userPwHash;
-    requestJson.userPwHash = yield genHash(password);
-    const q = {};
-    q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-    q.values = ['user', requestJson, 'userID', userID];
-    this.body = yield query(q);
+    if (user.scope.userID.toString() === userID) {
+      const requestJson = this.request.body;
+      const password = requestJson.userPwHash;
+      delete requestJson.userPwHash;
+      requestJson.userPwHash = yield genHash(password);
+      const q = {};
+      q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+      q.values = ['user', requestJson, 'userID', userID];
+      this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
+    }
   })
 
   // delete user by user id
   .delete('/:userID', function* deleteUser() {
+    const user = this.passport.user;
     const userID = this.params.userID;
-    const q = {};
-    q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-    q.values = ['user', 'userID', userID];
-    this.body = yield query(q);
+    if (user.scope.userID.toString() === userID) {
+      const q = {};
+      q.sql = 'DELETE FROM ?? WHERE ?? = ?';
+      q.values = ['user', 'userID', userID];
+      this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
+    }
   });
 
-  app.use(user.routes())
-    .use(user.allowedMethods());
+  app.use(users.routes())
+    .use(users.allowedMethods());
 };

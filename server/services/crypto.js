@@ -19,7 +19,7 @@ aes.encrypt = function(string) {
   let crypted = cipher.update(string, 'utf8', 'base64');
   crypted += cipher.final('base64');
   // console.timeEnd('encrypt');
-  // convert iv to hex encoding
+  // convert iv to base64 encoding
   return {payload: crypted, iv: iv.toString('base64')};
 };
 

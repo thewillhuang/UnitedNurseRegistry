@@ -11,6 +11,7 @@ describe('user address api', function() {
   const email2 = uuid.v4();
   const password2 = uuid.v4();
   let jwt;
+  let r1;
   it('should signup with /signup', function(done) {
     request.post('/api/auth/signup')
       .send({
@@ -20,6 +21,7 @@ describe('user address api', function() {
       .expect(200)
       .end(function(err, res) {
         jwt = { Authorization: res.headers.authorization };
+        r1 = res.body.message.scope.userID;
         // console.log(jwt);
         // console.log(res.headers);
         // console.log(res.body);
@@ -55,31 +57,31 @@ describe('user address api', function() {
       });
   });
 
-  let r2;
-  it('should create a user', function(done) {
-    request.post('/api/user')
-      .send({
-        firstName: 'william',
-        lastName: 'huang',
-        middleName: 'w',
-        userGeoHash: 27898503349316,
-        userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
-        dob: '1986-04-08',
-        email: uuid.v4(),
-      })
-      .expect(200)
-      .set(jwt)
-      .end(function(err, res) {
-        r2 = res.body.rows;
-        expect(r2).to.be.an('object');
-        expect(r2.insertId).to.be.an('number');
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
+  // let r2;
+  // it('should create a user', function(done) {
+  //   request.post('/api/user')
+  //     .send({
+  //       firstName: 'william',
+  //       lastName: 'huang',
+  //       middleName: 'w',
+  //       userGeoHash: 27898503349316,
+  //       userPwHash: '$2a$10$0vm3IMzEqCJwDwGNQzJYxOznt7kjXELjLOpOUcC7BjYTTEEksuhqy',
+  //       dob: '1986-04-08',
+  //       email: uuid.v4(),
+  //     })
+  //     .expect(200)
+  //     .set(jwt)
+  //     .end(function(err, res) {
+  //       r2 = res.body.rows;
+  //       expect(r2).to.be.an('object');
+  //       expect(r1).to.be.an('number');
+  //       expect(err).to.be.a('null');
+  //       done();
+  //     });
+  // });
 
   it('insert address 1 given a user id', function(done) {
-    request.post('/api/useraddress/user/' + r2.insertId)
+    request.post('/api/useraddress/user/' + r1)
       .send({
         address: '2950 arboridge ct.',
         city: 'fullerton',
@@ -97,7 +99,7 @@ describe('user address api', function() {
   });
 
   it('insert address 2 given a user id', function(done) {
-    request.post('/api/useraddress/user/' + r2.insertId)
+    request.post('/api/useraddress/user/' + r1)
       .send({
         address: '2952 arboridge ct.',
         city: 'fullerton',
@@ -117,7 +119,7 @@ describe('user address api', function() {
 
   let a1;
   it('should have 2 address given a user id', function(done) {
-    request.get('/api/useraddress/user/' + r2.insertId)
+    request.get('/api/useraddress/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -134,7 +136,7 @@ describe('user address api', function() {
   });
 
   it('should return 200 given the same data', function(done) {
-    request.get('/api/useraddress/user/' + r2.insertId)
+    request.get('/api/useraddress/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -152,7 +154,7 @@ describe('user address api', function() {
 
 
   it('should delete user address 1 given an address ID', function(done) {
-    request.delete('/api/useraddress/address/' + a1)
+    request.delete('/api/useraddress/user/' + r1 + '/address/' + a1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -164,7 +166,7 @@ describe('user address api', function() {
 
   let a2;
   it('should have 1 address instead of 2', function(done) {
-    request.get('/api/useraddress/user/' + r2.insertId)
+    request.get('/api/useraddress/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -181,7 +183,7 @@ describe('user address api', function() {
   });
 
   it('should update an address given an address id', function(done) {
-    request.put('/api/useraddress/address/' + a2)
+    request.put('/api/useraddress/user/' + r1 + '/address/' + a2)
       .send({
         address: '2952 arboridge ct.',
         city: 'irvine',
@@ -201,7 +203,7 @@ describe('user address api', function() {
   });
 
   it('should have an updated address', function(done) {
-    request.get('/api/useraddress/user/' + r2.insertId)
+    request.get('/api/useraddress/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -217,7 +219,7 @@ describe('user address api', function() {
   });
 
   it('should delete user address 2 given an address ID', function(done) {
-    request.delete('/api/useraddress/address/' + a2)
+    request.delete('/api/useraddress/user/' + r1 + '/address/' + a2)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -228,7 +230,7 @@ describe('user address api', function() {
   });
 
   it('should have 0 address instead of 1', function(done) {
-    request.get('/api/useraddress/user/' + r2.insertId)
+    request.get('/api/useraddress/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -244,7 +246,7 @@ describe('user address api', function() {
   });
 
   it('should delete a user given a correct user id', function(done) {
-    request.delete('/api/user/' + r2.insertId)
+    request.delete('/api/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -255,7 +257,7 @@ describe('user address api', function() {
   });
 
   it('the deleted user should not exist', function(done) {
-    request.get('/api/user/' + r2.insertId)
+    request.get('/api/user/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {

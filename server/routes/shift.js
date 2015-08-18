@@ -11,25 +11,29 @@ module.exports = function shiftRoutes(app) {
   shift
 
   // create shift -- TODO validate facility
-  .post('/', function* createShift() {
-    // console.log(this.passport.user);
+  .post('/facility/:facilityID', function* createShift() {
+    const user = this.passport.user;
     const requestJson = this.request.body;
+    const facilityID = this.params.facilityID;
     const specialtyID = requestJson.specialtyID;
-    const facilityID = requestJson.facilityID;
-    delete requestJson.specialtyID;
-    delete requestJson.facilityID;
-    delete requestJson.open;
-    delete requestJson.pending;
-    delete requestJson.completed;
-    delete requestJson.facilityPaid;
-    delete requestJson.userPaid;
-    requestJson.fk_Shift_facilityID = facilityID;
-    requestJson.fk_Shift_specialtyID = specialtyID;
-    const q = {};
-    q.sql = 'INSERT INTO ?? SET ?';
-    q.values = ['shift', requestJson];
-    // console.log(q);
-    this.body = yield query(q);
+    if (user.scope.facilityID.toString() === facilityID) {
+      delete requestJson.specialtyID;
+      delete requestJson.facilityID;
+      delete requestJson.open;
+      delete requestJson.pending;
+      delete requestJson.completed;
+      delete requestJson.facilityPaid;
+      delete requestJson.userPaid;
+      requestJson.fk_Shift_facilityID = facilityID;
+      requestJson.fk_Shift_specialtyID = specialtyID;
+      const q = {};
+      q.sql = 'INSERT INTO ?? SET ?';
+      q.values = ['shift', requestJson];
+      // console.log(q);
+      this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
+    }
   })
 
   // grab shift table info based on shift id
@@ -98,39 +102,50 @@ module.exports = function shiftRoutes(app) {
   })
 
   // update shift data by shift id -- TODO validate facility ID
-  .put('/:shiftID', function* updateShiftByShiftID() {
+  .put('/facility/:facilityID/shift/:shiftID', function* updateShiftByShiftID() {
+    const user = this.passport.user;
     const requestJson = this.request.body;
-    const specialtyID = requestJson.specialtyID;
-    const facilityID = requestJson.facilityID;
-    if (specialtyID) {
-      delete requestJson.specialtyID;
-      requestJson.fk_Shift_specialtyID = specialtyID;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID.toString() === facilityID) {
+      const specialtyID = requestJson.specialtyID;
+      if (specialtyID) {
+        delete requestJson.specialtyID;
+        requestJson.fk_Shift_specialtyID = specialtyID;
+      }
+      if (facilityID) {
+        delete requestJson.facilityID;
+        requestJson.fk_Shift_facilityID = facilityID;
+      }
+      delete requestJson.open;
+      delete requestJson.pending;
+      delete requestJson.completed;
+      delete requestJson.facilityPaid;
+      delete requestJson.userPaid;
+      const shiftID = this.params.shiftID;
+      const q = {};
+      q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+      q.values = ['shift', requestJson, 'shiftID', shiftID];
+      // console.log(q);
+      this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
     }
-    if (facilityID) {
-      delete requestJson.facilityID;
-      requestJson.fk_Shift_facilityID = facilityID;
-    }
-    delete requestJson.open;
-    delete requestJson.pending;
-    delete requestJson.completed;
-    delete requestJson.facilityPaid;
-    delete requestJson.userPaid;
-    const shiftID = this.params.shiftID;
-    const q = {};
-    q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-    q.values = ['shift', requestJson, 'shiftID', shiftID];
-    // console.log(q);
-    this.body = yield query(q);
-  });
+  })
 
-  // // delete shift by shift id
-  // .delete('/:shiftID', function* deleteShiftByShiftID() {
-  //   const shiftID = this.params.shiftID;
-  //   const q = {};
-  //   q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-  //   q.values = ['shift', 'shiftID', shiftID];
-  //   this.body = yield query(q);
-  // });
+  // delete shift by shift id
+  .delete('/facility/:facilityID/shift/:shiftID', function* deleteShiftByShiftID() {
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID.toString() === facilityID) {
+      const shiftID = this.params.shiftID;
+      const q = {};
+      q.sql = 'DELETE FROM ?? WHERE ?? = ?';
+      q.values = ['shift', 'shiftID', shiftID];
+      this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
+    }
+  });
 
   app.use(shift.routes())
     .use(shift.allowedMethods());

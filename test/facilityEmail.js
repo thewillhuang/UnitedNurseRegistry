@@ -12,14 +12,16 @@ describe('facility email api', function() {
   const email2 = uuid.v4();
   const password2 = uuid.v4();
   let jwt;
+  let r1;
   it('should signup with /signup', function(done) {
-    request.post('/api/auth/signup')
+    request.post('/api/auth/facility/signup')
       .send({
         password: password2,
         email: email2,
       })
       .expect(200)
       .end(function(err, res) {
+        r1 = res.body.message.scope.facilityID;
         jwt = { Authorization: res.headers.authorization };
         // console.log(jwt);
         // console.log(res.headers);
@@ -56,28 +58,28 @@ describe('facility email api', function() {
       });
   });
 
-  let r2;
-  it('should create a facility', function(done) {
-    request.post('/api/facility')
-      .send({
-        facilityName: uuid.v4(),
-        facilityGeoHash: 27898503349316,
-        facilityPwHash: uuid.v4(),
-        facilityEMR: uuid.v4(),
-      })
-      .set(jwt)
-      .expect(200)
-      .end(function(err, res) {
-        r2 = res.body.rows;
-        expect(r2).to.be.an('object');
-        expect(r2.insertId).to.be.an('number');
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
+  // let r2;
+  // it('should create a facility', function(done) {
+  //   request.post('/api/facility')
+  //     .send({
+  //       facilityName: uuid.v4(),
+  //       facilityGeoHash: 27898503349316,
+  //       facilityPwHash: uuid.v4(),
+  //       facilityEMR: uuid.v4(),
+  //     })
+  //     .set(jwt)
+  //     .expect(200)
+  //     .end(function(err, res) {
+  //       r2 = res.body.rows;
+  //       expect(r2).to.be.an('object');
+  //       expect(r2.insertId).to.be.an('number');
+  //       expect(err).to.be.a('null');
+  //       done();
+  //     });
+  // });
 
   it('insert email 1 given a facility id', function(done) {
-    request.post('/api/facilityemail/facility/' + r2.insertId)
+    request.post('/api/facilityemail/facility/' + r1)
       .send({
         emailAddress: uuid.v4(),
       })
@@ -92,7 +94,7 @@ describe('facility email api', function() {
   });
 
   it('insert email 2 given a facility id', function(done) {
-    request.post('/api/facilityemail/facility/' + r2.insertId)
+    request.post('/api/facilityemail/facility/' + r1)
       .send({
         emailAddress: uuid.v4(),
       })
@@ -108,7 +110,7 @@ describe('facility email api', function() {
 
   let a1;
   it('should have 2 email addresses given a facility id', function(done) {
-    request.get('/api/facilityemail/facility/' + r2.insertId)
+    request.get('/api/facilityemail/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -125,7 +127,7 @@ describe('facility email api', function() {
   });
 
   it('should 200 for same request', function(done) {
-    request.get('/api/facilityemail/facility/' + r2.insertId)
+    request.get('/api/facilityemail/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -142,7 +144,7 @@ describe('facility email api', function() {
   });
 
   it('should delete email 1 given an email ID', function(done) {
-    request.delete('/api/facilityemail/email/' + a1)
+    request.delete('/api/facilityemail/facility/' + r1 + '/email/' + a1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -154,7 +156,7 @@ describe('facility email api', function() {
 
   let a2;
   it('should have 1 email instead of 2', function(done) {
-    request.get('/api/facilityemail/facility/' + r2.insertId)
+    request.get('/api/facilityemail/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -172,7 +174,7 @@ describe('facility email api', function() {
 
   const newemail = uuid.v4();
   it('should update an email given an email id', function(done) {
-    request.put('/api/facilityemail/email/' + a2)
+    request.put('/api/facilityemail/facility/' + r1 + '/email/' + a2)
       .send({
         emailAddress: newemail,
       })
@@ -189,7 +191,7 @@ describe('facility email api', function() {
   });
 
   it('should have an updated email', function(done) {
-    request.get('/api/facilityemail/facility/' + r2.insertId)
+    request.get('/api/facilityemail/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -205,7 +207,7 @@ describe('facility email api', function() {
   });
 
   it('should delete email 2 given an email ID', function(done) {
-    request.delete('/api/facilityemail/email/' + a2)
+    request.delete('/api/facilityemail/facility/' + r1 + '/email/' + a2)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -216,7 +218,7 @@ describe('facility email api', function() {
   });
 
   it('should have 0 address instead of 1', function(done) {
-    request.get('/api/facilityemail/facility/' + r2.insertId)
+    request.get('/api/facilityemail/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -232,7 +234,7 @@ describe('facility email api', function() {
   });
 
   it('should delete a facility given a correct facility id', function(done) {
-    request.delete('/api/facility/' + r2.insertId)
+    request.delete('/api/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
@@ -243,7 +245,7 @@ describe('facility email api', function() {
   });
 
   it('the deleted facility should not exist', function(done) {
-    request.get('/api/facility/' + r2.insertId)
+    request.get('/api/facility/' + r1)
       .expect(200)
       .set(jwt)
       .end(function(err, res) {

@@ -26,6 +26,7 @@ module.exports = function(app) {
   // validate password return true or false
   .post('/validate/', function* validateFacility() {
     const user = this.passport.user;
+    console.log(user);
     const requestJson = this.request.body;
     const facilityID = requestJson.facilityID;
     if (user.scope.facilityID === facilityID) {

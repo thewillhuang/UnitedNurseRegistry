@@ -16,19 +16,19 @@ aes.encrypt = function(string) {
   // every single iv for every single message that is encrypted will be different
   const iv = new Buffer(crypto.randomBytes(16));
   const cipher = crypto.createCipheriv(algorithm, key, iv);
-  let crypted = cipher.update(string, 'utf8', 'hex');
-  crypted += cipher.final('hex');
+  let crypted = cipher.update(string, 'utf8', 'base64');
+  crypted += cipher.final('base64');
   // console.timeEnd('encrypt');
   // convert iv to hex encoding
-  return {payload: crypted, iv: iv.toString('hex')};
+  return {payload: crypted, iv: iv.toString('base64')};
 };
 
 aes.decrypt = function(string, iv) {
   // console.time('decrypt');
   // convert iv from hex coding to a buffer, default is utf-8, will get error wrong length
-  const ivbuf = new Buffer(iv, 'hex');
+  const ivbuf = new Buffer(iv, 'base64');
   const decipher = crypto.createDecipheriv(algorithm, key, ivbuf);
-  let dec = decipher.update(string, 'hex', 'utf8');
+  let dec = decipher.update(string, 'base64', 'utf8');
   dec += decipher.final('utf8');
   // console.timeEnd('decrypt');
   return dec;

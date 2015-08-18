@@ -49,11 +49,10 @@ describe('facility api', function() {
       .set(jwt)
       .expect(200)
       .end(function(err, res) {
-        console.log(res.headers);
+        // console.log(res.headers);
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
-        expect(res.body.rows).to.be.empty;
-        expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        expect(res.body.message).to.equal('no permission');
         expect(err).to.be.a('null');
         done();
       });
@@ -90,6 +89,8 @@ describe('facility api', function() {
       .set(jwt)
       .expect(200)
       .end(function(err, res) {
+        console.log(res.headers);
+        console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.success).to.equal(true);
         expect(err).to.be.a('null');

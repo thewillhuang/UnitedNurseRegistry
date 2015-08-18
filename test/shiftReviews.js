@@ -187,35 +187,6 @@ describe('shift reviews api', function() {
       });
   });
 
-  it('should update shift status to pending', function(done) {
-    request.post('/api/shiftstatus/pending/shift/' + s1.insertId + '/user/' + u1)
-      .expect(200)
-      .set(u1jwt)
-      .end(function(err, res) {
-        expect(res.body).to.be.an('object');
-        expect(res.body.rows).to.be.not.empty;
-        expect(res.body.rows.affectedRows).to.equal(1);
-        expect(res.body.rows).to.be.an('object');
-        expect(err).to.be.null;
-        done();
-      });
-  });
-
-  it('should update shift status to completed', function(done) {
-    request.post('/api/shiftstatus/completed/shift/' + s1.insertId)
-      .expect(200)
-      .set(u1jwt)
-      .end(function(err, res) {
-        // console.log(res.body);
-        expect(res.body).to.be.an('object');
-        expect(res.body.rows).to.be.not.empty;
-        expect(res.body.rows.affectedRows).to.equal(1);
-        expect(res.body.rows).to.be.an('object');
-        expect(err).to.be.null;
-        done();
-      });
-  });
-
   // user review tests
   it('should post a user review of 5', function(done) {
     request.post('/api/shiftreview/user/' + u1 + '/shift/' + s1.insertId)

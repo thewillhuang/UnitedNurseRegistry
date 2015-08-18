@@ -2,7 +2,7 @@
 
 const Router = require('koa-router');
 const facilityphone = new Router({
-  prefix: '/api/facilityphone'
+  prefix: '/api/facilityphone',
 });
 const query = require('../services/query');
 const getTransaction = require('../services/getTransaction');
@@ -11,61 +11,78 @@ const Promise = require('bluebird');
 module.exports = function(app) {
   facilityphone
 
-  //create new facility phone with facility id
+  // create new facility phone with facility id
   .post('/facility/:facilityID', function* () {
-    let facilityID = this.params.facilityID;
-    let requestJson = this.request.body;
-    let q = {};
-    q.sql = 'INSERT INTO ?? SET ?';
-    q.values = ['phone', requestJson];
-    this.body = yield Promise.using(getTransaction(), function(tx){
-      return tx.queryAsync(q).spread(function(rows, fields){
-        return {rows, fields};
-      }).then(function(result){
-        // console.log(result);
-        let phone = {};
-        phone.fk_FacilityPhone_facilityID = facilityID;
-        phone.fk_FacilityPhone_phoneID = result.rows.insertId;
-        let q2 = {};
-        q2.sql = 'INSERT INTO ?? SET ?';
-        q2.values = ['facilityphone', phone];
-        return q2;
-      }).then(function(q2){
-        return tx.queryAsync(q2).spread(function(rows, fields){
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID.toString() === facilityID) {
+      const requestJson = this.request.body;
+      const q = {};
+      q.sql = 'INSERT INTO ?? SET ?';
+      q.values = ['phone', requestJson];
+      this.body = yield Promise.using(getTransaction(), function(tx) {
+        return tx.queryAsync(q).spread(function(rows, fields) {
           return {rows, fields};
+        }).then(function(result) {
+          // console.log(result);
+          const phone = {};
+          phone.fk_FacilityPhone_facilityID = facilityID;
+          phone.fk_FacilityPhone_phoneID = result.rows.insertId;
+          const q2 = {};
+          q2.sql = 'INSERT INTO ?? SET ?';
+          q2.values = ['facilityphone', phone];
+          return q2;
+        }).then(function(q2) {
+          return tx.queryAsync(q2).spread(function(rows, fields) {
+            return {rows, fields};
+          });
+        }).catch(function(error) {
+          return error;
         });
-      }).catch(function(error){
-        return error;
       });
-    });
+    } else {
+      this.body = {message: 'no permission'};
+    }
   })
 
-  //grab facility phone based on facility id
+  // grab facility phone based on facility id
   .get('/facility/:facilityID', function* () {
-    let facilityID = this.params.facilityID;
-    let q = {};
+    const facilityID = this.params.facilityID;
+    const q = {};
     q.sql = 'SELECT p.* FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
     q.values = ['phone', 'p', 'facilityphone', 'fp', 'fp.fk_FacilityPhone_phoneID', 'p.phoneID', 'fp.fk_FacilityPhone_facilityID', facilityID];
     this.body = yield query(q);
   })
 
   // update facility phone based on phone ID
-  .put('/phone/:phoneID', function* () {
-    let requestJson = this.request.body;
-    let phoneID = this.params.phoneID;
-    let q = {};
-    q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-    q.values = ['phone', requestJson, 'phoneID', phoneID];
-    this.body = yield query(q);
+  .put('/facility/:facilityID/phone/:phoneID', function* () {
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID.toString() === facilityID) {
+      const requestJson = this.request.body;
+      const phoneID = this.params.phoneID;
+      const q = {};
+      q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+      q.values = ['phone', requestJson, 'phoneID', phoneID];
+      this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
+    }
   })
 
   // delete phone by phone id
-  .delete('/phone/:phoneID', function* () {
-    let phoneID = this.params.phoneID;
-    let q = {};
-    q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-    q.values = ['phone', 'phoneID', phoneID];
-    this.body = yield query(q);
+  .delete('/facility/:facilityID/phone/:phoneID', function* () {
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID.toString() === facilityID) {
+      const phoneID = this.params.phoneID;
+      const q = {};
+      q.sql = 'DELETE FROM ?? WHERE ?? = ?';
+      q.values = ['phone', 'phoneID', phoneID];
+      this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
+    }
   });
 
   app.use(facilityphone.routes())

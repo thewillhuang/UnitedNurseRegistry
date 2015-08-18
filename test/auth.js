@@ -16,6 +16,8 @@ describe('authentication api', function() {
   const email3 = uuid.v4();
   const password3 = uuid.v4();
 
+  let u1;
+  let u1jwt;
   it('should signup with /signup', function(done) {
     request.post('/api/auth/signup')
       .send({
@@ -27,6 +29,8 @@ describe('authentication api', function() {
         // console.log(res.headers.authorization.split(' ').pop());
         // console.log(res.headers);
         // console.log(res.body);
+        u1jwt = { Authorization: res.headers.authorization };
+        u1 = res.body.message.scope.userID;
         expect(res.body).to.be.an('object');
         expect(res.headers.authorization).to.be.a('string');
         expect(res.headers.authorization).to.contain('Bearer');
@@ -35,6 +39,8 @@ describe('authentication api', function() {
       });
   });
 
+  let f1;
+  let f1jwt;
   it('should signup facility with /signup', function(done) {
     request.post('/api/auth/facility/signup')
       .send({
@@ -46,6 +52,8 @@ describe('authentication api', function() {
         // console.log(res.headers.authorization.split(' ').pop());
         // console.log(res.headers);
         // console.log(res.body);
+        f1jwt = { Authorization: res.headers.authorization };
+        f1 = res.body.message.scope.facilityID;
         expect(res.body).to.be.an('object');
         expect(res.headers.authorization).to.be.a('string');
         expect(res.headers.authorization).to.contain('Bearer');
@@ -198,6 +206,56 @@ describe('authentication api', function() {
       .end(function(err, res) {
         expect(res.headers.location).to.equal('/');
         expect(res.headers.authorization).to.be.undefined;
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should delete a user given a correct user id', function(done) {
+    request.delete('/api/user/' + u1)
+      .expect(200)
+      .set(u1jwt)
+      .end(function(err, res) {
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('the deleted user should not exist', function(done) {
+    request.get('/api/user/' + u1)
+      .expect(200)
+      .set(u1jwt)
+      .end(function(err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should delete a facility given a correct facility id', function(done) {
+    request.delete('/api/facility/' + f1)
+      .expect(200)
+      .set(f1jwt)
+      .end(function(err, res) {
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('the deleted facility should not exist', function(done) {
+    request.get('/api/facility/' + f1)
+      .expect(200)
+      .set(f1jwt)
+      .end(function(err, res) {
+        expect(res.body).to.be.an('object');
+        expect(res.body.rows).to.be.empty;
+        expect(res.body.rows).to.be.an('array');
+        expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });

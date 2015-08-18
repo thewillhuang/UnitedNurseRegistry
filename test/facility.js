@@ -176,7 +176,7 @@ describe('facility api', function() {
       });
   });
 
-  it('the deconsted facility should not exist', function(done) {
+  it('the deleted facility should not exist', function(done) {
     request.get('/api/facility/' + r1)
       .expect(200)
       .set(jwt)

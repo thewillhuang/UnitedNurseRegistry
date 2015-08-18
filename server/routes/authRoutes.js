@@ -30,7 +30,7 @@ module.exports = function authRoutes(app) {
         ctx.passport.user = user;
         const token = jwt.encryptSign(user);
         ctx.set({ Authorization: 'Bearer ' + token });
-        ctx.body = {message: info};
+        ctx.body = {message: user};
       }
     }).call(this, next);
   })
@@ -47,7 +47,7 @@ module.exports = function authRoutes(app) {
         const token = jwt.encryptSign(user);
         ctx.passport.user = user;
         ctx.set({ Authorization: 'Bearer ' + token });
-        ctx.body = {message: info};
+        ctx.body = {message: user};
       }
     }).call(this, next);
   })
@@ -64,7 +64,7 @@ module.exports = function authRoutes(app) {
         const token = jwt.encryptSign(user);
         ctx.passport.user = user;
         ctx.set({ Authorization: 'Bearer ' + token });
-        ctx.body = {message: info};
+        ctx.body = {message: user};
       }
     }).call(this, next);
   })
@@ -82,7 +82,7 @@ module.exports = function authRoutes(app) {
         const token = jwt.encryptSign(user);
         ctx.passport.user = user;
         ctx.set({ Authorization: 'Bearer ' + token });
-        ctx.body = {message: info};
+        ctx.body = {message: user};
       }
     }).call(this, next);
   })
@@ -99,7 +99,7 @@ module.exports = function authRoutes(app) {
         const token = jwt.encryptSign(user);
         ctx.passport.user = user;
         ctx.set({ Authorization: 'Bearer ' + token });
-        ctx.body = {message: info};
+        ctx.body = {message: user};
       }
     }).call(this, next);
   })

@@ -24,7 +24,7 @@ const write = function(filepath) {
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(sourcemaps.init({loadMaps: true, debug: true}))
       .pipe(buffer())
-      .pipe(size({ showFiles: true }))
+      .pipe(size({ showFiles: true, title: 'factor-bundle' }))
       .pipe(sourcemaps.write())
       .pipe(gulp.dest(dest))
       .pipe(browserSync.reload({ stream: true }));

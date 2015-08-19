@@ -8,7 +8,7 @@ var size = require('gulp-size');
 gulp.task('markup', function() {
   return gulp.src(config.src)
     .pipe(changed(config.dest)) // Ignore unchanged files
-    .pipe(size({showFiles: true}))
+    .pipe(size({showFiles: true, title: 'markup'}))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({
       stream: true

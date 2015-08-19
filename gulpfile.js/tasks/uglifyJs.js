@@ -15,6 +15,6 @@ gulp.task('uglifyJs', ['browserify', 'copy'], function() {
     .pipe(sourcemaps.init({loadMaps: true, debug: true}))
     .pipe(uglify())
     .pipe(sourcemaps.write('./'))
-    .pipe(size({showFiles: true}))
+    .pipe(size({showFiles: true, title: 'uglify'}))
     .pipe(gulp.dest(config.dest));
 });

@@ -10,7 +10,7 @@ gulp.task('minifyHtml', ['sass', 'markup'], function() {
   return gulp.src(config.src, config.srcBase)
     // .pipe(inlineCss())
     .pipe(minifyHTML(config.opts))
-    .pipe(size({showFiles: true}))
+    .pipe(size({showFiles: true, title: 'minifyHtml'}))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({
       stream: true

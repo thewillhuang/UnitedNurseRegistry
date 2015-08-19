@@ -28,7 +28,7 @@ gulp.task('sass', ['clean'], function() {
     // Write final .map file
     .pipe(sourcemaps.write())
     // Save the CSS
-    .pipe(size({showFiles: true}))
+    .pipe(size({showFiles: true, title: 'scss'}))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({
       stream: true

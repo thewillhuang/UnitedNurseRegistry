@@ -75,13 +75,13 @@ module.exports = function(app) {
   .delete('/:facilityID', function* () {
     const facilityID = this.params.facilityID;
     const user = this.passport.user;
-    if (user.scope.facilityID.toString() !== facilityID) {
-      this.body = {message: 'no permission'};
-    } else {
+    if (user.scope.facilityID.toString() === facilityID) {
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ?';
       q.values = ['facility', 'facilityID', facilityID];
       this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
     }
   });
 

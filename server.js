@@ -1,4 +1,5 @@
 'use strict';
+
 const koa = require('koa');
 const app = module.exports = koa();
 const port = process.env.PORT || 3000;

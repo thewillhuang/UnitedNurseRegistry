@@ -1,7 +1,7 @@
 'use strict';
 const dest = './public';
 const src = './app';
-const jsDest = dest + '/js';
+// const jsDest = dest + '/js';
 const test = './test';
 // important lesson, always just use the base directory for gulp.dest, anything else will fuck up sourcemaps
 // and or other weird settings, giving you useless grief
@@ -31,7 +31,7 @@ module.exports = {
     env: { 'NODE_ENV': 'development' },
   },
   sass: {
-    src: src + '/css/**/*.{sass,scss}',
+    src: src + '/stylesheets/**/*.{sass,scss}',
     dest: dest,
     base: {base: src},
     settings: {
@@ -59,7 +59,7 @@ module.exports = {
     src: [
       src + '/**/*',
       '!' + src + '/images/**/*',
-      '!' + src + '/css/**/*.{sass,scss}',
+      '!' + src + '/stylesheets/**/*.{sass,scss}',
       '!' + src + '/**/*.html',
       '!' + src + '/**/*.jsx',
       '!' + src + '/js/react/**/*',
@@ -88,52 +88,10 @@ module.exports = {
     // bundle config in the list below
     bundleConfigs: [
       // {
-      //   entries: src + '/javascript/global.coffee',
-      //   dest: dest,
-      //   outputName: 'global.js',
-      //   // Additional file extentions to make optional
-      //   extensions: ['.coffee', '.hbs'],
-      //   // list of modules to make require-able externally
-      //   require: ['jquery', 'underscore']
-      // },
-      // {
-      //   entries: src + '/javascript/page.js',
-      //   dest: dest,
-      //   outputName: 'page.js'
-      //   // list of externally available modules to exclude from the bundle
-      //   external: ['jquery', 'underscore']
-      // },
-      // {
-      //   entries: src + '/js/common.js',
+      //   entries: src + '/js/notification.js',
       //   dest: jsDest,
-      //   outputName: 'common.js',
-      //   require: ['react', 'jquery', 'moment', 'socket.io-client', 'react-bootstrap', 'node-uuid', 'keymirror', 'flux', 'object-assign', 'events']
+      //   outputName: 'notification.js',
       // },
-      {
-        entries: src + '/js/notification.js',
-        dest: jsDest,
-        outputName: 'notification.js',
-      }, {
-        entries: src + '/js/activate.js',
-        dest: jsDest,
-        outputName: 'activate.js',
-      }, {
-        entries: src + '/js/dashboardWidgets.js',
-        dest: jsDest,
-        outputName: 'dashboardWidgets.js',
-      }, {
-        entries: src + '/js/uploader.js',
-        dest: jsDest,
-        outputName: 'uploader.js',
-      }, {
-        entries: src + '/js/requestRecords.js',
-        dest: jsDest,
-        outputName: 'requestRecords.js',
-      }, {
-        entries: src + '/js/clientValidate.js',
-        dest: jsDest,
-        outputName: 'clientValidate.js',
-      },
     ],
   },
   gzip: {

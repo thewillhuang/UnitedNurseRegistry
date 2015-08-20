@@ -53,7 +53,10 @@ module.exports = {
     },
   },
   clean: {
-    src: [dest + '/**/*.{js,css,map,gz,jsx}'],
+    src: [
+      dest + '/**/*.{js,css,map,gz,jsx}',
+      '!' + dest + '/plugins/**/*',
+    ],
   },
   copy: {
     src: [

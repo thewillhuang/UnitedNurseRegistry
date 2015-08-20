@@ -1,7 +1,7 @@
 'use strict';
 const dest = './public';
 const src = './app';
-// const jsDest = dest + '/js';
+const jsDest = dest + '/js';
 const test = './test';
 // important lesson, always just use the base directory for gulp.dest, anything else will fuck up sourcemaps
 // and or other weird settings, giving you useless grief
@@ -53,7 +53,7 @@ module.exports = {
     },
   },
   clean: {
-    src: [dest + '/**/*.{js,css,map,gz}'],
+    src: [dest + '/**/*.{js,css,map,gz,jsx}'],
   },
   copy: {
     src: [
@@ -62,7 +62,7 @@ module.exports = {
       '!' + src + '/stylesheets/**/*.{sass,scss}',
       '!' + src + '/**/*.html',
       '!' + src + '/**/*.jsx',
-      '!' + src + '/js/react/**/*',
+      '!' + src + '/js/components/**/*',
     ], // '!' must be a string
     dest: dest,
     base: {
@@ -87,11 +87,11 @@ module.exports = {
     // A separate bundle will be generated for each
     // bundle config in the list below
     bundleConfigs: [
-      // {
-      //   entries: src + '/js/notification.js',
-      //   dest: jsDest,
-      //   outputName: 'notification.js',
-      // },
+      {
+        entries: src + '/js/index.js',
+        dest: jsDest,
+        outputName: 'index.js',
+      },
     ],
   },
   gzip: {

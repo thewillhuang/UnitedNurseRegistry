@@ -1,12 +1,11 @@
 'use strict';
-var gulp = require('gulp');
-var config = require('../config/config').production;
-var size = require('gulp-size');
-var uglify = require('gulp-uglify');
-var buffer = require('vinyl-buffer');
-var uglify = require('gulp-uglify');
-var sourcemaps = require('gulp-sourcemaps');
-var gutil = require('gulp-util');
+const gulp = require('gulp');
+const config = require('../config/config').production;
+const size = require('gulp-size');
+const uglify = require('gulp-uglify');
+const buffer = require('vinyl-buffer');
+const sourcemaps = require('gulp-sourcemaps');
+const gutil = require('gulp-util');
 
 gulp.task('uglifyJs', ['browserify', 'copy'], function() {
   return gulp.src(config.jsSrc, config.jsBase)

@@ -1,16 +1,16 @@
 'use strict';
 
-var changed = require('gulp-changed');
-var gulp = require('gulp');
-var imagemin = require('gulp-imagemin');
-var config = require('../config/config').images;
-var browserSync = require('browser-sync');
-var size = require('gulp-size');
+const changed = require('gulp-changed');
+const gulp = require('gulp');
+const imagemin = require('gulp-imagemin');
+const config = require('../config/config').images;
+const browserSync = require('browser-sync');
+const size = require('gulp-size');
 
-var opt = {
+const opt = {
   optimizationLevel: 5,
   progressive: true,
-  interlaced: true
+  interlaced: true,
 };
 
 gulp.task('images', function() {
@@ -20,6 +20,6 @@ gulp.task('images', function() {
     .pipe(size({showFiles: true, title: 'images'}))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({
-      stream: true
+      stream: true,
     }));
 });

@@ -1,9 +1,9 @@
 'use strict';
-var gulp = require('gulp');
-var config = require('../config/config').markup;
-var browserSync = require('browser-sync');
-var changed = require('gulp-changed');
-var size = require('gulp-size');
+const gulp = require('gulp');
+const config = require('../config/config').markup;
+const browserSync = require('browser-sync');
+const changed = require('gulp-changed');
+const size = require('gulp-size');
 
 gulp.task('markup', function() {
   return gulp.src(config.src)
@@ -11,6 +11,6 @@ gulp.task('markup', function() {
     .pipe(size({showFiles: true, title: 'markup'}))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({
-      stream: true
+      stream: true,
     }));
 });

@@ -1,13 +1,13 @@
 'use strict';
 
-var browserSync = require('browser-sync');
-var gulp = require('gulp');
-var nodemon = require('gulp-nodemon');
-var config = require('../config/config.js');
-var BROWSER_SYNC_RELOAD_DELAY = 500;
+const browserSync = require('browser-sync');
+const gulp = require('gulp');
+const nodemon = require('gulp-nodemon');
+const config = require('../config/config.js');
+const BROWSER_SYNC_RELOAD_DELAY = 500;
 
 gulp.task('nodemon', function(cb) {
-  var called = false;
+  const called = false;
   return nodemon(config.nodemon)
     .on('start', function onStart() {
       // ensure start only got called once
@@ -21,15 +21,15 @@ gulp.task('nodemon', function(cb) {
       console.error(error);
       this.emit('end');
     })
-    .on('exit', function(){
+    .on('exit', function() {
       console.log('server stopped');
     })
     .on('restart', function onRestart() {
-      console.log('reload server')
+      console.log('reload server');
       // reload connected browsers after a slight delay
       setTimeout(function reload() {
         browserSync.reload({
-          stream: false   //
+          stream: false,
         });
       }, BROWSER_SYNC_RELOAD_DELAY);
     });

@@ -5,7 +5,7 @@ import mui from 'material-ui';
 import { HomeToolBar } from './homeToolBar.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 
-export class Login extends React.Component {
+export class Signup extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -19,7 +19,7 @@ export class Login extends React.Component {
       <div>
         <HomeToolBar />
         <h3>
-          Login
+          Signup
         </h3>
       </div>
     );

@@ -95,6 +95,26 @@ module.exports = {
         dest: jsDest,
         outputName: 'index.js',
       },
+      // {
+      //   entries: src + '/js/components/app.jsx',
+      //   dest: jsDest + '/components',
+      //   outputName: 'app.js',
+      // },
+      // {
+      //   entries: src + '/js/components/home.jsx',
+      //   dest: jsDest + '/components',
+      //   outputName: 'home.js',
+      // },
+      // {
+      //   entries: src + '/js/components/login.jsx',
+      //   dest: jsDest + '/components',
+      //   outputName: 'login.js',
+      // },
+      // {
+      //   entries: src + '/js/components/signup.jsx',
+      //   dest: jsDest + '/components',
+      //   outputName: 'signup.js',
+      // },
     ],
   },
   gzip: {

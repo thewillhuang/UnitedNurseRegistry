@@ -1,11 +1,11 @@
 'use strict';
 
 import React from 'react';
-import mui from 'material-ui';
+import mui, { Card, CardHeader, Avatar } from 'material-ui';
 import { HomeToolBar } from './homeToolBar.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 
-export class Login extends React.Component {
+export class Home extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -18,9 +18,12 @@ export class Login extends React.Component {
     return (
       <div>
         <HomeToolBar />
-        <h3>
-          Login
-        </h3>
+        <Card>
+          <CardHeader
+              title='Title'
+              subtitle='Subtitle'
+              avatar={<Avatar>A</Avatar>}/>
+        </Card>
       </div>
     );
   }

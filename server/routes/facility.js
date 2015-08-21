@@ -57,7 +57,7 @@ module.exports = function(app) {
   .put('/:facilityID', function* () {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const requestJson = this.request.body;
       const password = requestJson.facilityPwHash;
       delete requestJson.facilityPwHash;
@@ -75,7 +75,7 @@ module.exports = function(app) {
   .delete('/:facilityID', function* () {
     const facilityID = this.params.facilityID;
     const user = this.passport.user;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ?';
       q.values = ['facility', 'facilityID', facilityID];

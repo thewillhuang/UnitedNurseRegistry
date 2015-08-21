@@ -16,7 +16,7 @@ module.exports = function shiftRoutes(app) {
     const requestJson = this.request.body;
     const facilityID = this.params.facilityID;
     const specialtyID = requestJson.specialtyID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       delete requestJson.specialtyID;
       delete requestJson.facilityID;
       delete requestJson.open;
@@ -106,7 +106,7 @@ module.exports = function shiftRoutes(app) {
     const user = this.passport.user;
     const requestJson = this.request.body;
     const facilityID = this.params.facilityID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const specialtyID = requestJson.specialtyID;
       if (specialtyID) {
         delete requestJson.specialtyID;
@@ -136,7 +136,7 @@ module.exports = function shiftRoutes(app) {
   .delete('/facility/:facilityID/shift/:shiftID', function* deleteShiftByShiftID() {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const shiftID = this.params.shiftID;
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ?';

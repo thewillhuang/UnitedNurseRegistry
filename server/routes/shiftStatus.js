@@ -23,7 +23,7 @@ module.exports = function shiftStatusRoutes(app) {
   .post('/viewed/shift/:shiftID/user/:userID', function* addViews() {
     const user = this.passport.user;
     const userID = this.params.userID;
-    if (user.scope.userID.toString() === userID) {
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
       const shiftID = this.params.shiftID;
       const payload = {
         fk_ShiftViewed_shiftID: shiftID,
@@ -51,7 +51,7 @@ module.exports = function shiftStatusRoutes(app) {
   .post('/completed/shift/:shiftID/facility/:facilityID', function* markAsComplete() {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const shiftID = this.params.shiftID;
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ? AND ?? = ?';
@@ -67,7 +67,7 @@ module.exports = function shiftStatusRoutes(app) {
   .post('/pending/shift/:shiftID/user/:userID/facility/:facilityID', function* markAsPending() {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const userID = this.params.userID;
       const shiftID = this.params.shiftID;
       const q = {};
@@ -84,7 +84,7 @@ module.exports = function shiftStatusRoutes(app) {
   .post('/open/shift/:shiftID/facility/:facilityID', function* markAsOpen() {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const shiftID = this.params.shiftID;
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ? AND ?? = ?';

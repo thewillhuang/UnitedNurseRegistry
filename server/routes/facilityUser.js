@@ -15,7 +15,7 @@ module.exports = function(app) {
   .post('/facility/:facilityID', function* () {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const requestJson = this.request.body;
       // console.log(requestJson);
       const q = {};
@@ -50,7 +50,7 @@ module.exports = function(app) {
   .get('/facility/:facilityID', function* () {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const q = {};
       q.sql = 'SELECT ?? FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
       const select = [
@@ -74,7 +74,7 @@ module.exports = function(app) {
   .put('/facility/:facilityID/user/:userID', function* () {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const requestJson = this.request.body;
       const userID = this.params.userID;
       const q = {};
@@ -90,7 +90,7 @@ module.exports = function(app) {
   .delete('/facility/:facilityID/user/:userID', function* () {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const userID = this.params.userID;
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ?';

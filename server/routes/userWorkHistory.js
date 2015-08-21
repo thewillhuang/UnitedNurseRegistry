@@ -13,7 +13,7 @@ module.exports = function(app) {
   .post('/user/:userID/facility/:facilityID', function* () {
     const user = this.passport.user;
     const userID = this.params.userID;
-    if (user.scope.userID.toString() === userID) {
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
       const facilityID = this.params.facilityID;
       const requestJson = this.request.body;
       const q = {};
@@ -42,7 +42,7 @@ module.exports = function(app) {
   .put('/user/:userID/history/:userHistoryID', function* () {
     const user = this.passport.user;
     const userID = this.params.userID;
-    if (user.scope.userID.toString() === userID) {
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
       const requestJson = this.request.body;
       const userHistoryID = this.params.userHistoryID;
       const q = {};
@@ -58,7 +58,7 @@ module.exports = function(app) {
   .delete('/user/:userID/history/:userHistoryID', function* () {
     const user = this.passport.user;
     const userID = this.params.userID;
-    if (user.scope.userID.toString() === userID) {
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
       const userHistoryID = this.params.userHistoryID;
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ?';

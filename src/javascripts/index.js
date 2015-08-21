@@ -1,10 +1,10 @@
 'use strict';
 
 import React from 'react';
+import { Home } from './components/home.jsx';
 import { App } from './components/app.jsx';
 import { Login } from './components/login.jsx';
 import { Signup } from './components/signup.jsx';
-import { Home } from './components/home.jsx';
 import { Router, Route } from 'react-router';
 import { history } from 'react-router/lib/HashHistory';
 import injectTapEventPlugin from 'react-tap-event-plugin';

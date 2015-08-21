@@ -50,7 +50,7 @@ module.exports = function userRoutes(app) {
   .put('/:userID', function* updateUser() {
     const user = this.passport.user;
     const userID = this.params.userID;
-    if (user.scope.userID.toString() === userID) {
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
       const requestJson = this.request.body;
       const password = requestJson.userPwHash;
       delete requestJson.userPwHash;
@@ -68,7 +68,7 @@ module.exports = function userRoutes(app) {
   .delete('/:userID', function* deleteUser() {
     const user = this.passport.user;
     const userID = this.params.userID;
-    if (user.scope.userID.toString() === userID) {
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ?';
       q.values = ['user', 'userID', userID];

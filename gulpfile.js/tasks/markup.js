@@ -2,13 +2,12 @@
 const gulp = require('gulp');
 const config = require('../config/markup');
 const browserSync = require('browser-sync');
-const changed = require('gulp-changed');
 const minifyHTML = require('gulp-minify-html');
 const gulpif       = require('gulp-if');
 
+console.log('markup env', process.env.NODE_ENV);
 gulp.task('markup', function() {
   return gulp.src(config.src)
-    .pipe(changed(config.dest)) // Ignore unchanged files
     .pipe(gulpif(process.env.NODE_ENV === 'production', minifyHTML()))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({

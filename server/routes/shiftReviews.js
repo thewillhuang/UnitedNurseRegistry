@@ -13,7 +13,7 @@ module.exports = function shiftReviewRoutes(app) {
   .post('/user/:userID/shift/:shiftID', function* createUserReview() {
     const user = this.passport.user;
     const userID = this.params.userID;
-    if (user.scope.userID.toString() === userID) {
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
       const shiftID = this.params.shiftID;
       const requestJson = this.request.body;
       requestJson.fk_ShiftReviewOnUser_userID = userID;
@@ -32,7 +32,7 @@ module.exports = function shiftReviewRoutes(app) {
   .put('/user/:userID/shift/:shiftID', function* updateUserReview() {
     const user = this.passport.user;
     const userID = this.params.userID;
-    if (user.scope.userID.toString() === userID) {
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
       const shiftID = this.params.shiftID;
       const requestJson = this.request.body;
       const q = {};
@@ -65,7 +65,7 @@ module.exports = function shiftReviewRoutes(app) {
   .delete('/user/:userID/shift/:shiftID', function* deleteUserReview() {
     const user = this.passport.user;
     const userID = this.params.userID;
-    if (user.scope.userID.toString() === userID) {
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
       const shiftID = this.params.shiftID;
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ? AND ?? = ?';
@@ -80,7 +80,7 @@ module.exports = function shiftReviewRoutes(app) {
   .post('/facility/:facilityID/shift/:shiftID', function* createFacilityReview() {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const shiftID = this.params.shiftID;
       const requestJson = this.request.body;
       requestJson.fk_ShiftReviewOnFacility_facilityID = facilityID;
@@ -98,7 +98,7 @@ module.exports = function shiftReviewRoutes(app) {
   .put('/facility/:facilityID/shift/:shiftID', function* updateFacilityReview() {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const shiftID = this.params.shiftID;
       const requestJson = this.request.body;
       const q = {};
@@ -132,7 +132,7 @@ module.exports = function shiftReviewRoutes(app) {
   .delete('/facility/:facilityID/shift/:shiftID', function* deleteFacilityReview() {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
-    if (user.scope.facilityID.toString() === facilityID) {
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const shiftID = this.params.shiftID;
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ? AND ?? = ?';

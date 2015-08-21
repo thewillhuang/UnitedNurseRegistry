@@ -69,11 +69,6 @@ module.exports = function(env) {
     webpack.debug = true;
     webpackConfig.plugins.push(
       // new webpackManifest(publicPath, 'public'),
-      new webpack.DefinePlugin({
-        'process.env': {
-          'NODE_ENV': JSON.stringify('production'),
-        },
-      }),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin(),
       // new webpack.optimize.AggressiveMergingPlugin(),

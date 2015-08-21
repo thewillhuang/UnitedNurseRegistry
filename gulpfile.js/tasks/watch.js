@@ -1,15 +1,19 @@
-'use strict';
-/* Notes:
-   - gulp/tasks/browserify.js handles js recompiling with watchify
-   - gulp/tasks/browserSync.js watches and reloads compiled files
-*/
-const gulp = require('gulp');
-const config = require('../config/config');
-// const watchify = require('./browserify');
+var gulp      = require('gulp');
+var html      = require('../config/html');
+var markup      = require('../config/markup');
+var iconFont  = require('../config/iconFont');
+var svgSprite = require('../config/svg-sprite');
+var images    = require('../config/images');
+var sass      = require('../config/sass');
+var fonts     = require('../config/fonts');
+var watch     = require('gulp-watch');
 
-gulp.task('watch', ['watchify', 'browserSync'], function() {
-  gulp.watch(config.sass.src, ['sass']);
-  gulp.watch(config.images.src, ['images']);
-  gulp.watch(config.markup.src, ['markup']);
-  gulp.watch(config.copy.src, ['copy']);
+gulp.task('watch', ['browserSync'], function() {
+  watch(images.src, function() { gulp.start('images'); });
+  watch(sass.src, function() { gulp.start('sass'); });
+  watch(iconFont.src, function() { gulp.start('iconFont'); });
+  watch(svgSprite.src, function() { gulp.start('svg-sprite'); });
+  watch(fonts.src, function() { gulp.start('fonts'); });
+  watch(html.watch, function() { gulp.start('html'); });
+  watch(markup.watch, function() { gulp.start('markup'); });
 });

@@ -1,25 +1,13 @@
-'use strict';
-
-const changed = require('gulp-changed');
-const gulp = require('gulp');
-const imagemin = require('gulp-imagemin');
-const config = require('../config/config').images;
-const browserSync = require('browser-sync');
-const size = require('gulp-size');
-
-const opt = {
-  optimizationLevel: 5,
-  progressive: true,
-  interlaced: true,
-};
+var browserSync = require('browser-sync');
+var changed     = require('gulp-changed');
+var config      = require('../config/images');
+var gulp        = require('gulp');
+var imagemin    = require('gulp-imagemin');
 
 gulp.task('images', function() {
-  return gulp.src(config.src, config.base)
+  return gulp.src(config.src)
     .pipe(changed(config.dest)) // Ignore unchanged files
-    .pipe(imagemin(opt)) // Optimize
-    .pipe(size({showFiles: true, title: 'images'}))
+    .pipe(imagemin()) // Optimize
     .pipe(gulp.dest(config.dest))
-    .pipe(browserSync.reload({
-      stream: true,
-    }));
+    .pipe(browserSync.reload({stream:true}));
 });

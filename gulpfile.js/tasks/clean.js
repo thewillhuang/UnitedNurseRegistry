@@ -1,9 +1,13 @@
-'use strict';
+var gulp = require('gulp');
+var del = require('del');
+var config = require('../config');
+var htmlConfig = require('../config/html');
+var iconFontConfig = require('../config/iconFont');
 
-const config = require('../config/config').clean;
-const gulp = require('gulp');
-const del = require('del');
-
-gulp.task('clean', function() {
-  del(config.src, {read: false});
+gulp.task('clean', function (cb) {
+  del([
+    config.publicAssets,
+    htmlConfig.dest,
+    iconFontConfig.sassDest
+  ], {read: false}, cb);
 });

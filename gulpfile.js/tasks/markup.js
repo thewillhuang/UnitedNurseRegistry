@@ -1,14 +1,15 @@
 'use strict';
 const gulp = require('gulp');
-const config = require('../config/config').markup;
+const config = require('../config/markup');
 const browserSync = require('browser-sync');
 const changed = require('gulp-changed');
-const size = require('gulp-size');
+const minifyHTML = require('gulp-minify-html');
+const gulpif       = require('gulp-if');
 
 gulp.task('markup', function() {
   return gulp.src(config.src)
     .pipe(changed(config.dest)) // Ignore unchanged files
-    .pipe(size({showFiles: true, title: 'markup'}))
+    .pipe(gulpif(process.env.NODE_ENV === 'production', minifyHTML()))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({
       stream: true,

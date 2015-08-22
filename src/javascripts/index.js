@@ -5,7 +5,6 @@ import { Home } from './components/home.jsx';
 import { Router, Route } from 'react-router';
 import { history } from 'react-router/lib/HashHistory';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-
 injectTapEventPlugin();
 
 class UNRApp extends React.Component {

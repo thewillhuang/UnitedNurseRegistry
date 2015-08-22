@@ -1,10 +1,11 @@
 'use strict';
 
 import React from 'react';
-import mui, {Card, TextField, CardActions, RaisedButton } from 'material-ui';
+import mui from 'material-ui';
 import { HomeToolBar } from './homeToolBar.jsx';
 import { Footer } from './footer.jsx';
 import { FeatureGrid } from './featureGrid.jsx';
+import { SignupBox } from './signupBox.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 
 export class Home extends React.Component {
@@ -23,34 +24,26 @@ export class Home extends React.Component {
         <div className='alpha'>
           <HomeToolBar/>
           <div className='beta'>
+
             <div className='slogan'>
               <h1>
                 The Best place to find on-demand shifts from the hospital.
               </h1>
             </div>
+
             <div className='home-signup'>
               <h3>
                 Signup
               </h3>
-              <Card>
-                <div className='signup-wrapper'>
-                  <TextField floatingLabelText='Email Address' hintText='Email'/>
-                  <TextField floatingLabelText='Password' hintText='Password' type='password'/>
-                  <CardActions>
-                    <div className='signupbutton'>
-                      <RaisedButton label='Signup' secondary={true}/>
-                    </div>
-                  </CardActions>
-                </div>
-              </Card>
+              <SignupBox />
             </div>
+
           </div>
+
         </div>
 
         <FeatureGrid />
-
         <Footer/>
-
       </div>
     );
   }

@@ -70,11 +70,11 @@ export class HomeToolBar extends React.Component {
             <IconMenu iconButtonElement={
                 <IconButton iconClassName='fa fa-bars' tooltip='Menu'/>
               }>
+              <MenuItem onClick={() => {this.onMenuTap('home'); }} primaryText='Home' />
+              <MenuDivider/>
               <MenuItem onClick={() => {this.onMenuTap('login'); }} primaryText='Login' />
               <MenuItem onClick={() => {this.onMenuTap('signup'); }} primaryText='Signup' />
               <MenuItem onClick={() => {this.onMenuTap('hospitals'); }} primaryText='Hospitals'/ >
-              <MenuDivider/>
-              <MenuItem onClick={() => {this.onMenuTap('home'); }} primaryText='Home' />
             </IconMenu>
             } title='Dream Crew'/>
         </MediaQuery>

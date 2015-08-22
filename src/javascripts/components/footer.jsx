@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import mui from 'material-ui';
+import mui, { FontIcon } from 'material-ui';
 const ThemeManager = new mui.Styles.ThemeManager();
 
 export class Footer extends React.Component {
@@ -42,17 +42,17 @@ export class Footer extends React.Component {
           <ul className='footer-social'>
             <li>
               <a href=''>
-                <img alt='Facebook' src='https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/facebook-logo-circle.png'/>
+                <FontIcon className='fa fa-facebook-official' hoverColor={'#FFFFFF'} color={'light-grey'}/>
               </a>
             </li>
             <li>
               <a href=''>
-                <img alt='Twitter' src='https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/twitter-logo-circle.png'/>
+                <FontIcon className='fa fa-twitter-square' hoverColor={'#FFFFFF'} color={'light-grey'}/>
               </a>
             </li>
             <li>
               <a href=''>
-                <img alt='YouTube' src='https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/youtube-logo-circle.png'/>
+                <FontIcon className='fa fa-google-plus-square' hoverColor={'#FFFFFF'} color={'light-grey'}/>
               </a>
             </li>
           </ul>

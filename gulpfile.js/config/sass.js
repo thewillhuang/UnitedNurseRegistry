@@ -1,7 +1,6 @@
 'use strict';
 const config = require('./');
 const neat = require('node-neat').includePaths;
-console.log(neat);
 
 module.exports = {
   autoprefixer: { browsers: ['last 2 version'] },

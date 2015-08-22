@@ -10,7 +10,6 @@ const autoprefixer = require('gulp-autoprefixer');
 const minifyCSS = require('gulp-minify-css');
 const gulpif       = require('gulp-if');
 
-console.log('sass env', process.env.NODE_ENV);
 gulp.task('sass', function() {
   return gulp.src(config.src)
     .pipe(sourcemaps.init(config.sourcemaps))

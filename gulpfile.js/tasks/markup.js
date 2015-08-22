@@ -5,7 +5,6 @@ const browserSync = require('browser-sync');
 const minifyHTML = require('gulp-minify-html');
 const gulpif       = require('gulp-if');
 
-console.log('markup env', process.env.NODE_ENV);
 gulp.task('markup', function() {
   return gulp.src(config.src)
     .pipe(gulpif(process.env.NODE_ENV === 'production', minifyHTML()))

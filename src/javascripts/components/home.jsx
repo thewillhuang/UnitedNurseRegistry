@@ -3,6 +3,7 @@
 import React from 'react';
 import mui, {Card, TextField, CardActions, RaisedButton, CardText } from 'material-ui';
 import { HomeToolBar } from './homeToolBar.jsx';
+import { Footer } from './footer.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 
 export class Home extends React.Component {
@@ -48,6 +49,7 @@ export class Home extends React.Component {
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi. Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque. Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
           </CardText>
         </Card>
+        <Footer/>
       </div>
     );
   }

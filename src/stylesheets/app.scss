@@ -1,53 +1,178 @@
 @import 'bourbon';
 @import 'neat';
-
+@import 'base/variables';
 body {
   height: 100%;
   font-family: $helvetica;
   @include clearfix();
 }
-
 .alpha {
   @include outer-container(100%);
   @include background-image(radial-gradient(#2989d8, #451e98));
   background-size: cover;
   background-repeat: no-repeat;
   height: 600px;
+  @include media($mobile) {
+    height: 700px;
+  }
 }
-
 .beta {
   padding-top: 5em;
-  @include row();
-}
 
+  // @include row();
+}
 .slogan {
   @include span-columns(5);
   text-align: center;
   @include shift(1);
   color: white;
-}
+  @include media($mobile) {
 
+    // @include reset-display;
+    margin: auto;
+    width: 90%;
+  }
+}
 .home-signup {
-  @include span-columns(4);
+  @include span-columns(6);
   @include shift(1);
   width: 350px;
+  text-align: center;
+
   // @include omega();
   color: white;
-  // @include pad(1em);
-}
 
+  // @include pad(1em);
+  @include media($mobile) {
+
+  }
+}
 .signup-wrapper {
   margin: auto;
   width: 300px;
   margin-top: 0.5em;
   padding: 1em;
+  @include media($mobile) {
+    margin: auto;
+    width: 300px;
+  }
+
   // @include span-columns(11);
 }
-
 .signupbutton {
   margin-top: 0.5em;
   margin-bottom: 1em;
   position: relative;
-  left: 160px;
+  left: 100px;
+
   // @include omega();
+}
+
+// FOOTER
+// Uncomment this for a sticky footer.
+//
+// .wrapper-for-content-outside-of-footer {
+//   min-height: 100%;
+//   height: auto !important;
+//   height: 100%;
+//   margin: 0 auto -4em;
+// }
+// html, body {
+//  height: 100%;
+// }
+// .wrapper-for-content-outside-of-footer:after {
+//   content: "";
+//   display: block;
+// }
+// .footer-2, .wrapper-for-content-outside-of-footer:after {
+//   height: 17em;
+//   @include media($large-screen) {
+//     height: 4em;
+//   }
+// }
+.footer-2 {
+  $base-spacing: 1.5em !default;
+  $action-color: #477dca !default;
+  $medium-screen: em(640) !default;
+  $large-screen: em(860) !default;
+  $footer-background: desaturate(darken($action-color, 20%), 30%);
+  $footer-color: white;
+  $footer-link-color: transparentize($footer-color, 0.6);
+  $footer-disclaimer-color: transparentize($footer-color, 0.6);
+  background: $footer-background;
+  padding: $base-spacing;
+  width: 100%;
+  display: inline-block;
+  .footer-logo {
+    margin-right: 1em;
+    margin-bottom: 1em;
+    @include media($large-screen) {
+      float: left;
+      margin-bottom: 0;
+    }
+  }
+  .footer-logo img {
+    height: 1.6em;
+  }
+  ul {
+    line-height: 1.5em;
+    margin: 0 0 1em;
+    padding: 0;
+    @include media($large-screen) {
+      float: left;
+      line-height: 1.8em;
+      margin-left: 1em;
+      margin-bottom: 0;
+    }
+  }
+  ul li {
+    list-style: none;
+    padding-right: 1em;
+    @include media($large-screen) {
+      display: inline;
+      text-align: left;
+    }
+  }
+  ul li a {
+    color: $footer-link-color;
+    text-decoration: none;
+    &:focus,
+    &:hover {
+      color: transparentize($footer-color, 0);
+    }
+  }
+  .footer-secondary-links {
+    @include media($large-screen) {
+      float: right;
+    }
+    li {
+      font-size: 0.8em;
+    }
+    ul.footer-social {
+      margin: 1em 0 0;
+      @include media($large-screen) {
+        float: right;
+        margin-top: 0;
+      }
+      li {
+        font-size: 1em;
+        float: left;
+        line-height: 0;
+        margin: 0;
+        padding-right: 0.7em;
+        &:last-child {
+          padding-right: 0;
+        }
+      }
+      img {
+        height: 1.6em;
+        opacity: 0.7;
+        padding: 1px;
+        &:focus,
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+  }
 }

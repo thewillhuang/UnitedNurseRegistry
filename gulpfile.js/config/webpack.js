@@ -37,8 +37,8 @@ module.exports = function(env) {
   if (env !== 'test') {
     // Karma doesn't need entry points or output settings
     webpackConfig.entry = {
-      page1: ['./page1.js'],
-      page2: ['./page2.js'],
+      // page1: ['./page1.js'],
+      // page2: ['./page2.js'],
       index: ['./index.js'],
     };
 
@@ -71,7 +71,6 @@ module.exports = function(env) {
       // new webpackManifest(publicPath, 'public'),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin(),
-      // new webpack.optimize.AggressiveMergingPlugin(),
       new webpack.optimize.OccurenceOrderPlugin(true),
       new webpack.NoErrorsPlugin()
     );

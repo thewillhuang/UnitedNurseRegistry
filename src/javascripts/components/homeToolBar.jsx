@@ -19,7 +19,11 @@ export class HomeToolBar extends React.Component {
   render() {
     return (
       <div>
-        <Toolbar>
+        <Toolbar style={{
+          backgroundColor: 'rbga(255,255,255,0.6)',
+          paddingTop: 20,
+          marginBottom: 20,
+        }}>
           <ToolbarGroup key={0} float='left'>
             <RaisedButton
               label='Dream Crew'

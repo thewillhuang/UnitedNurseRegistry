@@ -20,6 +20,7 @@
     "font-awesome": "*",
     "simple-line-icons": "*",
     "vanilla-masker": "*",
-    "bootstrap": "*"
+    "bootstrap": "*",
+    "normalize.css": "~3.0.3"
   }
 }

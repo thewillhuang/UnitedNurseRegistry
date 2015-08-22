@@ -1,0 +1,53 @@
+@import 'bourbon';
+@import 'neat';
+
+body {
+  height: 100%;
+  font-family: $helvetica;
+  @include clearfix();
+}
+
+.alpha {
+  @include outer-container(100%);
+  @include background-image(radial-gradient(#2989d8, #451e98));
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 600px;
+}
+
+.beta {
+  padding-top: 5em;
+  @include row();
+}
+
+.slogan {
+  @include span-columns(5);
+  text-align: center;
+  @include shift(1);
+  color: white;
+}
+
+.home-signup {
+  @include span-columns(4);
+  @include shift(1);
+  width: 350px;
+  // @include omega();
+  color: white;
+  // @include pad(1em);
+}
+
+.signup-wrapper {
+  margin: auto;
+  width: 300px;
+  margin-top: 0.5em;
+  padding: 1em;
+  // @include span-columns(11);
+}
+
+.signupbutton {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  position: relative;
+  left: 160px;
+  // @include omega();
+}

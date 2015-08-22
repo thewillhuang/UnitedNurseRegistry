@@ -4,7 +4,6 @@
 body {
   height: 100%;
   font-family: $helvetica;
-  @include clearfix();
 }
 .alpha {
   @include outer-container(100%);
@@ -15,57 +14,48 @@ body {
   @include media($mobile) {
     height: 700px;
   }
+  @include media($smallerMobile) {
+    height: 750px;
+  }
 }
 .beta {
   padding-top: 5em;
-
-  // @include row();
+  @include media($mobile) {
+    padding-top: 2em;
+  }
 }
 .slogan {
+  margin-top: 30px;
+  margin-bottom: 30px;
   @include span-columns(5);
   text-align: center;
   @include shift(1);
   color: white;
   @include media($mobile) {
-
-    // @include reset-display;
-    margin: auto;
-    width: 90%;
+    @include span-columns(5);
   }
 }
 .home-signup {
-  @include span-columns(6);
+  @include span-columns(5);
   @include shift(1);
-  width: 400px;
   text-align: center;
-
-  // @include omega();
   color: white;
-
-  // @include pad(1em);
+  width: 400px;
   @include media($mobile) {
-
+    @include span-columns(5);
   }
 }
 .signup-wrapper {
-  margin: auto;
-  width: 350px;
   margin-top: 0.5em;
   padding: 1em;
-  @include media($mobile) {
-    margin: auto;
-    width: 350px;
-  }
-
-  // @include span-columns(11);
+  width: 300px;
+  margin: 0 auto;
 }
 .signupbutton {
   margin-top: 0.5em;
   margin-bottom: 1em;
   position: relative;
-  left: 100px;
-
-  // @include omega();
+  left: 90px;
 }
 
 // FOOTER

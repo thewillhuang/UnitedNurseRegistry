@@ -1,8 +1,10 @@
-var config = require('./');
+'use strict';
+
+const config = require('./');
 
 module.exports = {
   opts: {
-    threshold: 1000,
+    threshold: 500,
     gzipOptions: {
       level: 9,
     },
@@ -24,4 +26,4 @@ module.exports = {
     base: config.publicAssets,
   },
   dest: config.publicAssets,
-}
+};

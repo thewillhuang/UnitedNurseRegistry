@@ -37,6 +37,7 @@
     "passport-local": "^1.0.0",
     "react": "^0.13.3",
     "react-bootstrap": "^0.24.4",
+    "react-responsive": "0.0.8",
     "react-router": "^1.0.0-beta3",
     "react-tap-event-plugin": "^0.1.7",
     "react-zeroclipboard": "^2.0.1",

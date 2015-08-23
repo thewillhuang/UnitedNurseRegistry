@@ -9,6 +9,7 @@ const logger = require('koa-logger');
 const etag = require('koa-etag');
 const build = '/public';
 const path = require('path');
+const buildPath = path.join(__dirname, build);
 const bodyParser = require('koa-bodyparser');
 const conditional = require('koa-conditional-get');
 const helmet = require('koa-helmet');
@@ -21,24 +22,26 @@ const staticCache = require('koa-static-cache');
 // logging
 app.use(logger());
 
+// cacheing
 app.use(conditional());
-app.proxy = true;
-app.use(helmet());
-app.use(helmet.noCache());
 app.use(etag());
 
+// proxy
+app.proxy = true;
+
+// security headers
+app.use(helmet());
+app.use(helmet.noCache());
+
 // static file server
-const buildPath = path.join(__dirname, build);
 app.use(staticCache(buildPath, {
   buffer: true,
 }));
 
-app.use(function* staticServer(next) {
-  if (this.path.indexOf('api') !== -1) {
-    yield next;
-  } else {
-    yield send(this, buildPath + '/index.html');
-  }
+app.use(function* apiCheck(next) {
+  this.path.indexOf('api') !== -1
+  ? yield next
+  : yield send(this, buildPath + '/index.html');
 });
 
 // set unsigned cookies as we are using a signed and encrypted jwt
@@ -55,7 +58,7 @@ app.use(passport.initialize());
 // Set bearer tokens for different strategies
 require('./server/routes/authRoutes')(app);
 
-// authorize routes that has valid bearer tokens and set the token back
+// authorize any requests that has valid bearer tokens and set the token back
 app.use(function* bearerAuthentication(next) {
   const ctx = this;
   yield passport.authenticate('bearer', { session: false }, function* (err, user) {

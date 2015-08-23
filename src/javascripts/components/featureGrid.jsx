@@ -46,12 +46,12 @@ export class FeatureGrid extends React.Component {
           <a href='' className='grid-item'>
             <img src='../../images/instant.png' alt />
             <h1>Lighhting fast</h1>
-            <p>Find A Shift that Matches your criteria in seconds.</p>
+            <p>Find a Match with your criteria in seconds.</p>
           </a>
           <a href='' className='grid-item'>
             <img src='../../images/lock.png' alt />
-            <h1>Safe & Secure Encryption</h1>
-            <p>Your information is safe with us.</p>
+            <h1>Safe & Secure</h1>
+            <p>Everything is Military Grade Encrypted</p>
           </a>
           <a href='' className='grid-item'>
             <img src='../../images/recurring.png' alt />

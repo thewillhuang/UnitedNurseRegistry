@@ -1,5 +1,6 @@
 $mobile: new-breakpoint(max-width 1007px 6);
-$smallerMobile: new-breakpoint(max-width 419px);
+$mediummobile: new-breakpoint(max-width 800px 6);
+$smallerMobile: new-breakpoint(max-width 419px 6);
 $blue: #225378;
 $bluegreen: #1695A3;
 $skyblue: #ACF0F2;

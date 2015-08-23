@@ -6,6 +6,7 @@ import { HomeToolBar } from './homeToolBar.jsx';
 import { Footer } from './footer.jsx';
 import { FeatureGrid } from './featureGrid.jsx';
 import { SignupBox } from './signupBox.jsx';
+import { HowItWorks } from './howitworks.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 
 export class Home extends React.Component {
@@ -27,7 +28,7 @@ export class Home extends React.Component {
 
             <div className='slogan'>
               <h1>
-                The Best place to find on-demand shifts from the hospital.
+                The Best place to find on demand shifts from the hospital and be your own Boss.
               </h1>
             </div>
 
@@ -41,8 +42,8 @@ export class Home extends React.Component {
           </div>
 
         </div>
-
         <FeatureGrid />
+        <HowItWorks />
         <Footer/>
       </div>
     );

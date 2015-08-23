@@ -38,7 +38,7 @@ export class HomeToolBar extends React.Component {
       window.location.assign('/#/hospitals');
       break;
     case 'home':
-      window.location.assign('/#/');
+      window.location.assign('/#/home');
       break;
     default:
       return false;
@@ -58,8 +58,8 @@ export class HomeToolBar extends React.Component {
           </ToolbarGroup>
           <ToolbarGroup float='right' key={1}>
             <RaisedButton href='#hospitals' label='Hospitals' linkButton={true} secondary={true}/>
-            <RaisedButton href='#signup' label='Signup' linkButton={true} secondary={true}/>
             <RaisedButton href='#login' label='Login' linkButton={true} secondary={true}/>
+            <RaisedButton href='#signup' label='Signup' linkButton={true} secondary={true}/>
           </ToolbarGroup>
         </Toolbar>
         </MediaQuery>

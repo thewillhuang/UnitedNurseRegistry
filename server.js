@@ -28,15 +28,14 @@ app.use(etag());
 
 // static file server
 app.use(function* staticServer(next) {
-  const opts = { root: path.join(__dirname, build) };
-  // if (this.path === '/') {
+  const opts = {
+    root: path.join(__dirname, build),
+    index: 'index.html',
+  };
   if (this.path.indexOf('api') !== -1) {
     yield next;
-  } else if (this.path === '/') {
-    yield send(this, 'index.html', opts);
-  } else {
-    yield send(this, this.path, opts);
   }
+  yield send(this, this.path, opts);
 });
 
 // set unsigned cookies as we are using a signed and encrypted jwt

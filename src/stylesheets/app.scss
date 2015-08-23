@@ -14,11 +14,16 @@ body {
   background-repeat: no-repeat;
   height: 600px;
   @include media($mobile) {
-    height: 700px;
+    height: 750px;
+  }
+  @include media($mediummobile) {
+    height: 870px;
   }
   @include media($smallerMobile) {
-    height: 720px;
+    height: 800px;
   }
+
+
 }
 .beta {
   padding-top: 5em;
@@ -27,14 +32,19 @@ body {
   }
 }
 .slogan {
-  margin-top: 30px;
+  margin-top: 40px;
   margin-bottom: 30px;
   @include span-columns(5);
   text-align: center;
   @include shift(1);
   color: white;
   @include media($mobile) {
+    @include span-columns(4);
+    @include shift(1);
+  }
+  @include media($smallerMobile) {
     @include span-columns(5);
+    @include shift(0.5);
   }
 }
 .home-signup {
@@ -44,7 +54,16 @@ body {
   color: white;
   width: 400px;
   @include media($mobile) {
+    @include span-columns(3);
+    @include shift(1.5);
+  }
+  @include media($mediummobile) {
     @include span-columns(5);
+    @include shift(0.5);
+  }
+  @include media($smallerMobile) {
+    @include span-columns(5.5);
+    @include shift(0.25);
   }
 }
 .signup-wrapper {
@@ -84,7 +103,7 @@ body {
 // }
 .footer-2 {
   $base-spacing: 1.5em !default;
-  $action-color: #477dca !default;
+  $action-color: $blue !default;
   $medium-screen: em(640) !default;
   $large-screen: em(860) !default;
   $footer-background: desaturate(darken($action-color, 20%), 30%);
@@ -364,3 +383,91 @@ body {
 //     background-size: cover;
 //   }
 // }
+
+// //hero
+//
+// .hero {
+//   $base-border-radius: 3px !default;
+//   $action-color: #477DCA !default;
+//   $large-screen: em(860) !default;
+//   $hero-background-top: #7F99BE;
+//   $hero-background-bottom: #20392B;
+//   $hero-color: white;
+//   $gradient-angle: 10deg;
+//   $hero-image: 'https://raw.githubusercontent.com/thoughtbot/refills/master/source/images/mountains.png';
+//
+//   @include background(url($hero-image), linear-gradient($gradient-angle, $hero-background-bottom, $hero-background-top), no-repeat $hero-background-top scroll);
+//   background-color: #324766;
+//   background-position: top;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+//   padding-bottom: 3em;
+//
+//   .hero-logo img {
+//     height: 4em;
+//     margin-bottom: 1em;
+//   }
+//
+//   .hero-inner {
+//     @include outer-container;
+//     @include clearfix;
+//     margin: auto;
+//     padding: 3.5em;
+//     text-align: center;
+//
+//     .hero-copy {
+//       text-align: center;
+//
+//       h1 {
+//         color: $hero-color;
+//         font-size: 1.6em;
+//         margin-bottom: 0.5em;
+//
+//         @include media($large-screen) {
+//           font-size: 1.8em;
+//         }
+//       }
+//
+//       p {
+//         color: $hero-color;
+//         line-height: 1.4em;
+//         margin: 0 auto 3em auto;
+//
+//         @include media($large-screen) {
+//           font-size: 1.1em;
+//           max-width: 40%;
+//         }
+//       }
+//     }
+//   }
+// }
+
+// how it works
+
+.howitworks-wrapper {
+  @include outer-container(100%);
+}
+
+.howitworks-title {
+  @include span-columns(9);
+  @include shift(1.5);
+  @include pad(2em);
+  text-align: center;
+  display: inline;
+  hr.style-eight {
+    padding: 0;
+    border: none;
+    border-top: 1px solid #b4b4b4;
+    color: #8a8a8a;
+    text-align: center;
+  }
+  hr.style-eight:after {
+      content: "How it Works";
+      display: inline-block;
+      position: relative;
+      top: -0.7em;
+      font-size: 1.2em;
+      padding: 0 0.5em;
+      background: white;
+  }
+}

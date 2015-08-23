@@ -14,6 +14,7 @@ const conditional = require('koa-conditional-get');
 const helmet = require('koa-helmet');
 const passport = require('koa-passport');
 const compress = require('koa-compress');
+const staticCache = require('koa-static-cache');
 // const jwt = require('./server/services/jwt');
 // const session = require('koa-session');
 
@@ -27,15 +28,17 @@ app.use(helmet.noCache());
 app.use(etag());
 
 // static file server
+const buildPath = path.join(__dirname, build);
+app.use(staticCache(buildPath, {
+  buffer: true,
+}));
+
 app.use(function* staticServer(next) {
-  const opts = {
-    root: path.join(__dirname, build),
-    index: 'index.html',
-  };
   if (this.path.indexOf('api') !== -1) {
     yield next;
+  } else {
+    yield send(this, buildPath + '/index.html');
   }
-  yield send(this, this.path, opts);
 });
 
 // set unsigned cookies as we are using a signed and encrypted jwt

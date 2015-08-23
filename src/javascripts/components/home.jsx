@@ -28,7 +28,7 @@ export class Home extends React.Component {
 
             <div className='slogan'>
               <h1>
-                The Best place to find on demand shifts from the hospital and be your own Boss.
+                The Best place to find on demand shifts from the hospital.
               </h1>
             </div>
 

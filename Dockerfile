@@ -68,7 +68,6 @@ ENV HOME /usr/local/nonroot
 RUN npm install \
     && gulp production;
 
-
 # runs below command in WORKDIR when the images is ran.
 # CMD npm install
 

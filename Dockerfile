@@ -66,7 +66,7 @@ ENV HOME /usr/local/nonroot
 
 # install the files to cache them.
 RUN npm install \
-    && gulp production;
+    && npm run production;
 
 # runs below command in WORKDIR when the images is ran.
 # CMD npm install
@@ -75,6 +75,6 @@ RUN npm install \
 # when the image is run, docker will pull from github, and install, using cached files, should be much faster then rebuilding from scrach each time.
 CMD git pull https://7a7f0d9da87f1f218c309dcb903378776923d801:x-oauth-basic@github.com/thewillhuang/UnitedNurseRegistry.git \
     && npm install \
-    && gulp production \
+    && npm run production \
     && ls \
     && npm run test;

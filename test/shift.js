@@ -144,6 +144,24 @@ describe('shift api', function() {
       });
   });
 
+  it('should not update a new facility given a correct object but wrong token', function(done) {
+    request.put('/api/facility/' + f1)
+      .send({
+        facilityName: uuid.v4(),
+        facilityGeoHash: '9qh0b55sd',
+        facilityPwHash: uuid.v4(),
+        facilityEMR: uuid.v4(),
+      })
+      .expect(200)
+      .set(f2jwt)
+      .end(function(err, res) {
+        // console.log(res.body);
+        expect(res.body.message).to.equal('no permission');
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
   it('should update a new facility given a correct object', function(done) {
     request.put('/api/facility/' + f2)
       .send({
@@ -156,6 +174,23 @@ describe('shift api', function() {
       .set(f2jwt)
       .end(function(err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
+  it('should not update a new facility given a correct object but wrong id', function(done) {
+    request.put('/api/facility/' + f2)
+      .send({
+        facilityName: uuid.v4(),
+        facilityGeoHash: '9qh109',
+        facilityPwHash: uuid.v4(),
+        facilityEMR: uuid.v4(),
+      })
+      .expect(200)
+      .set(f1jwt)
+      .end(function(err, res) {
+        expect(res.body.message).to.equal('no permission');
         expect(err).to.be.a('null');
         done();
       });

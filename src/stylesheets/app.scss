@@ -17,10 +17,10 @@ body {
     height: 750px;
   }
   @include media($mediummobile) {
-    height: 870px;
+    height: 830px;
   }
   @include media($smallerMobile) {
-    height: 800px;
+    height: 890px;
   }
 }
 .beta {
@@ -30,7 +30,7 @@ body {
   }
 }
 .slogan {
-  margin-top: 40px;
+  margin-top: 90px;
   margin-bottom: 30px;
   @include span-columns(5);
   text-align: center;

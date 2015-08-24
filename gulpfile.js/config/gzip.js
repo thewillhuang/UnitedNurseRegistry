@@ -4,7 +4,7 @@ const config = require('./');
 
 module.exports = {
   opts: {
-    threshold: 500,
+    threshold: 1000,
     gzipOptions: {
       level: 9,
     },

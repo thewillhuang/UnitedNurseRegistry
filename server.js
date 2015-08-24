@@ -36,6 +36,8 @@ app.use(helmet.noCache());
 // static file server
 app.use(staticCache(buildPath, {
   buffer: true,
+  usePrecompiledGzip: true,
+  gzip: true,
 }));
 
 app.use(function* apiCheck(next) {

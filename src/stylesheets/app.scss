@@ -299,6 +299,7 @@ body {
   $grid2-item-height: 14em;
   @include clearfix;
   position: relative;
+  margin-bottom: 2em;
   .grid2-item {
     @include transition (all 0.2s ease-in-out);
     background: $grid2-item-background;
@@ -427,7 +428,7 @@ body {
   background-color: rgb(233, 233, 233);
 }
 .feature-title {
-  margin-top: 2em;
+  margin-top: 1em;
   @include span-columns(9);
   @include shift(1.5);
   @include pad(2em);

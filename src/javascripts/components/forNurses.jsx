@@ -29,8 +29,6 @@ export class ForNurses extends React.Component {
             <h1>Receive Money</h1>
             <p>Get Money in your bank account in 2 days</p>
           </div>
-          <div className='right-cover2'></div>
-          <div className='bottom-cover2'></div>
         </div>
 
       </div>

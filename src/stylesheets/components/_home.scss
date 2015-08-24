@@ -1,0 +1,70 @@
+.alpha {
+  @include outer-container(100%);
+  @include background-image(linear-gradient(130deg, #451e98, #2989d8));
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 600px;
+  margin-bottom: 2em;
+  @include media($mobile) {
+    height: 750px;
+  }
+  @include media($mediummobile) {
+    height: 830px;
+  }
+  @include media($smallerMobile) {
+    height: 890px;
+  }
+}
+.beta {
+  padding-top: 5em;
+  @include media($mobile) {
+    padding-top: 2em;
+  }
+}
+.slogan {
+  margin-top: 90px;
+  margin-bottom: 30px;
+  @include span-columns(5);
+  text-align: center;
+  @include shift(1);
+  color: white;
+  @include media($mobile) {
+    @include span-columns(4);
+    @include shift(1);
+  }
+  @include media($smallerMobile) {
+    @include span-columns(5);
+    @include shift(0.5);
+  }
+}
+.home-signup {
+  @include span-columns(5);
+  @include shift(1);
+  text-align: center;
+  color: white;
+  width: 400px;
+  @include media($mobile) {
+    @include span-columns(3);
+    @include shift(1.5);
+  }
+  @include media($mediummobile) {
+    @include span-columns(5);
+    @include shift(0.5);
+  }
+  @include media($smallerMobile) {
+    @include span-columns(5.5);
+    @include shift(0.25);
+  }
+}
+.signup-wrapper {
+  margin-top: 0.5em;
+  padding: 1em;
+  width: 300px;
+  margin: 0 auto;
+}
+.signupbutton {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  position: relative;
+  left: 90px;
+}

@@ -1,0 +1,125 @@
+// grid2 items
+@mixin grid2-item-columns($columns) {
+  width: (100% / 12) * $columns;
+}
+.grid2-items-lines {
+  $base-background-color: white !default;
+  $dark-gray: #333 !default;
+  $light-gray: #ddd !default;
+  $medium-screen: em(640) !default;
+  $large-screen: em(860) !default;
+  $base-font-color: $dark-gray !default;
+  $grid2-items-background: $base-background-color;
+  $grid2-item-background: $base-background-color;
+  $grid2-item-border: 0px solid transparentize($base-font-color, 0.9);
+  $grid2-item-columns: 4;
+  $grid2-item-big-columns: 12;
+  $grid2-item-color: $base-font-color;
+  $grid2-item-height: 14em;
+  @include clearfix;
+  position: relative;
+  margin-bottom: 2em;
+  .grid2-item {
+    @include transition (all 0.2s ease-in-out);
+    background: $grid2-item-background;
+    border-bottom: $grid2-item-border;
+    border-right: $grid2-item-border;
+    cursor: default;
+    float: left;
+    height: $grid2-item-height;
+    overflow: hidden;
+    outline: none;
+    padding: 2em;
+    text-decoration: none;
+    width: 100%;
+    @include media($large-screen) {
+      @include grid2-item-columns($grid2-item-columns);
+    }
+    // &:focus,
+    // &:hover {
+    //   background: transparentize($grid2-item-color, 0.95);
+    // }
+  }
+  .grid2-item img {
+    display: block;
+    height: 2.9em;
+    margin-bottom: 1.2em;
+    // opacity: 0.8;
+  }
+  .grid2-item h1 {
+    color: $grid2-item-color;
+    font-size: 1.3em;
+    margin-bottom: 0.4em;
+  }
+  .grid2-item p {
+    color: transparentize($grid2-item-color, 0.4);
+    line-height: 1.5em;
+    @include media($medium-screen) {
+      max-width: 70%;
+    }
+  }
+  .grid2-i {
+    color: $blue;
+  }
+  .grid2-item-big {
+    @include media($large-screen) {
+      @include grid2-item-columns($grid2-item-big-columns);
+    }
+    p {
+      @include media($medium-screen) {
+        max-width: 60%;
+      }
+    }
+  }
+}
+// how it works hr lines
+
+.nurse-wrapper {
+  @include outer-container(100%);
+}
+.nurse-title {
+  @include span-columns(9);
+  @include shift(1.5);
+  @include pad(2em);
+  hr.nurse-hr {
+    padding: 0;
+    border: none;
+    border-top: 1px solid #dbdbdb;
+    color: $dark-grey;
+    text-align: center;
+  }
+  hr.nurse-hr:after {
+      content: "For Nurses";
+      display: inline-block;
+      position: relative;
+      top: -0.7em;
+      font-size: 1.2em;
+      padding: 0 0.5em;
+      background: white;
+  }
+}
+
+.hospital-wrapper {
+  @include outer-container(100%);
+}
+.hospital-title {
+  @include span-columns(9);
+  @include shift(1.5);
+  @include pad(2em);
+  hr.hospital-hr {
+    padding: 0;
+    border: none;
+    border-top: 1px solid #dbdbdb;
+    color: $dark-grey;
+    text-align: center;
+  }
+  hr.hospital-hr:after {
+      content: "For Hospitals";
+      display: inline-block;
+      position: relative;
+      top: -0.7em;
+      font-size: 1.2em;
+      padding: 0 0.5em;
+      background: white;
+  }
+}

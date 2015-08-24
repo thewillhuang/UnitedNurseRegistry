@@ -29,8 +29,6 @@ export class ForHospitals extends React.Component {
             <h1>Pay</h1>
             <p>Pay securely for the nurses's shift</p>
           </div>
-          <div className='right-cover2'></div>
-          <div className='bottom-cover2'></div>
         </div>
 
       </div>

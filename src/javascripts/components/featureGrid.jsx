@@ -44,8 +44,8 @@ export class FeatureGrid extends React.Component {
             <h1>Background checked</h1>
             <p>All References are checked.</p>
           </div>
-        <div className='right-cover'></div>
-        <div className='bottom-cover'></div>
+          <div href='#' className='grid-omega'>
+          </div>
       </div>
 
     </div>

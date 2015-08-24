@@ -42,8 +42,8 @@ export class Home extends React.Component {
           </div>
 
         </div>
-        <FeatureGrid />
         <HowItWorks />
+        <FeatureGrid />
         <Footer/>
       </div>
     );

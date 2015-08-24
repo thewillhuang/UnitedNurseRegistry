@@ -65,6 +65,11 @@ export class HomeToolBar extends React.Component {
         </MediaQuery>
         <MediaQuery maxWidth={670}>
           <AppBar
+            style={{
+              backgroundColor: 'rbga(255,255,255,0.6)',
+              paddingTop: 5,
+              marginBottom: 20,
+            }}
             showMenuIconButton={false}
             iconElementRight={
             <IconMenu iconButtonElement={

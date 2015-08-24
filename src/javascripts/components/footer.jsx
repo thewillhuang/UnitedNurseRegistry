@@ -17,7 +17,6 @@ export class Footer extends React.Component {
     return (
       <footer className='footer-2' role='contentinfo'>
         <div className='footer-logo'>
-          <img alt='Logo image' src='../../images/sourcefusion-transparent.png'/>
         </div>
         <ul>
           <li>

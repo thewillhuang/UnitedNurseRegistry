@@ -9,7 +9,7 @@ body {
 }
 .alpha {
   @include outer-container(100%);
-  @include background-image(radial-gradient(#2989d8, #451e98));
+  @include background-image(linear-gradient(130deg, #451e98, #2989d8));
   background-size: cover;
   background-repeat: no-repeat;
   height: 600px;
@@ -22,8 +22,6 @@ body {
   @include media($smallerMobile) {
     height: 800px;
   }
-
-
 }
 .beta {
   padding-top: 5em;
@@ -193,7 +191,7 @@ body {
   width: (100% / 12) * $columns;
 }
 .grid-items-lines {
-  $base-background-color: rgb(252, 252, 252) !default;
+  $base-background-color: rgb(233, 233, 233) !default;
   $dark-gray: #333 !default;
   $light-gray: #ddd !default;
   $medium-screen: em(640) !default;
@@ -201,11 +199,11 @@ body {
   $base-font-color: $dark-gray !default;
   $grid-items-background: $base-background-color;
   $grid-item-background: $base-background-color;
-  $grid-item-border: 1px solid transparentize($base-font-color, 0.8);
-  $grid-item-columns: 4;
-  $grid-item-big-columns: 8;
+  $grid-item-border: 0px solid transparentize($base-font-color, 0.8);
+  $grid-item-columns: 6;
+  $grid-item-big-columns: 12;
   $grid-item-color: $base-font-color;
-  $grid-item-height: 14em;
+  $grid-item-height: 10em;
   @include clearfix;
   position: relative;
   .grid-item {
@@ -213,7 +211,7 @@ body {
     background: $grid-item-background;
     border-bottom: $grid-item-border;
     border-right: $grid-item-border;
-    cursor: pointer;
+    // cursor: pointer;
     float: left;
     height: $grid-item-height;
     overflow: hidden;
@@ -224,10 +222,10 @@ body {
     @include media($large-screen) {
       @include grid-item-columns($grid-item-columns);
     }
-    &:focus,
-    &:hover {
-      background: transparentize($grid-item-color, 0.95);
-    }
+    // &:focus,
+    // &:hover {
+    //   background: transparentize($grid-item-color, 0.95);
+    // }
   }
   .grid-item img {
     display: block;
@@ -237,7 +235,7 @@ body {
   }
   .grid-item h1 {
     color: $grid-item-color;
-    font-size: 1.3em;
+    font-size: 1em;
     margin-bottom: 0.4em;
   }
   .grid-item p {
@@ -246,6 +244,9 @@ body {
     @include media($medium-screen) {
       max-width: 70%;
     }
+  }
+  .grid-i {
+    color: $blue;
   }
   .grid-item-big {
     @include media($large-screen) {
@@ -452,16 +453,14 @@ body {
   @include span-columns(9);
   @include shift(1.5);
   @include pad(2em);
-  text-align: center;
-  display: inline;
-  hr.style-eight {
+  hr.howitworks-hr {
     padding: 0;
     border: none;
-    border-top: 1px solid #b4b4b4;
-    color: #8a8a8a;
+    border-top: 1px solid #dbdbdb;
+    color: $dark-grey;
     text-align: center;
   }
-  hr.style-eight:after {
+  hr.howitworks-hr:after {
       content: "How it Works";
       display: inline-block;
       position: relative;
@@ -469,5 +468,123 @@ body {
       font-size: 1.2em;
       padding: 0 0.5em;
       background: white;
+  }
+}
+
+
+.feature-wrapper {
+  @include outer-container(100%);
+  background-color: rgb(233, 233, 233);
+}
+.feature-title {
+  @include span-columns(9);
+  @include shift(1.5);
+  @include pad(2em);
+  background-color: rgb(233, 233, 233);
+  hr.feature-hr {
+    padding: 0;
+    border: none;
+    border-top: 1px solid #dbdbdb;
+    color: $dark-grey;
+    text-align: center;
+  }
+  hr.feature-hr:after {
+      content: "Features";
+      display: inline-block;
+      position: relative;
+      top: -0.7em;
+      font-size: 1.2em;
+      padding: 0 0.5em;
+      background: rgb(233, 233, 233);
+  }
+}
+
+// grid2 items
+@mixin grid2-item-columns($columns) {
+  width: (100% / 12) * $columns;
+}
+.grid2-items-lines {
+  $base-background-color: white !default;
+  $dark-gray: #333 !default;
+  $light-gray: #ddd !default;
+  $medium-screen: em(640) !default;
+  $large-screen: em(860) !default;
+  $base-font-color: $dark-gray !default;
+  $grid2-items-background: $base-background-color;
+  $grid2-item-background: $base-background-color;
+  $grid2-item-border: 0px solid transparentize($base-font-color, 0.9);
+  $grid2-item-columns: 4;
+  $grid2-item-big-columns: 12;
+  $grid2-item-color: $base-font-color;
+  $grid2-item-height: 14em;
+  @include clearfix;
+  position: relative;
+  .grid2-item {
+    @include transition (all 0.2s ease-in-out);
+    background: $grid2-item-background;
+    border-bottom: $grid2-item-border;
+    border-right: $grid2-item-border;
+    // cursor: pointer;
+    float: left;
+    height: $grid2-item-height;
+    overflow: hidden;
+    outline: none;
+    padding: 2em;
+    text-decoration: none;
+    width: 100%;
+    @include media($large-screen) {
+      @include grid2-item-columns($grid2-item-columns);
+    }
+    // &:focus,
+    // &:hover {
+    //   background: transparentize($grid2-item-color, 0.95);
+    // }
+  }
+  .grid2-item img {
+    display: block;
+    height: 2.9em;
+    margin-bottom: 1.2em;
+    // opacity: 0.8;
+  }
+  .grid2-item h1 {
+    color: $grid2-item-color;
+    font-size: 1.3em;
+    margin-bottom: 0.4em;
+  }
+  .grid2-item p {
+    color: transparentize($grid2-item-color, 0.4);
+    line-height: 1.5em;
+    @include media($medium-screen) {
+      max-width: 70%;
+    }
+  }
+  .grid2-i {
+    color: $blue;
+  }
+  .grid2-item-big {
+    @include media($large-screen) {
+      @include grid2-item-columns($grid2-item-big-columns);
+    }
+    p {
+      @include media($medium-screen) {
+        max-width: 60%;
+      }
+    }
+  }
+
+  // this, below, might not be the most beautiful solution but it removes the outer borders by using the background color.
+  .bottom-cover2 {
+    background: $grid2-items-background;
+    bottom: 0;
+    height: 3px;
+    position: absolute;
+    width: 100%;
+  }
+  .right-cover2 {
+    background: $grid2-items-background;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    width: 4px;
   }
 }

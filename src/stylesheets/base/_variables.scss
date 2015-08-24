@@ -1,8 +1,31 @@
+// Device Widths
+ $phone-portrait: em(320);
+ $phone-landscape: em(568);
+ $tablet-portrait: em(768);
+ $tablet-landscape: em(1024);
+ $desktop: em(1030);
+// Target device and smaller screens
+ $phone-portrait-down: new-breakpoint(max-width $phone-portrait);
+ $phone-landscape-down: new-breakpoint(max-width $phone-landscape);
+ $tablet-portrait-down: new-breakpoint(max-width $tablet-portrait);
+ $tablet-landscape-down: new-breakpoint(max-width $tablet-landscape);
+ $desktop-down: new-breakpoint(max-width $desktop);
+// Target device and bigger screens
+ $phone-portrait-up: new-breakpoint(min-width $phone-portrait);
+ $phone-landscape-up: new-breakpoint(min-width $phone-landscape);
+ $tablet-portrait-up: new-breakpoint(min-width $tablet-portrait);
+ $tablet-landscape-up: new-breakpoint(min-width $tablet-landscape);
+ $desktop-up: new-breakpoint(min-width $desktop);
+
+// media queries
 $mobile: new-breakpoint(max-width 1007px 6);
 $mediummobile: new-breakpoint(max-width 800px 6);
 $smallerMobile: new-breakpoint(max-width 419px 6);
+
+// colors
 $blue: #225378;
 $bluegreen: #1695A3;
 $skyblue: #ACF0F2;
 $milk: #F3FFE2;
 $orange: #EB7F00;
+$dark-grey: #333;

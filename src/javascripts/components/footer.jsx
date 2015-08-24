@@ -41,17 +41,12 @@ export class Footer extends React.Component {
           <ul className='footer-social'>
             <li>
               <a href=''>
-                <FontIcon className='fa fa-facebook-official' hoverColor={'#FFFFFF'} color={'light-grey'}/>
+                <FontIcon className='icon-social-facebook' hoverColor={'#FFFFFF'} color={'light-grey'}/>
               </a>
             </li>
             <li>
               <a href=''>
-                <FontIcon className='fa fa-twitter-square' hoverColor={'#FFFFFF'} color={'light-grey'}/>
-              </a>
-            </li>
-            <li>
-              <a href=''>
-                <FontIcon className='fa fa-google-plus-square' hoverColor={'#FFFFFF'} color={'light-grey'}/>
+                <FontIcon className='icon-social-twitter' hoverColor={'#FFFFFF'} color={'light-grey'}/>
               </a>
             </li>
           </ul>

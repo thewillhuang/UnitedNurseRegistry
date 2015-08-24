@@ -212,7 +212,7 @@ body {
     background: $grid-item-background;
     border-bottom: $grid-item-border;
     border-right: $grid-item-border;
-    // cursor: pointer;
+    cursor: default;
     float: left;
     height: $grid-item-height;
     overflow: hidden;
@@ -305,7 +305,7 @@ body {
     background: $grid2-item-background;
     border-bottom: $grid2-item-border;
     border-right: $grid2-item-border;
-    // cursor: pointer;
+    cursor: default;
     float: left;
     height: $grid2-item-height;
     overflow: hidden;

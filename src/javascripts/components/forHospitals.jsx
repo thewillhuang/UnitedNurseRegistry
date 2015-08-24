@@ -15,9 +15,9 @@ export class ForHospitals extends React.Component {
 
         <div className='grid2-items-lines'>
           <div href='#' className='grid2-item'>
-            <i className='fa fa-tasks fa-2x grid2-i'></i>
+            <i className='fa icon-paper-plane fa-2x grid2-i'></i>
             <h1>Post</h1>
-            <p>Post div shift and specify your price</p>
+            <p>Post a shift and specify your price range</p>
           </div>
           <div href='#' className='grid2-item'>
             <i className='fa icon-graph fa-2x grid2-i'></i>

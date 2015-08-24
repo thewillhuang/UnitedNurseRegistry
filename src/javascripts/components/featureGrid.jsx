@@ -17,7 +17,7 @@ export class FeatureGrid extends React.Component {
           <div href='#' className='grid-item'>
             <i className='fa icon-energy fa-2x grid-i'></i>
             <h1>Lighhting fast</h1>
-            <p>Find div Match with your criteria in seconds.</p>
+            <p>Find a Match with your criteria in seconds.</p>
           </div>
           <div href='#' className='grid-item'>
             <i className='fa icon-lock fa-2x grid-i'></i>

@@ -1,25 +1,15 @@
 'use strict';
 
 import React from 'react';
-import mui from 'material-ui';
-const ThemeManager = new mui.Styles.ThemeManager();
 
 export class ForNurses extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
   render() {
     return (
       <div>
 
-        <div className='howitworks-wrapper'>
-          <div className='howitworks-title'>
-            <hr className='howitworks-hr'></hr>
+        <div className='nurse-wrapper'>
+          <div className='nurse-title'>
+            <hr className='nurse-hr'></hr>
           </div>
         </div>
 
@@ -35,7 +25,7 @@ export class ForNurses extends React.Component {
             <p>Get notifications from the hospitals around you. Accept the ones you want.</p>
           </a>
           <a href='#' className='grid2-item'>
-            <i className='fa fa-usd fa-2x grid2-i'></i>
+            <i className='fa icon-wallet fa-2x grid2-i'></i>
             <h1>Receive Money</h1>
             <p>Get Money in your bank account in 2 days</p>
           </a>

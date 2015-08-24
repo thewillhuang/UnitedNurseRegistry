@@ -13,6 +13,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   height: 600px;
+  margin-bottom: 2em;
   @include media($mobile) {
     height: 750px;
   }
@@ -445,23 +446,47 @@ body {
 
 // how it works
 
-.howitworks-wrapper {
+.nurse-wrapper {
   @include outer-container(100%);
 }
-
-.howitworks-title {
+.nurse-title {
   @include span-columns(9);
   @include shift(1.5);
   @include pad(2em);
-  hr.howitworks-hr {
+  hr.nurse-hr {
     padding: 0;
     border: none;
     border-top: 1px solid #dbdbdb;
     color: $dark-grey;
     text-align: center;
   }
-  hr.howitworks-hr:after {
-      content: "How it Works";
+  hr.nurse-hr:after {
+      content: "For Nurses";
+      display: inline-block;
+      position: relative;
+      top: -0.7em;
+      font-size: 1.2em;
+      padding: 0 0.5em;
+      background: white;
+  }
+}
+
+.hospital-wrapper {
+  @include outer-container(100%);
+}
+.hospital-title {
+  @include span-columns(9);
+  @include shift(1.5);
+  @include pad(2em);
+  hr.hospital-hr {
+    padding: 0;
+    border: none;
+    border-top: 1px solid #dbdbdb;
+    color: $dark-grey;
+    text-align: center;
+  }
+  hr.hospital-hr:after {
+      content: "For Hospitals";
       display: inline-block;
       position: relative;
       top: -0.7em;

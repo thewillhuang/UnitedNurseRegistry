@@ -7,6 +7,7 @@ import { Footer } from './footer.jsx';
 import { FeatureGrid } from './featureGrid.jsx';
 import { SignupBox } from './signupBox.jsx';
 import { ForNurses } from './forNurses.jsx';
+import { ForHospitals } from './forHospitals.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 
 export class Home extends React.Component {
@@ -43,6 +44,7 @@ export class Home extends React.Component {
 
         </div>
         <ForNurses />
+        <ForHospitals />
         <FeatureGrid />
         <Footer/>
       </div>

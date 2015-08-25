@@ -2,10 +2,10 @@
 
 import React from 'react';
 import mui from 'material-ui';
-import { HomeToolBar } from './homeToolBar.jsx';
+import HomeToolBar from './homeToolBar.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 
-export class Signup extends React.Component {
+class Signup extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -25,3 +25,5 @@ export class Signup extends React.Component {
     );
   }
 }
+
+export default Signup;

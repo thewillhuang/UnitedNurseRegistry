@@ -18,6 +18,7 @@
   $grid-item-color: $base-font-color;
   $grid-item-height: 10em;
   @include clearfix;
+  text-align: center;
   position: relative;
   // margin-bottom: 2em;
   // background: $base-background-color2;
@@ -77,6 +78,7 @@
   .grid-item p {
     color: $text-light-grey;
     line-height: 1.5em;
+    margin: 0 auto;
     @include media($medium-screen) {
       max-width: 70%;
     }

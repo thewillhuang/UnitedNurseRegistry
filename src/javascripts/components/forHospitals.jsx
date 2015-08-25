@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-export class ForHospitals extends React.Component {
+class ForHospitals extends React.Component {
   render() {
     return (
       <div>
@@ -29,9 +29,13 @@ export class ForHospitals extends React.Component {
             <h1>Pay</h1>
             <p>Pay securely for the nurses's shift</p>
           </div>
+          <div href='#' className='grid2-omega'>
+          </div>
         </div>
 
       </div>
     );
   }
 }
+
+export default ForHospitals;

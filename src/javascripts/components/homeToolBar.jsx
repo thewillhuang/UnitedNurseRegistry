@@ -17,7 +17,7 @@ import MediaQuery from 'react-responsive';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-export class HomeToolBar extends React.Component {
+class HomeToolBar extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -87,3 +87,5 @@ export class HomeToolBar extends React.Component {
     );
   }
 }
+
+export default HomeToolBar;

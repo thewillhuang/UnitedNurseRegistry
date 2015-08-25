@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-export class ForNurses extends React.Component {
+class ForNurses extends React.Component {
   render() {
     return (
       <div>
@@ -35,3 +35,5 @@ export class ForNurses extends React.Component {
     );
   }
 }
+
+export default ForNurses;

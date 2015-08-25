@@ -4,7 +4,7 @@ import React from 'react';
 import mui, { Card, TextField, CardActions, RaisedButton } from 'material-ui';
 const ThemeManager = new mui.Styles.ThemeManager();
 
-export class SignupBox extends React.Component {
+class SignupBox extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -29,3 +29,5 @@ export class SignupBox extends React.Component {
     );
   }
 }
+
+export default SignupBox;

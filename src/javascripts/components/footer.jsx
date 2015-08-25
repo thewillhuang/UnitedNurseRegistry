@@ -4,7 +4,7 @@ import React from 'react';
 import mui, { FontIcon } from 'material-ui';
 const ThemeManager = new mui.Styles.ThemeManager();
 
-export class Footer extends React.Component {
+class Footer extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -55,3 +55,5 @@ export class Footer extends React.Component {
     );
   }
 }
+
+export default Footer;

@@ -47,14 +47,14 @@ export class HomeToolBar extends React.Component {
   render() {
     return (
       <div>
-        <MediaQuery minWidth={670}>
+        <MediaQuery minWidth={755}>
         <Toolbar style={{
           backgroundColor: 'rbga(255,255,255,0.6)',
           paddingTop: 20,
           marginBottom: 20,
         }}>
           <ToolbarGroup float='left' key={0}>
-            <RaisedButton href='#home' label='Dream Crew' linkButton={true} primary={true}/>
+            <RaisedButton href='#home' label='united nurse registry' linkButton={true} primary={true}/>
           </ToolbarGroup>
           <ToolbarGroup float='right' key={1}>
             <RaisedButton href='#hospitals' label='Hospitals' linkButton={true} secondary={true}/>
@@ -63,7 +63,7 @@ export class HomeToolBar extends React.Component {
           </ToolbarGroup>
         </Toolbar>
         </MediaQuery>
-        <MediaQuery maxWidth={670}>
+        <MediaQuery maxWidth={755}>
           <AppBar
             style={{
               backgroundColor: 'rbga(255,255,255,0.6)',

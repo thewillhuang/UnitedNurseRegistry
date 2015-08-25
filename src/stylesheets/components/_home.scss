@@ -1,7 +1,7 @@
 @import '../base/variables';
 .alpha {
   @include outer-container(100%);
-  @include background-image(linear-gradient(130deg, #451e98, #2989d8));
+  @include background-image(linear-gradient(130deg, $electricPurple, $electricBlue));
   background-size: cover;
   background-repeat: no-repeat;
   height: 600px;

@@ -1,10 +1,11 @@
+@import '../base/variables';
 // grid2 items
 @mixin grid2-item-columns($columns) {
   width: (100% / 12) * $columns;
 }
 .grid2-items-lines {
   $base-background-color: white !default;
-  $dark-gray: #333 !default;
+  $dark-gray: $dark-grey !default;
   $light-gray: #ddd !default;
   $medium-screen: em(640) !default;
   $large-screen: em(860) !default;
@@ -52,7 +53,7 @@
     margin-bottom: 0.4em;
   }
   .grid2-item p {
-    color: transparentize($grid2-item-color, 0.4);
+    color: $text-light-grey;
     line-height: 1.5em;
     @include media($medium-screen) {
       max-width: 70%;

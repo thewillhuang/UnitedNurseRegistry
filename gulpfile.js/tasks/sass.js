@@ -16,7 +16,7 @@ gulp.task('sass', function() {
     .pipe(sass(config.settings))
     .on('error', handleErrors)
     .pipe(autoprefixer(config.autoprefixer))
-    .pipe(gulpif(process.env.NODE_ENV === 'production', minifyCSS()))
+    .pipe(gulpif(process.env.NODE_ENV === 'production', minifyCSS(config.minify)))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.dest))
     .pipe(browserSync.reload({stream: true}));

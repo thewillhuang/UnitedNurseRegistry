@@ -1,8 +1,11 @@
 @import 'bourbon';
 @import 'neat';
 @import 'base/variables';
+@import 'layouts/col';
+@import 'layouts/shift';
 @import 'generated/icons';
 @import 'components/home';
 @import 'components/footer';
 @import 'components/howitworks';
 @import 'components/featureGrid';
+@import 'components/signup';

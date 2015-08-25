@@ -1,0 +1,30 @@
+.shift-1 {
+  @include shift(1);
+}
+.shift-2 {
+  @include shift(2);
+}
+.shift-3 {
+  @include shift(3);
+}
+.shift-4 {
+  @include shift(4);
+}
+.shift-5 {
+  @include shift(5);
+}
+.shift-6 {
+  @include shift(6);
+}
+.shift-0.5 {
+  @include shift(0.5);
+}
+.shift-1.5 {
+  @include shift(1.5);
+}
+.shift-2.5 {
+  @include shift(2.5);
+}
+.shift-3.5 {
+  @include shift(3.5);
+}

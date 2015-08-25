@@ -1,3 +1,5 @@
+@import 'bourbon';
+@import 'neat';
 // Device Widths
  $phone-portrait: em(320);
  $phone-landscape: em(568);
@@ -29,6 +31,8 @@ $skyblue: #ACF0F2;
 $milk: #F3FFE2;
 $orange: #EB7F00;
 $dark-grey: #333;
+$light-grey: rgb(233, 233, 233);
+$text-light-grey: transparentize($dark-grey, 0.4);
 
 // base body settings
 body {

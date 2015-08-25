@@ -1,10 +1,11 @@
+@import '../base/variables';
 // grid items
 @mixin grid-item-columns($columns) {
   width: (100% / 12) * $columns;
 }
 .grid-items-lines {
-  $base-background-color2: rgb(233, 233, 233) !default;
-  $dark-gray: #333 !default;
+  $base-background-color2: $light-grey !default;
+  $dark-gray: $dark-grey !default;
   $light-gray: #ddd !default;
   $medium-screen: em(640) !default;
   $large-screen: em(860) !default;
@@ -74,7 +75,7 @@
     margin-bottom: 0.4em;
   }
   .grid-item p {
-    color: transparentize($grid-item-color, 0.4);
+    color: $text-light-grey;
     line-height: 1.5em;
     @include media($medium-screen) {
       max-width: 70%;
@@ -98,14 +99,14 @@
 // feature hr
 .feature-wrapper {
   @include outer-container(100%);
-  background-color: rgb(233, 233, 233);
+  background-color: $light-grey;
 }
 .feature-title {
   margin-top: 1em;
   @include span-columns(9);
   @include shift(1.5);
   @include pad(2em);
-  background-color: rgb(233, 233, 233);
+  background-color: $light-grey;
   hr.feature-hr {
     padding: 0;
     border: none;
@@ -120,6 +121,6 @@
       top: -0.7em;
       font-size: 1.2em;
       padding: 0 0.5em;
-      background: rgb(233, 233, 233);
+      background: $light-grey;
   }
 }

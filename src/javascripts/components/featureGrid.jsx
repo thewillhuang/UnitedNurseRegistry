@@ -40,7 +40,7 @@ export class FeatureGrid extends React.Component {
             <p>Control your everything from your mobile device.</p>
           </div>
           <div href='#' className='grid-item'>
-            <i className='fa icon-like fa-2x grid-i'></i>
+            <i className='fa icon-magnifier fa-2x grid-i'></i>
             <h1>Background checked</h1>
             <p>All References are checked.</p>
           </div>

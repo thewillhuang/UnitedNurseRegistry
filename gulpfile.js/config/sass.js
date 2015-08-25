@@ -3,7 +3,7 @@ const config = require('./');
 const neat = require('node-neat').includePaths;
 
 module.exports = {
-  autoprefixer: { browsers: ['last 2 version'] },
+  autoprefixer: { browsers: ['> 1%'] },
   src: config.sourceAssets + '/stylesheets/**/*.{sass,scss}',
   dest: config.publicAssets + '/stylesheets',
   settings: {
@@ -14,5 +14,8 @@ module.exports = {
   sourcemaps: {
     loadMaps: true,
     debug: true,
+  },
+  minify: {
+    advanced: true,
   },
 };

@@ -1,3 +1,4 @@
+@import '../base/variables';
 .alpha {
   @include outer-container(100%);
   @include background-image(linear-gradient(130deg, #451e98, #2989d8));
@@ -55,16 +56,4 @@
     @include span-columns(5.5);
     @include shift(0.25);
   }
-}
-.signup-wrapper {
-  margin-top: 0.5em;
-  padding: 1em;
-  width: 300px;
-  margin: 0 auto;
-}
-.signupbutton {
-  margin-top: 0.5em;
-  margin-bottom: 1em;
-  position: relative;
-  left: 90px;
 }

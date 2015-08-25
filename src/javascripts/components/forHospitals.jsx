@@ -22,7 +22,7 @@ export class ForHospitals extends React.Component {
           <div href='#' className='grid2-item'>
             <i className='fa icon-graph fa-2x grid2-i'></i>
             <h1>Real Time</h1>
-            <p>Get real time feedback from nurses around you. Accept the ones you want.</p>
+            <p>Get real time Feedback from nurses around you. Accept the ones you want.</p>
           </div>
           <div href='#' className='grid2-item'>
             <i className='fa icon-credit-card fa-2x grid2-i'></i>

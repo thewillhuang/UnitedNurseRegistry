@@ -23,7 +23,7 @@ module.exports = function authRoutes(app) {
     }, function* (err, user, info) {
       if (err) console.log('error', err);
       if (!user) {
-        ctx.status = 401;
+        ctx.status = 406;
         ctx.body = {message: info};
       } else {
         ctx.status = 200;
@@ -40,7 +40,7 @@ module.exports = function authRoutes(app) {
     yield passport.authenticate('local', { session: false }, function*(err, user, info) {
       if (err) console.log('error', err);
       if (!user) {
-        ctx.status = 401;
+        ctx.status = 406;
         ctx.body = {message: info};
       } else {
         ctx.status = 200;
@@ -57,7 +57,7 @@ module.exports = function authRoutes(app) {
     yield passport.authenticate('facility-login', { session: false }, function*(err, user, info) {
       if (err) console.log('error', err);
       if (!user) {
-        ctx.status = 401;
+        ctx.status = 406;
         ctx.body = {message: info};
       } else {
         ctx.status = 200;
@@ -75,7 +75,7 @@ module.exports = function authRoutes(app) {
       // console.log('user', user, 'info', info);
       if (err) console.log('error', err);
       if (!user) {
-        ctx.status = 401;
+        ctx.status = 406;
         ctx.body = {message: info};
       } else {
         ctx.status = 200;
@@ -92,7 +92,7 @@ module.exports = function authRoutes(app) {
     yield passport.authenticate('local-signup',  { session: false }, function*(err, user, info) {
       if (err) console.log('error', err);
       if (!user) {
-        ctx.status = 401;
+        ctx.status = 406;
         ctx.body = {message: info};
       } else {
         ctx.status = 200;

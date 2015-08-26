@@ -1,15 +1,7 @@
 'use strict';
 
 import React from 'react';
-import mui,
-{
-  Toolbar,
-  ToolbarGroup,
-  RaisedButton,
-  AppBar,
-  IconMenu,
-  IconButton,
-} from 'material-ui';
+import mui, { Toolbar, ToolbarGroup, RaisedButton, AppBar, IconMenu, IconButton, FlatButton } from 'material-ui';
 const MenuItem = require('material-ui/lib/menus/menu-item');
 const MenuDivider = require('material-ui/lib/menus/menu-divider');
 const ThemeManager = new mui.Styles.ThemeManager();
@@ -57,9 +49,19 @@ class HomeToolBar extends React.Component {
             <RaisedButton href='#home' label='united nurse registry' linkButton={true} primary={true}/>
           </ToolbarGroup>
           <ToolbarGroup float='right' key={1}>
-            <RaisedButton href='#hospitals' label='Hospitals' linkButton={true} secondary={true}/>
-            <RaisedButton href='#login' label='Login' linkButton={true} secondary={true}/>
-            <RaisedButton href='#signup' label='Signup' linkButton={true} secondary={true}/>
+            <FlatButton href='#hospitals' label='Hospitals' linkButton={true} secondary={true} style={{
+              backgroundColor: 'rbga(255,255,255,0.6)',
+              color: 'white',
+            }}
+            />
+            <FlatButton href='#login' label='Login' linkButton={true} secondary={true} style={{
+              backgroundColor: 'rbga(255,255,255,0.6)',
+              color: 'white',
+            }}/>
+            <FlatButton href='#signup' label='Signup' linkButton={true} secondary={true} style={{
+              backgroundColor: 'rbga(255,255,255,0.6)',
+              color: 'white',
+            }}/>
           </ToolbarGroup>
         </Toolbar>
         </MediaQuery>

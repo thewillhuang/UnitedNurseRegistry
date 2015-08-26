@@ -7,10 +7,7 @@ module.exports = {
   proxy: 'localhost:3000',
   port: '8000',
   ui: {
-    port: 8081,
-    weinre: {
-      port: 9090,
-    },
+    port: 8001,
   },
   // server: {
   //   baseDir: config.publicDirectory,

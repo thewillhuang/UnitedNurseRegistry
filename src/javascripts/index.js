@@ -29,7 +29,15 @@ React.render((
         require.ensure([], (require) => {
           cb(null, require('./components/app.jsx'));
         });
-      }}/>
+      }} >
+
+        <Route path='/hospitals' getComponents={(cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./components/hospital.jsx'));
+          });
+        }}/>
+
+      </Route>
 
       <Route path='hospitals' getComponents={(cb) => {
         require.ensure([], (require) => {

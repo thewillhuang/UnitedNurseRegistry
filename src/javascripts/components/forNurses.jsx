@@ -15,7 +15,7 @@ class ForNurses extends React.Component {
 
         <div className='grid2-items-lines'>
           <div href='#' className='grid2-item'>
-            <i className='fa icon-link fa-2x grid2-i'></i>
+            <i className='fa icon-share fa-2x grid2-i'></i>
             <h1>Connect</h1>
             <p>Set up an account and Connect to your bank account</p>
           </div>

@@ -7,6 +7,7 @@ var images    = require('../config/images');
 var sass      = require('../config/sass');
 var fonts     = require('../config/fonts');
 var watch     = require('gulp-watch');
+// var nodemon = require('../config/nodemon');
 
 gulp.task('watch', ['browserSync'], function() {
   watch(images.src, function() { gulp.start('images'); });
@@ -16,4 +17,5 @@ gulp.task('watch', ['browserSync'], function() {
   watch(fonts.src, function() { gulp.start('fonts'); });
   watch(html.watch, function() { gulp.start('html'); });
   watch(markup.watch, function() { gulp.start('markup'); });
+  // watch(nodemon.watch, function() { gulp.start('nodemon'); });
 });

@@ -1,10 +1,20 @@
-var config = require('./')
-var morgan = require('morgan');
+'use strict';
+// var config = require('./')
+// const morgan = require('morgan');
 
 module.exports = {
-  server: {
-    baseDir: config.publicDirectory,
-    middleware: [morgan('dev')],
+  reloadDelay: 1500,
+  proxy: 'localhost:3000',
+  port: '8000',
+  ui: {
+    port: 8081,
+    weinre: {
+      port: 9090,
+    },
   },
-  files: ['public/**/*.html']
-}
+  // server: {
+  //   baseDir: config.publicDirectory,
+  //   middleware: [morgan('dev')],
+  // },
+  // files: ['public/**/*.html'],
+};

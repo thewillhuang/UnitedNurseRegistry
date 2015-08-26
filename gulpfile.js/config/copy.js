@@ -1,4 +1,6 @@
-var config = require('./');
+'use strict';
+
+const config = require('./');
 
 module.exports = {
   src: [

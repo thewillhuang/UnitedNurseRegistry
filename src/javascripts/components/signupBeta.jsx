@@ -48,7 +48,6 @@ class SignupBox extends React.Component {
     }
   }
 
-            // <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>
   render() {
     return (
       <div className='betasignup-wrapper'>
@@ -61,7 +60,8 @@ class SignupBox extends React.Component {
           onEnterKeyDown={this.handleSubmit}
           style={{color: 'white'}}
         />
-          <div className='signupbutton'>
+          <div className='signupbetabutton'>
+            <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>
           </div>
       </div>
     );

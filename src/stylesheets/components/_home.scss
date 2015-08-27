@@ -18,7 +18,7 @@
   }
 }
 .beta {
-  padding-top: 0.5em;
+  padding-top: 3em;
   @include media($mobile) {
     padding-top: 2em;
   }
@@ -26,8 +26,11 @@
 .slogan {
   margin-top: 50px;
   margin-bottom: 70px;
-  @include span-columns(12);
+  font-size: 1.3em;
+  // @include span-columns(12);
   text-align: center;
+  margin: 0 auto;
+
   // @include shift(1);
   color: white;
   @include media($mobile) {

@@ -17,7 +17,7 @@ class ForHospitals extends React.Component {
           <div href='#' className='grid2-item'>
             <i className='fa icon-paper-plane fa-2x grid2-i'></i>
             <h1>Post</h1>
-            <p>Shifts and specify your price range</p>
+            <p>Post shifts and specify your price range</p>
           </div>
           <div href='#' className='grid2-item'>
             <i className='fa icon-graph fa-2x grid2-i'></i>

@@ -7,7 +7,7 @@ import validator from 'validator';
 const ThemeManager = new mui.Styles.ThemeManager();
 // console.log(request);
 
-class SignupBox extends React.Component {
+class LoginBox extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -22,7 +22,7 @@ class SignupBox extends React.Component {
     if (validator.isEmail(this.refs.email.getValue()) && this.refs.password.getValue > 5) {
       this.refs.email.setErrorText('');
       request
-        .post('/api/auth/signup')
+        .post('/api/auth/login')
         .send({
           email: this.refs.email.getValue(),
           password: this.refs.password.getValue(),
@@ -63,7 +63,7 @@ class SignupBox extends React.Component {
   render() {
     return (
       <Card>
-        <div className='signup-wrapper'>
+        <div className='login-wrapper'>
           <TextField
             floatingLabelText='Email Address'
             ref='email'
@@ -71,14 +71,7 @@ class SignupBox extends React.Component {
             onChange={this.validateEmail}
             type='email'
           />
-          <TextField
-            floatingLabelText='Password'
-            ref='password'
-            onEnterKeyDown={this.handleSubmit}
-            hintText='Password'
-            onChange={this.validatePassword}
-            type='password'
-          />
+          <TextField floatingLabelText='Password' ref='password' onEnterKeyDown={this.handleSubmit} hintText='Password' type='password'/>
           <CardActions>
             <div className='signupButtonWrap'>
               <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>
@@ -90,4 +83,4 @@ class SignupBox extends React.Component {
   }
 }
 
-export default SignupBox;
+export default LoginBox;

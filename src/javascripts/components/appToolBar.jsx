@@ -14,8 +14,6 @@ const MenuItem = require('material-ui/lib/menus/menu-item');
 const MenuDivider = require('material-ui/lib/menus/menu-divider');
 const ThemeManager = new mui.Styles.ThemeManager();
 import MediaQuery from 'react-responsive';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
 
 class AppToolBar extends React.Component {
   static childContextTypes = {

@@ -1,0 +1,28 @@
+@import 'bourbon';
+@import 'neat';
+@import '../base/variables';
+
+.login-wrapper {
+  margin-top: 0.5em;
+  padding: 1em;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.loginAlpha {
+  @include outer-container(100%);
+  @include background-image(linear-gradient(130deg, #0E153A, #F7CDDA));
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  // margin-bottom: 2em;
+  // @include media($mobile) {
+  //   height: 750px;
+  // }
+  // @include media($mediummobile) {
+  //   height: 830px;
+  // }
+  // @include media($smallerMobile) {
+  //   height: 890px;
+  // }
+}

@@ -19,20 +19,23 @@ class SignupBox extends React.Component {
   }
 
   handleSubmit = ()  => {
-    request
-      .post('/api/auth/signup')
-      .send({
-        email: this.refs.email.getValue(),
-        password: this.refs.password.getValue(),
-      })
-      .end(function(err, res) {
-        console.log(err);
-        console.log(res.body);
-        console.log(res.headers);
-        localStorage.setItem('token', res.headers.authorization);
-        window.location.assign('/#/app');
-        console.log(localStorage.getItem('token'));
-      });
+    if (this.refs.email.getValue()) {
+      request
+        .post('/api/auth/signup')
+        .send({
+          email: this.refs.email.getValue(),
+        })
+        .end(function(err, res) {
+          console.log(err);
+          console.log(res.body);
+          console.log(res.headers);
+          localStorage.setItem('token', res.headers.authorization);
+          window.location.assign('/#/app');
+          console.log(localStorage.getItem('token'));
+        });
+    } else {
+      this.refs.email.setErrorText('Must enter an email');
+    }
   }
 
   validateEmail = () => {

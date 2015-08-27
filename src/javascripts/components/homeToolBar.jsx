@@ -6,8 +6,6 @@ const MenuItem = require('material-ui/lib/menus/menu-item');
 const MenuDivider = require('material-ui/lib/menus/menu-divider');
 const ThemeManager = new mui.Styles.ThemeManager();
 import MediaQuery from 'react-responsive';
-import injectTapEventPlugin from 'react-tap-event-plugin';
-injectTapEventPlugin();
 
 class HomeToolBar extends React.Component {
   static childContextTypes = {
@@ -39,7 +37,7 @@ class HomeToolBar extends React.Component {
   render() {
     return (
       <div>
-        <MediaQuery minWidth={755}>
+        <MediaQuery minWidth={691}>
         <Toolbar style={{
           backgroundColor: 'rbga(255,255,255,0.6)',
           paddingTop: 20,
@@ -52,23 +50,28 @@ class HomeToolBar extends React.Component {
             <FlatButton href='#hospitals' label='Hospitals' linkButton={true} secondary={true} style={{
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
+              marginLeft: 10,
+              marginRight: 10,
             }}
             />
             <FlatButton href='#login' label='Login' linkButton={true} secondary={true} style={{
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
+              marginLeft: 29,
+              marginRight: 10,
             }}/>
             <FlatButton href='#signup' label='Sign up' linkButton={true} secondary={true} style={{
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
+              marginLeft: 10,
+              marginRight: 10,
             }}/>
           </ToolbarGroup>
         </Toolbar>
         </MediaQuery>
-        <MediaQuery maxWidth={755}>
+        <MediaQuery maxWidth={691}>
           <AppBar
             style={{
-              backgroundColor: 'rbga(255,255,255,0.6)',
               paddingTop: 5,
               marginBottom: 20,
             }}

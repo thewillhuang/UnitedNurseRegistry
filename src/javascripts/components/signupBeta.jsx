@@ -50,23 +50,20 @@ class SignupBox extends React.Component {
 
   render() {
     return (
-      <Card>
-        <div className='betasignup-wrapper'>
-          <TextField
-            floatingLabelText='Email Address'
-            ref='email'
-            hintText='Email'
-            onChange={this.validateEmail}
-            type='email'
-            onEnterKeyDown={this.handleSubmit}
-          />
-          <CardActions>
-            <div className='signupbutton'>
-              <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>
-            </div>
-          </CardActions>
-        </div>
-      </Card>
+      <div className='betasignup-wrapper'>
+        <TextField
+          floatingLabelText='Email Address'
+          ref='email'
+          hintText='Email'
+          onChange={this.validateEmail}
+          type='email'
+          onEnterKeyDown={this.handleSubmit}
+          style={{color: 'white'}}
+        />
+          <div className='signupbutton'>
+            <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>
+          </div>
+      </div>
     );
   }
 }

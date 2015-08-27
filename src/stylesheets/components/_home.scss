@@ -5,10 +5,10 @@
   @include background-image(linear-gradient(130deg, $electricPurple, $electricBlue));
   background-size: cover;
   background-repeat: no-repeat;
-  height: 600px;
+  height: 700px;
   // margin-bottom: 2em;
   @include media($mobile) {
-    height: 750px;
+    height: 720px;
   }
   @include media($mediummobile) {
     height: 730px;

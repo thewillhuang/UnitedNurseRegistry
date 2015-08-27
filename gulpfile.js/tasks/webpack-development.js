@@ -11,7 +11,7 @@ gulp.task('webpack:development', function(callback) {
     webpack(config).watch(200, function(err, stats) {
       logger(err, stats)
       // let nodemon restart and reload instead
-      // browserSync.reload()
+      browserSync.reload();
       // On the initial compile, let gulp know the task is done
       if(!built) { built = true; callback() }
     })

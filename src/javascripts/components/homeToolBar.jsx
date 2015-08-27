@@ -58,7 +58,7 @@ class HomeToolBar extends React.Component {
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
             }}/>
-            <FlatButton href='#signup' label='Signup' linkButton={true} secondary={true} style={{
+            <FlatButton href='#signup' label='Sign up' linkButton={true} secondary={true} style={{
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
             }}/>
@@ -80,7 +80,7 @@ class HomeToolBar extends React.Component {
               <MenuItem onClick={() => {this.onMenuTap('home'); }} primaryText='Home' />
               <MenuDivider/>
               <MenuItem onClick={() => {this.onMenuTap('login'); }} primaryText='Login' />
-              <MenuItem onClick={() => {this.onMenuTap('signup'); }} primaryText='Signup' />
+              <MenuItem onClick={() => {this.onMenuTap('signup'); }} primaryText='Sign up' />
               <MenuItem onClick={() => {this.onMenuTap('hospitals'); }} primaryText='Hospitals'/ >
             </IconMenu>
             } title='Dream Crew'/>

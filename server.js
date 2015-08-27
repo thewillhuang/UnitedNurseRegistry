@@ -34,17 +34,30 @@ app.use(helmet());
 app.use(helmet.noCache());
 
 // static file server
-app.use(staticCache(buildPath, {
-  buffer: true,
-  usePrecompiledGzip: true,
-  gzip: true,
-}));
+if (process.env.NODE_ENV === 'development') {
+  console.log('server running in development mode');
+  app.use(function* apiCheck(next) {
+    if (this.path.indexOf('api') !== -1) {
+      yield next;
+    } else if (this.path === '/') {
+      yield send(this, buildPath + '/index.html');
+    } else {
+      yield send(this, buildPath + this.path);
+    }
+  });
+} else {
+  app.use(staticCache(buildPath, {
+    buffer: true,
+    usePrecompiledGzip: true,
+    gzip: true,
+  }));
 
-app.use(function* apiCheck(next) {
-  this.path.indexOf('api') !== -1
-  ? yield next
-  : yield send(this, buildPath + '/index.html');
-});
+  app.use(function* apiCheck(next) {
+    this.path.indexOf('api') !== -1
+    ? yield next
+    : yield send(this, buildPath + '/index.html');
+  });
+}
 
 // set unsigned cookies as we are using a signed and encrypted jwt
 // app.use(session({ signed: false }, app));

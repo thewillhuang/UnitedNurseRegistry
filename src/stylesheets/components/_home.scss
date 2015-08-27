@@ -1,4 +1,5 @@
 @import '../base/variables';
+
 .alpha {
   @include outer-container(100%);
   @include background-image(linear-gradient(130deg, $electricPurple, $electricBlue));
@@ -39,6 +40,7 @@
   }
 }
 .home-signup {
+  margin-top: 25px;
   @include span-columns(5);
   @include shift(1);
   text-align: center;

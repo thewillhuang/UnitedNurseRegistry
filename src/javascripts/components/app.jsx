@@ -9,14 +9,17 @@ class App extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
+
   static propTypes = {
     children: React.PropTypes.node,
   }
+
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme(),
     };
   }
+
   render() {
     return (
       <div>
@@ -25,7 +28,7 @@ class App extends React.Component {
           Signed-in app
         </h3>
         <div>test
-          {this.props.children || 'Welcome to your Inbox'}
+          {this.props.children || 'Welcome to your Dashboard'}
         </div>
       </div>
     );

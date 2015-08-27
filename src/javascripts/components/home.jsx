@@ -5,7 +5,8 @@ import mui from 'material-ui';
 import HomeToolBar from './homeToolBar.jsx';
 import Footer from './footer.jsx';
 import FeatureGrid from './featureGrid.jsx';
-import SignupBox from './signupBox.jsx';
+// import SignupBox from './signupBox.jsx';
+import SignupBeta from './signupBeta.jsx';
 import ForNurses from './forNurses.jsx';
 import ForHospitals from './forHospitals.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
@@ -35,9 +36,9 @@ export class Home extends React.Component {
 
             <div className='home-signup'>
               <h3>
-                Signup
+                Sign up for Beta Launch
               </h3>
-              <SignupBox />
+              <SignupBeta />
             </div>
 
           </div>

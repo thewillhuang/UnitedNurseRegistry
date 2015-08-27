@@ -17,7 +17,9 @@ class Signup extends React.Component {
   render() {
     return (
       <div>
-        <HomeToolBar />
+        <div>
+          <HomeToolBar />
+        </div>
         <h3>
           Signup
         </h3>

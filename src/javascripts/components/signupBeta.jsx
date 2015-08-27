@@ -36,7 +36,6 @@ class SignupBox extends React.Component {
   }
 
   validateEmail = () => {
-    console.log(this.refs.email.getValue());
     if (validator.isEmail(this.refs.email.getValue())) {
       this.refs.email.setErrorText('');
     } else if (this.refs.email.getValue().length === 0) {
@@ -49,15 +48,15 @@ class SignupBox extends React.Component {
   render() {
     return (
       <Card>
-        <div className='signup-wrapper'>
+        <div className='betasignup-wrapper'>
           <TextField
             floatingLabelText='Email Address'
             ref='email'
             hintText='Email'
             onChange={this.validateEmail}
             type='email'
+            onEnterKeyDown={this.handleSubmit}
           />
-          <TextField floatingLabelText='Password' ref='password' onEnterKeyDown={this.handleSubmit} hintText='Password' type='password'/>
           <CardActions>
             <div className='signupbutton'>
               <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>

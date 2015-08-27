@@ -3,7 +3,7 @@
 // const morgan = require('morgan');
 
 module.exports = {
-  reloadDelay: 1500,
+  // reloadDelay: 1500,
   proxy: 'localhost:3000',
   port: '8000',
   ui: {

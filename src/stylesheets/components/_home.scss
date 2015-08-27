@@ -8,7 +8,7 @@
   height: 600px;
   // margin-bottom: 2em;
   @include media($mobile) {
-    height: 650px;
+    height: 750px;
   }
   @include media($mediummobile) {
     height: 730px;
@@ -18,7 +18,7 @@
   }
 }
 .beta {
-  padding-top: 5em;
+  padding-top: 1em;
   @include media($mobile) {
     padding-top: 2em;
   }
@@ -26,9 +26,9 @@
 .slogan {
   margin-top: 90px;
   margin-bottom: 30px;
-  @include span-columns(5);
+  @include span-columns(12);
   text-align: center;
-  @include shift(1);
+  // @include shift(1);
   color: white;
   @include media($mobile) {
     margin-top: 50px;
@@ -42,11 +42,12 @@
 }
 .home-signup {
   // margin-top: 25px;
-  @include span-columns(5);
-  @include shift(1);
+  // @include span-columns(6);
+  // @include shift(3);
   text-align: center;
   color: white;
   width: 400px;
+  margin: 0 auto;
   @include media($mobile) {
     @include span-columns(3);
     @include shift(1.5);

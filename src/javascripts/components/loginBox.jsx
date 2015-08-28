@@ -74,7 +74,7 @@ class LoginBox extends React.Component {
           <TextField floatingLabelText='Password' ref='password' onEnterKeyDown={this.handleSubmit} hintText='Password' type='password'/>
           <CardActions>
             <div className='signupButtonWrap'>
-              <RaisedButton label='Login' onClick={this.handleSubmit} secondary={true}/>
+              <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>
             </div>
           </CardActions>
         </div>

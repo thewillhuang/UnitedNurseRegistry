@@ -1,6 +1,6 @@
 'use strict';
 const config = require('./');
-const neat = require('node-neat');
+const neat = require('node-neat').includePaths;
 
 module.exports = {
   autoprefixer: { browsers: ['> 1%'] },
@@ -9,7 +9,7 @@ module.exports = {
   settings: {
     // indentedSyntax: false, // Enable .sass syntax!
     imagePath: 'images', // Used by the image-url helper
-    includePaths: neat.includePaths,
+    includePaths: neat,
   },
   sourcemaps: {
     loadMaps: true,

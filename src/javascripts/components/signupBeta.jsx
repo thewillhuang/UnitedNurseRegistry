@@ -50,8 +50,11 @@ class SignupBox extends React.Component {
 
   render() {
     return (
-      <Card>
-        <div className='betasignup-wrapper'>
+      <div className='betasignup-wrapper'>
+      <h3 style={{color: 'white'}}>
+        Sign up for Beta Launch
+      </h3>
+        <Card style={{paddingTop: 30}}>
           <TextField
             floatingLabelText='Email Address'
             ref='email'
@@ -65,8 +68,8 @@ class SignupBox extends React.Component {
               <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>
             </div>
           </CardActions>
-        </div>
-      </Card>
+        </Card>
+      </div>
     );
   }
 }

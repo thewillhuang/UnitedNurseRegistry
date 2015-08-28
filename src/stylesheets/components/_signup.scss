@@ -4,7 +4,7 @@
 .signup-wrapper {
   margin-top: 0.5em;
   padding: 1em;
-  width: 300px;
+  width: 400px;
   margin: 0 auto;
 }
 .signupbutton {
@@ -35,6 +35,7 @@
   background-size: cover;
   background-repeat: no-repeat;
   height: 100vh;
+  min-height: 579px;
   // margin-bottom: 2em;
   // @include media($mobile) {
   //   height: 750px;

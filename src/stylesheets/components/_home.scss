@@ -14,7 +14,7 @@
     height: 730px;
   }
   @include media($smallerMobile) {
-    height: 790px;
+    height: 850px;
   }
 }
 .beta {
@@ -24,12 +24,13 @@
   }
 }
 .slogan {
-  margin-top: 90px;
+  margin-top: 70px;
   margin-bottom: 30px;
   @include span-columns(5);
   text-align: center;
   @include shift(1);
   color: white;
+  font-size: 1.2em;
   @include media($mobile) {
     margin-top: 50px;
     @include span-columns(4);

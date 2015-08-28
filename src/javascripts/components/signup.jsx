@@ -23,7 +23,7 @@ class Signup extends React.Component {
           <HomeToolBar/>
           <div className='spacing' />
           <div className='signup-wrap'>
-            <h3 style={{color: 'white', textAlign: 'center'}}>Sign Up</h3>
+            <h3 style={{color: 'white', textAlign: 'center'}}>Sign up</h3>
             <SignupBox />
           </div>
         </div>

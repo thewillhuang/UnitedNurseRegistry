@@ -35,9 +35,6 @@ export class Home extends React.Component {
             </div>
 
             <div className='home-signup'>
-              <h3>
-                Sign up for Beta Launch
-              </h3>
               <SignupBeta />
             </div>
 

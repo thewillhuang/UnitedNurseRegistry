@@ -1,8 +1,8 @@
 // if you remove '.css' to the end. scss will import the content of the files
 // therefore, less ajax requests yay
-@import '../bower_components/normalize.css/normalize';
 @import 'bourbon';
 @import 'neat';
+@import '../bower_components/normalize.css/normalize';
 @import 'base/variables';
 @import 'layouts/col';
 @import 'layouts/shift';

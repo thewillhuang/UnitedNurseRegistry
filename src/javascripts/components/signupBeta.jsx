@@ -7,7 +7,7 @@ import validator from 'validator';
 const ThemeManager = new mui.Styles.ThemeManager();
 // console.log(request);
 
-class SignupBox extends React.Component {
+class BetaSignup extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -74,4 +74,4 @@ class SignupBox extends React.Component {
   }
 }
 
-export default SignupBox;
+export default BetaSignup;

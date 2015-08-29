@@ -7,7 +7,7 @@ import validator from 'validator';
 const ThemeManager = new mui.Styles.ThemeManager();
 // console.log(request);
 
-class LoginBox extends React.Component {
+class HospitalSignup extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -83,4 +83,4 @@ class LoginBox extends React.Component {
   }
 }
 
-export default LoginBox;
+export default HospitalSignup;

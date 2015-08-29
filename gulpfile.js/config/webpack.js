@@ -72,7 +72,7 @@ module.exports = function(env) {
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin(),
       new webpack.optimize.OccurenceOrderPlugin(true),
-      new webpack.NoErrorsPlugin()
+      new webpack.NoErrorsPlugin(),
     );
   }
 

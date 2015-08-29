@@ -1,0 +1,29 @@
+@import 'bourbon';
+@import 'neat';
+@import '../base/variables';
+
+.login-wrapper {
+  margin-top: 0.5em;
+  padding: 1em;
+  width: 300px;
+  margin: 0 auto;
+}
+
+.hospitalAlpha {
+  @include outer-container(100%);
+  @include background-image(linear-gradient(130deg, #020002, #50A3D7));
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  min-height: 579px;
+  // margin-bottom: 2em;
+  // @include media($mobile) {
+  //   height: 750px;
+  // }
+  // @include media($mediummobile) {
+  //   height: 830px;
+  // }
+  // @include media($smallerMobile) {
+  //   height: 890px;
+  // }
+}

@@ -3,6 +3,8 @@
 import React from 'react';
 import mui from 'material-ui';
 import HomeToolBar from './homeToolBar.jsx';
+import LoginBox from './loginBox.jsx';
+import Footer from './footer.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 
 class Hospital extends React.Component {
@@ -17,10 +19,15 @@ class Hospital extends React.Component {
   render() {
     return (
       <div>
-        <HomeToolBar />
-        <h3>
-          Hospitals
-        </h3>
+        <div className='hospitalAlpha'>
+          <HomeToolBar/>
+          <div className='spacing' />
+          <div className='signup-wrap'>
+            <h3 style={{color: 'white', textAlign: 'center'}}>Hospital Login</h3>
+            <LoginBox />
+          </div>
+        </div>
+        <Footer/>
       </div>
     );
   }

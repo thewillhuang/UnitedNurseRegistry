@@ -7,7 +7,7 @@ import validator from 'validator';
 const ThemeManager = new mui.Styles.ThemeManager();
 // console.log(request);
 
-class SignupBox extends React.Component {
+class LoginBox extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -19,11 +19,13 @@ class SignupBox extends React.Component {
   }
 
   handleSubmit = ()  => {
-    if (this.refs.email.getValue()) {
+    if (validator.isEmail(this.refs.email.getValue()) && this.refs.password.getValue > 5) {
+      this.refs.email.setErrorText('');
       request
-        .post('/api/auth/signup')
+        .post('/api/auth/login')
         .send({
           email: this.refs.email.getValue(),
+          password: this.refs.password.getValue(),
         })
         .end(function(err, res) {
           console.log(err);
@@ -34,11 +36,21 @@ class SignupBox extends React.Component {
           console.log(localStorage.getItem('token'));
         });
     } else {
-      this.refs.email.setErrorText('You must enter an email');
+      this.validatePassword();
+      this.validateEmail();
     }
   }
-
+  validatePassword = () => {
+    if (this.refs.password.getValue().length === 0) {
+      this.refs.password.setErrorText('');
+    } else if (this.refs.password.getValue().length < 6) {
+      this.refs.password.setErrorText('Password have atleast 6 characters');
+    } else {
+      this.refs.password.setErrorText('');
+    }
+  }
   validateEmail = () => {
+    console.log(this.refs.email.getValue());
     if (validator.isEmail(this.refs.email.getValue())) {
       this.refs.email.setErrorText('');
     } else if (this.refs.email.getValue().length === 0) {
@@ -50,28 +62,25 @@ class SignupBox extends React.Component {
 
   render() {
     return (
-      <div className='betasignup-wrapper'>
-      <h3 style={{color: 'white'}}>
-        Sign up for Beta Launch
-      </h3>
-        <Card style={{paddingTop: 30}}>
+      <Card>
+        <div className='login-wrapper'>
           <TextField
             floatingLabelText='Email Address'
             ref='email'
             hintText='Email'
             onChange={this.validateEmail}
             type='email'
-            onEnterKeyDown={this.handleSubmit}
           />
+          <TextField floatingLabelText='Password' ref='password' onEnterKeyDown={this.handleSubmit} hintText='Password' type='password'/>
           <CardActions>
-            <div className='signupbutton'>
+            <div className='signupButtonWrap'>
               <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>
             </div>
           </CardActions>
-        </Card>
-      </div>
+        </div>
+      </Card>
     );
   }
 }
 
-export default SignupBox;
+export default LoginBox;

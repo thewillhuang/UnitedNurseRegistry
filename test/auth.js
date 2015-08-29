@@ -68,7 +68,7 @@ describe('authentication api', function() {
         password: password,
         email: email3,
       })
-      .expect(401)
+      .expect(406)
       .end(function(err, res) {
         // console.log(res.headers);
         // console.log(res.body);
@@ -85,7 +85,7 @@ describe('authentication api', function() {
         password: password,
         email: email2,
       })
-      .expect(401)
+      .expect(406)
       .end(function(err, res) {
         // console.log(res.headers);
         // console.log(res.body);
@@ -138,7 +138,7 @@ describe('authentication api', function() {
         password: password,
         email: email2,
       })
-      .expect(401)
+      .expect(406)
       .end(function(err, res) {
         // console.log(res.headers);
         // console.log(res.body);
@@ -155,7 +155,7 @@ describe('authentication api', function() {
         password: password,
         email: email,
       })
-      .expect(401)
+      .expect(406)
       .end(function(err, res) {
         // console.log(res.headers);
         // console.log(res.body);
@@ -172,7 +172,7 @@ describe('authentication api', function() {
         password: 'fldakjsfdlasfkj',
         email: email2,
       })
-      .expect(401)
+      .expect(406)
       .end(function(err, res) {
         // console.log(res.headers);
         // console.log(res.body);
@@ -189,7 +189,7 @@ describe('authentication api', function() {
         password: 'fldakjsfdlasfkj',
         email: email3,
       })
-      .expect(401)
+      .expect(406)
       .end(function(err, res) {
         // console.log(res.headers);
         // console.log(res.body);

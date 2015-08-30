@@ -9,6 +9,7 @@ import FeatureGrid from './featureGrid.jsx';
 import SignupBeta from './signupBeta.jsx';
 import ForNurses from './forNurses.jsx';
 import ForHospitals from './forHospitals.jsx';
+import ForReferrals from './forReferrals.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 
 export class Home extends React.Component {

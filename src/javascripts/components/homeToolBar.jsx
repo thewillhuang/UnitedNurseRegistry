@@ -54,16 +54,16 @@ class HomeToolBar extends React.Component {
               marginRight: 10,
             }}
             />
-            <FlatButton href='#login' label='Login' linkButton={true} secondary={true} style={{
-              backgroundColor: 'rbga(255,255,255,0.6)',
-              color: 'white',
-              marginLeft: 29,
-              marginRight: 10,
-            }}/>
             <FlatButton href='#signup' label='Sign up' linkButton={true} secondary={true} style={{
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
               marginLeft: 10,
+              marginRight: 10,
+            }}/>
+            <FlatButton href='#login' label='Login' linkButton={true} secondary={true} style={{
+              backgroundColor: 'rbga(255,255,255,0.6)',
+              color: 'white',
+              marginLeft: 29,
               marginRight: 10,
             }}/>
           </ToolbarGroup>
@@ -82,11 +82,11 @@ class HomeToolBar extends React.Component {
               }>
               <MenuItem onClick={() => {this.onMenuTap('home'); }} primaryText='Home' />
               <MenuDivider/>
-              <MenuItem onClick={() => {this.onMenuTap('login'); }} primaryText='Login' />
-              <MenuItem onClick={() => {this.onMenuTap('signup'); }} primaryText='Sign up' />
               <MenuItem onClick={() => {this.onMenuTap('hospitals'); }} primaryText='Hospitals'/ >
+              <MenuItem onClick={() => {this.onMenuTap('signup'); }} primaryText='User Sign up' />
+              <MenuItem onClick={() => {this.onMenuTap('login'); }} primaryText='Login' />
             </IconMenu>
-            } title='Dream Crew'/>
+          } title='United Nurse Registry'/>
         </MediaQuery>
       </div>
     );

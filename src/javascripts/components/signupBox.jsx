@@ -19,10 +19,10 @@ class LoginBox extends React.Component {
   }
 
   handleSubmit = ()  => {
-    if (validator.isEmail(this.refs.email.getValue()) && this.refs.password.getValue > 5) {
+    if (validator.isEmail(this.refs.email.getValue()) && this.refs.password.getValue().length > 5) {
       this.refs.email.setErrorText('');
       request
-        .post('/api/auth/login')
+        .post('/api/auth/signup')
         .send({
           email: this.refs.email.getValue(),
           password: this.refs.password.getValue(),
@@ -50,7 +50,7 @@ class LoginBox extends React.Component {
     }
   }
   validateEmail = () => {
-    console.log(this.refs.email.getValue());
+    // console.log(this.refs.email.getValue());
     if (validator.isEmail(this.refs.email.getValue())) {
       this.refs.email.setErrorText('');
     } else if (this.refs.email.getValue().length === 0) {
@@ -71,7 +71,14 @@ class LoginBox extends React.Component {
             onChange={this.validateEmail}
             type='email'
           />
-          <TextField floatingLabelText='Password' ref='password' onEnterKeyDown={this.handleSubmit} hintText='Password' type='password'/>
+          <TextField
+            floatingLabelText='Password'
+            ref='password'
+            onEnterKeyDown={this.handleSubmit}
+            onChange={this.validatePassword}
+            hintText='Password'
+            type='password'
+          />
           <CardActions>
             <div className='signupButtonWrap'>
               <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>

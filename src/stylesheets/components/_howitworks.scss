@@ -123,6 +123,31 @@
   }
 }
 
+.referral-wrapper {
+  @include outer-container(100%);
+}
+.referral-title {
+  @include span-columns(9);
+  @include shift(1.5);
+  @include pad(2em);
+  hr.referral-hr {
+    padding: 0;
+    border: none;
+    border-top: 1px solid #dbdbdb;
+    color: $dark-grey;
+    text-align: center;
+  }
+  hr.referral-hr:after {
+      content: "For Referrals";
+      display: inline-block;
+      position: relative;
+      top: -0.7em;
+      font-size: 1.2em;
+      padding: 0 0.5em;
+      background: white;
+  }
+}
+
 .hospital-wrapper {
   @include outer-container(100%);
 }

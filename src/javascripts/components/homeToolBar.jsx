@@ -16,24 +16,6 @@ class HomeToolBar extends React.Component {
       muiTheme: ThemeManager.getCurrentTheme(),
     };
   }
-  onMenuTap(value) {
-    switch (value) {
-    case 'login':
-      window.location.assign('/#/login');
-      break;
-    case 'signup':
-      window.location.assign('/#/signup');
-      break;
-    case 'hospitals':
-      window.location.assign('/#/hospitals');
-      break;
-    case 'home':
-      window.location.assign('/#/home');
-      break;
-    default:
-      return false;
-    }
-  }
   render() {
     return (
       <div>
@@ -80,11 +62,11 @@ class HomeToolBar extends React.Component {
             <IconMenu iconButtonElement={
                 <IconButton iconClassName='fa fa-bars' tooltip='Menu'/>
               }>
-              <MenuItem onClick={() => {this.onMenuTap('home'); }} primaryText='Home' />
+              <MenuItem onClick={()=> {window.location.assign('/#/home'); }} primaryText='Home' />
               <MenuDivider/>
-              <MenuItem onClick={() => {this.onMenuTap('hospitals'); }} primaryText='Hospitals'/ >
-              <MenuItem onClick={() => {this.onMenuTap('signup'); }} primaryText='User Sign up' />
-              <MenuItem onClick={() => {this.onMenuTap('login'); }} primaryText='Login' />
+              <MenuItem onClick={()=> {window.location.assign('/#/hospitals'); }} primaryText='Hospitals'/ >
+              <MenuItem onClick={()=> {window.location.assign('/#/signup'); }} primaryText='User Sign up' />
+              <MenuItem onClick={()=> {window.location.assign('/#/login'); }} primaryText='Login' />
             </IconMenu>
           } title='United Nurse Registry'/>
         </MediaQuery>

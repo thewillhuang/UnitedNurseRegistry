@@ -19,22 +19,35 @@ class BetaSignup extends React.Component {
   }
 
   handleSubmit = ()  => {
-    if (this.refs.email.getValue()) {
+    const ctx = this;
+    if (validator.isEmail(this.refs.email.getValue())) {
+      this.refs.email.setErrorText('');
       request
-        .post('/api/auth/signup')
+        .post('/api/auth/beta/signup')
         .send({
           email: this.refs.email.getValue(),
         })
         .end(function(err, res) {
           console.log(err);
-          console.log(res.body);
-          console.log(res.headers);
-          localStorage.setItem('token', res.headers.authorization);
-          window.location.assign('/#/app');
-          console.log(localStorage.getItem('token'));
+          // console.log(res.body);
+          // console.log(res.headers);
+          // console.log(res.status);
+          if (res.status === 200) {
+            localStorage.setItem('token', res.headers.authorization);
+            window.location.assign('/#/app');
+            // console.log(localStorage.getItem('token'));
+          } else if (res.status === 406) {
+            // console.log('406 block', res.body.message);
+            if (res.body.message === 'email taken' || res.body.message === 'incorrect email') {
+              // console.log('email block');
+              ctx.refs.email.focus();
+              ctx.refs.email.setErrorText(res.body.message);
+            }
+          }
         });
     } else {
-      this.refs.email.setErrorText('You must enter an email');
+      this.validatePassword();
+      this.validateEmail();
     }
   }
 

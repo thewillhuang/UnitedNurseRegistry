@@ -24,7 +24,7 @@ module.exports = function authRoutes(app) {
       if (err) console.log('error', err);
       if (!user) {
         ctx.status = 406;
-        ctx.body = {message: info};
+        ctx.body = info;
       } else {
         ctx.status = 200;
         ctx.passport.user = user;
@@ -41,7 +41,7 @@ module.exports = function authRoutes(app) {
       if (err) console.log('error', err);
       if (!user) {
         ctx.status = 406;
-        ctx.body = {message: info};
+        ctx.body = info;
       } else {
         ctx.status = 200;
         const token = jwt.encryptSign(user);
@@ -58,7 +58,7 @@ module.exports = function authRoutes(app) {
       if (err) console.log('error', err);
       if (!user) {
         ctx.status = 406;
-        ctx.body = {message: info};
+        ctx.body = info;
       } else {
         ctx.status = 200;
         const token = jwt.encryptSign(user);
@@ -76,7 +76,7 @@ module.exports = function authRoutes(app) {
       if (err) console.log('error', err);
       if (!user) {
         ctx.status = 406;
-        ctx.body = {message: info};
+        ctx.body = info;
       } else {
         ctx.status = 200;
         const token = jwt.encryptSign(user);
@@ -93,7 +93,7 @@ module.exports = function authRoutes(app) {
       if (err) console.log('error', err);
       if (!user) {
         ctx.status = 406;
-        ctx.body = {message: info};
+        ctx.body = info;
       } else {
         ctx.status = 200;
         const token = jwt.encryptSign(user);
@@ -102,14 +102,14 @@ module.exports = function authRoutes(app) {
         ctx.body = {message: user};
       }
     }).call(this, next);
-  })
-
-  .get('/logout', function*() {
-    this.remove('Authorization');
-    this.passport.user = null;
-    this.redirect('/');
-    this.body = {message: 'successfully logged out'};
   });
+
+  // .get('/logout', function*() {
+  //   this.remove('Authorization');
+  //   this.passport.user = null;
+  //   this.redirect('/');
+  //   this.body = {message: 'successfully logged out'};
+  // });
 
   app.use(auth.routes())
     .use(auth.allowedMethods());

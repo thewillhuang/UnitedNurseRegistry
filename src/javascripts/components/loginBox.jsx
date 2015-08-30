@@ -19,7 +19,8 @@ class LoginBox extends React.Component {
   }
 
   handleSubmit = ()  => {
-    if (validator.isEmail(this.refs.email.getValue()) && this.refs.password.getValue > 5) {
+    const ctx = this;
+    if (validator.isEmail(this.refs.email.getValue()) && this.refs.password.getValue().length > 5) {
       this.refs.email.setErrorText('');
       request
         .post('/api/auth/login')
@@ -29,17 +30,32 @@ class LoginBox extends React.Component {
         })
         .end(function(err, res) {
           console.log(err);
-          console.log(res.body);
-          console.log(res.headers);
-          localStorage.setItem('token', res.headers.authorization);
-          window.location.assign('/#/app');
-          console.log(localStorage.getItem('token'));
+          // console.log(res.body);
+          // console.log(res.headers);
+          // console.log(res.status);
+          if (res.status === 200) {
+            localStorage.setItem('token', res.headers.authorization);
+            window.location.assign('/#/app');
+            // console.log(localStorage.getItem('token'));
+          } else if (res.status === 406) {
+            // console.log('406 block', res.body.message);
+            if (res.body.message === 'email taken' || res.body.message === 'incorrect email') {
+              // console.log('email block');
+              ctx.refs.email.focus();
+              ctx.refs.email.setErrorText(res.body.message);
+            } else if (res.body.message === 'incorrect password') {
+              // console.log('incorrect password block');
+              ctx.refs.password.focus();
+              ctx.refs.password.setErrorText(res.body.message);
+            }
+          }
         });
     } else {
       this.validatePassword();
       this.validateEmail();
     }
   }
+
   validatePassword = () => {
     if (this.refs.password.getValue().length === 0) {
       this.refs.password.setErrorText('');
@@ -49,8 +65,9 @@ class LoginBox extends React.Component {
       this.refs.password.setErrorText('');
     }
   }
+
   validateEmail = () => {
-    console.log(this.refs.email.getValue());
+    // console.log(this.refs.email.getValue());
     if (validator.isEmail(this.refs.email.getValue())) {
       this.refs.email.setErrorText('');
     } else if (this.refs.email.getValue().length === 0) {
@@ -68,10 +85,18 @@ class LoginBox extends React.Component {
             floatingLabelText='Email Address'
             ref='email'
             hintText='Email'
+            onEnterKeyDown={this.handleSubmit}
             onChange={this.validateEmail}
             type='email'
           />
-          <TextField floatingLabelText='Password' ref='password' onEnterKeyDown={this.handleSubmit} hintText='Password' type='password'/>
+          <TextField
+            floatingLabelText='Password'
+            ref='password'
+            onEnterKeyDown={this.handleSubmit}
+            onChange={this.validatePassword}
+            hintText='Password'
+            type='password'
+          />
           <CardActions>
             <div className='signupButtonWrap'>
               <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>

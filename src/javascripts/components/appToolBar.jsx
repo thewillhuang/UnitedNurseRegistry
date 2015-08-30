@@ -1,15 +1,7 @@
 'use strict';
 
 import React from 'react';
-import mui,
-{
-  Toolbar,
-  ToolbarGroup,
-  RaisedButton,
-  AppBar,
-  IconMenu,
-  IconButton,
-} from 'material-ui';
+import mui, { Toolbar, ToolbarGroup, RaisedButton, AppBar, IconMenu, IconButton, FlatButton } from 'material-ui';
 const MenuItem = require('material-ui/lib/menus/menu-item');
 const MenuDivider = require('material-ui/lib/menus/menu-divider');
 const ThemeManager = new mui.Styles.ThemeManager();
@@ -24,28 +16,10 @@ class AppToolBar extends React.Component {
       muiTheme: ThemeManager.getCurrentTheme(),
     };
   }
-  onMenuTap(value) {
-    switch (value) {
-    case 'login':
-      window.location.assign('/#/login');
-      break;
-    case 'signup':
-      window.location.assign('/#/signup');
-      break;
-    case 'hospitals':
-      window.location.assign('/#/hospitals');
-      break;
-    case 'home':
-      window.location.assign('/#/home');
-      break;
-    default:
-      return false;
-    }
-  }
   render() {
     return (
       <div>
-        <MediaQuery minWidth={755}>
+        <MediaQuery minWidth={691}>
         <Toolbar style={{
           backgroundColor: 'rbga(255,255,255,0.6)',
           paddingTop: 20,
@@ -55,16 +29,31 @@ class AppToolBar extends React.Component {
             <RaisedButton href='#home' label='united nurse registry' linkButton={true} primary={true}/>
           </ToolbarGroup>
           <ToolbarGroup float='right' key={1}>
-            <RaisedButton href='#hospitals' label='Hospitals' linkButton={true} secondary={true}/>
-            <RaisedButton href='#login' label='Login' linkButton={true} secondary={true}/>
-            <RaisedButton href='#signup' label='Signup' linkButton={true} secondary={true}/>
+            <FlatButton href='#hospitals' label='Hospitals' linkButton={true} secondary={true} style={{
+              backgroundColor: 'rbga(255,255,255,0.6)',
+              color: 'white',
+              marginLeft: 10,
+              marginRight: 10,
+            }}
+            />
+            <FlatButton href='#signup' label='Sign up' linkButton={true} secondary={true} style={{
+              backgroundColor: 'rbga(255,255,255,0.6)',
+              color: 'white',
+              marginLeft: 10,
+              marginRight: 10,
+            }}/>
+            <FlatButton href='#login' label='Login' linkButton={true} secondary={true} style={{
+              backgroundColor: 'rbga(255,255,255,0.6)',
+              color: 'white',
+              marginLeft: 29,
+              marginRight: 10,
+            }}/>
           </ToolbarGroup>
         </Toolbar>
         </MediaQuery>
-        <MediaQuery maxWidth={755}>
+        <MediaQuery maxWidth={691}>
           <AppBar
             style={{
-              backgroundColor: 'rbga(255,255,255,0.6)',
               paddingTop: 5,
               marginBottom: 20,
             }}
@@ -73,13 +62,13 @@ class AppToolBar extends React.Component {
             <IconMenu iconButtonElement={
                 <IconButton iconClassName='fa fa-bars' tooltip='Menu'/>
               }>
-              <MenuItem onClick={() => {this.onMenuTap('home'); }} primaryText='Home' />
+              <MenuItem onClick={()=> {window.location.assign('/#/home'); }} primaryText='Home' />
               <MenuDivider/>
-              <MenuItem onClick={() => {this.onMenuTap('login'); }} primaryText='Login' />
-              <MenuItem onClick={() => {this.onMenuTap('signup'); }} primaryText='Signup' />
-              <MenuItem onClick={() => {this.onMenuTap('hospitals'); }} primaryText='Hospitals'/ >
+              <MenuItem onClick={()=> {window.location.assign('/#/hospitals'); }} primaryText='Hospitals'/ >
+              <MenuItem onClick={()=> {window.location.assign('/#/signup'); }} primaryText='User Sign up' />
+              <MenuItem onClick={()=> {window.location.assign('/#/login'); }} primaryText='Login' />
             </IconMenu>
-            } title='Dream Crew'/>
+          } title='United Nurse Registry'/>
         </MediaQuery>
       </div>
     );

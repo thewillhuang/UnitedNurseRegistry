@@ -4,7 +4,7 @@ const browserSync = require('browser-sync');
 const gulp = require('gulp');
 const nodemon = require('gulp-nodemon');
 const config = require('../config/nodemon');
-const BROWSER_SYNC_RELOAD_DELAY = 500;
+const BROWSER_SYNC_RELOAD_DELAY = 1500;
 
 gulp.task('nodemon', function(cb) {
   let called = false;

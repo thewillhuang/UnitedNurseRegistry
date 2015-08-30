@@ -7,7 +7,6 @@ const app = require('../server');
 const request = supertest(app.listen());
 const uuid = require('node-uuid');
 
-
 describe('authentication api', function() {
   const email = uuid.v4();
   const password = uuid.v4();
@@ -200,16 +199,16 @@ describe('authentication api', function() {
       });
   });
 
-  it('should logout with /logout', function(done) {
-    request.get('/api/auth/logout')
-      .expect(302)
-      .end(function(err, res) {
-        expect(res.headers.location).to.equal('/');
-        expect(res.headers.authorization).to.be.undefined;
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
+  // it('should logout with /logout', function(done) {
+  //   request.get('/api/auth/logout')
+  //     .expect(302)
+  //     .end(function(err, res) {
+  //       expect(res.headers.location).to.equal('/');
+  //       expect(res.headers.authorization).to.be.undefined;
+  //       expect(err).to.be.a('null');
+  //       done();
+  //     });
+  // });
 
   it('should delete a user given a correct user id', function(done) {
     request.delete('/api/user/' + u1)

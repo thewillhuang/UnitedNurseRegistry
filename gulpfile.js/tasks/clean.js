@@ -11,5 +11,8 @@ gulp.task('clean', function(cb) {
     config.publicAssets,
     htmlConfig.dest,
     iconFontConfig.sassDest,
-  ], {read: false}, cb);
+  ]).then(function(path) {
+    console.log('deleted', path);
+    cb();
+  });
 });

@@ -54,7 +54,7 @@ module.exports = function(env) {
         name: 'common',
         filename: '[name].js',
         async: true,
-        children: true,
+        // children: true,
       })
     );
   }

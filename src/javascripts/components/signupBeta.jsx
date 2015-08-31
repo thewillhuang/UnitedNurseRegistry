@@ -12,6 +12,10 @@ class BetaSignup extends React.Component {
     muiTheme: React.PropTypes.object,
   }
 
+  state = {
+    signupButton: 'Signup',
+  }
+
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme(),
@@ -22,6 +26,9 @@ class BetaSignup extends React.Component {
     const ctx = this;
     if (validator.isEmail(this.refs.email.getValue())) {
       this.refs.email.setErrorText('');
+      this.setState({
+        signupButton: 'Sending Data',
+      });
       request
         .post('/api/auth/beta/signup')
         .send({
@@ -33,11 +40,17 @@ class BetaSignup extends React.Component {
           // console.log(res.headers);
           // console.log(res.status);
           if (res.status === 200) {
+            this.setState({
+              signupButton: 'Success',
+            });
             localStorage.setItem('token', res.headers.authorization);
             window.location.assign('/#/app');
             // console.log(localStorage.getItem('token'));
           } else if (res.status === 406) {
-            // console.log('406 block', res.body.message);
+            console.log('406 block', res.body.message);
+            this.setState({
+              signupButton: 'Sign up',
+            });
             if (res.body.message === 'email taken' || res.body.message === 'incorrect email') {
               // console.log('email block');
               ctx.refs.email.focus();

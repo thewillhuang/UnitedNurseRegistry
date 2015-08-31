@@ -11,11 +11,13 @@ class Signup extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
+
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme(),
     };
   }
+  
   render() {
     return (
       <div>

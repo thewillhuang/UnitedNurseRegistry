@@ -1,8 +1,5 @@
 @import 'bourbon';
 @import 'neat';
-// file paths for fontawesome and simple-line-icons
-$fa-font-path: "../../bower_components/font-awesome/fonts/" !default;
-$simple-line-font-path: "../../bower_components/simple-line-icons/fonts/" !default;
 // Device Widths
  $phone-portrait: em(320);
  $phone-landscape: em(568);

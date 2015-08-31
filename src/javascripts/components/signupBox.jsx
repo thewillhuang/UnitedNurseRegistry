@@ -12,6 +12,10 @@ class SignupBox extends React.Component {
     muiTheme: React.PropTypes.object,
   }
 
+  state = {
+    signupButton: 'Signup',
+  }
+
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme(),
@@ -21,6 +25,11 @@ class SignupBox extends React.Component {
   handleSubmit = ()  => {
     const ctx = this;
     if (validator.isEmail(this.refs.email.getValue()) && this.refs.password.getValue().length > 5) {
+      this.setState({
+
+        signupButton: 'Sending Data',
+
+      });
       this.refs.email.setErrorText('');
       request
         .post('/api/auth/signup')
@@ -30,14 +39,20 @@ class SignupBox extends React.Component {
         })
         .end(function(err, res) {
           console.log(err);
-          // console.log(res.body);
+          console.log(res.body);
           // console.log(res.headers);
           // console.log(res.status);
           if (res.status === 200) {
+            ctx.setState({
+              signupButton: 'Success',
+            });
             localStorage.setItem('token', res.headers.authorization);
             window.location.assign('/#/app');
             // console.log(localStorage.getItem('token'));
           } else if (res.status === 406) {
+            ctx.setState({
+              signupButton: 'Sign up',
+            });
             // console.log('406 block', res.body.message);
             if (res.body.message === 'email taken' || res.body.message === 'incorrect email') {
               // console.log('email block');
@@ -99,7 +114,7 @@ class SignupBox extends React.Component {
           />
           <CardActions>
             <div className='signupButtonWrap'>
-              <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>
+              <RaisedButton label={this.state.signupButton} onClick={this.handleSubmit} secondary={true}/>
             </div>
           </CardActions>
         </div>

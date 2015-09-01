@@ -17,7 +17,7 @@ class ForNurses extends React.Component {
           <div href='#' className='grid2-item'>
             <i className='fa icon-share fa-2x grid2-i'></i>
             <h1>Connect</h1>
-            <p>Set up an account and Connect to your bank account</p>
+            <p>Set up an account and connect to your bank account</p>
           </div>
           <div href='#' className='grid2-item'>
             <i className='fa icon-check fa-2x grid2-i'></i>
@@ -27,7 +27,7 @@ class ForNurses extends React.Component {
           <div href='#' className='grid2-item'>
             <i className='fa icon-wallet fa-2x grid2-i'></i>
             <h1>Receive Money</h1>
-            <p>Get Money in your bank account in 2 days</p>
+            <p>Money in your bank account in 2 days</p>
           </div>
         </div>
 

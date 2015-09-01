@@ -27,7 +27,7 @@ class BetaSignup extends React.Component {
     if (validator.isEmail(this.refs.email.getValue())) {
       this.refs.email.setErrorText('');
       this.setState({
-        signupButton: 'Sending Data',
+        signupButton: 'Sending Data...',
       });
       request
         .post('/api/auth/beta/signup')
@@ -49,7 +49,7 @@ class BetaSignup extends React.Component {
           } else if (res.status === 406) {
             console.log('406 block', res.body.message);
             this.setState({
-              signupButton: 'Sign up',
+              signupButton: 'Retry',
             });
             if (res.body.message === 'email taken' || res.body.message === 'incorrect email') {
               // console.log('email block');
@@ -59,7 +59,6 @@ class BetaSignup extends React.Component {
           }
         });
     } else {
-      this.validatePassword();
       this.validateEmail();
     }
   }
@@ -91,7 +90,7 @@ class BetaSignup extends React.Component {
           />
           <CardActions>
             <div className='signupbutton'>
-              <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>
+              <RaisedButton label={this.state.signupButton} onClick={this.handleSubmit} secondary={true}/>
             </div>
           </CardActions>
         </Card>

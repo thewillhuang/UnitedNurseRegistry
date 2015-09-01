@@ -20,9 +20,9 @@ class ForReferrals extends React.Component {
             <p>Set up an account and Connect to your bank account</p>
           </div>
           <div href='#' className='grid2-item'>
-            <i className='fa icon-people fa-2x grid2-i'></i>
-            <h1>Refer People</h1>
-            <p>Get $5 from every shift your referrals work. Forever. (subject to tax)</p>
+            <i className='fa icon-heart fa-2x grid2-i'></i>
+            <h1>Share the love</h1>
+            <p>Get $5 from every shift completed due to your personal referral. Includes Hospitals</p>
           </div>
           <div href='#' className='grid2-item'>
             <i className='fa fa-dollar fa-2x grid2-i'></i>

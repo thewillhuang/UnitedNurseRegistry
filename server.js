@@ -3,7 +3,6 @@
 const koa = require('koa');
 const app = module.exports = koa();
 const port = process.env.PORT || 3000;
-const port2 = process.env.PORT2 || 3001;
 const send = require('koa-send');
 const logger = require('koa-logger');
 const etag = require('koa-etag');
@@ -16,6 +15,7 @@ const helmet = require('koa-helmet');
 const passport = require('koa-passport');
 const compress = require('koa-compress');
 const staticCache = require('koa-static-cache');
+// const port2 = process.env.PORT2 || 3001;
 // const jwt = require('./server/services/jwt');
 // const session = require('koa-session');
 
@@ -31,6 +31,8 @@ app.proxy = true;
 
 // security headers
 app.use(helmet());
+
+// no cache
 app.use(helmet.noCache());
 
 // static file server
@@ -109,11 +111,11 @@ app.listen(port);
 console.log('http listening on port:', port);
 
 // start https server
-const https = require('https');
-const fs = require('fs');
-const options = {
-  key: fs.readFileSync('unr-key.pem'),
-  cert: fs.readFileSync('unr-cert.pem'),
-};
-https.createServer(options, app.callback()).listen(port2);
-console.log('https listening on port:', port2);
+// const https = require('https');
+// const fs = require('fs');
+// const options = {
+//   key: fs.readFileSync('unr-key.pem'),
+//   cert: fs.readFileSync('unr-cert.pem'),
+// };
+// https.createServer(options, app.callback()).listen(port2);
+// console.log('https listening on port:', port2);

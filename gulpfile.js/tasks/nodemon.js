@@ -10,6 +10,7 @@ gulp.task('nodemon', function(cb) {
   let called = false;
   return nodemon(config)
     .on('start', function onStart() {
+      console.log('server started');
       // reload connected browsers after a slight delay
       setTimeout(function reload() {
         browserSync.reload();
@@ -29,7 +30,7 @@ gulp.task('nodemon', function(cb) {
       console.log('server stopped');
     })
     .on('restart', function onRestart() {
-      console.log('restart event');
+      console.log('server restart event');
       // // reload connected browsers after a slight delay
       // setTimeout(function reload() {
       //   browserSync.reload();

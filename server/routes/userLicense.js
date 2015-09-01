@@ -16,6 +16,9 @@ module.exports = function(app) {
     if (user.scope.userID && user.scope.userID.toString() === userID) {
       const requestJson = this.request.body;
       const q = {};
+      if (requestJson.licenseVetted) {
+        delete requestJson.licenseVetted;
+      }
       requestJson.fk_UserLicense_userID = userID;
       q.sql = 'INSERT INTO ?? SET ?';
       q.values = ['UserLicense', requestJson];
@@ -41,6 +44,9 @@ module.exports = function(app) {
     if (user.scope.userID && user.scope.userID.toString() === userID) {
       const requestJson = this.request.body;
       // console.log(requestJson);
+      if (requestJson.licenseVetted) {
+        delete requestJson.licenseVetted;
+      }
       const userLicenseID = this.params.userLicenseID;
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';

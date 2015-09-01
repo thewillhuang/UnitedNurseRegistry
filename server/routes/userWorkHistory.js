@@ -19,6 +19,9 @@ module.exports = function(app) {
       const q = {};
       requestJson.fk_UserWorkHistory_userID = userID;
       requestJson.fk_UserWorkHistory_facilityID = facilityID;
+      if (requestJson.workHistoryVetted) {
+        delete requestJson.workHistoryVetted;
+      }
       q.sql = 'INSERT INTO ?? SET ?';
       q.values = ['userworkhistory', requestJson];
       // console.log(q);
@@ -46,6 +49,9 @@ module.exports = function(app) {
       const requestJson = this.request.body;
       const userHistoryID = this.params.userHistoryID;
       const q = {};
+      if (requestJson.workHistoryVetted) {
+        delete requestJson.workHistoryVetted;
+      }
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
       q.values = ['UserWorkHistory', requestJson, 'userHistoryID', userHistoryID];
       this.body = yield query(q);

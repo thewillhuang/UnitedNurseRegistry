@@ -3,7 +3,7 @@
 // Nodejs encryption with CTR
 const aes = module.exports = {};
 const crypto = require('crypto');
-const algorithm = 'AES-256-CTR';
+const algorithm = 'AES-256-CBC';
 // for aes 256, length of key need to be exactically 32 bytes
 // generate a cryptographically strong 32 byte data
 const key = crypto.randomBytes(32);

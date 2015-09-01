@@ -46,6 +46,7 @@ if (process.env.NODE_ENV === 'development') {
     }
   });
 } else {
+  console.log('server running in production mode');
   app.use(staticCache(buildPath, {
     buffer: true,
     usePrecompiledGzip: true,

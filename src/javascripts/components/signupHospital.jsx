@@ -86,7 +86,7 @@ class HospitalSignup extends React.Component {
             ref='email'
             hintText='Email'
             onEnterKeyDown={this.handleSubmit}
-            onChange={this.validateEmail}
+            onBlur={this.validateEmail}
             type='email'
           />
           <TextField

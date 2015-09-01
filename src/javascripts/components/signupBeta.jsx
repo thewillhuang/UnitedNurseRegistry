@@ -85,7 +85,7 @@ class BetaSignup extends React.Component {
             floatingLabelText='Email Address'
             ref='email'
             hintText='Email'
-            onChange={this.validateEmail}
+            onBlur={this.validateEmail}
             type='email'
             onEnterKeyDown={this.handleSubmit}
           />

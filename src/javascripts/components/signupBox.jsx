@@ -100,7 +100,7 @@ class SignupBox extends React.Component {
             floatingLabelText='Email Address'
             ref='email'
             hintText='Email'
-            onChange={this.validateEmail}
+            onBlur={this.validateEmail}
             onEnterKeyDown={this.handleSubmit}
             type='email'
           />

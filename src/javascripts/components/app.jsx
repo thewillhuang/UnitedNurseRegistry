@@ -26,10 +26,7 @@ class App extends React.Component {
       <div>
         <AppBar />
         <AppNavBar />
-        <h3>
-          Signed-in app
-        </h3>
-        <div>
+        <div className='appBody'>
           {this.props.children || 'Welcome to your Dashboard'}
         </div>
       </div>

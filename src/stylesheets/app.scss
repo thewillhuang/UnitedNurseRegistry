@@ -1,12 +1,19 @@
-// if you remove '.css' to the end. scss will import the content of the files
-// therefore, less ajax requests yay
+// bourbon
 @import 'bourbon';
 @import 'neat';
+
+// reset
 @import '../bower_components/normalize.css/normalize';
+
+// variables
 @import 'base/variables';
 @import 'layouts/col';
 @import 'layouts/shift';
+
+// sprites
 @import 'generated/icons';
+
+// default css
 @import 'components/home';
 @import 'components/footer';
 @import 'components/howitworks';
@@ -14,8 +21,12 @@
 @import 'components/signup';
 @import 'components/login';
 @import 'components/hospital';
+
+// app css
 @import 'components/app/appBar';
 @import 'components/app/appNav';
+@import 'components/app/appBody';
+
 // file paths for fontawesome and simple-line-icons
 $fa-font-path: "../../bower_components/font-awesome/fonts/" !default;
 $simple-line-font-path: "../../bower_components/simple-line-icons/fonts/" !default;

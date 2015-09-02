@@ -19,7 +19,7 @@
 .appUserWrap {
   height: 100px;
   float: left;
-  @include pad(2em);
+  padding-left: 16px;
 }
 
 .appUserPhoto {
@@ -38,7 +38,7 @@
   float: left;
   text-transform: uppercase;
   color: white;
-  margin-left: 20px;
+  margin-left: 30px;
 }
 
 .appBarMenuButton {

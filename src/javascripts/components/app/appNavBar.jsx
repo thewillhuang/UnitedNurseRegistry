@@ -33,14 +33,51 @@ class AppNavBar extends React.Component {
           <li>
             <FontIcon
               color='rgb(199, 199, 199)'
-              className='icon-rocket'/>
-            <a href='default.asp'>
-              Home
+              className='icon-briefcase'/>
+            <a href='#/app/shifts'>
+              Shifts
             </a>
           </li>
-          <li><a href='news.asp'>News</a></li>
-          <li><a href='contact.asp'>Contact</a></li>
-          <li><a href='about.asp'>About</a></li>
+          <li>
+            <FontIcon
+              color='rgb(199, 199, 199)'
+              className='icon-check'/>
+            <a href='#/app/todo'>
+              TODOs
+            </a>
+          </li>
+          <li>
+            <FontIcon
+              color='rgb(199, 199, 199)'
+              className='icon-user'/>
+            <a href='#/app/profile'>
+              Profile
+            </a>
+          </li>
+          <li>
+            <FontIcon
+              color='rgb(199, 199, 199)'
+              className='icon-graph'/>
+            <a href='#/app/balance'>
+              Balance
+            </a>
+          </li>
+          <li>
+            <FontIcon
+              color='rgb(199, 199, 199)'
+              className='icon-star'/>
+            <a href='#/app/reviews'>
+              Reviews
+            </a>
+          </li>
+          <li>
+            <FontIcon
+              color='rgb(199, 199, 199)'
+              className='icon-heart'/>
+            <a href='#/app/referrals'>
+              Referrals
+            </a>
+          </li>
         </ul>
       </div>
     );

@@ -3,7 +3,7 @@
 
 .appNavBar {
   float: left;
-  height: 100vh;
+  height: calc(100vh - 100px);
   min-height: 650px;
   color: $app-background;
   width: 250px;

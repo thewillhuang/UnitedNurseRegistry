@@ -7,7 +7,7 @@ import mui, { FontIcon } from 'material-ui';
 const ThemeManager = new mui.Styles.ThemeManager();
 // import MediaQuery from 'react-responsive';
 
-class AppNavBar extends React.Component {
+class AppLeftNavBar extends React.Component {
   state = {
     userName: 'User',
   }
@@ -76,4 +76,4 @@ class AppNavBar extends React.Component {
   }
 }
 
-export default AppNavBar;
+export default AppLeftNavBar;

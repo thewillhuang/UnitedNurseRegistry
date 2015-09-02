@@ -30,17 +30,13 @@ class BetaSignup extends React.Component {
         signupButton: 'Sending Data...',
       });
       request
-        .post('/api/auth/beta/signup')
+        .post('/api/beta/signup')
         .send({
           email: this.refs.email.getValue(),
         })
         .end(function(err, res) {
-          console.log(err);
-          // console.log(res.body);
-          // console.log(res.headers);
-          // console.log(res.status);
           if (res.status === 200) {
-            this.setState({
+            ctx.setState({
               signupButton: 'Success',
             });
             localStorage.setItem('token', res.headers.authorization);
@@ -48,7 +44,7 @@ class BetaSignup extends React.Component {
             // console.log(localStorage.getItem('token'));
           } else if (res.status === 406) {
             console.log('406 block', res.body.message);
-            this.setState({
+            ctx.setState({
               signupButton: 'Retry',
             });
             if (res.body.message === 'email taken' || res.body.message === 'incorrect email') {

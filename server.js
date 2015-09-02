@@ -68,6 +68,9 @@ if (process.env.NODE_ENV === 'development') {
 app.use(compress());
 app.use(bodyParser());
 
+// beta signup
+require('./server/routes/beta')(app);
+
 // load strategies and initialize passport
 require('./server/services/auth');
 app.use(passport.initialize());

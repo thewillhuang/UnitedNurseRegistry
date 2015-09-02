@@ -87,23 +87,6 @@ module.exports = function authRoutes(app) {
     }).call(this, next);
   })
 
-  // beta signup
-  .post('/beta/signup', function* createUser() {
-    const requestJson = this.request.body;
-    const q = {};
-    q.sql = 'INSERT INTO ?? SET ?';
-    q.values = ['betaUser', requestJson];
-    this.body = yield query(q);
-  })
-
-  // get all beta users
-  .get('/beta/users', function* getAllBetaUser() {
-    const q = {};
-    q.sql = 'SELECT * FROM ??';
-    q.values = ['betaUser'];
-    this.body = yield query(q);
-  })
-
   .post('/signup', function*(next) {
     const ctx = this;
     yield passport.authenticate('local-signup',  { session: false }, function*(err, user, info) {

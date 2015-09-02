@@ -38,8 +38,8 @@ class SignupBox extends React.Component {
           password: this.refs.password.getValue(),
         })
         .end(function(err, res) {
-          console.log(err);
-          console.log(res.body);
+          // console.log(err);
+          // console.log(res.body);
           // console.log(res.headers);
           // console.log(res.status);
           if (res.status === 200) {

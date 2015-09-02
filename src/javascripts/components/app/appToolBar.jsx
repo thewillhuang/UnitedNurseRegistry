@@ -54,7 +54,9 @@ class AppBar extends React.Component {
           </IconMenu>
         </div>
         <div className='appBarTitle'>
-          <p>United Nurse Registry</p>
+          <a href='#/home'>
+            <p>United Nurse Registry</p>
+          </a>
         </div>
       </div>
     );

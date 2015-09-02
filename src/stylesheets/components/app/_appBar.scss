@@ -54,4 +54,13 @@
   float: left;
   letter-spacing: 1px;
   font-size: 1.3em;
+  a {
+    text-decoration: none;
+  }
+  a:link, a:visited {
+    color: #2D303C;
+  }
+  a:hover, a:active {
+    color: $light-grey;
+  }
 }

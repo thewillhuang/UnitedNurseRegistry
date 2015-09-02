@@ -25,13 +25,14 @@ React.render((
     <Route path='/' component={Root}>
       <Route path='home' component={Home}/>
 
+      // app route
       <Route path='app' getComponents={(cb) => {
         require.ensure([], (require) => {
           cb(null, require('./components/app.jsx'));
         });
       }} >
-
-        <Route path='/hospitals' getComponents={(cb) => {
+        // nested app routes
+        <Route path='hospitals' getComponents={(cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/hospital.jsx'));
           });

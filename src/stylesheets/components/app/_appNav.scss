@@ -1,0 +1,27 @@
+@import 'bourbon';
+@import 'neat';
+
+.appNavBar {
+  float: left;
+  height: 100vh;
+  // min-height: 100px;
+  color: $app-background;
+  width: 250px;
+  @include background-image(radial-gradient(#333546, #2A2B38));
+}
+
+.appNavMenu {
+  // list-style-type: none;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  li a {
+    text-decoration: none;
+  }
+  a:link, a:visited {
+    color: rgb(199, 199, 199);
+  }
+  a:hover, a:active {
+    color: $app-background;
+  }
+}

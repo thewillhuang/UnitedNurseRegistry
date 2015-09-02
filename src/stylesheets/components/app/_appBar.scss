@@ -1,0 +1,57 @@
+@import 'bourbon';
+@import 'neat';
+
+// app bar
+.appBar {
+  transform-style: preserve-3d;
+  height: 100px;
+  @include outer-container(100%);
+  background-color: white;
+}
+
+.appBarUser {
+  background-color: #AE7FD5;
+  height: 100px;
+  width: 250px;
+  float: left;
+}
+
+.appUserWrap {
+  height: 100px;
+  float: left;
+  @include pad(2em);
+}
+
+.appUserPhoto {
+  @include vertical-align();
+  float: left;
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+}
+
+.appUserName {
+  @include vertical-align();
+  float: left;
+  text-transform: uppercase;
+  color: white;
+  margin-left: 20px;
+}
+
+.appBarMenuButton {
+  @include vertical-align();
+  margin-right: 30px;
+  float: right;
+  color: rgb(180, 180, 180);
+}
+
+.appBarTitle {
+  @include vertical-align();
+  margin-left: 30px;
+  float: left;
+  letter-spacing: 1px;
+  font-size: 1.3em;
+}

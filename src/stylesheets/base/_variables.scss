@@ -35,9 +35,18 @@ $orange: #EB7F00;
 $dark-grey: #333;
 $light-grey: rgb(233, 233, 233);
 $text-light-grey: transparentize($dark-grey, 0.4);
+$app-background: #F6F6F6;
 
 // base body settings
 body {
   height: 100%;
   font-family: $helvetica;
+  background-color: $app-background;
+}
+
+// vertical align
+@mixin vertical-align($position: relative) {
+  position: $position;
+  top: 50%;
+  transform: translateY(-50%);
 }

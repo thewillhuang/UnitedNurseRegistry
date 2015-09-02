@@ -14,6 +14,8 @@
 @import 'components/signup';
 @import 'components/login';
 @import 'components/hospital';
+@import 'components/app/appBar';
+@import 'components/app/appNav';
 // file paths for fontawesome and simple-line-icons
 $fa-font-path: "../../bower_components/font-awesome/fonts/" !default;
 $simple-line-font-path: "../../bower_components/simple-line-icons/fonts/" !default;

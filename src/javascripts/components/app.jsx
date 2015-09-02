@@ -2,7 +2,8 @@
 
 import React from 'react';
 import mui from 'material-ui';
-import AppToolBar from './appToolBar.jsx';
+import AppBar from './app/appToolBar.jsx';
+import AppNavBar from './app/appNavBar.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 
 class App extends React.Component {
@@ -23,11 +24,12 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <AppToolBar />
+        <AppBar />
+        <AppNavBar />
         <h3>
           Signed-in app
         </h3>
-        <div>test
+        <div>
           {this.props.children || 'Welcome to your Dashboard'}
         </div>
       </div>

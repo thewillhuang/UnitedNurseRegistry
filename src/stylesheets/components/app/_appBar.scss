@@ -37,7 +37,7 @@
   @include vertical-align();
   float: left;
   text-transform: uppercase;
-  color: white;
+  color: $app-background;
   margin-left: 15px;
 }
 
@@ -45,7 +45,7 @@
   @include vertical-align();
   margin-right: 30px;
   float: right;
-  color: rgb(180, 180, 180);
+  color: $app-background;
 }
 
 .appBarTitle {

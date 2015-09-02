@@ -41,14 +41,6 @@ class AppNavBar extends React.Component {
           <li>
             <FontIcon
               color='rgb(199, 199, 199)'
-              className='icon-check'/>
-            <a href='#/app/todo'>
-              TODOs
-            </a>
-          </li>
-          <li>
-            <FontIcon
-              color='rgb(199, 199, 199)'
               className='icon-user'/>
             <a href='#/app/profile'>
               Profile

@@ -9,7 +9,7 @@ const ThemeManager = new mui.Styles.ThemeManager();
 
 class AppBar extends React.Component {
   state = {
-    userName: 'User name',
+    userName: 'User First Name',
   }
 
   static childContextTypes = {

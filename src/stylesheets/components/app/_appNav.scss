@@ -33,9 +33,9 @@
     padding-left: 30px;
   }
   a:link, a:visited {
-    color: rgb(199, 199, 199);
+    color: $app-background;
   }
   a:hover, a:active {
-    color: $app-background;
+    color: white;
   }
 }

@@ -38,7 +38,10 @@ React.render((
           });
         }}/>
 
+
       </Route>
+
+      // end of app route
 
       <Route path='hospitals' getComponents={(cb) => {
         require.ensure([], (require) => {

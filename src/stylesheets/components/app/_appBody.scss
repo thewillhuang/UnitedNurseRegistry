@@ -1,6 +1,10 @@
 .appBody {
-  padding-top: 30px;
   float: left;
-  padding-left: 30px;
-  width : calc(100vw - 250px);
+  width : calc(100vw - 270px);
+  height : calc(100vh - 100px);
+}
+
+.appContent {
+  margin-top: 25px;
+  margin-left: 30px;
 }

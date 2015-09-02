@@ -17,10 +17,10 @@
   list-style: none;
   margin: 0;
   padding: 0;
-  padding-top: 30px;
+  // margin-top: 15px;
   li a {
     text-decoration: none;
-    padding-left: 30px;
+    margin-left: 30px;
   }
   a {
     position:relative;
@@ -28,9 +28,15 @@
     left: -2px;
   }
   li {
+    height: 70px;
+    cursor: pointer;
+  }
+  .appNameItemWrap {
     @include vertical-align();
-    padding-top: 30px;
-    padding-left: 30px;
+    margin-left: 30px;
+  }
+  .isActive {
+    background-color: #1E1F2C;
   }
   a:link, a:visited {
     color: $app-background;

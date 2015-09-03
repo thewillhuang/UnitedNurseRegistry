@@ -32,9 +32,6 @@ app.proxy = true;
 // security headers
 app.use(helmet());
 
-// no cache
-app.use(helmet.noCache());
-
 // static file server
 if (process.env.NODE_ENV === 'development') {
   console.log('server running in development mode');
@@ -53,6 +50,7 @@ if (process.env.NODE_ENV === 'development') {
     buffer: true,
     usePrecompiledGzip: true,
     gzip: true,
+    dynamic: true,
   }));
 
   app.use(function* apiCheck(next) {

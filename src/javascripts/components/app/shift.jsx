@@ -8,10 +8,6 @@ const ThemeManager = new mui.Styles.ThemeManager();
 // import MediaQuery from 'react-responsive';
 
 class Shift extends React.Component {
-  state = {
-    userName: 'User First Name',
-  }
-
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }

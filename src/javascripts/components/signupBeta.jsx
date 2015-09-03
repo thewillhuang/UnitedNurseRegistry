@@ -39,7 +39,7 @@ class BetaSignup extends React.Component {
             ctx.setState({
               signupButton: 'Success',
             });
-            localStorage.setItem('token', res.headers.authorization);
+            sessionStorage.setItem('token', res.headers.authorization);
             window.location.assign('/#/app');
             // console.log(localStorage.getItem('token'));
           } else if (res.status === 406) {

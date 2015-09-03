@@ -23,7 +23,7 @@ class AppBar extends React.Component {
   }
 
   componentWillUnmount() {
-    window.localStorage.clear();
+    window.sessionStorage.clear();
   }
 
   render() {
@@ -47,8 +47,7 @@ class AppBar extends React.Component {
                 style={{color: 'rgb(180, 180, 180)'}}
                 iconClassName='icon-menu'
                 tooltip='menu'/>
-            }
-            >
+            }>
             <MenuItem
               onClick={()=> {window.location.assign('/#/home'); }}
               primaryText='Logout'/>

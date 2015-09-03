@@ -100,8 +100,8 @@ class AppLeftNavBar extends React.Component {
             <div className={'appNameItemWrap ' + this.state.shift}>
               <FontIcon
                 color='rgb(199, 199, 199)'
-                className='icon-briefcase'/>
-              <a href='#/app/shifts' className={this.state.shift}>
+                className={'icon-briefcase ' + this.state.shift}/>
+              <a href='#/app/shifts' className={'appNavText' + this.state.shift}>
                 Shifts
               </a>
             </div>
@@ -112,8 +112,8 @@ class AppLeftNavBar extends React.Component {
             <div className={'appNameItemWrap ' + this.state.profile}>
               <FontIcon
                 color='rgb(199, 199, 199)'
-                className='icon-user'/>
-              <a href='#/app/profile' className={this.state.profile}>
+                className={'icon-user ' + this.state.profile}/>
+              <a href='#/app/profile' className={'appNavText' + this.state.profile}>
                 Profile
               </a>
             </div>
@@ -124,8 +124,8 @@ class AppLeftNavBar extends React.Component {
             <div className={'appNameItemWrap ' + this.state.balance}>
               <FontIcon
                 color='rgb(199, 199, 199)'
-                className='icon-graph'/>
-              <a href='#/app/balance' className={this.state.balance}>
+                className={'icon-graph ' + this.state.balance}/>
+              <a href='#/app/balance' className={'appNavText' + this.state.balance}>
                 Balance
               </a>
             </div>
@@ -136,8 +136,8 @@ class AppLeftNavBar extends React.Component {
             <div className={'appNameItemWrap ' + this.state.reviews}>
               <FontIcon
                 color='rgb(199, 199, 199)'
-                className='icon-star'/>
-              <a href='#/app/reviews' className={this.state.reviews}>
+                className={'icon-star ' + this.state.reviews}/>
+              <a href='#/app/reviews' className={'appNavText' + this.state.reviews}>
                 Reviews
               </a>
             </div>
@@ -148,8 +148,8 @@ class AppLeftNavBar extends React.Component {
             <div className={'appNameItemWrap ' + this.state.referrals}>
               <FontIcon
                 color='rgb(199, 199, 199)'
-                className='icon-heart'/>
-              <a href='#/app/referrals' className={this.state.referrals}>
+                className={'icon-heart ' + this.state.referrals}/>
+              <a href='#/app/referrals' className={'appNavText' + this.state.referrals}>
                 referrals
               </a>
             </div>

@@ -33,7 +33,7 @@ class AppLeftNavBar extends React.Component {
   }
 
   componentWillUnmount() {
-    windown.removeEventListener('hashchange', this.hashChange, false);
+    window.removeEventListener('hashchange', this.hashChange, false);
   }
 
   hashChange = () => {

@@ -30,6 +30,7 @@ class AppLeftNavBar extends React.Component {
 
   componentDidMount() {
     window.addEventListener('hashchange', this.hashChange, false);
+    this.hashChange();
   }
 
   componentWillUnmount() {
@@ -96,11 +97,11 @@ class AppLeftNavBar extends React.Component {
           <li
             onClick={()=> {window.location.assign('/#/app/shifts'); }}
             className={'appNavItems ' + this.state.shift} >
-            <div className='appNameItemWrap'>
+            <div className={'appNameItemWrap ' + this.state.shift}>
               <FontIcon
                 color='rgb(199, 199, 199)'
                 className='icon-briefcase'/>
-              <a href='#/app/shifts'>
+              <a href='#/app/shifts' className={this.state.shift}>
                 Shifts
               </a>
             </div>
@@ -108,11 +109,11 @@ class AppLeftNavBar extends React.Component {
           <li
             onClick={()=> {window.location.assign('/#/app/profile'); }}
             className={'appNavItems ' + this.state.profile}>
-            <div className='appNameItemWrap'>
+            <div className={'appNameItemWrap ' + this.state.profile}>
               <FontIcon
                 color='rgb(199, 199, 199)'
                 className='icon-user'/>
-              <a href='#/app/profile'>
+              <a href='#/app/profile' className={this.state.profile}>
                 Profile
               </a>
             </div>
@@ -120,11 +121,11 @@ class AppLeftNavBar extends React.Component {
           <li
             onClick={()=> {window.location.assign('/#/app/balance'); }}
             className={'appNavItems ' + this.state.balance}>
-            <div className='appNameItemWrap'>
+            <div className={'appNameItemWrap ' + this.state.balance}>
               <FontIcon
                 color='rgb(199, 199, 199)'
                 className='icon-graph'/>
-              <a href='#/app/balance'>
+              <a href='#/app/balance' className={this.state.balance}>
                 Balance
               </a>
             </div>
@@ -132,11 +133,11 @@ class AppLeftNavBar extends React.Component {
           <li
             onClick={()=> {window.location.assign('/#/app/reviews'); }}
             className={'appNavItems ' + this.state.reviews}>
-            <div className='appNameItemWrap'>
+            <div className={'appNameItemWrap ' + this.state.reviews}>
               <FontIcon
                 color='rgb(199, 199, 199)'
                 className='icon-star'/>
-              <a href='#/app/reviews'>
+              <a href='#/app/reviews' className={this.state.reviews}>
                 Reviews
               </a>
             </div>
@@ -144,11 +145,11 @@ class AppLeftNavBar extends React.Component {
           <li
             onClick={()=> {window.location.assign('/#/app/referrals'); }}
             className={'appNavItems ' + this.state.referrals}>
-            <div className='appNameItemWrap'>
+            <div className={'appNameItemWrap ' + this.state.referrals}>
               <FontIcon
                 color='rgb(199, 199, 199)'
                 className='icon-heart'/>
-              <a href='#/app/referrals'>
+              <a href='#/app/referrals' className={this.state.referrals}>
                 referrals
               </a>
             </div>

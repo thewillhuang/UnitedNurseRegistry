@@ -1,0 +1,11 @@
+.appShift {
+  @include outer-container(100%);
+}
+
+.appShiftFilter {
+  @include span-columns(4);
+}
+
+.appShiftResult {
+  @include span-columns(8);
+}

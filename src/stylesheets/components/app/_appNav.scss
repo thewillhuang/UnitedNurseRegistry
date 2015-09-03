@@ -14,6 +14,7 @@
   list-style: none;
   margin: 0;
   padding: 0;
+  user-select: none;
   // margin-top: 15px;
   li a {
     text-decoration: none;
@@ -25,8 +26,11 @@
     left: -2px;
   }
   li {
-    height: 70px;
+    height: 80px;
     cursor: pointer;
+  }
+  li:hover {
+    background-color: #1E1F2C;
   }
   .appNameItemWrap {
     @include vertical-align();
@@ -36,7 +40,7 @@
     background-color: #1E1F2C;
   }
   a:link, a:visited {
-    color: $app-background;
+    color: rgb(198, 198, 198);
   }
   a:hover, a:active {
     color: white;

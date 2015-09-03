@@ -32,9 +32,9 @@ React.render((
         });
       }} >
         // nested app routes
-        <Route path='hospitals' getComponents={(cb) => {
+        <Route path='shifts' getComponents={(cb) => {
           require.ensure([], (require) => {
-            cb(null, require('./components/hospital.jsx'));
+            cb(null, require('./components/app/shift.jsx'));
           });
         }}/>
 

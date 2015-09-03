@@ -22,8 +22,8 @@ class AppBar extends React.Component {
     };
   }
 
-  componentDidMount() {
-
+  componentWillUnmount() {
+    window.localStorage.clear();
   }
 
   render() {
@@ -50,6 +50,7 @@ class AppBar extends React.Component {
             }
             >
             <MenuItem
+              onClick={()=> {window.location.assign('/#/home'); }}
               primaryText='Logout'/>
           </IconMenu>
         </div>

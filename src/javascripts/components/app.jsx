@@ -21,6 +21,10 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    window.location.assign('/#/app/shifts');
+  }
+
   render() {
     return (
       <div>
@@ -28,7 +32,7 @@ class App extends React.Component {
         <AppNavBar />
         <div className='appBody'>
           <div className='appContent'>
-            {this.props.children || 'Welcome to your Dashboard'}
+            {this.props.children}
           </div>
         </div>
       </div>

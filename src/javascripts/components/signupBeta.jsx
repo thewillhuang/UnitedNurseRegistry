@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import mui, { Card, TextField, CardActions, RaisedButton } from 'material-ui';
+import mui, { Card, TextField, CardActions, RaisedButton, Snackbar } from 'material-ui';
 import request from 'superagent';
 import validator from 'validator';
 const ThemeManager = new mui.Styles.ThemeManager();
@@ -39,9 +39,8 @@ class BetaSignup extends React.Component {
             ctx.setState({
               signupButton: 'Success',
             });
-            sessionStorage.setItem('token', res.headers.authorization);
-            window.location.assign('/#/app');
-            // console.log(localStorage.getItem('token'));
+            ctx.refs.success.show();
+            ctx.refs.email.setValue('');
           } else if (res.status === 406) {
             console.log('406 block', res.body.message);
             ctx.setState({
@@ -69,9 +68,18 @@ class BetaSignup extends React.Component {
     }
   }
 
+  handleDismiss = () => {
+    this.refs.success.dismiss();
+  }
   render() {
     return (
       <div className='betasignup-wrapper'>
+      <Snackbar
+        ref='success'
+        action='Dismiss'
+        onActionTouchTap={this.handleDismiss}
+        message='We received your email, thank you for your interest'
+        autoHideDuration={5000} />
       <h3 style={{color: 'white'}}>
         Sign up for Beta Launch
       </h3>

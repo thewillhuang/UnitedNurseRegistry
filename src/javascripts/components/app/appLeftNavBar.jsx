@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import mui, { FontIcon } from 'material-ui';
+import mui from 'material-ui';
 // const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
 const ThemeManager = new mui.Styles.ThemeManager();

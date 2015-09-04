@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import mui from 'material-ui';
+import mui, {TextField, RaisedButton, Checkbox} from 'material-ui';
 const ThemeManager = new mui.Styles.ThemeManager();
 // const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
@@ -10,6 +10,10 @@ const ThemeManager = new mui.Styles.ThemeManager();
 class ShiftFilter extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
+  }
+
+  static propTypes = {
+    getLocation: React.PropTypes.func.isRequired,
   }
 
   getChildContext() {
@@ -21,7 +25,17 @@ class ShiftFilter extends React.Component {
   render() {
     return (
       <div>
-        FIlters
+        <RaisedButton
+          label='Use Current Location'
+          onClick={this.props.getLocation}
+          secondary={true} />
+        <TextField
+          hintText='Address'
+          floatingLabelText='Enter Address or Zip' />
+        <Checkbox
+          name='checkboxName1'
+          value='checkboxValue1'
+          label='went for a run today'/>
       </div>
     );
   }

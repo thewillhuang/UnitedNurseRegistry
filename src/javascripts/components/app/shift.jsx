@@ -2,8 +2,7 @@
 
 import React from 'react';
 import mui from 'material-ui';
-import geohash from 'ngeohash';
-import ShiftFilter from './shiftFilter.jsx';
+// import ShiftFilter from './shiftFilter.jsx';
 import ShiftHospital from './shiftHospitalTable.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 // const MenuItem = require('material-ui/lib/menus/menu-item');
@@ -20,44 +19,20 @@ class Shift extends React.Component {
       muiTheme: ThemeManager.getCurrentTheme(),
     };
   }
-
-  getLocation = () => {
-    const options = {
-      enableHighAccuracy: true,
-      timeout: 5000,
-      maximumAge: 0,
-    };
-    const success = (pos) => {
-      const geoHash = geohash.encode(pos.coords.latitude, pos.coords.longitude, 4);
-      const geoHashSet = geohash.neighbors(geoHash);
-      this.setState({
-        geohash: geoHash,
-        geohashset: geoHashSet,
-      });
-      console.log(this.state.geohash);
-      console.log(this.state.geohashset);
-    };
-    const error = (err) => {
-      console.log(err);
-    };
-    navigator.geolocation.getCurrentPosition(success, error, options);
-  }
-
+        // <div className='appShiftFilter'>
+        //   <div className='card'>
+        //     <div className='cardTitle'>
+        //       Filter
+        //     </div>
+        //     <hr className='cardDivider'/>
+        //     <div className='cardBody'>
+        //       <ShiftFilter getLocation={this.getLocation} />
+        //     </div>
+        //   </div>
+        // </div>
   render() {
-    this.getLocation();
     return (
       <div className='appShift'>
-        <div className='appShiftFilter'>
-          <div className='card'>
-            <div className='cardTitle'>
-              Filter
-            </div>
-            <hr className='cardDivider'/>
-            <div className='cardBody'>
-              <ShiftFilter />
-            </div>
-          </div>
-        </div>
         <div className='appShiftResult'>
           <div className='card'>
             <div className='cardTitle'>

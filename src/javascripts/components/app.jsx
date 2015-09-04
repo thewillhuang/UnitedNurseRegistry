@@ -22,7 +22,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    window.location.assign('/#/app/shifts');
+    window.location.assign('#/app/shifts');
   }
 
   render() {

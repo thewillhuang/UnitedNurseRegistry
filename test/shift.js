@@ -501,6 +501,7 @@ describe('shift api', function() {
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
+        console.log(res.body);
         // console.log(res.body.rows[0]);
         // console.log(res.headers);
         // console.log(res.body.rows);

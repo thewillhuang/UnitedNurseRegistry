@@ -28,9 +28,11 @@ class Shift extends React.Component {
       maximumAge: 0,
     };
     const success = (pos) => {
+      const geoHash = geohash.encode(pos.coords.latitude, pos.coords.longitude, 4);
+      const geoHashSet = geohash.neighbors(geoHash);
       this.setState({
-        geohash: geohash.encode(pos.coords.latitude, pos.coords.longitude),
-        geohashset: geohash.neighbors(geohash.encode(pos.coords.latitude, pos.coords.longitude)),
+        geohash: geoHash,
+        geohashset: geoHashSet,
       });
       console.log(this.state.geohash);
       console.log(this.state.geohashset);

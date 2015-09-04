@@ -10,7 +10,6 @@ const ThemeManager = new mui.Styles.ThemeManager();
 class AppLeftNavBar extends React.Component {
   state = {
     userName: 'User',
-    route: '/',
     shift: '',
     profile: '',
     balance: '',
@@ -47,6 +46,11 @@ class AppLeftNavBar extends React.Component {
         balance: '',
         reviews: '',
         referrals: '',
+        shiftColor: 'white',
+        profileColor: 'rgb(198, 198, 198)',
+        balanceColor: 'rgb(198, 198, 198)',
+        reviewsColor: 'rgb(198, 198, 198)',
+        referralsColor: 'rgb(198, 198, 198)',
       });
       break;
     case '#/app/profile':
@@ -56,6 +60,11 @@ class AppLeftNavBar extends React.Component {
         balance: '',
         reviews: '',
         referrals: '',
+        shiftColor: 'rgb(198, 198, 198)',
+        profileColor: 'white',
+        balanceColor: 'rgb(198, 198, 198)',
+        reviewsColor: 'rgb(198, 198, 198)',
+        referralsColor: 'rgb(198, 198, 198)',
       });
       break;
     case '#/app/balance':
@@ -65,6 +74,11 @@ class AppLeftNavBar extends React.Component {
         balance: 'isActive',
         reviews: '',
         referrals: '',
+        shiftColor: 'rgb(198, 198, 198)',
+        profileColor: 'rgb(198, 198, 198)',
+        balanceColor: 'white',
+        reviewsColor: 'rgb(198, 198, 198)',
+        referralsColor: 'rgb(198, 198, 198)',
       });
       break;
     case '#/app/reviews':
@@ -74,6 +88,11 @@ class AppLeftNavBar extends React.Component {
         balance: '',
         reviews: 'isActive',
         referrals: '',
+        shiftColor: 'rgb(198, 198, 198)',
+        profileColor: 'rgb(198, 198, 198)',
+        balanceColor: 'rgb(198, 198, 198)',
+        reviewsColor: 'white',
+        referralsColor: 'rgb(198, 198, 198)',
       });
       break;
     case '#/app/referrals':
@@ -83,6 +102,11 @@ class AppLeftNavBar extends React.Component {
         balance: '',
         reviews: '',
         referrals: 'isActive',
+        shiftColor: 'rgb(198, 198, 198)',
+        profileColor: 'rgb(198, 198, 198)',
+        balanceColor: 'rgb(198, 198, 198)',
+        reviewsColor: 'rgb(198, 198, 198)',
+        referralsColor: 'white',
       });
       break;
     default:
@@ -98,10 +122,8 @@ class AppLeftNavBar extends React.Component {
             onClick={()=> {window.location.assign('/#/app/shifts'); }}
             className={'appNavItems ' + this.state.shift} >
             <div className={'appNameItemWrap ' + this.state.shift}>
-              <FontIcon
-                color='rgb(199, 199, 199)'
-                className={'icon-briefcase ' + this.state.shift}/>
-              <a href='#/app/shifts' className={'appNavText' + this.state.shift}>
+              <i className={'icon-briefcase fa-2x ' + this.state.shift}/>
+              <a href='#/app/shifts' style={{color: this.state.shiftColor}} className={'appNavText ' + this.state.shift}>
                 Shifts
               </a>
             </div>
@@ -110,10 +132,8 @@ class AppLeftNavBar extends React.Component {
             onClick={()=> {window.location.assign('/#/app/profile'); }}
             className={'appNavItems ' + this.state.profile}>
             <div className={'appNameItemWrap ' + this.state.profile}>
-              <FontIcon
-                color='rgb(199, 199, 199)'
-                className={'icon-user ' + this.state.profile}/>
-              <a href='#/app/profile' className={'appNavText' + this.state.profile}>
+              <i className={'icon-user fa-2x ' + this.state.profile}/>
+              <a href='#/app/profile' style={{color: this.state.profileColor}} className={'appNavText ' + this.state.profile}>
                 Profile
               </a>
             </div>
@@ -122,10 +142,8 @@ class AppLeftNavBar extends React.Component {
             onClick={()=> {window.location.assign('/#/app/balance'); }}
             className={'appNavItems ' + this.state.balance}>
             <div className={'appNameItemWrap ' + this.state.balance}>
-              <FontIcon
-                color='rgb(199, 199, 199)'
-                className={'icon-graph ' + this.state.balance}/>
-              <a href='#/app/balance' className={'appNavText' + this.state.balance}>
+              <i className={'icon-graph fa-2x ' + this.state.balance}/>
+              <a href='#/app/balance' style={{color: this.state.balanceColor}} className={'appNavText ' + this.state.balance}>
                 Balance
               </a>
             </div>
@@ -134,10 +152,8 @@ class AppLeftNavBar extends React.Component {
             onClick={()=> {window.location.assign('/#/app/reviews'); }}
             className={'appNavItems ' + this.state.reviews}>
             <div className={'appNameItemWrap ' + this.state.reviews}>
-              <FontIcon
-                color='rgb(199, 199, 199)'
-                className={'icon-star ' + this.state.reviews}/>
-              <a href='#/app/reviews' className={'appNavText' + this.state.reviews}>
+              <i className={'icon-star fa-2x ' + this.state.reviews}/>
+              <a href='#/app/reviews' style={{color: this.state.reviewsColor}} className={'appNavText ' + this.state.reviews}>
                 Reviews
               </a>
             </div>
@@ -146,10 +162,8 @@ class AppLeftNavBar extends React.Component {
             onClick={()=> {window.location.assign('/#/app/referrals'); }}
             className={'appNavItems ' + this.state.referrals}>
             <div className={'appNameItemWrap ' + this.state.referrals}>
-              <FontIcon
-                color='rgb(199, 199, 199)'
-                className={'icon-heart ' + this.state.referrals}/>
-              <a href='#/app/referrals' className={'appNavText' + this.state.referrals}>
+              <i className={'icon-heart fa-2x ' + this.state.referrals}/>
+              <a href='#/app/referrals' style={{color: this.state.referralsColor}} className={'appNavText ' + this.state.referrals}>
                 referrals
               </a>
             </div>

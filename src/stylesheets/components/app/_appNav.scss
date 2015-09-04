@@ -26,8 +26,9 @@
     left: -2px;
   }
   li {
-    height: 80px;
+    height: 60px;
     cursor: pointer;
+    // color: rgb(198, 198, 198);
   }
   li:hover {
     background-color: #1E1F2C;
@@ -36,13 +37,8 @@
     @include vertical-align();
     margin-left: 30px;
   }
-  .isActive {
+  a.isActive, .isActive {
     background-color: #1E1F2C;
-  }
-  a:link, a:visited {
-    color: rgb(198, 198, 198);
-  }
-  a:hover, a:active {
     color: white;
   }
 }

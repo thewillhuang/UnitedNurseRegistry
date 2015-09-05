@@ -22,7 +22,11 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    window.location.assign('#/app/shifts');
+    if (sessionStorage.length) {
+      window.location.assign('#/app/shifts');
+    } else {
+      window.location.assign('#/home');
+    }
   }
 
   render() {

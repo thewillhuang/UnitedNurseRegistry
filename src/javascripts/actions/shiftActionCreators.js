@@ -40,6 +40,9 @@ shiftActions.queryDb = (geoHash, geohashSet, cb) => {
       return res.body;
     }).catch(function(err) {
       console.log(err);
+      if (err.status === 500) {
+        window.location.assign('#/home');
+      }
     });
 };
 
@@ -61,7 +64,7 @@ shiftActions.queryAsync = (geoHash, geohashSet) => {
 
 shiftActions.loadCurrent = () => {
   shiftActions.getLocation(function(data) {
-    console.log(data);
+    console.log('loadCurrent payload', data.rows);
     shiftDispatcher.dispatch({
       type: shiftConst.LOAD,
       payload: data.rows,
@@ -70,7 +73,7 @@ shiftActions.loadCurrent = () => {
 };
 
 shiftActions.loadAddress = (address) => {
-  console.log('address from action', address);
+  // console.log('address from action', address);
   request
     .post('/api/geohash')
     .set({
@@ -80,8 +83,12 @@ shiftActions.loadAddress = (address) => {
       address: address,
     })
     .endAsync().then(function(res) {
+      // console.log('res.body from loadAddress', res.body);
       return res.body;
     }).then(function(location) {
+      // console.log('location from loadAddress', location);
+      // console.log('location.lat', location.lat);
+      // console.log('location.lng', location.lng);
       const geohash2 = geohash.encode(location.lat, location.lng, 4);
       const geohashset2 = geohash.neighbors(geohash2);
       return {
@@ -89,15 +96,19 @@ shiftActions.loadAddress = (address) => {
         geohashset: geohashset2,
       };
     }).then(function(geoHash) {
+      // console.log('geoHash', geoHash);
       return shiftActions.queryAsync(geoHash.geohash, geoHash.geohashset);
     }).then(function(res) {
-      console.log(res);
+      console.log('load address payload', res.rows);
       shiftDispatcher.dispatch({
         type: shiftConst.LOAD,
         payload: res.rows,
       });
     }).catch(function(err) {
       console.log(err);
+      if (err.status === 500) {
+        window.location.assign('#/home');
+      }
     });
 };
 

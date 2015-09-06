@@ -24,7 +24,6 @@ class ShiftFilter extends React.Component {
   }
 
   _onAddressChange = (e, selected) => {
-    console.log('selected', selected);
     if (selected === 'currentLocation') {
       shiftActions.loadCurrent();
     } else {

@@ -106,6 +106,7 @@ app.use(function* ensureAuthenticated(next) {
 require('./server/routes/userRoutes')(app);
 require('./server/routes/facilityRoutes')(app);
 require('./server/routes/shiftRoutes')(app);
+require('./server/routes/getHash')(app);
 
 // start http server
 app.listen(port);

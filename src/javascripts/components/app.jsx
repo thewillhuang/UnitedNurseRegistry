@@ -22,12 +22,16 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.checkToken();
+  }
+
+  checkToken = () => {
     if (sessionStorage.length) {
       window.location.assign('#/app/shifts');
     } else {
       window.location.assign('#/home');
     }
-  }
+  };
 
   render() {
     return (

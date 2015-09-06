@@ -19,6 +19,10 @@ tokenize.encryptSign = function(payload) {
 // returns a json from a token
 tokenize.verifyDecrypt = function(token, done) {
   jwt.verify(token, cert, options, function(err, decoded) {
-    done(err, JSON.parse(crypto.decrypt(decoded.payload, decoded.iv)));
+    if (err) {
+      done(err, null);
+    } else {
+      done(null, JSON.parse(crypto.decrypt(decoded.payload, decoded.iv)));
+    }
   });
 };

@@ -77,6 +77,10 @@ class HospitalSignup extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this.refs.email.focus();
+  }
+
   render() {
     return (
       <Card>

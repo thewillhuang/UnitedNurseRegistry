@@ -38,6 +38,11 @@ React.render((
           });
         }}/>
 
+        <Route path='profile' getComponents={(cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./components/app/profile.jsx'));
+          });
+        }}/>
 
       </Route>
 

@@ -8,6 +8,7 @@ const query = require('../services/query');
 const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('superagent'));
 const API_KEY = '&key=' + 'AIzaSyCYjPRBL33MXDv_Z230il4oibGj607wdTI';
+const googleUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
 
 module.exports = function authRoutes(app) {
   geohash
@@ -21,9 +22,9 @@ module.exports = function authRoutes(app) {
     q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
     q.values = ['lat', 'lng', 'geohash', 'address', address];
     const dbquery = yield query(q);
+    // if theres nothing, ask google
     if (!dbquery.rows.length) {
       // console.log('google', dbquery.rows);
-      const googleUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
       const url = googleUrl + address + API_KEY;
       const response = yield request.get(url)
       .endAsync().then(function(res) {

@@ -71,6 +71,11 @@ class BetaSignup extends React.Component {
   handleDismiss = () => {
     this.refs.success.dismiss();
   }
+
+  componentDidMount() {
+    this.refs.email.focus();
+  }
+
   render() {
     return (
       <div className='betasignup-wrapper'>

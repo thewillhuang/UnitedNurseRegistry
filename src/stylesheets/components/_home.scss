@@ -2,7 +2,8 @@
 
 .alpha {
   @include outer-container(100%);
-  @include background-image(linear-gradient(130deg, $electricPurple, $electricBlue));
+  // @include background-image(linear-gradient(130deg, $electricPurple, $electricBlue));
+  @include background-image(linear-gradient(50deg, #202D66, #85BBCD));
   background-size: cover;
   background-repeat: no-repeat;
   height: 620px;

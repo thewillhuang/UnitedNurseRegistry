@@ -39,8 +39,23 @@ describe('geohash api', function() {
       .set(jwt)
       .expect(200)
       .end(function(err, res) {
-        console.log(res.body.results[0].geometry.location);
-        expect(res.body.results[0].geometry.location).to.be.an('object');
+        console.log(res.body);
+        expect(res.body).to.be.an('object');
+        // expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+  it('should make a call to google api to get long and lat', function(done) {
+    request.post('/api/geohash')
+      .send({
+        address: '2950 arboridge ct fullerton ca 92835',
+      })
+      .set(jwt)
+      .expect(200)
+      .end(function(err, res) {
+        console.log(res.body);
+        expect(res.body).to.be.an('object');
         // expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
         done();

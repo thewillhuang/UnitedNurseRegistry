@@ -1,0 +1,11 @@
+.appProfile {
+  @include outer-container(100%);
+}
+
+.appProfileList {
+  @include span-columns(4);
+}
+
+.appProfileCards {
+  @include span-columns(8);
+}

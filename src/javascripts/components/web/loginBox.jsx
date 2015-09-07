@@ -35,6 +35,7 @@ class LoginBox extends React.Component {
           // console.log(res.status);
           if (res.status === 200) {
             sessionStorage.setItem('token', res.headers.authorization);
+            sessionStorage.setItem('user', res.body.message);
             window.location.assign('/#/app');
             // console.log(localStorage.getItem('token'));
           } else if (res.status === 406) {

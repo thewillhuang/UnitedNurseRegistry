@@ -9,3 +9,7 @@
 .appProfileCards {
   @include span-columns(8);
 }
+
+.profileCardInputWrap {
+  margin: 0 auto;
+}

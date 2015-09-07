@@ -2,7 +2,6 @@
 
 import React from 'react';
 import mui from 'material-ui';
-import ShiftFilter from './shiftFilter.jsx';
 import ShiftHospital from './shiftHospitalTable.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 // const MenuItem = require('material-ui/lib/menus/menu-item');
@@ -22,17 +21,6 @@ class Shift extends React.Component {
   render() {
     return (
       <div className='appShift'>
-        <div className='appShiftFilter'>
-          <div className='card'>
-            <div className='cardTitle'>
-              Filter
-            </div>
-            <hr className='cardDivider'/>
-            <div className='cardBody'>
-              <ShiftFilter getLocation={this.getLocation} />
-            </div>
-          </div>
-        </div>
         <div className='appShiftResult'>
           <div className='card'>
             <div className='cardTitle'>

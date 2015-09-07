@@ -2,8 +2,8 @@
 
 import React from 'react';
 import mui from 'material-ui';
-import AppBar from './app/appToolBar.jsx';
-import AppNavBar from './app/appLeftNavBar.jsx';
+import AppBar from '../app/appToolBar.jsx';
+import AppNavBar from '../app/appLeftNavBar.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 
 class App extends React.Component {

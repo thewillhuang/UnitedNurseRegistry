@@ -7,7 +7,7 @@ import validator from 'validator';
 const ThemeManager = new mui.Styles.ThemeManager();
 // console.log(request);
 
-class HospitalSignup extends React.Component {
+class LoginBox extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -23,19 +23,20 @@ class HospitalSignup extends React.Component {
     if (validator.isEmail(this.refs.email.getValue()) && this.refs.password.getValue().length > 5) {
       this.refs.email.setErrorText('');
       request
-        .post('/api/auth/facility/signup')
+        .post('/api/auth/facility/login')
         .send({
           email: this.refs.email.getValue(),
           password: this.refs.password.getValue(),
         })
         .end(function(err, res) {
-          console.log(err);
+          // console.log(err);
           // console.log(res.body);
           // console.log(res.headers);
           // console.log(res.status);
           if (res.status === 200) {
             sessionStorage.setItem('token', res.headers.authorization);
-            window.location.assign('/#/app');
+            sessionStorage.setItem('user', res.body.message);
+            window.location.assign('/#/hospital');
             // console.log(localStorage.getItem('token'));
           } else if (res.status === 406) {
             // console.log('406 block', res.body.message);
@@ -67,7 +68,7 @@ class HospitalSignup extends React.Component {
   }
 
   validateEmail = () => {
-    console.log(this.refs.email.getValue());
+    // console.log(this.refs.email.getValue());
     if (validator.isEmail(this.refs.email.getValue())) {
       this.refs.email.setErrorText('');
     } else if (this.refs.email.getValue().length === 0) {
@@ -97,8 +98,10 @@ class HospitalSignup extends React.Component {
             floatingLabelText='Password'
             ref='password'
             onEnterKeyDown={this.handleSubmit}
+            onChange={this.validatePassword}
             hintText='Password'
-            type='password'/>
+            type='password'
+          />
           <CardActions>
             <div className='signupButtonWrap'>
               <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>
@@ -110,4 +113,4 @@ class HospitalSignup extends React.Component {
   }
 }
 
-export default HospitalSignup;
+export default LoginBox;

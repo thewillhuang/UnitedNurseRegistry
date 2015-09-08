@@ -8,7 +8,7 @@ const ThemeManager = new mui.Styles.ThemeManager();
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
 // import MediaQuery from 'react-responsive';
 
-class Profile extends React.Component {
+class ProfileList extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -34,37 +34,13 @@ class Profile extends React.Component {
             <div className='cardBody'>
               <FlatButton
                 linkButton={true}
-                href='/#/app/profile/profile'
+                href='/#/hospital/profile/profile'
                 label='Profile'
                 secondary={true} />
               <br/>
               <FlatButton
                 linkButton={true}
-                href='/#/app/profile/workHistory'
-                label='Work History'
-                secondary={true} />
-              <br/>
-              <FlatButton
-                linkButton={true}
-                href='/#/app/profile/license'
-                label='License and Certifications'
-                secondary={true} />
-              <br/>
-              <FlatButton
-                linkButton={true}
-                href='/#/app/profile/specialty'
-                label='Specialty'
-                secondary={true} />
-              <br/>
-              <FlatButton
-                linkButton={true}
-                href='/#/app/profile/schedule'
-                label='Work Schedule'
-                secondary={true} />
-              <br/>
-              <FlatButton
-                linkButton={true}
-                href='/#/app/profile/security'
+                href='/#/hospital/profile/security'
                 label='Security'
                 secondary={true} />
               <br/>
@@ -79,4 +55,4 @@ class Profile extends React.Component {
   }
 }
 
-export default Profile;
+export default ProfileList;

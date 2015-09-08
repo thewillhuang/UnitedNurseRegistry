@@ -5,7 +5,6 @@ import mui from 'material-ui';
 import HomeToolBar from './homeToolBar.jsx';
 import Footer from './footer.jsx';
 import FeatureGrid from './featureGrid.jsx';
-// import SignupBox from './signupBox.jsx';
 import SignupBeta from './signupBeta.jsx';
 import ForNurses from './forNurses.jsx';
 import ForHospitals from './forHospitals.jsx';

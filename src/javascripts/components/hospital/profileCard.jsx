@@ -34,24 +34,19 @@ class ProfileCard extends React.Component {
           <div className='profileCardInputWrap'>
 
             <TextField
-              ref='fName'
-              floatingLabelText='First Name'
-              hintText='First Name' />
+              ref='name'
+              floatingLabelText='Hospital Name'
+              hintText='Name' />
             <br/>
             <TextField
-              ref='mName'
-              floatingLabelText='Middle Name'
-              hintText='Middle Name' />
+              ref='emr'
+              floatingLabelText='Hospital EMR'
+              hintText='EMR' />
             <br/>
             <TextField
-              ref='lName'
-              floatingLabelText='Last Name'
-              hintText='Last Name' />
-            <br/>
-            <TextField
-              ref='dob'
-              floatingLabelText='Date of Birth'
-              hintText='Date of Birth' />
+              ref='dress'
+              floatingLabelText='Dress Code'
+              hintText='Dress Code' />
             <br/>
             <TextField
               ref='phone'
@@ -59,11 +54,11 @@ class ProfileCard extends React.Component {
               hintText='Phone Number' />
             <br/>
             <TextField
-              ref='ssn'
-              floatingLabelText='Social Security Number'
-              hintText='Social Security Number' />
+              ref='address'
+              floatingLabelText='Address'
+              hintText='Address' />
             <br/>
-            <RaisedButton primary={true} label='Choose an Image'>
+            <RaisedButton primary={true} label='Upload Facility Image'>
               <input type='file' style={input}></input>
             </RaisedButton>
 

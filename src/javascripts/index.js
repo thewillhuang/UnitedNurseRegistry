@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import Home from './components/web/home.jsx';
 import { Router, Route } from 'react-router';
@@ -27,6 +25,12 @@ React.render((
       <Route path='hospitalLogin' getComponents={(cb) => {
         require.ensure([], (require) => {
           cb(null, require('./components/web/hospitalLogin.jsx'));
+        });
+      }}/>
+
+      <Route path='hospitalSignup' getComponents={(cb) => {
+        require.ensure([], (require) => {
+          cb(null, require('./components/web/hospitalSignup.jsx'));
         });
       }}/>
 
@@ -135,7 +139,7 @@ React.render((
       // hospital route
       <Route path='hospital' getComponents={(cb) => {
         require.ensure([], (require) => {
-          cb(null, require('./components/web/hospital.jsx'));
+          cb(null, require('./components/web/hospitalApp.jsx'));
         });
       }}>
         // nested app routes

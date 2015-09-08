@@ -53,7 +53,7 @@ class AppBar extends React.Component {
         </div>
         <div className='appBarTitle'>
           <a href='#/hospital/shifts'>
-            <p>United Nurse Registry Hospital Dashboard</p>
+            <p>Hospital Dashboard</p>
           </a>
         </div>
       </div>

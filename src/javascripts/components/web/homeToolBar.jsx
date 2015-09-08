@@ -19,7 +19,7 @@ class HomeToolBar extends React.Component {
   render() {
     return (
       <div>
-        <MediaQuery minWidth={691}>
+        <MediaQuery minWidth={909}>
         <Toolbar style={{
           backgroundColor: 'rbga(255,255,255,0.6)',
           paddingTop: 20,
@@ -29,7 +29,14 @@ class HomeToolBar extends React.Component {
             <RaisedButton href='#home' label='united nurse registry' linkButton={true} primary={true}/>
           </ToolbarGroup>
           <ToolbarGroup float='right' key={1}>
-            <FlatButton href='#hospitallogin' label='Hospitals' linkButton={true} secondary={true} style={{
+            <FlatButton href='#hospitalSignup' label='Hospital Signup' linkButton={true} secondary={true} style={{
+              backgroundColor: 'rbga(255,255,255,0.6)',
+              color: 'white',
+              marginLeft: 10,
+              marginRight: 10,
+            }}
+            />
+            <FlatButton href='#hospitallogin' label='Hospital Login' linkButton={true} secondary={true} style={{
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
               marginLeft: 10,
@@ -51,7 +58,7 @@ class HomeToolBar extends React.Component {
           </ToolbarGroup>
         </Toolbar>
         </MediaQuery>
-        <MediaQuery maxWidth={691}>
+        <MediaQuery maxWidth={909}>
           <AppBar
             style={{
               paddingTop: 5,
@@ -64,7 +71,8 @@ class HomeToolBar extends React.Component {
               }>
               <MenuItem onClick={()=> {window.location.assign('/#/home'); }} primaryText='Home' />
               <MenuDivider/>
-              <MenuItem onClick={()=> {window.location.assign('/#/hospitals'); }} primaryText='Hospitals'/ >
+              <MenuItem onClick={()=> {window.location.assign('/#/hospitallogin'); }} primaryText='Hospital Login'/ >
+              <MenuItem onClick={()=> {window.location.assign('/#/hospitalsignup'); }} primaryText='Hospital Signup'/ >
               <MenuItem onClick={()=> {window.location.assign('/#/signup'); }} primaryText='User Sign up' />
               <MenuItem onClick={()=> {window.location.assign('/#/login'); }} primaryText='Login' />
             </IconMenu>

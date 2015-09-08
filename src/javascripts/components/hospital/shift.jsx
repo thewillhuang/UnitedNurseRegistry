@@ -1,6 +1,6 @@
 import React from 'react';
 import mui from 'material-ui';
-import ShiftHospital from './shiftHospitalTable.jsx';
+import PostShifts from './postShifts.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 // const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
@@ -22,11 +22,11 @@ class Shift extends React.Component {
         <div className='appShiftResult'>
           <div className='card'>
             <div className='cardTitle'>
-              Hospitals
+              Post Shifts
             </div>
             <hr className='cardDivider' />
             <div className='cardBody'>
-              <ShiftHospital />
+              <PostShifts />
             </div>
           </div>
         </div>

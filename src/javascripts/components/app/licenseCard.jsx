@@ -45,14 +45,9 @@ class LicenseCard extends React.Component {
             hintText='License State' />
           <br/>
           <TextField
-            ref='reference'
-            floatingLabelText='Reference Name'
-            hintText='Reference Name' />
-          <br/>
-          <TextField
-            ref='reference phone'
-            floatingLabelText='Reference Phone'
-            hintText='Reference Phone' />
+            ref='licenseExp'
+            floatingLabelText='License Expiration Date'
+            hintText='License Expiration Date' />
           <br/>
           <RaisedButton primary={true} label='Choose an Image'>
             <input type='file' style={input}></input>

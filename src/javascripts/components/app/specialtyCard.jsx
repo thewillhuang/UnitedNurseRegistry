@@ -33,11 +33,6 @@ class SpecialtyCard extends React.Component {
             floatingLabelText='Years of Experience'
             hintText='Years of Experience' />
           <br/>
-          <TextField
-            ref='licenseExp'
-            floatingLabelText='License Expiration Date'
-            hintText='License Expiration Date' />
-          <br/>
         </div>
       </div>
     );

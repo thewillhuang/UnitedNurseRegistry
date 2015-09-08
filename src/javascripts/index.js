@@ -81,9 +81,27 @@ React.render((
             });
           }} />
 
-        // end of profile nested routes
 
         </Route>
+        // end of profile nested routes
+
+        <Route path='balance' getComponents={(cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./components/app/balance.jsx'));
+          });
+        }}/>
+
+        <Route path='referrals' getComponents={(cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./components/app/referrals.jsx'));
+          });
+        }}/>
+
+        <Route path='reviews' getComponents={(cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./components/app/reviews.jsx'));
+          });
+        }}/>
 
       </Route>
 

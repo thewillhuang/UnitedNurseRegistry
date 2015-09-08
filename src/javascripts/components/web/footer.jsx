@@ -1,4 +1,4 @@
-'use strict';
+
 
 import React from 'react';
 import mui, { FontIcon } from 'material-ui';

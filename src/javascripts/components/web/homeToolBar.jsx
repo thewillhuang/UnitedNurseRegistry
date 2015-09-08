@@ -1,4 +1,4 @@
-'use strict';
+
 
 import React from 'react';
 import mui, { Toolbar, ToolbarGroup, RaisedButton, AppBar, IconMenu, IconButton, FlatButton } from 'material-ui';

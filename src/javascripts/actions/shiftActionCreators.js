@@ -1,4 +1,4 @@
-'use strict';
+
 
 import shiftConst from '../constants/shiftConstants.js';
 import geohash from 'ngeohash';

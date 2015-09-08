@@ -1,4 +1,4 @@
-'use strict';
+
 
 import shiftDispatcher from '../dispatcher/appDispatcher.js';
 import shiftConst from '../constants/shiftConstants.js';

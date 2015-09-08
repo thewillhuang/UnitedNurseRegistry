@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import mui, {TextField} from 'material-ui';
 const ThemeManager = new mui.Styles.ThemeManager();

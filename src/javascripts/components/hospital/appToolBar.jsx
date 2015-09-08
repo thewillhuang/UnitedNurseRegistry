@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import mui, {IconMenu, IconButton} from 'material-ui';
 const MenuItem = require('material-ui/lib/menus/menu-item');
@@ -9,7 +7,7 @@ const ThemeManager = new mui.Styles.ThemeManager();
 
 class AppBar extends React.Component {
   state = {
-    userName: 'User First Name',
+    userName: 'Hospital Name',
   }
 
   static childContextTypes = {
@@ -55,7 +53,7 @@ class AppBar extends React.Component {
         </div>
         <div className='appBarTitle'>
           <a href='#/home'>
-            <p>United Nurse Registry Nurse Dashboard</p>
+            <p>United Nurse Registry Hospital Dashboard</p>
           </a>
         </div>
       </div>

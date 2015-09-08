@@ -19,9 +19,9 @@ class Hospital extends React.Component {
     };
   }
 
-  // componentDidMount() {
-  //   this.checkToken();
-  // }
+  componentDidMount() {
+    this.checkToken();
+  }
 
   checkToken = () => {
     if (sessionStorage.length) {

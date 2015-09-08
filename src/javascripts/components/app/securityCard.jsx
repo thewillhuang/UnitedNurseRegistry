@@ -1,7 +1,7 @@
 'use strict';
 
 import React from 'react';
-import mui from 'material-ui';
+import mui, {TextField} from 'material-ui';
 const ThemeManager = new mui.Styles.ThemeManager();
 
 class SecurityCard extends React.Component {
@@ -23,7 +23,30 @@ class SecurityCard extends React.Component {
         </div>
         <hr className='cardDivider' />
         <div className='cardBody'>
-          fields
+          <TextField
+            ref='nPassword'
+            type='password'
+            floatingLabelText='New Password'
+            hintText='New Password' />
+          <br/>
+          <TextField
+            ref='nPassword2'
+            type='password'
+            floatingLabelText='Repeat New Password'
+            hintText='Repeat New Password' />
+          <br/>
+          <TextField
+            ref='nPin'
+            type='password'
+            floatingLabelText='New Pin'
+            hintText='New Pin' />
+          <br/>
+          <TextField
+            ref='nPin2'
+            type='password'
+            floatingLabelText='Repeat New Pin'
+            hintText='Repeat New Pin' />
+          <br/>
         </div>
       </div>
     );

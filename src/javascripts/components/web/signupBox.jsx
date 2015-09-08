@@ -24,11 +24,11 @@ class SignupBox extends React.Component {
 
   handleSubmit = ()  => {
     const ctx = this;
-    if (validator.isEmail(this.refs.email.getValue()) && this.refs.password.getValue().length > 5) {
+    if (validator.isEmail(this.refs.email.getValue()) &&
+        this.refs.password.getValue().length > 5 &&
+        this.refs.password.getValue() === this.refs.password2.getValue()) {
       this.setState({
-
         signupButton: 'Sending Data',
-
       });
       this.refs.email.setErrorText('');
       request
@@ -47,6 +47,7 @@ class SignupBox extends React.Component {
               signupButton: 'Success',
             });
             sessionStorage.setItem('token', res.headers.authorization);
+            sessionStorage.setItem('user', res.body.message);
             window.location.assign('/#/app');
             // console.log(localStorage.getItem('token'));
           } else if (res.status === 406) {
@@ -78,6 +79,26 @@ class SignupBox extends React.Component {
       this.refs.password.setErrorText('Password have atleast 6 characters');
     } else {
       this.refs.password.setErrorText('');
+      if (this.refs.password.getValue() !== this.refs.password2.getValue()) {
+        this.refs.password.setErrorText('Password Must Match');
+        this.refs.password2.setErrorText('Password Must Match');
+      } else {
+        this.refs.password2.setErrorText('');
+        this.refs.password.setErrorText('');
+      }
+    }
+    if (this.refs.password2.getValue().length === 0) {
+      this.refs.password2.setErrorText('');
+    } else if (this.refs.password2.getValue().length < 6) {
+      this.refs.password2.setErrorText('Password have atleast 6 characters');
+    } else {
+      if (this.refs.password.getValue() !== this.refs.password2.getValue()) {
+        this.refs.password.setErrorText('Password Must Match');
+        this.refs.password2.setErrorText('Password Must Match');
+      } else {
+        this.refs.password2.setErrorText('');
+        this.refs.password.setErrorText('');
+      }
     }
   }
 
@@ -114,6 +135,14 @@ class SignupBox extends React.Component {
             onEnterKeyDown={this.handleSubmit}
             onChange={this.validatePassword}
             hintText='Password'
+            type='password'
+          />
+          <TextField
+            floatingLabelText='Repeat Password'
+            ref='password2'
+            onEnterKeyDown={this.handleSubmit}
+            onChange={this.validatePassword}
+            hintText='Repeat Password'
             type='password'
           />
           <CardActions>

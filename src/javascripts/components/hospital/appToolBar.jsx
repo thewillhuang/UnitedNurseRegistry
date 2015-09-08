@@ -52,7 +52,7 @@ class AppBar extends React.Component {
           </IconMenu>
         </div>
         <div className='appBarTitle'>
-          <a href='#/home'>
+          <a href='#/hospital/shifts'>
             <p>United Nurse Registry Hospital Dashboard</p>
           </a>
         </div>

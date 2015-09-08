@@ -12,7 +12,7 @@ import ForHospitals from './forHospitals.jsx';
 import ForReferrals from './forReferrals.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 
-export class Home extends React.Component {
+class Home extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -51,3 +51,5 @@ export class Home extends React.Component {
     );
   }
 }
+
+export default Home;

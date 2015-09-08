@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import { Home } from './components/web/home.jsx';
+import Home from './components/web/home.jsx';
 import { Router, Route } from 'react-router';
 import { history } from 'react-router/lib/HashHistory';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -23,7 +23,32 @@ class Root extends React.Component {
 React.render((
   <Router history={history}>
     <Route path='/' component={Root}>
-      <Route path='home' component={Home}/>
+      // web routes
+      <Route path='hospitalLogin' getComponents={(cb) => {
+        require.ensure([], (require) => {
+          cb(null, require('./components/web/hospitalLogin.jsx'));
+        });
+      }}/>
+
+      <Route path='login' getComponents={(cb) => {
+        require.ensure([], (require) => {
+          cb(null, require('./components/web/login.jsx'));
+        });
+      }}/>
+
+      <Route path='signup' getComponents={(cb) => {
+        require.ensure([], (require) => {
+          cb(null, require('./components/web/signup.jsx'));
+        });
+      }}/>
+
+      <Route path='home' getComponents={(cb) => {
+        require.ensure([], (require) => {
+          cb(null, require('./components/web/home.jsx'));
+        });
+      }} />
+
+      // end of web routes
 
       // app routes
       <Route path='app' getComponents={(cb) => {
@@ -185,27 +210,7 @@ React.render((
         }}/>
 
       </Route>
-
       // end of hospital route
-
-      <Route path='hospitalLogin' getComponents={(cb) => {
-        require.ensure([], (require) => {
-          cb(null, require('./components/web/hospitalLogin.jsx'));
-        });
-      }}/>
-
-      <Route path='login' getComponents={(cb) => {
-        require.ensure([], (require) => {
-          cb(null, require('./components/web/login.jsx'));
-        });
-      }}/>
-
-      <Route path='signup' getComponents={(cb) => {
-        require.ensure([], (require) => {
-          cb(null, require('./components/web/signup.jsx'));
-        });
-      }}/>
-
     </Route>
   </Router>
 ), document.getElementById('root'));

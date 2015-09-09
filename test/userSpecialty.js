@@ -112,6 +112,18 @@ describe('user specialty api', function() {
       });
   });
 
+  it('should retrieve all specialty', function(done) {
+    request.get('/api/userspecialty/')
+      .expect(200)
+      .set(jwt)
+      .end(function(err, res) {
+        console.log(res.body);
+        expect(res.body.rows[0].specialtyID).to.equal(1);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
   let a1;
   it('should have 2 specialty given a user id', function(done) {
     request.get('/api/userspecialty/user/' + r1)

@@ -1,5 +1,5 @@
 import React from 'react';
-import mui, {TextField, RaisedButton} from 'material-ui';
+import mui, {TextField} from 'material-ui';
 const ThemeManager = new mui.Styles.ThemeManager();
 // const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
@@ -44,7 +44,6 @@ class ShiftHospitalTable extends React.Component {
           floatingLabelText='Shift Date'
           hintText='Shift Date' />
       </div>
-
     );
   }
 }

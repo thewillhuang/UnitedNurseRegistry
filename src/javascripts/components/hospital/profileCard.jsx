@@ -32,11 +32,13 @@ class ProfileCard extends React.Component {
         <hr className='cardDivider' />
         <div className='cardBody'>
           <div className='profileCardInputWrap'>
-
             <TextField
               ref='name'
               floatingLabelText='Hospital Name'
               hintText='Name' />
+            <RaisedButton primary={true} label='Upload Facility Images'>
+              <input type='file' style={input}></input>
+            </RaisedButton>
             <br/>
             <TextField
               ref='emr'
@@ -57,11 +59,6 @@ class ProfileCard extends React.Component {
               ref='address'
               floatingLabelText='Address'
               hintText='Address' />
-            <br/>
-            <RaisedButton primary={true} label='Upload Facility Image'>
-              <input type='file' style={input}></input>
-            </RaisedButton>
-
           </div>
         </div>
       </div>

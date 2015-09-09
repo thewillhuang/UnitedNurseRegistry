@@ -1,5 +1,4 @@
 'use strict';
-
 const Router = require('koa-router');
 const userSpecialty = new Router({
   prefix: '/api/userspecialty',
@@ -65,6 +64,14 @@ module.exports = function(app) {
     const q = {};
     q.sql = 'SELECT s.* FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
     q.values = ['specialty', 's', 'UserSpecialty', 'us', 'us.fk_UserSpecialty_specialtyID', 's.specialtyID', 'us.fk_UserSpecialty_userID', userID];
+    this.body = yield query(q);
+  })
+
+  // grab a list of IDs
+  .get('/', function* () {
+    const q = {};
+    q.sql = 'SELECT * FROM ??';
+    q.values = ['Specialty'];
     this.body = yield query(q);
   })
 

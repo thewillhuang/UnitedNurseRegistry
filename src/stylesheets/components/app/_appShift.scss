@@ -5,3 +5,19 @@
 .appShiftResult {
   @include span-columns(12);
 }
+
+.hospitalShifts {
+  @include outer-container(100%);
+}
+
+.postShifts {
+  @include span-columns(4);
+}
+
+.shiftFeedback {
+  @include span-columns(8);
+}
+
+.tableWrap {
+  margin-right: 30px;
+}

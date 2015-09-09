@@ -22,12 +22,12 @@ class ForNurses extends React.Component {
           <div href='#' className='grid2-item'>
             <i className='fa icon-check fa-2x grid2-i'></i>
             <h1>Accept Shifts</h1>
-            <p>Get notifications from the hospitals around you. Accept the ones you want.</p>
+            <p>Get notifications from the hospitals around you. Bid and Accept the shifts you want.</p>
           </div>
           <div href='#' className='grid2-item'>
             <i className='fa icon-wallet fa-2x grid2-i'></i>
             <h1>Receive Money</h1>
-            <p>Money in your bank account in 2 days</p>
+            <p>Money in your bank account in 2 days after your shift</p>
           </div>
         </div>
 

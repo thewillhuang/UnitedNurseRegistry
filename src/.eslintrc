@@ -5,5 +5,9 @@
   "rules": {
     "react/jsx-quotes": [2, "single", "avoid-escape"],
     "react/sort-comp": [0],
+    "strict": [2, "global"],
+  },
+  "ecmaFeatures": {
+    "modules": true
   }
 }

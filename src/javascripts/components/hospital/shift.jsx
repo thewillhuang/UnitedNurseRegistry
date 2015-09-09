@@ -1,6 +1,7 @@
 import React from 'react';
 import mui from 'material-ui';
 import PostShifts from './postShifts.jsx';
+import ShiftFeedback from './shiftFeedback.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();
 // const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
@@ -18,8 +19,8 @@ class Shift extends React.Component {
   }
   render() {
     return (
-      <div className='appShift'>
-        <div className='appShiftResult'>
+      <div className='hospitalShifts'>
+        <div className='postShifts'>
           <div className='card'>
             <div className='cardTitle'>
               Post Shifts
@@ -27,6 +28,17 @@ class Shift extends React.Component {
             <hr className='cardDivider' />
             <div className='cardBody'>
               <PostShifts />
+            </div>
+          </div>
+        </div>
+        <div className='shiftFeedback'>
+          <div className='card'>
+            <div className='cardTitle'>
+              Feedbacks
+            </div>
+            <hr className='cardDivider' />
+            <div className='cardBody'>
+              <ShiftFeedback />
             </div>
           </div>
         </div>

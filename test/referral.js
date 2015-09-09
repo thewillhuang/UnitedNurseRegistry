@@ -196,12 +196,13 @@ describe('referral api', function() {
 
   // for adding facilities
   it('child facility should set referral for parent', function(done) {
-    console.log('facilityjwt', fjwt);
+    // console.log('facilityjwt', fjwt);
     request.post('/api/referral/facility/' + r1)
       .expect(200)
       .set(fjwt)
       .end(function(err, res) {
-        console.log(res.body);
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
         done();
       });
   });
@@ -211,29 +212,22 @@ describe('referral api', function() {
       .expect(200)
       .set(jwt2)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
+        expect(res.body.rows[0].count).to.equal(1);
+        expect(err).to.be.a('null');
         done();
       });
   });
 
   // test using wrong type of token
-  // for falsely adding facilities
+  // for falsely adding facilities as user
   it('child facility should set referral for parent', function(done) {
     request.post('/api/referral/facility/' + r1)
-      .expect(200)
+      .expect(406)
       .set(jwt)
       .end(function(err, res) {
-        console.log(res.body);
-        done();
-      });
-  });
-
-  it('should get facility referral for parent', function(done) {
-    request.get('/api/referral/facility/' + r1)
-      .expect(200)
-      .set(jwt)
-      .end(function(err, res) {
-        console.log(res.body);
+        expect(res.body.message).to.equal('no permission');
+        expect(err).to.be.a('null');
         done();
       });
   });

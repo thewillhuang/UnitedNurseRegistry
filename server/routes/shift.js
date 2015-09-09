@@ -56,6 +56,22 @@ module.exports = function shiftRoutes(app) {
     this.body = yield query(q);
   })
 
+  // view all pending and open shifts given hospital id -- returns a list of shift infromation
+  // get
+  .get('/active/:facilityID', function* grabOpenShift() {
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
+      const q = {};
+      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ? OR ?? = ?';
+      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'pending', 1, 'open', 1];
+      this.body = yield query(q);
+    } else {
+      this.status = 406;
+      this.body = {message: 'no permission'};
+    }
+  })
+
   // view all scheduled shifts by userID --> returns a list of shift information
   // get
   .get('/user/:userID', function* grabShiftInfoByUserId() {

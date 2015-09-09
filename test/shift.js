@@ -501,7 +501,7 @@ describe('shift api', function() {
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         // console.log(res.body.rows[0]);
         // console.log(res.headers);
         // console.log(res.body.rows);
@@ -517,6 +517,50 @@ describe('shift api', function() {
         expect(err).to.be.a('null');
         done();
       });
+  });
+
+  // it should get active shifts for the hospital given the right token and facility ID
+  it('should return active shifts, open and pending shifts from the hospital', function(done) {
+    request.get('/api/shift/active/' + f1)
+    .expect(200)
+    .set(f1jwt)
+    .end(function(err, res) {
+      expect(res.body).to.be.an('object');
+      expect(res.body.rows).to.be.not.empty;
+      expect(res.body.rows[0].open).to.equal(1);
+      expect(res.body.rows[1].open).to.equal(1);
+      expect(res.body.rows[2].open).to.equal(1);
+      expect(res.body.rows).to.be.an('array');
+      expect(res.body.rows).to.have.length.above(3);
+      expect(res.body.fields).to.be.an('array');
+      expect(err).to.be.a('null');
+      done();
+    });
+  });
+
+  // it should not get active shifts for the hospital given the wrong facility token and facility ID
+  it('should not return active shifts, open and pending shifts from the hospital', function(done) {
+    request.get('/api/shift/active/' + f1)
+    .expect(406)
+    .set(f2jwt)
+    .end(function(err, res) {
+      expect(res.body.message).to.equal('no permission');
+      expect(err).to.be.a('null');
+      done();
+    });
+  });
+
+
+  // it should not get active shifts for the hospital given the wrong user token and facility ID
+  it('should not return active shifts, open and pending shifts from the hospital', function(done) {
+    request.get('/api/shift/active/' + f1)
+    .expect(406)
+    .set(u1jwt)
+    .end(function(err, res) {
+      expect(res.body.message).to.equal('no permission');
+      expect(err).to.be.a('null');
+      done();
+    });
   });
 
   it('should delete shift 2 given a correct shift id', function(done) {

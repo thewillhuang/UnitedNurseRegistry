@@ -107,6 +107,7 @@ require('./server/routes/userRoutes')(app);
 require('./server/routes/facilityRoutes')(app);
 require('./server/routes/shiftRoutes')(app);
 require('./server/routes/getHash')(app);
+require('./server/routes/referral.js')(app);
 
 // start http server
 app.listen(port);

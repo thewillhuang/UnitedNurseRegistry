@@ -76,7 +76,7 @@ describe('referral api', function() {
       .end(function(err, res) {
         fjwt = { Authorization: res.headers.authorization };
         // console.log(jwt);
-        console.log(res.headers);
+        // console.log(res.headers);
         // console.log(res.body);
         facilityr1 = res.body.message.scope.facilityID;
         expect(res.body).to.be.an('object');
@@ -88,7 +88,7 @@ describe('referral api', function() {
   });
 
   it('should grab a facility given a correct facility id', function(done) {
-    console.log('facilityjwt', fjwt);
+    // console.log('facilityjwt', fjwt);
     request.get('/api/facility/' + facilityr1)
       .set(fjwt)
       .expect(200)
@@ -150,7 +150,9 @@ describe('referral api', function() {
       .expect(200)
       .set(jwt2)
       .end(function(err, res) {
-        console.log(res.body);
+        expect(res.body.rows.affectedRows).to.equal(1);
+        expect(err).to.be.a('null');
+        // console.log(res.body);
         done();
       });
   });
@@ -160,28 +162,34 @@ describe('referral api', function() {
       .expect(200)
       .set(jwt2)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
+        expect(res.body.rows[0].count).to.equal(1);
+        expect(err).to.be.a('null');
         done();
       });
   });
 
-  // start testing using wrong users
+  // start of wrong testing
+  // using facility token
   it('child should set referral for parent', function(done) {
-    request.post('/api/referral/user/' + r1)
-      .expect(200)
-      .set(jwt2)
+    request.post('/api/referral/user/' + r2)
+      .expect(406)
+      .set(fjwt)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
+        expect(err).to.be.a('null');
+        expect(res.body.message).to.equal('no permission');
         done();
       });
   });
-
-  it('should get user referral for parent', function(done) {
-    request.get('/api/referral/user/' + r1)
-      .expect(200)
-      .set(jwt2)
+  // using own token
+  it('should not set yourself as your own referral', function(done) {
+    request.post('/api/referral/user/' + r1)
+      .expect(406)
+      .set(jwt)
       .end(function(err, res) {
-        console.log(res.body);
+        expect(err).to.be.a('null');
+        expect(res.body.message).to.equal('no permission');
         done();
       });
   });

@@ -82,8 +82,8 @@ module.exports = function shiftRoutes(app) {
     // take off any elements that is not unique
     const set = _.uniq(trimmedHashSet);
     const q = {};
-    q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (?)';
-    const selectShift = ['shift.shiftID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date', 'shift.open'];
+    q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? OR ?? = ? AND LEFT(??, ?) IN (?)';
+    const selectShift = ['shift.shiftID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date', 'shift.open', 'shift.shiftDressCode', 'shift.pending'];
     const specialty = ['specialty.specialty'];
     const facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR', 'facility.facilityGeohash'];
     q.values = [
@@ -94,6 +94,7 @@ module.exports = function shiftRoutes(app) {
       'Specialty',
       'specialty.specialtyID', 'fk_Shift_specialtyID',
       'shift.open', 1,
+      'shift.pending', 1,
       'facility.facilityGeohash', precision,
       set,
     ];

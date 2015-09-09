@@ -1,5 +1,3 @@
-
-
 import shiftConst from '../constants/shiftConstants.js';
 import geohash from 'ngeohash';
 import shiftDispatcher from '../dispatcher/appDispatcher.js';

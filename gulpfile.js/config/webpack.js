@@ -1,3 +1,4 @@
+'use strict';
 const path = require('path');
 const paths = require('./');
 const webpack = require('webpack');
@@ -47,14 +48,14 @@ module.exports = function(env) {
     };
 
     // Factor out common dependencies into a shared.js
-    webpackConfig.plugins.push(
-      new webpack.optimize.CommonsChunkPlugin({
-        name: 'common',
-        filename: '[name].js',
-        async: true,
-        children: true,
-      })
-    );
+    // webpackConfig.plugins.push(
+    //   new webpack.optimize.CommonsChunkPlugin({
+    //     name: 'common',
+    //     filename: '[name].js',
+    //     async: true,
+    //     children: true,
+    //   })
+    // );
   }
 
   if (env === 'development') {
@@ -72,6 +73,7 @@ module.exports = function(env) {
           NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         },
       }),
+      new webpack.optimize.AggressiveMergingPlugin(),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin(),
       new webpack.optimize.OccurenceOrderPlugin(true),

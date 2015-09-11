@@ -61,6 +61,7 @@ module.exports = function(app) {
       const requestJson = this.request.body;
       const password = requestJson.facilityPwHash;
       delete requestJson.facilityPwHash;
+      delete requestJson.facilityVetted;
       requestJson.facilityPwHash = yield genHash(password);
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';

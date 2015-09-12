@@ -9,7 +9,6 @@ const query = require('../services/query');
 module.exports = function shiftReviewRoutes(app) {
   shiftReview
 
-  // user reviews TODO validate user ID
   .post('/user/:userID/shift/:shiftID', function* createUserReview() {
     const user = this.passport.user;
     const userID = this.params.userID;
@@ -28,7 +27,14 @@ module.exports = function shiftReviewRoutes(app) {
     }
   })
 
-  // TODO validate userID
+  // only a facility should be able to post a review on the shift, and therefore the user
+  .post('/:shiftID', function* createUserReview() {
+    const user = this.passport.user;
+    // take the shiftID, make a query and get the user and the facilityID on the shift
+    // do a check on the token for the facility, if they match continue to add review
+    // insert statement on shift revew on user table, by using the userID, facilityID and review from shift table
+  })
+
   .put('/user/:userID/shift/:shiftID', function* updateUserReview() {
     const user = this.passport.user;
     const userID = this.params.userID;

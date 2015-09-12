@@ -46,7 +46,7 @@ module.exports = function shiftRoutes(app) {
     this.body = yield query(q);
   })
 
-  // view all scheduled shifts by hospital id --> returns a list of shift information
+  // view all shifts by hospital id --> returns a list of shift information
   // get
   .get('/facility/:facilityID', function* grabShiftInfoByFacility() {
     const facilityID = this.params.facilityID;

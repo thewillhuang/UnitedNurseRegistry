@@ -28,10 +28,10 @@ module.exports = function shiftReviewRoutes(app) {
   })
 
   // only a facility should be able to post a review on the shift, and therefore the user
-  .post('/:shiftID', function* createUserReview() {
+  .post('/user/:shiftID', function* createUserReview() {
     const user = this.passport.user;
     // take the shiftID, make a query and get the user and the facilityID on the shift
-    // do a check on the token for the facility, if they match continue to add review
+    // do a check on the token for the facility, if they match continue to add review else throw 406
     // insert statement on shift revew on user table, by using the userID, facilityID and review from shift table
   })
 

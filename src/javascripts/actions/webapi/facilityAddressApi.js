@@ -1,6 +1,7 @@
 import Promise from 'bluebird';
 import superagent from 'superagent';
 import token from '../../utils/grabToken.js';
+import _ from 'lodash';
 const request = Promise.promisifyAll(superagent);
 const prefix = '/api/facilityAddress';
 const facilityAddressApi = {};
@@ -18,7 +19,7 @@ facilityAddressApi.addFacilityAddress = (facilityID, address, address2, city, st
   return request
     .post(prefix + '/facility/' + facilityID)
     .set(token)
-    .send({address, address2, city, state, zip})
+    .send(_.omit({address, address2, city, state, zip}, _.isNull))
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
@@ -28,9 +29,9 @@ facilityAddressApi.addFacilityAddress = (facilityID, address, address2, city, st
 
 facilityAddressApi.updateFacilityAddress = (facilityID, addressID, address, address2, city, state, zip) => {
   return request
-    .put(prefix + '/facilit/' + facilityID + '/address/' + addressID)
+    .put(`${prefix}/facility/${facilityID}/address/${addressID}`)
     .set(token)
-    .send({address, address2, city, state, zip})
+    .send(_.omit({address, address2, city, state, zip}, _.isNull))
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {

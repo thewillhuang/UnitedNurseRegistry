@@ -187,15 +187,28 @@ describe('shift reviews api', function() {
       });
   });
 
-  // user review tests
+  it('should set a shift status as pending', function(done) {
+    request.post('/api/shiftstatus/pending/shift/' + s1.insertId + '/user/' + u1 + '/facility/' + f1)
+      .expect(200)
+      .set(f1jwt)
+      .end(function(err, res) {
+        expect(res.body.rows.affectedRows);
+        expect(err).to.be.null;
+        done();
+      });
+  });
+
+  // // user review tests
+
   it('should post a user review of 5', function(done) {
-    request.post('/api/shiftreview/user/' + u1 + '/shift/' + s1.insertId)
+    request.post('/api/shiftreview/user/' + s1.insertId)
       .send({
         review: 5,
       })
       .expect(200)
-      .set(u1jwt)
+      .set(f1jwt)
       .end(function(err, res) {
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows.affectedRows).to.equal(1);
@@ -210,6 +223,7 @@ describe('shift reviews api', function() {
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
+        console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows[0].review).to.equal(5);
@@ -219,14 +233,15 @@ describe('shift reviews api', function() {
       });
   });
 
-  it('should update a user review to 4', function(done) {
-    request.put('/api/shiftreview/user/' + u1 + '/shift/' + s1.insertId)
+  it('should post a user review of 5', function(done) {
+    request.put('/api/shiftreview/user/' + s1.insertId)
       .send({
         review: 4,
       })
       .expect(200)
-      .set(u1jwt)
+      .set(f1jwt)
       .end(function(err, res) {
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows.affectedRows).to.equal(1);
@@ -273,14 +288,26 @@ describe('shift reviews api', function() {
       });
   });
 
+  it('should set a shift status as pending', function(done) {
+    request.post('/api/shiftstatus/pending/shift/' + s2.insertId + '/user/' + u1 + '/facility/' + f1)
+      .expect(200)
+      .set(f1jwt)
+      .end(function(err, res) {
+        expect(res.body.rows.affectedRows);
+        expect(err).to.be.null;
+        done();
+      });
+  });
+
   it('should post a user review of 1', function(done) {
-    request.post('/api/shiftreview/user/' + u1 + '/shift/' + s2.insertId)
+    request.post('/api/shiftreview/user/' + s2.insertId)
       .send({
         review: 1,
       })
       .expect(200)
-      .set(u1jwt)
+      .set(f1jwt)
       .end(function(err, res) {
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows.affectedRows).to.equal(1);

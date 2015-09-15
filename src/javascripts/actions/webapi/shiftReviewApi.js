@@ -10,9 +10,9 @@ shiftReviewApi.createUserReview = (shiftID, review) => {
     .post(`${prefix}/user/${shiftID}`)
     .set(token)
     .send({review})
-    .endAsync().then((res) => {
+    .endAsync().then(res => {
       return res.body;
-    }).catch((err) => {
+    }).catch(err => {
       return err;
     });
 };
@@ -22,7 +22,7 @@ shiftReviewApi.updateUserReview = (shiftID, review) => {
     .get(`${prefix}/user/${shiftID}`)
     .send({review})
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(res => {
       return res.body;
     });
 };
@@ -32,7 +32,7 @@ shiftReviewApi.createFacilityReview = (shiftID, review) => {
     .post(`${prefix}/facility/${shiftID}`)
     .send({review})
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(res => {
       return res.body;
     });
 };
@@ -42,7 +42,7 @@ shiftReviewApi.updateFacilityReview = (shiftID, review) => {
     .put(`${prefix}/facility/${shiftID}`)
     .send({review})
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(res => {
       return res.body;
     });
 };
@@ -51,9 +51,9 @@ shiftReviewApi.getUserReview = (shiftID) => {
   return request
     .get(`${prefix}/user/shift/${shiftID}`)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(err => {
       return err;
     });
 };
@@ -62,9 +62,9 @@ shiftReviewApi.getFacilityReview = (shiftID) => {
   return request
     .get(`${prefix}/user/shift/${shiftID}`)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(err => {
       return err;
     });
 };
@@ -73,9 +73,9 @@ shiftReviewApi.getAvgFacilityReview = (shiftID) => {
   return request
     .get(`${prefix}/user/shift/${shiftID}`)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(err => {
       return err;
     });
 };
@@ -84,9 +84,9 @@ shiftReviewApi.getAvgUserReview = (userID) => {
   return request
     .get(`${prefix}/avg/user/${userID}`)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(err => {
       return err;
     });
 };
@@ -95,9 +95,9 @@ shiftReviewApi.deleteFacilityReview = (facilityID) => {
   return request
     .get(`${prefix}/avg/facility/${facilityID}`)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(err => {
       return err;
     });
 };
@@ -106,9 +106,9 @@ shiftReviewApi.deleteUserReview = (shiftID, userID) => {
   return request
     .delete(`${prefix}/user/${userID}/shift/${shiftID}`)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(err => {
       return err;
     });
 };

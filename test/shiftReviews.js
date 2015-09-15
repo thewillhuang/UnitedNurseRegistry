@@ -223,7 +223,7 @@ describe('shift reviews api', function() {
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows[0].review).to.equal(5);
@@ -347,21 +347,36 @@ describe('shift reviews api', function() {
 
   // facility review tests
 
-  it('should post a facility review of 5', function(done) {
-    request.post('/api/shiftreview/facility/' + f1 + '/shift/' + s1.insertId)
-      .send({
-        review: 1,
-      })
-      .expect(200)
-      .set(f1jwt)
-      .end(function(err, res) {
-        expect(res.body).to.be.an('object');
-        expect(res.body.rows).to.be.not.empty;
-        expect(res.body.rows.affectedRows).to.equal(1);
-        expect(res.body.rows).to.be.an('object');
-        expect(err).to.be.null;
-        done();
-      });
+  // it('should post a facility review of 5', function(done) {
+  //   request.post('/api/shiftreview/facility/' + f1 + '/shift/' + s1.insertId)
+  //     .send({
+  //       review: 1,
+  //     })
+  //     .expect(200)
+  //     .set(f1jwt)
+  //     .end(function(err, res) {
+  //       expect(res.body).to.be.an('object');
+  //       expect(res.body.rows).to.be.not.empty;
+  //       expect(res.body.rows.affectedRows).to.equal(1);
+  //       expect(res.body.rows).to.be.an('object');
+  //       expect(err).to.be.null;
+  //       done();
+  //     });
+  // });
+
+  it('should post a facility review of 1', function(done) {
+    request.post('/api/shiftreview/facility/' + s1.insertId)
+    .send({
+      review: 1,
+    })
+    .set(u1jwt)
+    .end(function(err, res) {
+      expect(res.body).to.be.an('object');
+      expect(res.body.rows).to.be.not.empty;
+      expect(res.body.rows.affectedRows).to.equal(1);
+      expect(res.body.rows).to.be.an('object');
+      done();
+    });
   });
 
   it('should get a facility review back and it review should have a rating of 1', function(done) {
@@ -378,24 +393,40 @@ describe('shift reviews api', function() {
       });
   });
 
-  it('should update a user review to 5', function(done) {
-    request.put('/api/shiftreview/facility/' + f1 + '/shift/' + s1.insertId)
-      .send({
-        review: 5,
-      })
-      .expect(200)
-      .set(f1jwt)
-      .end(function(err, res) {
-        expect(res.body).to.be.an('object');
-        expect(res.body.rows).to.be.not.empty;
-        expect(res.body.rows.affectedRows).to.equal(1);
-        expect(res.body.rows).to.be.an('object');
-        expect(err).to.be.null;
-        done();
-      });
+  // it('should update a user review to 5', function(done) {
+  //   request.put('/api/shiftreview/facility/' + f1 + '/shift/' + s1.insertId)
+  //     .send({
+  //       review: 5,
+  //     })
+  //     .expect(200)
+  //     .set(f1jwt)
+  //     .end(function(err, res) {
+  //       expect(res.body).to.be.an('object');
+  //       expect(res.body.rows).to.be.not.empty;
+  //       expect(res.body.rows.affectedRows).to.equal(1);
+  //       expect(res.body.rows).to.be.an('object');
+  //       expect(err).to.be.null;
+  //       done();
+  //     });
+  // });
+
+
+  it('should post a facility review of 5', function(done) {
+    request.put('/api/shiftreview/facility/' + s1.insertId)
+    .send({
+      review: 5,
+    })
+    .set(u1jwt)
+    .end(function(err, res) {
+      expect(res.body).to.be.an('object');
+      expect(res.body.rows).to.be.not.empty;
+      expect(res.body.rows.affectedRows).to.equal(1);
+      expect(res.body.rows).to.be.an('object');
+      done();
+    });
   });
 
-  it('should get an updated facility review back and it review should have a rating of 4', function(done) {
+  it('should get an updated facility review back and it review should have a rating of 5', function(done) {
     request.get('/api/shiftreview/facility/' + f1 + '/shift/' + s1.insertId)
       .expect(200)
       .set(u1jwt)
@@ -410,21 +441,37 @@ describe('shift reviews api', function() {
       });
   });
 
+  // it('should post a facility review of 1', function(done) {
+  //   request.post('/api/shiftreview/facility/' + f1 + '/shift/' + s2.insertId)
+  //     .send({
+  //       review: 1,
+  //     })
+  //     .expect(200)
+  //     .set(f1jwt)
+  //     .end(function(err, res) {
+  //       expect(res.body).to.be.an('object');
+  //       expect(res.body.rows).to.be.not.empty;
+  //       expect(res.body.rows.affectedRows).to.equal(1);
+  //       expect(res.body.rows).to.be.an('object');
+  //       expect(err).to.be.null;
+  //       done();
+  //     });
+  // });
+
+
   it('should post a facility review of 1', function(done) {
-    request.post('/api/shiftreview/facility/' + f1 + '/shift/' + s2.insertId)
-      .send({
-        review: 1,
-      })
-      .expect(200)
-      .set(f1jwt)
-      .end(function(err, res) {
-        expect(res.body).to.be.an('object');
-        expect(res.body.rows).to.be.not.empty;
-        expect(res.body.rows.affectedRows).to.equal(1);
-        expect(res.body.rows).to.be.an('object');
-        expect(err).to.be.null;
-        done();
-      });
+    request.post('/api/shiftreview/facility/' + s2.insertId)
+    .send({
+      review: 1,
+    })
+    .set(u1jwt)
+    .end(function(err, res) {
+      expect(res.body).to.be.an('object');
+      expect(res.body.rows).to.be.not.empty;
+      expect(res.body.rows.affectedRows).to.equal(1);
+      expect(res.body.rows).to.be.an('object');
+      done();
+    });
   });
 
   it('should get a facility review back and it review should have a rating of 1', function(done) {

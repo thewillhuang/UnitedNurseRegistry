@@ -9,24 +9,6 @@ const query = require('../services/query');
 module.exports = function shiftReviewRoutes(app) {
   shiftReview
 
-  // .post('/user/:userID/shift/:shiftID', function* createUserReview() {
-  //   const user = this.passport.user;
-  //   const userID = this.params.userID;
-  //   if (user.scope.userID && user.scope.userID.toString() === userID) {
-  //     const shiftID = this.params.shiftID;
-  //     const requestJson = this.request.body;
-  //     requestJson.fk_ShiftReviewOnUser_userID = userID;
-  //     requestJson.fk_ShiftReviewOnUser_shiftID = shiftID;
-  //     const q = {};
-  //     q.sql = 'INSERT INTO ?? SET ?';
-  //     q.values = ['ShiftReviewOnUser', requestJson];
-  //     // console.log(q);
-  //     this.body = yield query(q);
-  //   } else {
-  //     this.body = {message: 'no permission'};
-  //   }
-  // })
-
   // only a facility should be able to post a review on the shift, and therefore the user
   .post('/user/:shiftID', function* createUserReview() {
     const shiftID = this.params.shiftID;
@@ -38,7 +20,7 @@ module.exports = function shiftReviewRoutes(app) {
     const result = yield query(q);
     const facilityID = result.rows[0].fk_Shift_facilityID;
     const userID = result.rows[0].fk_Shift_userID;
-    console.log('userID', userID, 'user facility id', user.scope.facilityID, 'facilityID from query', facilityID);
+    // console.log('userID', userID, 'user facility id', user.scope.facilityID, 'facilityID from query', facilityID);
     // do a check on the token for the facility, if they match continue to add review else throw 406
     if (user.scope.facilityID && user.scope.facilityID === facilityID) {
     // insert statement on shift revew on user table, by using the userID, facilityID and review from shift table
@@ -65,7 +47,7 @@ module.exports = function shiftReviewRoutes(app) {
     const result = yield query(q);
     const facilityID = result.rows[0].fk_Shift_facilityID;
     const userID = result.rows[0].fk_Shift_userID;
-    console.log('user facility id', user.scope.facilityID, 'facilityID from query', facilityID);
+    // console.log('user facility id', user.scope.facilityID, 'facilityID from query', facilityID);
     // do a check on the token for the facility, if they match continue to add review else throw 406
     if (user.scope.facilityID && user.scope.facilityID === facilityID) {
     // insert statement on shift revew on user table, by using the userID, facilityID and review from shift table
@@ -80,27 +62,12 @@ module.exports = function shiftReviewRoutes(app) {
     }
   })
 
-  // .put('/user/:userID/shift/:shiftID', function* updateUserReview() {
-  //   const user = this.passport.user;
-  //   const userID = this.params.userID;
-  //   if (user.scope.userID && user.scope.userID.toString() === userID) {
-  //     const shiftID = this.params.shiftID;
-  //     const requestJson = this.request.body;
-  //     const q = {};
-  //     q.sql = 'UPDATE ?? SET ? WHERE ?? = ? AND ?? = ?';
-  //     q.values = ['ShiftReviewOnUser', requestJson, 'fk_ShiftReviewOnUser_userID', userID, 'fk_ShiftReviewOnUser_shiftID', shiftID];
-  //     this.body = yield query(q);
-  //   } else {
-  //     this.body = {message: 'no permission'};
-  //   }
-  // })
-
-  .get('/user/:userID/shift/:shiftID', function* getUserReview() {
-    const userID = this.params.userID;
+  .get('/user/shift/:shiftID', function* getUserReview() {
+    // const userID = this.params.userID;
     const shiftID = this.params.shiftID;
     const q = {};
-    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ? AND ?? = ?';
-    q.values = ['review', 'ShiftReviewOnUser', 'fk_ShiftReviewOnUser_userID', userID, 'fk_ShiftReviewOnUser_shiftID', shiftID];
+    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
+    q.values = ['review', 'ShiftReviewOnUser', 'fk_ShiftReviewOnUser_shiftID', shiftID];
     this.body = yield query(q);
   })
 
@@ -127,24 +94,6 @@ module.exports = function shiftReviewRoutes(app) {
     }
   })
 
-  // facility reviews TODO validate facility ID
-  // .post('/facility/:facilityID/shift/:shiftID', function* createFacilityReview() {
-  //   const user = this.passport.user;
-  //   const facilityID = this.params.facilityID;
-  //   if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
-  //     const shiftID = this.params.shiftID;
-  //     const requestJson = this.request.body;
-  //     requestJson.fk_ShiftReviewOnFacility_facilityID = facilityID;
-  //     requestJson.fk_ShiftReviewOnFacility_shiftID = shiftID;
-  //     const q = {};
-  //     q.sql = 'INSERT INTO ?? SET ?';
-  //     q.values = ['ShiftReviewOnFacility', requestJson];
-  //     this.body = yield query(q);
-  //   } else {
-  //     this.body = {message: 'no permission'};
-  //   }
-  // })
-
   .post('/facility/:shiftID', function* createUserReview() {
     const shiftID = this.params.shiftID;
     const user = this.passport.user;
@@ -155,7 +104,7 @@ module.exports = function shiftReviewRoutes(app) {
     const result = yield query(q);
     const facilityID = result.rows[0].fk_Shift_facilityID;
     const userID = result.rows[0].fk_Shift_userID;
-    console.log('userID', userID, 'user id', user.scope.userID, 'facilityID from query', facilityID);
+    // console.log('userID', userID, 'user id', user.scope.userID, 'facilityID from query', facilityID);
     // do a check on the token for the facility, if they match continue to add review else throw 406
     if (user.scope.userID && user.scope.userID === userID) {
     // insert statement on shift revew on user table, by using the userID, facilityID and review from shift table
@@ -172,22 +121,6 @@ module.exports = function shiftReviewRoutes(app) {
     }
   })
 
-  // TODO validate facility ID
-  // .put('/facility/:facilityID/shift/:shiftID', function* updateFacilityReview() {
-  //   const user = this.passport.user;
-  //   const facilityID = this.params.facilityID;
-  //   if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
-  //     const shiftID = this.params.shiftID;
-  //     const requestJson = this.request.body;
-  //     const q = {};
-  //     q.sql = 'UPDATE ?? SET ? WHERE ?? = ? AND ?? = ?';
-  //     q.values = ['ShiftReviewOnFacility', requestJson, 'fk_ShiftReviewOnFacility_facilityID', facilityID, 'fk_ShiftReviewOnFacility_shiftID', shiftID];
-  //     this.body = yield query(q);
-  //   } else {
-  //     this.body = {message: 'no permission'};
-  //   }
-  // })
-
   .put('/facility/:shiftID', function* updateUserReview() {
     const shiftID = this.params.shiftID;
     const user = this.passport.user;
@@ -198,7 +131,7 @@ module.exports = function shiftReviewRoutes(app) {
     const result = yield query(q);
     const facilityID = result.rows[0].fk_Shift_facilityID;
     const userID = result.rows[0].fk_Shift_userID;
-    console.log('user facility id', user.scope.facilityID, 'facilityID from query', facilityID);
+    // console.log('user facility id', user.scope.facilityID, 'facilityID from query', facilityID);
     // do a check on the token for the facility, if they match continue to add review else throw 406
     if (user.scope.userID && user.scope.userID === userID) {
     // insert statement on shift revew on user table, by using the userID, facilityID and review from shift table
@@ -213,12 +146,12 @@ module.exports = function shiftReviewRoutes(app) {
     }
   })
 
-  .get('/facility/:facilityID/shift/:shiftID', function* getFacilityReview() {
-    const facilityID = this.params.facilityID;
+  .get('/facility/shift/:shiftID', function* getFacilityReview() {
+    // const facilityID = this.params.facilityID;
     const shiftID = this.params.shiftID;
     const q = {};
-    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ? AND ?? = ?';
-    q.values = ['review', 'ShiftReviewOnFacility', 'fk_ShiftReviewOnFacility_facilityID', facilityID, 'fk_ShiftReviewOnFacility_shiftID', shiftID];
+    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
+    q.values = ['review', 'ShiftReviewOnFacility', 'fk_ShiftReviewOnFacility_shiftID', shiftID];
     // console.log(q);
     this.body = yield query(q);
   })
@@ -231,7 +164,6 @@ module.exports = function shiftReviewRoutes(app) {
     this.body = yield query(q);
   })
 
-  // TODO validate facility ID
   .delete('/facility/:facilityID/shift/:shiftID', function* deleteFacilityReview() {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;

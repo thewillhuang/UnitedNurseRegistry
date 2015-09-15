@@ -66,7 +66,7 @@ describe('shift reviews api', function() {
   });
 
   it('should respond with empty array with unknown shift', function(done) {
-    request.get('/api/shiftReview/user/abc/shift/313')
+    request.get('/api/shiftReview/user/shift/313')
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
@@ -80,7 +80,7 @@ describe('shift reviews api', function() {
   });
 
   it('should respond with empty array with unknown shift', function(done) {
-    request.get('/api/shiftReview/facility/abc/shift/313')
+    request.get('/api/shiftReview/facility/shift/313')
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
@@ -219,7 +219,7 @@ describe('shift reviews api', function() {
   });
 
   it('should get a user review of the same user back and it review should have a rating of 5', function(done) {
-    request.get('/api/shiftreview/user/' + u1 + '/shift/' + s1.insertId)
+    request.get('/api/shiftreview/user/shift/' + s1.insertId)
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
@@ -252,7 +252,7 @@ describe('shift reviews api', function() {
   });
 
   it('should get an updated user review of the same user back and it review should have a rating of 4', function(done) {
-    request.get('/api/shiftreview/user/' + u1 + '/shift/' + s1.insertId)
+    request.get('/api/shiftreview/user/shift/' + s1.insertId)
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
@@ -318,7 +318,7 @@ describe('shift reviews api', function() {
   });
 
   it('should get a user review of the same user back and it review should have a rating of 1', function(done) {
-    request.get('/api/shiftreview/user/' + u1 + '/shift/' + s2.insertId)
+    request.get('/api/shiftreview/user/shift/' + s2.insertId)
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
@@ -380,7 +380,7 @@ describe('shift reviews api', function() {
   });
 
   it('should get a facility review back and it review should have a rating of 1', function(done) {
-    request.get('/api/shiftreview/facility/' + f1 + '/shift/' + s1.insertId)
+    request.get('/api/shiftreview/facility/shift/' + s1.insertId)
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
@@ -427,7 +427,7 @@ describe('shift reviews api', function() {
   });
 
   it('should get an updated facility review back and it review should have a rating of 5', function(done) {
-    request.get('/api/shiftreview/facility/' + f1 + '/shift/' + s1.insertId)
+    request.get('/api/shiftreview/facility/shift/' + s1.insertId)
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
@@ -475,7 +475,7 @@ describe('shift reviews api', function() {
   });
 
   it('should get a facility review back and it review should have a rating of 1', function(done) {
-    request.get('/api/shiftreview/facility/' + f1 + '/shift/' + s2.insertId)
+    request.get('/api/shiftreview/facility/shift/' + s2.insertId)
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
@@ -634,10 +634,11 @@ describe('shift reviews api', function() {
   });
 
   it('the deleted user review 1 should not exist', function(done) {
-    request.get('/api/shiftreview/user/' + u1 + '/shift/' + s1.insertId)
+    request.get('/api/shiftreview/user/shift/' + s1.insertId)
       .expect(200)
       .set(f1jwt)
       .end(function(err, res) {
+        console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
@@ -648,7 +649,7 @@ describe('shift reviews api', function() {
   });
 
   it('the deleted user review 2 should not exist', function(done) {
-    request.get('/api/shiftreview/user/' + u1 + '/shift/' + s2.insertId)
+    request.get('/api/shiftreview/user/shift/' + s2.insertId)
       .expect(200)
       .set(f1jwt)
       .end(function(err, res) {
@@ -662,7 +663,7 @@ describe('shift reviews api', function() {
   });
 
   it('the deleted facility review 1 by cascading foreign key should not exist', function(done) {
-    request.get('/api/shiftreview/facility/' + f1 + '/shift/' + s1.insertId)
+    request.get('/api/shiftreview/facility/shift/' + s1.insertId)
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
@@ -676,7 +677,7 @@ describe('shift reviews api', function() {
   });
 
   it('the deleted facility review 2 cascading foreign key should not exist', function(done) {
-    request.get('/api/shiftreview/facility/' + f1 + '/shift/' + s2.insertId)
+    request.get('/api/shiftreview/facility/shift/' + s2.insertId)
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {

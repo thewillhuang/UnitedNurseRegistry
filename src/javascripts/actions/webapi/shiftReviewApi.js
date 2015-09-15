@@ -2,12 +2,12 @@ import Promise from 'bluebird';
 import superagent from 'superagent';
 import token from '../../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = '/api/shift';
+const prefix = '/api/shiftReview';
 const shiftReviewApi = {};
 
-shiftReviewApi.createUserReview = (userID, shiftID, review) => {
+shiftReviewApi.createUserReview = (shiftID, review) => {
   return request
-    .post(prefix + '/user/' + userID + '/shift/' + shiftID)
+    .post(`${prefix}/user/${shiftID}`)
     .set(token)
     .send({review})
     .endAsync().then((res) => {
@@ -17,18 +17,50 @@ shiftReviewApi.createUserReview = (userID, shiftID, review) => {
     });
 };
 
-shiftReviewApi.getShift = (shiftID) => {
+shiftReviewApi.updateUserReview = (shiftID, review) => {
   return request
-    .get(prefix + '/' + shiftID)
+    .get(`${prefix}/user/${shiftID}`)
+    .send({review})
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
     });
 };
 
-shiftReviewApi.getAllHospitalShift = (facilityID) => {
+shiftReviewApi.createFacilityReview = (shiftID, review) => {
   return request
-    .get(prefix + '/facility/' + facilityID)
+    .post(`${prefix}/facility/${shiftID}`)
+    .send({review})
+    .set(token)
+    .endAsync().then(function(res) {
+      return res.body;
+    });
+};
+
+shiftReviewApi.updateFacilityReview = (shiftID, review) => {
+  return request
+    .put(`${prefix}/facility/${shiftID}`)
+    .send({review})
+    .set(token)
+    .endAsync().then(function(res) {
+      return res.body;
+    });
+};
+
+shiftReviewApi.getUserReview = (shiftID) => {
+  return request
+    .get(`${prefix}/user/shift/${shiftID}`)
+    .set(token)
+    .endAsync().then(function(res) {
+      return res.body;
+    }).catch(function(err) {
+      return err;
+    });
+};
+
+shiftReviewApi.getFacilityReview = (shiftID) => {
+  return request
+    .get(`${prefix}/user/shift/${shiftID}`)
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
@@ -37,9 +69,9 @@ shiftReviewApi.getAllHospitalShift = (facilityID) => {
     });
 };
 
-shiftReviewApi.getActiveHospitalShift = (facilityID) => {
+shiftReviewApi.getAvgFacilityReview = (shiftID) => {
   return request
-    .get(prefix + '/active/' + facilityID)
+    .get(`${prefix}/user/shift/${shiftID}`)
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
@@ -48,9 +80,9 @@ shiftReviewApi.getActiveHospitalShift = (facilityID) => {
     });
 };
 
-shiftReviewApi.getUserShift = (userID) => {
+shiftReviewApi.getAvgUserReview = (userID) => {
   return request
-    .get(prefix + '/user/' + userID)
+    .get(`${prefix}/avg/user/${userID}`)
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
@@ -59,11 +91,10 @@ shiftReviewApi.getUserShift = (userID) => {
     });
 };
 
-shiftReviewApi.getShiftWithGeoHash = (geohash, hashSet, precision) => {
+shiftReviewApi.deleteFacilityReview = (facilityID) => {
   return request
-    .post(prefix + '/geohash/' + userID + '/precision/' + precision)
+    .get(`${prefix}/avg/facility/${facilityID}`)
     .set(token)
-    .send({hashSet})
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
@@ -71,25 +102,13 @@ shiftReviewApi.getShiftWithGeoHash = (geohash, hashSet, precision) => {
     });
 };
 
-shiftReviewApi.updateShift = (facilityID, shiftID, specialtyID, shiftStartHour, shiftDuration, payPerHour, date, shiftDressCode) => {
+shiftReviewApi.deleteUserReview = (shiftID, userID) => {
   return request
-    .put(prefix + '/facility/' + facilityID + '/shift/' + shiftID)
+    .delete(`${prefix}/user/${userID}/shift/${shiftID}`)
     .set(token)
-    .send({specialtyID, shiftStartHour, shiftDuration, payPerHour, date, shiftDressCode})
-    .endAsync().then((res) => {
+    .endAsync().then(function(res) {
       return res.body;
-    }).catch((err) => {
-      return err;
-    });
-};
-
-shiftReviewApi.deleteShift = (facilityID, shiftID) => {
-  return request
-    .delete(prefix + '/facilit/' + facilityID + 'shift/' + shiftID)
-    .set(token)
-    .endAsync().then((res) => {
-      return res.body;
-    }).catch((err) => {
+    }).catch(function(err) {
       return err;
     });
 };

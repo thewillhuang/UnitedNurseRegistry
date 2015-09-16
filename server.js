@@ -3,7 +3,6 @@
 const koa = require('koa');
 const app = module.exports = koa();
 const port = process.env.PORT || 3000;
-const send = require('koa-send');
 const logger = require('koa-logger');
 const etag = require('koa-etag');
 const build = '/public';
@@ -15,9 +14,8 @@ const helmet = require('koa-helmet');
 const passport = require('koa-passport');
 const compress = require('koa-compress');
 const staticCache = require('koa-static-cache');
-// const port2 = process.env.PORT2 || 3001;
-// const jwt = require('./server/services/jwt');
-// const session = require('koa-session');
+const serve = require('koa-static');
+const send = require('koa-send');
 
 // logging
 app.use(logger());
@@ -35,15 +33,7 @@ app.use(helmet());
 // static file server
 if (process.env.NODE_ENV === 'development') {
   console.log('server running in development mode');
-  app.use(function* apiCheck(next) {
-    if (this.path.indexOf('api') !== -1) {
-      yield next;
-    } else if (this.path === '/') {
-      yield send(this, buildPath + '/index.html');
-    } else {
-      yield send(this, buildPath + this.path);
-    }
-  });
+  app.use(serve(buildPath));
 } else {
   console.log('server running in production mode');
   app.use(staticCache(buildPath, {

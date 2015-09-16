@@ -12,7 +12,7 @@ module.exports = function(app) {
   userAddress
 
   // create new user address with user id
-  .post('/user/:userID', function* () {
+  .post('/user/:userID', function* createUserAddress() {
     const user = this.passport.user;
     const userID = this.params.userID;
     if (user.scope.userID && user.scope.userID.toString() === userID) {

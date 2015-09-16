@@ -466,7 +466,7 @@ describe('shift status api', function() {
   });
 
   it('should update shift status to pending', function(done) {
-    request.post('/api/shiftstatus/pending/shift/' + s2.insertId + '/user/' + u1 + '/facility/' + f1)
+    request.put('/api/shiftstatus/pending/shift/' + s2.insertId + '/user/' + u1 + '/facility/' + f1)
       .expect(200)
       .set(f1jwt)
       .end(function(err, res) {
@@ -497,7 +497,7 @@ describe('shift status api', function() {
   });
 
   it('should update shift status to open', function(done) {
-    request.post('/api/shiftstatus/open/shift/' + s2.insertId + '/facility/' + f1)
+    request.put('/api/shiftstatus/open/shift/' + s2.insertId + '/facility/' + f1)
       .expect(200)
       .set(f1jwt)
       .end(function(err, res) {
@@ -529,7 +529,7 @@ describe('shift status api', function() {
   });
 
   it('should update shift status to completed', function(done) {
-    request.post('/api/shiftstatus/completed/shift/' + s2.insertId + '/facility/' + f1)
+    request.put('/api/shiftstatus/completed/shift/' + s2.insertId + '/facility/' + f1)
       .expect(200)
       .set(f1jwt)
       .end(function(err, res) {
@@ -621,7 +621,7 @@ describe('shift status api', function() {
   });
 
   it('should update shift status to pending', function(done) {
-    request.post('/api/shiftstatus/pending/shift/' + s2.insertId + '/user/' + u1 + '/facility/' + f1)
+    request.put('/api/shiftstatus/pending/shift/' + s2.insertId + '/user/' + u1 + '/facility/' + f1)
       .expect(200)
       .set(f1jwt)
       .end(function(err, res) {

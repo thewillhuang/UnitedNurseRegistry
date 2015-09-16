@@ -48,7 +48,7 @@ module.exports = function shiftStatusRoutes(app) {
   })
 
   // mark shift as completed by shiftID TODO validate facility ID
-  .post('/completed/shift/:shiftID/facility/:facilityID', function* markAsComplete() {
+  .put('/completed/shift/:shiftID/facility/:facilityID', function* markAsComplete() {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
     if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
@@ -64,7 +64,7 @@ module.exports = function shiftStatusRoutes(app) {
   })
 
   // mark shift as pending by shiftID TODO validate facility ID
-  .post('/pending/shift/:shiftID/user/:userID/facility/:facilityID', function* markAsPending() {
+  .put('/pending/shift/:shiftID/user/:userID/facility/:facilityID', function* markAsPending() {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
     if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
@@ -81,7 +81,7 @@ module.exports = function shiftStatusRoutes(app) {
   })
 
   // mark shift as open by shiftID TODO validate facility ID
-  .post('/open/shift/:shiftID/facility/:facilityID', function* markAsOpen() {
+  .put('/open/shift/:shiftID/facility/:facilityID', function* markAsOpen() {
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
     if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {

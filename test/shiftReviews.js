@@ -188,7 +188,7 @@ describe('shift reviews api', function() {
   });
 
   it('should set a shift status as pending', function(done) {
-    request.post('/api/shiftstatus/pending/shift/' + s1.insertId + '/user/' + u1 + '/facility/' + f1)
+    request.put('/api/shiftstatus/pending/shift/' + s1.insertId + '/user/' + u1 + '/facility/' + f1)
       .expect(200)
       .set(f1jwt)
       .end(function(err, res) {
@@ -289,7 +289,7 @@ describe('shift reviews api', function() {
   });
 
   it('should set a shift status as pending', function(done) {
-    request.post('/api/shiftstatus/pending/shift/' + s2.insertId + '/user/' + u1 + '/facility/' + f1)
+    request.put('/api/shiftstatus/pending/shift/' + s2.insertId + '/user/' + u1 + '/facility/' + f1)
       .expect(200)
       .set(f1jwt)
       .end(function(err, res) {

@@ -17,6 +17,28 @@ userSpecialtyApi.createUserSpecialty = (userID, specialty) => {
     });
 };
 
+userSpecialtyApi.getAllSpecialtyID = () => {
+  return request
+    .get(`${prefix}/`)
+    .set(token)
+    .endAsync().then(res => {
+      return res.body;
+    }).catch(err => {
+      return err;
+    });
+};
+
+userSpecialtyApi.createSpecialty = (specialty) => {
+  return request
+    .post(`${prefix}/new/${specialty}`)
+    .set(token)
+    .endAsync().then(res => {
+      return res.body;
+    }).catch(err => {
+      return err;
+    });
+};
+
 userSpecialtyApi.updateUserSpecialty = (userID, oldSpecialtyID, newSpecialtyID) => {
   return request
     .put(`${prefix}/user/${userID}/old/${oldSpecialtyID}/new/${newSpecialtyID}`)

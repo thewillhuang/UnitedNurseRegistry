@@ -112,13 +112,25 @@ describe('user specialty api', function() {
       });
   });
 
+
+  it('should not insert a new specialty that exists', function(done) {
+    request.post('/api/userspecialty/new/er')
+      .expect(200)
+      .set(jwt)
+      .end(function(err, res) {
+        console.log(res.body);
+        expect(err).to.be.a('null');
+        done();
+      });
+  });
+
   it('should retrieve all specialty', function(done) {
     request.get('/api/userspecialty/')
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
         console.log(res.body);
-        expect(res.body.rows[0].specialtyID).to.equal(1);
+        expect(res.body.rows.length).to.equal(3);
         expect(err).to.be.a('null');
         done();
       });

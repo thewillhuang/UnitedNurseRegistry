@@ -5,6 +5,7 @@ import mui, { Card, TextField, CardActions, RaisedButton} from 'material-ui';
 import request from 'superagent';
 import validator from 'validator';
 const ThemeManager = new mui.Styles.ThemeManager();
+import setToken from '../../utils/setToken.js';
 // console.log(request);
 
 class SignupBox extends React.Component {
@@ -46,6 +47,7 @@ class SignupBox extends React.Component {
             ctx.setState({
               signupButton: 'Success',
             });
+            setToken(res.headers.authorization, res.body.message);
             sessionStorage.setItem('token', res.headers.authorization);
             sessionStorage.setItem('user', res.body.message);
             window.location.assign('/#/hospital');
@@ -147,7 +149,7 @@ class SignupBox extends React.Component {
           />
           <CardActions>
             <div className='signupButtonWrap'>
-              <RaisedButton label={this.state.signupButton} onClick={this.handleSubmit} secondary={true}/>
+              <RaisedButton label={this.state.signupButton} onClick={this.handleSubmit} secondary/>
             </div>
           </CardActions>
         </div>

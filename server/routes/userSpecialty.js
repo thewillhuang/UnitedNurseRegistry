@@ -75,6 +75,27 @@ module.exports = function(app) {
     this.body = yield query(q);
   })
 
+  .post('/new/:specialty', function* () {
+    const specialty = this.params.specialty;
+    const q = {};
+    q.sql = 'SELECT * FROM ?? WHERE ??=?';
+    q.values = ['Specialty', 'specialty', specialty];
+    const result1 = yield query(q);
+    if (result1.rows.length === 0) {
+      const q2 = {};
+      q2.payload = {specialty: specialty};
+      q2.sql = 'INSERT INTO ?? SET ?';
+      q2.values = ['Specialty', q2.payload];
+      const result2 = yield query(q2);
+      this.body = {
+        specialty: specialty,
+        specialtyID: result2.rows.insertId,
+      };
+    } else {
+      this.body = result1.rows[0];
+    }
+  })
+
   // update user specialty by userID, old specialty Id, new specialty ID
   .put('/user/:userID/old/:oldSpecialtyID/new/:newSpecialtyID', function* () {
     const user = this.passport.user;

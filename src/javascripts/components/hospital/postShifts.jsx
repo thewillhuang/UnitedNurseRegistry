@@ -8,6 +8,7 @@ import shiftApi from '../../actions/webapi/shiftApi.js';
 import specialtyApi from '../../actions/webapi/userSpecialtyApi.js';
 import user from '../../utils/grabUser.js';
 import io from 'socket.io-client';
+import moment from 'moment';
 const socket = io.connect();
 
 
@@ -113,6 +114,7 @@ class ShiftHospitalTable extends React.Component {
       <div className='profileCardInputWrap'>
         <Snackbar
           ref='submitted'
+          action='OK'
           message='Shift added to shift boards'
           autoHideDuration={5000}
           />
@@ -128,12 +130,14 @@ class ShiftHospitalTable extends React.Component {
           onChange={this.validateShift}
           onEnterKeyDown={this.handleSubmit}
           floatingLabelText='Shift Start Hour'
+          defaultValue='07'
           hintText='Shift Start Hour' />
         <br/>
         <TextField
           ref='duration'
           onChange={this.validateShift}
           onEnterKeyDown={this.handleSubmit}
+          defaultValue='12'
           floatingLabelText='Shift Duration'
           hintText='Shift Duration' />
         <br/>
@@ -142,6 +146,7 @@ class ShiftHospitalTable extends React.Component {
           onChange={this.validateShift}
           onEnterKeyDown={this.handleSubmit}
           floatingLabelText='Dress Code'
+          defaultValue='clean scrubs'
           hintText='Dress Code' />
         <br/>
         <TextField
@@ -149,6 +154,7 @@ class ShiftHospitalTable extends React.Component {
           onChange={this.validateShift}
           onEnterKeyDown={this.handleSubmit}
           floatingLabelText='Pay Per Hour'
+          defaultValue='40'
           hintText='Pay Per Hour' />
         <br/>
         <TextField
@@ -156,6 +162,7 @@ class ShiftHospitalTable extends React.Component {
           onChange={this.validateShift}
           onEnterKeyDown={this.handleSubmit}
           floatingLabelText='Shift Date'
+          defaultValue={moment().format('YYYY-MM-DD')}
           hintText='Shift Date' />
         <RaisedButton label='submit' onClick={this.handleSubmit} secondary/>
       </div>

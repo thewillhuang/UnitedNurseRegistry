@@ -7,10 +7,10 @@ const ThemeManager = new mui.Styles.ThemeManager();
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
 // import MediaQuery from 'react-responsive';
 const rows = [
-  ['a1', 'b1', 'c1', 'd1'],
-  ['a1', 'b1', 'c1', 'd1'],
-  ['a1', 'b1', 'c1', 'd1'],
-  ['a1', 'b1', 'c1', 'd1'],
+  ['a1', 'b1', 'c1', 'd1', 'e1'],
+  ['a1', 'b1', 'c1', 'd1', 'e1'],
+  ['a1', 'b1', 'c1', 'd1', 'e1'],
+  ['a1', 'b1', 'c1', 'd1', 'e1'],
   // .... and more
 ];
 
@@ -64,14 +64,22 @@ class ShiftHospitalTable extends React.Component {
             dataKey={1}
           />
           <Column
-            label='Price'
+            label='Pay Per Hour'
+            flexGrow={1}
             width={100}
             dataKey={2}
           />
           <Column
             label='Unit'
+            flexGrow={1}
             width={100}
             dataKey={3}
+          />
+          <Column
+            label='Dress Code'
+            flexGrow={1}
+            width={150}
+            dataKey={4}
           />
         </Table>
       </div>

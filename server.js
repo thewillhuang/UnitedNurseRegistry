@@ -74,7 +74,7 @@ app.use(function* bearerAuthentication(next) {
   }
   const ctx = this;
   yield passport.authenticate('bearer', { session: false }, function* (err, user) {
-    if (err) {throw new Error(err); }
+    if (err) { ctx.status = 401; }
     if (user) {
       // const token = 'Bearer ' + jwt.encryptSign(user);
       // copy the token and send it right back
@@ -87,7 +87,10 @@ app.use(function* bearerAuthentication(next) {
 });
 
 app.use(function* ensureAuthenticated(next) {
-  if (this.isAuthenticated() || this.path.indexOf('socket.io' !== -1)) {
+  if (this.path.indexOf('socket.io') !== -1) {
+    yield next;
+  }
+  if (this.isAuthenticated()) {
     yield next;
   } else {
     this.status = 401;
@@ -102,18 +105,17 @@ require('./server/routes/shiftRoutes')(app);
 require('./server/routes/getHash')(app);
 require('./server/routes/referral')(app);
 
-// socket io server
-// const server = require('http').createServer(app.callback());
-// const io = require('socket.io')(server);
-// io.on('connection', function(socket) {
-//   console.log('socket io connected');
-//   socket.emit('shift', {update: true});
-// });
-//
-// server.listen(port);
+// socket io for real time updates
+const server = require('http').createServer(app.callback());
+const io = require('socket.io')(server);
+io.on('connection', function(socket) {
+  socket.on('shift updated', function() {
+    socket.emit('update shift');
+  });
+});
 
 // start http server
-app.listen(port);
+server.listen(port);
 console.log('http listening on port:', port);
 
 // start https server

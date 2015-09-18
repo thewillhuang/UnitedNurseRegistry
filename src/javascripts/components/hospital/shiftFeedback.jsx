@@ -32,10 +32,10 @@ class ShiftHospitalTable extends React.Component {
   componentDidMount() {
     const socket = io.connect();
     socket.on('connect', function() {
-      console.log('connected');
+      console.log('client connected');
     });
-    socket.on('shift', function(payload) {
-      console.log(payload);
+    socket.on('update shift', function() {
+      console.log('shift updated from table');
     });
   }
 

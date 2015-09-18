@@ -7,6 +7,9 @@ const ThemeManager = new mui.Styles.ThemeManager();
 import shiftApi from '../../actions/webapi/shiftApi.js';
 import specialtyApi from '../../actions/webapi/userSpecialtyApi.js';
 import user from '../../utils/grabUser.js';
+import io from 'socket.io-client';
+const socket = io.connect();
+
 
 console.log(shiftApi);
 console.log(specialtyApi);
@@ -98,6 +101,7 @@ class ShiftHospitalTable extends React.Component {
         ctx.refs.date.clearValue();
         ctx.refs.shiftDressCode.clearValue();
         ctx.refs.submitted.show();
+        socket.emit('shift updated');
       });
     } else {
       this.validateShift();

@@ -44,7 +44,10 @@ if (process.env.NODE_ENV === 'development') {
   }));
 
   app.use(function* apiCheck(next) {
-    this.path.indexOf('api') !== -1 || this.path.indexOf('socket.io') !== -1
+    if (this.path.indexOf('socket.io') !== -1) {
+      yield next;
+    }
+    this.path.indexOf('api') !== -1
     ? yield next
     : yield send(this, buildPath + '/index.html');
   });
@@ -117,13 +120,3 @@ io.on('connection', function(socket) {
 // start http server
 server.listen(port);
 console.log('http listening on port:', port);
-
-// start https server
-// const https = require('https');
-// const fs = require('fs');
-// const options = {
-//   key: fs.readFileSync('unr-key.pem'),
-//   cert: fs.readFileSync('unr-cert.pem'),
-// };
-// https.createServer(options, app.callback()).listen(port2);
-// console.log('https listening on port:', port2);

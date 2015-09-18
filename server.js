@@ -44,7 +44,7 @@ if (process.env.NODE_ENV === 'development') {
   }));
 
   app.use(function* apiCheck(next) {
-    this.path.indexOf('api') !== -1
+    this.path.indexOf('api') !== -1 || this.path.indexOf('socket.io') !== -1
     ? yield next
     : yield send(this, buildPath + '/index.html');
   });
@@ -69,6 +69,9 @@ require('./server/routes/authRoutes')(app);
 
 // authorize any requests that has a valid bearer token
 app.use(function* bearerAuthentication(next) {
+  if (this.path.indexOf('socket.io') !== -1) {
+    yield next;
+  }
   const ctx = this;
   yield passport.authenticate('bearer', { session: false }, function* (err, user) {
     if (err) {throw new Error(err); }
@@ -84,7 +87,7 @@ app.use(function* bearerAuthentication(next) {
 });
 
 app.use(function* ensureAuthenticated(next) {
-  if (this.isAuthenticated()) {
+  if (this.isAuthenticated() || this.path.indexOf('socket.io' !== -1)) {
     yield next;
   } else {
     this.status = 401;
@@ -97,7 +100,17 @@ require('./server/routes/userRoutes')(app);
 require('./server/routes/facilityRoutes')(app);
 require('./server/routes/shiftRoutes')(app);
 require('./server/routes/getHash')(app);
-require('./server/routes/referral.js')(app);
+require('./server/routes/referral')(app);
+
+// socket io server
+// const server = require('http').createServer(app.callback());
+// const io = require('socket.io')(server);
+// io.on('connection', function(socket) {
+//   console.log('socket io connected');
+//   socket.emit('shift', {update: true});
+// });
+//
+// server.listen(port);
 
 // start http server
 app.listen(port);

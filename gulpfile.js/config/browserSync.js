@@ -4,10 +4,9 @@
 
 module.exports = {
   // reloadDelay: 1500,
-  proxy: 'localhost:3000',
-  port: '8000',
-  ui: {
-    port: 8001,
+  proxy: {
+    target: 'localhost:3000',
+    ws: true,
   },
   // server: {
   //   baseDir: config.publicDirectory,

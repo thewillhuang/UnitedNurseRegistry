@@ -1,5 +1,5 @@
 import React from 'react';
-import mui, {TextField, RaisedButton} from 'material-ui';
+import mui, {TextField, RaisedButton, Snackbar} from 'material-ui';
 const ThemeManager = new mui.Styles.ThemeManager();
 // const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
@@ -59,21 +59,45 @@ class ShiftHospitalTable extends React.Component {
     } else {
       this.refs.date.setErrorText('');
     }
+    if (this.refs.shiftDressCode.getValue().length === 0) {
+      this.refs.shiftDressCode.setErrorText('Must enter a Dress Code');
+    } else if (this.refs.shiftDressCode.getValue().length <= 1) {
+      this.refs.shiftDressCode.setErrorText('Must enter a Dress Code');
+    } else {
+      this.refs.shiftDressCode.setErrorText('');
+    }
   }
 
   // TODO not done yet need to submit shift
   handleSubmit = () => {
-    if (this.refs.specialty.getValue().length &&
-        this.refs.startHour.getValue().length &&
-        this.refs.duration.getValue().length &&
-        this.refs.payPerHour.getValue().length &&
-        this.refs.date.getValue().length) {
-      console.log('send');
+    const facilityID = user.scope.facilityID;
+    const specialty = this.refs.specialty.getValue();
+    const shiftStartHour = this.refs.startHour.getValue();
+    const shiftDuration = this.refs.duration.getValue();
+    const payPerHour = this.refs.payPerHour.getValue();
+    const date = this.refs.date.getValue();
+    const shiftDressCode = this.refs.shiftDressCode.getValue();
+    const ctx = this;
+    if (specialty.length &&
+        shiftStartHour.length &&
+        shiftDuration.length &&
+        payPerHour.length &&
+        shiftDressCode.length &&
+        date.length) {
+      // get specialty ID of the specialty
       specialtyApi.createSpecialty(this.refs.specialty.getValue())
+      // then, store the shift with the specialtyID
       .then(res => {
-        return res.specialtyID;
-      }).then(specialtyID => {
-        console.log(specialtyID);
+        return shiftApi.createShift(facilityID, res.specialtyID, shiftStartHour, shiftDuration, payPerHour, date, shiftDressCode);
+      }).then(saved => {
+        console.log(saved);
+        ctx.refs.specialty.clearValue();
+        ctx.refs.startHour.clearValue();
+        ctx.refs.duration.clearValue();
+        ctx.refs.payPerHour.clearValue();
+        ctx.refs.date.clearValue();
+        ctx.refs.shiftDressCode.clearValue();
+        ctx.refs.submitted.show();
       });
     } else {
       this.validateShift();
@@ -83,6 +107,11 @@ class ShiftHospitalTable extends React.Component {
   render() {
     return (
       <div className='profileCardInputWrap'>
+        <Snackbar
+          ref='submitted'
+          message='Shift added to shift boards'
+          autoHideDuration={5000}
+          />
         <TextField
           ref='specialty'
           onChange={this.validateShift}
@@ -103,6 +132,13 @@ class ShiftHospitalTable extends React.Component {
           onEnterKeyDown={this.handleSubmit}
           floatingLabelText='Shift Duration'
           hintText='Shift Duration' />
+        <br/>
+        <TextField
+          ref='shiftDressCode'
+          onChange={this.validateShift}
+          onEnterKeyDown={this.handleSubmit}
+          floatingLabelText='Dress Code'
+          hintText='Dress Code' />
         <br/>
         <TextField
           ref='payPerHour'

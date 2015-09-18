@@ -1,18 +1,22 @@
 import React from 'react';
-import mui,
-{
-  Table,
-  TableHeader,
-  TableRow,
-  TableHeaderColumn,
-  TableBody,
-  TableRowColumn
-} from 'material-ui';
-
+import mui from 'material-ui';
+import {Table, Column} from 'fixed-data-table';
+import io from 'socket.io-client';
 const ThemeManager = new mui.Styles.ThemeManager();
 // const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
 // import MediaQuery from 'react-responsive';
+const rows = [
+  ['a1', 'b1', 'c1', 'd1'],
+  ['a1', 'b1', 'c1', 'd1'],
+  ['a1', 'b1', 'c1', 'd1'],
+  ['a1', 'b1', 'c1', 'd1'],
+  // .... and more
+];
+
+function rowGetter(rowIndex) {
+  return rows[rowIndex];
+}
 
 class ShiftHospitalTable extends React.Component {
   getChildContext() {
@@ -21,20 +25,18 @@ class ShiftHospitalTable extends React.Component {
     };
   }
 
-  state = {
-    fixedHeader: true,
-    fixedFooter: true,
-    stripedRows: false,
-    showRowHover: false,
-    selectable: true,
-    multiSelectable: true,
-    enableSelectAll: false,
-    deselectOnClickaway: true,
-    height: '400px',
-  };
-
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
+  }
+
+  componentDidMount() {
+    const socket = io.connect();
+    socket.on('connect', function() {
+      console.log('connected');
+    });
+    socket.on('shift', function(payload) {
+      console.log(payload);
+    });
   }
 
   _onRowSelection(array) {
@@ -45,56 +47,32 @@ class ShiftHospitalTable extends React.Component {
     return (
       <div className='tableWrap'>
         <Table
-          fixedFooter={this.state.fixedFooter}
-          fixedHeader={this.state.fixedHeader}
-          height={this.state.height}
-          multiSelectable={this.state.multiSelectable}
-          onRowSelection={this._onRowSelection}
-          selectable={this.state.selectable}>
-          <TableHeader enableSelectAll={this.state.enableSelectAll}>
-            <TableRow>
-              <TableHeaderColumn tooltip='The ID'>ID</TableHeaderColumn>
-              <TableHeaderColumn tooltip='The Name'>Name</TableHeaderColumn>
-              <TableHeaderColumn tooltip='The Status'>Status</TableHeaderColumn>
-            </TableRow>
-          </TableHeader>
-          <TableBody deselectOnClickaway={this.state.deselectOnClickaway} showRowHover={this.state.showRowHover} stripedRows={this.state.stripedRows}>
-            <TableRow selected={true}>
-              <TableRowColumn>1</TableRowColumn>
-              <TableRowColumn>John Smith</TableRowColumn>
-              <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>2</TableRowColumn>
-              <TableRowColumn>Randal White</TableRowColumn>
-              <TableRowColumn>Unemployed</TableRowColumn>
-            </TableRow>
-            <TableRow selected={true}>
-              <TableRowColumn>3</TableRowColumn>
-              <TableRowColumn>Stephanie Sanders</TableRowColumn>
-              <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>4</TableRowColumn>
-              <TableRowColumn>Steve Brown</TableRowColumn>
-              <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>5</TableRowColumn>
-              <TableRowColumn>Joyce Whitten</TableRowColumn>
-              <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>6</TableRowColumn>
-              <TableRowColumn>Samuel Roberts</TableRowColumn>
-              <TableRowColumn>Unemployed</TableRowColumn>
-            </TableRow>
-            <TableRow>
-              <TableRowColumn>7</TableRowColumn>
-              <TableRowColumn>Adam Moore</TableRowColumn>
-              <TableRowColumn>Employed</TableRowColumn>
-            </TableRow>
-          </TableBody>
+          rowHeight={50}
+          rowGetter={rowGetter}
+          rowsCount={rows.length}
+          width={700}
+          height={500}
+          headerHeight={50}>
+          <Column
+            label='Status'
+            width={100}
+            dataKey={0}
+          />
+          <Column
+            label='Viewed %'
+            width={100}
+            dataKey={1}
+          />
+          <Column
+            label='Price'
+            width={100}
+            dataKey={2}
+          />
+          <Column
+            label='Unit'
+            width={100}
+            dataKey={3}
+          />
         </Table>
       </div>
     );

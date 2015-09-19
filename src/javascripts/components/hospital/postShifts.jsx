@@ -29,9 +29,9 @@ class ShiftHospitalTable extends React.Component {
 
   validateShift = () => {
     if (this.refs.specialty.getValue().length === 0) {
-      this.refs.specialty.setErrorText('Must enter a specialty');
+      this.refs.specialty.setErrorText('Must enter a specialty or Unit');
     } else if (this.refs.specialty.getValue().length <= 1) {
-      this.refs.specialty.setErrorText('Must enter a specialty');
+      this.refs.specialty.setErrorText('Must enter a specialty or Unit');
     } else {
       this.refs.specialty.setErrorText('');
     }
@@ -96,11 +96,11 @@ class ShiftHospitalTable extends React.Component {
       }).then(saved => {
         console.log(saved);
         ctx.refs.specialty.clearValue();
-        ctx.refs.startHour.clearValue();
-        ctx.refs.duration.clearValue();
-        ctx.refs.payPerHour.clearValue();
-        ctx.refs.date.clearValue();
-        ctx.refs.shiftDressCode.clearValue();
+        // ctx.refs.startHour.clearValue();
+        // ctx.refs.duration.clearValue();
+        // ctx.refs.payPerHour.clearValue();
+        // ctx.refs.date.clearValue();
+        // ctx.refs.shiftDressCode.clearValue();
         ctx.refs.submitted.show();
         socket.emit('shift updated');
       });
@@ -115,7 +115,7 @@ class ShiftHospitalTable extends React.Component {
         <Snackbar
           ref='submitted'
           action='OK'
-          message='Shift added to shift boards'
+          message='Shift Added'
           autoHideDuration={5000}
           />
         <TextField

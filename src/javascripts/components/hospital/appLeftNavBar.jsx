@@ -34,9 +34,9 @@ class AppLeftNavBar extends React.Component {
   }
 
   hashChange = () => {
+    // console.log('hash change detected');
     const route = window.location.hash;
-    switch (route) {
-    case '#/hospital/shifts':
+    if (route.indexOf('#/hospital/shifts') !== -1) {
       this.setState({
         shift: 'isActive',
         profile: '',
@@ -49,8 +49,7 @@ class AppLeftNavBar extends React.Component {
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'rgb(198, 198, 198)',
       });
-      break;
-    case '#/hospital/profile':
+    } else if (route.indexOf('#/hospital/profile') !== -1) {
       this.setState({
         shift: '',
         profile: 'isActive',
@@ -63,8 +62,7 @@ class AppLeftNavBar extends React.Component {
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'rgb(198, 198, 198)',
       });
-      break;
-    case '#/hospital/balance':
+    } else if (route.indexOf('#/hospital/balance') !== -1) {
       this.setState({
         shift: '',
         profile: '',
@@ -77,8 +75,7 @@ class AppLeftNavBar extends React.Component {
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'rgb(198, 198, 198)',
       });
-      break;
-    case '#/hospital/reviews':
+    } else if (route.indexOf('#/hospital/reviews') !== -1) {
       this.setState({
         shift: '',
         profile: '',
@@ -91,8 +88,7 @@ class AppLeftNavBar extends React.Component {
         reviewsColor: 'white',
         referralsColor: 'rgb(198, 198, 198)',
       });
-      break;
-    case '#/hospital/referrals':
+    } else if (route.indexOf('#/hospital/referrals') !== -1) {
       this.setState({
         shift: '',
         profile: '',
@@ -105,13 +101,11 @@ class AppLeftNavBar extends React.Component {
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'white',
       });
-      break;
-    default:
-      break;
     }
   }
 
   render() {
+    // console.log(this.state);
     return (
       <div className='appNavBar'>
         <ul className='appNavMenu'>

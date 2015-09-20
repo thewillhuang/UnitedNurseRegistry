@@ -38,8 +38,7 @@ class AppLeftNavBar extends React.Component {
 
   hashChange = () => {
     const route = window.location.hash;
-    switch (route) {
-    case '#/app/shifts':
+    if (route.indexOf('#/app/shifts') !== -1) {
       this.setState({
         shift: 'isActive',
         profile: '',
@@ -52,8 +51,7 @@ class AppLeftNavBar extends React.Component {
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'rgb(198, 198, 198)',
       });
-      break;
-    case '#/app/profile':
+    } else if (route.indexOf('#/app/profile') !== -1) {
       this.setState({
         shift: '',
         profile: 'isActive',
@@ -66,8 +64,7 @@ class AppLeftNavBar extends React.Component {
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'rgb(198, 198, 198)',
       });
-      break;
-    case '#/app/balance':
+    } else if (route.indexOf('#/app/balance') !== -1) {
       this.setState({
         shift: '',
         profile: '',
@@ -80,8 +77,7 @@ class AppLeftNavBar extends React.Component {
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'rgb(198, 198, 198)',
       });
-      break;
-    case '#/app/reviews':
+    } else if (route.indexOf('#/app/reviews') !== -1) {
       this.setState({
         shift: '',
         profile: '',
@@ -94,8 +90,7 @@ class AppLeftNavBar extends React.Component {
         reviewsColor: 'white',
         referralsColor: 'rgb(198, 198, 198)',
       });
-      break;
-    case '#/app/referrals':
+    } else if (route.indexOf('#/app/referrals') !== -1) {
       this.setState({
         shift: '',
         profile: '',
@@ -108,9 +103,6 @@ class AppLeftNavBar extends React.Component {
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'white',
       });
-      break;
-    default:
-      break;
     }
   }
 

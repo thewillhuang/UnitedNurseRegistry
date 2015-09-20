@@ -1,7 +1,8 @@
 import React from 'react';
 import Home from './components/web/home.jsx';
-import { Router, Route } from 'react-router';
-import { history } from 'react-router/lib/HashHistory';
+import { Router, Route, IndexRoute} from 'react-router';
+// import { history } from 'react-router/lib/HashHistory';
+// import createBrowserHistory from 'history/lib/createBrowserHistory';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
@@ -12,41 +13,43 @@ class Root extends React.Component {
   render() {
     return (
       <div>
-        { this.props.children || <Home />}
+        { this.props.children }
       </div>
     );
   }
 }
 
 React.render((
-  <Router history={history}>
+  <Router>
     <Route path='/' component={Root}>
       // web routes
-      <Route path='hospitalLogin' getComponents={(cb) => {
+      <IndexRoute component={Home} />
+
+      <Route path='hospitalLogin' getComponents={(location, cb) => {
         require.ensure([], (require) => {
           cb(null, require('./components/web/hospitalLogin.jsx'));
         });
       }}/>
 
-      <Route path='hospitalSignup' getComponents={(cb) => {
+      <Route path='hospitalSignup' getComponents={(location, cb) => {
         require.ensure([], (require) => {
           cb(null, require('./components/web/hospitalSignup.jsx'));
         });
       }}/>
 
-      <Route path='login' getComponents={(cb) => {
+      <Route path='login' getComponents={(location, cb) => {
         require.ensure([], (require) => {
           cb(null, require('./components/web/login.jsx'));
         });
       }}/>
 
-      <Route path='signup' getComponents={(cb) => {
+      <Route path='signup' getComponents={(location, cb) => {
         require.ensure([], (require) => {
           cb(null, require('./components/web/signup.jsx'));
         });
       }}/>
 
-      <Route path='home' getComponents={(cb) => {
+      <Route path='home' getComponents={(location, cb) => {
         require.ensure([], (require) => {
           cb(null, require('./components/web/home.jsx'));
         });
@@ -55,56 +58,56 @@ React.render((
       // end of web routes
 
       // app routes
-      <Route path='app' getComponents={(cb) => {
+      <Route path='app' getComponents={(location, cb) => {
         require.ensure([], (require) => {
           cb(null, require('./components/web/app.jsx'));
         });
       }}>
         // nested app routes
-        <Route path='shifts' getComponents={(cb) => {
+        <Route path='shifts' getComponents={(location, cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/app/shift.jsx'));
           });
         }}/>
 
-        <Route path='profile' getComponents={(cb) => {
+        <Route path='profile' getComponents={(location, cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/app/profile.jsx'));
           });
         }}>
 
           // profile nested routes
-          <Route path='profile' getComponents={(cb) => {
+          <Route path='profile' getComponents={(location, cb) => {
             require.ensure([], (require) => {
               cb(null, require('./components/app/ProfileCard.jsx'));
             });
           }} />
 
-          <Route path='workhistory' getComponents={(cb) => {
+          <Route path='workhistory' getComponents={(location, cb) => {
             require.ensure([], (require) => {
               cb(null, require('./components/app/workHistoryCard.jsx'));
             });
           }} />
 
-          <Route path='license' getComponents={(cb) => {
+          <Route path='license' getComponents={(location, cb) => {
             require.ensure([], (require) => {
               cb(null, require('./components/app/licenseCard.jsx'));
             });
           }} />
 
-          <Route path='specialty' getComponents={(cb) => {
+          <Route path='specialty' getComponents={(location, cb) => {
             require.ensure([], (require) => {
               cb(null, require('./components/app/specialtyCard.jsx'));
             });
           }} />
 
-          <Route path='schedule' getComponents={(cb) => {
+          <Route path='schedule' getComponents={(location, cb) => {
             require.ensure([], (require) => {
               cb(null, require('./components/app/scheduleCard.jsx'));
             });
           }} />
 
-          <Route path='security' getComponents={(cb) => {
+          <Route path='security' getComponents={(location, cb) => {
             require.ensure([], (require) => {
               cb(null, require('./components/app/securityCard.jsx'));
             });
@@ -114,19 +117,19 @@ React.render((
         </Route>
         // end of profile nested routes
 
-        <Route path='balance' getComponents={(cb) => {
+        <Route path='balance' getComponents={(location, cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/app/balance.jsx'));
           });
         }}/>
 
-        <Route path='referrals' getComponents={(cb) => {
+        <Route path='referrals' getComponents={(location, cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/app/referrals.jsx'));
           });
         }}/>
 
-        <Route path='reviews' getComponents={(cb) => {
+        <Route path='reviews' getComponents={(location, cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/app/reviews.jsx'));
           });
@@ -137,56 +140,56 @@ React.render((
       // end of app route
 
       // hospital route
-      <Route path='hospital' getComponents={(cb) => {
+      <Route path='hospital' getComponents={(location, cb) => {
         require.ensure([], (require) => {
           cb(null, require('./components/web/hospitalApp.jsx'));
         });
       }}>
         // nested app routes
-        <Route path='shifts' getComponents={(cb) => {
+        <Route path='shifts' getComponents={(location, cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/hospital/shift.jsx'));
           });
         }}/>
 
-        <Route path='profile' getComponents={(cb) => {
+        <Route path='profile' getComponents={(location, cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/hospital/profile.jsx'));
           });
         }}>
 
           // profile nested routes
-          <Route path='profile' getComponents={(cb) => {
+          <Route path='profile' getComponents={(location, cb) => {
             require.ensure([], (require) => {
               cb(null, require('./components/hospital/ProfileCard.jsx'));
             });
           }} />
 
-          <Route path='workhistory' getComponents={(cb) => {
+          <Route path='workhistory' getComponents={(location, cb) => {
             require.ensure([], (require) => {
               cb(null, require('./components/hospital/workHistoryCard.jsx'));
             });
           }} />
 
-          <Route path='license' getComponents={(cb) => {
+          <Route path='license' getComponents={(location, cb) => {
             require.ensure([], (require) => {
               cb(null, require('./components/hospital/licenseCard.jsx'));
             });
           }} />
 
-          <Route path='specialty' getComponents={(cb) => {
+          <Route path='specialty' getComponents={(location, cb) => {
             require.ensure([], (require) => {
               cb(null, require('./components/hospital/specialtyCard.jsx'));
             });
           }} />
 
-          <Route path='schedule' getComponents={(cb) => {
+          <Route path='schedule' getComponents={(location, cb) => {
             require.ensure([], (require) => {
               cb(null, require('./components/hospital/scheduleCard.jsx'));
             });
           }} />
 
-          <Route path='security' getComponents={(cb) => {
+          <Route path='security' getComponents={(location, cb) => {
             require.ensure([], (require) => {
               cb(null, require('./components/hospital/securityCard.jsx'));
             });
@@ -195,19 +198,19 @@ React.render((
         </Route>
         // end of profile nested routes
 
-        <Route path='balance' getComponents={(cb) => {
+        <Route path='balance' getComponents={(location, cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/hospital/balance.jsx'));
           });
         }}/>
 
-        <Route path='referrals' getComponents={(cb) => {
+        <Route path='referrals' getComponents={(location, cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/hospital/referrals.jsx'));
           });
         }}/>
 
-        <Route path='reviews' getComponents={(cb) => {
+        <Route path='reviews' getComponents={(location, cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/hospital/reviews.jsx'));
           });

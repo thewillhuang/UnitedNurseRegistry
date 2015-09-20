@@ -3,7 +3,7 @@
 // const config = require('./');
 
 module.exports = {
-  script: 'server.js',
+  script: 'index.js',
   watch: ['server/**/*', 'server.js'],
   env: { 'NODE_ENV': 'development' },
 };

@@ -100,8 +100,8 @@ module.exports = function shiftStatusRoutes(app) {
   .get('/open/facility/:facilityID', function* viewOpenShiftByHospital() {
     const facilityID = this.params.facilityID;
     const q = {};
-    q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ? OR ?? = ?';
-    q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'open', 1, 'pending', 1];
+    q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
+    q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'open', 1];
     this.body = yield query(q);
   })
 

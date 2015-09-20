@@ -58,7 +58,7 @@ class AppBar extends React.Component {
                 tooltip='menu'/>
             }>
             <MenuItem
-              onClick={()=> {window.location.assign('/#/home'); }}
+              onClick={()=> {window.location.assign('/'); }}
               primaryText='Logout'/>
           </IconMenu>
         </div>

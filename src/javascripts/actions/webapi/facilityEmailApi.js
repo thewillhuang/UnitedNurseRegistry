@@ -13,7 +13,7 @@ facilityEmailApi.getFacilityEmail = (facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -27,7 +27,7 @@ facilityEmailApi.addFacilityEmail = (facilityID, emailAddress, emailType) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -41,7 +41,7 @@ facilityEmailApi.updateFacilityEmail = (facilityID, emailID, emailAddress, email
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -55,7 +55,7 @@ facilityEmailApi.deleteFacilityEmail = (facilityID, emailID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };

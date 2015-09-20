@@ -40,7 +40,7 @@ shiftActions.queryDb = (geoHash, geohashSet, cb) => {
     }).catch(function(err) {
       console.log(err);
       if (err.status === 500) {
-        window.location.assign('#/home');
+        window.location.assign('/');
       }
     });
 };
@@ -106,7 +106,7 @@ shiftActions.loadAddress = (address) => {
     }).catch(function(err) {
       console.log(err);
       if (err.status === 500) {
-        window.location.assign('#/home');
+        window.location.assign('/');
       }
     });
 };

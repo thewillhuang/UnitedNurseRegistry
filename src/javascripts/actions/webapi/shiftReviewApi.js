@@ -14,7 +14,7 @@ shiftReviewApi.createUserReview = (shiftID, review) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -28,7 +28,7 @@ shiftReviewApi.updateUserReview = (shiftID, review) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -42,7 +42,7 @@ shiftReviewApi.createFacilityReview = (shiftID, review) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -56,7 +56,7 @@ shiftReviewApi.updateFacilityReview = (shiftID, review) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -69,7 +69,7 @@ shiftReviewApi.getUserReview = (shiftID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -82,7 +82,7 @@ shiftReviewApi.getFacilityReview = (shiftID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -95,7 +95,7 @@ shiftReviewApi.getAvgFacilityReview = (shiftID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -108,7 +108,7 @@ shiftReviewApi.getAvgUserReview = (userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -121,7 +121,7 @@ shiftReviewApi.deleteFacilityReview = (facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -134,7 +134,7 @@ shiftReviewApi.deleteUserReview = (shiftID, userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };

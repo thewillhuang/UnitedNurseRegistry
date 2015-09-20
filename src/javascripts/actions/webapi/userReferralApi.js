@@ -13,7 +13,7 @@ referralApi.createUserReferral = (parentId) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -26,7 +26,7 @@ referralApi.createFacilityReferral = (parentId) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -39,7 +39,7 @@ referralApi.getUserReferral = (userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -52,7 +52,7 @@ referralApi.getFacilityReferral = (userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };

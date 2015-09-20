@@ -14,7 +14,7 @@ geoHashApi.addressLatLng = (address) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };

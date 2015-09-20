@@ -69,7 +69,7 @@ class HomeToolBar extends React.Component {
             <IconMenu iconButtonElement={
                 <IconButton iconClassName='fa fa-bars' tooltip='Menu'/>
               }>
-              <MenuItem onClick={()=> {window.location.assign('/#/home'); }} primaryText='Home' />
+              <MenuItem onClick={()=> {window.location.assign('/'); }} primaryText='Home' />
               <MenuDivider/>
               <MenuItem onClick={()=> {window.location.assign('/#/hospitallogin'); }} primaryText='Hospital Login'/ >
               <MenuItem onClick={()=> {window.location.assign('/#/hospitalsignup'); }} primaryText='Hospital Signup'/ >

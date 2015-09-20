@@ -13,7 +13,7 @@ betaApi.signup = (email, password) => {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
     });
 };
 
@@ -24,7 +24,7 @@ betaApi.getAllBeta = () => {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
     });
 };
 

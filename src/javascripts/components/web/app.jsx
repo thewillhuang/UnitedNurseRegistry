@@ -29,7 +29,7 @@ class App extends React.Component {
     if (sessionStorage.length) {
       window.location.assign('#/app/shifts');
     } else {
-      window.location.assign('#/home');
+      window.location.assign('/');
     }
   };
 

@@ -16,7 +16,7 @@ facilityApi.getFacilityInfo = (facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -32,7 +32,7 @@ facilityApi.updateFacilityInfo = (facilityID, facilityEmail, facilityName, facil
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -45,7 +45,7 @@ facilityApi.deleteFacility = (facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#/home');
+      window.location.assign('/');
       return err;
     });
 };

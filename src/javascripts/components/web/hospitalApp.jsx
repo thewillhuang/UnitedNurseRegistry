@@ -27,7 +27,7 @@ class Hospital extends React.Component {
     if (sessionStorage.length) {
       window.location.assign('#/hospital/shifts');
     } else {
-      window.location.assign('#/home');
+      window.location.assign('/');
     }
   };
 

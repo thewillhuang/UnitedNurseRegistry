@@ -12,7 +12,9 @@ userWorkHistoryApi.createUserWorkHistory = (userID, facilityID, months, referenc
     .send({months, referenceName, referencePhone})
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -25,6 +27,10 @@ userWorkHistoryApi.updateUserWorkHistory = (userID, userHistoryID, facilityID, m
     .send({fk_UserWorkHistory_facilityID, months, referenceName, referencePhone})
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -34,7 +40,9 @@ userWorkHistoryApi.getUserWorkHistory = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -45,6 +53,10 @@ userWorkHistoryApi.deleteUserWorkHistory = (userID, userHistoryID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 

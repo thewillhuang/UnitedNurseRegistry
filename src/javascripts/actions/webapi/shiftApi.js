@@ -12,7 +12,9 @@ shiftApi.createShift = (facilityID, specialtyID, shiftStartHour, shiftDuration, 
     .send({facilityID, specialtyID, shiftStartHour, shiftDuration, payPerHour, date, shiftDressCode})
     .endAsync().then((res) => {
       return res.body;
-    }).catch((err) => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -23,6 +25,10 @@ shiftApi.getShift = (shiftID) => {
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -33,6 +39,8 @@ shiftApi.getAllHospitalShift = (facilityID) => {
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -44,6 +52,8 @@ shiftApi.getActiveHospitalShift = (facilityID) => {
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -55,6 +65,8 @@ shiftApi.getUserShift = (userID) => {
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -67,6 +79,8 @@ shiftApi.getShiftWithGeoHash = (geohash, hashSet, precision) => {
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -78,7 +92,9 @@ shiftApi.updateShift = (facilityID, shiftID, specialtyID, shiftStartHour, shiftD
     .send({specialtyID, shiftStartHour, shiftDuration, payPerHour, date, shiftDressCode})
     .endAsync().then((res) => {
       return res.body;
-    }).catch((err) => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -89,7 +105,9 @@ shiftApi.deleteShift = (facilityID, shiftID) => {
     .set(token)
     .endAsync().then((res) => {
       return res.body;
-    }).catch((err) => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };

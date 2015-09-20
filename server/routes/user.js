@@ -54,7 +54,9 @@ module.exports = function userRoutes(app) {
       const requestJson = this.request.body;
       const password = requestJson.userPwHash;
       delete requestJson.userPwHash;
-      requestJson.userPwHash = yield genHash(password);
+      if (password) {
+        requestJson.userPwHash = yield genHash(password);
+      }
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
       q.values = ['user', requestJson, 'userID', userID];

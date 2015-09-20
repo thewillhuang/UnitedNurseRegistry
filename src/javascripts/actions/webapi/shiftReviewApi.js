@@ -12,7 +12,9 @@ shiftReviewApi.createUserReview = (shiftID, review) => {
     .send({review})
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -24,6 +26,10 @@ shiftReviewApi.updateUserReview = (shiftID, review) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -34,6 +40,10 @@ shiftReviewApi.createFacilityReview = (shiftID, review) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -44,6 +54,10 @@ shiftReviewApi.updateFacilityReview = (shiftID, review) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -53,7 +67,9 @@ shiftReviewApi.getUserReview = (shiftID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -64,7 +80,9 @@ shiftReviewApi.getFacilityReview = (shiftID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -75,7 +93,9 @@ shiftReviewApi.getAvgFacilityReview = (shiftID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -86,7 +106,9 @@ shiftReviewApi.getAvgUserReview = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -97,7 +119,9 @@ shiftReviewApi.deleteFacilityReview = (facilityID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -108,7 +132,9 @@ shiftReviewApi.deleteUserReview = (shiftID, userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };

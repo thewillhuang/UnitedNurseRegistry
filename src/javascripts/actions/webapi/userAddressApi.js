@@ -12,7 +12,9 @@ userAddressApi.createUserAddress = (userID, address, address2, city, state, zip,
     .send({address, address2, city, state, zip, geohash})
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -24,6 +26,10 @@ userAddressApi.updateUserAddress = (userID, addressID, address, address2, city, 
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -33,7 +39,9 @@ userAddressApi.getUserAddress = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -44,6 +52,10 @@ userAddressApi.deleteUserAddress = (userID, addressID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 

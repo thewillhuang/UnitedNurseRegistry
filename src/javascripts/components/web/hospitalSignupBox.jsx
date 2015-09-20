@@ -48,8 +48,6 @@ class SignupBox extends React.Component {
               signupButton: 'Success',
             });
             setToken(res.headers.authorization, res.body.message);
-            sessionStorage.setItem('token', res.headers.authorization);
-            sessionStorage.setItem('user', res.body.message);
             window.location.assign('/#/hospital');
             // console.log(localStorage.getItem('token'));
           } else if (res.status === 406) {

@@ -12,7 +12,9 @@ userSpecialtyApi.createUserSpecialty = (userID, specialty) => {
     .send({specialty})
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -23,7 +25,9 @@ userSpecialtyApi.getAllSpecialtyID = () => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -34,7 +38,9 @@ userSpecialtyApi.createSpecialty = (specialty) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -45,6 +51,10 @@ userSpecialtyApi.updateUserSpecialty = (userID, oldSpecialtyID, newSpecialtyID) 
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -54,7 +64,9 @@ userSpecialtyApi.getUserSpecialty = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -65,6 +77,10 @@ userSpecialtyApi.deleteUserSpecialty = (userID, specialtyID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 

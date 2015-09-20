@@ -11,6 +11,10 @@ facilityPhoneApi.getFacilityPhone = (facilityID) => {
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -23,6 +27,10 @@ facilityPhoneApi.addFacilityPhone = (facilityID, phoneNumber, ext, phoneType) =>
       return res.body;
     }).catch(function(err) {
       return err;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -34,6 +42,8 @@ facilityPhoneApi.updateFacilityPhone = (facilityID, phoneID, phoneNumber, ext, p
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -45,6 +55,10 @@ facilityPhoneApi.deleteFacilityPhone = (facilityID, phoneID) => {
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 

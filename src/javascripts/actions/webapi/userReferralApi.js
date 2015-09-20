@@ -11,6 +11,10 @@ referralApi.createUserReferral = (parentId) => {
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -20,6 +24,10 @@ referralApi.createFacilityReferral = (parentId) => {
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -30,6 +38,8 @@ referralApi.getUserReferral = (userID) => {
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -41,6 +51,8 @@ referralApi.getFacilityReferral = (userID) => {
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };

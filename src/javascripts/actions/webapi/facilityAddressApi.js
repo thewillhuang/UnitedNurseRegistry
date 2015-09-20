@@ -12,6 +12,8 @@ facilityAddressApi.getFacilityAddress = (facilityID) => {
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
+    }).catch(()=> {
+      window.sessionStorage.clear();
     });
 };
 
@@ -24,6 +26,9 @@ facilityAddressApi.addFacilityAddress = (facilityID, address, address2, city, st
       return res.body;
     }).catch(function(err) {
       return err;
+    }).catch(()=> {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
     });
 };
 
@@ -35,6 +40,8 @@ facilityAddressApi.updateFacilityAddress = (facilityID, addressID, address, addr
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -46,6 +53,10 @@ facilityAddressApi.deleteFacilityAddress = (facilityID, addressID) => {
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 

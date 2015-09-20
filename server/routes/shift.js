@@ -63,8 +63,8 @@ module.exports = function shiftRoutes(app) {
     const facilityID = this.params.facilityID;
     if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const q = {};
-      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ? OR ?? = ?';
-      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'pending', 1, 'open', 1];
+      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
+      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'open', 1];
       this.body = yield query(q);
     } else {
       this.status = 406;

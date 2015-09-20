@@ -13,6 +13,8 @@ geoHashApi.addressLatLng = (address) => {
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };

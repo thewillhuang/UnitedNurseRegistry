@@ -11,6 +11,10 @@ facilityEmailApi.getFacilityEmail = (facilityID) => {
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -22,6 +26,8 @@ facilityEmailApi.addFacilityEmail = (facilityID, emailAddress, emailType) => {
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -34,6 +40,8 @@ facilityEmailApi.updateFacilityEmail = (facilityID, emailID, emailAddress, email
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -45,6 +53,10 @@ facilityEmailApi.deleteFacilityEmail = (facilityID, emailID) => {
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 

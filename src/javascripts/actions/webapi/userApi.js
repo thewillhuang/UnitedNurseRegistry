@@ -11,7 +11,9 @@ userApi.getUser = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -23,6 +25,10 @@ userApi.updateUser = (userID, firstName, lastName, middleName, profilePic, email
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -32,6 +38,10 @@ userApi.deleteUser = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 

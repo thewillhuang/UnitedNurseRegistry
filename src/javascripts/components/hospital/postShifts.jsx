@@ -93,8 +93,8 @@ class ShiftHospitalTable extends React.Component {
       // then, store the shift with the specialtyID
       .then(res => {
         return shiftApi.createShift(facilityID, res.specialtyID, shiftStartHour, shiftDuration, payPerHour, date, shiftDressCode);
-      }).then(saved => {
-        console.log(saved);
+      }).then(()=> {
+        // console.log(saved);
         ctx.refs.specialty.clearValue();
         // ctx.refs.startHour.clearValue();
         // ctx.refs.duration.clearValue();
@@ -102,7 +102,7 @@ class ShiftHospitalTable extends React.Component {
         // ctx.refs.date.clearValue();
         // ctx.refs.shiftDressCode.clearValue();
         ctx.refs.submitted.show();
-        socket.emit('shift updated');
+        socket.emit('shift updated', {facility: user.scope.facilityID});
       });
     } else {
       this.validateShift();
@@ -154,7 +154,7 @@ class ShiftHospitalTable extends React.Component {
           onChange={this.validateShift}
           onEnterKeyDown={this.handleSubmit}
           floatingLabelText='Pay Per Hour'
-          defaultValue='40'
+          defaultValue='53'
           hintText='Pay Per Hour' />
         <br/>
         <TextField

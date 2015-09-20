@@ -11,7 +11,9 @@ shiftStatusApi.grabShiftStatus = (shiftID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -22,15 +24,23 @@ shiftStatusApi.viewedShift = (shiftID, userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
 shiftStatusApi.getViewCount = (shiftID) => {
   return request
-    .post(`${prefix}/viewed/shift/${shiftID}`)
+    .get(`${prefix}/viewed/shift/${shiftID}`)
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -40,6 +50,10 @@ shiftStatusApi.markShiftAsComplete = (shiftID, facilityID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -49,7 +63,9 @@ shiftStatusApi.markShiftAsPending = (shiftID, userID, facilityID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -60,7 +76,9 @@ shiftStatusApi.markShiftAsOpen = (shiftID, facilityID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -71,7 +89,9 @@ shiftStatusApi.viewOpenShiftsByHospitalID = (facilityID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -82,7 +102,9 @@ shiftStatusApi.viewAllShiftByUserID = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -93,7 +115,9 @@ shiftStatusApi.deleteFacilityReview = (facilityID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -104,7 +128,9 @@ shiftStatusApi.deleteUserReview = (shiftID, userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };

@@ -5,8 +5,10 @@ import io from 'socket.io-client';
 const ThemeManager = new mui.Styles.ThemeManager();
 import shiftApi from '../../actions/webapi/shiftApi.js';
 import userSpecialtyApi from '../../actions/webapi/userSpecialtyApi.js';
+// import shiftStatusApi from '../../actions/webapi/shiftStatusApi.js';
 import user from '../../utils/grabUser.js';
 import moment from 'moment';
+// import Promise from 'bluebird';
 const socket = io.connect();
 // const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
@@ -14,7 +16,9 @@ const socket = io.connect();
 
 class ShiftHospitalTable extends React.Component {
   state = {
-    table: [],
+    table: [
+      ['data', 'data', 'data', 'data', 'data', 'data', 'data'],
+    ],
   }
 
   rowGetter = (rowIndex) => {
@@ -48,11 +52,9 @@ class ShiftHospitalTable extends React.Component {
             newObj.shiftID = obj.shiftID;
             newObj.specialtyID = obj.fk_Shift_specialtyID;
             newObj.unit = ctx.state.specialty[`${obj.fk_Shift_specialtyID}`];
-            if (obj.open === 1) {
-              newObj.status = 'open';
-            } else {
-              newObj.status = 'pending';
-            }
+            obj.open === 1
+            ? newObj.status = 'Open'
+            : newObj.status = 'Pending';
             newObj.payPerHour = obj.payPerHour;
             newObj.shiftDressCode = obj.shiftDressCode;
             newObj.shiftDuration = obj.shiftDuration;
@@ -64,14 +66,15 @@ class ShiftHospitalTable extends React.Component {
           // construct the table
           const table = [];
           for (let i = 0; i < newObj.length; i++) {
-            const date = moment(newObj[i].date).format('MM-DD-YYYY');
-            table.push([newObj[i].status, newObj[i].payPerHour, newObj[i].unit, date, newObj[i].shiftStartHour]);
+            const date = moment(newObj[i].date).format('YYYY-MM-DD');
+            table.push([newObj[i].shiftID, newObj[i].status, '...', `$ ${newObj[i].payPerHour}`, `${newObj[i].shiftDuration} hrs`, newObj[i].unit, date, `${newObj[i].shiftStartHour} hrs`]);
           }
-          // console.log('new object', newObj);
+          return table.reverse();
+        }).then(table => {
           ctx.setState({table: table});
         });
       } catch (e) {
-        console.log(e);
+        console.log('get table error', e);
       }
     }
 
@@ -88,7 +91,7 @@ class ShiftHospitalTable extends React.Component {
         // console.log('specialties', specialties);
         getTableRows();
       } catch (e) {
-        console.log('async await error', e);
+        console.log('specialty error', e);
       }
     }
 
@@ -96,9 +99,11 @@ class ShiftHospitalTable extends React.Component {
       console.log('table connected');
     });
 
-    socket.on('update shift', function() {
+    socket.on('update shift', function(data) {
       console.log('server received a new shift');
-      getTableRows();
+      if (data.facility === user.scope.facilityID) {
+        getTableRows();
+      }
     });
 
     getSpecialtyID();
@@ -119,32 +124,50 @@ class ShiftHospitalTable extends React.Component {
           height={500}
           headerHeight={50}>
           <Column
-            label='Status'
-            width={100}
+            label='ID'
+            width={70}
             dataKey={0}
           />
           <Column
-            label='Viewed %'
-            width={100}
+            label='Status'
+            width={80}
             dataKey={1}
+          />
+          <Column
+            label='Viewed %'
+            width={80}
+            dataKey={2}
+            flexGrow={1}
           />
           <Column
             label='Pay Per Hour'
             flexGrow={1}
-            width={100}
-            dataKey={2}
+            width={80}
+            dataKey={3}
+          />
+          <Column
+            label='Duration'
+            flexGrow={1}
+            width={80}
+            dataKey={4}
           />
           <Column
             label='Unit'
             flexGrow={1}
             width={100}
-            dataKey={3}
+            dataKey={5}
           />
           <Column
-            label='Date and Time'
+            label='Date'
             flexGrow={1}
             width={150}
-            dataKey={4}
+            dataKey={6}
+          />
+          <Column
+            label='Time'
+            flexGrow={1}
+            width={70}
+            dataKey={7}
           />
         </Table>
       </div>

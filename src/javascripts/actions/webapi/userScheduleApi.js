@@ -12,7 +12,9 @@ userScheduleApi.createUserSchedule = (userID, shiftStart, shiftDuration, dayOfWe
     .send({shiftStart, shiftDuration, dayOfWeek})
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -24,6 +26,10 @@ userScheduleApi.updateUserSchedule = (userID, scheduleID, shiftStart, shiftDurat
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -33,7 +39,9 @@ userScheduleApi.getUserSchedule = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -44,6 +52,10 @@ userScheduleApi.deleteUserAddress = (userID, userScheduleID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 

@@ -12,7 +12,9 @@ userPhoneApi.createUserPhone = (userID, phoneNumber, ext, phoneType) => {
     .send({phoneNumber, ext, phoneType})
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -24,6 +26,10 @@ userPhoneApi.updateUserPhone = (userID, phoneID, phoneNumber, ext, phoneType) =>
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 
@@ -33,7 +39,9 @@ userPhoneApi.getUserPhone = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(err => {
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
       return err;
     });
 };
@@ -44,6 +52,10 @@ userPhoneApi.deleteUserAddress = (userID, phoneID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('#/home');
+      return err;
     });
 };
 

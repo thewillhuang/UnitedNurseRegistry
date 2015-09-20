@@ -4,6 +4,9 @@ const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
 const ThemeManager = new mui.Styles.ThemeManager();
 // import MediaQuery from 'react-responsive';
+import user from '../../utils/grabUser.js';
+import facilityApi from '../../actions/webapi/facilityApi.js';
+
 
 class AppBar extends React.Component {
   state = {
@@ -18,6 +21,14 @@ class AppBar extends React.Component {
     return {
       muiTheme: ThemeManager.getCurrentTheme(),
     };
+  }
+
+  componentDidMount() {
+    const ctx = this;
+    facilityApi.getFacilityInfo(user.scope.facilityID)
+    .then(data=> {
+      ctx.setState({userName: data.rows[0].facilityName});
+    });
   }
 
   componentWillUnmount() {

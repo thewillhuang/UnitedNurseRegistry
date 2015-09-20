@@ -4,7 +4,6 @@ import mui from 'material-ui';
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
 const ThemeManager = new mui.Styles.ThemeManager();
 // import MediaQuery from 'react-responsive';
-
 class AppLeftNavBar extends React.Component {
   state = {
     userName: 'User',

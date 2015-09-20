@@ -10,6 +10,7 @@
     "fixed-data-table": "^0.4.6",
     "flux": "^2.1.1",
     "geolib": "^2.0.18",
+    "history": "^1.9.1",
     "jquery": "^2.1.4",
     "jsonwebtoken": "^5.0.5",
     "keymirror": "^0.1.1",

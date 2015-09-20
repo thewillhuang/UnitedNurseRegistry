@@ -26,30 +26,30 @@ class HomeToolBar extends React.Component {
           marginBottom: 20,
         }}>
           <ToolbarGroup float='left' key={0}>
-            <RaisedButton href='#home' label='united nurse registry' linkButton={true} primary={true}/>
+            <RaisedButton href='#home' label='united nurse registry' linkButton primary/>
           </ToolbarGroup>
           <ToolbarGroup float='right' key={1}>
-            <FlatButton href='#hospitalSignup' label='Hospital Signup' linkButton={true} secondary={true} style={{
+            <FlatButton href='#hospitalSignup' label='Hospital Signup' linkButton secondary style={{
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
               marginLeft: 10,
               marginRight: 10,
             }}
             />
-            <FlatButton href='#hospitallogin' label='Hospital Login' linkButton={true} secondary={true} style={{
+            <FlatButton href='#hospitallogin' label='Hospital Login' linkButton secondary style={{
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
               marginLeft: 10,
               marginRight: 10,
             }}
             />
-            <FlatButton href='#signup' label='Sign up' linkButton={true} secondary={true} style={{
+            <FlatButton href='#signup' label='Sign up' linkButton secondary style={{
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
               marginLeft: 10,
               marginRight: 10,
             }}/>
-            <FlatButton href='#login' label='Login' linkButton={true} secondary={true} style={{
+            <FlatButton href='#login' label='Login' linkButton secondary style={{
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
               marginLeft: 29,

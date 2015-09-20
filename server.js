@@ -42,16 +42,16 @@ if (process.env.NODE_ENV === 'development') {
     gzip: true,
     dynamic: true,
   }));
-
-  app.use(function* apiCheck(next) {
-    if (this.path.indexOf('socket.io') !== -1) {
-      yield next;
-    }
-    this.path.indexOf('api') !== -1
-    ? yield next
-    : yield send(this, buildPath + '/index.html');
-  });
 }
+
+app.use(function* apiCheck(next) {
+  if (this.path.indexOf('socket.io') !== -1) {
+    yield next;
+  }
+  this.path.indexOf('api') !== -1
+  ? yield next
+  : yield send(this, buildPath + '/index.html');
+});
 
 // set unsigned cookies as we are using a signed and encrypted jwt
 // app.use(session({ signed: false }, app));

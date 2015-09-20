@@ -14,6 +14,7 @@ const input = {
 
 import user from '../../utils/grabUser.js';
 import facilityApi from '../../actions/webapi/facilityApi.js';
+import facilityPhoneApi from '../../actions/webapi/facilityPhoneApi.js';
 import geoHashApi from '../../actions/webapi/geoHashApi.js';
 import geohash from 'ngeohash';
 
@@ -40,7 +41,8 @@ class ProfileCard extends React.Component {
     const emr = this.refs.emr.getValue() || null;
     const phone = this.refs.phone.getValue() || null;
     const address = this.refs.address.getValue() || null;
-    const email = this.refs.email.getValue() || null;
+    const ext = this.refs.ext.getValue() || null;
+    const phoneType = this.refs.phoneType.getValue() || null;
 
     async function getGeoHash() {
       try {
@@ -49,14 +51,23 @@ class ProfileCard extends React.Component {
           console.log(data);
           return geohash.encode(data.lat, data.lng);
         }).then(hash=> {
-          facilityApi.updateFacilityInfo(user.scope.facilityID, email, name, hash, null, emr);
+          facilityApi.updateFacilityInfo(user.scope.facilityID, null, name, hash, null, emr);
         });
       } catch (e) {
         console.log(e);
       }
     }
 
+    async function setPhone() {
+      try {
+        await facilityPhoneApi.addFacilityPhone(user.scope.facilityID, phone, ext, phoneType);
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
     getGeoHash();
+    setPhone();
   }
 
   render() {
@@ -73,9 +84,6 @@ class ProfileCard extends React.Component {
               floatingLabelText='Hospital Name'
               onEnterKeyDown={this.handleSubmit}
               hintText='Name' />
-            <RaisedButton primary label='Upload Facility Images'>
-              <input type='file' style={input}></input>
-            </RaisedButton>
             <br/>
             <TextField
               ref='emr'
@@ -84,22 +92,32 @@ class ProfileCard extends React.Component {
               hintText='EMR' />
             <br/>
             <TextField
-              ref='email'
-              onEnterKeyDown={this.handleSubmit}
-              floatingLabelText='Update Email'
-              hintText='Email' />
-            <br/>
-            <TextField
               ref='phone'
               onEnterKeyDown={this.handleSubmit}
               floatingLabelText='Phone Number'
               hintText='Phone Number' />
             <br/>
             <TextField
+              ref='ext'
+              onEnterKeyDown={this.handleSubmit}
+              floatingLabelText='Phone Number ext'
+              hintText='Ext' />
+            <br/>
+            <TextField
+              ref='phoneType'
+              onEnterKeyDown={this.handleSubmit}
+              floatingLabelText='Phone Type'
+              hintText='Phone Type' />
+            <br/>
+            <TextField
               ref='address'
               onEnterKeyDown={this.handleSubmit}
               floatingLabelText='Address'
               hintText='Address' />
+            <br/>
+            <RaisedButton primary label='Upload Facility Images'>
+              <input type='file' style={input}></input>
+            </RaisedButton>
           </div>
         </div>
       </div>

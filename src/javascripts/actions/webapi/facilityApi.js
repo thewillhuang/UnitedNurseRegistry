@@ -6,7 +6,7 @@ const prefix = '/api/facility';
 const facilityApi = {};
 import _ from 'lodash';
 
-console.log(token);
+// console.log(token);
 
 facilityApi.getFacilityInfo = (facilityID) => {
   return request

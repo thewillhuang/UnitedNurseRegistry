@@ -4,6 +4,7 @@ import token from '../../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
 const prefix = '/api/facilityphone';
 const facilityPhoneApi = {};
+import _ from 'lodash';
 
 facilityPhoneApi.getFacilityPhone = (facilityID) => {
   return request
@@ -19,10 +20,11 @@ facilityPhoneApi.getFacilityPhone = (facilityID) => {
 };
 
 facilityPhoneApi.addFacilityPhone = (facilityID, phoneNumber, ext, phoneType) => {
+  const payload = _.omit({phoneNumber, ext, phoneType}, _.isNull);
   return request
     .post(prefix + '/facility/' + facilityID)
     .set(token)
-    .send({phoneNumber, ext, phoneType})
+    .send(payload)
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {

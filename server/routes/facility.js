@@ -65,7 +65,6 @@ module.exports = function(app) {
       if (password) {
         requestJson.facilityPwHash = yield genHash(password);
       }
-      console.log(requestJson.facilityPwHash);
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
       q.values = ['facility', requestJson, 'facilityID', facilityID];

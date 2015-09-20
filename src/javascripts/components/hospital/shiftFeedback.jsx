@@ -102,7 +102,7 @@ class ShiftHospitalTable extends React.Component {
     socket.on('update shift', function(data) {
       console.log('server received a new shift');
       if (data.facility === user.scope.facilityID) {
-        getTableRows();
+        getSpecialtyID();
       }
     });
 

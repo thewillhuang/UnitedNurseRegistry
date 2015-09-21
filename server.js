@@ -29,9 +29,6 @@ app.proxy = true;
 
 // security headers
 app.use(helmet());
-app.use(helmet.contentSecurityPolicy({
-  scriptSrc: ['\'self\'', 'https://checkout.stripe.com'],
-}));
 
 // static file server
 if (process.env.NODE_ENV === 'development') {
@@ -39,6 +36,10 @@ if (process.env.NODE_ENV === 'development') {
   app.use(serve(buildPath));
 } else {
   console.log('server running in production mode');
+  app.use(helmet.contentSecurityPolicy({
+    scriptSrc: ['\'self\'', 'https://checkout.stripe.com'],
+  }));
+
   app.use(staticCache(buildPath, {
     buffer: true,
     usePrecompiledGzip: true,

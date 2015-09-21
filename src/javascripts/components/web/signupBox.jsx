@@ -6,6 +6,7 @@ import request from 'superagent';
 import validator from 'validator';
 const ThemeManager = new mui.Styles.ThemeManager();
 // console.log(request);
+import setToken from '../../utils/setToken.js';
 
 class SignupBox extends React.Component {
   static childContextTypes = {
@@ -46,8 +47,7 @@ class SignupBox extends React.Component {
             ctx.setState({
               signupButton: 'Success',
             });
-            sessionStorage.setItem('token', res.headers.authorization);
-            sessionStorage.setItem('user', res.body.message);
+            setToken(res.headers.authorization, res.body.message);
             window.location.assign('/#/app');
             // console.log(localStorage.getItem('token'));
           } else if (res.status === 406) {

@@ -1,5 +1,5 @@
 import React from 'react';
-import mui, {TextField, RaisedButton} from 'material-ui';
+import mui, {TextField, RaisedButton, Snackbar} from 'material-ui';
 const ThemeManager = new mui.Styles.ThemeManager();
 const input = {
   cursor: 'pointer',
@@ -43,7 +43,7 @@ class ProfileCard extends React.Component {
     const address = this.refs.address.getValue() || null;
     const ext = this.refs.ext.getValue() || null;
     const phoneType = this.refs.phoneType.getValue() || null;
-
+    const ctx = this;
     async function getGeoHash() {
       try {
         return await geoHashApi.addressLatLng(address)
@@ -52,6 +52,7 @@ class ProfileCard extends React.Component {
           return geohash.encode(data.lat, data.lng);
         }).then(hash=> {
           facilityApi.updateFacilityInfo(user.scope.facilityID, null, name, hash, null, emr);
+          ctx.refs.submitted.show();
         });
       } catch (e) {
         console.log(e);
@@ -73,6 +74,12 @@ class ProfileCard extends React.Component {
   render() {
     return (
       <div className='card'>
+        <Snackbar
+          ref='submitted'
+          action='OK'
+          message='Hospital Profile Updated'
+          autoHideDuration={5000}
+        />
         <div className='cardTitle'>
           Profile
         </div>

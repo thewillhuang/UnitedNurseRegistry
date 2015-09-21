@@ -73,7 +73,7 @@ shiftApi.getUserShift = (userID) => {
 
 shiftApi.getShiftWithGeoHash = (geohash, hashSet, precision) => {
   return request
-    .post(prefix + '/geohash/' + userID + '/precision/' + precision)
+    .post(prefix + '/geohash/' + geohash + '/precision/' + precision)
     .set(token)
     .send({hashSet})
     .endAsync().then(function(res) {

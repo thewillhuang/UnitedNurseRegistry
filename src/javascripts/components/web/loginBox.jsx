@@ -5,6 +5,7 @@ import mui, { Card, TextField, CardActions, RaisedButton } from 'material-ui';
 import request from 'superagent';
 import validator from 'validator';
 const ThemeManager = new mui.Styles.ThemeManager();
+import setToken from '../../utils/setToken.js';
 // console.log(request);
 
 class LoginBox extends React.Component {
@@ -34,8 +35,7 @@ class LoginBox extends React.Component {
           // console.log(res.headers);
           // console.log(res.status);
           if (res.status === 200) {
-            sessionStorage.setItem('token', res.headers.authorization);
-            sessionStorage.setItem('user', res.body.message);
+            setToken(res.headers.authorization, res.body.message);
             window.location.assign('/#/app');
             // console.log(localStorage.getItem('token'));
           } else if (res.status === 406) {

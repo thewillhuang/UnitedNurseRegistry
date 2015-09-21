@@ -33,16 +33,28 @@ class ProfileList extends React.Component {
             <hr className='cardDivider'/>
             <div className='cardBody'>
               <FlatButton
-                linkButton={true}
+                linkButton
                 href='/#/hospital/profile/profile'
                 label='Profile'
-                secondary={true} />
+                secondary />
               <br/>
               <FlatButton
-                linkButton={true}
+                linkButton
                 href='/#/hospital/profile/security'
                 label='Security'
-                secondary={true} />
+                secondary />
+              <br/>
+              <FlatButton
+                linkButton
+                href='/#/hospital/profile/address'
+                label='Address'
+                secondary />
+              <br/>
+              <FlatButton
+                linkButton
+                href='/#/hospital/profile/phone'
+                label='Phone'
+                secondary />
               <br/>
             </div>
           </div>

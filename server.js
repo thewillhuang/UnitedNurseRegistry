@@ -29,6 +29,9 @@ app.proxy = true;
 
 // security headers
 app.use(helmet());
+app.use(helmet.contentSecurityPolicy({
+  scriptSrc: ['"self"', 'https://checkout.stripe.com'],
+}));
 
 // static file server
 if (process.env.NODE_ENV === 'development') {
@@ -77,15 +80,20 @@ app.use(function* bearerAuthentication(next) {
   }
   const ctx = this;
   yield passport.authenticate('bearer', { session: false }, function* (err, user) {
-    if (err) { ctx.status = 401; }
+    if (err) {
+      console.log(err);
+      ctx.status = 500;
+    }
     if (user) {
       // const token = 'Bearer ' + jwt.encryptSign(user);
       // copy the token and send it right back
       const token = ctx.header.authorization;
       ctx.passport.user = user;
       ctx.set({ Authorization: token });
+      yield next;
+    } else {
+      ctx.status = 401;
     }
-    yield next;
   }).call(this, next);
 });
 

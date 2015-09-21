@@ -15,38 +15,40 @@ module.exports = function authRoutes(app) {
 
   .post('/', function* convertToGeoHash() {
     // console.log(this.request.body);
-    const address = this.request.body.address.replace(/\s+/g, '+');
-    // console.log(address);
-    // first check our own database before asking google
-    const q = {};
-    q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
-    q.values = ['lat', 'lng', 'geohash', 'address', address];
-    const dbquery = yield query(q);
-    // if theres nothing, ask google
-    console.log(dbquery);
-    if (!dbquery.rows.length) {
-      // console.log('google', dbquery.rows);
-      const url = googleUrl + address + API_KEY;
-      const response = yield request.get(url)
-      .endAsync().then(function(res) {
-        // console.log(res.body.results[0].geometry.location);
-        return res.body.results[0].geometry.location;
-      }).catch(function(err) {
-        return err;
-      });
-      const q2 = {};
-      q2.sql = 'INSERT INTO ?? SET ?';
-      const payload = {
-        address: address,
-        lat: response.lat,
-        lng: response.lng,
-      };
-      q2.values = ['geohash', payload];
-      yield query(q2);
-      this.body = yield response;
+    if (this.request.body.address) {
+      const address = this.request.body.address.replace(/\s+/g, '+');
+      const q = {};
+      q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
+      q.values = ['lat', 'lng', 'geohash', 'address', address];
+      const dbquery = yield query(q);
+      // if theres nothing, ask google
+      console.log(dbquery);
+      if (!dbquery.rows.length) {
+        // console.log('google', dbquery.rows);
+        const url = googleUrl + address + API_KEY;
+        const response = yield request.get(url)
+        .endAsync().then(function(res) {
+          // console.log(res.body.results[0].geometry.location);
+          return res.body.results[0].geometry.location;
+        }).catch(function(err) {
+          return err;
+        });
+        const q2 = {};
+        q2.sql = 'INSERT INTO ?? SET ?';
+        const payload = {
+          address: address,
+          lat: response.lat,
+          lng: response.lng,
+        };
+        q2.values = ['geohash', payload];
+        yield query(q2);
+        this.body = yield response;
+      } else {
+        // console.log('no google', dbquery.rows[0]);
+        this.body = dbquery.rows[0];
+      }
     } else {
-      // console.log('no google', dbquery.rows[0]);
-      this.body = dbquery.rows[0];
+      this.status = 400;
     }
   });
 

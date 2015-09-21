@@ -30,7 +30,7 @@ app.proxy = true;
 // security headers
 app.use(helmet());
 app.use(helmet.contentSecurityPolicy({
-  scriptSrc: ['"self"', 'https://checkout.stripe.com'],
+  scriptSrc: ['\'self\'', 'https://checkout.stripe.com'],
 }));
 
 // static file server

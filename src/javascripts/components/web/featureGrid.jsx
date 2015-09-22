@@ -26,8 +26,8 @@ class FeatureGrid extends React.Component {
           </div>
           <div href='#' className='grid-item'>
             <i className='fa icon-reload fa-2x grid-i'></i>
-            <h1>Recurring Payroll</h1>
-            <p>You Choose how you get paid.</p>
+            <h1>Rolling Payroll</h1>
+            <p>Get paid on a 2 day rolling basis.</p>
           </div>
           <div href='#' className='grid-item'>
             <i className='fa icon-umbrella fa-2x grid-i'></i>

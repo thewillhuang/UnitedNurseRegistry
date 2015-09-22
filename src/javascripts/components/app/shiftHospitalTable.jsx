@@ -83,19 +83,19 @@ class ShiftHospitalTable extends React.Component {
               el.shiftID,
               el.facilityName,
               el.payPerHour,
-              el.specialty,
+              el.shiftDuration,
               el.facilityEMR,
               el.shiftDressCode,
               el.specialty,
-              distMi,
+              distMi.toFixed(2) + ' Mi',
               moment(el.date).format('YYYY-MM-DD'),
               el.shiftStartHour,
               moment(el.shift_modified).format('YYYY-MM-DD, h:mm a'),
             ]);
-            console.log(ctx.state.lat, ctx.state.lng, lat, lng, distKm, distMi);
+            // console.log(ctx.state.lat, ctx.state.lng, lat, lng, distKm, distMi);
           }
         }
-        console.log('table', table);
+        // console.log('table', table);
         ctx.setState({
           table: table,
         });
@@ -157,12 +157,12 @@ class ShiftHospitalTable extends React.Component {
 
   _renderHeader = (label, cellDataKey) => {
     return (
-      <div onClick={this._sortRowsBy.bind(null, cellDataKey)} style={{curser: 'pointer'}}>{label}</div>
+      <a onClick={this._sortRowsBy.bind(null, cellDataKey)} style={{cursor: 'pointer'}}>{label}</a>
     );
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     let sortDirArrow = '';
 
     if (this.state.sortDir !== null) {
@@ -179,7 +179,7 @@ class ShiftHospitalTable extends React.Component {
           height={550}
           headerHeight={50}>
           <Column
-            width={70}
+            width={100}
             label={'Shift ID' + (this.state.sortBy === 0 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             allowCellsRecycling
@@ -188,12 +188,12 @@ class ShiftHospitalTable extends React.Component {
           <Column
             label={'Facility Name' + (this.state.sortBy === 1 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
-            width={100}
+            width={150}
             allowCellsRecycling
             dataKey={1}
           />
           <Column
-            label={'Pay Per Hour' + (this.state.sortBy === 2 ? sortDirArrow : '')}
+            label={'$/hr' + (this.state.sortBy === 2 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             width={60}
             dataKey={2}
@@ -201,10 +201,10 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
           />
           <Column
-            label={'Specialty' + (this.state.sortBy === 3 ? sortDirArrow : '')}
+            label={'Duration' + (this.state.sortBy === 3 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
-            width={80}
+            width={100}
             allowCellsRecycling
             dataKey={3}
           />
@@ -212,7 +212,7 @@ class ShiftHospitalTable extends React.Component {
             label={'EMR' + (this.state.sortBy === 4 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
-            width={100}
+            width={110}
             allowCellsRecycling
             dataKey={4}
           />
@@ -228,7 +228,7 @@ class ShiftHospitalTable extends React.Component {
             label={'Specialty' + (this.state.sortBy === 6 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
-            width={70}
+            width={100}
             allowCellsRecycling
             dataKey={6}
           />
@@ -244,7 +244,7 @@ class ShiftHospitalTable extends React.Component {
             label={'Start Date' + (this.state.sortBy === 8 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
-            width={70}
+            width={100}
             allowCellsRecycling
             dataKey={8}
           />
@@ -252,7 +252,7 @@ class ShiftHospitalTable extends React.Component {
             label={'Start Time' + (this.state.sortBy === 9 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
-            width={40}
+            width={110}
             allowCellsRecycling
             dataKey={9}
           />
@@ -260,7 +260,7 @@ class ShiftHospitalTable extends React.Component {
             label={'Modified' + (this.state.sortBy === 10 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
-            width={80}
+            width={120}
             allowCellsRecycling
             dataKey={10}
           />

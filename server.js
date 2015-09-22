@@ -37,7 +37,7 @@ if (process.env.NODE_ENV === 'development') {
 } else {
   console.log('server running in production mode');
   app.use(helmet.contentSecurityPolicy({
-    scriptSrc: ['\'self\'', 'https://checkout.stripe.com'],
+    scriptSrc: ['\'self\'', 'https://checkout.stripe.com', '\'unsafe-eval\''],
   }));
 
   app.use(staticCache(buildPath, {

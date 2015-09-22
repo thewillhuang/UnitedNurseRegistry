@@ -122,7 +122,7 @@ const server = require('http').createServer(app.callback());
 const io = require('socket.io')(server);
 io.on('connection', function(socket) {
   socket.on('shift updated', function(data) {
-    socket.emit('update shift', data);
+    io.sockets.emit('update shift', data);
   });
 });
 

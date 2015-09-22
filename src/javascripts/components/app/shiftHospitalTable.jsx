@@ -217,7 +217,7 @@ class ShiftHospitalTable extends React.Component {
             dataKey={1}
           />
           <Column
-            label={'Duration' + (this.state.sortBy === 3 ? sortDirArrow : '')}
+            label={'Duration' + (this.state.sortBy === 2 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
             width={100}
@@ -225,7 +225,7 @@ class ShiftHospitalTable extends React.Component {
             dataKey={2}
           />
           <Column
-            label={'Specialty' + (this.state.sortBy === 6 ? sortDirArrow : '')}
+            label={'Specialty' + (this.state.sortBy === 3 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
             width={100}
@@ -233,23 +233,23 @@ class ShiftHospitalTable extends React.Component {
             dataKey={3}
           />
           <Column
-            label={'As Employee' + (this.state.sortBy === 3 ? sortDirArrow : '')}
+            label={'Pay As Employee' + (this.state.sortBy === 4 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
-            width={100}
+            width={150}
             allowCellsRecycling
             dataKey={4}
           />
           <Column
-            label={'As IC' + (this.state.sortBy === 3 ? sortDirArrow : '')}
+            label={'Pay As IC' + (this.state.sortBy === 5 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
-            width={100}
+            width={130}
             allowCellsRecycling
             dataKey={5}
           />
           <Column
-            label={'EMR' + (this.state.sortBy === 4 ? sortDirArrow : '')}
+            label={'EMR' + (this.state.sortBy === 6 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
             width={110}
@@ -257,7 +257,7 @@ class ShiftHospitalTable extends React.Component {
             dataKey={6}
           />
           <Column
-            label={'Dress Code' + (this.state.sortBy === 5 ? sortDirArrow : '')}
+            label={'Dress Code' + (this.state.sortBy === 7 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
             width={120}
@@ -265,7 +265,7 @@ class ShiftHospitalTable extends React.Component {
             dataKey={7}
           />
           <Column
-            label={'Miles' + (this.state.sortBy === 7 ? sortDirArrow : '')}
+            label={'Miles' + (this.state.sortBy === 8 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
             width={70}
@@ -273,7 +273,7 @@ class ShiftHospitalTable extends React.Component {
             dataKey={8}
           />
           <Column
-            label={'Start Date' + (this.state.sortBy === 8 ? sortDirArrow : '')}
+            label={'Start Date' + (this.state.sortBy === 9 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
             width={100}
@@ -281,7 +281,7 @@ class ShiftHospitalTable extends React.Component {
             dataKey={9}
           />
           <Column
-            label={'Start Time' + (this.state.sortBy === 9 ? sortDirArrow : '')}
+            label={'Start Time' + (this.state.sortBy === 10 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
             width={110}
@@ -289,7 +289,7 @@ class ShiftHospitalTable extends React.Component {
             dataKey={10}
           />
           <Column
-            label={'Modified' + (this.state.sortBy === 10 ? sortDirArrow : '')}
+            label={'Modified' + (this.state.sortBy === 11 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={2}
             width={120}

@@ -87,7 +87,7 @@ class ShiftHospitalTable extends React.Component {
               el.facilityEMR,
               el.shiftDressCode,
               el.specialty,
-              distMi.toFixed(2) + ' Mi',
+              distMi.toFixed(2),
               moment(el.date).format('YYYY-MM-DD'),
               el.shiftStartHour,
               moment(el.shift_modified).format('YYYY-MM-DD, h:mm a'),
@@ -157,7 +157,7 @@ class ShiftHospitalTable extends React.Component {
 
   _renderHeader = (label, cellDataKey) => {
     return (
-      <a onClick={this._sortRowsBy.bind(null, cellDataKey)} style={{cursor: 'pointer'}}>{label}</a>
+      <a onClick={this._sortRowsBy.bind(null, cellDataKey)} style={{cursor: 'pointer', color: '#00526c'}}>{label}</a>
     );
   }
 

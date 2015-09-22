@@ -87,8 +87,8 @@ class ShiftHospitalTable extends React.Component {
               el.shiftID,
               el.facilityName,
               // el.payPerHour,
-              el.specialty,
               el.shiftDuration + ' hrs',
+              el.specialty,
               '$ ' + calcW2(total),
               '$ ' + calcIc(total),
               el.facilityEMR,
@@ -244,7 +244,7 @@ class ShiftHospitalTable extends React.Component {
             label={'Pay As IC' + (this.state.sortBy === 5 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
-            width={130}
+            width={100}
             allowCellsRecycling
             dataKey={5}
           />

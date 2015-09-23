@@ -24,8 +24,8 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 ENV NVM_DIR /usr/local/nvm
 
 # install node
-ENV NODE_VERSION v4.1.0
-ENV NODE_BRANCH node/v4.1.0
+ENV NODE_VERSION v4.1.1
+ENV NODE_BRANCH node/v4.1.1
 # ENV NODE_VERSION 2.5.0
 # ENV NODE_BRANCH io.js/v2.5.0
 

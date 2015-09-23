@@ -67,7 +67,7 @@ class ShiftHospitalTable extends React.Component {
           const table = [];
           for (let i = 0; i < newObj.length; i++) {
             const date = moment(newObj[i].date).format('YYYY-MM-DD');
-            table.push([newObj[i].shiftID, newObj[i].status, '...', `$ ${newObj[i].payPerHour}`, `${newObj[i].shiftDuration} hrs`, newObj[i].unit, date, `${newObj[i].shiftStartHour} hrs`]);
+            table.push([newObj[i].shiftID, newObj[i].status, '...', `$ ${newObj[i].payPerHour}`, `${newObj[i].shiftDuration} hrs`, `$ ${newObj[i].payPerHour * newObj[i].shiftDuration}`, newObj[i].unit, date, `${newObj[i].shiftStartHour} hrs`]);
           }
           return table.reverse();
         }).then(table => {
@@ -152,22 +152,28 @@ class ShiftHospitalTable extends React.Component {
             dataKey={4}
           />
           <Column
+            label='Total Payment'
+            flexGrow={1}
+            width={120}
+            dataKey={5}
+          />
+          <Column
             label='Unit'
             flexGrow={1}
             width={100}
-            dataKey={5}
+            dataKey={6}
           />
           <Column
             label='Date'
             flexGrow={1}
             width={150}
-            dataKey={6}
+            dataKey={7}
           />
           <Column
             label='Time'
             flexGrow={1}
             width={70}
-            dataKey={7}
+            dataKey={8}
           />
         </Table>
       </div>

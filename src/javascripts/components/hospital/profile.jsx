@@ -43,19 +43,6 @@ class ProfileList extends React.Component {
                 href='/#/hospital/profile/security'
                 label='Security'
                 secondary />
-              <br/>
-              <FlatButton
-                linkButton
-                href='/#/hospital/profile/address'
-                label='Address'
-                secondary />
-              <br/>
-              <FlatButton
-                linkButton
-                href='/#/hospital/profile/phone'
-                label='Phone'
-                secondary />
-              <br/>
             </div>
           </div>
         </div>

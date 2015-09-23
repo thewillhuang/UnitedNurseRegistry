@@ -17,6 +17,7 @@ import facilityApi from '../../actions/webapi/facilityApi.js';
 import facilityPhoneApi from '../../actions/webapi/facilityPhoneApi.js';
 import geoHashApi from '../../actions/webapi/geoHashApi.js';
 import geohash from 'ngeohash';
+import facilityAddressApi from '../../actions/webapi/facilityAddressApi.js';
 
 class ProfileCard extends React.Component {
   getChildContext() {
@@ -41,12 +42,16 @@ class ProfileCard extends React.Component {
     const emr = this.refs.emr.getValue() || null;
     const phone = this.refs.phone.getValue() || null;
     const address = this.refs.address.getValue() || null;
+    const city = this.refs.city.getValue() || null;
+    const state = this.refs.state.getValue() || null;
+    const zip = this.refs.zip.getValue() || null;
     const ext = this.refs.ext.getValue() || null;
     const phoneType = this.refs.phoneType.getValue() || null;
+    const facilityID = user.scope.facilityID;
     const ctx = this;
     async function getGeoHash() {
       try {
-        return await geoHashApi.addressLatLng(address)
+        await geoHashApi.addressLatLng(`${address} ${city} ${state} ${zip}`)
         .then(data=> {
           console.log(data);
           return geohash.encode(data.lat, data.lng);
@@ -54,6 +59,7 @@ class ProfileCard extends React.Component {
           facilityApi.updateFacilityInfo(user.scope.facilityID, null, name, hash, null, emr);
           ctx.refs.submitted.show();
         });
+        await facilityAddressApi.addFacilityAddress(facilityID, address, null, city, state, zip);
       } catch (e) {
         console.log(e);
       }
@@ -121,6 +127,24 @@ class ProfileCard extends React.Component {
               onEnterKeyDown={this.handleSubmit}
               floatingLabelText='Address'
               hintText='Address' />
+            <br/>
+            <TextField
+              ref='city'
+              onEnterKeyDown={this.handleSubmit}
+              floatingLabelText='City'
+              hintText='City' />
+            <br/>
+            <TextField
+              ref='state'
+              onEnterKeyDown={this.handleSubmit}
+              floatingLabelText='State'
+              hintText='State' />
+            <br/>
+            <TextField
+              ref='zip'
+              onEnterKeyDown={this.handleSubmit}
+              floatingLabelText='Zip'
+              hintText='Zip' />
             <br/>
             <RaisedButton primary label='Upload Facility Images'>
               <input type='file' style={input}></input>

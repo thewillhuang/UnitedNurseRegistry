@@ -45,6 +45,9 @@ class ShiftHospitalTable extends React.Component {
       try {
         // grab geo hash
         const geoHash = await getGeoHash();
+        ctx.setState({
+          geoHash: geoHash,
+        });
         // use geo hash to grab search results
         const latlong = ghash.decode(geoHash.geoHash);
         ctx.setState({
@@ -52,7 +55,7 @@ class ShiftHospitalTable extends React.Component {
           lng: latlong.longitude,
         });
 
-        const data = await shiftApi.getShiftWithGeoHash(geoHash.geoHash, geoHash.geoHashSet, 3);
+        const data = await shiftApi.getShiftWithGeoHash(ctx.state.geoHash.geoHash, ctx.state.geoHash.geoHashSet, 3);
         // save the results
         ctx.setState({
           data: data.rows,

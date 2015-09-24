@@ -33,6 +33,8 @@ module.exports = function authRoutes(app) {
         }).catch(function(err) {
           return err;
         });
+
+        // store the result for future use.
         const q2 = {};
         q2.sql = 'INSERT INTO ?? SET ?';
         const payload = {

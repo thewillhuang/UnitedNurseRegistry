@@ -9,6 +9,7 @@ import specialtyApi from '../../actions/webapi/userSpecialtyApi.js';
 import user from '../../utils/grabUser.js';
 import io from 'socket.io-client';
 import moment from 'moment';
+import PayButton from './payButton.jsx';
 const socket = io.connect();
 
 
@@ -165,6 +166,7 @@ class ShiftHospitalTable extends React.Component {
           defaultValue={moment().format('YYYY-MM-DD')}
           hintText='Shift Date' />
         <RaisedButton label='submit' onClick={this.handleSubmit} secondary/>
+        <PayButton pay={1} />
       </div>
     );
   }

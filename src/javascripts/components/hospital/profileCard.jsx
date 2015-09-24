@@ -42,9 +42,9 @@ class ProfileCard extends React.Component {
     const emr = this.refs.emr.getValue() || null;
     const phone = this.refs.phone.getValue() || null;
     const address = this.refs.address.getValue() || null;
-    const city = this.refs.city.getValue() || null;
-    const state = this.refs.state.getValue() || null;
-    const zip = this.refs.zip.getValue() || null;
+    const city = this.refs.city.getValue() || '';
+    const state = this.refs.state.getValue() || '';
+    const zip = this.refs.zip.getValue() || '';
     const ext = this.refs.ext.getValue() || null;
     const phoneType = this.refs.phoneType.getValue() || null;
     const facilityID = user.scope.facilityID;

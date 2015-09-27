@@ -8,9 +8,9 @@ module.exports = function query(q) {
     return connection.queryAsync(q);
   }).spread(function(rows, fields) {
       // returns the result if there is any
-      return {rows, fields};
-    }).catch(function(error) {
+    return {rows, fields};
+  }).catch(function(error) {
       // or return the error if there is any
-      return error;
-    });
+    return error;
+  });
 };

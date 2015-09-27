@@ -3,8 +3,9 @@ import mui from 'material-ui';
 import {Table, Column} from 'fixed-data-table';
 import io from 'socket.io-client';
 const ThemeManager = new mui.Styles.ThemeManager();
-import shiftApi from '../../actions/webapi/shiftApi.js';
+// import shiftApi from '../../actions/webapi/shiftApi.js';
 import userSpecialtyApi from '../../actions/webapi/userSpecialtyApi.js';
+import shiftStatusApi from '../../actions/webapi/shiftStatusApi.js';
 // import shiftStatusApi from '../../actions/webapi/shiftStatusApi.js';
 import user from '../../utils/grabUser.js';
 import moment from 'moment';
@@ -17,7 +18,7 @@ const socket = io.connect();
 class ShiftHospitalTable extends React.Component {
   state = {
     table: [
-      ['data', 'data', 'data', 'data', 'data', 'data', 'data'],
+      ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
     ],
   }
 
@@ -40,11 +41,11 @@ class ShiftHospitalTable extends React.Component {
     async function getTableRows() {
       // console.log('this', ctx);
       try {
-        await shiftApi.getActiveHospitalShift(user.scope.facilityID)
+        await shiftStatusApi.getCompletedShift(user.scope.facilityID)
         .then(res=> {
           return res.rows;
         }).then(rows => {
-          // console.log(rows);
+          console.log(rows);
           // get useful information shiftID, fk_Shift_specialtyID, status, Viewed %, Pay Per Hour, Unit, Date and Time, fk_Shift_userID
           return rows.map(obj => {
             // console.log('ctx', ctx.state, obj);
@@ -52,9 +53,6 @@ class ShiftHospitalTable extends React.Component {
             newObj.shiftID = obj.shiftID;
             newObj.specialtyID = obj.fk_Shift_specialtyID;
             newObj.unit = ctx.state.specialty[`${obj.fk_Shift_specialtyID}`];
-            obj.open === 1
-            ? newObj.status = 'Open'
-            : newObj.status = 'Pending';
             newObj.payPerHour = obj.payPerHour;
             newObj.shiftDuration = obj.shiftDuration;
             newObj.date = obj.date;
@@ -64,12 +62,9 @@ class ShiftHospitalTable extends React.Component {
         }).then(newObj => {
           // construct the table
           const table = [];
-          const today = moment().format('YYYY-MM-DD');
           for (let i = 0; i < newObj.length; i++) {
             const date = moment(newObj[i].date).format('YYYY-MM-DD');
-            if (date >= today) {
-              table.push([newObj[i].shiftID, newObj[i].status, '...', `$ ${newObj[i].payPerHour}`, `${newObj[i].shiftDuration} hrs`, `$ ${newObj[i].payPerHour * newObj[i].shiftDuration}`, newObj[i].unit, date, `${newObj[i].shiftStartHour} hrs`]);
-            }
+            table.push([newObj[i].shiftID, 'complete', `$ ${newObj[i].payPerHour}`, `${newObj[i].shiftDuration} hrs`, `$ ${newObj[i].payPerHour * newObj[i].shiftDuration}`, newObj[i].unit, date, `${newObj[i].shiftStartHour} hrs`]);
           }
           return table.reverse();
         }).then(table => {
@@ -122,60 +117,54 @@ class ShiftHospitalTable extends React.Component {
           rowHeight={50}
           rowGetter={this.rowGetter}
           rowsCount={this.state.table.length}
-          width={700}
+          width={1050}
           height={500}
           headerHeight={50}>
           <Column
-            label='ID'
-            width={70}
+            label='Shift ID'
+            width={110}
             dataKey={0}
           />
           <Column
             label='Status'
-            width={80}
+            width={100}
             dataKey={1}
-          />
-          <Column
-            label='Viewed %'
-            width={80}
-            dataKey={2}
-            flexGrow={1}
           />
           <Column
             label='Pay Per Hour'
             flexGrow={1}
-            width={80}
-            dataKey={3}
+            width={160}
+            dataKey={2}
           />
           <Column
             label='Duration'
             flexGrow={1}
-            width={80}
-            dataKey={4}
+            width={100}
+            dataKey={3}
           />
           <Column
             label='Total Payment'
             flexGrow={1}
             width={120}
-            dataKey={5}
+            dataKey={4}
           />
           <Column
             label='Unit'
             flexGrow={1}
             width={100}
-            dataKey={6}
+            dataKey={5}
           />
           <Column
             label='Date'
             flexGrow={1}
             width={150}
-            dataKey={7}
+            dataKey={6}
           />
           <Column
             label='Time'
             flexGrow={1}
-            width={70}
-            dataKey={8}
+            width={120}
+            dataKey={7}
           />
         </Table>
       </div>

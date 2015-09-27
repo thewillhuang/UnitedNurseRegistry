@@ -24,6 +24,10 @@ class ShiftHospitalTable extends React.Component {
     };
   }
 
+  state = {
+    shiftID: null,
+  }
+
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
@@ -94,8 +98,11 @@ class ShiftHospitalTable extends React.Component {
       // then, store the shift with the specialtyID
       .then(res => {
         return shiftApi.createShift(facilityID, res.specialtyID, shiftStartHour, shiftDuration, payPerHour, date, shiftDressCode);
-      }).then(()=> {
-        // console.log(saved);
+      }).then((saved)=> {
+        console.log(saved);
+        ctx.setState({
+          shiftID: saved.rows.insertId,
+        });
         ctx.refs.specialty.clearValue();
         // ctx.refs.startHour.clearValue();
         // ctx.refs.duration.clearValue();
@@ -111,6 +118,7 @@ class ShiftHospitalTable extends React.Component {
   }
 
   render() {
+    console.log(this.state);
     return (
       <div className='profileCardInputWrap'>
         <Snackbar
@@ -166,7 +174,6 @@ class ShiftHospitalTable extends React.Component {
           defaultValue={moment().format('YYYY-MM-DD')}
           hintText='Shift Date' />
         <RaisedButton label='submit' onClick={this.handleSubmit} secondary/>
-        <PayButton pay={1} />
       </div>
     );
   }

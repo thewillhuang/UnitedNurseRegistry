@@ -152,6 +152,12 @@ React.render((
           });
         }}/>
 
+        <Route path='invoice' getComponents={(location, cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./components/hospital/invoice.jsx'));
+          });
+        }}/>
+
         <Route path='profile' getComponents={(location, cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/hospital/profile.jsx'));

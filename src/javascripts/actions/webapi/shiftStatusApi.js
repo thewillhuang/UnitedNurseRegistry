@@ -109,6 +109,20 @@ shiftStatusApi.viewAllShiftByUserID = (userID) => {
     });
 };
 
+shiftStatusApi.getCompletedShift = (facilityID) => {
+  return request
+    .get(`${prefix}/finished/facility/${facilityID}`)
+    .set(token)
+    .endAsync().then(res=> {
+      return res.body;
+    }).catch(err => {
+      window.sessionStorage.clear();
+      window.location.assign('/');
+      return err;
+    });
+};
+
+
 shiftStatusApi.deleteFacilityReview = (facilityID) => {
   return request
     .get(`${prefix}/avg/facility/${facilityID}`)

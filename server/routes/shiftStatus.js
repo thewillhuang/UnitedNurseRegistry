@@ -63,6 +63,19 @@ module.exports = function shiftStatusRoutes(app) {
     }
   })
 
+  // TODO
+  .put('/accept/shift/:shiftID/user/:userID', function* acceptShift() {
+    const user = this.passport.user;
+    const userID = this.params.userID;
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
+      const shiftID = this.params.shiftID;
+      const q = {};
+      q.sql = 'UPDATE ?? SET ? WHERE ?? = ? AND ?? = ?';
+      const set = {open: 0, pending: 0, completed: 0, accepted: 1};
+      q.values = ['shift', set, 'ShiftID', shiftID];
+    }
+  })
+
   // mark shift as pending by shiftID TODO validate facility ID
   .put('/pending/shift/:shiftID/user/:userID/facility/:facilityID', function* markAsPending() {
     const user = this.passport.user;
@@ -102,6 +115,16 @@ module.exports = function shiftStatusRoutes(app) {
     const q = {};
     q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
     q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'open', 1];
+    this.body = yield query(q);
+  })
+
+  // view completed shift from the hospital
+  .get('/finished/facility/:facilityID', function* viewCompletedShiftByHospital() {
+    console.log('called');
+    const facilityID = this.params.facilityID;
+    const q = {};
+    q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
+    q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'completed', 1];
     this.body = yield query(q);
   })
 

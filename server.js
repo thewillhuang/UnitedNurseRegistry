@@ -116,6 +116,7 @@ require('./server/routes/facilityRoutes')(app);
 require('./server/routes/shiftRoutes')(app);
 require('./server/routes/getHash')(app);
 require('./server/routes/referral')(app);
+require('./server/routes/checkout')(app);
 
 // socket io for real time updates
 const server = require('http').createServer(app.callback());

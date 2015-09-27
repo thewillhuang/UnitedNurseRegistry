@@ -1,5 +1,6 @@
 import React from 'react';
 import mui, {RaisedButton} from 'material-ui';
+import checkoutApi from '../../actions/webapi/checkout.js';
 const ThemeManager = new mui.Styles.ThemeManager();
 
 class Checkout extends React.Component {
@@ -10,6 +11,7 @@ class Checkout extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
     pay: React.PropTypes.number.isRequired,
+    shiftID: React.PropTypes.number.isRequired,
   }
 
   getChildContext() {
@@ -22,8 +24,9 @@ class Checkout extends React.Component {
     const handler = window.StripeCheckout.configure({
       key: 'pk_test_pUdeTIh8WRLykG3RSugGr5yg',
       locale: 'auto',
-      token: function(token) {
+      token: async function(token) {
         console.log(token);
+        await checkoutApi.saveCharges();
       },
     });
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import mui, {Snackbar} from 'material-ui';
+import mui, {Snackbar, Dialog, FlatButton} from 'material-ui';
 const ThemeManager = new mui.Styles.ThemeManager();
 import {Table, Column} from 'fixed-data-table';
 import getGeoHash from '../../utils/getGeoHash.js';
@@ -25,7 +25,7 @@ class ShiftHospitalTable extends React.Component {
     ],
     sortBy: 0,
     sortDir: null,
-    focus: null,
+    focus: ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
   }
 
   getChildContext() {
@@ -179,6 +179,21 @@ class ShiftHospitalTable extends React.Component {
     this.setState({
       focus: c,
     });
+    this.refs.comfirm.show();
+  }
+
+  dialogDismiss = () => {
+    this.refs.comfirm.dismiss();
+  }
+
+  dialogOkay = () => {
+    this.refs.comfirm.dismiss();
+    this.refs.recomfirm.show();
+  }
+
+  dialogAccept = () => {
+    this.refs.recomfirm.dismiss();
+    console.log('accept job ', this.state.focus[0]);
   }
 
   render() {
@@ -189,8 +204,53 @@ class ShiftHospitalTable extends React.Component {
       sortDirArrow = this.state.sortDir === SortTypes.DESC ? ' ↓' : ' ↑';
     }
 
+    const customActions = [
+      <FlatButton
+        label='Cancel'
+        secondary
+        onTouchTap={this.dialogDismiss} />,
+      <FlatButton
+        label='I Accept'
+        primary
+        onTouchTap={this.dialogOkay} />,
+    ];
+
+    const reComfirmActions = [
+      <FlatButton
+        label='Cancel'
+        secondary
+        onTouchTap={this.dialogDismiss} />,
+      <FlatButton
+        label='I Am Sure'
+        primary
+        onTouchTap={this.dialogAccept} />,
+    ];
+
     return (
+
       <div>
+        <Dialog
+          ref='comfirm'
+          title='Comfirm Contract'
+          actions={customActions}
+          modal={this.state.modal}>
+          Do you want to accept shift #<b>{this.state.focus[0] }</b> from <b>{this.state.focus[1] }</b>. The hospital will pay you <b>{this.state.focus[4] }</b> as an emplyee or <b>{this.state.focus[5] }</b> as an independent contractor.
+          The shift starts at <b>{this.state.focus[9] }</b> at <b>{this.state.focus[10] }</b> in <b>{this.state.focus[3]}</b> and last for <b>{this.state.focus[2]}</b>.
+          <br/>
+          <br/>
+          Failuare to show up without 2 hours notification before will adversely affect your chance of finding another job on this platform.
+        </Dialog>
+        <Dialog
+          ref='recomfirm'
+          title='reComfirmActions'
+          actions={reComfirmActions}
+          modal={this.state.modal}>
+          Are you sure you want to accept shift #<b>{this.state.focus[0] }</b> from <b>{this.state.focus[1] }</b>. The hospital will pay you <b>{this.state.focus[4] }</b> as an emplyee or <b>{this.state.focus[5] }</b> as an independent contractor.
+          The shift starts at <b>{this.state.focus[9] }</b> at <b>{this.state.focus[10] }</b> in <b>{this.state.focus[3]}</b> and last for <b>{this.state.focus[2]}</b>.
+          <br/>
+          <br/>
+          <b>Failuare to show up without 2 hours notification before will adversely affect your chance of finding another job on this platform.</b>
+        </Dialog>
         <Snackbar
           ref='submitted'
           action='OK'

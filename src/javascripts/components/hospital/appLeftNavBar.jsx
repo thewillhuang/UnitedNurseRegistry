@@ -12,6 +12,7 @@ class AppLeftNavBar extends React.Component {
     balance: '',
     reviews: '',
     referrals: '',
+    invoice: '',
   }
 
   static childContextTypes = {
@@ -48,6 +49,7 @@ class AppLeftNavBar extends React.Component {
         balanceColor: 'rgb(198, 198, 198)',
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'rgb(198, 198, 198)',
+        invoiceColor: 'rgb(198, 198, 198)',
       });
     } else if (route.indexOf('#/hospital/profile') !== -1) {
       this.setState({
@@ -61,11 +63,13 @@ class AppLeftNavBar extends React.Component {
         balanceColor: 'rgb(198, 198, 198)',
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'rgb(198, 198, 198)',
+        invoiceColor: 'rgb(198, 198, 198)',
       });
     } else if (route.indexOf('#/hospital/balance') !== -1) {
       this.setState({
         shift: '',
         profile: '',
+        invoice: '',
         balance: 'isActive',
         reviews: '',
         referrals: '',
@@ -74,11 +78,13 @@ class AppLeftNavBar extends React.Component {
         balanceColor: 'white',
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'rgb(198, 198, 198)',
+        invoiceColor: 'rgb(198, 198, 198)',
       });
     } else if (route.indexOf('#/hospital/reviews') !== -1) {
       this.setState({
         shift: '',
         profile: '',
+        invoice: '',
         balance: '',
         reviews: 'isActive',
         referrals: '',
@@ -87,11 +93,28 @@ class AppLeftNavBar extends React.Component {
         balanceColor: 'rgb(198, 198, 198)',
         reviewsColor: 'white',
         referralsColor: 'rgb(198, 198, 198)',
+        invoiceColor: 'rgb(198, 198, 198)',
       });
-    } else if (route.indexOf('#/hospital/referrals') !== -1) {
+    } else if (route.indexOf('#/hospital/invoice') !== -1) {
       this.setState({
         shift: '',
         profile: '',
+        invoice: 'isActive',
+        balance: '',
+        reviews: '',
+        referrals: '',
+        shiftColor: 'rgb(198, 198, 198)',
+        profileColor: 'rgb(198, 198, 198)',
+        balanceColor: 'rgb(198, 198, 198)',
+        reviewsColor: 'rgb(198, 198, 198)',
+        referralsColor: 'rgb(198, 198, 198)',
+        invoiceColor: 'white',
+      });
+    }  else if (route.indexOf('#/hospital/referrals') !== -1) {
+      this.setState({
+        shift: '',
+        profile: '',
+        invoice: '',
         balance: '',
         reviews: '',
         referrals: 'isActive',
@@ -100,6 +123,7 @@ class AppLeftNavBar extends React.Component {
         balanceColor: 'rgb(198, 198, 198)',
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'white',
+        invoiceColor: 'rgb(198, 198, 198)',
       });
     }
   }
@@ -156,6 +180,16 @@ class AppLeftNavBar extends React.Component {
               <i className={'icon-heart fa-2x ' + this.state.referrals}/>
               <a href='#/hospital/referrals' style={{color: this.state.referralsColor}} className={'appNavText ' + this.state.referrals}>
                 referrals
+              </a>
+            </div>
+          </li>
+          <li
+            onClick={()=> {window.location.assign('/#/hospital/invoice'); }}
+            className={'appNavItems ' + this.state.invoice}>
+            <div className={'appNameItemWrap ' + this.state.invoice}>
+              <i className={'icon-credit-card fa-2x ' + this.state.invoice}/>
+              <a href='#/hospital/invoice' style={{color: this.state.invoiceColor}} className={'appNavText ' + this.state.invoice}>
+                invoice
               </a>
             </div>
           </li>

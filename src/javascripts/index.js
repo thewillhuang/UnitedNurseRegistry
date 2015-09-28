@@ -79,7 +79,7 @@ React.render((
           // profile nested routes
           <Route path='profile' getComponents={(location, cb) => {
             require.ensure([], (require) => {
-              cb(null, require('./components/app/ProfileCard.jsx'));
+              cb(null, require('./components/app/profileCard.jsx'));
             });
           }} />
 
@@ -173,7 +173,7 @@ React.render((
           // profile nested routes
           <Route path='profile' getComponents={(location, cb) => {
             require.ensure([], (require) => {
-              cb(null, require('./components/hospital/ProfileCard.jsx'));
+              cb(null, require('./components/hospital/profileCard.jsx'));
             });
           }} />
 

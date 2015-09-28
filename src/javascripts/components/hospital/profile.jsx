@@ -1,6 +1,6 @@
 import React from 'react';
 import mui, {FlatButton} from 'material-ui';
-import ProfileCard from './ProfileCard.jsx';
+import ProfileCard from './profileCard.jsx';
 // import ShiftFilter from './shiftFilter.jsx';
 // import ShiftHospital from './shiftHospitalTable.jsx';
 const ThemeManager = new mui.Styles.ThemeManager();

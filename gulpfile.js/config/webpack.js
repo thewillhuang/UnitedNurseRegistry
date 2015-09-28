@@ -7,7 +7,7 @@ const webpack = require('webpack');
 module.exports = function(env) {
   const jsSrc = path.resolve(paths.sourceAssets + '/javascripts/');
   const jsDest = paths.publicAssets + '/javascripts/';
-  const publicPath = 'javascripts/';
+  const publicPath = '/javascripts/';
 
   const webpackConfig = {
     context: jsSrc,

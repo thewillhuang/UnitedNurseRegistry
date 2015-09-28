@@ -177,30 +177,6 @@ React.render((
             });
           }} />
 
-          <Route path='workhistory' getComponents={(location, cb) => {
-            require.ensure([], (require) => {
-              cb(null, require('./components/hospital/workHistoryCard.jsx'));
-            });
-          }} />
-
-          <Route path='license' getComponents={(location, cb) => {
-            require.ensure([], (require) => {
-              cb(null, require('./components/hospital/licenseCard.jsx'));
-            });
-          }} />
-
-          <Route path='specialty' getComponents={(location, cb) => {
-            require.ensure([], (require) => {
-              cb(null, require('./components/hospital/specialtyCard.jsx'));
-            });
-          }} />
-
-          <Route path='schedule' getComponents={(location, cb) => {
-            require.ensure([], (require) => {
-              cb(null, require('./components/hospital/scheduleCard.jsx'));
-            });
-          }} />
-
           <Route path='security' getComponents={(location, cb) => {
             require.ensure([], (require) => {
               cb(null, require('./components/hospital/securityCard.jsx'));

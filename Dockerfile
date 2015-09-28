@@ -75,5 +75,4 @@ RUN npm install \
 CMD git pull https://7a7f0d9da87f1f218c309dcb903378776923d801:x-oauth-basic@github.com/thewillhuang/UnitedNurseRegistry.git \
     && npm install \
     && npm run production \
-    && ls \
-    && npm run test;
+    # && npm run test;

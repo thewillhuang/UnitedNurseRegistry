@@ -17,7 +17,7 @@ class ForReferrals extends React.Component {
           <div href='#' className='grid2-item'>
             <i className='fa icon-share fa-2x grid2-i'></i>
             <h1>Connect</h1>
-            <p>Set up an account and Connect to your bank account</p>
+            <p>Set up an account</p>
           </div>
           <div href='#' className='grid2-item'>
             <i className='fa icon-heart fa-2x grid2-i'></i>

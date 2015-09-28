@@ -13,6 +13,7 @@ class AppLeftNavBar extends React.Component {
     reviews: '',
     referrals: '',
     invoice: '',
+    pending: '',
   }
 
   static childContextTypes = {
@@ -45,6 +46,8 @@ class AppLeftNavBar extends React.Component {
         reviews: '',
         referrals: '',
         shiftColor: 'white',
+        pending: '',
+        pendingColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
         balanceColor: 'rgb(198, 198, 198)',
         reviewsColor: 'rgb(198, 198, 198)',
@@ -58,6 +61,8 @@ class AppLeftNavBar extends React.Component {
         balance: '',
         reviews: '',
         referrals: '',
+        pending: '',
+        pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'white',
         balanceColor: 'rgb(198, 198, 198)',
@@ -73,6 +78,8 @@ class AppLeftNavBar extends React.Component {
         balance: 'isActive',
         reviews: '',
         referrals: '',
+        pending: '',
+        pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
         balanceColor: 'white',
@@ -88,6 +95,8 @@ class AppLeftNavBar extends React.Component {
         balance: '',
         reviews: 'isActive',
         referrals: '',
+        pending: '',
+        pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
         balanceColor: 'rgb(198, 198, 198)',
@@ -103,12 +112,31 @@ class AppLeftNavBar extends React.Component {
         balance: '',
         reviews: '',
         referrals: '',
+        pending: '',
+        pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
         balanceColor: 'rgb(198, 198, 198)',
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'rgb(198, 198, 198)',
         invoiceColor: 'white',
+      });
+    }  else if (route.indexOf('#/hospital/pending') !== -1) {
+      this.setState({
+        shift: '',
+        profile: '',
+        invoice: '',
+        balance: '',
+        reviews: '',
+        pending: 'isActive',
+        referrals: '',
+        shiftColor: 'rgb(198, 198, 198)',
+        profileColor: 'rgb(198, 198, 198)',
+        balanceColor: 'rgb(198, 198, 198)',
+        reviewsColor: 'rgb(198, 198, 198)',
+        referralsColor: 'rgb(198, 198, 198)',
+        invoiceColor: 'rgb(198, 198, 198)',
+        pendingColor: 'white',
       });
     }  else if (route.indexOf('#/hospital/referrals') !== -1) {
       this.setState({
@@ -118,6 +146,8 @@ class AppLeftNavBar extends React.Component {
         balance: '',
         reviews: '',
         referrals: 'isActive',
+        pending: '',
+        pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
         balanceColor: 'rgb(198, 198, 198)',
@@ -140,6 +170,26 @@ class AppLeftNavBar extends React.Component {
               <i className={'icon-briefcase fa-2x ' + this.state.shift}/>
               <a href='#/hospital/shifts' style={{color: this.state.shiftColor}} className={'appNavText ' + this.state.shift}>
                 Shifts
+              </a>
+            </div>
+          </li>
+          <li
+            onClick={()=> {window.location.assign('/#/hospital/pending'); }}
+            className={'appNavItems ' + this.state.pending}>
+            <div className={'appNameItemWrap ' + this.state.pending}>
+              <i className={'icon-check fa-2x ' + this.state.pending}/>
+              <a href='#/hospital/pending' style={{color: this.state.pendingColor}} className={'appNavText ' + this.state.pending}>
+                pending shifts
+              </a>
+            </div>
+          </li>
+          <li
+            onClick={()=> {window.location.assign('/#/hospital/invoice'); }}
+            className={'appNavItems ' + this.state.invoice}>
+            <div className={'appNameItemWrap ' + this.state.invoice}>
+              <i className={'icon-credit-card fa-2x ' + this.state.invoice}/>
+              <a href='#/hospital/invoice' style={{color: this.state.invoiceColor}} className={'appNavText ' + this.state.invoice}>
+                invoice
               </a>
             </div>
           </li>
@@ -180,16 +230,6 @@ class AppLeftNavBar extends React.Component {
               <i className={'icon-heart fa-2x ' + this.state.referrals}/>
               <a href='#/hospital/referrals' style={{color: this.state.referralsColor}} className={'appNavText ' + this.state.referrals}>
                 referrals
-              </a>
-            </div>
-          </li>
-          <li
-            onClick={()=> {window.location.assign('/#/hospital/invoice'); }}
-            className={'appNavItems ' + this.state.invoice}>
-            <div className={'appNameItemWrap ' + this.state.invoice}>
-              <i className={'icon-credit-card fa-2x ' + this.state.invoice}/>
-              <a href='#/hospital/invoice' style={{color: this.state.invoiceColor}} className={'appNavText ' + this.state.invoice}>
-                invoice
               </a>
             </div>
           </li>

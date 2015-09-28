@@ -14,7 +14,6 @@ RUN apt-get update && apt-get install -y \
       build-essential \
       python \
       curl \
-      mysql-server-5.6 \
       git;
 
 #enable sourcing in docker

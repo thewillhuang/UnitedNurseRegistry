@@ -4,6 +4,7 @@ const ThemeManager = new mui.Styles.ThemeManager();
 import {Table, Column} from 'fixed-data-table';
 import getGeoHash from '../../utils/getGeoHash.js';
 import shiftApi from '../../actions/webapi/shiftApi.js';
+import shiftStatusApi from '../../actions/webapi/shiftStatusApi.js';
 import io from 'socket.io-client';
 const socket = io.connect();
 import _ from 'lodash';
@@ -11,6 +12,7 @@ import ghash from 'ngeohash';
 import moment from 'moment';
 import geolib from 'geolib';
 import calcIc from '../../utils/icPay.js';
+import user from '../../utils/grabUser.js';
 import calcW2 from '../../utils/w2Pay.js';
 
 const SortTypes = {
@@ -194,6 +196,7 @@ class ShiftHospitalTable extends React.Component {
   dialogAccept = () => {
     this.refs.recomfirm.dismiss();
     console.log('accept job ', this.state.focus[0]);
+    shiftStatusApi.markShiftAsAccepted(this.state.focus[0], user.scope.userID);
   }
 
   render() {
@@ -242,7 +245,7 @@ class ShiftHospitalTable extends React.Component {
         </Dialog>
         <Dialog
           ref='recomfirm'
-          title='reComfirmActions'
+          title='Are you sure?'
           actions={reComfirmActions}
           modal={this.state.modal}>
           Are you sure you want to accept shift #<b>{this.state.focus[0] }</b> from <b>{this.state.focus[1] }</b>. The hospital will pay you <b>{this.state.focus[4] }</b> as an emplyee or <b>{this.state.focus[5] }</b> as an independent contractor.

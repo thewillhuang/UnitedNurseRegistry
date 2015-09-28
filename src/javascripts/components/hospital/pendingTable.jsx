@@ -41,7 +41,7 @@ class ShiftHospitalTable extends React.Component {
     async function getTableRows() {
       // console.log('this', ctx);
       try {
-        await shiftStatusApi.getCompletedShift(user.scope.facilityID)
+        await shiftStatusApi.getPendingApprovalShift(user.scope.facilityID)
         .then(res=> {
           return res.rows;
         }).then(rows => {
@@ -64,14 +64,7 @@ class ShiftHospitalTable extends React.Component {
           const table = [];
           for (let i = 0; i < newObj.length; i++) {
             const date = moment(newObj[i].date).format('YYYY-MM-DD');
-            table.push([
-              newObj[i].shiftID,
-              'complete', `$ ${newObj[i].payPerHour}`,
-              `${newObj[i].shiftDuration} hrs`,
-              `$ ${newObj[i].payPerHour * newObj[i].shiftDuration}`,
-              newObj[i].unit, date,
-              `${newObj[i].shiftStartHour}`,
-            ]);
+            table.push([newObj[i].shiftID, 'accepted', `$ ${newObj[i].payPerHour}`, `${newObj[i].shiftDuration} hrs`, `$ ${newObj[i].payPerHour * newObj[i].shiftDuration}`, newObj[i].unit, date, `${newObj[i].shiftStartHour}`]);
           }
           return table.reverse();
         }).then(table => {

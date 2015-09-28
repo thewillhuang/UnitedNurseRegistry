@@ -70,6 +70,32 @@ shiftStatusApi.markShiftAsPending = (shiftID, userID, facilityID) => {
     });
 };
 
+shiftStatusApi.markShiftAsAccepted = (shiftID, userID) => {
+  return request
+    .put(`${prefix}/accept/shift/${shiftID}/user/${userID}`)
+    .set(token)
+    .endAsync().then(res => {
+      return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('/');
+      return err;
+    });
+};
+
+shiftStatusApi.getPendingApprovalShift = (facilityID) => {
+  return request
+    .get(`${prefix}/accepted/facility/${facilityID}`)
+    .set(token)
+    .endAsync().then(res => {
+      return res.body;
+    }).catch(err => {
+      window.sessionStorage.clear();
+      window.location.assign('/');
+      return err;
+    });
+};
+
 shiftStatusApi.markShiftAsOpen = (shiftID, facilityID) => {
   return request
     .put(`${prefix}/open/shift/${shiftID}/facility/${facilityID}`)

@@ -158,6 +158,12 @@ React.render((
           });
         }}/>
 
+        <Route path='pending' getComponents={(location, cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./components/hospital/pending.jsx'));
+          });
+        }}/>
+
         <Route path='profile' getComponents={(location, cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/hospital/profile.jsx'));

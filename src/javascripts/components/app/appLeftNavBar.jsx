@@ -15,6 +15,8 @@ class AppLeftNavBar extends React.Component {
     balance: '',
     reviews: '',
     referrals: '',
+    pending: '',
+    approved: '',
   }
 
   static childContextTypes = {
@@ -46,6 +48,10 @@ class AppLeftNavBar extends React.Component {
         reviews: '',
         referrals: '',
         shiftColor: 'white',
+        pending: '',
+        approved: '',
+        approvedColor: 'rgb(198, 198, 198)',
+        pendingColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
         balanceColor: 'rgb(198, 198, 198)',
         reviewsColor: 'rgb(198, 198, 198)',
@@ -58,8 +64,46 @@ class AppLeftNavBar extends React.Component {
         balance: '',
         reviews: '',
         referrals: '',
+        pending: '',
+        approved: '',
+        approvedColor: 'rgb(198, 198, 198)',
+        pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'white',
+        balanceColor: 'rgb(198, 198, 198)',
+        reviewsColor: 'rgb(198, 198, 198)',
+        referralsColor: 'rgb(198, 198, 198)',
+      });
+    } else if (route.indexOf('#/app/pending') !== -1) {
+      this.setState({
+        shift: '',
+        profile: '',
+        balance: '',
+        reviews: '',
+        referrals: '',
+        pending: 'isActive',
+        approved: '',
+        approvedColor: 'rgb(198, 198, 198)',
+        pendingColor: 'white',
+        shiftColor: 'rgb(198, 198, 198)',
+        profileColor: 'rgb(198, 198, 198)',
+        balanceColor: 'rgb(198, 198, 198)',
+        reviewsColor: 'rgb(198, 198, 198)',
+        referralsColor: 'rgb(198, 198, 198)',
+      });
+    } else if (route.indexOf('#/app/approved') !== -1) {
+      this.setState({
+        shift: '',
+        profile: '',
+        balance: '',
+        reviews: '',
+        referrals: '',
+        pending: '',
+        approved: 'isActive',
+        approvedColor: 'white',
+        pendingColor: 'rgb(198, 198, 198)',
+        shiftColor: 'rgb(198, 198, 198)',
+        profileColor: 'rgb(198, 198, 198)',
         balanceColor: 'rgb(198, 198, 198)',
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'rgb(198, 198, 198)',
@@ -71,6 +115,10 @@ class AppLeftNavBar extends React.Component {
         balance: 'isActive',
         reviews: '',
         referrals: '',
+        pending: '',
+        approved: '',
+        approvedColor: 'rgb(198, 198, 198)',
+        pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
         balanceColor: 'white',
@@ -84,6 +132,10 @@ class AppLeftNavBar extends React.Component {
         balance: '',
         reviews: 'isActive',
         referrals: '',
+        pending: '',
+        approved: '',
+        approvedColor: 'rgb(198, 198, 198)',
+        pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
         balanceColor: 'rgb(198, 198, 198)',
@@ -97,6 +149,10 @@ class AppLeftNavBar extends React.Component {
         balance: '',
         reviews: '',
         referrals: 'isActive',
+        pending: '',
+        approved: '',
+        approvedColor: 'rgb(198, 198, 198)',
+        pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
         balanceColor: 'rgb(198, 198, 198)',
@@ -117,6 +173,26 @@ class AppLeftNavBar extends React.Component {
               <i className={'icon-briefcase fa-2x ' + this.state.shift}/>
               <a href='#/app/shifts' style={{color: this.state.shiftColor}} className={'appNavText ' + this.state.shift}>
                 Shifts
+              </a>
+            </div>
+          </li>
+          <li
+            onClick={()=> {window.location.assign('/#/app/pending'); }}
+            className={'appNavItems ' + this.state.pending} >
+            <div className={'appNameItemWrap ' + this.state.pending}>
+              <i className={'icon-clock fa-2x ' + this.state.pending}/>
+              <a href='#/app/pending' style={{color: this.state.pendingColor}} className={'appNavText ' + this.state.pending}>
+                Pending Shifts
+              </a>
+            </div>
+          </li>
+          <li
+            onClick={()=> {window.location.assign('/#/app/approved'); }}
+            className={'appNavItems ' + this.state.approved} >
+            <div className={'appNameItemWrap ' + this.state.approved}>
+              <i className={'icon-check fa-2x ' + this.state.approved}/>
+              <a href='#/app/approved' style={{color: this.state.approvedColor}} className={'appNavText ' + this.state.approved}>
+                Approved Shifts
               </a>
             </div>
           </li>

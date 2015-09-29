@@ -1,7 +1,7 @@
 import React from 'react';
 import mui from 'material-ui';
 import {
-  Line as LineChart
+  Line as LineChart,
 } from 'react-chartjs';
 const ThemeManager = new mui.Styles.ThemeManager();
 

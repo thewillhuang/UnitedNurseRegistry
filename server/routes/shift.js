@@ -82,6 +82,14 @@ module.exports = function shiftRoutes(app) {
     this.body = yield query(q);
   })
 
+  .get('/accepted/user/:userID', function* grabAcceptedByUserId() {
+    const userID = this.params.userID;
+    const q = {};
+    q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
+    q.values = ['shift', 'fk_Shift_userID', userID, 'accepted', 1];
+    this.body = yield query(q);
+  })
+
   // view all the open shifts by location and based on distance --> returns shift information, including facility info
   // get
   .post('/geohash/:geohash/precision/:precision', function* grabOpenShiftByGeohash() {

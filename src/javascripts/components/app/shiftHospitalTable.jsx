@@ -76,6 +76,7 @@ class ShiftHospitalTable extends React.Component {
         // change array of object to array of arrays for table user who what where when
         const table = [];
         const rows = data.rows;
+        const today = moment().subtract(12, 'hours').format('YYYY-MM-DD');
         for (let i = 0; i < rows.length; i++) {
           const el = rows[i];
           if (el.facilityGeohash) {
@@ -88,22 +89,26 @@ class ShiftHospitalTable extends React.Component {
             );
             const distMi = distKm / 1000 * 0.621371;
             const total = el.payPerHour * el.shiftDuration;
-            table.push([
-              el.shiftID,
-              el.facilityName,
-              // el.payPerHour,
-              el.shiftDuration + ' hrs',
-              el.specialty,
-              '$ ' + calcW2(total),
-              '$ ' + calcIc(total),
-              el.facilityEMR,
-              el.shiftDressCode,
-              distMi.toFixed(2),
-              moment(el.date).format('MM-DD-YYYY'),
-              el.shiftStartHour,
-              moment(el.shift_modified).format('MM-DD-YYYY, h:mm a'),
-            ]);
-            // console.log(ctx.state.lat, ctx.state.lng, lat, lng, distKm, distMi);
+            const date = moment(el.date).format('YYYY-MM-DD');
+            if (date >= today) {
+              table.push([
+                el.shiftID,
+                el.facilityID,
+                el.facilityName,
+                // el.payPerHour,
+                el.shiftDuration + ' hrs',
+                el.specialty,
+                '$ ' + calcW2(total),
+                '$ ' + calcIc(total),
+                el.facilityEMR,
+                el.shiftDressCode,
+                distMi.toFixed(2),
+                date,
+                el.shiftStartHour,
+                moment(el.shift_modified).format('YYYY-MM-DD, h:mm a'),
+              ]);
+              // console.log(ctx.state.lat, ctx.state.lng, lat, lng, distKm, distMi);
+            }
           }
         }
         // console.log('table', table);
@@ -195,8 +200,19 @@ class ShiftHospitalTable extends React.Component {
 
   dialogAccept = () => {
     this.refs.recomfirm.dismiss();
-    console.log('accept job ', this.state.focus[0]);
-    shiftStatusApi.markShiftAsAccepted(this.state.focus[0], user.scope.userID);
+    const ctx = this;
+    async function checkThenUpdate() {
+      const userAccepted = await shiftApi.getAccepted(user.scope.userID);
+      if (!userAccepted.rows.length) {
+        console.log('accept job ', ctx.state.focus[0]);
+        await shiftStatusApi.markShiftAsAccepted(ctx.state.focus[0], user.scope.userID);
+        socket.emit('shift updated', {facility: ctx.state.focus[1]});
+      } else {
+        ctx.refs.error.show();
+      }
+    }
+
+    checkThenUpdate();
   }
 
   render() {
@@ -213,7 +229,7 @@ class ShiftHospitalTable extends React.Component {
         secondary
         onTouchTap={this.dialogDismiss} />,
       <FlatButton
-        label='I Accept'
+        label='Request for Approval'
         primary
         onTouchTap={this.dialogOkay} />,
     ];
@@ -224,7 +240,7 @@ class ShiftHospitalTable extends React.Component {
         secondary
         onTouchTap={this.dialogDismiss} />,
       <FlatButton
-        label='I Am Sure'
+        label='Request for Approval'
         primary
         onTouchTap={this.dialogAccept} />,
     ];
@@ -260,6 +276,12 @@ class ShiftHospitalTable extends React.Component {
           message='Shift Added'
           autoHideDuration={1000}
           />
+        <Snackbar
+          ref='error'
+          action='OK'
+          message='ERROR! You may only queue for one shift a day.'
+          autoHideDuration={10000}
+          />
         <Table
           rowHeight={50}
           rowGetter={this.rowGetter}
@@ -280,7 +302,7 @@ class ShiftHospitalTable extends React.Component {
             headerRenderer={this._renderHeader}
             width={150}
             allowCellsRecycling
-            dataKey={1}
+            dataKey={2}
           />
           <Column
             label={'Duration' + (this.state.sortBy === 2 ? sortDirArrow : '')}
@@ -288,7 +310,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={100}
             allowCellsRecycling
-            dataKey={2}
+            dataKey={3}
           />
           <Column
             label={'Specialty' + (this.state.sortBy === 3 ? sortDirArrow : '')}
@@ -296,7 +318,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={100}
             allowCellsRecycling
-            dataKey={3}
+            dataKey={4}
           />
           <Column
             label={'Pay As Employee' + (this.state.sortBy === 4 ? sortDirArrow : '')}
@@ -304,7 +326,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={150}
             allowCellsRecycling
-            dataKey={4}
+            dataKey={5}
           />
           <Column
             label={'Pay As IC' + (this.state.sortBy === 5 ? sortDirArrow : '')}
@@ -312,7 +334,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={100}
             allowCellsRecycling
-            dataKey={5}
+            dataKey={6}
           />
           <Column
             label={'EMR' + (this.state.sortBy === 6 ? sortDirArrow : '')}
@@ -320,7 +342,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={110}
             allowCellsRecycling
-            dataKey={6}
+            dataKey={7}
           />
           <Column
             label={'Dress Code' + (this.state.sortBy === 7 ? sortDirArrow : '')}
@@ -328,7 +350,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={120}
             allowCellsRecycling
-            dataKey={7}
+            dataKey={8}
           />
           <Column
             label={'Miles' + (this.state.sortBy === 8 ? sortDirArrow : '')}
@@ -336,7 +358,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={70}
             allowCellsRecycling
-            dataKey={8}
+            dataKey={9}
           />
           <Column
             label={'Start Date' + (this.state.sortBy === 9 ? sortDirArrow : '')}
@@ -344,7 +366,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={100}
             allowCellsRecycling
-            dataKey={9}
+            dataKey={10}
           />
           <Column
             label={'Start Time' + (this.state.sortBy === 10 ? sortDirArrow : '')}
@@ -352,7 +374,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={110}
             allowCellsRecycling
-            dataKey={10}
+            dataKey={11}
           />
           <Column
             label={'Modified' + (this.state.sortBy === 11 ? sortDirArrow : '')}
@@ -360,7 +382,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={2}
             width={120}
             allowCellsRecycling
-            dataKey={11}
+            dataKey={12}
           />
         </Table>
       </div>

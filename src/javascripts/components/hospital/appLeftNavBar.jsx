@@ -14,6 +14,7 @@ class AppLeftNavBar extends React.Component {
     referrals: '',
     invoice: '',
     pending: '',
+    approved: '',
   }
 
   static childContextTypes = {
@@ -47,6 +48,8 @@ class AppLeftNavBar extends React.Component {
         referrals: '',
         shiftColor: 'white',
         pending: '',
+        approved: '',
+        approvedColor: 'rgb(198, 198, 198)',
         pendingColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
         balanceColor: 'rgb(198, 198, 198)',
@@ -62,9 +65,29 @@ class AppLeftNavBar extends React.Component {
         reviews: '',
         referrals: '',
         pending: '',
+        approved: '',
+        approvedColor: 'rgb(198, 198, 198)',
         pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'white',
+        balanceColor: 'rgb(198, 198, 198)',
+        reviewsColor: 'rgb(198, 198, 198)',
+        referralsColor: 'rgb(198, 198, 198)',
+        invoiceColor: 'rgb(198, 198, 198)',
+      });
+    } else if (route.indexOf('#/hospital/approved') !== -1) {
+      this.setState({
+        shift: '',
+        profile: '',
+        balance: '',
+        reviews: '',
+        referrals: '',
+        pending: '',
+        approved: 'isActive',
+        approvedColor: 'white',
+        pendingColor: 'rgb(198, 198, 198)',
+        shiftColor: 'rgb(198, 198, 198)',
+        profileColor: 'rgb(198, 198, 198)',
         balanceColor: 'rgb(198, 198, 198)',
         reviewsColor: 'rgb(198, 198, 198)',
         referralsColor: 'rgb(198, 198, 198)',
@@ -79,6 +102,8 @@ class AppLeftNavBar extends React.Component {
         reviews: '',
         referrals: '',
         pending: '',
+        approved: '',
+        approvedColor: 'rgb(198, 198, 198)',
         pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
@@ -96,6 +121,8 @@ class AppLeftNavBar extends React.Component {
         reviews: 'isActive',
         referrals: '',
         pending: '',
+        approved: '',
+        approvedColor: 'rgb(198, 198, 198)',
         pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
@@ -113,6 +140,8 @@ class AppLeftNavBar extends React.Component {
         reviews: '',
         referrals: '',
         pending: '',
+        approved: '',
+        approvedColor: 'rgb(198, 198, 198)',
         pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
@@ -130,6 +159,8 @@ class AppLeftNavBar extends React.Component {
         reviews: '',
         pending: 'isActive',
         referrals: '',
+        approved: '',
+        approvedColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
         balanceColor: 'rgb(198, 198, 198)',
@@ -147,6 +178,8 @@ class AppLeftNavBar extends React.Component {
         reviews: '',
         referrals: 'isActive',
         pending: '',
+        approved: '',
+        approvedColor: 'rgb(198, 198, 198)',
         pendingColor: 'rgb(198, 198, 198)',
         shiftColor: 'rgb(198, 198, 198)',
         profileColor: 'rgb(198, 198, 198)',
@@ -177,9 +210,19 @@ class AppLeftNavBar extends React.Component {
             onClick={()=> {window.location.assign('/#/hospital/pending'); }}
             className={'appNavItems ' + this.state.pending}>
             <div className={'appNameItemWrap ' + this.state.pending}>
-              <i className={'icon-check fa-2x ' + this.state.pending}/>
+              <i className={'icon-clock fa-2x ' + this.state.pending}/>
               <a href='#/hospital/pending' style={{color: this.state.pendingColor}} className={'appNavText ' + this.state.pending}>
-                pending shifts
+                Pending shifts
+              </a>
+            </div>
+          </li>
+          <li
+            onClick={()=> {window.location.assign('/#/hospital/approved'); }}
+            className={'appNavItems ' + this.state.approved}>
+            <div className={'appNameItemWrap ' + this.state.approved}>
+              <i className={'icon-check fa-2x ' + this.state.approved}/>
+              <a href='#/hospital/approved' style={{color: this.state.approvedColor}} className={'appNavText ' + this.state.approved}>
+                Approved shifts
               </a>
             </div>
           </li>

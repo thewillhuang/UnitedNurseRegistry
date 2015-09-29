@@ -9,7 +9,7 @@ import specialtyApi from '../../actions/webapi/userSpecialtyApi.js';
 import user from '../../utils/grabUser.js';
 import io from 'socket.io-client';
 import moment from 'moment';
-import PayButton from './payButton.jsx';
+// import PayButton from './payButton.jsx';
 const socket = io.connect();
 
 

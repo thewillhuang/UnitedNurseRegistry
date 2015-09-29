@@ -32,6 +32,19 @@ shiftApi.getShift = (shiftID) => {
     });
 };
 
+shiftApi.getAccepted = (userID) => {
+  return request
+    .get(`${prefix}/accepted/user/${userID}`)
+    .set(token)
+    .endAsync().then(res=>{
+      return res.body;
+    }).catch(err=>{
+      window.sessionStorage.clear();
+      window.location.assign('/');
+      return err;
+    });
+};
+
 shiftApi.getAllHospitalShift = (facilityID) => {
   return request
     .get(prefix + '/facility/' + facilityID)

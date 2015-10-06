@@ -4,12 +4,14 @@ import token from '../../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
 const prefix = '/api/useraddress';
 const userAddressApi = {};
+import _ from 'lodash';
 
 userAddressApi.createUserAddress = (userID, address, address2, city, state, zip, geohash) => {
+  const payload = _.omit({address, address2, city, state, zip, geohash}, _.isNull);
   return request
     .post(`${prefix}/user/${userID}`)
     .set(token)
-    .send({address, address2, city, state, zip, geohash})
+    .send(payload)
     .endAsync().then(res => {
       return res.body;
     }).catch(function(err) {
@@ -20,9 +22,10 @@ userAddressApi.createUserAddress = (userID, address, address2, city, state, zip,
 };
 
 userAddressApi.updateUserAddress = (userID, addressID, address, address2, city, state, zip, geohash) => {
+  const payload = _.omit({address, address2, city, state, zip, geohash}, _.isNull);
   return request
     .put(`${prefix}/user/${userID}/address/${addressID}`)
-    .send({address, address2, city, state, zip, geohash})
+    .send(payload)
     .set(token)
     .endAsync().then(res => {
       return res.body;

@@ -81,6 +81,7 @@ class AppLeftNavBar extends React.Component {
         profile: '',
         balance: '',
         reviews: '',
+        invoice: '',
         referrals: '',
         pending: '',
         approved: 'isActive',

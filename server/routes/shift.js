@@ -72,23 +72,121 @@ module.exports = function shiftRoutes(app) {
     }
   })
 
+  .get('/open/:facilityID', function* grabOpenShift() {
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
+      const q = {};
+      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
+      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'open', 1];
+      this.body = yield query(q);
+    } else {
+      this.status = 406;
+      this.body = {message: 'no permission'};
+    }
+  })
+
+  .get('/pending/:facilityID', function* grabOpenShift() {
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
+      const q = {};
+      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
+      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'pending', 1];
+      this.body = yield query(q);
+    } else {
+      this.status = 406;
+      this.body = {message: 'no permission'};
+    }
+  })
+
+  .get('/accepted/:facilityID', function* grabOpenShift() {
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
+      const q = {};
+      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
+      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'accepted', 1];
+      this.body = yield query(q);
+    } else {
+      this.status = 406;
+      this.body = {message: 'no permission'};
+    }
+  })
+
+  .get('/completed/:facilityID', function* grabOpenShift() {
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
+      const q = {};
+      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
+      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'completed', 1];
+      this.body = yield query(q);
+    } else {
+      this.status = 406;
+      this.body = {message: 'no permission'};
+    }
+  })
+
+
   // view all scheduled shifts by userID --> returns a list of shift information
   // get
   .get('/user/:userID', function* grabShiftInfoByUserId() {
+    const user = this.passport.user;
     const userID = this.params.userID;
-    const q = {};
-    q.sql = 'SELECT * FROM ?? WHERE ?? = ?';
-    q.values = ['shift', 'fk_Shift_userID', userID];
-    this.body = yield query(q);
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
+      const q = {};
+      q.sql = 'SELECT * FROM ?? WHERE ?? = ?';
+      q.values = ['shift', 'fk_Shift_userID', userID];
+      this.body = yield query(q);
+    } else {
+      this.status = 406;
+      this.body = {message: 'no permission'};
+    }
   })
 
   .get('/accepted/user/:userID', function* grabAcceptedByUserId() {
+    const user = this.passport.user;
     const userID = this.params.userID;
-    const q = {};
-    q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-    q.values = ['shift', 'fk_Shift_userID', userID, 'accepted', 1];
-    this.body = yield query(q);
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
+      const q = {};
+      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
+      q.values = ['shift', 'fk_Shift_userID', userID, 'accepted', 1];
+      this.body = yield query(q);
+    } else {
+      this.status = 406;
+      this.body = {message: 'no permission'};
+    }
   })
+
+  .get('/pending/user/:userID', function* grabPendingByUserId() {
+    const user = this.passport.user;
+    const userID = this.params.userID;
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
+      const q = {};
+      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
+      q.values = ['shift', 'fk_Shift_userID', userID, 'pending', 1];
+      this.body = yield query(q);
+    } else {
+      this.status = 406;
+      this.body = {message: 'no permission'};
+    }
+  })
+
+  .get('/completed/user/:userID', function* grabCompletedByUserId() {
+    const userID = this.params.userID;
+    const user = this.passport.user;
+    if (user.scope.userID && user.scope.userID.toString() === userID) {
+      const q = {};
+      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
+      q.values = ['shift', 'fk_Shift_userID', userID, 'completed', 1];
+      this.body = yield query(q);
+    } else {
+      this.status = 406;
+      this.body = {message: 'no permission'};
+    }
+  })
+
 
   // view all the open shifts by location and based on distance --> returns shift information, including facility info
   // get
@@ -106,7 +204,7 @@ module.exports = function shiftRoutes(app) {
     // take off any elements that is not unique
     const set = _.uniq(trimmedHashSet);
     const q = {};
-    q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? OR ?? = ? AND LEFT(??, ?) IN (?)';
+    q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (?)';
     const selectShift = ['shift.shiftID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date', 'shift.open', 'shift.shiftDressCode', 'shift.pending', 'shift.shift_modified'];
     const specialty = ['specialty.specialty'];
     const facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR', 'facility.facilityGeohash'];
@@ -118,7 +216,6 @@ module.exports = function shiftRoutes(app) {
       'Specialty',
       'specialty.specialtyID', 'fk_Shift_specialtyID',
       'shift.open', 1,
-      'shift.pending', 1,
       'facility.facilityGeohash', precision,
       set,
     ];

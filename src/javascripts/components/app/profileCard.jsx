@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import mui, {TextField, RaisedButton} from 'material-ui';
 const ThemeManager = new mui.Styles.ThemeManager();
@@ -65,7 +63,27 @@ class ProfileCard extends React.Component {
               floatingLabelText='Social Security Number'
               hintText='Social Security Number' />
             <br/>
-            <RaisedButton primary={true} label='Choose an Image'>
+            <TextField
+              ref='address'
+              floatingLabelText='Address'
+              hintText='Address' />
+            <br/>
+            <TextField
+              ref='city'
+              floatingLabelText='City'
+              hintText='City' />
+            <br/>
+            <TextField
+              ref='state'
+              floatingLabelText='State'
+              hintText='State' />
+            <br/>
+            <TextField
+              ref='zip'
+              floatingLabelText='Zip'
+              hintText='Zip' />
+            <br/>
+            <RaisedButton primary label='Choose an Image'>
               <input type='file' style={input}></input>
             </RaisedButton>
 

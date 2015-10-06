@@ -19,6 +19,7 @@ module.exports = function shiftStatusRoutes(app) {
     this.body = yield query(q);
   })
 
+  // view count
   // insert view count by unique userID TODO validate userID
   .post('/viewed/shift/:shiftID/user/:userID', function* addViews() {
     const user = this.passport.user;
@@ -47,21 +48,7 @@ module.exports = function shiftStatusRoutes(app) {
     this.body = yield query(q);
   })
 
-  // mark shift as completed by shiftID TODO validate facility ID
-  .put('/completed/shift/:shiftID/facility/:facilityID', function* markAsComplete() {
-    const user = this.passport.user;
-    const facilityID = this.params.facilityID;
-    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
-      const shiftID = this.params.shiftID;
-      const q = {};
-      q.sql = 'UPDATE ?? SET ? WHERE ?? = ? AND ?? = ?';
-      const set = {open: 0, pending: 0, completed: 1};
-      q.values = ['shift', set, 'shiftID', shiftID, 'fk_Shift_facilityID', facilityID];
-      this.body = yield query(q);
-    } else {
-      this.body = {message: 'no permission'};
-    }
-  })
+  // end view count
 
   // user accept a shift
   .put('/accept/shift/:shiftID/user/:userID', function* acceptShift() {
@@ -80,20 +67,7 @@ module.exports = function shiftStatusRoutes(app) {
     }
   })
 
-  // facility getting shifts that are open
-  .get('/accepted/facility/:facilityID', function* getAcceptedShiftFromHospitalID() {
-    console.log('get accepted shift called');
-    const user = this.passport.user;
-    const facilityID = this.params.facilityID;
-    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
-      console.log('passed token test');
-      const q = {};
-      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'accepted', 1];
-      this.body = yield query(q);
-    }
-  })
-
+  // hospital setting to pending
   // mark shift as pending by shiftID TODO validate facility ID
   .put('/pending/shift/:shiftID/user/:userID/facility/:facilityID', function* markAsPending() {
     const user = this.passport.user;
@@ -111,6 +85,7 @@ module.exports = function shiftStatusRoutes(app) {
     }
   })
 
+  // hospital setting back to open
   // mark shift as open by shiftID TODO validate facility ID
   .put('/open/shift/:shiftID/facility/:facilityID', function* markAsOpen() {
     const user = this.passport.user;
@@ -124,6 +99,37 @@ module.exports = function shiftStatusRoutes(app) {
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};
+    }
+  })
+
+  // hospital setting to completed
+  // mark shift as completed by shiftID TODO validate facility ID
+  .put('/completed/shift/:shiftID/facility/:facilityID', function* markAsComplete() {
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
+      const shiftID = this.params.shiftID;
+      const q = {};
+      q.sql = 'UPDATE ?? SET ? WHERE ?? = ? AND ?? = ?';
+      const set = {open: 0, pending: 0, completed: 1};
+      q.values = ['shift', set, 'shiftID', shiftID, 'fk_Shift_facilityID', facilityID];
+      this.body = yield query(q);
+    } else {
+      this.body = {message: 'no permission'};
+    }
+  })
+
+  // facility getting shifts that are open
+  .get('/accepted/facility/:facilityID', function* getAcceptedShiftFromHospitalID() {
+    console.log('get accepted shift called');
+    const user = this.passport.user;
+    const facilityID = this.params.facilityID;
+    if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
+      console.log('passed token test');
+      const q = {};
+      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
+      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'accepted', 1];
+      this.body = yield query(q);
     }
   })
 

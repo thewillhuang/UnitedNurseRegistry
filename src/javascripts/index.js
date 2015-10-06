@@ -70,6 +70,18 @@ React.render((
           });
         }}/>
 
+        <Route path='pending' getComponents={(location, cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./components/app/pending.jsx'));
+          });
+        }}/>
+
+        <Route path='approved' getComponents={(location, cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./components/app/approved.jsx'));
+          });
+        }}/>
+
         <Route path='profile' getComponents={(location, cb) => {
           require.ensure([], (require) => {
             cb(null, require('./components/app/profile.jsx'));
@@ -163,6 +175,13 @@ React.render((
             cb(null, require('./components/hospital/pending.jsx'));
           });
         }}/>
+
+        <Route path='approved' getComponents={(location, cb) => {
+          require.ensure([], (require) => {
+            cb(null, require('./components/hospital/approved.jsx'));
+          });
+        }}/>
+
 
         <Route path='profile' getComponents={(location, cb) => {
           require.ensure([], (require) => {

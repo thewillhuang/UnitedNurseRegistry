@@ -77,7 +77,7 @@ module.exports = function shiftStatusRoutes(app) {
       const shiftID = this.params.shiftID;
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ? AND ?? = ?';
-      const set = {open: 0, pending: 1, completed: 0, fk_Shift_userID: userID};
+      const set = {open: 0, pending: 1, completed: 0, accepted: 0, fk_Shift_userID: userID};
       q.values = ['shift', set, 'shiftID', shiftID, 'fk_Shift_facilityID', facilityID];
       this.body = yield query(q);
     } else {

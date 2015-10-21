@@ -127,7 +127,7 @@ class ShiftHospitalTable extends React.Component {
       console.log('table connected');
     });
 
-    socket.on('update shift', function(data) {
+    socket.on('shift updated', function(data) {
       console.log('server received a new shift regarding facility', data.facility);
       if (_.includes(ctx.state.facilityIDs, data.facility)) {
         ctx.refs.submitted.show();
@@ -199,10 +199,12 @@ class ShiftHospitalTable extends React.Component {
   }
 
   dialogAccept = () => {
+    console.log('dialogAccept called');
     this.refs.recomfirm.dismiss();
     const ctx = this;
     async function checkThenUpdate() {
-      const userAccepted = await shiftApi.getAccepted(user.scope.userID);
+      const userAccepted = await shiftApi.getUserAccepted(user.scope.userID);
+      console.log(userAccepted);
       if (!userAccepted.rows.length) {
         console.log('accept job ', ctx.state.focus[0]);
         await shiftStatusApi.markShiftAsAccepted(ctx.state.focus[0], user.scope.userID);
@@ -216,7 +218,7 @@ class ShiftHospitalTable extends React.Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     let sortDirArrow = '';
 
     if (this.state.sortDir !== null) {

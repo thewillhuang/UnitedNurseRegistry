@@ -202,7 +202,7 @@ class ShiftHospitalTable extends React.Component {
     this.refs.recomfirm.dismiss();
     const ctx = this;
     async function checkThenUpdate() {
-      const userAccepted = await shiftApi.getAccepted(user.scope.userID);
+      const userAccepted = await shiftApi.getUserAccepted(user.scope.userID);
       if (!userAccepted.rows.length) {
         console.log('accept job ', ctx.state.focus[0]);
         await shiftStatusApi.markShiftAsAccepted(ctx.state.focus[0], user.scope.userID);

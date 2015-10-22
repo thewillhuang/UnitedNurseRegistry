@@ -4,17 +4,11 @@ import mui, {FlatButton, Dialog} from 'material-ui';
 import {Table, Column} from 'fixed-data-table';
 import io from 'socket.io-client';
 const ThemeManager = new mui.Styles.ThemeManager();
-// import shiftApi from '../../actions/webapi/shiftApi.js';
 import userSpecialtyApi from '../../actions/webapi/userSpecialtyApi.js';
 import shiftStatusApi from '../../actions/webapi/shiftStatusApi.js';
-// import shiftStatusApi from '../../actions/webapi/shiftStatusApi.js';
 import user from '../../utils/grabUser.js';
 import moment from 'moment';
-// import Promise from 'bluebird';
 const socket = io.connect();
-// const MenuItem = require('material-ui/lib/menus/menu-item');
-// const MenuDivider = require('material-ui/lib/menus/menu-divider');
-// import MediaQuery from 'react-responsive';
 
 class ShiftHospitalTable extends React.Component {
   state = {
@@ -100,7 +94,7 @@ class ShiftHospitalTable extends React.Component {
     });
 
     // console.log('about to run socket.on');
-    socket.on('update shift', function(data) {
+    socket.on('updated', function(data) {
       // console.log('hospital received a new shift :D ');
       console.log(data.facility, user.scope.facilityID);
       if (data.facility === user.scope.facilityID) {
@@ -138,7 +132,7 @@ class ShiftHospitalTable extends React.Component {
       // console.log(setAsPending);
       if (setAsPending.rows.affectedRows !== 0) {
         console.log('emit update shift');
-        socket.emit('shift updated', {facility: user.scope.facilityID});
+        socket.emit('update', {facility: user.scope.facilityID});
       }
     }
 

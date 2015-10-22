@@ -122,8 +122,8 @@ require('./server/routes/checkout')(app);
 const server = require('http').createServer(app.callback());
 const io = require('socket.io')(server);
 io.on('connection', function(socket) {
-  socket.on('shift updated', function(data) {
-    io.sockets.emit('update shift', data);
+  socket.on('update', function(data) {
+    io.sockets.emit('updated', data);
   });
 });
 

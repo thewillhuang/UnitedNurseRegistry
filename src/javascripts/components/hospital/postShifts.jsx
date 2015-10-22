@@ -110,7 +110,7 @@ class ShiftHospitalTable extends React.Component {
         // ctx.refs.date.clearValue();
         // ctx.refs.shiftDressCode.clearValue();
         ctx.refs.submitted.show();
-        socket.emit('shift updated', {facility: user.scope.facilityID});
+        socket.emit('update', {facility: user.scope.facilityID});
       });
     } else {
       this.validateShift();

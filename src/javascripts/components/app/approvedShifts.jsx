@@ -127,7 +127,7 @@ class ShiftHospitalTable extends React.Component {
       console.log('table connected');
     });
 
-    socket.on('update shift', function(data) {
+    socket.on('updated', function(data) {
       console.log('server received a new shift regarding facility', data.facility);
       if (_.includes(ctx.state.facilityIDs, data.facility)) {
         ctx.refs.submitted.show();
@@ -206,7 +206,7 @@ class ShiftHospitalTable extends React.Component {
       if (!userAccepted.rows.length) {
         console.log('accept job ', ctx.state.focus[0]);
         await shiftStatusApi.markShiftAsAccepted(ctx.state.focus[0], user.scope.userID);
-        socket.emit('shift updated', {facility: ctx.state.focus[1]});
+        socket.emit('update', {facility: ctx.state.focus[1]});
       } else {
         ctx.refs.error.show();
       }

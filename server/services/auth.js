@@ -53,7 +53,7 @@ passport.use(new LocalStrategy({
       return !isMatch ?
         this.done = [false, {message: 'incorrect password'}] :
         this.done = [
-          {email: email, scope: {userID: this.userID}},
+          {scope: {userID: this.userID}},
           {message: 'Auth Success'},
         ];
     }).catch(NoAccountError, function() {
@@ -86,7 +86,7 @@ passport.use('facility-login', new LocalStrategy({
       return !isMatch ?
         this.done = [false, {message: 'incorrect password'}] :
         this.done = [
-          {email: email, scope: {facilityID: this.facilityID}},
+          {scope: {facilityID: this.facilityID}},
           {message: 'Auth Success'},
         ];
     }).catch(NoAccountError, function() {
@@ -126,7 +126,7 @@ passport.use('facility-signup', new LocalStrategy({
       // console.log('facility q2', result);
       const insertId = result.rows.insertId;
       this.done = [
-        {email: email, scope: {facilityID: insertId}},
+        {scope: {facilityID: insertId}},
         {message: 'Registeration successful'},
       ];
     }).catch(EmailTaken, function() {
@@ -163,7 +163,7 @@ passport.use('local-signup', new LocalStrategy({
     }).then(function(result) {
       const insertId = result.rows.insertId;
       this.done = [
-        {email: email, scope: {userID: insertId}},
+        {scope: {userID: insertId}},
         {message: 'Registeration successful'},
       ];
     }).catch(EmailTaken, function() {

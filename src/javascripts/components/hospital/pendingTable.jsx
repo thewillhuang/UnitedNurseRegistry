@@ -127,9 +127,7 @@ class ShiftHospitalTable extends React.Component {
     this.refs.recomfirm.dismiss();
     const ctx = this;
     async function checkThenUpdate() {
-      // console.log(user.scope.facilityID);
       const setAsPending = await shiftStatusApi.markShiftAsPending(ctx.state.focus[0], ctx.state.focus[8], user.scope.facilityID);
-      // console.log(setAsPending);
       if (setAsPending.rows.affectedRows !== 0) {
         console.log('emit update shift');
         socket.emit('update', {facility: user.scope.facilityID});

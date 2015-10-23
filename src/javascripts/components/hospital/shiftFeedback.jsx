@@ -40,7 +40,7 @@ class ShiftHospitalTable extends React.Component {
     async function getTableRows() {
       // console.log('this', ctx);
       try {
-        await shiftApi.getActiveHospitalShift(user.scope.facilityID)
+        await shiftApi.getOpenHospitalShift(user.scope.facilityID)
         .then(res=> {
           return res.rows;
         }).then(rows => {

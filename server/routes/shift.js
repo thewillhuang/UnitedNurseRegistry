@@ -150,8 +150,18 @@ module.exports = function shiftRoutes(app) {
     const userID = this.params.userID;
     if (user.scope.userID && user.scope.userID.toString() === userID) {
       const q = {};
-      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-      q.values = ['shift', 'fk_Shift_userID', userID, 'accepted', 1];
+      q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND ?? = ?';
+      const selectShift = ['shift.shiftID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date', 'shift.open', 'shift.shiftDressCode', 'shift.pending', 'shift.shift_modified'];
+      const specialty = ['specialty.specialty'];
+      const facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR', 'facility.facilityGeohash'];
+      q.values = [
+        selectShift, specialty, facility,
+        'shift',
+        'facility',
+        'shift.fk_Shift_facilityID', 'facility.facilityID',
+        'Specialty',
+        'specialty.specialtyID', 'fk_Shift_specialtyID',
+        'fk_Shift_userID', userID, 'accepted', 1];
       this.body = yield query(q);
     } else {
       this.status = 406;
@@ -164,8 +174,18 @@ module.exports = function shiftRoutes(app) {
     const userID = this.params.userID;
     if (user.scope.userID && user.scope.userID.toString() === userID) {
       const q = {};
-      q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-      q.values = ['shift', 'fk_Shift_userID', userID, 'pending', 1];
+      q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND ?? = ?';
+      const selectShift = ['shift.shiftID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date', 'shift.open', 'shift.shiftDressCode', 'shift.pending', 'shift.shift_modified'];
+      const specialty = ['specialty.specialty'];
+      const facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR', 'facility.facilityGeohash'];
+      q.values = [
+        selectShift, specialty, facility,
+        'shift',
+        'facility',
+        'shift.fk_Shift_facilityID', 'facility.facilityID',
+        'Specialty',
+        'specialty.specialtyID', 'fk_Shift_specialtyID',
+        'fk_Shift_userID', userID, 'pending', 1];
       this.body = yield query(q);
     } else {
       this.status = 406;

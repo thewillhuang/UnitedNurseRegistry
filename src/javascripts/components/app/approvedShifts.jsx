@@ -57,8 +57,11 @@ class ShiftHospitalTable extends React.Component {
           lng: latlong.longitude,
         });
 
-        const data = await shiftApi.getShiftWithGeoHash(ctx.state.geoHash.geoHash, ctx.state.geoHash.geoHashSet, 3);
-        // save the results
+        console.log('getUserAccepted called');
+        const data = await shiftApi.getUserPending(user.scope.userID);
+
+        console.log(data);
+
         ctx.setState({
           data: data.rows,
         });
@@ -79,36 +82,45 @@ class ShiftHospitalTable extends React.Component {
         const today = moment().subtract(12, 'hours').format('YYYY-MM-DD');
         for (let i = 0; i < rows.length; i++) {
           const el = rows[i];
+          console.log(el);
+          let latlng = '';
+          let lat = '';
+          let lng = '';
+          let distKm = '';
+          let distMi = 0;
+          let total = '';
           if (el.facilityGeohash) {
-            const latlng = ghash.decode(el.facilityGeohash);
-            const lat = latlng.latitude;
-            const lng = latlng.longitude;
-            const distKm = geolib.getDistance(
+            latlng = ghash.decode(el.facilityGeohash);
+            lat = latlng.latitude;
+            lng = latlng.longitude;
+            distKm = geolib.getDistance(
               {latitude: lat, longitude: lng},
               {latitude: ctx.state.lat, longitude: ctx.state.lng}
             );
-            const distMi = distKm / 1000 * 0.621371;
-            const total = el.payPerHour * el.shiftDuration;
-            const date = moment(el.date).format('YYYY-MM-DD');
-            if (date >= today) {
-              table.push([
-                el.shiftID,
-                el.facilityID,
-                el.facilityName,
-                // el.payPerHour,
-                el.shiftDuration + ' hrs',
-                el.specialty,
-                '$ ' + calcW2(total),
-                '$ ' + calcIc(total),
-                el.facilityEMR,
-                el.shiftDressCode,
-                distMi.toFixed(2),
-                date,
-                el.shiftStartHour,
-                moment(el.shift_modified).format('YYYY-MM-DD, h:mm a'),
-              ]);
-              // console.log(ctx.state.lat, ctx.state.lng, lat, lng, distKm, distMi);
-            }
+            distMi = distKm / 1000 * 0.621371;
+            total = el.payPerHour * el.shiftDuration;
+          }
+          const date = moment(el.date).format('YYYY-MM-DD');
+          console.log(date, today);
+          if (date >= today) {
+            console.log('today passed');
+            table.push([
+              el.shiftID,
+              el.facilityID,
+              el.facilityName,
+              // el.payPerHour,
+              el.shiftDuration + ' hrs',
+              el.specialty,
+              '$ ' + calcW2(total),
+              '$ ' + calcIc(total),
+              el.facilityEMR,
+              el.shiftDressCode,
+              distMi.toFixed(2),
+              date,
+              el.shiftStartHour,
+              moment(el.shift_modified).format('YYYY-MM-DD, h:mm a'),
+            ]);
+            console.log(ctx.state.lat, ctx.state.lng, lat, lng, distKm, distMi);
           }
         }
         // console.log('table', table);
@@ -130,7 +142,7 @@ class ShiftHospitalTable extends React.Component {
     socket.on('updated', function(data) {
       console.log('server received a new shift regarding facility', data.facility);
       if (_.includes(ctx.state.facilityIDs, data.facility)) {
-        ctx.refs.submitted.show();
+        // ctx.refs.submitted.show();
         search();
       }
     });
@@ -199,10 +211,12 @@ class ShiftHospitalTable extends React.Component {
   }
 
   dialogAccept = () => {
+    console.log('dialogAccept called');
     this.refs.recomfirm.dismiss();
     const ctx = this;
     async function checkThenUpdate() {
-      const userAccepted = await shiftApi.getAccepted(user.scope.userID);
+      const userAccepted = await shiftApi.getUserAccepted(user.scope.userID);
+      console.log(userAccepted);
       if (!userAccepted.rows.length) {
         console.log('accept job ', ctx.state.focus[0]);
         await shiftStatusApi.markShiftAsAccepted(ctx.state.focus[0], user.scope.userID);
@@ -216,7 +230,7 @@ class ShiftHospitalTable extends React.Component {
   }
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     let sortDirArrow = '';
 
     if (this.state.sortDir !== null) {

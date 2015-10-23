@@ -127,8 +127,11 @@ class ShiftHospitalTable extends React.Component {
       console.log('table connected');
     });
 
+    // console.log(this, ctx);
+
     socket.on('updated', function(data) {
       console.log('server received a new shift regarding facility', data.facility);
+      // console.log(ctx);
       if (_.includes(ctx.state.facilityIDs, data.facility)) {
         ctx.refs.submitted.show();
         search();

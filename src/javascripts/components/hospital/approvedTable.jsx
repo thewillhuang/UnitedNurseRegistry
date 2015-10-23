@@ -3,9 +3,8 @@ import mui from 'material-ui';
 import {Table, Column} from 'fixed-data-table';
 import io from 'socket.io-client';
 const ThemeManager = new mui.Styles.ThemeManager();
-// import shiftApi from '../../actions/webapi/shiftApi.js';
+import shiftApi from '../../actions/webapi/shiftApi.js';
 import userSpecialtyApi from '../../actions/webapi/userSpecialtyApi.js';
-import shiftStatusApi from '../../actions/webapi/shiftStatusApi.js';
 // import shiftStatusApi from '../../actions/webapi/shiftStatusApi.js';
 import user from '../../utils/grabUser.js';
 import moment from 'moment';
@@ -41,7 +40,7 @@ class ShiftHospitalTable extends React.Component {
     async function getTableRows() {
       // console.log('this', ctx);
       try {
-        await shiftStatusApi.getPendingApprovalShift(user.scope.facilityID)
+        await shiftApi.getPendingHospitalShift(user.scope.facilityID)
         .then(res=> {
           return res.rows;
         }).then(rows => {

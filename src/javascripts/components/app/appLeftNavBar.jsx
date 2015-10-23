@@ -182,7 +182,7 @@ class AppLeftNavBar extends React.Component {
             <div className={'appNameItemWrap ' + this.state.pending}>
               <i className={'icon-clock fa-2x ' + this.state.pending}/>
               <a href='#/app/pending' style={{color: this.state.pendingColor}} className={'appNavText ' + this.state.pending}>
-                Pending Shifts
+                Requested Shifts
               </a>
             </div>
           </li>

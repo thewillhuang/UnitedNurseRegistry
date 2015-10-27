@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 
 class ForHospitals extends React.Component {
@@ -20,7 +18,7 @@ class ForHospitals extends React.Component {
             <p>Post shifts and specify your price</p>
           </div>
           <div href='#' className='grid2-item'>
-            <i className='fa icon-graph fa-2x grid2-i'></i>
+            <i className='fa icon-energy fa-2x grid2-i'></i>
             <h1>Real Time</h1>
             <p>Immediate pricing Feedback from nurses around you. Accept the Bids from the nurses you want.</p>
           </div>

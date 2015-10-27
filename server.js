@@ -106,7 +106,7 @@ app.use(function* ensureAuthenticated(next) {
     yield next;
   } else {
     this.status = 401;
-    this.body = {message: 'Invalid Authorization'};
+    // this.body = {message: 'Invalid Authorization'};
   }
 });
 

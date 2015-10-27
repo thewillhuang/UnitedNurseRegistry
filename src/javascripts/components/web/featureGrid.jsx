@@ -35,9 +35,9 @@ class FeatureGrid extends React.Component {
             <p>You will be paid, guaranteed.</p>
           </div>
           <div href='#' className='grid-item'>
-            <i className='fa icon-screen-smartphone fa-2x grid-i'></i>
-            <h1>Mobile Apps</h1>
-            <p>Control your everything from your mobile device.</p>
+            <i className='fa icon-graph fa-2x grid-i'></i>
+            <h1>Simple Pricing</h1>
+            <p>7% per successful shift. You keep the rest</p>
           </div>
           <div href='#' className='grid-item'>
             <i className='fa icon-magnifier fa-2x grid-i'></i>

@@ -43,13 +43,13 @@ class HomeToolBar extends React.Component {
               marginRight: 10,
             }}
             />
-            <FlatButton href='#signup' label='Sign up' linkButton secondary style={{
+            <FlatButton href='#signup' label='User Sign up' linkButton secondary style={{
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
               marginLeft: 10,
               marginRight: 10,
             }}/>
-            <FlatButton href='#login' label='Login' linkButton secondary style={{
+            <FlatButton href='#login' label='User Login' linkButton secondary style={{
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
               marginLeft: 29,
@@ -74,7 +74,7 @@ class HomeToolBar extends React.Component {
               <MenuItem onClick={()=> {window.location.assign('/#/hospitallogin'); }} primaryText='Hospital Login'/ >
               <MenuItem onClick={()=> {window.location.assign('/#/hospitalsignup'); }} primaryText='Hospital Signup'/ >
               <MenuItem onClick={()=> {window.location.assign('/#/signup'); }} primaryText='User Sign up' />
-              <MenuItem onClick={()=> {window.location.assign('/#/login'); }} primaryText='Login' />
+              <MenuItem onClick={()=> {window.location.assign('/#/login'); }} primaryText='User Login' />
             </IconMenu>
           } title='United Nurse Registry'/>
         </MediaQuery>

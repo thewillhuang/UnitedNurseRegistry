@@ -2,8 +2,7 @@
 const tokenize = module.exports = {};
 const jwt = require('jsonwebtoken');
 const crypto = require('./crypto');
-const cryptos = require('crypto');
-const cert = cryptos.randomBytes(32);
+const cert = require('crypto').randomBytes(32);
 const options = {
   algorithm: 'HS256',
   issuer: 'unr api',

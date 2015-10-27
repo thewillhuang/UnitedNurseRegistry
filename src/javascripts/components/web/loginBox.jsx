@@ -104,7 +104,7 @@ class LoginBox extends React.Component {
           />
           <CardActions>
             <div className='signupButtonWrap'>
-              <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary={true}/>
+              <RaisedButton label='Sign Up' onClick={this.handleSubmit} secondary/>
             </div>
           </CardActions>
         </div>

@@ -171,7 +171,7 @@ describe('referral api', function() {
 
   // start of wrong testing
   // using facility token
-  it('child should set referral for parent', function(done) {
+  it('child should not set referral for parent', function(done) {
     request.post('/api/referral/user/' + r2)
       .expect(406)
       .set(fjwt)
@@ -221,7 +221,7 @@ describe('referral api', function() {
 
   // test using wrong type of token
   // for falsely adding facilities as user
-  it('child facility should set referral for parent', function(done) {
+  it('child facility should not set referral for parent', function(done) {
     request.post('/api/referral/facility/' + r1)
       .expect(406)
       .set(jwt)

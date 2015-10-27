@@ -145,6 +145,13 @@ class SignupBox extends React.Component {
             hintText='Repeat Password'
             type='password'
           />
+          <TextField
+            floatingLabelText='Referral Email (optional)'
+            ref='referral'
+            onEnterKeyDown={this.handleSubmit}
+            hintText='Referral Email (optional)'
+            type='email'
+          />
           <CardActions>
             <div className='signupButtonWrap'>
               <RaisedButton label={this.state.signupButton} onClick={this.handleSubmit} secondary/>

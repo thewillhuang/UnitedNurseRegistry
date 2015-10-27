@@ -9,6 +9,7 @@ import shiftStatusApi from '../../actions/webapi/shiftStatusApi.js';
 import user from '../../utils/grabUser.js';
 import moment from 'moment';
 const socket = io.connect();
+import checkoutApi from '../../actions/webapi/checkout.js';
 
 class ShiftHospitalTable extends React.Component {
   state = {
@@ -123,18 +124,42 @@ class ShiftHospitalTable extends React.Component {
     this.refs.recomfirm.show();
   }
 
-  dialogAccept = () => {
-    this.refs.recomfirm.dismiss();
+  createToken = () => {
     const ctx = this;
-    async function checkThenUpdate() {
-      const setAsPending = await shiftStatusApi.markShiftAsPending(ctx.state.focus[0], ctx.state.focus[8], user.scope.facilityID);
-      if (setAsPending.rows.affectedRows !== 0) {
+    // console.log(ctx.state.focus[0]);
+    const handler = window.StripeCheckout.configure({
+      key: 'pk_test_pUdeTIh8WRLykG3RSugGr5yg',
+      locale: 'auto',
+      token: async function(token) {
+        // console.log('amount', parseInt(ctx.state.focus[4], 10) * 100);
+        console.log('amount', parseInt(ctx.state.focus[4].split(' ')[1], 10));
+        await checkoutApi.saveCharges(token, ctx.state.focus[0], parseInt(ctx.state.focus[4].split(' ')[1], 10) * 100);
+        await ctx.setAsPending();
+      },
+    });
+
+    handler.open({
+      name: 'test',
+      description: '2 widgets',
+      amount: parseInt(ctx.state.focus[4].split(' ')[1], 10) * 100,
+    });
+  }
+
+  setAsPending = () => {
+    const ctx = this;
+    async function set() {
+      const setState = await shiftStatusApi.markShiftAsPending(ctx.state.focus[0], ctx.state.focus[8], user.scope.facilityID);
+      if (setState.rows.affectedRows !== 0) {
         console.log('emit update shift');
         socket.emit('update', {facility: user.scope.facilityID});
       }
     }
+    set();
+  }
 
-    checkThenUpdate();
+  dialogAccept = () => {
+    this.refs.recomfirm.dismiss();
+    this.createToken();
   }
 
   dialogAcceptPending = () => {

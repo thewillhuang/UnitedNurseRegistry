@@ -6,19 +6,20 @@ const request = Promise.promisifyAll(superagent);
 const prefix = '/api/checkout';
 const checkoutApi = {};
 
-// checkoutApi.saveCharges = (token, shiftID, price) => {
-//   return request
-//     .post(`${prefix}/shift/${shiftID}/price/${price}`)
-//     .set(jwt)
-//     .send({token})
-//     .endAsync().then(res => {
-//       return res.body;
-//     }).catch((e)=> {
-//       console.log(e);
-//       window.sessionStorage.clear();
-//       window.location.assign('/');
-//     });
-// };
+checkoutApi.saveCharges = (token, shiftID, price) => {
+  console.log('token', token, 'shiftID', shiftID, 'price', price);
+  return request
+    .post(`${prefix}/shift/${shiftID}/price/${price}`)
+    .set(jwt)
+    .send({token})
+    .endAsync().then(res => {
+      return res.body;
+    }).catch((e)=> {
+      console.log(e);
+      window.sessionStorage.clear();
+      window.location.assign('/');
+    });
+};
 
 checkoutApi.charge = (shiftID) => {
   return request

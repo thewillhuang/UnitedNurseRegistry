@@ -13,7 +13,8 @@ module.exports = function authRoutes(app) {
   .post('/shift/:shiftID/price/:cents', function* saveStripeToken() {
     const shiftID = this.params.shiftID;
     const cents = this.params.cents;
-    const token = JSON.stringify(this.request.body.token);
+    // const token = JSON.stringify(this.request.body.token);
+    const token = this.request.body.token;
     const user = this.passport.user;
     const email = user.email;
     const ctx = this;
@@ -21,14 +22,9 @@ module.exports = function authRoutes(app) {
     q1.sql = 'SELECT ?? AS ? FROM ?? WHERE ?? = ?';
     q1.values = ['fk_Shift_facilityID', 'facilityID', 'Shift', 'shiftID', shiftID];
     const facilityID = yield query(q1);
-    console.log(token);
-    // console.log('called here');
-    // console.log(facilityID.rows[0].facilityID);
-    // console.log(user.scope.facilityID);
     if (user.scope.facilityID && user.scope.facilityID === facilityID.rows[0].facilityID) {
-      console.log('check passed');
-      stripe.customers.create({
-        source: token,
+      yield stripe.customers.create({
+        source: token.id,
         description: email,
       }).then(function(customer) {
         return stripe.charges.create({
@@ -37,16 +33,21 @@ module.exports = function authRoutes(app) {
           customer: customer.id,
         });
       }).then(function(charge) {
+        // '# YOUR CODE: Save the customer ID and other info in a database for later!'
+        console.log(charge);
+        const payload = {};
+        payload.chargeID = charge.id;
+        payload.amount = charge.amount;
         const q = {};
-        q.sql = 'INSERT INTO ?? WHERE ?? = ? SET ?? = ?';
-        q.values = ['Shift', 'shiftID', shiftID, 'stripeToken', charge.customer];
+        q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
+        q.values = ['Shift', payload, 'shiftID', shiftID];
         return q;
       }).then(function(q) {
-        query(q);
+        return query(q);
+      }).then(() => {
         ctx.body = {message: 'charge stored'};
       }).catch(error => {
         ctx.body = {message: error};
-        console.log(error);
       });
     }
   })

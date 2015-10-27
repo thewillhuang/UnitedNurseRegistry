@@ -34,7 +34,7 @@ module.exports = function authRoutes(app) {
         });
       }).then(function(charge) {
         // '# YOUR CODE: Save the customer ID and other info in a database for later!'
-        console.log(charge);
+        // console.log(charge);
         const payload = {};
         payload.chargeID = charge.id;
         payload.amount = charge.amount;

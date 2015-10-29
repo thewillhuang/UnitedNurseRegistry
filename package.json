@@ -38,6 +38,7 @@
     "react-responsive": "0.0.8",
     "react-router": "1.0.0-rc1",
     "react-tap-event-plugin": "^0.1.7",
+    "redux": "^3.0.4",
     "socket.io": "^1.3.7",
     "socket.io-client": "^1.3.7",
     "stripe": "^4.0.0",

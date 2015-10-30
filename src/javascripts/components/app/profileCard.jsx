@@ -12,7 +12,7 @@ const input = {
   opacity: 0,
 };
 
-class ProfileCard extends React.Component {
+export default class ProfileCard extends React.Component {
   getChildContext() {
     return {
       muiTheme: ThemeManager.getCurrentTheme(),
@@ -93,5 +93,3 @@ class ProfileCard extends React.Component {
     );
   }
 }
-
-export default ProfileCard;

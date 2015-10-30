@@ -35,40 +35,40 @@ class Profile extends React.Component {
             <hr className='cardDivider'/>
             <div className='cardBody'>
               <FlatButton
-                linkButton={true}
+                linkButton
                 href='/#/app/profile/profile'
                 label='Profile'
-                secondary={true} />
+                secondary />
               <br/>
               <FlatButton
-                linkButton={true}
+                linkButton
                 href='/#/app/profile/workHistory'
                 label='Work History'
-                secondary={true} />
+                secondary />
               <br/>
               <FlatButton
-                linkButton={true}
+                linkButton
                 href='/#/app/profile/license'
                 label='License and Certifications'
-                secondary={true} />
+                secondary />
               <br/>
               <FlatButton
-                linkButton={true}
+                linkButton
                 href='/#/app/profile/specialty'
                 label='Specialty'
-                secondary={true} />
+                secondary />
               <br/>
               <FlatButton
-                linkButton={true}
+                linkButton
                 href='/#/app/profile/schedule'
                 label='Work Schedule'
-                secondary={true} />
+                secondary />
               <br/>
               <FlatButton
-                linkButton={true}
+                linkButton
                 href='/#/app/profile/security'
                 label='Security'
-                secondary={true} />
+                secondary />
               <br/>
             </div>
           </div>

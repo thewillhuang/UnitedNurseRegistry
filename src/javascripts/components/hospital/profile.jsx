@@ -1,9 +1,9 @@
 import React from 'react';
-import mui, {FlatButton} from 'material-ui';
+import {FlatButton} from 'material-ui';
 import ProfileCard from './profileCard.jsx';
 // import ShiftFilter from './shiftFilter.jsx';
 // import ShiftHospital from './shiftHospitalTable.jsx';
-const ThemeManager = new mui.Styles.ThemeManager();
+// const ThemeManager = new mui.Styles.ThemeManager();
 // const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
 // import MediaQuery from 'react-responsive';
@@ -17,11 +17,11 @@ class ProfileList extends React.Component {
     children: React.PropTypes.node,
   }
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
   render() {
     return (
       <div className='appProfile'>

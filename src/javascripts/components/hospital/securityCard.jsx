@@ -1,15 +1,15 @@
 import React from 'react';
-import mui, {TextField, Snackbar} from 'material-ui';
-const ThemeManager = new mui.Styles.ThemeManager();
+import {TextField, Snackbar} from 'material-ui';
+// const ThemeManager = new mui.Styles.ThemeManager();
 import user from '../../utils/grabUser.js';
 import facilityApi from '../../actions/webapi/facilityApi.js';
 
 class SecurityCard extends React.Component {
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   static childContextTypes = {
     muiTheme: React.PropTypes.object,

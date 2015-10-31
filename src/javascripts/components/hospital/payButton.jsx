@@ -1,7 +1,7 @@
 import React from 'react';
-import mui, {RaisedButton} from 'material-ui';
+import {RaisedButton} from 'material-ui';
 import checkoutApi from '../../actions/webapi/checkout.js';
-const ThemeManager = new mui.Styles.ThemeManager();
+// const ThemeManager = new mui.Styles.ThemeManager();
 
 class Checkout extends React.Component {
   static childContextTypes = {
@@ -14,11 +14,11 @@ class Checkout extends React.Component {
     shiftID: React.PropTypes.number.isRequired,
   }
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   createToken = () => {
     const handler = window.StripeCheckout.configure({

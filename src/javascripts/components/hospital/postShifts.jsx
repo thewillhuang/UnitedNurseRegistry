@@ -1,6 +1,6 @@
 import React from 'react';
-import mui, {TextField, RaisedButton, Snackbar} from 'material-ui';
-const ThemeManager = new mui.Styles.ThemeManager();
+import {TextField, RaisedButton, Snackbar} from 'material-ui';
+// const ThemeManager = new mui.Styles.ThemeManager();
 // const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
 // import MediaQuery from 'react-responsive';
@@ -18,11 +18,11 @@ console.log(specialtyApi);
 console.log(user);
 
 class ShiftHospitalTable extends React.Component {
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   state = {
     shiftID: null,

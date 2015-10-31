@@ -1,6 +1,6 @@
 import React from 'react';
-import mui, {TextField, RaisedButton} from 'material-ui';
-const ThemeManager = new mui.Styles.ThemeManager();
+import {TextField, RaisedButton} from 'material-ui';
+// const ThemeManager = new mui.Styles.ThemeManager();
 
 const input = {
   cursor: 'pointer',
@@ -14,11 +14,11 @@ const input = {
 };
 
 class LicenseCard extends React.Component {
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   static childContextTypes = {
     muiTheme: React.PropTypes.object,

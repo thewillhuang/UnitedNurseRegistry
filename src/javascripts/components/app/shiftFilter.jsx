@@ -1,9 +1,9 @@
 
 
 import React from 'react';
-import mui, {TextField, RadioButton, RadioButtonGroup} from 'material-ui';
+import {TextField, RadioButton, RadioButtonGroup} from 'material-ui';
 import shiftActions from '../../actions/shiftActionCreators.js';
-const ThemeManager = new mui.Styles.ThemeManager();
+// const ThemeManager = new mui.Styles.ThemeManager();
 import shiftStore from '../../stores/shiftStore.js';
 // const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
@@ -16,11 +16,11 @@ class ShiftFilter extends React.Component {
     muiTheme: React.PropTypes.object,
   }
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   componentDidMount() {
     shiftActions.loadCurrent();

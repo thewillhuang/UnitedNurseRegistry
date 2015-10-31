@@ -1,9 +1,9 @@
 // TODO need to change dialog message
 import React from 'react';
-import mui, {FlatButton, Dialog} from 'material-ui';
+import {FlatButton, Dialog} from 'material-ui';
 import {Table, Column} from 'fixed-data-table';
 import io from 'socket.io-client';
-const ThemeManager = new mui.Styles.ThemeManager();
+// const ThemeManager = new mui.Styles.ThemeManager();
 import userSpecialtyApi from '../../actions/webapi/userSpecialtyApi.js';
 import shiftStatusApi from '../../actions/webapi/shiftStatusApi.js';
 import user from '../../utils/grabUser.js';
@@ -23,11 +23,11 @@ class ShiftHospitalTable extends React.Component {
     return this.state.table[rowIndex];
   }
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   static childContextTypes = {
     muiTheme: React.PropTypes.object,

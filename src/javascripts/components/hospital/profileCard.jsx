@@ -1,6 +1,6 @@
 import React from 'react';
-import mui, {TextField, RaisedButton, Snackbar} from 'material-ui';
-const ThemeManager = new mui.Styles.ThemeManager();
+import {TextField, RaisedButton, Snackbar} from 'material-ui';
+// const ThemeManager = new mui.Styles.ThemeManager();
 const input = {
   cursor: 'pointer',
   position: 'absolute',
@@ -20,11 +20,11 @@ import geohash from 'ngeohash';
 import facilityAddressApi from '../../actions/webapi/facilityAddressApi.js';
 
 class ProfileCard extends React.Component {
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   static childContextTypes = {
     muiTheme: React.PropTypes.object,

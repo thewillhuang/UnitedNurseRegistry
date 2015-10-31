@@ -1,15 +1,15 @@
 
 
 import React from 'react';
-import mui, {TextField, Checkbox} from 'material-ui';
-const ThemeManager = new mui.Styles.ThemeManager();
+import {TextField, Checkbox} from 'material-ui';
+// const ThemeManager = new mui.Styles.ThemeManager();
 
 class ScheduleCard extends React.Component {
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   static childContextTypes = {
     muiTheme: React.PropTypes.object,

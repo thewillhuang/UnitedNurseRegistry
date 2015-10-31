@@ -1,10 +1,8 @@
-
-
 import React from 'react';
-import mui, { Card, TextField, CardActions, RaisedButton } from 'material-ui';
+import { Card, TextField, CardActions, RaisedButton } from 'material-ui';
 import request from 'superagent';
 import validator from 'validator';
-const ThemeManager = new mui.Styles.ThemeManager();
+// // const ThemeManager = new mui.Styles.ThemeManager();
 import setToken from '../../utils/setToken.js';
 // console.log(request);
 
@@ -13,11 +11,11 @@ class LoginBox extends React.Component {
     muiTheme: React.PropTypes.object,
   }
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   handleSubmit = ()  => {
     const ctx = this;

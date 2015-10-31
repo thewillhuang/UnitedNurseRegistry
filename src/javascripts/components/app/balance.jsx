@@ -1,9 +1,9 @@
 import React from 'react';
-import mui from 'material-ui';
+// import mui from 'material-ui';
 import {
   Line as LineChart,
 } from 'react-chartjs';
-const ThemeManager = new mui.Styles.ThemeManager();
+// const ThemeManager = new mui.Styles.ThemeManager();
 
 const data = {
   labels: [
@@ -73,11 +73,11 @@ class Balance extends React.Component {
     muiTheme: React.PropTypes.object,
   }
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
   render() {
     return (
       <div className='appShift'>

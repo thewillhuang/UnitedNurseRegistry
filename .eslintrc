@@ -1,11 +1,6 @@
 {
   "extends": "airbnb",
   "rules": {
-    "quotes": [2, "single"],
-    "no-console": 0,
-    "func-names": 0,
-    "strict": [2, "global"],
-    "id-length": 0
   },
   "ecmaFeatures": {
     "modules": false,

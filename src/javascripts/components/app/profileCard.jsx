@@ -1,6 +1,6 @@
 import React from 'react';
-import mui, {TextField, RaisedButton} from 'material-ui';
-const ThemeManager = new mui.Styles.ThemeManager();
+import {TextField, RaisedButton} from 'material-ui';
+// const ThemeManager = new mui.Styles.ThemeManager();
 const input = {
   cursor: 'pointer',
   position: 'absolute',
@@ -13,11 +13,11 @@ const input = {
 };
 
 export default class ProfileCard extends React.Component {
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   static childContextTypes = {
     muiTheme: React.PropTypes.object,

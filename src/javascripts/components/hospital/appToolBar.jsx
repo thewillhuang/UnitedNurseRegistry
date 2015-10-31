@@ -1,8 +1,8 @@
 import React from 'react';
-import mui, {IconMenu, IconButton} from 'material-ui';
+import {IconMenu, IconButton} from 'material-ui';
 const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
-const ThemeManager = new mui.Styles.ThemeManager();
+// const ThemeManager = new mui.Styles.ThemeManager();
 // import MediaQuery from 'react-responsive';
 import user from '../../utils/grabUser.js';
 import facilityApi from '../../actions/webapi/facilityApi.js';
@@ -17,11 +17,11 @@ class AppBar extends React.Component {
     muiTheme: React.PropTypes.object,
   }
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   componentDidMount() {
     const ctx = this;

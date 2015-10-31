@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import Home from './components/web/home.jsx';
 import { Router, Route, IndexRoute} from 'react-router';
 // import { history } from 'react-router/lib/HashHistory';
@@ -19,7 +20,7 @@ class Root extends React.Component {
   }
 }
 
-React.render((
+ReactDOM.render((
   <Router>
     <Route path='/' component={Root}>
       // web routes

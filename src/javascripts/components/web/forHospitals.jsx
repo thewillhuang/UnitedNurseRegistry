@@ -1,6 +1,6 @@
 import React from 'react';
 
-class ForHospitals extends React.Component {
+export default class ForHospitals extends React.Component {
   render() {
     return (
       <div>
@@ -35,5 +35,3 @@ class ForHospitals extends React.Component {
     );
   }
 }
-
-export default ForHospitals;

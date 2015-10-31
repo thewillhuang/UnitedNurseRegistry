@@ -1,3 +1,2 @@
-'use strict';
-require('babel/register');
+require('babel-core/register');
 require('./server.js');

@@ -1,6 +1,6 @@
 import React from 'react';
 import mui, {Snackbar, Dialog, FlatButton} from 'material-ui';
-const ThemeManager = new mui.Styles.ThemeManager();
+// const ThemeManager = new mui.Styles.ThemeManager();
 import {Table, Column} from 'fixed-data-table';
 import getGeoHash from '../../utils/getGeoHash.js';
 import shiftApi from '../../actions/webapi/shiftApi.js';
@@ -30,11 +30,11 @@ class ShiftHospitalTable extends React.Component {
     focus: ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
   }
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   rowGetter = (rowIndex) => {
     return this.state.table[rowIndex];

@@ -1,8 +1,8 @@
 import React from 'react';
-import mui from 'material-ui';
+// // import mui from 'material-ui';
 import AppBar from '../hospital/appToolBar.jsx';
 import AppNavBar from '../hospital/appLeftNavBar.jsx';
-const ThemeManager = new mui.Styles.ThemeManager();
+// // const ThemeManager = new mui.Styles.ThemeManager();
 
 class Hospital extends React.Component {
   static childContextTypes = {
@@ -13,11 +13,11 @@ class Hospital extends React.Component {
     children: React.PropTypes.node,
   }
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   componentDidMount() {
     this.checkToken();

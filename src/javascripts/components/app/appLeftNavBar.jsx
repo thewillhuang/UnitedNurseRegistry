@@ -1,13 +1,17 @@
 
 
 import React from 'react';
-import mui from 'material-ui';
+// import mui from 'material-ui';
 // const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
-const ThemeManager = new mui.Styles.ThemeManager();
+// const ThemeManager = new mui.Styles.ThemeManager();
 // import MediaQuery from 'react-responsive';
 
 class AppLeftNavBar extends React.Component {
+
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object,
+  }
   state = {
     userName: 'User',
     shift: '',
@@ -19,15 +23,11 @@ class AppLeftNavBar extends React.Component {
     approved: '',
   }
 
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   componentDidMount() {
     window.addEventListener('hashchange', this.hashChange, false);

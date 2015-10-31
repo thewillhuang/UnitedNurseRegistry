@@ -1,19 +1,19 @@
 import React from 'react';
-import mui from 'material-ui';
+// // import mui from 'material-ui';
 import HomeToolBar from './homeToolBar.jsx';
 import HospitalLoginBox from './hospitalLoginBox.jsx';
 import Footer from './footer.jsx';
-const ThemeManager = new mui.Styles.ThemeManager();
+// // const ThemeManager = new mui.Styles.ThemeManager();
 
 class Hospital extends React.Component {
   static childContextTypes = {
     muiTheme: React.PropTypes.object,
   }
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
   render() {
     return (
       <div>

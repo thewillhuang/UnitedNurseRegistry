@@ -1,10 +1,15 @@
 import React from 'react';
-import mui from 'material-ui';
+// import mui from 'material-ui';
 // const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
-const ThemeManager = new mui.Styles.ThemeManager();
+// const ThemeManager = new mui.Styles.ThemeManager();
 // import MediaQuery from 'react-responsive';
 class AppLeftNavBar extends React.Component {
+
+  static childContextTypes = {
+    muiTheme: React.PropTypes.object,
+  }
+
   state = {
     userName: 'User',
     shift: '',
@@ -16,16 +21,11 @@ class AppLeftNavBar extends React.Component {
     pending: '',
     approved: '',
   }
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   componentDidMount() {
     window.addEventListener('hashchange', this.hashChange, false);
@@ -151,7 +151,7 @@ class AppLeftNavBar extends React.Component {
         referralsColor: 'rgb(198, 198, 198)',
         invoiceColor: 'white',
       });
-    }  else if (route.indexOf('#/hospital/pending') !== -1) {
+    } else if (route.indexOf('#/hospital/pending') !== -1) {
       this.setState({
         shift: '',
         profile: '',
@@ -170,7 +170,7 @@ class AppLeftNavBar extends React.Component {
         invoiceColor: 'rgb(198, 198, 198)',
         pendingColor: 'white',
       });
-    }  else if (route.indexOf('#/hospital/referrals') !== -1) {
+    } else if (route.indexOf('#/hospital/referrals') !== -1) {
       this.setState({
         shift: '',
         profile: '',

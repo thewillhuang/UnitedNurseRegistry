@@ -1,10 +1,10 @@
 
 
 import React from 'react';
-import mui from 'material-ui';
+// // import mui from 'material-ui';
 import AppBar from '../app/appToolBar.jsx';
 import AppNavBar from '../app/appLeftNavBar.jsx';
-const ThemeManager = new mui.Styles.ThemeManager();
+// // const ThemeManager = new mui.Styles.ThemeManager();
 
 class App extends React.Component {
   static childContextTypes = {
@@ -15,11 +15,11 @@ class App extends React.Component {
     children: React.PropTypes.node,
   }
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   componentDidMount() {
     this.checkToken();

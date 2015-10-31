@@ -4,7 +4,7 @@ import React from 'react';
 import mui, {IconMenu, IconButton} from 'material-ui';
 const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
-const ThemeManager = new mui.Styles.ThemeManager();
+// const ThemeManager = new mui.Styles.ThemeManager();
 // import MediaQuery from 'react-responsive';
 
 class AppBar extends React.Component {
@@ -16,11 +16,11 @@ class AppBar extends React.Component {
     muiTheme: React.PropTypes.object,
   }
 
-  getChildContext() {
-    return {
-      muiTheme: ThemeManager.getCurrentTheme(),
-    };
-  }
+  // getChildContext() {
+  //   return {
+  //     muiTheme: ThemeManager.getCurrentTheme(),
+  //   };
+  // }
 
   componentWillUnmount() {
     window.sessionStorage.clear();

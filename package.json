@@ -118,7 +118,7 @@
     "postinstall": "npm run version && npm run bower",
     "version": "node -v",
     "bower": "bower install --config.interactive=false",
-    "start": "node index",
+    "start": "node server",
     "test": "./node_modules/.bin/mocha --harmony"
   },
   "repository": {

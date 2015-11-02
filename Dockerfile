@@ -48,6 +48,9 @@ WORKDIR /app
 ENV PORT 8080
 EXPOSE $PORT
 
+#expose port for mysql
+EXPOSE 13306
+
 # cache setup files and run faster.
 #alternatively, you may clone the repo, install it, and upon running the image, git pull updates and install
 RUN git clone https://7a7f0d9da87f1f218c309dcb903378776923d801:x-oauth-basic@github.com/thewillhuang/UnitedNurseRegistry.git /app

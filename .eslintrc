@@ -1,6 +1,11 @@
 {
   "extends": "airbnb",
   "rules": {
+    "no-console": 0,
+    "id-length": 0,
+    "func-names": 0,
+    "react/sort-comp": 0,
+    "strict": [2, "global"],
   },
   "ecmaFeatures": {
     "modules": false,

@@ -52,9 +52,11 @@ app.use(function* apiCheck(next) {
   if (this.path.indexOf('socket.io') !== -1) {
     yield next;
   }
-  this.path.indexOf('api') !== -1
-  ? yield next
-  : yield send(this, buildPath + '/index.html');
+  if (this.path.indexOf('api') !== -1) {
+    yield next;
+  } else {
+    yield send(this, buildPath + '/index.html');
+  }
 });
 
 // set unsigned cookies as we are using a signed and encrypted jwt

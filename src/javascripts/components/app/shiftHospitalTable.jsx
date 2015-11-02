@@ -133,7 +133,7 @@ class ShiftHospitalTable extends React.Component {
       console.log('server received a new shift regarding facility', data.facility);
       // console.log(ctx);
       if (_.includes(ctx.state.facilityIDs, data.facility)) {
-        ctx.refs.submitted.show();
+        // ctx.refs.submitted.show();
         search();
       }
     });

@@ -1,4 +1,2 @@
 script:
   - true
-node_js:
-  - 0.12.7

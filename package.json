@@ -4,8 +4,6 @@
   "description": "United Nurses",
   "main": "server.js",
   "dependencies": {
-    "babel-core": "^6.0.14",
-    "babel-loader": "^5.3.3",
     "bcrypt": "^0.8.5",
     "bluebird": "^2.10.1",
     "chart.js": "^1.0.2",

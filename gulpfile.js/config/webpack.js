@@ -25,8 +25,8 @@ module.exports = function(env) {
           exclude: /(node_modules|bower_components)/,
           loader: 'babel',
           query: {
-            optional: ['runtime'],
-            stage: 0,
+            cacheDirectory: true,
+            presets: ['es2015', 'stage-0', 'stage-1', 'stage-2', 'stage-3', 'react'],
           },
         },
       ],

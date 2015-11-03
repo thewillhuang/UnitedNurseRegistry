@@ -7,6 +7,8 @@ import { Router, Route, IndexRoute } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
+const rootElement = document.getElementById('root')
+
 class Root extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
@@ -228,4 +230,4 @@ render((
       // end of hospital route
     </Route>
   </Router>
-), document.getElementById('root'));
+), rootElement);

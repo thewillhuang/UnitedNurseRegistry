@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
 import Home from './components/web/home.jsx';
-import { Router, Route, IndexRoute} from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
 // import { history } from 'react-router/lib/HashHistory';
 // import createBrowserHistory from 'history/lib/createBrowserHistory';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -20,7 +20,7 @@ class Root extends React.Component {
   }
 }
 
-ReactDOM.render((
+render((
   <Router>
     <Route path='/' component={Root}>
       // web routes

@@ -7,7 +7,7 @@ import { Router, Route, IndexRoute } from 'react-router';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 injectTapEventPlugin();
 
-const rootElement = document.getElementById('root')
+const rootElement = document.getElementById('root');
 
 class Root extends React.Component {
   static propTypes = {

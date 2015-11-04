@@ -1,15 +1,42 @@
 import Promise from 'bluebird';
 import superagent from 'superagent';
-import token from '../../utils/grabToken.js';
+import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = '/api/useremail';
-const userEmailApi = {};
+const prefix = '/api/userphone';
+const userPhoneApi = {};
 
-userEmailApi.createUserEmail = (userID, emailAddress, emailType) => {
+userPhoneApi.createUserPhone = (userID, phoneNumber, ext, phoneType) => {
+  return request
+    .post(`${prefix}/user/${userID}`)
+    .set(token)
+    .send({phoneNumber, ext, phoneType})
+    .endAsync().then(res => {
+      return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('/');
+      return err;
+    });
+};
+
+userPhoneApi.updateUserPhone = (userID, phoneID, phoneNumber, ext, phoneType) => {
+  return request
+    .put(`${prefix}/user/${userID}/phone/${phoneID}`)
+    .send({phoneNumber, ext, phoneType})
+    .set(token)
+    .endAsync().then(res => {
+      return res.body;
+    }).catch(function(err) {
+      window.sessionStorage.clear();
+      window.location.assign('/');
+      return err;
+    });
+};
+
+userPhoneApi.getUserPhone = (userID) => {
   return request
     .get(`${prefix}/user/${userID}`)
     .set(token)
-    .send({emailAddress, emailType})
     .endAsync().then(res => {
       return res.body;
     }).catch(function(err) {
@@ -19,10 +46,9 @@ userEmailApi.createUserEmail = (userID, emailAddress, emailType) => {
     });
 };
 
-userEmailApi.updateUserEmail = (userID, emailID, emailAddress, emailType) => {
+userPhoneApi.deleteUserAddress = (userID, phoneID) => {
   return request
-    .put(`${prefix}/user/${userID}/email/${emailID}`)
-    .send({emailAddress, emailType})
+    .delete(`${prefix}/user/${userID}/phone/${phoneID}`)
     .set(token)
     .endAsync().then(res => {
       return res.body;
@@ -33,30 +59,4 @@ userEmailApi.updateUserEmail = (userID, emailID, emailAddress, emailType) => {
     });
 };
 
-userEmailApi.getUserEmail = (userID) => {
-  return request
-    .get(`${prefix}/user/${userID}`)
-    .set(token)
-    .endAsync().then(res => {
-      return res.body;
-    }).catch(function(err) {
-      window.sessionStorage.clear();
-      window.location.assign('/');
-      return err;
-    });
-};
-
-userEmailApi.deleteUserAddress = (userID, emailID) => {
-  return request
-    .delete(`${prefix}/user/${userID}/email/${emailID}`)
-    .set(token)
-    .endAsync().then(res => {
-      return res.body;
-    }).catch(function(err) {
-      window.sessionStorage.clear();
-      window.location.assign('/');
-      return err;
-    });
-};
-
-export default userEmailApi;
+export default userPhoneApi;

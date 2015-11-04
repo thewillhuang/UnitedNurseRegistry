@@ -1,10 +1,10 @@
 import React from 'react';
-import mui, {Snackbar, Dialog, FlatButton} from 'material-ui';
+import {Snackbar, Dialog, FlatButton} from 'material-ui';
 // const ThemeManager = new mui.Styles.ThemeManager();
 import {Table, Column} from 'fixed-data-table';
 import getGeoHash from '../../utils/getGeoHash.js';
-import shiftApi from '../../actions/webapi/shiftApi.js';
-import shiftStatusApi from '../../actions/webapi/shiftStatusApi.js';
+import shiftApi from '../../webapi/shiftApi.js';
+import shiftStatusApi from '../../webapi/shiftStatusApi.js';
 import io from 'socket.io-client';
 const socket = io.connect();
 import _ from 'lodash';

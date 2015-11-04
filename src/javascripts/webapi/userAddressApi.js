@@ -1,15 +1,17 @@
 import Promise from 'bluebird';
 import superagent from 'superagent';
-import token from '../../utils/grabToken.js';
+import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = '/api/userphone';
-const userPhoneApi = {};
+const prefix = '/api/useraddress';
+const userAddressApi = {};
+import _ from 'lodash';
 
-userPhoneApi.createUserPhone = (userID, phoneNumber, ext, phoneType) => {
+userAddressApi.createUserAddress = (userID, address, address2, city, state, zip, geohash) => {
+  const payload = _.omit({address, address2, city, state, zip, geohash}, _.isNull);
   return request
     .post(`${prefix}/user/${userID}`)
     .set(token)
-    .send({phoneNumber, ext, phoneType})
+    .send(payload)
     .endAsync().then(res => {
       return res.body;
     }).catch(function(err) {
@@ -19,10 +21,11 @@ userPhoneApi.createUserPhone = (userID, phoneNumber, ext, phoneType) => {
     });
 };
 
-userPhoneApi.updateUserPhone = (userID, phoneID, phoneNumber, ext, phoneType) => {
+userAddressApi.updateUserAddress = (userID, addressID, address, address2, city, state, zip, geohash) => {
+  const payload = _.omit({address, address2, city, state, zip, geohash}, _.isNull);
   return request
-    .put(`${prefix}/user/${userID}/phone/${phoneID}`)
-    .send({phoneNumber, ext, phoneType})
+    .put(`${prefix}/user/${userID}/address/${addressID}`)
+    .send(payload)
     .set(token)
     .endAsync().then(res => {
       return res.body;
@@ -33,7 +36,7 @@ userPhoneApi.updateUserPhone = (userID, phoneID, phoneNumber, ext, phoneType) =>
     });
 };
 
-userPhoneApi.getUserPhone = (userID) => {
+userAddressApi.getUserAddress = (userID) => {
   return request
     .get(`${prefix}/user/${userID}`)
     .set(token)
@@ -46,9 +49,9 @@ userPhoneApi.getUserPhone = (userID) => {
     });
 };
 
-userPhoneApi.deleteUserAddress = (userID, phoneID) => {
+userAddressApi.deleteUserAddress = (userID, addressID) => {
   return request
-    .delete(`${prefix}/user/${userID}/phone/${phoneID}`)
+    .delete(`${prefix}/user/${userID}/address/${addressID}`)
     .set(token)
     .endAsync().then(res => {
       return res.body;
@@ -59,4 +62,4 @@ userPhoneApi.deleteUserAddress = (userID, phoneID) => {
     });
 };
 
-export default userPhoneApi;
+export default userAddressApi;

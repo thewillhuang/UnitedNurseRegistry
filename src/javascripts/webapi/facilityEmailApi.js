@@ -1,12 +1,11 @@
 import Promise from 'bluebird';
 import superagent from 'superagent';
-import token from '../../utils/grabToken.js';
+import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = '/api/facilityphone';
-const facilityPhoneApi = {};
-import _ from 'lodash';
+const prefix = '/api/facilityemail';
+const facilityEmailApi = {};
 
-facilityPhoneApi.getFacilityPhone = (facilityID) => {
+facilityEmailApi.getFacilityEmail = (facilityID) => {
   return request
     .put(prefix + '/facility/' + facilityID)
     .set(token)
@@ -19,16 +18,13 @@ facilityPhoneApi.getFacilityPhone = (facilityID) => {
     });
 };
 
-facilityPhoneApi.addFacilityPhone = (facilityID, phoneNumber, ext, phoneType) => {
-  const payload = _.omit({phoneNumber, ext, phoneType}, _.isNull);
+facilityEmailApi.addFacilityEmail = (facilityID, emailAddress, emailType) => {
   return request
     .post(prefix + '/facility/' + facilityID)
     .set(token)
-    .send(payload)
+    .send({emailAddress, emailType})
     .endAsync().then(function(res) {
       return res.body;
-    }).catch(function(err) {
-      return err;
     }).catch(function(err) {
       window.sessionStorage.clear();
       window.location.assign('/');
@@ -36,11 +32,11 @@ facilityPhoneApi.addFacilityPhone = (facilityID, phoneNumber, ext, phoneType) =>
     });
 };
 
-facilityPhoneApi.updateFacilityPhone = (facilityID, phoneID, phoneNumber, ext, phoneType) => {
+facilityEmailApi.updateFacilityEmail = (facilityID, emailID, emailAddress, emailType) => {
   return request
-    .put(prefix + '/facilit/' + facilityID + '/phone/' + phoneID)
+    .put(prefix + '/facilit/' + facilityID + '/email/' + emailID)
     .set(token)
-    .send({phoneNumber, ext, phoneType})
+    .send({emailAddress, emailType})
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
@@ -51,9 +47,9 @@ facilityPhoneApi.updateFacilityPhone = (facilityID, phoneID, phoneNumber, ext, p
 };
 
 
-facilityPhoneApi.deleteFacilityPhone = (facilityID, phoneID) => {
+facilityEmailApi.deleteFacilityEmail = (facilityID, emailID) => {
   return request
-    .delete(prefix + '/facilit/' + facilityID + '/phone/' + phoneID)
+    .delete(prefix + '/facilit/' + facilityID + '/email/' + emailID)
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
@@ -64,4 +60,4 @@ facilityPhoneApi.deleteFacilityPhone = (facilityID, phoneID) => {
     });
 };
 
-export default facilityPhoneApi;
+export default facilityEmailApi;

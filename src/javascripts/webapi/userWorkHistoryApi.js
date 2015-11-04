@@ -1,15 +1,15 @@
 import Promise from 'bluebird';
 import superagent from 'superagent';
-import token from '../../utils/grabToken.js';
+import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = '/api/userlicense';
-const userLicenseApi = {};
+const prefix = '/api/userworkhistory';
+const userWorkHistoryApi = {};
 
-userLicenseApi.createUserLicense = (userID, licenseNumber, licenseState, licensePhotoUrl, expiration) => {
+userWorkHistoryApi.createUserWorkHistory = (userID, facilityID, months, referenceName, referencePhone) => {
   return request
-    .post(`${prefix}/user/${userID}`)
+    .post(`${prefix}/user/${userID}/facility/${facilityID}`)
     .set(token)
-    .send({licenseNumber, licenseState, licensePhotoUrl, expiration})
+    .send({months, referenceName, referencePhone})
     .endAsync().then(res => {
       return res.body;
     }).catch(function(err) {
@@ -19,11 +19,12 @@ userLicenseApi.createUserLicense = (userID, licenseNumber, licenseState, license
     });
 };
 
-userLicenseApi.updateUserLicense = (userID, userLicenseID, licenseNumber, licenseState, licensePhotoUrl, expiration) => {
+userWorkHistoryApi.updateUserWorkHistory = (userID, userHistoryID, facilityID, months, referenceName, referencePhone) => {
+  const fk_UserWorkHistory_facilityID = facilityID;
   return request
-    .put(`${prefix}/user/${userID}/license/${userLicenseID}`)
-    .send({licenseNumber, licenseState, licensePhotoUrl, expiration})
+    .put(`${prefix}/user/${userID}/history/${userHistoryID}`)
     .set(token)
+    .send({fk_UserWorkHistory_facilityID, months, referenceName, referencePhone})
     .endAsync().then(res => {
       return res.body;
     }).catch(function(err) {
@@ -33,7 +34,7 @@ userLicenseApi.updateUserLicense = (userID, userLicenseID, licenseNumber, licens
     });
 };
 
-userLicenseApi.getUserLicense = (userID) => {
+userWorkHistoryApi.getUserWorkHistory = (userID) => {
   return request
     .get(`${prefix}/user/${userID}`)
     .set(token)
@@ -46,9 +47,9 @@ userLicenseApi.getUserLicense = (userID) => {
     });
 };
 
-userLicenseApi.deleteUserAddress = (userID, userLicenseID) => {
+userWorkHistoryApi.deleteUserWorkHistory = (userID, userHistoryID) => {
   return request
-    .delete(`${prefix}/user/${userID}/license/${userLicenseID}`)
+    .delete(`${prefix}/user/${userID}/history/${userHistoryID}`)
     .set(token)
     .endAsync().then(res => {
       return res.body;
@@ -59,4 +60,4 @@ userLicenseApi.deleteUserAddress = (userID, userLicenseID) => {
     });
 };
 
-export default userLicenseApi;
+export default userWorkHistoryApi;

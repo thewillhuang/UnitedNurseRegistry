@@ -2,7 +2,7 @@ import React from 'react';
 import {TextField, Snackbar} from 'material-ui';
 // const ThemeManager = new mui.Styles.ThemeManager();
 import user from '../../utils/grabUser.js';
-import facilityApi from '../../actions/webapi/facilityApi.js';
+import facilityApi from '../../webapi/facilityApi.js';
 
 class SecurityCard extends React.Component {
   // getChildContext() {

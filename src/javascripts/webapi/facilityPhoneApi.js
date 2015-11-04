@@ -1,42 +1,46 @@
 import Promise from 'bluebird';
 import superagent from 'superagent';
-import token from '../../utils/grabToken.js';
-import _ from 'lodash';
+import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = '/api/facilityAddress';
-const facilityAddressApi = {};
+const prefix = '/api/facilityphone';
+const facilityPhoneApi = {};
+import _ from 'lodash';
 
-facilityAddressApi.getFacilityAddress = (facilityID) => {
+facilityPhoneApi.getFacilityPhone = (facilityID) => {
   return request
     .put(prefix + '/facility/' + facilityID)
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
-    }).catch(()=> {
+    }).catch(function(err) {
       window.sessionStorage.clear();
+      window.location.assign('/');
+      return err;
     });
 };
 
-facilityAddressApi.addFacilityAddress = (facilityID, address, address2, city, state, zip) => {
+facilityPhoneApi.addFacilityPhone = (facilityID, phoneNumber, ext, phoneType) => {
+  const payload = _.omit({phoneNumber, ext, phoneType}, _.isNull);
   return request
     .post(prefix + '/facility/' + facilityID)
     .set(token)
-    .send(_.omit({address, address2, city, state, zip}, _.isNull))
+    .send(payload)
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
       return err;
-    }).catch(()=> {
+    }).catch(function(err) {
       window.sessionStorage.clear();
       window.location.assign('/');
+      return err;
     });
 };
 
-facilityAddressApi.updateFacilityAddress = (facilityID, addressID, address, address2, city, state, zip) => {
+facilityPhoneApi.updateFacilityPhone = (facilityID, phoneID, phoneNumber, ext, phoneType) => {
   return request
-    .put(`${prefix}/facility/${facilityID}/address/${addressID}`)
+    .put(prefix + '/facilit/' + facilityID + '/phone/' + phoneID)
     .set(token)
-    .send(_.omit({address, address2, city, state, zip}, _.isNull))
+    .send({phoneNumber, ext, phoneType})
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
@@ -47,9 +51,9 @@ facilityAddressApi.updateFacilityAddress = (facilityID, addressID, address, addr
 };
 
 
-facilityAddressApi.deleteFacilityAddress = (facilityID, addressID) => {
+facilityPhoneApi.deleteFacilityPhone = (facilityID, phoneID) => {
   return request
-    .delete(prefix + '/facilit/' + facilityID + '/address/' + addressID)
+    .delete(prefix + '/facilit/' + facilityID + '/phone/' + phoneID)
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
@@ -60,4 +64,4 @@ facilityAddressApi.deleteFacilityAddress = (facilityID, addressID) => {
     });
 };
 
-export default facilityAddressApi;
+export default facilityPhoneApi;

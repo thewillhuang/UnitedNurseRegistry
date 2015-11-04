@@ -1,15 +1,15 @@
 import Promise from 'bluebird';
 import superagent from 'superagent';
-import token from '../../utils/grabToken.js';
+import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = '/api/userworkhistory';
-const userWorkHistoryApi = {};
+const prefix = '/api/userschedule';
+const userScheduleApi = {};
 
-userWorkHistoryApi.createUserWorkHistory = (userID, facilityID, months, referenceName, referencePhone) => {
+userScheduleApi.createUserSchedule = (userID, shiftStart, shiftDuration, dayOfWeek) => {
   return request
-    .post(`${prefix}/user/${userID}/facility/${facilityID}`)
+    .post(`${prefix}/user/${userID}`)
     .set(token)
-    .send({months, referenceName, referencePhone})
+    .send({shiftStart, shiftDuration, dayOfWeek})
     .endAsync().then(res => {
       return res.body;
     }).catch(function(err) {
@@ -19,12 +19,11 @@ userWorkHistoryApi.createUserWorkHistory = (userID, facilityID, months, referenc
     });
 };
 
-userWorkHistoryApi.updateUserWorkHistory = (userID, userHistoryID, facilityID, months, referenceName, referencePhone) => {
-  const fk_UserWorkHistory_facilityID = facilityID;
+userScheduleApi.updateUserSchedule = (userID, scheduleID, shiftStart, shiftDuration, dayOfWeek) => {
   return request
-    .put(`${prefix}/user/${userID}/history/${userHistoryID}`)
+    .put(`${prefix}/user/${userID}/schedule/${scheduleID}`)
+    .send({shiftStart, shiftDuration, dayOfWeek})
     .set(token)
-    .send({fk_UserWorkHistory_facilityID, months, referenceName, referencePhone})
     .endAsync().then(res => {
       return res.body;
     }).catch(function(err) {
@@ -34,7 +33,7 @@ userWorkHistoryApi.updateUserWorkHistory = (userID, userHistoryID, facilityID, m
     });
 };
 
-userWorkHistoryApi.getUserWorkHistory = (userID) => {
+userScheduleApi.getUserSchedule = (userID) => {
   return request
     .get(`${prefix}/user/${userID}`)
     .set(token)
@@ -47,9 +46,9 @@ userWorkHistoryApi.getUserWorkHistory = (userID) => {
     });
 };
 
-userWorkHistoryApi.deleteUserWorkHistory = (userID, userHistoryID) => {
+userScheduleApi.deleteUserAddress = (userID, userScheduleID) => {
   return request
-    .delete(`${prefix}/user/${userID}/history/${userHistoryID}`)
+    .delete(`${prefix}/user/${userID}/schedule/${userScheduleID}`)
     .set(token)
     .endAsync().then(res => {
       return res.body;
@@ -60,4 +59,4 @@ userWorkHistoryApi.deleteUserWorkHistory = (userID, userHistoryID) => {
     });
 };
 
-export default userWorkHistoryApi;
+export default userLicenseApi;

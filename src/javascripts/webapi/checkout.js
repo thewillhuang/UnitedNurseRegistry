@@ -1,6 +1,6 @@
 import Promise from 'bluebird';
 import superagent from 'superagent';
-import jwt from '../../utils/grabToken.js';
+import jwt from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
 
 const prefix = '/api/checkout';

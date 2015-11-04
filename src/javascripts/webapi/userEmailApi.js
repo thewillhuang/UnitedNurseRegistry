@@ -1,17 +1,15 @@
 import Promise from 'bluebird';
 import superagent from 'superagent';
-import token from '../../utils/grabToken.js';
+import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = '/api/useraddress';
-const userAddressApi = {};
-import _ from 'lodash';
+const prefix = '/api/useremail';
+const userEmailApi = {};
 
-userAddressApi.createUserAddress = (userID, address, address2, city, state, zip, geohash) => {
-  const payload = _.omit({address, address2, city, state, zip, geohash}, _.isNull);
+userEmailApi.createUserEmail = (userID, emailAddress, emailType) => {
   return request
-    .post(`${prefix}/user/${userID}`)
+    .get(`${prefix}/user/${userID}`)
     .set(token)
-    .send(payload)
+    .send({emailAddress, emailType})
     .endAsync().then(res => {
       return res.body;
     }).catch(function(err) {
@@ -21,11 +19,10 @@ userAddressApi.createUserAddress = (userID, address, address2, city, state, zip,
     });
 };
 
-userAddressApi.updateUserAddress = (userID, addressID, address, address2, city, state, zip, geohash) => {
-  const payload = _.omit({address, address2, city, state, zip, geohash}, _.isNull);
+userEmailApi.updateUserEmail = (userID, emailID, emailAddress, emailType) => {
   return request
-    .put(`${prefix}/user/${userID}/address/${addressID}`)
-    .send(payload)
+    .put(`${prefix}/user/${userID}/email/${emailID}`)
+    .send({emailAddress, emailType})
     .set(token)
     .endAsync().then(res => {
       return res.body;
@@ -36,7 +33,7 @@ userAddressApi.updateUserAddress = (userID, addressID, address, address2, city, 
     });
 };
 
-userAddressApi.getUserAddress = (userID) => {
+userEmailApi.getUserEmail = (userID) => {
   return request
     .get(`${prefix}/user/${userID}`)
     .set(token)
@@ -49,9 +46,9 @@ userAddressApi.getUserAddress = (userID) => {
     });
 };
 
-userAddressApi.deleteUserAddress = (userID, addressID) => {
+userEmailApi.deleteUserAddress = (userID, emailID) => {
   return request
-    .delete(`${prefix}/user/${userID}/address/${addressID}`)
+    .delete(`${prefix}/user/${userID}/email/${emailID}`)
     .set(token)
     .endAsync().then(res => {
       return res.body;
@@ -62,4 +59,4 @@ userAddressApi.deleteUserAddress = (userID, addressID) => {
     });
 };
 
-export default userAddressApi;
+export default userEmailApi;

@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import mui, {IconMenu, IconButton} from 'material-ui';
+import {IconMenu, IconButton} from 'material-ui';
 const MenuItem = require('material-ui/lib/menus/menu-item');
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
 // const ThemeManager = new mui.Styles.ThemeManager();

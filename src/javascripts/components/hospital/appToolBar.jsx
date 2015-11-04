@@ -5,7 +5,7 @@ const MenuItem = require('material-ui/lib/menus/menu-item');
 // const ThemeManager = new mui.Styles.ThemeManager();
 // import MediaQuery from 'react-responsive';
 import user from '../../utils/grabUser.js';
-import facilityApi from '../../actions/webapi/facilityApi.js';
+import facilityApi from '../../webapi/facilityApi.js';
 
 
 class AppBar extends React.Component {

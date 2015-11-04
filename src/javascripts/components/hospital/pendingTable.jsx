@@ -4,12 +4,12 @@ import {FlatButton, Dialog} from 'material-ui';
 import {Table, Column} from 'fixed-data-table';
 import io from 'socket.io-client';
 // const ThemeManager = new mui.Styles.ThemeManager();
-import userSpecialtyApi from '../../actions/webapi/userSpecialtyApi.js';
-import shiftStatusApi from '../../actions/webapi/shiftStatusApi.js';
+import userSpecialtyApi from '../../webapi/userSpecialtyApi.js';
+import shiftStatusApi from '../../webapi/shiftStatusApi.js';
 import user from '../../utils/grabUser.js';
 import moment from 'moment';
 const socket = io.connect();
-import checkoutApi from '../../actions/webapi/checkout.js';
+import checkoutApi from '../../webapi/checkout.js';
 
 class ShiftHospitalTable extends React.Component {
   state = {

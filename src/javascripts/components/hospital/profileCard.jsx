@@ -13,11 +13,11 @@ const input = {
 };
 
 import user from '../../utils/grabUser.js';
-import facilityApi from '../../actions/webapi/facilityApi.js';
-import facilityPhoneApi from '../../actions/webapi/facilityPhoneApi.js';
-import geoHashApi from '../../actions/webapi/geoHashApi.js';
+import facilityApi from '../../webapi/facilityApi.js';
+import facilityPhoneApi from '../../webapi/facilityPhoneApi.js';
+import geoHashApi from '../../webapi/geoHashApi.js';
 import geohash from 'ngeohash';
-import facilityAddressApi from '../../actions/webapi/facilityAddressApi.js';
+import facilityAddressApi from '../../webapi/facilityAddressApi.js';
 
 class ProfileCard extends React.Component {
   // getChildContext() {

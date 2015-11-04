@@ -1,6 +1,6 @@
 import React from 'react';
 import {RaisedButton} from 'material-ui';
-import checkoutApi from '../../actions/webapi/checkout.js';
+import checkoutApi from '../../webapi/checkout.js';
 // const ThemeManager = new mui.Styles.ThemeManager();
 
 class Checkout extends React.Component {

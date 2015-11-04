@@ -1,15 +1,15 @@
 import Promise from 'bluebird';
 import superagent from 'superagent';
-import token from '../../utils/grabToken.js';
+import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = '/api/userschedule';
-const userScheduleApi = {};
+const prefix = '/api/userlicense';
+const userLicenseApi = {};
 
-userScheduleApi.createUserSchedule = (userID, shiftStart, shiftDuration, dayOfWeek) => {
+userLicenseApi.createUserLicense = (userID, licenseNumber, licenseState, licensePhotoUrl, expiration) => {
   return request
     .post(`${prefix}/user/${userID}`)
     .set(token)
-    .send({shiftStart, shiftDuration, dayOfWeek})
+    .send({licenseNumber, licenseState, licensePhotoUrl, expiration})
     .endAsync().then(res => {
       return res.body;
     }).catch(function(err) {
@@ -19,10 +19,10 @@ userScheduleApi.createUserSchedule = (userID, shiftStart, shiftDuration, dayOfWe
     });
 };
 
-userScheduleApi.updateUserSchedule = (userID, scheduleID, shiftStart, shiftDuration, dayOfWeek) => {
+userLicenseApi.updateUserLicense = (userID, userLicenseID, licenseNumber, licenseState, licensePhotoUrl, expiration) => {
   return request
-    .put(`${prefix}/user/${userID}/schedule/${scheduleID}`)
-    .send({shiftStart, shiftDuration, dayOfWeek})
+    .put(`${prefix}/user/${userID}/license/${userLicenseID}`)
+    .send({licenseNumber, licenseState, licensePhotoUrl, expiration})
     .set(token)
     .endAsync().then(res => {
       return res.body;
@@ -33,7 +33,7 @@ userScheduleApi.updateUserSchedule = (userID, scheduleID, shiftStart, shiftDurat
     });
 };
 
-userScheduleApi.getUserSchedule = (userID) => {
+userLicenseApi.getUserLicense = (userID) => {
   return request
     .get(`${prefix}/user/${userID}`)
     .set(token)
@@ -46,9 +46,9 @@ userScheduleApi.getUserSchedule = (userID) => {
     });
 };
 
-userScheduleApi.deleteUserAddress = (userID, userScheduleID) => {
+userLicenseApi.deleteUserAddress = (userID, userLicenseID) => {
   return request
-    .delete(`${prefix}/user/${userID}/schedule/${userScheduleID}`)
+    .delete(`${prefix}/user/${userID}/license/${userLicenseID}`)
     .set(token)
     .endAsync().then(res => {
       return res.body;

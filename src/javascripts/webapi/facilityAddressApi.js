@@ -1,42 +1,42 @@
 import Promise from 'bluebird';
 import superagent from 'superagent';
-import token from '../../utils/grabToken.js';
+import token from '../utils/grabToken.js';
+import _ from 'lodash';
 const request = Promise.promisifyAll(superagent);
-const prefix = '/api/facilityemail';
-const facilityEmailApi = {};
+const prefix = '/api/facilityAddress';
+const facilityAddressApi = {};
 
-facilityEmailApi.getFacilityEmail = (facilityID) => {
+facilityAddressApi.getFacilityAddress = (facilityID) => {
   return request
     .put(prefix + '/facility/' + facilityID)
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(()=> {
       window.sessionStorage.clear();
-      window.location.assign('/');
-      return err;
     });
 };
 
-facilityEmailApi.addFacilityEmail = (facilityID, emailAddress, emailType) => {
+facilityAddressApi.addFacilityAddress = (facilityID, address, address2, city, state, zip) => {
   return request
     .post(prefix + '/facility/' + facilityID)
     .set(token)
-    .send({emailAddress, emailType})
+    .send(_.omit({address, address2, city, state, zip}, _.isNull))
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
+      return err;
+    }).catch(()=> {
       window.sessionStorage.clear();
       window.location.assign('/');
-      return err;
     });
 };
 
-facilityEmailApi.updateFacilityEmail = (facilityID, emailID, emailAddress, emailType) => {
+facilityAddressApi.updateFacilityAddress = (facilityID, addressID, address, address2, city, state, zip) => {
   return request
-    .put(prefix + '/facilit/' + facilityID + '/email/' + emailID)
+    .put(`${prefix}/facility/${facilityID}/address/${addressID}`)
     .set(token)
-    .send({emailAddress, emailType})
+    .send(_.omit({address, address2, city, state, zip}, _.isNull))
     .endAsync().then(function(res) {
       return res.body;
     }).catch(function(err) {
@@ -47,9 +47,9 @@ facilityEmailApi.updateFacilityEmail = (facilityID, emailID, emailAddress, email
 };
 
 
-facilityEmailApi.deleteFacilityEmail = (facilityID, emailID) => {
+facilityAddressApi.deleteFacilityAddress = (facilityID, addressID) => {
   return request
-    .delete(prefix + '/facilit/' + facilityID + '/email/' + emailID)
+    .delete(prefix + '/facilit/' + facilityID + '/address/' + addressID)
     .set(token)
     .endAsync().then(function(res) {
       return res.body;
@@ -60,4 +60,4 @@ facilityEmailApi.deleteFacilityEmail = (facilityID, emailID) => {
     });
 };
 
-export default facilityEmailApi;
+export default facilityAddressApi;

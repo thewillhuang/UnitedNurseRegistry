@@ -45,6 +45,7 @@ passport.use(new LocalStrategy({
     q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'userID', 'user', 'email', email];
     query(q).bind({}).then(function(result) {
+      console.log(result);
       if (result.rows.length === 0) { throw new NoAccountError('no such user found'); }
       this.userID = result.rows[0].userID;
       return validatePw(password, result.rows[0].userPwHash);
@@ -78,6 +79,7 @@ passport.use('facility-login', new LocalStrategy({
     q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
     q.values = ['facilityPwHash', 'facilityID', 'Facility', 'facilityEmail', email];
     query(q).bind({}).then(function(result) {
+      console.log(result);
       // console.log('facility result', result);
       if (result.rows.length === 0) { throw new NoAccountError('no such facility found'); }
       this.facilityID = result.rows[0].facilityID;
@@ -113,6 +115,7 @@ passport.use('facility-signup', new LocalStrategy({
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['facilityPwHash', 'facility', 'facilityemail', email];
     query(q).bind({}).then(function(result) {
+      console.log(result);
       // console.log('facility result', result);
       if (result.rows.length !== 0) { throw new EmailTaken('email taken'); }
       return genHash(password);
@@ -153,6 +156,7 @@ passport.use('local-signup', new LocalStrategy({
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'user', 'email', email];
     query(q).bind({}).then(function(result) {
+      console.log(result);
       if (result.rows.length !== 0) { throw new EmailTaken('email taken'); }
       return genHash(password);
     }).then(function(pwhash) {
@@ -205,6 +209,7 @@ passport.use(new FacebookStrategy({
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userID', 'user', 'fb_id', fbprofile.id];
     query(q).bind({}).then(function(result) {
+      console.log(result);
       if (result.rows.length !== 0) {
         // skip to userExists block in catch
         this.userID = result.rows[0].userID;

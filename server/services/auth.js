@@ -165,7 +165,7 @@ passport.use('local-signup', new LocalStrategy({
       userData.email = email;
       userData.userPwHash = pwhash;
       q2.sql = 'INSERT INTO ?? SET ?';
-      q2.values = ['user', userData];
+      q2.values = ['User', userData];
       return query(q2);
     }).then(function(result) {
       const insertId = result.rows.insertId;

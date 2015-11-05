@@ -63,6 +63,8 @@ class ShiftHospitalTable extends React.Component {
           data: data.rows,
         });
 
+        console.log(data);
+
         const searchFacilityIDs = [];
         for (let i = 0; i < data.rows.length; i++) {
           searchFacilityIDs.push(data.rows[i].facilityID);
@@ -76,6 +78,7 @@ class ShiftHospitalTable extends React.Component {
         // change array of object to array of arrays for table user who what where when
         const table = [];
         const rows = data.rows;
+        console.log(rows);
         const today = moment().subtract(12, 'hours').format('YYYY-MM-DD');
         for (let i = 0; i < rows.length; i++) {
           const el = rows[i];

@@ -71,7 +71,7 @@ module.exports = function authRoutes(app) {
 
   .post('/facility/signup', function*(next) {
     const ctx = this;
-    yield passport.authenticate('facility-signup',  { session: false }, function*(err, user, info) {
+    yield passport.authenticate('facility-signup', { session: false }, function*(err, user, info) {
       // console.log('user', user, 'info', info);
       if (err) console.log('error', err);
       if (!user) {
@@ -89,7 +89,7 @@ module.exports = function authRoutes(app) {
 
   .post('/signup', function*(next) {
     const ctx = this;
-    yield passport.authenticate('local-signup',  { session: false }, function*(err, user, info) {
+    yield passport.authenticate('local-signup', { session: false }, function*(err, user, info) {
       if (err) console.log('error', err);
       if (!user) {
         ctx.status = 406;

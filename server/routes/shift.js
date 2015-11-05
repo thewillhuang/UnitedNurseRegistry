@@ -150,17 +150,17 @@ module.exports = function shiftRoutes(app) {
     const userID = this.params.userID;
     if (user.scope.userID && user.scope.userID.toString() === userID) {
       const q = {};
-      q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND ?? = ?';
-      const selectShift = ['shift.shiftID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date', 'shift.open', 'shift.shiftDressCode', 'shift.pending', 'shift.shift_modified'];
-      const specialty = ['specialty.specialty'];
-      const facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR', 'facility.facilityGeohash'];
+      q.sql = 'SELECT ??, ??, ?? FROM ?? AS ?? INNER JOIN ?? AS ?? ON (?? = ??) INNER JOIN ?? AS ?? ON (?? = ??) WHERE ?? = ? AND ?? = ?';
+      const selectShift = ['s.shiftID', 's.shiftStartHour', 's.shiftDuration', 's.payPerHour', 's.date', 's.open', 's.shiftDressCode', 's.pending', 's.shift_modified'];
+      const specialty = ['sp.specialty'];
+      const facility = ['f.facilityID', 'f.facilityName', 'f.facilityEMR', 'f.facilityGeohash'];
       q.values = [
         selectShift, specialty, facility,
-        'Shift',
-        'Facility',
-        'shift.fk_Shift_facilityID', 'facility.facilityID',
-        'Specialty',
-        'specialty.specialtyID', 'fk_Shift_specialtyID',
+        'Shift', 's',
+        'Facility', 'f',
+        's.fk_Shift_facilityID', 'f.facilityID',
+        'Specialty', 'sp',
+        'sp.specialtyID', 'fk_Shift_specialtyID',
         'fk_Shift_userID', userID, 'accepted', 1];
       this.body = yield query(q);
     } else {
@@ -174,17 +174,17 @@ module.exports = function shiftRoutes(app) {
     const userID = this.params.userID;
     if (user.scope.userID && user.scope.userID.toString() === userID) {
       const q = {};
-      q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND ?? = ?';
-      const selectShift = ['shift.shiftID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date', 'shift.open', 'shift.shiftDressCode', 'shift.pending', 'shift.shift_modified'];
-      const specialty = ['specialty.specialty'];
-      const facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR', 'facility.facilityGeohash'];
+      q.sql = 'SELECT ??, ??, ?? FROM ?? AS ?? INNER JOIN ?? AS ?? ON (?? = ??) INNER JOIN ?? AS ?? ON (?? = ??) WHERE ?? = ? AND ?? = ?';
+      const selectShift = ['s.shiftID', 's.shiftStartHour', 's.shiftDuration', 's.payPerHour', 's.date', 's.open', 's.shiftDressCode', 's.pending', 's.shift_modified'];
+      const specialty = ['sp.specialty'];
+      const facility = ['f.facilityID', 'f.facilityName', 'f.facilityEMR', 'f.facilityGeohash'];
       q.values = [
         selectShift, specialty, facility,
-        'Shift',
-        'Facility',
-        'shift.fk_Shift_facilityID', 'facility.facilityID',
-        'Specialty',
-        'specialty.specialtyID', 'fk_Shift_specialtyID',
+        'Shift', 's',
+        'Facility', 'f',
+        's.fk_Shift_facilityID', 'f.facilityID',
+        'Specialty', 'sp',
+        'sp.specialtyID', 'fk_Shift_specialtyID',
         'fk_Shift_userID', userID, 'pending', 1];
       this.body = yield query(q);
     } else {
@@ -224,19 +224,19 @@ module.exports = function shiftRoutes(app) {
     // take off any elements that is not unique
     const set = _.uniq(trimmedHashSet);
     const q = {};
-    q.sql = 'SELECT ??, ??, ?? FROM ?? INNER JOIN ?? ON (?? = ??) INNER JOIN ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (?)';
-    const selectShift = ['shift.shiftID', 'shift.shiftStartHour', 'shift.shiftDuration', 'shift.payPerHour', 'shift.date', 'shift.open', 'shift.shiftDressCode', 'shift.pending', 'shift.shift_modified'];
-    const specialty = ['specialty.specialty'];
-    const facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR', 'facility.facilityGeohash'];
+    q.sql = 'SELECT ??, ??, ?? FROM ?? AS ?? INNER JOIN ?? AS ?? ON (?? = ??) INNER JOIN ?? AS ?? ON (?? = ??) WHERE ?? = ? AND LEFT(??, ?) IN (?)';
+    const selectShift = ['s.shiftID', 's.shiftStartHour', 's.shiftDuration', 's.payPerHour', 's.date', 's.open', 's.shiftDressCode', 's.pending', 's.shift_modified'];
+    const specialty = ['sp.specialty'];
+    const facility = ['f.facilityID', 'f.facilityName', 'f.facilityEMR', 'f.facilityGeohash'];
     q.values = [
       selectShift, facility, specialty,
-      'shift',
-      'facility',
-      'shift.fk_Shift_facilityID', 'facility.facilityID',
-      'Specialty',
-      'specialty.specialtyID', 'fk_Shift_specialtyID',
-      'shift.open', 1,
-      'facility.facilityGeohash', precision,
+      'Shift', 's',
+      'Facility', 'f',
+      's.fk_Shift_facilityID', 'f.facilityID',
+      'Specialty', 'sp',
+      'sp.specialtyID', 'fk_Shift_specialtyID',
+      's.open', 1,
+      'f.facilityGeohash', precision,
       set,
     ];
     // console.log(q);

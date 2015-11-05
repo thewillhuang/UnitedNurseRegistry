@@ -12,11 +12,6 @@ import moment from 'moment';
 // import PayButton from './payButton.jsx';
 const socket = io.connect();
 
-
-console.log(shiftApi);
-console.log(specialtyApi);
-console.log(user);
-
 class ShiftHospitalTable extends React.Component {
   // getChildContext() {
   //   return {

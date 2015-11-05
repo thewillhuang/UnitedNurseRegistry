@@ -104,6 +104,7 @@
     "node-uuid": "^1.4.3",
     "open": "0.0.5",
     "pretty-hrtime": "~1.0.0",
+    "redux-devtools": "^2.1.5",
     "require-dir": "^0.3.0",
     "supertest": "^1.1.0",
     "vinyl-source-stream": "~1.1.0",

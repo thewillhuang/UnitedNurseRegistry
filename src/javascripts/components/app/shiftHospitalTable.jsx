@@ -92,7 +92,8 @@ class ShiftHospitalTable extends React.Component {
             );
             const distMi = distKm / 1000 * 0.621371;
             const total = el.payPerHour * el.shiftDuration;
-            const date = moment(el.date).format('YYYY-MM-DD');
+            // const date = moment(el.date).format('YYYY-MM-DD');
+            const date = el.date.split('T')[0];
             if (date >= today) {
               table.push([
                 el.shiftID,

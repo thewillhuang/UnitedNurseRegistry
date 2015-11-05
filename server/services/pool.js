@@ -7,11 +7,9 @@ const options = {
   user: 'thewillhuang',
   password: 'Voodoo3d1668',
   database: 'unrdb',
-  port: '3306',
   connectionLimit: 10,
-  // ssl: 'Amazon RDS',
+  ssl: 'Amazon RDS',
 };
-// Promise.promisifyAll(mysql);
 Promise.promisifyAll(require('mysql/lib/Pool').prototype);
 Promise.promisifyAll(require('mysql/lib/Connection').prototype);
 // long stack trace for debug

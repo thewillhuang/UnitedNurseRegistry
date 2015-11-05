@@ -61,7 +61,8 @@ class ShiftHospitalTable extends React.Component {
           // construct the table
           const table = [];
           for (let i = 0; i < newObj.length; i++) {
-            const date = moment(newObj[i].date).format('YYYY-MM-DD');
+            // const date = moment(newObj[i].date).format('YYYY-MM-DD');
+            const date = newObj[i].date.split('T')[0];
             table.push([newObj[i].shiftID, 'pending', `$ ${newObj[i].payPerHour}`, `${newObj[i].shiftDuration} hrs`, `$ ${newObj[i].payPerHour * newObj[i].shiftDuration}`, newObj[i].unit, date, `${newObj[i].shiftStartHour}`, newObj[i].userID]);
           }
           return table.reverse();

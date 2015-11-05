@@ -68,6 +68,7 @@ class ShiftHospitalTable extends React.Component {
           const table = [];
           const today = moment().format('YYYY-MM-DD');
           for (let i = 0; i < newObj.length; i++) {
+            console.log('table object', newObj);
             const date = moment(newObj[i].date).format('YYYY-MM-DD');
             if (date >= today) {
               table.push([newObj[i].shiftID, newObj[i].status, '...', `$ ${newObj[i].payPerHour}`, `${newObj[i].shiftDuration} hrs`, `$ ${newObj[i].payPerHour * newObj[i].shiftDuration}`, newObj[i].unit, date, `${newObj[i].shiftStartHour}`]);

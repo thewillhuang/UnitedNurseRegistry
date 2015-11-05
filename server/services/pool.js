@@ -6,7 +6,7 @@ const options = {
   host: 'unrdb.c96pt8dvujyx.us-west-2.rds.amazonaws.com',
   user: 'thewillhuang',
   password: 'Voodoo3d1668',
-  database: 'unrdb',
+  database: 'UNRdb',
   port: '3306',
   connectionLimit: 10,
   // ssl: 'Amazon RDS',

@@ -49,7 +49,7 @@ ENV PORT 8080
 EXPOSE $PORT
 
 #expose port for mysql
-# EXPOSE 13306
+# EXPOSE 3306
 
 # cache setup files and run faster.
 #alternatively, you may clone the repo, install it, and upon running the image, git pull updates and install

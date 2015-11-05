@@ -3,6 +3,7 @@
 const koa = require('koa');
 const app = module.exports = koa();
 const port = process.env.PORT || 3000;
+const sslPort = process.env.SSL || 443;
 const logger = require('koa-logger');
 const etag = require('koa-etag');
 const build = '/public';
@@ -132,3 +133,16 @@ io.on('connection', function(socket) {
 // start http server
 server.listen(port);
 console.log('http listening on port:', port);
+
+// https server on another port
+const https = require('https').createServer(app.callback());
+const ios = require('socket.io')(https);
+ios.on('connection', function(socket) {
+  socket.on('update', function(data) {
+    ios.sockets.emit('updated', data);
+  });
+});
+
+// start https server
+https.listen(sslPort);
+console.log('https listening on port:', sslPort);

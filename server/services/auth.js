@@ -59,6 +59,7 @@ passport.use(new LocalStrategy({
     }).catch(NoAccountError, function() {
       this.done = [false, {message: 'incorrect email'}];
     }).catch(function(e) {
+      console.log(e);
       this.done = [false, {message: e}];
     }).then(function() {
       return this.done;
@@ -92,6 +93,7 @@ passport.use('facility-login', new LocalStrategy({
     }).catch(NoAccountError, function() {
       this.done = [false, {message: 'incorrect email'}];
     }).catch(function(e) {
+      console.log(e);
       this.done = [false, {message: e}];
     }).then(function() {
       return this.done;
@@ -132,6 +134,7 @@ passport.use('facility-signup', new LocalStrategy({
     }).catch(EmailTaken, function() {
       this.done = [false, {message: 'email taken'}];
     }).catch(function(e) {
+      console.log(e);
       this.done = [false, {message: e}];
     }).then(function() {
       return this.done;
@@ -169,6 +172,7 @@ passport.use('local-signup', new LocalStrategy({
     }).catch(EmailTaken, function() {
       this.done = [false, {message: 'email taken'}];
     }).catch(function(e) {
+      console.log(e);
       this.done = [false, {message: e}];
     }).then(function() {
       return this.done;
@@ -231,6 +235,7 @@ passport.use(new FacebookStrategy({
         {message: 'Auth successful'},
       ];
     }).catch(function(e) {
+      console.log(e);
       this.done = [false, {message: e}];
     }).then(function() {
       return this.done;

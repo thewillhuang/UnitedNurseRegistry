@@ -19,7 +19,7 @@ module.exports = function authRoutes(app) {
       const address = this.request.body.address.replace(/\s+/g, '+');
       const q = {};
       q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
-      q.values = ['lat', 'lng', 'geohash', 'address', address];
+      q.values = ['lat', 'lng', 'Geohash', 'address', address];
       const dbquery = yield query(q);
       // if theres nothing, ask google
       console.log(dbquery);
@@ -42,7 +42,7 @@ module.exports = function authRoutes(app) {
           lat: response.lat,
           lng: response.lng,
         };
-        q2.values = ['geohash', payload];
+        q2.values = ['Geohash', payload];
         yield query(q2);
         this.body = yield response;
       } else {

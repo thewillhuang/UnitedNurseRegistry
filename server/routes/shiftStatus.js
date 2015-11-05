@@ -15,7 +15,7 @@ module.exports = function shiftStatusRoutes(app) {
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     const select = ['open', 'pending', 'completed'];
-    q.values = [select, 'shift', 'shiftID', shiftID];
+    q.values = [select, 'Shift', 'shiftID', shiftID];
     this.body = yield query(q);
   })
 
@@ -62,7 +62,7 @@ module.exports = function shiftStatusRoutes(app) {
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
       const set = {open: 0, pending: 0, completed: 0, accepted: 1, fk_Shift_userID: userID};
-      q.values = ['shift', set, 'ShiftID', shiftID];
+      q.values = ['Shift', set, 'ShiftID', shiftID];
       this.body = yield query(q);
     }
   })
@@ -78,7 +78,7 @@ module.exports = function shiftStatusRoutes(app) {
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ? AND ?? = ?';
       const set = {open: 0, pending: 1, completed: 0, accepted: 0, fk_Shift_userID: userID};
-      q.values = ['shift', set, 'shiftID', shiftID, 'fk_Shift_facilityID', facilityID];
+      q.values = ['Shift', set, 'shiftID', shiftID, 'fk_Shift_facilityID', facilityID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};
@@ -95,7 +95,7 @@ module.exports = function shiftStatusRoutes(app) {
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ? AND ?? = ?';
       const set = {open: 1, pending: 0, completed: 0, fk_Shift_userID: null, accepted: 0};
-      q.values = ['shift', set, 'shiftID', shiftID, 'fk_Shift_facilityID', facilityID];
+      q.values = ['Shift', set, 'shiftID', shiftID, 'fk_Shift_facilityID', facilityID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};
@@ -112,7 +112,7 @@ module.exports = function shiftStatusRoutes(app) {
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ? AND ?? = ?';
       const set = {open: 0, pending: 0, completed: 1};
-      q.values = ['shift', set, 'shiftID', shiftID, 'fk_Shift_facilityID', facilityID];
+      q.values = ['Shift', set, 'shiftID', shiftID, 'fk_Shift_facilityID', facilityID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};
@@ -128,7 +128,7 @@ module.exports = function shiftStatusRoutes(app) {
       console.log('passed token test');
       const q = {};
       q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'accepted', 1];
+      q.values = ['Shift', 'fk_Shift_facilityID', facilityID, 'accepted', 1];
       this.body = yield query(q);
     }
   })
@@ -138,7 +138,7 @@ module.exports = function shiftStatusRoutes(app) {
     const facilityID = this.params.facilityID;
     const q = {};
     q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-    q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'open', 1];
+    q.values = ['Shift', 'fk_Shift_facilityID', facilityID, 'open', 1];
     this.body = yield query(q);
   })
 
@@ -148,7 +148,7 @@ module.exports = function shiftStatusRoutes(app) {
     const facilityID = this.params.facilityID;
     const q = {};
     q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-    q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'completed', 1];
+    q.values = ['Shift', 'fk_Shift_facilityID', facilityID, 'completed', 1];
     this.body = yield query(q);
   })
 
@@ -157,7 +157,7 @@ module.exports = function shiftStatusRoutes(app) {
     const userID = this.params.userID;
     const q = {};
     q.sql = 'SELECT * FROM ?? WHERE ?? = ?';
-    q.values = ['shift', 'fk_Shift_userID', userID];
+    q.values = ['Shift', 'fk_Shift_userID', userID];
     this.body = yield query(q);
   });
 

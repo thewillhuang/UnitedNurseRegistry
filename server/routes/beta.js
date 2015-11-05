@@ -14,7 +14,7 @@ module.exports = function authRoutes(app) {
     const requestJson = this.request.body;
     const q = {};
     q.sql = 'INSERT INTO ?? SET ?';
-    q.values = ['betaUser', requestJson];
+    q.values = ['BetaUser', requestJson];
     this.body = yield query(q);
   })
 
@@ -22,7 +22,7 @@ module.exports = function authRoutes(app) {
   .get('/signup', function* getAllBetaUser() {
     const q = {};
     q.sql = 'SELECT * FROM ??';
-    q.values = ['betaUser'];
+    q.values = ['BetaUser'];
     this.body = yield query(q);
   });
 

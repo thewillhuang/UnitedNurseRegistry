@@ -49,7 +49,7 @@ module.exports = function(app) {
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     // console.log(q);
     const select = ['facilityName', 'facilityGeohash', 'facilityEMR'];
-    q.values = [select, 'facility', 'facilityID', facilityID];
+    q.values = [select, 'Facility', 'facilityID', facilityID];
     this.body = yield query(q);
   })
 
@@ -67,7 +67,7 @@ module.exports = function(app) {
       }
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-      q.values = ['facility', requestJson, 'facilityID', facilityID];
+      q.values = ['Facility', requestJson, 'facilityID', facilityID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};
@@ -81,7 +81,7 @@ module.exports = function(app) {
     if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-      q.values = ['facility', 'facilityID', facilityID];
+      q.values = ['Facility', 'facilityID', facilityID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};

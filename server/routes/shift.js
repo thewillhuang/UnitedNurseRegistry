@@ -28,7 +28,7 @@ module.exports = function shiftRoutes(app) {
       requestJson.fk_Shift_specialtyID = specialtyID;
       const q = {};
       q.sql = 'INSERT INTO ?? SET ?';
-      q.values = ['shift', requestJson];
+      q.values = ['Shift', requestJson];
       // console.log(q);
       this.body = yield query(q);
     } else {
@@ -41,7 +41,7 @@ module.exports = function shiftRoutes(app) {
     const shiftID = this.params.shiftID;
     const q = {};
     q.sql = 'SELECT * FROM ?? WHERE ?? = ?';
-    q.values = ['shift', 'shiftID', shiftID];
+    q.values = ['Shift', 'shiftID', shiftID];
     // console.log(q);
     this.body = yield query(q);
   })
@@ -52,7 +52,7 @@ module.exports = function shiftRoutes(app) {
     const facilityID = this.params.facilityID;
     const q = {};
     q.sql = 'SELECT * FROM ?? WHERE ?? = ?';
-    q.values = ['shift', 'fk_Shift_facilityID', facilityID];
+    q.values = ['Shift', 'fk_Shift_facilityID', facilityID];
     this.body = yield query(q);
   })
 
@@ -64,7 +64,7 @@ module.exports = function shiftRoutes(app) {
     if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const q = {};
       q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND (?? = ? OR ??= ?)';
-      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'open', 1, 'pending', 1];
+      q.values = ['Shift', 'fk_Shift_facilityID', facilityID, 'open', 1, 'pending', 1];
       this.body = yield query(q);
     } else {
       this.status = 406;
@@ -78,7 +78,7 @@ module.exports = function shiftRoutes(app) {
     if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const q = {};
       q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'open', 1];
+      q.values = ['Shift', 'fk_Shift_facilityID', facilityID, 'open', 1];
       this.body = yield query(q);
     } else {
       this.status = 406;
@@ -92,7 +92,7 @@ module.exports = function shiftRoutes(app) {
     if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const q = {};
       q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'pending', 1];
+      q.values = ['Shift', 'fk_Shift_facilityID', facilityID, 'pending', 1];
       this.body = yield query(q);
     } else {
       this.status = 406;
@@ -106,7 +106,7 @@ module.exports = function shiftRoutes(app) {
     if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const q = {};
       q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'accepted', 1];
+      q.values = ['Shift', 'fk_Shift_facilityID', facilityID, 'accepted', 1];
       this.body = yield query(q);
     } else {
       this.status = 406;
@@ -120,7 +120,7 @@ module.exports = function shiftRoutes(app) {
     if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
       const q = {};
       q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-      q.values = ['shift', 'fk_Shift_facilityID', facilityID, 'completed', 1];
+      q.values = ['Shift', 'fk_Shift_facilityID', facilityID, 'completed', 1];
       this.body = yield query(q);
     } else {
       this.status = 406;
@@ -137,7 +137,7 @@ module.exports = function shiftRoutes(app) {
     if (user.scope.userID && user.scope.userID.toString() === userID) {
       const q = {};
       q.sql = 'SELECT * FROM ?? WHERE ?? = ?';
-      q.values = ['shift', 'fk_Shift_userID', userID];
+      q.values = ['Shift', 'fk_Shift_userID', userID];
       this.body = yield query(q);
     } else {
       this.status = 406;
@@ -156,8 +156,8 @@ module.exports = function shiftRoutes(app) {
       const facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR', 'facility.facilityGeohash'];
       q.values = [
         selectShift, specialty, facility,
-        'shift',
-        'facility',
+        'Shift',
+        'Facility',
         'shift.fk_Shift_facilityID', 'facility.facilityID',
         'Specialty',
         'specialty.specialtyID', 'fk_Shift_specialtyID',
@@ -180,8 +180,8 @@ module.exports = function shiftRoutes(app) {
       const facility = ['facility.facilityID', 'facility.facilityName', 'facility.facilityEMR', 'facility.facilityGeohash'];
       q.values = [
         selectShift, specialty, facility,
-        'shift',
-        'facility',
+        'Shift',
+        'Facility',
         'shift.fk_Shift_facilityID', 'facility.facilityID',
         'Specialty',
         'specialty.specialtyID', 'fk_Shift_specialtyID',
@@ -199,7 +199,7 @@ module.exports = function shiftRoutes(app) {
     if (user.scope.userID && user.scope.userID.toString() === userID) {
       const q = {};
       q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
-      q.values = ['shift', 'fk_Shift_userID', userID, 'completed', 1];
+      q.values = ['Shift', 'fk_Shift_userID', userID, 'completed', 1];
       this.body = yield query(q);
     } else {
       this.status = 406;
@@ -266,7 +266,7 @@ module.exports = function shiftRoutes(app) {
       const shiftID = this.params.shiftID;
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-      q.values = ['shift', requestJson, 'shiftID', shiftID];
+      q.values = ['Shift', requestJson, 'shiftID', shiftID];
       // console.log(q);
       this.body = yield query(q);
     } else {
@@ -282,7 +282,7 @@ module.exports = function shiftRoutes(app) {
       const shiftID = this.params.shiftID;
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-      q.values = ['shift', 'shiftID', shiftID];
+      q.values = ['Shift', 'shiftID', shiftID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};

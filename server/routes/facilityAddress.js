@@ -19,7 +19,7 @@ module.exports = function(app) {
       const requestJson = this.request.body;
       const q = {};
       q.sql = 'INSERT INTO ?? SET ?';
-      q.values = ['address', requestJson];
+      q.values = ['Address', requestJson];
       this.body = yield Promise.using(getTransaction(), function(tx) {
         return tx.queryAsync(q).spread(function(rows, fields) {
           return {rows, fields};
@@ -29,7 +29,7 @@ module.exports = function(app) {
           address.fk_FacilityAddress_addressID = result.rows.insertId;
           const q2 = {};
           q2.sql = 'INSERT INTO ?? SET ?';
-          q2.values = ['facilityAddress', address];
+          q2.values = ['FacilityAddress', address];
           return q2;
         }).then(function(q2) {
           return tx.queryAsync(q2).spread(function(rows, fields) {
@@ -50,7 +50,7 @@ module.exports = function(app) {
     const facilityID = this.params.facilityID;
     const q = {};
     q.sql = 'SELECT a.* FROM ?? AS ?? INNER JOIN ?? AS ?? ON (?? = ??) WHERE ?? = ?';
-    q.values = ['address', 'a', 'facilityaddress', 'fa', 'fa.fk_facilityAddress_addressID', 'a.addressID', 'fa.fk_facilityAddress_facilityID', facilityID];
+    q.values = ['Address', 'a', 'FacilityAddress', 'fa', 'fa.fk_facilityAddress_addressID', 'a.addressID', 'fa.fk_facilityAddress_facilityID', facilityID];
     this.body = yield query(q);
   })
 
@@ -63,7 +63,7 @@ module.exports = function(app) {
       const addressID = this.params.addressID;
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-      q.values = ['address', requestJson, 'addressID', addressID];
+      q.values = ['Address', requestJson, 'addressID', addressID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};
@@ -78,7 +78,7 @@ module.exports = function(app) {
       const addressID = this.params.addressID;
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-      q.values = ['address', 'addressID', addressID];
+      q.values = ['Address', 'addressID', addressID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};

@@ -43,7 +43,7 @@ passport.use(new LocalStrategy({
   function(email, password, done) {
     const q = {};
     q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
-    q.values = ['userPwHash', 'userID', 'user', 'email', email];
+    q.values = ['userPwHash', 'userID', 'User', 'email', email];
     query(q).bind({}).then(function(result) {
       console.log(result);
       if (result.rows.length === 0) { throw new NoAccountError('no such user found'); }
@@ -113,7 +113,7 @@ passport.use('facility-signup', new LocalStrategy({
     // console.log(email, password);
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    q.values = ['facilityPwHash', 'facility', 'facilityemail', email];
+    q.values = ['facilityPwHash', 'Facility', 'facilityemail', email];
     query(q).bind({}).then(function(result) {
       console.log(result);
       // console.log('facility result', result);
@@ -154,7 +154,7 @@ passport.use('local-signup', new LocalStrategy({
   function(email, password, done) {
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    q.values = ['userPwHash', 'user', 'email', email];
+    q.values = ['userPwHash', 'User', 'email', email];
     query(q).bind({}).then(function(result) {
       console.log(result);
       if (result.rows.length !== 0) { throw new EmailTaken('email taken'); }
@@ -207,7 +207,7 @@ passport.use(new FacebookStrategy({
     const fbprofile = profile._json;
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
-    q.values = ['userID', 'user', 'fb_id', fbprofile.id];
+    q.values = ['userID', 'User', 'fb_id', fbprofile.id];
     query(q).bind({}).then(function(result) {
       console.log(result);
       if (result.rows.length !== 0) {

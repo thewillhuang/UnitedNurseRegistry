@@ -19,7 +19,7 @@ module.exports = function(app) {
       const requestJson = this.request.body;
       const q = {};
       q.sql = 'INSERT INTO ?? SET ?';
-      q.values = ['phone', requestJson];
+      q.values = ['Phone', requestJson];
       this.body = yield Promise.using(getTransaction(), function(tx) {
         return tx.queryAsync(q).spread(function(rows, fields) {
           return {rows, fields};
@@ -30,7 +30,7 @@ module.exports = function(app) {
           phone.fk_FacilityPhone_phoneID = result.rows.insertId;
           const q2 = {};
           q2.sql = 'INSERT INTO ?? SET ?';
-          q2.values = ['facilityphone', phone];
+          q2.values = ['FacilityPhone', phone];
           return q2;
         }).then(function(q2) {
           return tx.queryAsync(q2).spread(function(rows, fields) {
@@ -50,7 +50,7 @@ module.exports = function(app) {
     const facilityID = this.params.facilityID;
     const q = {};
     q.sql = 'SELECT p.* FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
-    q.values = ['phone', 'p', 'facilityphone', 'fp', 'fp.fk_FacilityPhone_phoneID', 'p.phoneID', 'fp.fk_FacilityPhone_facilityID', facilityID];
+    q.values = ['Phone', 'p', 'FacilityPhone', 'fp', 'fp.fk_FacilityPhone_phoneID', 'p.phoneID', 'fp.fk_FacilityPhone_facilityID', facilityID];
     this.body = yield query(q);
   })
 
@@ -63,7 +63,7 @@ module.exports = function(app) {
       const phoneID = this.params.phoneID;
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-      q.values = ['phone', requestJson, 'phoneID', phoneID];
+      q.values = ['Phone', requestJson, 'phoneID', phoneID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};
@@ -78,7 +78,7 @@ module.exports = function(app) {
       const phoneID = this.params.phoneID;
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-      q.values = ['phone', 'phoneID', phoneID];
+      q.values = ['Phone', 'phoneID', phoneID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};

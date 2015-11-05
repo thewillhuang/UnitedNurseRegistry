@@ -42,7 +42,7 @@ module.exports = function userRoutes(app) {
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     const select = ['userID', 'firstName', 'middleName', 'lastName', 'userGeoHash', 'dob', 'email'];
-    q.values = [select, 'user', 'userID', userID];
+    q.values = [select, 'User', 'userID', userID];
     this.body = yield query(q);
   })
 
@@ -59,7 +59,7 @@ module.exports = function userRoutes(app) {
       }
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-      q.values = ['user', requestJson, 'userID', userID];
+      q.values = ['User', requestJson, 'userID', userID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};
@@ -73,7 +73,7 @@ module.exports = function userRoutes(app) {
     if (user.scope.userID && user.scope.userID.toString() === userID) {
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-      q.values = ['user', 'userID', userID];
+      q.values = ['User', 'userID', userID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};

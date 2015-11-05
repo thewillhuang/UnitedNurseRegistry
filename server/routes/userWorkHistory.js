@@ -23,7 +23,7 @@ module.exports = function(app) {
         delete requestJson.workHistoryVetted;
       }
       q.sql = 'INSERT INTO ?? SET ?';
-      q.values = ['userworkhistory', requestJson];
+      q.values = ['UserWorkHistory', requestJson];
       // console.log(q);
       this.body = yield query(q);
     } else {

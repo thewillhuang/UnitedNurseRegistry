@@ -20,7 +20,7 @@ module.exports = function(app) {
       // console.log(requestJson);
       const q = {};
       q.sql = 'INSERT INTO ?? SET ?';
-      q.values = ['user', requestJson];
+      q.values = ['User', requestJson];
       this.body = yield Promise.using(getTransaction(), function(tx) {
         return tx.queryAsync(q).spread(function(rows, fields) {
           return {rows, fields};
@@ -31,7 +31,7 @@ module.exports = function(app) {
           userData.fk_facilityuser_userID = result.rows.insertId;
           const q2 = {};
           q2.sql = 'INSERT INTO ?? SET ?';
-          q2.values = ['facilityuser', userData];
+          q2.values = ['FacilityUser', userData];
           return q2;
         }).then(function(q2) {
           return tx.queryAsync(q2).spread(function(rows, fields) {
@@ -62,7 +62,7 @@ module.exports = function(app) {
         'u.dob',
         'u.email',
       ];
-      q.values = [select, 'user', 'u', 'facilityuser', 'fu', 'fu.fk_facilityuser_userID', 'u.userID', 'fu.fk_facilityuser_facilityID', facilityID];
+      q.values = [select, 'User', 'u', 'FacilityUser', 'fu', 'fu.fk_facilityuser_userID', 'u.userID', 'fu.fk_facilityuser_facilityID', facilityID];
       // console.log(q);
       this.body = yield query(q);
     } else {
@@ -79,7 +79,7 @@ module.exports = function(app) {
       const userID = this.params.userID;
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
-      q.values = ['user', requestJson, 'userID', userID];
+      q.values = ['User', requestJson, 'userID', userID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};
@@ -94,7 +94,7 @@ module.exports = function(app) {
       const userID = this.params.userID;
       const q = {};
       q.sql = 'DELETE FROM ?? WHERE ?? = ?';
-      q.values = ['user', 'userID', userID];
+      q.values = ['User', 'userID', userID];
       this.body = yield query(q);
     } else {
       this.body = {message: 'no permission'};

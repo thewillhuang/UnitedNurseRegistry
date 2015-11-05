@@ -42,10 +42,10 @@ class ShiftHospitalTable extends React.Component {
         .then(res=> {
           return res.rows;
         }).then(rows => {
-          // console.log(rows);
+          console.log(rows);
           // get useful information shiftID, fk_Shift_specialtyID, status, Viewed %, Pay Per Hour, Unit, Date and Time, fk_Shift_userID
           return rows.map(obj => {
-            // console.log('ctx', ctx.state, obj);
+            console.log('ctx', ctx.state, obj);
             const newObj = {};
             newObj.shiftID = obj.shiftID;
             newObj.specialtyID = obj.fk_Shift_specialtyID;

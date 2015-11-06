@@ -29,9 +29,11 @@ app.use(helmet());
 
 // static file server
 if (process.env.NODE_ENV === 'development') {
+  console.log('server running in development mode');
   // logging
   app.use(logger());
-  console.log('server running in development mode');
+
+  // serve fresh files
   app.use(serve(buildPath));
 } else {
   console.log('server running in production mode');
@@ -39,6 +41,7 @@ if (process.env.NODE_ENV === 'development') {
     scriptSrc: ['\'self\'', 'https://checkout.stripe.com', '\'unsafe-eval\''],
   }));
 
+  // serve cached files for faster speed
   app.use(staticCache(buildPath, {
     buffer: true,
     usePrecompiledGzip: true,

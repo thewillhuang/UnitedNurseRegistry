@@ -17,9 +17,6 @@ const staticCache = require('koa-static-cache');
 const serve = require('koa-static');
 const send = require('koa-send');
 
-// logging
-app.use(logger());
-
 // cacheing
 app.use(conditional());
 app.use(etag());
@@ -32,6 +29,8 @@ app.use(helmet());
 
 // static file server
 if (process.env.NODE_ENV === 'development') {
+  // logging
+  app.use(logger());
   console.log('server running in development mode');
   app.use(serve(buildPath));
 } else {

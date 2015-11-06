@@ -4,10 +4,10 @@ build
 Desktop.ini
 node_modules
 bower_components
+src/bower_components
 **/*.log
 public
-app/plugins
-app/js/config.js
+src/plugins
 gulp/node_modules
 Dockerfile
 .dockerignore

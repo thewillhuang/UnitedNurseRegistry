@@ -27,6 +27,17 @@ app.proxy = true;
 // security headers
 app.use(helmet());
 
+// server side rendering
+// const renderToString = require('react-dom/server').renderToString;
+// const rootApp = require('./src/javascripts/index.js');
+// app.use(function* sendRawHtml(next) {
+//   if (this.path === '/') {
+//     this.body = renderToString(rootApp);
+//   } else {
+//     yield next;
+//   }
+// });
+
 // static file server
 if (process.env.NODE_ENV === 'development') {
   console.log('server running in development mode');

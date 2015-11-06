@@ -9,7 +9,7 @@ injectTapEventPlugin();
 
 const rootElement = document.getElementById('root');
 
-class Root extends React.Component {
+export default class Root extends React.Component {
   static propTypes = {
     children: React.PropTypes.node,
   }

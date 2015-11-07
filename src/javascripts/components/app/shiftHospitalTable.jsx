@@ -309,7 +309,7 @@ class ShiftHospitalTable extends React.Component {
             headerRenderer={this._renderHeader}
             width={150}
             allowCellsRecycling
-            dataKey={2}
+            dataKey={1}
           />
           <Column
             label={'Duration' + (this.state.sortBy === 2 ? sortDirArrow : '')}
@@ -317,7 +317,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={100}
             allowCellsRecycling
-            dataKey={3}
+            dataKey={2}
           />
           <Column
             label={'Specialty' + (this.state.sortBy === 3 ? sortDirArrow : '')}
@@ -325,7 +325,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={100}
             allowCellsRecycling
-            dataKey={4}
+            dataKey={3}
           />
           <Column
             label={'Pay As Employee' + (this.state.sortBy === 4 ? sortDirArrow : '')}
@@ -333,7 +333,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={150}
             allowCellsRecycling
-            dataKey={5}
+            dataKey={4}
           />
           <Column
             label={'Pay As IC' + (this.state.sortBy === 5 ? sortDirArrow : '')}
@@ -341,7 +341,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={100}
             allowCellsRecycling
-            dataKey={6}
+            dataKey={5}
           />
           <Column
             label={'EMR' + (this.state.sortBy === 6 ? sortDirArrow : '')}
@@ -349,7 +349,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={110}
             allowCellsRecycling
-            dataKey={7}
+            dataKey={6}
           />
           <Column
             label={'Dress Code' + (this.state.sortBy === 7 ? sortDirArrow : '')}
@@ -357,7 +357,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={120}
             allowCellsRecycling
-            dataKey={8}
+            dataKey={7}
           />
           <Column
             label={'Miles' + (this.state.sortBy === 8 ? sortDirArrow : '')}
@@ -365,7 +365,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={70}
             allowCellsRecycling
-            dataKey={9}
+            dataKey={8}
           />
           <Column
             label={'Start Date' + (this.state.sortBy === 9 ? sortDirArrow : '')}
@@ -373,7 +373,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={100}
             allowCellsRecycling
-            dataKey={10}
+            dataKey={9}
           />
           <Column
             label={'Start Time' + (this.state.sortBy === 10 ? sortDirArrow : '')}
@@ -381,7 +381,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={1}
             width={110}
             allowCellsRecycling
-            dataKey={11}
+            dataKey={10}
           />
           <Column
             label={'Modified' + (this.state.sortBy === 11 ? sortDirArrow : '')}
@@ -389,7 +389,7 @@ class ShiftHospitalTable extends React.Component {
             flexGrow={2}
             width={120}
             allowCellsRecycling
-            dataKey={12}
+            dataKey={11}
           />
         </Table>
       </div>

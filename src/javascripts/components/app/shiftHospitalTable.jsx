@@ -305,22 +305,14 @@ class ShiftHospitalTable extends React.Component {
             dataKey={0}
           />
           <Column
-            label={'Facility Name' + (this.state.sortBy === 1 ? sortDirArrow : '')}
+            label={'Facility Name' + (this.state.sortBy === 2 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             width={150}
-            allowCellsRecycling
-            dataKey={1}
-          />
-          <Column
-            label={'Duration' + (this.state.sortBy === 2 ? sortDirArrow : '')}
-            headerRenderer={this._renderHeader}
-            flexGrow={1}
-            width={100}
             allowCellsRecycling
             dataKey={2}
           />
           <Column
-            label={'Specialty' + (this.state.sortBy === 3 ? sortDirArrow : '')}
+            label={'Duration' + (this.state.sortBy === 3 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
             width={100}
@@ -328,68 +320,76 @@ class ShiftHospitalTable extends React.Component {
             dataKey={3}
           />
           <Column
-            label={'Pay As Employee' + (this.state.sortBy === 4 ? sortDirArrow : '')}
+            label={'Specialty' + (this.state.sortBy === 4 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
-            width={150}
+            width={100}
             allowCellsRecycling
             dataKey={4}
           />
           <Column
-            label={'Pay As IC' + (this.state.sortBy === 5 ? sortDirArrow : '')}
+            label={'Pay As Employee' + (this.state.sortBy === 5 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
-            width={100}
+            width={150}
             allowCellsRecycling
             dataKey={5}
           />
           <Column
-            label={'EMR' + (this.state.sortBy === 6 ? sortDirArrow : '')}
-            headerRenderer={this._renderHeader}
-            flexGrow={1}
-            width={110}
-            allowCellsRecycling
-            dataKey={6}
-          />
-          <Column
-            label={'Dress Code' + (this.state.sortBy === 7 ? sortDirArrow : '')}
-            headerRenderer={this._renderHeader}
-            flexGrow={1}
-            width={120}
-            allowCellsRecycling
-            dataKey={7}
-          />
-          <Column
-            label={'Miles' + (this.state.sortBy === 8 ? sortDirArrow : '')}
-            headerRenderer={this._renderHeader}
-            flexGrow={1}
-            width={70}
-            allowCellsRecycling
-            dataKey={8}
-          />
-          <Column
-            label={'Start Date' + (this.state.sortBy === 9 ? sortDirArrow : '')}
+            label={'Pay As IC' + (this.state.sortBy === 6 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
             width={100}
             allowCellsRecycling
-            dataKey={9}
+            dataKey={6}
           />
           <Column
-            label={'Start Time' + (this.state.sortBy === 10 ? sortDirArrow : '')}
+            label={'EMR' + (this.state.sortBy === 7 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
             width={110}
             allowCellsRecycling
+            dataKey={7}
+          />
+          <Column
+            label={'Dress Code' + (this.state.sortBy === 8 ? sortDirArrow : '')}
+            headerRenderer={this._renderHeader}
+            flexGrow={1}
+            width={120}
+            allowCellsRecycling
+            dataKey={8}
+          />
+          <Column
+            label={'Miles' + (this.state.sortBy === 9 ? sortDirArrow : '')}
+            headerRenderer={this._renderHeader}
+            flexGrow={1}
+            width={70}
+            allowCellsRecycling
+            dataKey={9}
+          />
+          <Column
+            label={'Start Date' + (this.state.sortBy === 10 ? sortDirArrow : '')}
+            headerRenderer={this._renderHeader}
+            flexGrow={1}
+            width={100}
+            allowCellsRecycling
             dataKey={10}
           />
           <Column
-            label={'Modified' + (this.state.sortBy === 11 ? sortDirArrow : '')}
+            label={'Start Time' + (this.state.sortBy === 11 ? sortDirArrow : '')}
+            headerRenderer={this._renderHeader}
+            flexGrow={1}
+            width={110}
+            allowCellsRecycling
+            dataKey={11}
+          />
+          <Column
+            label={'Modified' + (this.state.sortBy === 12 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={2}
             width={120}
             allowCellsRecycling
-            dataKey={11}
+            dataKey={12}
           />
         </Table>
       </div>

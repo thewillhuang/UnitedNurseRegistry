@@ -4,6 +4,7 @@ const passport = require('koa-passport');
 const LocalStrategy = require('passport-local').Strategy;
 const FacebookStrategy = require('passport-facebook').Strategy;
 const BearerStrategy = require('passport-http-bearer').Strategy;
+const StripeStrategy = require('passport-stripe').Strategy;
 const query = require('./query');
 const validatePw = require('./validatePassword');
 const genHash = require('./genHash');
@@ -188,6 +189,54 @@ passport.use('local-signup', new LocalStrategy({
 passport.use(new BearerStrategy(
   function(token, done) {
     jwt.verifyDecrypt(token, done);
+  }
+));
+
+passport.use(new StripeStrategy({
+  clientID: 'ca_7KPW3l2e2cetMAYgRLBxO7rZqKa84WTh',
+  clientSecret: 'sk_test_QhkM0TkqmtZinr5Gy7P4CtIq',
+  callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/api/auth/stripe/callback',
+},
+  function(accessToken, refreshToken, stripeProperties, done) {
+    console.log(accessToken, refreshToken, stripeProperties, done);
+    const q = {};
+    q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
+    q.values = ['userID', 'User', 'stripe_user_id', stripeProperties.stripe_user_id];
+    query(q).bind({}).then(function(result) {
+      // console.log(result);
+      if (result.rows.length !== 0) {
+        this.userID = result.rows[0].userID;
+        throw new UserExist('stripe user exists');
+      }
+    }).then(function() {
+      const q2 = {};
+      const userData = {};
+      userData.stripe_publishable_key = stripeProperties.stripe_publishable_key;
+      userData.stripe_user_id = stripeProperties.stripe_user_id;
+      userData.stripe_refresh_token = refreshToken;
+      userData.stripe_access_token = accessToken;
+      console.log('userData', userData);
+      q2.sql = 'INSERT INTO ?? SET ?';
+      q2.values = ['User', userData];
+      return query(q2);
+    }).then(function(result) {
+      console.log(result);
+      const insertId = result.rows.insertId;
+      this.done = [
+        {userID: insertId, scope: {userID: insertId}},
+        {message: 'Registeration successful'},
+      ];
+    }).catch(UserExist, function() {
+      this.done = [
+        {userID: this.userID, scope: {userID: this.userID}},
+        {message: 'Auth successful'},
+      ];
+    }).catch(function(e) {
+      console.log(e);
+      this.done = [false, {message: e}];
+    }).then(function() {
+      return this.done;
+    }).nodeify(done, {spread: true});
   }
 ));
 

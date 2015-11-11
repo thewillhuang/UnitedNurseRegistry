@@ -27,17 +27,6 @@ app.proxy = true;
 // security headers
 app.use(helmet());
 
-// server side rendering
-// const renderToString = require('react-dom/server').renderToString;
-// const rootApp = require('./src/javascripts/index.js');
-// app.use(function* sendRawHtml(next) {
-//   if (this.path === '/') {
-//     this.body = renderToString(rootApp);
-//   } else {
-//     yield next;
-//   }
-// });
-
 // static file server
 if (process.env.NODE_ENV === 'development') {
   console.log('server running in development mode');
@@ -78,6 +67,7 @@ app.use(function* apiCheck(next) {
 app.use(compress());
 app.use(bodyParser());
 
+// public routes
 // beta signup
 require('./server/routes/beta')(app);
 
@@ -145,25 +135,3 @@ io.on('connection', function(socket) {
 // start http server
 server.listen(port);
 console.log('http listening on port:', port);
-
-
-// // SSL options
-// const sslPort = process.env.SSL || 8000;
-// const fs = require('fs');
-// const options = {
-//   key: fs.readFileSync('unr-key.pem'),
-//   cert: fs.readFileSync('unr-cert.pem'),
-// };
-//
-// // https server on another port
-// const https = require('https').createServer(options, app.callback());
-// const ios = require('socket.io')(https);
-// ios.on('connection', function(socket) {
-//   socket.on('update', function(data) {
-//     ios.sockets.emit('updated', data);
-//   });
-// });
-//
-// // start https server
-// https.listen(sslPort);
-// console.log('https listening on port:', sslPort);

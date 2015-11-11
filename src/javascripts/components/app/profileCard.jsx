@@ -83,6 +83,8 @@ export default class ProfileCard extends React.Component {
               floatingLabelText='Zip'
               hintText='Zip' />
             <br/>
+            <a href='/api/auth/stripe' className='stripe-connect'><span>Connect with Stripe</span></a>
+            <br/>
             <RaisedButton primary label='Choose an Image'>
               <input type='file' style={input}></input>
             </RaisedButton>

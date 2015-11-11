@@ -35,6 +35,31 @@ module.exports = function authRoutes(app) {
     }).call(this, next);
   })
 
+  .get('/stripe',
+    passport.authenticate('stripe')
+  )
+
+  .get('/stripe/callback', function* (next) {
+    const ctx = this;
+    yield passport.authenticate('stripe', {
+      failureRedirect: '/login',
+      session: false,
+      scope: 'read_write',
+    }, function* (err, user, info) {
+      if (err) console.log('error', err);
+      if (!user) {
+        ctx.status = 406;
+        ctx.body = info;
+      } else {
+        ctx.status = 200;
+        ctx.passport.user = user;
+        const token = jwt.encryptSign(user);
+        ctx.set({ Authorization: 'Bearer ' + token });
+        ctx.body = {message: user};
+      }
+    }).call(this, next);
+  })
+
   .post('/login', function*(next) {
     const ctx = this;
     yield passport.authenticate('local', { session: false }, function*(err, user, info) {

@@ -21,7 +21,7 @@ module.exports = function(app) {
       q.values = ['Specialty', requestJson];
       const q1 = {};
       q1.sql = 'SELECT * FROM ?? WHERE ?';
-      q1.values = ['specialty', requestJson];
+      q1.values = ['Specialty', requestJson];
       this.body = yield Promise.using(getTransaction(), function(tx) {
         return tx.queryAsync(q1).spread(function(rows, fields) {
           // result from the select to see if theres a duplicate
@@ -33,8 +33,8 @@ module.exports = function(app) {
           // else make another query to get an insert id
           : tx.queryAsync(q).spread(function(rows, fields) {
             // return that for the next promise
-              return {rows, fields};
-            });
+            return {rows, fields};
+          });
         }).then(function(result) {
           // construct the query to make the intersection table
           const specialty = {};
@@ -63,7 +63,7 @@ module.exports = function(app) {
     const userID = this.params.userID;
     const q = {};
     q.sql = 'SELECT s.* FROM ?? AS ?? INNER JOIN ?? AS ?? on (?? = ??) WHERE ?? = ?';
-    q.values = ['specialty', 's', 'UserSpecialty', 'us', 'us.fk_UserSpecialty_specialtyID', 's.specialtyID', 'us.fk_UserSpecialty_userID', userID];
+    q.values = ['Specialty', 's', 'UserSpecialty', 'us', 'us.fk_UserSpecialty_specialtyID', 's.specialtyID', 'us.fk_UserSpecialty_userID', userID];
     this.body = yield query(q);
   })
 
@@ -78,7 +78,7 @@ module.exports = function(app) {
   .post('/new/:specialty', function* () {
     const specialty = this.params.specialty;
     const q = {};
-    q.sql = 'SELECT * FROM ?? WHERE ??=?';
+    q.sql = 'SELECT * FROM ?? WHERE ?? = ?';
     q.values = ['Specialty', 'specialty', specialty];
     const result1 = yield query(q);
     if (result1.rows.length === 0) {

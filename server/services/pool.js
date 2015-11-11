@@ -3,12 +3,15 @@
 const Promise = require('bluebird');
 const mysql = require('mysql');
 const options = {
+  database: 'unrdb',
+  connectionLimit: 10,
   host: 'unrdb.c96pt8dvujyx.us-west-2.rds.amazonaws.com',
   user: 'thewillhuang',
   password: 'Voodoo3d1668',
-  database: 'unrdb',
-  connectionLimit: 10,
   ssl: 'Amazon RDS',
+  // localhost
+  // host: 'localhost',
+  // user: 'root',
 };
 Promise.promisifyAll(require('mysql/lib/Pool').prototype);
 Promise.promisifyAll(require('mysql/lib/Connection').prototype);

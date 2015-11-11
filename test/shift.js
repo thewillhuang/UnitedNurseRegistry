@@ -221,6 +221,7 @@ describe('shift api', function() {
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
+        console.log(res.body);
         expect(res).to.be.an('object');
         expect(res.body.rows.insertId).to.be.an('number');
         expect(err).to.be.a('null');

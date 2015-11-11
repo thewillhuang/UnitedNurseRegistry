@@ -16,10 +16,9 @@ module.exports = function acquireTransaction() {
           connection.release();
         });
       });
-    } else {
-      return connection.rollbackAsync().then(function() {
-        connection.release();
-      });
     }
+    return connection.rollbackAsync().then(function() {
+      connection.release();
+    });
   });
 };

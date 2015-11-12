@@ -25,7 +25,7 @@ export default class ForHospitals extends React.Component {
           <div href='#' className='grid2-item'>
             <i className='fa icon-credit-card fa-2x grid2-i'></i>
             <h1>Pay</h1>
-            <p>Securely for the nurses's shift</p>
+            <p>Pay through Stripe for the nurses's shift</p>
           </div>
           <div href='#' className='grid2-omega'>
           </div>

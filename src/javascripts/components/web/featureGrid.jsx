@@ -16,13 +16,13 @@ export default class FeatureGrid extends React.Component {
         <div className='grid-items-lines'>
           <div href='#' className='grid-item'>
             <i className='fa icon-speedometer fa-2x grid-i'></i>
-            <h1>Lighhting fast</h1>
+            <h1>Fast Matching</h1>
             <p>Find a Match with your criteria in seconds.</p>
           </div>
           <div href='#' className='grid-item'>
             <i className='fa icon-lock fa-2x grid-i'></i>
             <h1>Safe & Secure</h1>
-            <p>Everything is Military Grade Encrypted</p>
+            <p>Everything is AES-256 Encrypted</p>
           </div>
           <div href='#' className='grid-item'>
             <i className='fa icon-reload fa-2x grid-i'></i>
@@ -37,12 +37,12 @@ export default class FeatureGrid extends React.Component {
           <div href='#' className='grid-item'>
             <i className='fa icon-graph fa-2x grid-i'></i>
             <h1>Simple Pricing</h1>
-            <p>7% per successful shift. You keep the rest</p>
+            <p>7% charge for successful shifts. You keep the rest</p>
           </div>
           <div href='#' className='grid-item'>
             <i className='fa icon-magnifier fa-2x grid-i'></i>
             <h1>Background checked</h1>
-            <p>All References are checked.</p>
+            <p>Criminal Record and Backgrounds are checked via industry standards.</p>
           </div>
           <div href='#' className='grid-omega'>
           </div>

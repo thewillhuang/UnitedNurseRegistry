@@ -113,7 +113,6 @@ const ShiftHospitalTable = React.createClass({
                 el.shiftStartHour,
                 moment(el.shift_modified).format('YYYY-MM-DD, h:mm a'),
               ]);
-              // console.log(ctx.state.lat, ctx.state.lng, lat, lng, distKm, distMi);
             }
           }
         }

@@ -41,10 +41,10 @@ class Home extends React.Component {
           </div>
 
         </div>
-        <ForNurses />
-        <ForReferrals />
         <ForHospitals />
+        <ForNurses />
         <FeatureGrid />
+        <ForReferrals />
         <Footer/>
       </div>
     );

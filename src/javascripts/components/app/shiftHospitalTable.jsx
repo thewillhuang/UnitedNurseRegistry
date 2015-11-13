@@ -20,15 +20,17 @@ const SortTypes = {
   DESC: 'DESC',
 };
 
-class ShiftHospitalTable extends React.Component {
-  state = {
-    table: [
-      ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
-    ],
-    sortBy: 0,
-    sortDir: null,
-    focus: ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
-  }
+const ShiftHospitalTable = React.createClass({
+  getInitialState: function() {
+    return {
+      table: [
+        ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
+      ],
+      sortBy: 0,
+      sortDir: null,
+      focus: ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
+    };
+  },
 
   // getChildContext() {
   //   return {
@@ -36,9 +38,9 @@ class ShiftHospitalTable extends React.Component {
   //   };
   // }
 
-  rowGetter = (rowIndex) => {
+  rowGetter(rowIndex) {
     return this.state.table[rowIndex];
-  }
+  },
 
   componentDidMount() {
     // grab geohash then execute the search
@@ -143,9 +145,9 @@ class ShiftHospitalTable extends React.Component {
     });
 
     search();
-  }
+  },
 
-  _sortRowsBy = (cellDataKey) => {
+  _sortRowsBy(cellDataKey) {
     let sortDir = this.state.sortDir;
     const sortBy = cellDataKey;
     if (sortBy === this.state.sortBy) {
@@ -176,36 +178,32 @@ class ShiftHospitalTable extends React.Component {
       sortBy,
       sortDir,
     });
-  }
+  },
 
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  _renderHeader = (label, cellDataKey) => {
+  _renderHeader(label, cellDataKey) {
     return (
       <a onClick={this._sortRowsBy.bind(null, cellDataKey)} style={{cursor: 'pointer', color: '#00526c'}}>{label}</a>
     );
-  }
+  },
 
-  onRowClick = (a, b, c) => {
+  onRowClick(a, b, c) {
     console.log(a, b, c);
     this.setState({
       focus: c,
     });
     this.refs.comfirm.show();
-  }
+  },
 
-  dialogDismiss = () => {
+  dialogDismiss() {
     this.refs.comfirm.dismiss();
-  }
+  },
 
-  dialogOkay = () => {
+  dialogOkay() {
     this.refs.comfirm.dismiss();
     this.refs.recomfirm.show();
-  }
+  },
 
-  dialogAccept = () => {
+  dialogAccept() {
     this.refs.recomfirm.dismiss();
     const ctx = this;
     async function checkThenUpdate() {
@@ -220,7 +218,7 @@ class ShiftHospitalTable extends React.Component {
     }
 
     checkThenUpdate();
-  }
+  },
 
   render() {
     console.log(this.state);
@@ -394,7 +392,7 @@ class ShiftHospitalTable extends React.Component {
         </Table>
       </div>
     );
-  }
-}
+  },
+});
 
 export default ShiftHospitalTable;

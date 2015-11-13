@@ -20,12 +20,12 @@ export default class ForReferrals extends React.Component {
           <div href='#' className='grid2-item'>
             <i className='fa icon-heart fa-2x grid2-i'></i>
             <h1>Share the love</h1>
-            <p>Get 20% of what we make from every shift completed due to your personal referral. Includes Hospitals</p>
+            <p>Get 10% of what we make from every shift completed due to your personal referral. Includes Hospitals</p>
           </div>
           <div href='#' className='grid2-item'>
             <i className='fa icon-people fa-2x grid2-i'></i>
             <h1>Make more money</h1>
-            <p>Get another 10% of what we make from your referral's referral. Includes Hospitals</p>
+            <p>We pay industry competitive rates and have lower hospital bill rates.</p>
           </div>
         </div>
 

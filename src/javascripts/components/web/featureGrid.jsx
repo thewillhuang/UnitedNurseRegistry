@@ -15,7 +15,7 @@ export default class FeatureGrid extends React.Component {
 
         <div className='grid-items-lines'>
           <div href='#' className='grid-item'>
-            <i className='fa icon-speedometer fa-2x grid-i'></i>
+            <i className='fa icon-star fa-2x grid-i'></i>
             <h1>Fast Matching</h1>
             <p>Find a Match with your criteria in seconds.</p>
           </div>

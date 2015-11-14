@@ -29,7 +29,7 @@ class HomeToolBar extends React.Component {
             <RaisedButton href='#home' label='united nurse registry' linkButton primary/>
           </ToolbarGroup>
           <ToolbarGroup float='right' key={1}>
-            <FlatButton href='#hospitalSignup' label='Hospital Signup' linkButton secondary style={{
+            <FlatButton href='#hospitalSignup' label='Hospital Sign up' linkButton secondary style={{
               backgroundColor: 'rbga(255,255,255,0.6)',
               color: 'white',
               marginLeft: 10,

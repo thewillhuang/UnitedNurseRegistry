@@ -25,7 +25,7 @@ export default class ForNurses extends React.Component {
           <div href='#' className='grid2-item'>
             <i className='fa icon-wallet fa-2x grid2-i'></i>
             <h1>Pay</h1>
-            <p>Money in your bank account in 2 days after your shift</p>
+            <p>Money in your bank account in 3 days after your shift</p>
           </div>
         </div>
 

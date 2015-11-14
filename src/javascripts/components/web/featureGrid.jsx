@@ -17,7 +17,7 @@ export default class FeatureGrid extends React.Component {
           <div href='#' className='grid-item'>
             <i className='fa icon-star fa-2x grid-i'></i>
             <h1>Review Nurses</h1>
-            <p>Rate your nurses as well as view ratings before approving clinicians for a shift</p>
+            <p>Rate your nurses as well as view ratings before approving clinicians for a shift.</p>
           </div>
           <div href='#' className='grid-item'>
             <i className='fa icon-lock fa-2x grid-i'></i>
@@ -27,7 +27,7 @@ export default class FeatureGrid extends React.Component {
           <div href='#' className='grid-item'>
             <i className='fa icon-reload fa-2x grid-i'></i>
             <h1>Rolling Payroll</h1>
-            <p>Get paid on a 2 day rolling basis.</p>
+            <p>Get paid on a two-day rolling basis</p>
           </div>
           <div href='#' className='grid-item'>
             <i className='fa icon-umbrella fa-2x grid-i'></i>
@@ -42,7 +42,7 @@ export default class FeatureGrid extends React.Component {
           <div href='#' className='grid-item'>
             <i className='fa icon-magnifier fa-2x grid-i'></i>
             <h1>Background checked</h1>
-            <p>Criminal Record and Backgrounds are checked via industry standards.</p>
+            <p>Criminal Record and Backgrounds are checked via industry standards</p>
           </div>
           <div href='#' className='grid-omega'>
           </div>

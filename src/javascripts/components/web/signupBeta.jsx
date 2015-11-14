@@ -13,7 +13,7 @@ class BetaSignup extends React.Component {
   }
 
   state = {
-    signupButton: 'Signup',
+    signupButton: 'Sign up',
   }
 
   // getChildContext() {

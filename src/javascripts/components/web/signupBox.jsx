@@ -14,7 +14,7 @@ class SignupBox extends React.Component {
   }
 
   state = {
-    signupButton: 'Signup',
+    signupButton: 'Sign up',
   }
 
   // getChildContext() {

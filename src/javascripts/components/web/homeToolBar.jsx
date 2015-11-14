@@ -72,7 +72,7 @@ class HomeToolBar extends React.Component {
               <MenuItem onClick={()=> {window.location.assign('/'); }} primaryText='Home' />
               <MenuDivider/>
               <MenuItem onClick={()=> {window.location.assign('/#/hospitallogin'); }} primaryText='Hospital Login'/ >
-              <MenuItem onClick={()=> {window.location.assign('/#/hospitalsignup'); }} primaryText='Hospital Signup'/ >
+              <MenuItem onClick={()=> {window.location.assign('/#/hospitalsignup'); }} primaryText='Hospital Sign up'/ >
               <MenuItem onClick={()=> {window.location.assign('/#/signup'); }} primaryText='User Sign up' />
               <MenuItem onClick={()=> {window.location.assign('/#/login'); }} primaryText='User Login' />
             </IconMenu>

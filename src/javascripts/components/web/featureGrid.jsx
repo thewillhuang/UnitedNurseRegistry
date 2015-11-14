@@ -42,7 +42,7 @@ export default class FeatureGrid extends React.Component {
           <div href='#' className='grid-item'>
             <i className='fa icon-magnifier fa-2x grid-i'></i>
             <h1>Background Checked</h1>
-            <p>Criminal record and backgrounds are checked using industry standards</p>
+            <p>Criminal records and backgrounds are checked using industry standards</p>
           </div>
           <div href='#' className='grid-omega'>
           </div>

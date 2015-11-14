@@ -22,7 +22,7 @@ export default class FeatureGrid extends React.Component {
           <div href='#' className='grid-item'>
             <i className='fa icon-lock fa-2x grid-i'></i>
             <h1>Safe & Secure</h1>
-            <p>Everything is AES-256 Encrypted</p>
+            <p>AES-256 encrypted</p>
           </div>
           <div href='#' className='grid-item'>
             <i className='fa icon-reload fa-2x grid-i'></i>
@@ -31,18 +31,18 @@ export default class FeatureGrid extends React.Component {
           </div>
           <div href='#' className='grid-item'>
             <i className='fa icon-umbrella fa-2x grid-i'></i>
-            <h1>Covered By Insurance</h1>
-            <p>You will be paid, guaranteed.</p>
+            <h1>Review Facilities</h1>
+            <p>Rate facilities as well as view facility ratings before choosing your shifts</p>
           </div>
           <div href='#' className='grid-item'>
             <i className='fa icon-graph fa-2x grid-i'></i>
             <h1>Payments</h1>
-            <p>Payments are processed securely via Stripe</p>
+            <p>Secure processing via Stripe</p>
           </div>
           <div href='#' className='grid-item'>
             <i className='fa icon-magnifier fa-2x grid-i'></i>
-            <h1>Background checked</h1>
-            <p>Criminal Record and Backgrounds are checked via industry standards</p>
+            <h1>Background Checked</h1>
+            <p>Criminal record and backgrounds are checked using industry standards</p>
           </div>
           <div href='#' className='grid-omega'>
           </div>

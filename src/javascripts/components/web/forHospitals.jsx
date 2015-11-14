@@ -20,12 +20,12 @@ export default class ForHospitals extends React.Component {
           <div href='#' className='grid2-item'>
             <i className='fa icon-energy fa-2x grid2-i'></i>
             <h1>Real Time</h1>
-            <p>Immediate pricing Feedback from nurses around you. Accept the Bids from the nurses you want.</p>
+            <p>Immediate pricing feedback from nurses around you. Accept the bids from the nurses you want.</p>
           </div>
           <div href='#' className='grid2-item'>
             <i className='fa icon-credit-card fa-2x grid2-i'></i>
             <h1>Save</h1>
-            <p>We offer the lowest rates. Guaranteed.</p>
+            <p>We offer the most competitive bill rates.</p>
           </div>
           <div href='#' className='grid2-omega'>
           </div>

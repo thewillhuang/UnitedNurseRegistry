@@ -295,13 +295,6 @@ const ShiftHospitalTable = React.createClass({
           height={550}
           headerHeight={50}>
           <Column
-            width={100}
-            label={'Shift ID' + (this.state.sortBy === 0 ? sortDirArrow : '')}
-            headerRenderer={this._renderHeader}
-            allowCellsRecycling
-            dataKey={0}
-          />
-          <Column
             label={'Facility Name' + (this.state.sortBy === 2 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             width={150}
@@ -312,15 +305,15 @@ const ShiftHospitalTable = React.createClass({
             label={'Duration' + (this.state.sortBy === 3 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
-            width={100}
+            width={90}
             allowCellsRecycling
             dataKey={3}
           />
           <Column
             label={'Specialty' + (this.state.sortBy === 4 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
-            flexGrow={1}
-            width={100}
+            flexGrow={3}
+            width={150}
             allowCellsRecycling
             dataKey={4}
           />
@@ -331,14 +324,6 @@ const ShiftHospitalTable = React.createClass({
             width={150}
             allowCellsRecycling
             dataKey={5}
-          />
-          <Column
-            label={'Pay As IC' + (this.state.sortBy === 6 ? sortDirArrow : '')}
-            headerRenderer={this._renderHeader}
-            flexGrow={1}
-            width={100}
-            allowCellsRecycling
-            dataKey={6}
           />
           <Column
             label={'EMR' + (this.state.sortBy === 7 ? sortDirArrow : '')}
@@ -379,14 +364,6 @@ const ShiftHospitalTable = React.createClass({
             width={110}
             allowCellsRecycling
             dataKey={11}
-          />
-          <Column
-            label={'Modified' + (this.state.sortBy === 12 ? sortDirArrow : '')}
-            headerRenderer={this._renderHeader}
-            flexGrow={2}
-            width={120}
-            allowCellsRecycling
-            dataKey={12}
           />
         </Table>
       </div>

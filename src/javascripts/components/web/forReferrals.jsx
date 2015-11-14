@@ -24,8 +24,8 @@ export default class ForReferrals extends React.Component {
           </div>
           <div href='#' className='grid2-item'>
             <i className='fa icon-people fa-2x grid2-i'></i>
-            <h1>Make more money</h1>
-            <p>We pay industry competitive rates and have lower hospital bill rates.</p>
+            <h1>Become an affiliate</h1>
+            <p>Be a part of our team</p>
           </div>
         </div>
 

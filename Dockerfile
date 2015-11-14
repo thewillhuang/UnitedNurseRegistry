@@ -23,8 +23,8 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 ENV NVM_DIR /usr/local/nvm
 
 # install node
-ENV NODE_VERSION v4.2.1
-ENV NODE_BRANCH node/v4.2.1
+ENV NODE_VERSION v5.0.0
+ENV NODE_BRANCH node/v5.0.0
 
 
 # Install nvm and use node version defined above.

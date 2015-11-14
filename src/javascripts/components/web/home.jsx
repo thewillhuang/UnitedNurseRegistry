@@ -30,7 +30,7 @@ class Home extends React.Component {
 
             <div className='slogan'>
               <h1>
-                The Best place to find on demand shifts from the hospital.
+                The best place to find on demand shifts from the hospital.
               </h1>
             </div>
 

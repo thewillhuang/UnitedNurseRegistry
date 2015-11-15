@@ -14,6 +14,7 @@ import geolib from 'geolib';
 import calcIc from '../../utils/icPay.js';
 import user from '../../utils/grabUser.js';
 import calcW2 from '../../utils/w2Pay.js';
+import userApi from '../../webapi/userApi.js';
 
 const SortTypes = {
   ASC: 'ASC',
@@ -32,18 +33,36 @@ const ShiftHospitalTable = React.createClass({
     };
   },
 
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
   rowGetter(rowIndex) {
     return this.state.table[rowIndex];
   },
 
-  componentDidMount() {
-    // grab geohash then execute the search
+  searchFailed: function() {
+    const ctx = this;
+    async function retry() {
+      try {
+        const userGeoHash = await userApi.getUser(user.scope.userID);
+        const slicedGeoHash = userGeoHash.rows[0].userGeoHash.slice(0, 3);
+        console.log(userGeoHash.rows[0].userGeoHash);
+        console.log(slicedGeoHash);
+        const geoHashSet = ghash.neighbors(slicedGeoHash);
+        console.log(geoHashSet);
+        const geoHash = {};
+        geoHash.geoHash = slicedGeoHash;
+        geoHash.geoHashSet = geoHashSet;
+        ctx.setState({
+          geoHash: geoHash,
+        });
+        ctx.constructTable();
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    retry();
+  },
+
+  constructTable: function() {
     const ctx = this;
     async function search() {
       try {
@@ -52,6 +71,8 @@ const ShiftHospitalTable = React.createClass({
         ctx.setState({
           geoHash: geoHash,
         });
+        console.log(geoHash);
+
         // use geo hash to grab search results
         const latlong = ghash.decode(geoHash.geoHash);
         ctx.setState({
@@ -125,8 +146,15 @@ const ShiftHospitalTable = React.createClass({
         ctx._sortRowsBy(0);
       } catch (e) {
         console.log(e);
+        ctx.searchFailed();
       }
     }
+    search();
+  },
+
+  componentDidMount() {
+    // grab geohash then execute the search
+    const ctx = this;
 
     socket.on('connect', function() {
       console.log('table connected');
@@ -139,11 +167,10 @@ const ShiftHospitalTable = React.createClass({
       // console.log(ctx);
       if (_.includes(ctx.state.facilityIDs, data.facility)) {
         // ctx.refs.submitted.show();
-        search();
+        ctx.constructTable();
       }
     });
-
-    search();
+    this.constructTable();
   },
 
   _sortRowsBy(cellDataKey) {

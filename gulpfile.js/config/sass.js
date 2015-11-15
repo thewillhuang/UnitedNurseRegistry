@@ -3,7 +3,7 @@ const config = require('./');
 const neat = require('node-neat').includePaths;
 
 module.exports = {
-  autoprefixer: { browsers: ['> 1%'] },
+  autoprefixer: { browsers: ['> 1%', 'last 2 version'] },
   src: config.sourceAssets + '/stylesheets/**/*.{sass,scss}',
   dest: config.publicAssets + '/stylesheets',
   settings: {

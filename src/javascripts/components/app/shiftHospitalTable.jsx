@@ -21,6 +21,15 @@ const SortTypes = {
   DESC: 'DESC',
 };
 
+function returnHeight(offset = -250) {
+  return Math.max(document.documentElement.clientHeight, window.innerHeight || 0) + offset;
+}
+
+function returnWidth(offset = -360) {
+  const width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0) + offset;
+  return width;
+}
+
 const ShiftHospitalTable = React.createClass({
   getInitialState: function() {
     return {
@@ -30,6 +39,8 @@ const ShiftHospitalTable = React.createClass({
       sortBy: 0,
       sortDir: null,
       focus: ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
+      w: returnWidth(),
+      h: returnHeight(),
     };
   },
 
@@ -42,51 +53,67 @@ const ShiftHospitalTable = React.createClass({
     async function retry() {
       try {
         const userGeoHash = await userApi.getUser(user.scope.userID);
+        const latlong = ghash.decode(userGeoHash);
+        ctx.setState({
+          lat: latlong.latitude,
+          lng: latlong.longitude,
+        });
         const slicedGeoHash = userGeoHash.rows[0].userGeoHash.slice(0, 3);
-        console.log(userGeoHash.rows[0].userGeoHash);
-        console.log(slicedGeoHash);
+        // console.log(userGeoHash.rows[0].userGeoHash);
+        // console.log(slicedGeoHash);
         const geoHashSet = ghash.neighbors(slicedGeoHash);
-        console.log(geoHashSet);
+        // console.log(geoHashSet);
         const geoHash = {};
         geoHash.geoHash = slicedGeoHash;
         geoHash.geoHashSet = geoHashSet;
+        console.log('hash set from user info', geoHash);
         ctx.setState({
           geoHash: geoHash,
         });
         ctx.constructTable();
       } catch (e) {
-        console.log(e);
+        console.log('search user db failed', e);
       }
     }
 
     retry();
   },
 
-  constructTable: function() {
+  setLocation: function() {
     const ctx = this;
-    async function search() {
+    async function setHash() {
       try {
-        // grab geo hash
         const geoHash = await getGeoHash();
+        console.log('location set', geoHash);
         ctx.setState({
           geoHash: geoHash,
         });
-        console.log(geoHash);
-
         // use geo hash to grab search results
         const latlong = ghash.decode(geoHash.geoHash);
         ctx.setState({
           lat: latlong.latitude,
           lng: latlong.longitude,
         });
+        ctx.constructTable();
+      } catch (e) {
+        console.log('setlocation error', e);
+        ctx.searchFailed();
+      }
+    }
+    setHash();
+  },
 
+  constructTable: function() {
+    const ctx = this;
+    async function search() {
+      try {
         const data = await shiftApi.getShiftWithGeoHash(ctx.state.geoHash.geoHash, ctx.state.geoHash.geoHashSet, 3);
         // save the results
         ctx.setState({
           data: data.rows,
         });
 
-        console.log(data);
+        // console.log(data);
 
         const searchFacilityIDs = [];
         for (let i = 0; i < data.rows.length; i++) {
@@ -101,7 +128,7 @@ const ShiftHospitalTable = React.createClass({
         // change array of object to array of arrays for table user who what where when
         const table = [];
         const rows = data.rows;
-        console.log(rows);
+        // console.log(rows);
         const today = moment().subtract(12, 'hours').format('YYYY-MM-DD');
         for (let i = 0; i < rows.length; i++) {
           const el = rows[i];
@@ -145,32 +172,35 @@ const ShiftHospitalTable = React.createClass({
         // sort the table
         ctx._sortRowsBy(0);
       } catch (e) {
-        console.log(e);
-        ctx.searchFailed();
+        console.log('construct table failed', e);
       }
     }
     search();
   },
 
-  componentDidMount() {
-    // grab geohash then execute the search
-    const ctx = this;
-
-    socket.on('connect', function() {
-      console.log('table connected');
+  resize: function() {
+    this.setState({
+      w: returnWidth(),
+      h: returnHeight(),
     });
+  },
 
-    // console.log(this, ctx);
+  componentDidMount() {
+    window.onresize = this.resize;
+    this.setLocation();
+
+    // socket.on('connect', function() {
+    //   console.log('table connected');
+    // });
 
     socket.on('updated', function(data) {
       console.log('server received a new shift regarding facility', data.facility);
-      // console.log(ctx);
-      if (_.includes(ctx.state.facilityIDs, data.facility)) {
+      // console.log(this);
+      if (_.includes(this.state.facilityIDs, data.facility)) {
         // ctx.refs.submitted.show();
-        ctx.constructTable();
+        this.setLocation();
       }
-    });
-    this.constructTable();
+    }.bind(this));
   },
 
   _sortRowsBy(cellDataKey) {
@@ -213,7 +243,7 @@ const ShiftHospitalTable = React.createClass({
   },
 
   onRowClick(a, b, c) {
-    console.log(a, b, c);
+    // console.log(a, b, c);
     this.setState({
       focus: c,
     });
@@ -247,7 +277,7 @@ const ShiftHospitalTable = React.createClass({
   },
 
   render() {
-    console.log(this.state);
+    // console.log(this.state);
     let sortDirArrow = '';
 
     if (this.state.sortDir !== null) {
@@ -318,8 +348,8 @@ const ShiftHospitalTable = React.createClass({
           rowGetter={this.rowGetter}
           rowsCount={this.state.table.length}
           onRowClick={this.onRowClick}
-          width={1090}
-          height={550}
+          width={this.state.w}
+          height={this.state.h}
           headerHeight={50}>
           <Column
             label={'Facility Name' + (this.state.sortBy === 2 ? sortDirArrow : '')}
@@ -345,10 +375,10 @@ const ShiftHospitalTable = React.createClass({
             dataKey={4}
           />
           <Column
-            label={'Pay As Employee' + (this.state.sortBy === 5 ? sortDirArrow : '')}
+            label={'Pay' + (this.state.sortBy === 5 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}
             flexGrow={1}
-            width={150}
+            width={100}
             allowCellsRecycling
             dataKey={5}
           />

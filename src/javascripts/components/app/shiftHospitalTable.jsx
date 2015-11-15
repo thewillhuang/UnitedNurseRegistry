@@ -75,7 +75,6 @@ const ShiftHospitalTable = React.createClass({
         console.log('search user db failed', e);
       }
     }
-
     retry();
   },
 

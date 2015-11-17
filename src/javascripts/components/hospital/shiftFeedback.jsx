@@ -50,7 +50,7 @@ class ShiftHospitalTable extends React.Component {
             console.log('ctx', ctx.state, obj);
             const newObj = {};
             newObj.shiftID = obj.shiftID;
-            newObj.specialtyID = obj.fk_Shift_specialtyID;
+            newObj.specialtyID = obj.fk_Shift_specialtyID.toUpperCase();
             newObj.unit = ctx.state.specialty[`${obj.fk_Shift_specialtyID}`];
             if (obj.open === 1) {
               newObj.status = 'Open';

@@ -150,7 +150,7 @@ const ShiftHospitalTable = React.createClass({
                 el.facilityName,
                 // el.payPerHour,
                 el.shiftDuration + ' hrs',
-                el.specialty,
+                el.specialty.toUpperCase(),
                 '$ ' + calcW2(total),
                 '$ ' + calcIc(total),
                 el.facilityEMR,
@@ -309,8 +309,8 @@ const ShiftHospitalTable = React.createClass({
 
       <div>
         <Dialog
-          ref='comfirm'
-          title='Comfirm Contract'
+          ref='confirm'
+          title='Confirm Contract'
           actions={customActions}
           modal={this.state.modal}>
           Do you want to accept shift #<b>{this.state.focus[0] }</b> from <b>{this.state.focus[1] }</b>. The hospital will pay you <b>{this.state.focus[4] }</b> as an emplyee or <b>{this.state.focus[5] }</b> as an independent contractor.

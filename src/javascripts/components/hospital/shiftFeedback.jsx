@@ -50,7 +50,7 @@ class ShiftHospitalTable extends React.Component {
             console.log('ctx', ctx.state, obj);
             const newObj = {};
             newObj.shiftID = obj.shiftID;
-            newObj.specialtyID = obj.fk_Shift_specialtyID.toUpperCase();
+            newObj.specialtyID = obj.fk_Shift_specialtyID;
             newObj.unit = ctx.state.specialty[`${obj.fk_Shift_specialtyID}`];
             if (obj.open === 1) {
               newObj.status = 'Open';
@@ -73,7 +73,7 @@ class ShiftHospitalTable extends React.Component {
             const date = newObj[i].date.split('T')[0];
             console.log('date', date, 'today', today, 'id', newObj[i].shiftID);
             if (date >= today) {
-              table.push([newObj[i].shiftID, newObj[i].status, '...', `$ ${newObj[i].payPerHour}`, `${newObj[i].shiftDuration} hrs`, `$ ${newObj[i].payPerHour * newObj[i].shiftDuration}`, newObj[i].unit, date, `${newObj[i].shiftStartHour}`]);
+              table.push([newObj[i].shiftID, newObj[i].status, '...', `$ ${newObj[i].payPerHour}`, `${newObj[i].shiftDuration} hrs`, `$ ${newObj[i].payPerHour * newObj[i].shiftDuration}`, newObj[i].unit.toUpperCase(), date, `${newObj[i].shiftStartHour}`]);
             }
           }
           return table.reverse();

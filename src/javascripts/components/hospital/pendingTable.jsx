@@ -3,35 +3,25 @@ import React from 'react';
 import {FlatButton, Dialog} from 'material-ui';
 import {Table, Column} from 'fixed-data-table';
 import io from 'socket.io-client';
-// const ThemeManager = new mui.Styles.ThemeManager();
 import userSpecialtyApi from '../../webapi/userSpecialtyApi.js';
 import shiftStatusApi from '../../webapi/shiftStatusApi.js';
 import user from '../../utils/grabUser.js';
-import moment from 'moment';
 const socket = io.connect();
 import checkoutApi from '../../webapi/checkout.js';
 
-class ShiftHospitalTable extends React.Component {
-  state = {
-    table: [
-      ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
-    ],
-    focus: ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
-  }
+const ShiftHospitalTable = React.createClass({
+  getInitialState: function() {
+    return {
+      table: [
+        ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
+      ],
+      focus: ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
+    };
+  },
 
-  rowGetter = (rowIndex) => {
+  rowGetter(rowIndex) {
     return this.state.table[rowIndex];
-  }
-
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
+  },
 
   componentDidMount() {
     const ctx = this;
@@ -106,26 +96,26 @@ class ShiftHospitalTable extends React.Component {
     });
 
     getSpecialtyID();
-  }
+  },
 
-  onRowClick = (a, b, c) => {
+  onRowClick(a, b, c) {
     // console.log(a, b, c);
     this.setState({
       focus: c,
     });
     this.refs.comfirm.show();
-  }
+  },
 
-  dialogDismiss = () => {
+  dialogDismiss() {
     this.refs.comfirm.dismiss();
-  }
+  },
 
-  dialogOkay = () => {
+  dialogOkay() {
     this.refs.comfirm.dismiss();
     this.refs.recomfirm.show();
-  }
+  },
 
-  createToken = () => {
+  createToken() {
     const ctx = this;
     // console.log(ctx.state.focus[0]);
     const handler = window.StripeCheckout.configure({
@@ -144,9 +134,9 @@ class ShiftHospitalTable extends React.Component {
       description: '2 widgets',
       amount: parseInt(ctx.state.focus[4].split(' ')[1], 10) * 100,
     });
-  }
+  },
 
-  setAsPending = () => {
+  setAsPending() {
     const ctx = this;
     async function set() {
       const setState = await shiftStatusApi.markShiftAsPending(ctx.state.focus[0], ctx.state.focus[8], user.scope.facilityID);
@@ -156,16 +146,12 @@ class ShiftHospitalTable extends React.Component {
       }
     }
     set();
-  }
+  },
 
-  dialogAccept = () => {
+  dialogAccept() {
     this.refs.recomfirm.dismiss();
     this.createToken();
-  }
-
-  dialogAcceptPending = () => {
-
-  }
+  },
 
   render() {
     const customActions = [
@@ -276,6 +262,7 @@ class ShiftHospitalTable extends React.Component {
         </Table>
       </div>
     );
-  }
-}
+  },
+});
+
 export default ShiftHospitalTable;

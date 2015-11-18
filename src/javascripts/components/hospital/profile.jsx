@@ -1,27 +1,13 @@
 import React from 'react';
 import {FlatButton} from 'material-ui';
 import ProfileCard from './profileCard.jsx';
-// import ShiftFilter from './shiftFilter.jsx';
-// import ShiftHospital from './shiftHospitalTable.jsx';
-// const ThemeManager = new mui.Styles.ThemeManager();
-// const MenuItem = require('material-ui/lib/menus/menu-item');
-// const MenuDivider = require('material-ui/lib/menus/menu-divider');
-// import MediaQuery from 'react-responsive';
 
-class ProfileList extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
+const ProfileList = React.createClass({
 
-  static propTypes = {
+  propTypes: {
     children: React.PropTypes.node,
-  }
+  },
 
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
   render() {
     return (
       <div className='appProfile'>
@@ -51,7 +37,7 @@ class ProfileList extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default ProfileList;

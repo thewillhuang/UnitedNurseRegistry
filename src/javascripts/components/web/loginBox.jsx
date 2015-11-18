@@ -2,22 +2,10 @@ import React from 'react';
 import { Card, TextField, CardActions, RaisedButton } from 'material-ui';
 import request from 'superagent';
 import validator from 'validator';
-// // const ThemeManager = new mui.Styles.ThemeManager();
 import setToken from '../../utils/setToken.js';
-// console.log(request);
 
-class LoginBox extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  handleSubmit = ()  => {
+const LoginBox = React.createClass({
+  handleSubmit() {
     const ctx = this;
     if (validator.isEmail(this.refs.email.getValue()) && this.refs.password.getValue().length > 5) {
       this.refs.email.setErrorText('');
@@ -53,9 +41,9 @@ class LoginBox extends React.Component {
       this.validatePassword();
       this.validateEmail();
     }
-  }
+  },
 
-  validatePassword = () => {
+  validatePassword() {
     if (this.refs.password.getValue().length === 0) {
       this.refs.password.setErrorText('');
     } else if (this.refs.password.getValue().length < 6) {
@@ -63,9 +51,9 @@ class LoginBox extends React.Component {
     } else {
       this.refs.password.setErrorText('');
     }
-  }
+  },
 
-  validateEmail = () => {
+  validateEmail() {
     // console.log(this.refs.email.getValue());
     if (validator.isEmail(this.refs.email.getValue())) {
       this.refs.email.setErrorText('');
@@ -74,11 +62,11 @@ class LoginBox extends React.Component {
     } else {
       this.refs.email.setErrorText('Invalid Email');
     }
-  }
+  },
 
   componentDidMount() {
     this.refs.email.focus();
-  }
+  },
 
   render() {
     return (
@@ -108,7 +96,7 @@ class LoginBox extends React.Component {
         </div>
       </Card>
     );
-  }
-}
+  },
+});
 
 export default LoginBox;

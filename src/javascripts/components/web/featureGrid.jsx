@@ -1,8 +1,6 @@
-
-
 import React from 'react';
 
-export default class FeatureGrid extends React.Component {
+const FeatureGrid = React.createClass({
   render() {
     return (
       <div>
@@ -50,5 +48,7 @@ export default class FeatureGrid extends React.Component {
 
     </div>
     );
-  }
-}
+  },
+});
+
+export default FeatureGrid;

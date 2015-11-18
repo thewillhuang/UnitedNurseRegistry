@@ -1,18 +1,7 @@
-
-
 import React from 'react';
 import { FontIcon } from 'material-ui';
-// // const ThemeManager = new mui.Styles.ThemeManager();
 
-class Footer extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
+const Footer = React.createClass({
   render() {
     return (
       <footer className='footer-2' role='contentinfo'>
@@ -53,7 +42,7 @@ class Footer extends React.Component {
         </div>
       </footer>
     );
-  }
-}
+  },
+});
 
 export default Footer;

@@ -1,19 +1,7 @@
-
-
 import React from 'react';
 import {TextField} from 'material-ui';
-// const ThemeManager = new mui.Styles.ThemeManager();
 
-class SpecialtyCard extends React.Component {
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
+const SpecialtyCard = React.createClass({
 
   render() {
     return (
@@ -36,7 +24,7 @@ class SpecialtyCard extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default SpecialtyCard;

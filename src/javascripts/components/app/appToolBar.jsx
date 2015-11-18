@@ -3,30 +3,19 @@
 import React from 'react';
 import {IconMenu, IconButton} from 'material-ui';
 const MenuItem = require('material-ui/lib/menus/menu-item');
-// const MenuDivider = require('material-ui/lib/menus/menu-divider');
-// const ThemeManager = new mui.Styles.ThemeManager();
-// import MediaQuery from 'react-responsive';
 
-class AppBar extends React.Component {
-  state = {
-    userName: 'User First Name',
-  }
+const AppBar = React.createClass({
+  getInitialState: function() {
+    return {
+      userName: 'User First Name',
+    };
+  },
 
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  componentWillUnmount() {
+  componentWillUnmount: function() {
     window.sessionStorage.clear();
-  }
+  },
 
-  render() {
+  render: function() {
     return (
       <div className='appBar'>
         <div className='appBarUser'>
@@ -60,7 +49,7 @@ class AppBar extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default AppBar;

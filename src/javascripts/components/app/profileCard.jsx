@@ -18,9 +18,9 @@ const input = {
   opacity: 0,
 };
 
-export default class ProfileCard extends React.Component {
+const ProfileCard = React.createClass({
 
-  handleSubmit = () => {
+  handleSubmit: function() {
     const address = this.refs.address.getValue() || null;
     const city = this.refs.city.getValue() || '';
     const state = this.refs.state.getValue() || '';
@@ -39,13 +39,9 @@ export default class ProfileCard extends React.Component {
       await userPhoneApi.createUserPhone(user.scope.userID, phoneNumber, null, null);
     }
     getGeoHash();
-  }
+  },
 
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  render() {
+  render: function() {
     return (
       <div className='card'>
         <div className='cardTitle'>
@@ -125,5 +121,7 @@ export default class ProfileCard extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  },
+});
+
+export default ProfileCard;

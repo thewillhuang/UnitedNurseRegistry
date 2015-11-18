@@ -7,6 +7,7 @@
     "react/sort-comp": 0,
     "strict": [2, "global"],
   },
+  "parser": "babel-eslint",
   "ecmaFeatures": {
     "modules": false,
   }

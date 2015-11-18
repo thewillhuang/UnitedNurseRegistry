@@ -1,24 +1,7 @@
-
-
 import React from 'react';
-// import mui from 'material-ui';
-// import ShiftHospital from './shiftHospitalTable.jsx';
-// const ThemeManager = new mui.Styles.ThemeManager();
-// const MenuItem = require('material-ui/lib/menus/menu-item');
-// const MenuDivider = require('material-ui/lib/menus/menu-divider');
-// import MediaQuery from 'react-responsive';
 
-class Reviews extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-  render() {
+const Reviews = React.createClass({
+  render: function() {
     return (
       <div className='appShift'>
         <div className='appShiftResult'>
@@ -34,7 +17,7 @@ class Reviews extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default Reviews;

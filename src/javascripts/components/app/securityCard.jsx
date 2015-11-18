@@ -1,21 +1,8 @@
-
-
 import React from 'react';
 import {TextField} from 'material-ui';
-// const ThemeManager = new mui.Styles.ThemeManager();
 
-class SecurityCard extends React.Component {
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  render() {
+const SecurityCard = React.createClass({
+  render: function() {
     return (
       <div className='card'>
         <div className='cardTitle'>
@@ -50,7 +37,7 @@ class SecurityCard extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default SecurityCard;

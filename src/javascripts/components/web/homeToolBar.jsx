@@ -1,21 +1,11 @@
-
-
 import React from 'react';
 import { Toolbar, ToolbarGroup, RaisedButton, AppBar, IconMenu, IconButton, FlatButton } from 'material-ui';
 const MenuItem = require('material-ui/lib/menus/menu-item');
 const MenuDivider = require('material-ui/lib/menus/menu-divider');
-// // const ThemeManager = new mui.Styles.ThemeManager();
 import MediaQuery from 'react-responsive';
 
-class HomeToolBar extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
+const HomeToolBar = React.createClass({
+
   render() {
     return (
       <div>
@@ -80,7 +70,7 @@ class HomeToolBar extends React.Component {
         </MediaQuery>
       </div>
     );
-  }
-}
+  },
+});
 
 export default HomeToolBar;

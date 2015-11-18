@@ -1,20 +1,7 @@
-
-
 import React from 'react';
 import {TextField} from 'material-ui';
-// const ThemeManager = new mui.Styles.ThemeManager();
 
-class WorkHistoryCard extends React.Component {
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
+const WorkHistoryCard = React.createClass({
   render() {
     return (
       <div className='card'>
@@ -45,7 +32,7 @@ class WorkHistoryCard extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default WorkHistoryCard;

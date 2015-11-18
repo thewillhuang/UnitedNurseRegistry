@@ -1,40 +1,25 @@
 import React from 'react';
-// import mui from 'material-ui';
 import {Table, Column} from 'fixed-data-table';
 import io from 'socket.io-client';
-// const ThemeManager = new mui.Styles.ThemeManager();
-// import shiftApi from '../../webapi/shiftApi.js';
 import userSpecialtyApi from '../../webapi/userSpecialtyApi.js';
 import shiftStatusApi from '../../webapi/shiftStatusApi.js';
-// import shiftStatusApi from '../../webapi/shiftStatusApi.js';
 import user from '../../utils/grabUser.js';
 import moment from 'moment';
-// import Promise from 'bluebird';
 const socket = io.connect();
-// const MenuItem = require('material-ui/lib/menus/menu-item');
-// const MenuDivider = require('material-ui/lib/menus/menu-divider');
-// import MediaQuery from 'react-responsive';
 
-class ShiftHospitalTable extends React.Component {
-  state = {
-    table: [
-      ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
-    ],
-  }
+const ShiftHospitalTable = React.createClass({
 
-  rowGetter = (rowIndex) => {
+  getInitialState: function() {
+    return {
+      table: [
+        ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
+      ],
+    };
+  },
+
+  rowGetter(rowIndex) {
     return this.state.table[rowIndex];
-  }
-
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
+  },
 
   componentDidMount() {
     const ctx = this;
@@ -111,11 +96,11 @@ class ShiftHospitalTable extends React.Component {
     });
 
     getSpecialtyID();
-  }
+  },
 
   _onRowSelection(array) {
     console.log(array);
-  }
+  },
 
   render() {
     return (
@@ -176,6 +161,7 @@ class ShiftHospitalTable extends React.Component {
         </Table>
       </div>
     );
-  }
-}
+  },
+});
+
 export default ShiftHospitalTable;

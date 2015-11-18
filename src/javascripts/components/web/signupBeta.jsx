@@ -1,28 +1,17 @@
-
-
 import React from 'react';
 import { Card, TextField, CardActions, RaisedButton, Snackbar } from 'material-ui';
 import request from 'superagent';
 import validator from 'validator';
-// // const ThemeManager = new mui.Styles.ThemeManager();
-// console.log(request);
 
-class BetaSignup extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
+const BetaSignup = React.createClass({
 
-  state = {
-    signupButton: 'Sign up',
-  }
+  getInitialState: function() {
+    return {
+      signupButton: 'Sign up',
+    };
+  },
 
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  handleSubmit = ()  => {
+  handleSubmit() {
     const ctx = this;
     if (validator.isEmail(this.refs.email.getValue())) {
       this.refs.email.setErrorText('');
@@ -56,9 +45,9 @@ class BetaSignup extends React.Component {
     } else {
       this.validateEmail();
     }
-  }
+  },
 
-  validateEmail = () => {
+  validateEmail() {
     if (validator.isEmail(this.refs.email.getValue())) {
       this.refs.email.setErrorText('');
     } else if (this.refs.email.getValue().length === 0) {
@@ -66,15 +55,15 @@ class BetaSignup extends React.Component {
     } else {
       this.refs.email.setErrorText('Invalid Email');
     }
-  }
+  },
 
-  handleDismiss = () => {
+  handleDismiss() {
     this.refs.success.dismiss();
-  }
+  },
 
   componentDidMount() {
     this.refs.email.focus();
-  }
+  },
 
   render() {
     return (
@@ -99,13 +88,13 @@ class BetaSignup extends React.Component {
           />
           <CardActions>
             <div className='signupbutton'>
-              <RaisedButton label={this.state.signupButton} onClick={this.handleSubmit} secondary={true}/>
+              <RaisedButton label={this.state.signupButton} onClick={this.handleSubmit} secondary/>
             </div>
           </CardActions>
         </Card>
       </div>
     );
-  }
-}
+  },
+});
 
 export default BetaSignup;

@@ -1,27 +1,16 @@
 import React from 'react';
 import {IconMenu, IconButton} from 'material-ui';
 const MenuItem = require('material-ui/lib/menus/menu-item');
-// const MenuDivider = require('material-ui/lib/menus/menu-divider');
-// const ThemeManager = new mui.Styles.ThemeManager();
-// import MediaQuery from 'react-responsive';
 import user from '../../utils/grabUser.js';
 import facilityApi from '../../webapi/facilityApi.js';
 
+const AppBar = React.createClass({
 
-class AppBar extends React.Component {
-  state = {
-    userName: 'Hospital Name',
-  }
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
+  getInitialState: function() {
+    return {
+      userName: 'Hospital Name',
+    };
+  },
 
   componentDidMount() {
     const ctx = this;
@@ -29,11 +18,11 @@ class AppBar extends React.Component {
     .then(data=> {
       ctx.setState({userName: data.rows[0].facilityName});
     });
-  }
+  },
 
   componentWillUnmount() {
     window.sessionStorage.clear();
-  }
+  },
 
   render() {
     return (
@@ -69,7 +58,7 @@ class AppBar extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default AppBar;

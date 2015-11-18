@@ -1,6 +1,5 @@
 import React from 'react';
 import {TextField, RaisedButton} from 'material-ui';
-// const ThemeManager = new mui.Styles.ThemeManager();
 
 const input = {
   cursor: 'pointer',
@@ -13,16 +12,7 @@ const input = {
   opacity: 0,
 };
 
-class LicenseCard extends React.Component {
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
+const LicenseCard = React.createClass({
 
   render() {
     return (
@@ -47,13 +37,13 @@ class LicenseCard extends React.Component {
             floatingLabelText='License Expiration Date'
             hintText='License Expiration Date' />
           <br/>
-          <RaisedButton primary={true} label='Choose an Image'>
+          <RaisedButton primary label='Choose an Image'>
             <input type='file' style={input}></input>
           </RaisedButton>
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default LicenseCard;

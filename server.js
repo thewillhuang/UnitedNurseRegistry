@@ -1,5 +1,5 @@
 'use strict';
-
+// require("babel-core/register");
 const koa = require('koa');
 const app = module.exports = koa();
 const port = process.env.PORT || 3000;
@@ -26,6 +26,8 @@ app.proxy = true;
 
 // security headers
 app.use(helmet());
+
+// require('./server/routes/isomorphic')(app);
 
 // static file server
 if (process.env.NODE_ENV === 'development') {
@@ -74,7 +76,6 @@ require('./server/routes/beta')(app);
 // load strategies and initialize passport
 require('./server/services/auth');
 app.use(passport.initialize());
-// app.use(passport.session());
 
 // Set bearer tokens for different auth strategies
 require('./server/routes/authRoutes')(app);

@@ -13,18 +13,8 @@ const input = {
   opacity: 0,
 };
 
-class LicenseCard extends React.Component {
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  render() {
+const LicenseCard = React.createClass({
+  render: function() {
     return (
       <div className='card'>
         <div className='cardTitle'>
@@ -47,13 +37,13 @@ class LicenseCard extends React.Component {
             floatingLabelText='License Expiration Date'
             hintText='License Expiration Date' />
           <br/>
-          <RaisedButton primary={true} label='Choose an Image'>
+          <RaisedButton primary label='Choose an Image'>
             <input type='file' style={input}></input>
           </RaisedButton>
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default LicenseCard;

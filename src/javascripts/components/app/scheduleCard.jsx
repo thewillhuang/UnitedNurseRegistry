@@ -1,21 +1,8 @@
-
-
 import React from 'react';
 import {TextField, Checkbox} from 'material-ui';
-// const ThemeManager = new mui.Styles.ThemeManager();
 
-class ScheduleCard extends React.Component {
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  render() {
+const ScheduleCard = React.createClass({
+  render: function() {
     return (
       <div className='card'>
         <div className='cardTitle'>
@@ -66,7 +53,7 @@ class ScheduleCard extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default ScheduleCard;

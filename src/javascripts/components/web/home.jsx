@@ -12,9 +12,9 @@ import ForReferrals from './forReferrals.jsx';
 // // const ThemeManager = new mui.Styles.ThemeManager();
 
 class Home extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
+  // static childContextTypes = {
+  //   muiTheme: React.PropTypes.object,
+  // }
   // getChildContext() {
   //   return {
   //     muiTheme: ThemeManager.getCurrentTheme(),

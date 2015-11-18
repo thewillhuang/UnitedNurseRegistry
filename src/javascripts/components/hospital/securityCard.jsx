@@ -1,21 +1,11 @@
 import React from 'react';
 import {TextField, Snackbar} from 'material-ui';
-// const ThemeManager = new mui.Styles.ThemeManager();
 import user from '../../utils/grabUser.js';
 import facilityApi from '../../webapi/facilityApi.js';
 
-class SecurityCard extends React.Component {
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
+const SecurityCard = React.createClass({
 
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  handleSubmit = () => {
+  handleSubmit() {
     const nPassword = this.refs.nPassword.getValue() || null;
     const nPassword2 = this.refs.nPassword2.getValue() || null;
     const ctx = this;
@@ -26,7 +16,7 @@ class SecurityCard extends React.Component {
         ctx.refs.submitted.show();
       });
     }
-  }
+  },
 
   render() {
     return (
@@ -59,7 +49,7 @@ class SecurityCard extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default SecurityCard;

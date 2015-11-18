@@ -1,26 +1,15 @@
 import React from 'react';
 import {RaisedButton} from 'material-ui';
 import checkoutApi from '../../webapi/checkout.js';
-// const ThemeManager = new mui.Styles.ThemeManager();
 
-class Checkout extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  static propTypes = {
+const Checkout = React.createClass({
+  propTypes: {
     children: React.PropTypes.node,
     pay: React.PropTypes.number.isRequired,
     shiftID: React.PropTypes.number.isRequired,
-  }
+  },
 
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  createToken = () => {
+  createToken() {
     const handler = window.StripeCheckout.configure({
       key: 'pk_test_pUdeTIh8WRLykG3RSugGr5yg',
       locale: 'auto',
@@ -35,7 +24,7 @@ class Checkout extends React.Component {
       description: '2 widgets',
       amount: this.props.pay * 100,
     });
-  }
+  },
 
   render() {
     return (
@@ -43,7 +32,7 @@ class Checkout extends React.Component {
         <RaisedButton secondary label='Pay' onClick={this.createToken} />
       </div>
     );
-  }
-}
+  },
+});
 
 export default Checkout;

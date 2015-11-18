@@ -1,44 +1,29 @@
-
-
 import React from 'react';
-// import mui from 'material-ui';
-// const MenuItem = require('material-ui/lib/menus/menu-item');
-// const MenuDivider = require('material-ui/lib/menus/menu-divider');
-// const ThemeManager = new mui.Styles.ThemeManager();
-// import MediaQuery from 'react-responsive';
 
-class AppLeftNavBar extends React.Component {
+const AppLeftNavBar = React.createClass({
+  getInitialState: function() {
+    return {
+      userName: 'User',
+      shift: '',
+      profile: '',
+      balance: '',
+      reviews: '',
+      referrals: '',
+      pending: '',
+      approved: '',
+    };
+  },
 
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-  state = {
-    userName: 'User',
-    shift: '',
-    profile: '',
-    balance: '',
-    reviews: '',
-    referrals: '',
-    pending: '',
-    approved: '',
-  }
-
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  componentDidMount() {
+  componentDidMount: function() {
     window.addEventListener('hashchange', this.hashChange, false);
     this.hashChange();
-  }
+  },
 
-  componentWillUnmount() {
+  componentWillUnmount: function() {
     window.removeEventListener('hashchange', this.hashChange, false);
-  }
+  },
 
-  hashChange = () => {
+  hashChange: function() {
     const route = window.location.hash;
     if (route.indexOf('#/app/shifts') !== -1) {
       this.setState({
@@ -160,9 +145,9 @@ class AppLeftNavBar extends React.Component {
         referralsColor: 'white',
       });
     }
-  }
+  },
 
-  render() {
+  render: function() {
     return (
       <div className='appNavBar'>
         <ul className='appNavMenu'>
@@ -239,7 +224,7 @@ class AppLeftNavBar extends React.Component {
         </ul>
       </div>
     );
-  }
-}
+  },
+});
 
 export default AppLeftNavBar;

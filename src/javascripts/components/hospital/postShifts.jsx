@@ -1,33 +1,21 @@
 import React from 'react';
 import {TextField, RaisedButton, Snackbar} from 'material-ui';
-// const ThemeManager = new mui.Styles.ThemeManager();
-// const MenuItem = require('material-ui/lib/menus/menu-item');
-// const MenuDivider = require('material-ui/lib/menus/menu-divider');
-// import MediaQuery from 'react-responsive';
 import shiftApi from '../../webapi/shiftApi.js';
 import specialtyApi from '../../webapi/userSpecialtyApi.js';
 import user from '../../utils/grabUser.js';
 import io from 'socket.io-client';
 import moment from 'moment';
-// import PayButton from './payButton.jsx';
 const socket = io.connect();
 
-class ShiftHospitalTable extends React.Component {
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
+const ShiftHospitalTable = React.createClass({
 
-  state = {
-    shiftID: null,
-  }
+  getInitialState: function() {
+    return {
+      shiftID: null,
+    };
+  },
 
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  validateShift = () => {
+  validateShift() {
     if (this.refs.specialty.getValue().length === 0) {
       this.refs.specialty.setErrorText('Must enter a specialty or Unit');
     } else if (this.refs.specialty.getValue().length <= 1) {
@@ -70,10 +58,10 @@ class ShiftHospitalTable extends React.Component {
     } else {
       this.refs.shiftDressCode.setErrorText('');
     }
-  }
+  },
 
   // TODO not done yet need to submit shift
-  handleSubmit = () => {
+  handleSubmit() {
     const facilityID = user.scope.facilityID;
     const specialty = this.refs.specialty.getValue();
     const shiftStartHour = this.refs.startHour.getValue();
@@ -110,7 +98,7 @@ class ShiftHospitalTable extends React.Component {
     } else {
       this.validateShift();
     }
-  }
+  },
 
   render() {
     console.log(this.state);
@@ -171,7 +159,7 @@ class ShiftHospitalTable extends React.Component {
         <RaisedButton label='submit' onClick={this.handleSubmit} secondary/>
       </div>
     );
-  }
-}
+  },
+});
 
 export default ShiftHospitalTable;

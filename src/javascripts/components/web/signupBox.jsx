@@ -1,29 +1,17 @@
-
-
 import React from 'react';
 import { Card, TextField, CardActions, RaisedButton} from 'material-ui';
 import request from 'superagent';
 import validator from 'validator';
-// // const ThemeManager = new mui.Styles.ThemeManager();
-// console.log(request);
 import setToken from '../../utils/setToken.js';
 
-class SignupBox extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
+const SignupBox = React.createClass({
+  getInitialState: function() {
+    return {
+      signupButton: 'Sign up',
+    };
+  },
 
-  state = {
-    signupButton: 'Sign up',
-  }
-
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  handleSubmit = ()  => {
+  handleSubmit() {
     const ctx = this;
     if (validator.isEmail(this.refs.email.getValue()) &&
         this.refs.password.getValue().length > 5 &&
@@ -70,9 +58,9 @@ class SignupBox extends React.Component {
       this.validatePassword();
       this.validateEmail();
     }
-  }
+  },
 
-  validatePassword = () => {
+  validatePassword() {
     if (this.refs.password.getValue().length === 0) {
       this.refs.password.setErrorText('');
     } else if (this.refs.password.getValue().length < 6) {
@@ -100,9 +88,9 @@ class SignupBox extends React.Component {
         this.refs.password.setErrorText('');
       }
     }
-  }
+  },
 
-  validateEmail = () => {
+  validateEmail() {
     // console.log(this.refs.email.getValue());
     if (validator.isEmail(this.refs.email.getValue())) {
       this.refs.email.setErrorText('');
@@ -111,11 +99,11 @@ class SignupBox extends React.Component {
     } else {
       this.refs.email.setErrorText('Invalid Email');
     }
-  }
+  },
 
   componentDidMount() {
     this.refs.email.focus();
-  }
+  },
 
   render() {
     return (
@@ -160,7 +148,7 @@ class SignupBox extends React.Component {
         </div>
       </Card>
     );
-  }
-}
+  },
+});
 
 export default SignupBox;

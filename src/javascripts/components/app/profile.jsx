@@ -10,21 +10,12 @@ import ProfileCard from './profileCard.jsx';
 // const MenuDivider = require('material-ui/lib/menus/menu-divider');
 // import MediaQuery from 'react-responsive';
 
-class Profile extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  static propTypes = {
+const Profile = React.createClass({
+  propTypes: {
     children: React.PropTypes.node,
-  }
+  },
 
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-  render() {
+  render: function() {
     return (
       <div className='appProfile'>
         <div className='appProfileList'>
@@ -78,7 +69,7 @@ class Profile extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default Profile;

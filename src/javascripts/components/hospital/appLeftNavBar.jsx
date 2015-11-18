@@ -1,42 +1,30 @@
 import React from 'react';
-// import mui from 'material-ui';
-// const MenuItem = require('material-ui/lib/menus/menu-item');
-// const MenuDivider = require('material-ui/lib/menus/menu-divider');
-// const ThemeManager = new mui.Styles.ThemeManager();
-// import MediaQuery from 'react-responsive';
-class AppLeftNavBar extends React.Component {
 
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  state = {
-    userName: 'User',
-    shift: '',
-    profile: '',
-    balance: '',
-    reviews: '',
-    referrals: '',
-    invoice: '',
-    pending: '',
-    approved: '',
-  }
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
+const AppLeftNavBar = React.createClass({
+  getInitialState: function() {
+    return {
+      userName: 'User',
+      shift: '',
+      profile: '',
+      balance: '',
+      reviews: '',
+      referrals: '',
+      invoice: '',
+      pending: '',
+      approved: '',
+    };
+  },
 
   componentDidMount() {
     window.addEventListener('hashchange', this.hashChange, false);
     this.hashChange();
-  }
+  },
 
   componentWillUnmount() {
     window.removeEventListener('hashchange', this.hashChange, false);
-  }
+  },
 
-  hashChange = () => {
+  hashChange() {
     // console.log('hash change detected');
     const route = window.location.hash;
     if (route.indexOf('#/hospital/shifts') !== -1) {
@@ -190,7 +178,7 @@ class AppLeftNavBar extends React.Component {
         invoiceColor: 'rgb(198, 198, 198)',
       });
     }
-  }
+  },
 
   render() {
     // console.log(this.state);
@@ -280,7 +268,7 @@ class AppLeftNavBar extends React.Component {
         </ul>
       </div>
     );
-  }
-}
+  },
+});
 
 export default AppLeftNavBar;

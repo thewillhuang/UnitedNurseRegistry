@@ -1,21 +1,10 @@
-
-
 import React from 'react';
-// // import mui from 'material-ui';
 import HomeToolBar from './homeToolBar.jsx';
 import LoginBox from './loginBox.jsx';
 import Footer from './footer.jsx';
-// // const ThemeManager = new mui.Styles.ThemeManager();
 
-class Login extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
+const Login = React.createClass({
+
   render() {
     return (
       <div>
@@ -30,7 +19,7 @@ class Login extends React.Component {
         <Footer/>
       </div>
     );
-  }
-}
+  },
+});
 
 export default Login;

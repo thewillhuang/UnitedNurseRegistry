@@ -68,17 +68,8 @@ const options = {
   legendTemplate: '<ul class=\'<%=name.toLowerCase()%>-legend\'><% for (var i=0; i<datasets.length; i++){%><li><span style=\'background-color:<%=datasets[i].strokeColor%>\'></span><%if(datasets[i].label){%><%=datasets[i].label%><%}%></li><%}%></ul>',
 };
 
-class Balance extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-  render() {
+const Balance = React.createClass({
+  render: function() {
     return (
       <div className='appShift'>
         <div className='appShiftResult'>
@@ -94,7 +85,7 @@ class Balance extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default Balance;

@@ -1,6 +1,5 @@
 import React from 'react';
 import {TextField, RaisedButton, Snackbar} from 'material-ui';
-// const ThemeManager = new mui.Styles.ThemeManager();
 const input = {
   cursor: 'pointer',
   position: 'absolute',
@@ -19,25 +18,15 @@ import geoHashApi from '../../webapi/geoHashApi.js';
 import geohash from 'ngeohash';
 import facilityAddressApi from '../../webapi/facilityAddressApi.js';
 
-class ProfileCard extends React.Component {
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
+const ProfileCard = React.createClass({
   componentDidMount() {
     facilityApi.getFacilityInfo(user.scope.facilityID)
     .then(data=> {
       console.log(data);
     });
-  }
+  },
 
-  handleSubmit = () => {
+  handleSubmit() {
     const name = this.refs.name.getValue() || null;
     const emr = this.refs.emr.getValue() || null;
     const phone = this.refs.phone.getValue() || null;
@@ -75,7 +64,7 @@ class ProfileCard extends React.Component {
 
     getGeoHash();
     setPhone();
-  }
+  },
 
   render() {
     return (
@@ -153,7 +142,7 @@ class ProfileCard extends React.Component {
         </div>
       </div>
     );
-  }
-}
+  },
+});
 
 export default ProfileCard;

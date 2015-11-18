@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class ForReferrals extends React.Component {
+const ForReferrals = React.createClass({
   render() {
     return (
       <div>
@@ -31,5 +31,7 @@ export default class ForReferrals extends React.Component {
 
       </div>
     );
-  }
-}
+  },
+});
+
+export default ForReferrals;

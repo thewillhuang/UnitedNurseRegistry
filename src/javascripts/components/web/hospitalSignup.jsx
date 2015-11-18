@@ -1,20 +1,9 @@
 import React from 'react';
-// // import mui from 'material-ui';
 import HomeToolBar from './homeToolBar.jsx';
 import HospitalSignupBox from './hospitalSignupBox.jsx';
 import Footer from './footer.jsx';
-// // const ThemeManager = new mui.Styles.ThemeManager();
 
-class Signup extends React.Component {
-  static childContextTypes = {
-    muiTheme: React.PropTypes.object,
-  }
-
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
+const Signup = React.createClass({
 
   render() {
     return (
@@ -30,7 +19,7 @@ class Signup extends React.Component {
         <Footer/>
       </div>
     );
-  }
-}
+  },
+});
 
 export default Signup;

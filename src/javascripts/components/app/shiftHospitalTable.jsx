@@ -1,6 +1,5 @@
 import React from 'react';
 import {Snackbar, Dialog, FlatButton} from 'material-ui';
-// const ThemeManager = new mui.Styles.ThemeManager();
 import {Table, Column} from 'fixed-data-table';
 import getGeoHash from '../../utils/getGeoHash.js';
 import shiftApi from '../../webapi/shiftApi.js';

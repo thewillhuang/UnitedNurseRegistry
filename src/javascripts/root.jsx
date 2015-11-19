@@ -6,6 +6,7 @@ const Root = React.createClass({
   },
 
   render() {
+    console.log(this.props.children);
     return (
       <div>
         { this.props.children }

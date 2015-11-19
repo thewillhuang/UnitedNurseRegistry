@@ -1,7 +1,15 @@
 import React from 'react';
 import Home from './components/web/home.jsx';
 import { Router, Route, IndexRoute } from 'react-router';
-import Root from './root.js';
+import Root from './root.jsx';
+
+// const routes = [{
+//   path: '/',
+//   component: Root,
+//   childRoutes: [
+//     {path: 'hospitalLogin', }
+//   ],
+// }];
 
 const routes = (
   <Router>
@@ -10,10 +18,8 @@ const routes = (
       <IndexRoute component={Home} />
 
       <Route path='hospitalLogin' getComponents={(location, cb) => {
-        console.log(location, cb);
+        console.log(location);
         require.ensure([], (require) => {
-          // console.log(require);
-          // console.log(require('./components/web/hospitalLogin.jsx'));
           cb(null, require('./components/web/hospitalLogin.jsx'));
         });
       }}/>

@@ -103,16 +103,16 @@ const ShiftHospitalTable = React.createClass({
     this.setState({
       focus: c,
     });
-    this.refs.comfirm.show();
+    this.refs.confirm.show();
   },
 
   dialogDismiss() {
-    this.refs.comfirm.dismiss();
+    this.refs.confirm.dismiss();
   },
 
   dialogOkay() {
-    this.refs.comfirm.dismiss();
-    this.refs.recomfirm.show();
+    this.refs.confirm.dismiss();
+    this.refs.reconfirm.show();
   },
 
   createToken() {
@@ -149,7 +149,7 @@ const ShiftHospitalTable = React.createClass({
   },
 
   dialogAccept() {
-    this.refs.recomfirm.dismiss();
+    this.refs.reconfirm.dismiss();
     this.createToken();
   },
 
@@ -165,7 +165,7 @@ const ShiftHospitalTable = React.createClass({
         onTouchTap={this.dialogOkay} />,
     ];
 
-    const reComfirmActions = [
+    const reconfirmActions = [
       <FlatButton
         label='Cancel'
         secondary
@@ -178,8 +178,8 @@ const ShiftHospitalTable = React.createClass({
     return (
       <div className='tableWrap'>
         <Dialog
-          ref='comfirm'
-          title='Comfirm Contract'
+          ref='confirm'
+          title='confirm Contract'
           actions={customActions}
           modal={this.state.modal}>
           Do you want to accept shift #<b>{this.state.focus[0] }</b> from <b>{this.state.focus[1] }</b>. The hospital will pay you <b>{this.state.focus[4] }</b> as an emplyee or <b>{this.state.focus[5] }</b> as an independent contractor.
@@ -189,9 +189,9 @@ const ShiftHospitalTable = React.createClass({
           Failuare to show up without 2 hours notification before will adversely affect your chance of finding another job on this platform.
         </Dialog>
         <Dialog
-          ref='recomfirm'
+          ref='reconfirm'
           title='Are you sure?'
-          actions={reComfirmActions}
+          actions={reconfirmActions}
           modal={this.state.modal}>
           Are you sure you want to accept shift #<b>{this.state.focus[0] }</b> from <b>{this.state.focus[1] }</b>. The hospital will pay you <b>{this.state.focus[4] }</b> as an emplyee or <b>{this.state.focus[5] }</b> as an independent contractor.
           The shift starts at <b>{this.state.focus[9] }</b> at <b>{this.state.focus[10] }</b> in <b>{this.state.focus[3]}</b> and last for <b>{this.state.focus[2]}</b>.

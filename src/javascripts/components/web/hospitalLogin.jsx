@@ -5,7 +5,7 @@ import Footer from './footer.jsx';
 
 const Hospital = React.createClass({
 
-  render() {
+  render: function() {
     return (
       <div>
         <div className='hospitalAlpha'>

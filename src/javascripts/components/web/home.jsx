@@ -11,16 +11,8 @@ import ForHospitals from './forHospitals.jsx';
 import ForReferrals from './forReferrals.jsx';
 // // const ThemeManager = new mui.Styles.ThemeManager();
 
-class Home extends React.Component {
-  // static childContextTypes = {
-  //   muiTheme: React.PropTypes.object,
-  // }
-  // getChildContext() {
-  //   return {
-  //     muiTheme: ThemeManager.getCurrentTheme(),
-  //   };
-  // }
-  render() {
+const Home = React.createClass({
+  render: function() {
     return (
       <div>
 
@@ -48,7 +40,7 @@ class Home extends React.Component {
         <Footer/>
       </div>
     );
-  }
-}
+  },
+});
 
 export default Home;

@@ -21,7 +21,7 @@ const send = require('koa-send');
 app.use(conditional());
 app.use(etag());
 
-// proxy
+// trust proxy headers
 app.proxy = true;
 
 // security headers

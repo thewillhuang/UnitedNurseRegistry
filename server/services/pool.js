@@ -9,12 +9,13 @@ const options = {
   user: 'thewillhuang',
   password: 'Voodoo3d1668',
   ssl: 'Amazon RDS',
-  // localhost
+  // // localhost
   // host: 'localhost',
   // user: 'root',
 };
-Promise.promisifyAll(require('mysql/lib/Pool').prototype);
-Promise.promisifyAll(require('mysql/lib/Connection').prototype);
+const Pool = require('mysql/lib/Pool');
+const Connection = require('mysql/lib/Connection');
+Promise.promisifyAll([Pool, Connection]);
 // long stack trace for debug
 Promise.longStackTraces();
 const pool = mysql.createPool(options);

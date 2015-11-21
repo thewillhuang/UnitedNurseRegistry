@@ -2,26 +2,6 @@ import React from 'react';
 import Home from './components/web/home.jsx';
 import { Route, IndexRoute } from 'react-router';
 
-// const rootRoutes = [{
-//   component: 'div',
-//   childRoutes: [
-//     {
-//       path: '/',
-//       component: require('./components/web/home.jsx'),
-//       childRoutes: [
-//         {
-//           path: '/hospitalLogin',
-//           getComponents(location, callback) {
-//             require.ensure([], function(require) {
-//               callback(null, require('./components/web/hospitalLogin.jsx'));
-//             });
-//           },
-//         },
-//       ],
-//     },
-//   ],
-// }];
-
 const routes = (
   <Route path='/' component='div'>
     // web routes

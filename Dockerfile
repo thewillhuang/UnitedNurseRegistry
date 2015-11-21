@@ -40,7 +40,7 @@ ENV PATH      $NVM_DIR/versions/$NODE_BRANCH/bin:$PATH
 
 # forever for running node apps as daemons and automatically restarting on crashes
 # gulp, grunt-cli, bower typical front-end stuff
-RUN npm install -g forever gulp grunt-cli bower mocha
+RUN npm install -g pm2 gulp bower mocha
 
 #set WORKDIR, PORT and set Port
 WORKDIR /app
@@ -75,4 +75,4 @@ RUN npm install \
 
 # Alternative method
 # when the image is run, docker will pull from github, and install, using cached files, should be much faster then rebuilding from scrach each time.
-CMD forever server
+CMD pm2 start server.js -i 0

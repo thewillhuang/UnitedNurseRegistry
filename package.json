@@ -105,7 +105,6 @@
     "webpack": "^1.12.6"
   },
   "scripts": {
-    "deploy": "gulp deploy",
     "development": "NODE_ENV='development' gulp",
     "production": "NODE_ENV='production' gulp build:production",
     "postinstall": "npm run version && npm run bower",

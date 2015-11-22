@@ -18,6 +18,15 @@ module.exports = function authRoutes(app) {
     this.body = yield query(q);
   })
 
+  .delete('/signup', function* deleteBetaUser() {
+    console.log(this.request.body);
+    const requestJson = this.request.body;
+    const q = {};
+    q.sql = 'DELETE FROM ?? WHERE ?? = ?';
+    q.values = ['BetaUser', 'email', requestJson.email];
+    this.body = yield query(q);
+  })
+
   // get all beta users
   .get('/signup', function* getAllBetaUser() {
     const q = {};

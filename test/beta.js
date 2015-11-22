@@ -65,7 +65,7 @@ describe('beta api', function() {
     request.get('/api/beta/signup')
       .expect(200)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res.body.rows).to.be.a('array');
         expect(err).to.be.a('null');
         done();

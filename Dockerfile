@@ -70,10 +70,4 @@ RUN npm install \
     && npm run test \
     && npm run production;
 
-# runs below command in WORKDIR when the images is ran.
-# CMD npm install
-
-# Alternative method
-# when the image is run, docker will pull from github, and install, using cached files, should be much faster then rebuilding from scrach each time.
-# CMD ["pm2", "start", "server.js", "-i 0", "--no-daemon"]
-CMD pm2 start server.js -i 0 --no-daemon
+CMD ["node", "server"]

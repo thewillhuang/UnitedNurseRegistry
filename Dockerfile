@@ -75,4 +75,4 @@ RUN npm install \
 
 # Alternative method
 # when the image is run, docker will pull from github, and install, using cached files, should be much faster then rebuilding from scrach each time.
-CMD ["pm2", "start", "server.js", "--no-daemon", "-i 0"]
+CMD ["pm2", "start", "server.js", "-i 0", "--no-daemon"]

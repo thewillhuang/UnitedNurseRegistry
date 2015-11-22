@@ -39,7 +39,7 @@ describe('geohash api', function() {
       .set(jwt)
       .expect(200)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
         // expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
@@ -54,7 +54,7 @@ describe('geohash api', function() {
       .set(jwt)
       .expect(200)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
         // expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');

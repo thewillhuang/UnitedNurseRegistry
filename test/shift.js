@@ -221,7 +221,7 @@ describe('shift api', function() {
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res).to.be.an('object');
         expect(res.body.rows.insertId).to.be.an('number');
         expect(err).to.be.a('null');
@@ -502,7 +502,7 @@ describe('shift api', function() {
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         // console.log(res.body.rows[0]);
         // console.log(res.headers);
         // console.log(res.body.rows);
@@ -526,7 +526,7 @@ describe('shift api', function() {
     .expect(200)
     .set(f1jwt)
     .end(function(err, res) {
-      console.log(res.body);
+      // console.log(res.body);
       expect(res.body).to.be.an('object');
       expect(res.body.rows).to.be.not.empty;
       expect(res.body.rows[0].open).to.equal(1);

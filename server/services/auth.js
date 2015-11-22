@@ -46,7 +46,7 @@ passport.use(new LocalStrategy({
     q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'userID', 'User', 'email', email];
     query(q).bind({}).then(function(result) {
-      console.log(result);
+      // console.log(result);
       if (result.rows.length === 0) { throw new NoAccountError('no such user found'); }
       this.userID = result.rows[0].userID;
       return validatePw(password, result.rows[0].userPwHash);
@@ -80,7 +80,7 @@ passport.use('facility-login', new LocalStrategy({
     q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
     q.values = ['facilityPwHash', 'facilityID', 'Facility', 'facilityEmail', email];
     query(q).bind({}).then(function(result) {
-      console.log(result);
+      // console.log(result);
       // console.log('facility result', result);
       if (result.rows.length === 0) { throw new NoAccountError('no such facility found'); }
       this.facilityID = result.rows[0].facilityID;
@@ -116,7 +116,7 @@ passport.use('facility-signup', new LocalStrategy({
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['facilityPwHash', 'Facility', 'facilityemail', email];
     query(q).bind({}).then(function(result) {
-      console.log(result);
+      // console.log(result);
       // console.log('facility result', result);
       if (result.rows.length !== 0) { throw new EmailTaken('email taken'); }
       return genHash(password);
@@ -157,7 +157,7 @@ passport.use('local-signup', new LocalStrategy({
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'User', 'email', email];
     query(q).bind({}).then(function(result) {
-      console.log(result);
+      // console.log(result);
       if (result.rows.length !== 0) { throw new EmailTaken('email taken'); }
       return genHash(password);
     }).then(function(pwhash) {
@@ -198,7 +198,7 @@ passport.use(new StripeStrategy({
   callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/api/auth/stripe/callback',
 },
   function(accessToken, refreshToken, stripeProperties, done) {
-    console.log(accessToken, refreshToken, stripeProperties, done);
+    // console.log(accessToken, refreshToken, stripeProperties, done);
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userID', 'User', 'stripe_user_id', stripeProperties.stripe_user_id];
@@ -215,12 +215,12 @@ passport.use(new StripeStrategy({
       userData.stripe_user_id = stripeProperties.stripe_user_id;
       userData.stripe_refresh_token = refreshToken;
       userData.stripe_access_token = accessToken;
-      console.log('userData', userData);
+      // console.log('userData', userData);
       q2.sql = 'INSERT INTO ?? SET ?';
       q2.values = ['User', userData];
       return query(q2);
     }).then(function(result) {
-      console.log(result);
+      // console.log(result);
       const insertId = result.rows.insertId;
       this.done = [
         {userID: insertId, scope: {userID: insertId}},
@@ -258,7 +258,7 @@ passport.use(new FacebookStrategy({
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userID', 'User', 'fb_id', fbprofile.id];
     query(q).bind({}).then(function(result) {
-      console.log(result);
+      // console.log(result);
       if (result.rows.length !== 0) {
         // skip to userExists block in catch
         this.userID = result.rows[0].userID;

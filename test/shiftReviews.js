@@ -638,7 +638,7 @@ describe('shift reviews api', function() {
       .expect(200)
       .set(f1jwt)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');

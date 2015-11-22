@@ -22,7 +22,7 @@ module.exports = function authRoutes(app) {
       q.values = ['lat', 'lng', 'Geohash', 'address', address];
       const dbquery = yield query(q);
       // if theres nothing, ask google
-      console.log(dbquery);
+      // console.log(dbquery);
       if (!dbquery.rows.length) {
         // console.log('google', dbquery.rows);
         const url = googleUrl + address + API_KEY;

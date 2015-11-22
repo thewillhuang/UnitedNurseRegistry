@@ -10,7 +10,7 @@ module.exports = function authRoutes(app) {
   beta
 
   .post('/signup', function* createBetaUser() {
-    console.log(this.request.body);
+    // console.log(this.request.body);
     const requestJson = this.request.body;
     const q = {};
     q.sql = 'INSERT INTO ?? SET ?';
@@ -19,7 +19,7 @@ module.exports = function authRoutes(app) {
   })
 
   .delete('/signup', function* deleteBetaUser() {
-    console.log(this.request.body);
+    // console.log(this.request.body);
     const requestJson = this.request.body;
     const q = {};
     q.sql = 'DELETE FROM ?? WHERE ?? = ?';

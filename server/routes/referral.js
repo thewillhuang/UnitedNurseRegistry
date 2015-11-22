@@ -13,7 +13,7 @@ module.exports = function userRoutes(app) {
   .post('/user/:parentId', function* createUserReferral() {
     const parentId = this.params.parentId;
     const user = this.passport.user;
-    console.log('create user parent id', parentId, 'create user user.scope.userID', user.scope.userID);
+    // console.log('create user parent id', parentId, 'create user user.scope.userID', user.scope.userID);
     if (user.scope.userID && user.scope.userID.toString() !== parentId) {
       const payload = {};
       payload.parent = parentId;

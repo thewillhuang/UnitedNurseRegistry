@@ -78,7 +78,7 @@ describe('beta api', function() {
       })
       .expect(200)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res.body.rows).to.be.an('object');
         expect(res.body.rows.affectedRows).to.eql(1);
         expect(err).to.be.a('null');
@@ -92,7 +92,7 @@ describe('beta api', function() {
       })
       .expect(200)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res.body.rows).to.be.an('object');
         expect(res.body.rows.affectedRows).to.eql(1);
         expect(err).to.be.a('null');
@@ -106,7 +106,7 @@ describe('beta api', function() {
       })
       .expect(200)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res.body.rows).to.be.an('object');
         expect(res.body.rows.affectedRows).to.eql(1);
         expect(err).to.be.a('null');
@@ -120,7 +120,7 @@ describe('beta api', function() {
       })
       .expect(200)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res.body.rows).to.be.an('object');
         expect(res.body.rows.affectedRows).to.eql(1);
         expect(err).to.be.a('null');

@@ -118,7 +118,7 @@ describe('user specialty api', function() {
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(err).to.be.a('null');
         done();
       });
@@ -129,7 +129,7 @@ describe('user specialty api', function() {
       .expect(200)
       .set(jwt)
       .end(function(err, res) {
-        console.log(res.body);
+        // console.log(res.body);
         expect(res.body.rows.length).to.be.at.least(3);
         expect(err).to.be.a('null');
         done();

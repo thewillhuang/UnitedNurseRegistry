@@ -57,7 +57,7 @@ module.exports = function shiftStatusRoutes(app) {
     const userID = this.params.userID;
     // console.log(user, userID);
     if (user.scope.userID && user.scope.userID.toString() === userID) {
-      console.log('passed accepted shift');
+      // console.log('passed accepted shift');
       const shiftID = this.params.shiftID;
       const q = {};
       q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
@@ -121,11 +121,11 @@ module.exports = function shiftStatusRoutes(app) {
 
   // facility getting shifts that are open
   .get('/accepted/facility/:facilityID', function* getAcceptedShiftFromHospitalID() {
-    console.log('get accepted shift called');
+    // console.log('get accepted shift called');
     const user = this.passport.user;
     const facilityID = this.params.facilityID;
     if (user.scope.facilityID && user.scope.facilityID.toString() === facilityID) {
-      console.log('passed token test');
+      // console.log('passed token test');
       const q = {};
       q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';
       q.values = ['Shift', 'fk_Shift_facilityID', facilityID, 'accepted', 1];
@@ -144,7 +144,7 @@ module.exports = function shiftStatusRoutes(app) {
 
   // view completed shift from the hospital
   .get('/finished/facility/:facilityID', function* viewCompletedShiftByHospital() {
-    console.log('called');
+    // console.log('called');
     const facilityID = this.params.facilityID;
     const q = {};
     q.sql = 'SELECT * FROM ?? WHERE ?? = ? AND ?? = ?';

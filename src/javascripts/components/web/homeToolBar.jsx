@@ -9,7 +9,7 @@ const HomeToolBar = React.createClass({
   render() {
     return (
       <div>
-        <MediaQuery minWidth={909}>
+        <MediaQuery minWidth={909} values={{deviceWidth: 1600}}>
         <Toolbar style={{
           backgroundColor: 'rbga(255,255,255,0.6)',
           paddingTop: 20,

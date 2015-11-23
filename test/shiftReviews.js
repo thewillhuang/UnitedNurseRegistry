@@ -338,7 +338,7 @@ describe('shift reviews api', function() {
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
-        expect(res.body.rows[0].avgReview).to.equal(2.5);
+        expect(res.body.rows[0].avgReview).to.contain(2.5);
         expect(res.body.rows).to.be.an('array');
         expect(err).to.be.null;
         done();
@@ -495,7 +495,7 @@ describe('shift reviews api', function() {
       .end(function(err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
-        expect(res.body.rows[0].avgReview).to.equal(3);
+        expect(res.body.rows[0].avgReview).to.contain(3);
         expect(res.body.rows).to.be.an('array');
         expect(err).to.be.null;
         done();

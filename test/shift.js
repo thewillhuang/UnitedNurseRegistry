@@ -322,7 +322,7 @@ describe('shift api', function() {
       .expect(200)
       .set(u1jwt)
       .end(function(err, res) {
-        expect(res.body.rows[0].payPerHour).to.equal(updateinfo);
+        expect(res.body.rows[0].payPerHour).to.contain(updateinfo);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
@@ -357,7 +357,7 @@ describe('shift api', function() {
       .end(function(err, res) {
         // console.log(res.body);
         expect(res.body.rows[0].facilityPaid).to.equal(0);
-        expect(res.body.rows[0].payPerHour).to.equal(updateinfo2);
+        expect(res.body.rows[0].payPerHour).to.contain(updateinfo2);
         expect(res.body.rows[0].open).to.equal(1);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;

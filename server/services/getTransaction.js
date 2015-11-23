@@ -1,24 +1,14 @@
 'use strict';
 
-const pool = require('./pool');
+const Promise = require('bluebird');
+const getConnection = require('./getConnection');
 
 module.exports = function acquireTransaction() {
-  return pool.getConnectionAsync().then(function(connection) {
-    return connection.beginTransactionAsync().then(function() {
-      return connection;
+  return Promise.using(getConnection(), function(tx) {
+    return tx.beginTransactionAsync().then(function() {
+      return tx;
     });
-  }).disposer(function(connection, promise) {
-    if (promise.isFulfilled()) {
-      return connection.commitAsync().then(function() {
-        connection.release();
-      }).catch(function() {
-        return connection.rollbackAsync().then(function() {
-          connection.release();
-        });
-      });
-    }
-    return connection.rollbackAsync().then(function() {
-      connection.release();
-    });
+  }).disposer(function(tx, promise) {
+    return promise.isFulfilled() ? tx.commitAsync() : tx.rollbackAsync();
   });
 };

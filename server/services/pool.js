@@ -4,7 +4,7 @@ const Promise = require('bluebird');
 const mysql = require('mysql');
 const options = {
   database: 'unrdb',
-  connectionLimit: 10,
+  connectionLimit: 100,
   host: 'unrdb.c96pt8dvujyx.us-west-2.rds.amazonaws.com',
   user: 'thewillhuang',
   password: 'Voodoo3d1668',

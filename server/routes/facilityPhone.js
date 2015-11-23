@@ -21,8 +21,8 @@ module.exports = function(app) {
       q.sql = 'INSERT INTO ?? SET ?';
       q.values = ['Phone', requestJson];
       this.body = yield Promise.using(getTransaction(), function(tx) {
-        return tx.queryAsync(q).spread(function(rows, fields) {
-          return {rows, fields};
+        return tx.queryAsync(q).then(function(rows) {
+          return {rows};
         }).then(function(result) {
           // console.log(result);
           const phone = {};
@@ -33,8 +33,8 @@ module.exports = function(app) {
           q2.values = ['FacilityPhone', phone];
           return q2;
         }).then(function(q2) {
-          return tx.queryAsync(q2).spread(function(rows, fields) {
-            return {rows, fields};
+          return tx.queryAsync(q2).then(function(rows) {
+            return {rows};
           });
         }).catch(function(error) {
           return error;

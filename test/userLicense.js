@@ -128,7 +128,7 @@ describe('user license api', function() {
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(2);
         a1 = res.body.rows[0].userLicenseID;
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -145,7 +145,7 @@ describe('user license api', function() {
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(2);
         a1 = res.body.rows[0].userLicenseID;
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -174,7 +174,7 @@ describe('user license api', function() {
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(1);
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -211,7 +211,7 @@ describe('user license api', function() {
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(1);
         expect(res.body.rows).to.have.deep.property('[0].licenseNumber', newLicense);
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -238,7 +238,7 @@ describe('user license api', function() {
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(0);
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -263,7 +263,7 @@ describe('user license api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });

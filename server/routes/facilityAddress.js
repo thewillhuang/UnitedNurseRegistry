@@ -21,9 +21,11 @@ module.exports = function(app) {
       q.sql = 'INSERT INTO ?? SET ?';
       q.values = ['Address', requestJson];
       this.body = yield Promise.using(getTransaction(), function(tx) {
-        return tx.queryAsync(q).spread(function(rows, fields) {
-          return {rows, fields};
+        return tx.queryAsync(q).then(function(rows) {
+          // console.log('rows here ***', rows);
+          return {rows};
         }).then(function(result) {
+          // console.log(result);
           const address = {};
           address.fk_FacilityAddress_facilityID = facilityID;
           address.fk_FacilityAddress_addressID = result.rows.insertId;
@@ -32,8 +34,8 @@ module.exports = function(app) {
           q2.values = ['FacilityAddress', address];
           return q2;
         }).then(function(q2) {
-          return tx.queryAsync(q2).spread(function(rows, fields) {
-            return {rows, fields};
+          return tx.queryAsync(q2).then(function(rows) {
+            return {rows};
           });
         }).catch(function(error) {
           // console.log(error);

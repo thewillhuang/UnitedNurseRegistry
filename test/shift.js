@@ -120,7 +120,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -241,7 +241,7 @@ describe('shift api', function() {
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(1);
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -280,7 +280,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -295,7 +295,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -326,7 +326,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -362,7 +362,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -427,7 +427,7 @@ describe('shift api', function() {
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length(3);
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -514,7 +514,7 @@ describe('shift api', function() {
         expect(res.body.rows[3].open).to.equal(1);
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.have.length.above(3);
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -534,7 +534,7 @@ describe('shift api', function() {
       // expect(res.body.rows[2].open).to.equal(1);
       expect(res.body.rows).to.be.an('array');
       expect(res.body.rows).to.have.length.above(1);
-      expect(res.body.fields).to.be.an('array');
+      // expect(res.body.fields).to.be.an('array');
       expect(err).to.be.a('null');
       done();
     });
@@ -617,7 +617,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -631,7 +631,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -645,7 +645,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -659,7 +659,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -673,7 +673,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -723,7 +723,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -737,7 +737,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -751,7 +751,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });
@@ -776,7 +776,7 @@ describe('shift api', function() {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');
-        expect(res.body.fields).to.be.an('array');
+        // expect(res.body.fields).to.be.an('array');
         expect(err).to.be.a('null');
         done();
       });

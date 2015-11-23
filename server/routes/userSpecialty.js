@@ -23,17 +23,17 @@ module.exports = function(app) {
       q1.sql = 'SELECT * FROM ?? WHERE ?';
       q1.values = ['Specialty', requestJson];
       this.body = yield Promise.using(getTransaction(), function(tx) {
-        return tx.queryAsync(q1).spread(function(rows, fields) {
+        return tx.queryAsync(q1).then(function(rows) {
           // result from the select to see if theres a duplicate
-          return {rows, fields};
+          return {rows};
         }).then(function(result) {
           // if there is a an existing specialty, return the result,
           return (result.rows.length !== 0)
           ? result
           // else make another query to get an insert id
-          : tx.queryAsync(q).spread(function(rows, fields) {
+          : tx.queryAsync(q).then(function(rows) {
             // return that for the next promise
-            return {rows, fields};
+            return {rows};
           });
         }).then(function(result) {
           // construct the query to make the intersection table
@@ -46,8 +46,8 @@ module.exports = function(app) {
           return q2;
         }).then(function(q2) {
           // make the query and return the final result
-          return tx.queryAsync(q2).spread(function(rows, fields) {
-            return {rows, fields};
+          return tx.queryAsync(q2).then(function(rows) {
+            return {rows};
           });
         }).catch(function(error) {
           return error;

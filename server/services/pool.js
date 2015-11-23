@@ -1,7 +1,7 @@
 'use strict';
 
 const Promise = require('bluebird');
-const mysql = require('mysql');
+const mysql = require('mysql2');
 const options = {
   database: 'unrdb',
   connectionLimit: 100,
@@ -13,8 +13,8 @@ const options = {
   // host: 'localhost',
   // user: 'root',
 };
-const Pool = require('mysql/lib/Pool');
-const Connection = require('mysql/lib/Connection');
+const Pool = require('mysql2/lib/pool');
+const Connection = require('mysql2/lib/connection');
 Promise.promisifyAll([Pool, Connection]);
 // long stack trace for debug
 Promise.longStackTraces();

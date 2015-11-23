@@ -10,6 +10,9 @@ module.exports = function reactRender(app) {
   iso
   // get iso
   .get('/', function* render() {
+    global.navigator = {
+      userAgent: this.request.headers['user-agent'],
+    };
     match({ routes, location: this.path }, (error, redirectLocation, renderProps) => {
       if (error) {
         this.status = 500;

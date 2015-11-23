@@ -27,7 +27,8 @@ app.proxy = true;
 // security headers
 app.use(helmet());
 
-// require('./server/routes/isomorphic')(app);
+// server side rendering
+require('./server/routes/isomorphic')(app);
 
 // static file server
 if (process.env.NODE_ENV === 'development') {

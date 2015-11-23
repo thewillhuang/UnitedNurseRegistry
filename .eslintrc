@@ -6,6 +6,7 @@
     "func-names": 0,
     "react/sort-comp": 0,
     "strict": [2, "global"],
+    "jsx-quotes": 0,
   },
   "parser": "babel-eslint",
   "ecmaFeatures": {

@@ -17,7 +17,23 @@ module.exports = function reactRender(app) {
       } else if (redirectLocation) {
         this.redirect(redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
-        this.body = renderToString(<RoutingContext {...renderProps} />);
+        this.body = renderToString(
+          <html lang='en'>
+          <head>
+            <meta charSet='UTF-8' />
+            <title>United Nurse Registery</title>
+            <link rel='stylesheet' href='/stylesheets/app.css' />
+            <link rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico' />
+          </head>
+          <body>
+            <div id='root'>
+              <RoutingContext {...renderProps} />
+            </div>
+            <script src='./javascripts/index.js' charSet='utf-8'></script>
+            <script src='https://checkout.stripe.com/checkout.js' async></script>
+          </body>
+          </html>
+        );
       } else {
         this.status = 404;
         this.body = 'Not Found';

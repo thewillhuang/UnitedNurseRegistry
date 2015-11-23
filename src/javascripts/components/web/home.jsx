@@ -15,7 +15,6 @@ const Home = React.createClass({
   render: function() {
     return (
       <div>
-
         <div className='alpha'>
           <HomeToolBar/>
           <div className='beta'>

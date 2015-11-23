@@ -3,7 +3,7 @@
 const bcrypt = require('./bcrypt');
 
 module.exports = function(password) {
-  return bcrypt.hashAsync(password, 2).then(function(hash) {
+  return bcrypt.hashAsync(password, 10).then(function(hash) {
     return hash;
   }).catch(function(err) {
     return err;

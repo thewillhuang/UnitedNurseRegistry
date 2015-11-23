@@ -29,6 +29,9 @@ app.proxy = true;
 // security headers
 app.use(helmet());
 
+// compression
+app.use(compress());
+
 // server side rendering
 require('./server/routes/isomorphic')(app);
 
@@ -69,7 +72,6 @@ app.use(function* apiCheck(next) {
 // set unsigned cookies as we are using a signed and encrypted jwt
 // app.use(session({ signed: false }, app));
 
-app.use(compress());
 app.use(bodyParser());
 
 // public routes

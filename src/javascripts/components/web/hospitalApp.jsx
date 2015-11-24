@@ -23,6 +23,7 @@ const Hospital = React.createClass({
   render() {
     return (
       <div>
+        <script src='https://checkout.stripe.com/checkout.js' async />
         <AppBar />
         <AppNavBar />
         <div className='appBody'>

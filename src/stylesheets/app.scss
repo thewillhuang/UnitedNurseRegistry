@@ -5,6 +5,10 @@
 // reset
 @import '../bower_components/normalize.css/normalize';
 
+// other pages
+@import 'components/tableStyle';
+@import 'components/stripe';
+
 // variables
 @import 'base/variables';
 @import 'layouts/col';
@@ -13,22 +17,5 @@
 // sprites
 @import 'generated/icons';
 
-// default css
-@import 'components/home';
-@import 'components/footer';
-@import 'components/howitworks';
-@import 'components/featureGrid';
-@import 'components/signup';
-@import 'components/login';
-@import 'components/hospital';
-@import 'components/tableStyle';
-@import 'components/stripe';
-
 // app css
 @import 'components/app/combined';
-
-// file paths for fontawesome and simple-line-icons
-$fa-font-path: "../../bower_components/font-awesome/fonts/" !default;
-$simple-line-font-path: "../../bower_components/simple-line-icons/fonts/" !default;
-@import '../bower_components/font-awesome/scss/font-awesome';
-@import '../bower_components/simple-line-icons/scss/simple-line-icons';

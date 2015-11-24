@@ -37,7 +37,7 @@ app.use(helmet());
 app.use(compress());
 
 // server side react components rendering
-require('./server/isomorphic')(app);
+require('./server/serverRender')(app);
 
 // static file services
 if (env === 'development') {

@@ -1,16 +1,15 @@
 'use strict';
 const Router = require('koa-router');
 import { renderToStaticMarkup } from 'react-dom/server';
-const iso = new Router();
+const serverRender = new Router();
 import { match, RoutingContext } from 'react-router';
 import routes from '../src/javascripts/routes';
 import React from 'react';
 
 module.exports = function reactRender(app) {
-  iso
+  serverRender
   // get iso
   .get('/', function* render() {
-    // console.log('server rendering \'/\'');
     global.navigator = {
       userAgent: this.request.headers['user-agent'],
     };
@@ -27,7 +26,7 @@ module.exports = function reactRender(app) {
             <meta charSet='UTF-8' />
             <meta name='viewport' content='width=device-width, initial-scale=1' />
             <title>United Nurse Registery</title>
-            <link rel='stylesheet' href='/stylesheets/app.css' />
+            <link rel='stylesheet' href='/stylesheets/home.css' />
             <link rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico' />
           </head>
           <body>
@@ -35,7 +34,6 @@ module.exports = function reactRender(app) {
               <RoutingContext {...renderProps} />
             </div>
             <script src='./javascripts/index.js' charSet='utf-8' async />
-            <script src='https://checkout.stripe.com/checkout.js' async />
           </body>
           </html>
         );
@@ -46,6 +44,6 @@ module.exports = function reactRender(app) {
     });
   });
 
-  app.use(iso.routes())
-    .use(iso.allowedMethods());
+  app.use(serverRender.routes())
+    .use(serverRender.allowedMethods());
 };

@@ -72,7 +72,6 @@ const LoginBox = React.createClass({
   render() {
     return (
       <Card>
-        <link rel='stylesheet' href='/stylesheets/app.css' />
         <div className='login-wrapper'>
           <TextField
             floatingLabelText='Email Address'

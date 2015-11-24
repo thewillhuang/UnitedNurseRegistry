@@ -184,6 +184,7 @@ const AppLeftNavBar = React.createClass({
     // console.log(this.state);
     return (
       <div className='appNavBar'>
+        <link rel='stylesheet' href='/stylesheets/app.css' />
         <ul className='appNavMenu'>
           <li
             onClick={()=> {window.location.assign('#hospital/shifts'); }}

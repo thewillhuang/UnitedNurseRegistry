@@ -18,8 +18,9 @@ const compress = require('koa-compress');
 const staticCache = require('koa-static-cache');
 const serve = require('koa-static');
 const send = require('koa-send');
+const env = process.env.NODE_ENV;
 
-if (process.env.NODE_ENV === 'development') {
+if (env === 'development') {
   // logging if under development
   app.use(logger());
 }
@@ -41,7 +42,7 @@ app.use(compress());
 require('./server/isomorphic')(app);
 
 // static file services
-if (process.env.NODE_ENV === 'development') {
+if (env === 'development') {
   console.log('server running in development mode');
   app.use(serve(buildPath));
 } else {

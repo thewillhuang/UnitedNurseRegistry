@@ -1,6 +1,4 @@
 'use strict';
-// transform es
-require('babel-core/register');
 
 import koa from 'koa';
 import logger from 'koa-logger';

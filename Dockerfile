@@ -31,8 +31,6 @@ ENV NODE_BRANCH node/v5.1.0
 RUN git clone https://github.com/creationix/nvm.git $NVM_DIR && cd $NVM_DIR && git checkout `git describe --abbrev=0 --tags`
 RUN source $NVM_DIR/nvm.sh \
     && nvm install $NODE_VERSION \
-    # && nvm alias default $NODE_VERSION \
-    # && nvm use default \
 
 #Set npm and node paths to allow running npm and node executables
 ENV NODE_PATH $NVM_DIR/versions/$NODE_BRANCH/lib/node_modules
@@ -47,17 +45,9 @@ WORKDIR /app
 ENV PORT 8080
 EXPOSE $PORT
 
-#expose port for mysql
-# EXPOSE 3306
-
 # cache setup files and run faster.
 #alternatively, you may clone the repo, install it, and upon running the image, git pull updates and install
 RUN git clone https://7a7f0d9da87f1f218c309dcb903378776923d801:x-oauth-basic@github.com/thewillhuang/UnitedNurseRegistry.git /app
-
-# add current directory from the host matching to docker WORKDIR
-#   s  dest
-# ADD . ./
-
 
 # make user and set /src as project folder with only user privelages. *running as root will make bower and npm go nuts*
 RUN /usr/sbin/useradd --create-home --home-dir /usr/local/nonroot --shell /bin/bash nonroot

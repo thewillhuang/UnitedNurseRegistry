@@ -1,5 +1,5 @@
 module.exports = {
-  script: 'server.js',
-  watch: ['server/**/*', 'server.js'],
+  script: 'index.js',
+  watch: ['server/**/*', 'server.js', 'index.js'],
   env: { 'NODE_ENV': 'development' },
 };

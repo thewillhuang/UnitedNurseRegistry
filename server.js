@@ -2,22 +2,22 @@
 // transform es
 require('babel-core/register');
 
-const koa = require('koa');
-const app = module.exports = koa();
+import koa from 'koa';
+import logger from 'koa-logger';
+import etag from 'koa-etag';
+import bodyParser from 'koa-bodyparser';
+import conditional from 'koa-conditional-get';
+import helmet from 'koa-helmet';
+import passport from 'koa-passport';
+import compress from 'koa-compress';
+import staticCache from 'koa-static-cache';
+import serve from 'koa-static';
+import send from 'koa-send';
 const port = process.env.PORT || 3000;
-const logger = require('koa-logger');
-const etag = require('koa-etag');
 const build = '/public';
 const path = require('path');
 const buildPath = path.join(__dirname, build);
-const bodyParser = require('koa-bodyparser');
-const conditional = require('koa-conditional-get');
-const helmet = require('koa-helmet');
-const passport = require('koa-passport');
-const compress = require('koa-compress');
-const staticCache = require('koa-static-cache');
-const serve = require('koa-static');
-const send = require('koa-send');
+const app = module.exports = koa();
 const env = process.env.NODE_ENV;
 
 if (env === 'development') {

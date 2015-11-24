@@ -62,4 +62,4 @@ RUN npm install \
     && npm run production;
 
 # run the server when docker image is ran.
-CMD ["node", "server"]
+CMD ["node", "index"]

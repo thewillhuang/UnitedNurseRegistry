@@ -24,6 +24,7 @@ module.exports = function reactRender(app) {
           <html lang='en'>
           <head>
             <meta charSet='UTF-8' />
+            <meta name='viewport' content='width=device-width, initial-scale=1' />
             <title>United Nurse Registery</title>
             <link rel='stylesheet' href='/stylesheets/app.css' />
             <link rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico' />

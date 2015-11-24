@@ -3,13 +3,14 @@ const Router = require('koa-router');
 import { renderToStaticMarkup } from 'react-dom/server';
 const iso = new Router();
 import { match, RoutingContext } from 'react-router';
-import routes from '../../src/javascripts/routes';
+import routes from '../src/javascripts/routes';
 import React from 'react';
 
 module.exports = function reactRender(app) {
   iso
   // get iso
   .get('/', function* render() {
+    console.log('server rendering \'/\'');
     global.navigator = {
       userAgent: this.request.headers['user-agent'],
     };

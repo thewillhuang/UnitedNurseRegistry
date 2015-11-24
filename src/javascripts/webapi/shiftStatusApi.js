@@ -13,7 +13,7 @@ shiftStatusApi.grabShiftStatus = (shiftID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -26,7 +26,7 @@ shiftStatusApi.viewedShift = (shiftID, userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -39,7 +39,7 @@ shiftStatusApi.getViewCount = (shiftID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -52,7 +52,7 @@ shiftStatusApi.markShiftAsComplete = (shiftID, facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -65,7 +65,7 @@ shiftStatusApi.markShiftAsPending = (shiftID, userID, facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -78,7 +78,7 @@ shiftStatusApi.markShiftAsAccepted = (shiftID, userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -91,7 +91,7 @@ shiftStatusApi.getPendingApprovalShift = (facilityID) => {
       return res.body;
     }).catch(err => {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -104,7 +104,7 @@ shiftStatusApi.markShiftAsOpen = (shiftID, facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -117,7 +117,7 @@ shiftStatusApi.viewOpenShiftsByHospitalID = (facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -130,7 +130,7 @@ shiftStatusApi.viewAllShiftByUserID = (userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -143,7 +143,7 @@ shiftStatusApi.getCompletedShift = (facilityID) => {
       return res.body;
     }).catch(err => {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -157,7 +157,7 @@ shiftStatusApi.deleteFacilityReview = (facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -170,7 +170,7 @@ shiftStatusApi.deleteUserReview = (shiftID, userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };

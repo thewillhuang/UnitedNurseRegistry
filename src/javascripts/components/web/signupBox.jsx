@@ -36,7 +36,7 @@ const SignupBox = React.createClass({
               signupButton: 'Success',
             });
             setToken(res.headers.authorization, res.body.message);
-            window.location.assign('/#/app');
+            window.location.assign('#app');
             // console.log(localStorage.getItem('token'));
           } else if (res.status === 406) {
             ctx.setState({

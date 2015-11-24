@@ -20,13 +20,13 @@ const ProfileList = React.createClass({
             <div className='cardBody'>
               <FlatButton
                 linkButton
-                href='/#/hospital/profile/profile'
+                href='#hospital/profile/profile'
                 label='Profile'
                 secondary />
               <br/>
               <FlatButton
                 linkButton
-                href='/#/hospital/profile/security'
+                href='#hospital/profile/security'
                 label='Security'
                 secondary />
             </div>

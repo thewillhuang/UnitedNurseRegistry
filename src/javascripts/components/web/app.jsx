@@ -16,7 +16,7 @@ const App = React.createClass({
     if (sessionStorage.length) {
       window.location.assign('#/app/shifts');
     } else {
-      window.location.assign('/');
+      window.location.assign('#home');
     }
   },
 

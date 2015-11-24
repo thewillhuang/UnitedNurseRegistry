@@ -14,7 +14,7 @@ userWorkHistoryApi.createUserWorkHistory = (userID, facilityID, months, referenc
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -29,7 +29,7 @@ userWorkHistoryApi.updateUserWorkHistory = (userID, userHistoryID, facilityID, m
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -42,7 +42,7 @@ userWorkHistoryApi.getUserWorkHistory = (userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -55,7 +55,7 @@ userWorkHistoryApi.deleteUserWorkHistory = (userID, userHistoryID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };

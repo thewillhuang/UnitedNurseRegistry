@@ -16,7 +16,7 @@ const Hospital = React.createClass({
     if (sessionStorage.length) {
       window.location.assign('#/hospital/shifts');
     } else {
-      window.location.assign('/');
+      window.location.assign('#home');
     }
   },
 

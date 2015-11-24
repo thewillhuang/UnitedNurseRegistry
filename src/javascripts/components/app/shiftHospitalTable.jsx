@@ -12,6 +12,7 @@ import moment from 'moment';
 import geolib from 'geolib';
 import calcIc from '../../utils/icPay.js';
 import user from '../../utils/grabUser.js';
+const userID = user.scope.userID;
 import calcW2 from '../../utils/w2Pay.js';
 import userApi from '../../webapi/userApi.js';
 
@@ -51,7 +52,7 @@ const ShiftHospitalTable = React.createClass({
     const ctx = this;
     async function retry() {
       try {
-        const userGeoHash = await userApi.getUser(user.scope.userID);
+        const userGeoHash = await userApi.getUser(userID);
         const latlong = ghash.decode(userGeoHash);
         ctx.setState({
           lat: latlong.latitude,
@@ -261,10 +262,10 @@ const ShiftHospitalTable = React.createClass({
     this.refs.reconfirm.dismiss();
     const ctx = this;
     async function checkThenUpdate() {
-      const userAccepted = await shiftApi.getUserAccepted(user.scope.userID);
+      const userAccepted = await shiftApi.getUserAccepted(userID);
       if (!userAccepted.rows.length) {
         console.log('accept job ', ctx.state.focus[0]);
-        await shiftStatusApi.markShiftAsAccepted(ctx.state.focus[0], user.scope.userID);
+        await shiftStatusApi.markShiftAsAccepted(ctx.state.focus[0], userID);
         socket.emit('update', {facility: ctx.state.focus[1]});
       } else {
         ctx.refs.error.show();

@@ -12,7 +12,7 @@ authApi.getFacebook = () => {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
     });
 };
 
@@ -24,7 +24,7 @@ authApi.login = (email, password) => {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
     });
 };
 
@@ -36,7 +36,7 @@ authApi.facilityLogin = (email, password) => {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
     });
 };
 
@@ -48,7 +48,7 @@ authApi.facilitySignup = (email, password) => {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
     });
 };
 
@@ -60,7 +60,7 @@ authApi.signup = (email, password) => {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
     });
 };
 

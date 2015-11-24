@@ -59,12 +59,12 @@ const HomeToolBar = React.createClass({
             <IconMenu iconButtonElement={
                 <IconButton iconClassName='fa fa-bars' tooltip='Menu'/>
               }>
-              <MenuItem onClick={()=> {window.location.assign('/'); }} primaryText='Home' />
+              <MenuItem onClick={()=> {window.location.assign('#home'); }} primaryText='Home' />
               <MenuDivider/>
-              <MenuItem onClick={()=> {window.location.assign('/#/hospitallogin'); }} primaryText='Hospital Login'/ >
-              <MenuItem onClick={()=> {window.location.assign('/#/hospitalsignup'); }} primaryText='Hospital Sign up'/ >
-              <MenuItem onClick={()=> {window.location.assign('/#/signup'); }} primaryText='User Sign up' />
-              <MenuItem onClick={()=> {window.location.assign('/#/login'); }} primaryText='User Login' />
+              <MenuItem onClick={()=> {window.location.assign('#hospitallogin'); }} primaryText='Hospital Login'/ >
+              <MenuItem onClick={()=> {window.location.assign('#hospitalsignup'); }} primaryText='Hospital Sign up'/ >
+              <MenuItem onClick={()=> {window.location.assign('#signup'); }} primaryText='User Sign up' />
+              <MenuItem onClick={()=> {window.location.assign('#login'); }} primaryText='User Login' />
             </IconMenu>
           } title='United Nurse Registry'/>
         </MediaQuery>

@@ -2,6 +2,7 @@ import React from 'react';
 import {IconMenu, IconButton} from 'material-ui';
 const MenuItem = require('material-ui/lib/menus/menu-item');
 import user from '../../utils/grabUser.js';
+const facilityID = user.scope.facilityID;
 import facilityApi from '../../webapi/facilityApi.js';
 
 const AppBar = React.createClass({
@@ -14,7 +15,7 @@ const AppBar = React.createClass({
 
   componentDidMount() {
     const ctx = this;
-    facilityApi.getFacilityInfo(user.scope.facilityID)
+    facilityApi.getFacilityInfo(facilityID)
     .then(data=> {
       ctx.setState({userName: data.rows[0].facilityName});
     });
@@ -47,7 +48,7 @@ const AppBar = React.createClass({
                 tooltip='menu'/>
             }>
             <MenuItem
-              onClick={()=> {window.location.assign('/'); }}
+              onClick={()=> {window.location.assign('#home'); }}
               primaryText='Logout'/>
           </IconMenu>
         </div>

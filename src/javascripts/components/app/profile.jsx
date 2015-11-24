@@ -27,37 +27,37 @@ const Profile = React.createClass({
             <div className='cardBody'>
               <FlatButton
                 linkButton
-                href='/#/app/profile/profile'
+                href='#app/profile/profile'
                 label='Profile'
                 secondary />
               <br/>
               <FlatButton
                 linkButton
-                href='/#/app/profile/workHistory'
+                href='#app/profile/workHistory'
                 label='Work History'
                 secondary />
               <br/>
               <FlatButton
                 linkButton
-                href='/#/app/profile/license'
+                href='#app/profile/license'
                 label='License and Certifications'
                 secondary />
               <br/>
               <FlatButton
                 linkButton
-                href='/#/app/profile/specialty'
+                href='#app/profile/specialty'
                 label='Specialty'
                 secondary />
               <br/>
               <FlatButton
                 linkButton
-                href='/#/app/profile/schedule'
+                href='#app/profile/schedule'
                 label='Work Schedule'
                 secondary />
               <br/>
               <FlatButton
                 linkButton
-                href='/#/app/profile/security'
+                href='#app/profile/security'
                 label='Security'
                 secondary />
               <br/>

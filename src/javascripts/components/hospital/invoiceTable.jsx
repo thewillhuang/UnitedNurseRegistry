@@ -4,6 +4,7 @@ import io from 'socket.io-client';
 import userSpecialtyApi from '../../webapi/userSpecialtyApi.js';
 import shiftStatusApi from '../../webapi/shiftStatusApi.js';
 import user from '../../utils/grabUser.js';
+const facilityID = user.scope.facilityID;
 import moment from 'moment';
 const socket = io.connect();
 
@@ -26,7 +27,7 @@ const ShiftHospitalTable = React.createClass({
     async function getTableRows() {
       // console.log('this', ctx);
       try {
-        await shiftStatusApi.getCompletedShift(user.scope.facilityID)
+        await shiftStatusApi.getCompletedShift(facilityID)
         .then(res=> {
           return res.rows;
         }).then(rows => {
@@ -90,7 +91,7 @@ const ShiftHospitalTable = React.createClass({
 
     socket.on('updated', function(data) {
       console.log('server received a new shift');
-      if (data.facility === user.scope.facilityID) {
+      if (data.facility === facilityID) {
         getSpecialtyID();
       }
     });

@@ -14,7 +14,7 @@ userSpecialtyApi.createUserSpecialty = (userID, specialty) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -27,7 +27,7 @@ userSpecialtyApi.getAllSpecialtyID = () => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -40,7 +40,7 @@ userSpecialtyApi.createSpecialty = (specialty) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -53,7 +53,7 @@ userSpecialtyApi.updateUserSpecialty = (userID, oldSpecialtyID, newSpecialtyID) 
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -66,7 +66,7 @@ userSpecialtyApi.getUserSpecialty = (userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -79,7 +79,7 @@ userSpecialtyApi.deleteUserSpecialty = (userID, specialtyID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };

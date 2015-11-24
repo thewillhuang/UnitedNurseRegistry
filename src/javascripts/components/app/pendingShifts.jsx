@@ -12,6 +12,7 @@ import moment from 'moment';
 import geolib from 'geolib';
 import calcIc from '../../utils/icPay.js';
 import user from '../../utils/grabUser.js';
+const userID = user.scope.userID;
 import calcW2 from '../../utils/w2Pay.js';
 
 const SortTypes = {
@@ -54,7 +55,7 @@ const ShiftHospitalTable = React.createClass({
         });
 
         console.log('getUserAccepted called');
-        const data = await shiftApi.getUserAccepted(user.scope.userID);
+        const data = await shiftApi.getUserAccepted(userID);
 
         console.log(data);
 
@@ -209,11 +210,11 @@ const ShiftHospitalTable = React.createClass({
     this.refs.reconfirm.dismiss();
     const ctx = this;
     async function checkThenUpdate() {
-      const userAccepted = await shiftApi.getUserAccepted(user.scope.userID);
+      const userAccepted = await shiftApi.getUserAccepted(userID);
       console.log(userAccepted);
       if (!userAccepted.rows.length) {
         console.log('accept job ', ctx.state.focus[0]);
-        await shiftStatusApi.markShiftAsAccepted(ctx.state.focus[0], user.scope.userID);
+        await shiftStatusApi.markShiftAsAccepted(ctx.state.focus[0], userID);
         socket.emit('update', {facility: ctx.state.focus[1]});
       } else {
         ctx.refs.error.show();

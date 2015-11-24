@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 import userSpecialtyApi from '../../webapi/userSpecialtyApi.js';
 import shiftStatusApi from '../../webapi/shiftStatusApi.js';
 import user from '../../utils/grabUser.js';
+const facilityID = user.scope.facilityID;
 const socket = io.connect();
 import checkoutApi from '../../webapi/checkout.js';
 
@@ -28,7 +29,7 @@ const ShiftHospitalTable = React.createClass({
     async function getTableRows() {
       // console.log('this', ctx);
       try {
-        await shiftStatusApi.getPendingApprovalShift(user.scope.facilityID)
+        await shiftStatusApi.getPendingApprovalShift(facilityID)
         .then(res=> {
           return res.rows;
         }).then(rows => {
@@ -88,8 +89,8 @@ const ShiftHospitalTable = React.createClass({
     // console.log('about to run socket.on');
     socket.on('updated', function(data) {
       // console.log('hospital received a new shift :D ');
-      console.log(data.facility, user.scope.facilityID);
-      if (data.facility === user.scope.facilityID) {
+      console.log(data.facility, facilityID);
+      if (data.facility === facilityID) {
         // console.log('called getSpecialtyID()');
         getSpecialtyID();
       }
@@ -139,7 +140,7 @@ const ShiftHospitalTable = React.createClass({
   setAsPending() {
     const ctx = this;
     async function set() {
-      const setState = await shiftStatusApi.markShiftAsPending(ctx.state.focus[0], ctx.state.focus[8], user.scope.facilityID);
+      const setState = await shiftStatusApi.markShiftAsPending(ctx.state.focus[0], ctx.state.focus[8], facilityID);
       if (setState.rows.affectedRows !== 0) {
         console.log('emit update shift');
         socket.emit('update', {facility: user.scope.facilityID});

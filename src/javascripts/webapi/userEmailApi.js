@@ -14,7 +14,7 @@ userEmailApi.createUserEmail = (userID, emailAddress, emailType) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -28,7 +28,7 @@ userEmailApi.updateUserEmail = (userID, emailID, emailAddress, emailType) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -41,7 +41,7 @@ userEmailApi.getUserEmail = (userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -54,7 +54,7 @@ userEmailApi.deleteUserAddress = (userID, emailID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };

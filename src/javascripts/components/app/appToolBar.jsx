@@ -38,7 +38,7 @@ const AppBar = React.createClass({
                 tooltip='menu'/>
             }>
             <MenuItem
-              onClick={()=> {window.location.assign('/'); }}
+              onClick={()=> {window.location.assign('#home'); }}
               primaryText='Logout'/>
           </IconMenu>
         </div>

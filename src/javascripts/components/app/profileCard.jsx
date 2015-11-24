@@ -4,6 +4,7 @@ import geoHashApi from '../../webapi/geoHashApi.js';
 import geohash from 'ngeohash';
 import userAddressApi from '../../webapi/userAddressApi.js';
 import user from '../../utils/grabUser.js';
+const userID = user.scope.userID;
 import userApi from '../../webapi/userApi.js';
 import userPhoneApi from '../../webapi/userPhoneApi.js';
 // const ThemeManager = new mui.Styles.ThemeManager();
@@ -34,9 +35,9 @@ const ProfileCard = React.createClass({
     async function getGeoHash() {
       const latlng = await geoHashApi.addressLatLng(`${address} ${city} ${state} ${zip}`);
       const geoHash = geohash.encode(latlng.lat, latlng.lng);
-      await userAddressApi.createUserAddress(user.scope.userID, address, null, city, state, zip, geoHash);
-      await userApi.updateUser(user.scope.userID, firstName, lastName, middleName, null, null, geoHash, dob);
-      await userPhoneApi.createUserPhone(user.scope.userID, phoneNumber, null, null);
+      await userAddressApi.createUserAddress(userID, address, null, city, state, zip, geoHash);
+      await userApi.updateUser(userID, firstName, lastName, middleName, null, null, geoHash, dob);
+      await userPhoneApi.createUserPhone(userID, phoneNumber, null, null);
     }
     getGeoHash();
   },

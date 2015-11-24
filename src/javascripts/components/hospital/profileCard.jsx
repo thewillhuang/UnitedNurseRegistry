@@ -1,5 +1,7 @@
 import React from 'react';
 import {TextField, RaisedButton, Snackbar} from 'material-ui';
+import user from '../../utils/grabUser.js';
+const facilityID = user.scope.facilityID;
 const input = {
   cursor: 'pointer',
   position: 'absolute',
@@ -10,8 +12,6 @@ const input = {
   width: '100%',
   opacity: 0,
 };
-
-import user from '../../utils/grabUser.js';
 import facilityApi from '../../webapi/facilityApi.js';
 import facilityPhoneApi from '../../webapi/facilityPhoneApi.js';
 import geoHashApi from '../../webapi/geoHashApi.js';
@@ -20,7 +20,7 @@ import facilityAddressApi from '../../webapi/facilityAddressApi.js';
 
 const ProfileCard = React.createClass({
   componentDidMount() {
-    facilityApi.getFacilityInfo(user.scope.facilityID)
+    facilityApi.getFacilityInfo(facilityID)
     .then(data=> {
       console.log(data);
     });

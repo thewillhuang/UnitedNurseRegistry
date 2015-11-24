@@ -152,7 +152,7 @@ const AppLeftNavBar = React.createClass({
       <div className='appNavBar'>
         <ul className='appNavMenu'>
           <li
-            onClick={()=> {window.location.assign('/#/app/shifts'); }}
+            onClick={()=> {window.location.assign('#app/shifts'); }}
             className={'appNavItems ' + this.state.shift} >
             <div className={'appNameItemWrap ' + this.state.shift}>
               <i className={'icon-briefcase fa-2x ' + this.state.shift}/>
@@ -162,7 +162,7 @@ const AppLeftNavBar = React.createClass({
             </div>
           </li>
           <li
-            onClick={()=> {window.location.assign('/#/app/pending'); }}
+            onClick={()=> {window.location.assign('#app/pending'); }}
             className={'appNavItems ' + this.state.pending} >
             <div className={'appNameItemWrap ' + this.state.pending}>
               <i className={'icon-clock fa-2x ' + this.state.pending}/>
@@ -172,7 +172,7 @@ const AppLeftNavBar = React.createClass({
             </div>
           </li>
           <li
-            onClick={()=> {window.location.assign('/#/app/approved'); }}
+            onClick={()=> {window.location.assign('#app/approved'); }}
             className={'appNavItems ' + this.state.approved} >
             <div className={'appNameItemWrap ' + this.state.approved}>
               <i className={'icon-check fa-2x ' + this.state.approved}/>
@@ -182,7 +182,7 @@ const AppLeftNavBar = React.createClass({
             </div>
           </li>
           <li
-            onClick={()=> {window.location.assign('/#/app/profile'); }}
+            onClick={()=> {window.location.assign('#app/profile'); }}
             className={'appNavItems ' + this.state.profile}>
             <div className={'appNameItemWrap ' + this.state.profile}>
               <i className={'icon-user fa-2x ' + this.state.profile}/>
@@ -192,7 +192,7 @@ const AppLeftNavBar = React.createClass({
             </div>
           </li>
           <li
-            onClick={()=> {window.location.assign('/#/app/balance'); }}
+            onClick={()=> {window.location.assign('#app/balance'); }}
             className={'appNavItems ' + this.state.balance}>
             <div className={'appNameItemWrap ' + this.state.balance}>
               <i className={'icon-graph fa-2x ' + this.state.balance}/>
@@ -202,7 +202,7 @@ const AppLeftNavBar = React.createClass({
             </div>
           </li>
           <li
-            onClick={()=> {window.location.assign('/#/app/reviews'); }}
+            onClick={()=> {window.location.assign('#app/reviews'); }}
             className={'appNavItems ' + this.state.reviews}>
             <div className={'appNameItemWrap ' + this.state.reviews}>
               <i className={'icon-star fa-2x ' + this.state.reviews}/>
@@ -212,7 +212,7 @@ const AppLeftNavBar = React.createClass({
             </div>
           </li>
           <li
-            onClick={()=> {window.location.assign('/#/app/referrals'); }}
+            onClick={()=> {window.location.assign('#app/referrals'); }}
             className={'appNavItems ' + this.state.referrals}>
             <div className={'appNameItemWrap ' + this.state.referrals}>
               <i className={'icon-heart fa-2x ' + this.state.referrals}/>

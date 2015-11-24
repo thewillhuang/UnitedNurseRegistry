@@ -16,7 +16,7 @@ userAddressApi.createUserAddress = (userID, address, address2, city, state, zip,
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -31,7 +31,7 @@ userAddressApi.updateUserAddress = (userID, addressID, address, address2, city, 
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -44,7 +44,7 @@ userAddressApi.getUserAddress = (userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };
@@ -57,7 +57,7 @@ userAddressApi.deleteUserAddress = (userID, addressID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('/');
+      window.location.assign('#home');
       return err;
     });
 };

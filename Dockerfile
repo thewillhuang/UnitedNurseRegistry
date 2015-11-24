@@ -19,7 +19,8 @@ RUN apt-get update && apt-get install -y \
 #enable sourcing in docker
 RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 
-#install node and set node env variables for less typing
+# node specific
+# install node and set node env variables for less typing
 ENV NVM_DIR /usr/local/nvm
 
 # install node
@@ -40,7 +41,7 @@ ENV PATH      $NVM_DIR/versions/$NODE_BRANCH/bin:$PATH
 # gulp, grunt-cli, bower typical front-end stuff
 RUN npm install -g pm2 gulp bower mocha
 
-#set WORKDIR, PORT and set Port
+# set WORKDIR, PORT and set Port
 WORKDIR /app
 ENV PORT 8080
 EXPOSE $PORT
@@ -60,4 +61,5 @@ RUN npm install \
     && npm run test \
     && npm run production;
 
+# run the server when docker image is ran.
 CMD ["node", "server"]

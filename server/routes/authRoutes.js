@@ -129,13 +129,6 @@ module.exports = function authRoutes(app) {
     }).call(this, next);
   });
 
-  // .get('/logout', function*() {
-  //   this.remove('Authorization');
-  //   this.passport.user = null;
-  //   this.redirect('/');
-  //   this.body = {message: 'successfully logged out'};
-  // });
-
   app.use(auth.routes())
     .use(auth.allowedMethods());
 };

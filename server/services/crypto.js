@@ -1,12 +1,13 @@
 'use strict';
 
+const config = require('../config');
 // Nodejs encryption with CTR
 const aes = module.exports = {};
 const crypto = require('crypto');
-const algorithm = 'AES-256-CBC';
+const algorithm = config.encryption.alg;
 // for aes 256, length of key need to be exactically 32 bytes
 // generate a cryptographically strong 32 byte data
-const key = crypto.randomBytes(32);
+const key = config.encryption.key;
 // console.log(key);
 // console.log(key.toString('hex'));
 

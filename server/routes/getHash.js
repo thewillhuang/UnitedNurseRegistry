@@ -1,5 +1,5 @@
 'use strict';
-
+const config = require('../config');
 const Router = require('koa-router');
 const geohash = new Router({
   prefix: '/api/geohash',
@@ -7,8 +7,8 @@ const geohash = new Router({
 const query = require('../services/query');
 const Promise = require('bluebird');
 const request = Promise.promisifyAll(require('superagent'));
-const API_KEY = '&key=' + 'AIzaSyCYjPRBL33MXDv_Z230il4oibGj607wdTI';
-const googleUrl = 'https://maps.googleapis.com/maps/api/geocode/json?address=';
+const API_KEY = config.googlePlacesApi.API_KEY;
+const googleUrl = config.googlePlacesApi.googleUrl;
 
 module.exports = function authRoutes(app) {
   geohash

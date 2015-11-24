@@ -1,12 +1,10 @@
 'use strict';
+const config = require('../config');
 const tokenize = module.exports = {};
 const jwt = require('jsonwebtoken');
 const crypto = require('./crypto');
-const cert = require('crypto').randomBytes(32);
-const options = {
-  algorithm: 'HS256',
-  issuer: 'unr api',
-};
+const cert = config.jwt.cert;
+const options = config.jwt.options;
 
 // takes a json, encrypt and sign it
 tokenize.encryptSign = function(payload) {

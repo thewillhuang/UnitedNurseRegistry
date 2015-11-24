@@ -10,7 +10,7 @@ module.exports = function reactRender(app) {
   iso
   // get iso
   .get('/', function* render() {
-    console.log('server rendering \'/\'');
+    // console.log('server rendering \'/\'');
     global.navigator = {
       userAgent: this.request.headers['user-agent'],
     };

@@ -19,6 +19,11 @@ const staticCache = require('koa-static-cache');
 const serve = require('koa-static');
 const send = require('koa-send');
 
+if (process.env.NODE_ENV === 'development') {
+  // logging if under development
+  app.use(logger());
+}
+
 // cacheing
 app.use(conditional());
 app.use(etag());
@@ -35,13 +40,9 @@ app.use(compress());
 // server side react components rendering
 require('./server/isomorphic')(app);
 
-// static file server
+// static file services
 if (process.env.NODE_ENV === 'development') {
   console.log('server running in development mode');
-  // logging
-  app.use(logger());
-
-  // serve fresh files
   app.use(serve(buildPath));
 } else {
   console.log('server running in production mode');
@@ -49,7 +50,7 @@ if (process.env.NODE_ENV === 'development') {
     scriptSrc: ['\'self\'', 'https://checkout.stripe.com', '\'unsafe-eval\''],
   }));
 
-  // serve cached files for faster speed
+  // serve gzipped cached files for faster speed
   app.use(staticCache(buildPath, {
     buffer: true,
     usePrecompiledGzip: true,

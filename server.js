@@ -30,11 +30,11 @@ app.use(conditional());
 // add etags to static files that exits
 app.use(etag());
 
-// security headers
-app.use(helmet());
-
 // compression
 app.use(compress());
+
+// security headers
+app.use(helmet());
 
 // server side react components rendering
 require('./server/serverRender')(app);

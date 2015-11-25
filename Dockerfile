@@ -37,9 +37,9 @@ RUN source $NVM_DIR/nvm.sh \
 ENV NODE_PATH $NVM_DIR/versions/$NODE_BRANCH/lib/node_modules
 ENV PATH      $NVM_DIR/versions/$NODE_BRANCH/bin:$PATH
 
-# forever for running node apps as daemons and automatically restarting on crashes
-# gulp, grunt-cli, bower typical front-end stuff
-RUN npm install -g pm2 gulp bower mocha
+# # forever for running node apps as daemons and automatically restarting on crashes
+# # gulp, grunt-cli, bower typical front-end stuff
+# RUN npm install -g pm2 gulp bower mocha
 
 # set WORKDIR, PORT and set Port
 WORKDIR /app

@@ -33,7 +33,8 @@ module.exports = function reactRender(app) {
             <div id='root'>
               <RoutingContext {...renderProps} />
             </div>
-            <script src='./javascripts/index.js' charSet='utf-8' async />
+            <script src='/javascripts/index.js' charSet='utf-8' async />
+            <script src='https://checkout.stripe.com/checkout.js' async />
           </body>
           </html>
         );

@@ -46,11 +46,9 @@ WORKDIR /app
 ENV PORT 8080
 EXPOSE $PORT
 
-# cache setup files and run faster.
-#alternatively, you may clone the repo, install it, and upon running the image, git pull updates and install
 RUN git clone https://7a7f0d9da87f1f218c309dcb903378776923d801:x-oauth-basic@github.com/thewillhuang/UnitedNurseRegistry.git /app
 
-# make user and set /src as project folder with only user privelages. *running as root will make bower and npm go nuts*
+# make user and set /app as project folder with only user privelages. *running as root will make bower and npm go nuts*
 RUN /usr/sbin/useradd --create-home --home-dir /usr/local/nonroot --shell /bin/bash nonroot
 RUN chown -R nonroot /app
 USER nonroot

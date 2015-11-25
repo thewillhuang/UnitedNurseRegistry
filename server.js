@@ -45,10 +45,10 @@ if (env === 'development') {
   app.use(serve(buildPath));
 } else {
   console.log('server running in production mode');
+  // extra security for production
   app.use(helmet.contentSecurityPolicy({
     scriptSrc: ['\'self\'', 'https://checkout.stripe.com', '\'unsafe-eval\''],
   }));
-
   // serve gzipped cached files for faster speed
   app.use(staticCache(buildPath, {
     buffer: true,
@@ -57,20 +57,6 @@ if (env === 'development') {
     dynamic: true,
   }));
 }
-
-app.use(function* apiCheck(next) {
-  if (this.path.indexOf('socket.io') !== -1) {
-    yield next;
-  }
-  if (this.path.indexOf('api') !== -1) {
-    yield next;
-  } else {
-    yield send(this, buildPath + '/index.html');
-  }
-});
-
-// set unsigned cookies as we are using a signed and encrypted jwt
-// app.use(session({ signed: false }, app));
 
 app.use(bodyParser());
 

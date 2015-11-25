@@ -6,8 +6,8 @@ import { match, RoutingContext } from 'react-router';
 import routes from '../src/javascripts/routes';
 import React from 'react';
 import etag from 'etag';
-let html;
 module.exports = function reactRender(app) {
+  let html;
   serverRender
   // get iso
   .get('/', function* render() {

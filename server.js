@@ -17,6 +17,9 @@ const buildPath = path.join(__dirname, build);
 const app = module.exports = koa();
 const env = process.env.NODE_ENV;
 
+// trust proxy headers
+app.proxy = true;
+
 if (env === 'development') {
   // logging if under development
   app.use(logger());
@@ -25,9 +28,6 @@ if (env === 'development') {
 // cacheing
 app.use(conditional());
 app.use(etag());
-
-// trust proxy headers
-app.proxy = true;
 
 // security headers
 app.use(helmet());

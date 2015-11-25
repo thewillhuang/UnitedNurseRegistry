@@ -5,6 +5,7 @@ const serverRender = new Router();
 import { match, RoutingContext } from 'react-router';
 import routes from '../src/javascripts/routes';
 import React from 'react';
+import etag from 'etag';
 let html;
 module.exports = function reactRender(app) {
   serverRender
@@ -38,6 +39,7 @@ module.exports = function reactRender(app) {
           </body>
           </html>
         );
+        this.set('ETag', etag(html));
         this.body = html;
       } else {
         this.status = 404;

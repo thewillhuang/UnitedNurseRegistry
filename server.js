@@ -21,12 +21,13 @@ const env = process.env.NODE_ENV;
 app.proxy = true;
 
 if (env === 'development') {
-  // logging if under development
   app.use(logger());
 }
 
 // cacheing
 app.use(conditional());
+
+// add etags to static files that exits
 app.use(etag());
 
 // security headers

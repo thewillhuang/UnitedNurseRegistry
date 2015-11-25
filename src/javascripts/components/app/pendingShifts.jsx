@@ -54,7 +54,7 @@ const ShiftHospitalTable = React.createClass({
           lng: latlong.longitude,
         });
 
-        console.log('getUserAccepted called');
+        console.log('getUserAccepted called', userID);
         const data = await shiftApi.getUserAccepted(userID);
 
         console.log(data);

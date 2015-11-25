@@ -30,7 +30,7 @@ app.use(conditional());
 // add etags to static files that exits
 app.use(etag());
 
-// compression
+// compress everything before exiting
 app.use(compress());
 
 // security headers

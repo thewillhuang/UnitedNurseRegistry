@@ -58,6 +58,7 @@ if (env === 'development') {
   }));
 }
 
+// parse body to json
 app.use(bodyParser());
 
 // beta signup

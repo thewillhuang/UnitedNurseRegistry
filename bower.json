@@ -1,11 +1,11 @@
 {
-  "name": "Platform",
+  "name": "UNR",
   "version": "0.0.1",
-  "homepage": "https://github.com/lifespeed/lifespeed.web",
+  "homepage": "https://github.com/thewillhuang/unitednurseregistry.git",
   "authors": [
     "william <will.h86@gmail.com>"
   ],
-  "description": "Lifespeed platform",
+  "description": "UNR",
   "license": "MIT",
   "private": true,
   "ignore": [

@@ -5,7 +5,7 @@ const serverRender = new Router();
 import { match, RoutingContext } from 'react-router';
 import routes from '../src/javascripts/routes';
 import React from 'react';
-
+let html;
 module.exports = function reactRender(app) {
   serverRender
   // get iso
@@ -20,7 +20,7 @@ module.exports = function reactRender(app) {
       } else if (redirectLocation) {
         this.redirect(redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
-        this.body = renderToStaticMarkup(
+        html = html || renderToStaticMarkup(
           <html lang='en'>
           <head>
             <meta charSet='UTF-8' />
@@ -38,6 +38,7 @@ module.exports = function reactRender(app) {
           </body>
           </html>
         );
+        this.body = html;
       } else {
         this.status = 404;
         this.body = 'Not Found';

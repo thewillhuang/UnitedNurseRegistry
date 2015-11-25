@@ -14,7 +14,7 @@ userLicenseApi.createUserLicense = (userID, licenseNumber, licenseState, license
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -28,7 +28,7 @@ userLicenseApi.updateUserLicense = (userID, userLicenseID, licenseNumber, licens
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -41,7 +41,7 @@ userLicenseApi.getUserLicense = (userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -54,7 +54,7 @@ userLicenseApi.deleteUserAddress = (userID, userLicenseID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };

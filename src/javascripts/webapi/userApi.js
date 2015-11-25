@@ -14,7 +14,7 @@ userApi.getUser = (userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -29,7 +29,7 @@ userApi.updateUser = (userID, firstName, lastName, middleName, profilePic, email
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -42,7 +42,7 @@ userApi.deleteUser = (userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };

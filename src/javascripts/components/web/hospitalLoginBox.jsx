@@ -67,7 +67,7 @@ const LoginBox = React.createClass({
   },
 
   componentDidMount() {
-    // this.refs.email.focus();
+    this.refs.email.focus();
   },
 
   render() {

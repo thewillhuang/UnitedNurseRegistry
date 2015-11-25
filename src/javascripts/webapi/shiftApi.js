@@ -14,7 +14,7 @@ shiftApi.createShift = (facilityID, specialtyID, shiftStartHour, shiftDuration, 
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -27,7 +27,7 @@ shiftApi.getShift = (shiftID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -40,7 +40,7 @@ shiftApi.getAllHospitalShift = (facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -53,7 +53,7 @@ shiftApi.getUserShift = (userID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -67,7 +67,7 @@ shiftApi.getShiftWithGeoHash = (geohash, hashSet, precision) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -81,7 +81,7 @@ shiftApi.updateShift = (facilityID, shiftID, specialtyID, shiftStartHour, shiftD
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -94,7 +94,7 @@ shiftApi.deleteShift = (facilityID, shiftID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -108,7 +108,7 @@ shiftApi.getUserAccepted = (userID) => {
       return res.body;
     }).catch(err=>{
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -121,7 +121,7 @@ shiftApi.getUserPending = (userID) => {
       return res.body;
     }).catch(err=>{
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -134,7 +134,7 @@ shiftApi.getUserCompleted = (userID) => {
       return res.body;
     }).catch(err=>{
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -148,7 +148,7 @@ shiftApi.getActiveHospitalShift = (facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -162,7 +162,7 @@ shiftApi.getOpenHospitalShift = (facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -176,7 +176,7 @@ shiftApi.getPendingHospitalShift = (facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -189,7 +189,7 @@ shiftApi.getAcceptedHospitalShift = (facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -202,7 +202,7 @@ shiftApi.getCompletedHospitalShift = (facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };

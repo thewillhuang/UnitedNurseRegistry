@@ -17,7 +17,7 @@ checkoutApi.saveCharges = (token, shiftID, price) => {
     }).catch((e)=> {
       console.log(e);
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
     });
 };
 
@@ -30,7 +30,7 @@ checkoutApi.charge = (shiftID) => {
     }).catch(e=> {
       console.log(e);
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
     });
 };
 

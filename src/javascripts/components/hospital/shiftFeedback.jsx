@@ -27,6 +27,7 @@ const ShiftHospitalTable = React.createClass({
     async function getTableRows() {
       // console.log('this', ctx);
       try {
+        console.log(user);
         console.log(facilityID);
         await shiftApi.getOpenHospitalShift(facilityID)
         .then(res=> {

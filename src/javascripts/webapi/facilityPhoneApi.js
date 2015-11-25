@@ -14,7 +14,7 @@ facilityPhoneApi.getFacilityPhone = (facilityID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -31,7 +31,7 @@ facilityPhoneApi.addFacilityPhone = (facilityID, phoneNumber, ext, phoneType) =>
       return err;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -45,7 +45,7 @@ facilityPhoneApi.updateFacilityPhone = (facilityID, phoneID, phoneNumber, ext, p
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };
@@ -59,7 +59,7 @@ facilityPhoneApi.deleteFacilityPhone = (facilityID, phoneID) => {
       return res.body;
     }).catch(function(err) {
       window.sessionStorage.clear();
-      window.location.assign('#home');
+      window.location.assign('/');
       return err;
     });
 };

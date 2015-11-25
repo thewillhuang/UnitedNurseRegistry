@@ -10,7 +10,6 @@ import passport from 'koa-passport';
 import compress from 'koa-compress';
 import staticCache from 'koa-static-cache';
 import serve from 'koa-static';
-import send from 'koa-send';
 const port = process.env.PORT || 3000;
 const build = '/public';
 const path = require('path');
@@ -60,11 +59,10 @@ if (env === 'development') {
 
 app.use(bodyParser());
 
-// public routes
 // beta signup
 require('./server/routes/beta')(app);
 
-// load strategies and initialize passport
+// load passport strategies and initialize passport
 require('./server/services/auth');
 app.use(passport.initialize());
 
@@ -103,7 +101,6 @@ app.use(function* ensureAuthenticated(next) {
     yield next;
   } else {
     this.status = 401;
-    // this.body = {message: 'Invalid Authorization'};
   }
 });
 

@@ -9,7 +9,6 @@
     "chart.js": "^1.0.2",
     "etag": "^1.7.0",
     "fixed-data-table": "^0.5.0",
-    "flux": "^2.1.1",
     "geolib": "^2.0.18",
     "history": "^1.11.1",
     "jsonwebtoken": "^5.0.5",

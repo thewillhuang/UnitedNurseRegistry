@@ -53,8 +53,8 @@ const ShiftHospitalTable = React.createClass({
           lat: latlong.latitude,
           lng: latlong.longitude,
         });
-        console.log(user);
-        console.log('getUserAccepted called', userID);
+        // console.log(user);
+        // console.log('getUserAccepted called', userID);
         const data = await shiftApi.getUserAccepted(userID);
 
         console.log(data);
@@ -211,7 +211,7 @@ const ShiftHospitalTable = React.createClass({
     const ctx = this;
     async function checkThenUpdate() {
       const userAccepted = await shiftApi.getUserAccepted(userID);
-      console.log(userAccepted);
+      // console.log(userAccepted);
       if (!userAccepted.rows.length) {
         console.log('accept job ', ctx.state.focus[0]);
         await shiftStatusApi.markShiftAsAccepted(ctx.state.focus[0], userID);

@@ -26,11 +26,16 @@ gulper
 ```
 
 ### ec2 pull new image, stop current container, clean and start a new one
-#### install docker
+#### setup server
 ```sh
-sudo yum update -y && sudo yum install -y docker && sudo service docker start && sudo usermod -a -G docker ec2-user
+sudo yum update -y && sudo yum install -y docker && sudo service docker start && sudo usermod -a -G docker ec2-user && exit
 ```
-#### load server
+#### first load
+```sh
+docker login
+docker run --restart=always -d -p 80:8080 thewillhuang/unitednurseregistry && exit
+```
+#### subsequent loads
 ```sh
 sudo yum update -y && docker pull thewillhuang/unitednurseregistry && docker rm --force `docker ps -qa` && docker rmi $(docker images -q --filter "dangling=true") && docker run --restart=always -d -p 80:8080 thewillhuang/unitednurseregistry && exit
 ```

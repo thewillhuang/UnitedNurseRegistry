@@ -27,5 +27,5 @@ gulper
 
 ### ec2 pull new image, stop current container, clean and start a new one
 ```sh
-docker pull thewillhuang/unitednurseregistry && docker rm --force `docker ps -qa` && docker rmi $(docker images -q --filter "dangling=true") && docker run --restart=always -d -p 80:8080 thewillhuang/unitednurseregistry
+sudo yum update -y && docker pull thewillhuang/unitednurseregistry && docker rm --force `docker ps -qa` && docker rmi $(docker images -q --filter "dangling=true") && docker run --restart=always -d -p 80:8080 thewillhuang/unitednurseregistry && exit
 ```

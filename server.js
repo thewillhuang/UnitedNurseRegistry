@@ -1,5 +1,3 @@
-'use strict';
-
 import koa from 'koa';
 import logger from 'koa-logger';
 import etag from 'koa-etag';

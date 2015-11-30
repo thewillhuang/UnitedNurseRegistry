@@ -12,6 +12,7 @@ MAINTAINER thewillhuang
 # install dependencies
 RUN apt-get update && apt-get install -y \
       build-essential \
+      python \
       curl \
       git;
 

@@ -108,7 +108,7 @@
     "postinstall": "npm run version && npm run bower",
     "version": "node -v",
     "bower": "bower install --config.interactive=false",
-    "start": "node index",
+    "start": "npm run production && node index",
     "test": "mocha --compilers js:babel-core/register 'test/**/*.@(js|jsx)'",
     "test:watch": "npm run test -- --watch"
   },

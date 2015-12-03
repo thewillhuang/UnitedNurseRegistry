@@ -6,6 +6,7 @@ import { match, RoutingContext } from 'react-router';
 import routes from '../src/javascripts/routes';
 import React from 'react';
 import etag from 'etag';
+
 const html = {};
 const serveCachedHtml = (ctx, agent, renderProps) => {
   if (html[agent]) {

@@ -7,6 +7,33 @@ import routes from '../src/javascripts/routes';
 import React from 'react';
 import etag from 'etag';
 const html = {};
+const serveMemoizedHtml = (agent, renderProps) => {
+  if (html[agent]) {
+    this.set('ETag', etag(html[agent]));
+    return html[agent];
+  }
+  global.navigator = { agent };
+  html[agent] = renderToStaticMarkup(
+    <html lang='en'>
+    <head>
+      <meta charSet='UTF-8' />
+      <meta name='viewport' content='width=device-width, initial-scale=1' />
+      <title>United Nurse Registery</title>
+      <link rel='stylesheet' href='/stylesheets/home.css' />
+      <link rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico' />
+    </head>
+    <body>
+      <div id='root'>
+        <RoutingContext {...renderProps} />
+      </div>
+      <script src='/javascripts/index.js' async />
+      <script src='https://checkout.stripe.com/checkout.js' async />
+    </body>
+    </html>
+  );
+  this.set('ETag', etag(html[agent]));
+  return html[agent];
+};
 
 module.exports = function reactRender(app) {
   serverRender
@@ -20,35 +47,6 @@ module.exports = function reactRender(app) {
         this.redirect(redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
         const userAgent = this.request.headers['user-agent'];
-        const serveMemoizedHtml = (agent) => {
-          if (html[agent]) {
-            // console.log('userAgent found', agent);
-            this.set('ETag', etag(html[userAgent]));
-            return html[userAgent];
-          }
-          // console.log('new userAgent', agent);
-          global.navigator = { userAgent };
-          html[userAgent] = renderToStaticMarkup(
-            <html lang='en'>
-            <head>
-              <meta charSet='UTF-8' />
-              <meta name='viewport' content='width=device-width, initial-scale=1' />
-              <title>United Nurse Registery</title>
-              <link rel='stylesheet' href='/stylesheets/home.css' />
-              <link rel='shortcut icon' type='image/x-icon' href='/images/favicon.ico' />
-            </head>
-            <body>
-              <div id='root'>
-                <RoutingContext {...renderProps} />
-              </div>
-              <script src='/javascripts/index.js' async />
-              <script src='https://checkout.stripe.com/checkout.js' async />
-            </body>
-            </html>
-          );
-          this.set('ETag', etag(html[userAgent]));
-          return html[agent];
-        };
         this.body = serveMemoizedHtml(userAgent);
       } else {
         this.status = 404;

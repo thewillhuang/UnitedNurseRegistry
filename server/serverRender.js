@@ -22,11 +22,11 @@ module.exports = function reactRender(app) {
         const userAgent = this.request.headers['user-agent'];
         const serveMemoizedHtml = (agent) => {
           if (html[agent]) {
-            console.log('userAgent found', agent);
+            // console.log('userAgent found', agent);
             this.set('ETag', etag(html[userAgent]));
             return html[userAgent];
           }
-          console.log('new userAgent', agent);
+          // console.log('new userAgent', agent);
           global.navigator = { userAgent };
           html[userAgent] = renderToStaticMarkup(
             <html lang='en'>

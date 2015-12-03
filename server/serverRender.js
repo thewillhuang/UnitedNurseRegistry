@@ -20,11 +20,10 @@ module.exports = function reactRender(app) {
         this.redirect(redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
         const userAgent = this.request.headers['user-agent'];
-        const ctx = this;
         const serveMemoizedHtml = (agent) => {
           if (html[agent]) {
             console.log('userAgent found', agent);
-            ctx.set('ETag', etag(html[userAgent]));
+            this.set('ETag', etag(html[userAgent]));
             return html[userAgent];
           }
           console.log('new userAgent', agent);
@@ -47,7 +46,7 @@ module.exports = function reactRender(app) {
             </body>
             </html>
           );
-          ctx.set('ETag', etag(html[userAgent]));
+          this.set('ETag', etag(html[userAgent]));
           return html[agent];
         };
         this.body = serveMemoizedHtml(userAgent);

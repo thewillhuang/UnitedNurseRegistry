@@ -37,9 +37,7 @@ const serveCachedHtml = (ctx, agent, renderProps) => {
 };
 
 module.exports = function reactRender(app) {
-  serverRender
-  // get iso
-  .get('/', function* render() {
+  serverRender.get('/', function* render() {
     match({ routes, location: this.path }, (error, redirectLocation, renderProps) => {
       if (error) {
         this.status = 500;

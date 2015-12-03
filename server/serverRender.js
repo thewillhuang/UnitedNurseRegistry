@@ -7,12 +7,12 @@ import routes from '../src/javascripts/routes';
 import React from 'react';
 import etag from 'etag';
 const html = {};
-const serveMemoizedHtml = (agent, renderProps) => {
+const serveCachedHtml = (ctx, agent, renderProps) => {
   if (html[agent]) {
-    this.set('ETag', etag(html[agent]));
+    ctx.set('ETag', etag(html[agent]));
     return html[agent];
   }
-  global.navigator = { agent };
+  global.navigator = { userAgent: agent };
   html[agent] = renderToStaticMarkup(
     <html lang='en'>
     <head>
@@ -31,7 +31,7 @@ const serveMemoizedHtml = (agent, renderProps) => {
     </body>
     </html>
   );
-  this.set('ETag', etag(html[agent]));
+  ctx.set('ETag', etag(html[agent]));
   return html[agent];
 };
 
@@ -47,7 +47,7 @@ module.exports = function reactRender(app) {
         this.redirect(redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
         const userAgent = this.request.headers['user-agent'];
-        this.body = serveMemoizedHtml(userAgent);
+        this.body = serveCachedHtml(this, userAgent, renderProps);
       } else {
         this.status = 404;
         this.body = 'Not Found';

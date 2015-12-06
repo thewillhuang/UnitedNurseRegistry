@@ -4,7 +4,7 @@ var config           = require('../../config/iconFont');
 var generateIconSass = require('./generateIconSass');
 var handleErrors     = require('../../lib/handleErrors');
 
-gulp.task('iconFont', function() {
+gulp.task('iconFont', function () {
   return gulp.src(config.src)
     .pipe(iconfont(config.options))
     .on('glyphs', generateIconSass)

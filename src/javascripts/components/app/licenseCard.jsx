@@ -14,7 +14,7 @@ const input = {
 };
 
 const LicenseCard = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <div className='card'>
         <div className='cardTitle'>

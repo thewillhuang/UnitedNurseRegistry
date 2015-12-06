@@ -8,7 +8,7 @@ const authApi = {};
 authApi.getFacebook = () => {
   return request
     .get(prefix + '/facebook')
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();
@@ -20,7 +20,7 @@ authApi.login = (email, password) => {
   return request
     .post(prefix + '/login')
     .send({email, password})
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();
@@ -32,7 +32,7 @@ authApi.facilityLogin = (email, password) => {
   return request
     .post(prefix + '/facility/login')
     .send({email, password})
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();
@@ -44,7 +44,7 @@ authApi.facilitySignup = (email, password) => {
   return request
     .post(prefix + '/facility/signup')
     .send({email, password})
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();
@@ -56,7 +56,7 @@ authApi.signup = (email, password) => {
   return request
     .post(prefix + '/siguup')
     .send({email, password})
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();

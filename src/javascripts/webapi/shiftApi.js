@@ -12,7 +12,7 @@ shiftApi.createShift = (facilityID, specialtyID, shiftStartHour, shiftDuration, 
     .send({facilityID, specialtyID, shiftStartHour, shiftDuration, payPerHour, date, shiftDressCode})
     .endAsync().then((res) => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -23,9 +23,9 @@ shiftApi.getShift = (shiftID) => {
   return request
     .get(`${prefix}/${shiftID}`)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -36,9 +36,9 @@ shiftApi.getAllHospitalShift = (facilityID) => {
   return request
     .get(`${prefix}/facility/${facilityID}`)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -49,9 +49,9 @@ shiftApi.getUserShift = (userID) => {
   return request
     .get(`${prefix}/user/${userID}`)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -63,9 +63,9 @@ shiftApi.getShiftWithGeoHash = (geohash, hashSet, precision) => {
     .post(`${prefix}/geohash/${geohash}/precision/${precision}`)
     .set(token)
     .send({hashSet})
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -79,7 +79,7 @@ shiftApi.updateShift = (facilityID, shiftID, specialtyID, shiftStartHour, shiftD
     .send({specialtyID, shiftStartHour, shiftDuration, payPerHour, date, shiftDressCode})
     .endAsync().then((res) => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -92,7 +92,7 @@ shiftApi.deleteShift = (facilityID, shiftID) => {
     .set(token)
     .endAsync().then((res) => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -144,9 +144,9 @@ shiftApi.getActiveHospitalShift = (facilityID) => {
   return request
     .get(prefix + '/active/' + facilityID)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -158,9 +158,9 @@ shiftApi.getOpenHospitalShift = (facilityID) => {
   return request
     .get(`${prefix}/open/${facilityID}`)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -172,9 +172,9 @@ shiftApi.getPendingHospitalShift = (facilityID) => {
   return request
     .get(`${prefix}/pending/${facilityID}`)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -185,9 +185,9 @@ shiftApi.getAcceptedHospitalShift = (facilityID) => {
   return request
     .get(`${prefix}/accepted/${facilityID}`)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -198,9 +198,9 @@ shiftApi.getCompletedHospitalShift = (facilityID) => {
   return request
     .get(`${prefix}/completed/${facilityID}`)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;

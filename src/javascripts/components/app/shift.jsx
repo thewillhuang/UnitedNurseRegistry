@@ -2,7 +2,7 @@ import React from 'react';
 import ShiftHospital from './shiftHospitalTable.jsx';
 
 const Shift = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <div className='appShift'>
         <div className='appShiftResult'>

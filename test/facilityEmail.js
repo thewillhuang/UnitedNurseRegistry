@@ -8,19 +8,19 @@ const request = supertest(app.listen());
 const uuid = require('node-uuid');
 
 
-describe('facility email api', function() {
+describe('facility email api', function () {
   const email2 = uuid.v4();
   const password2 = uuid.v4();
   let jwt;
   let r1;
-  it('should signup with /signup', function(done) {
+  it('should signup with /signup', function (done) {
     request.post('/api/auth/facility/signup')
       .send({
         password: password2,
         email: email2,
       })
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         r1 = res.body.message.scope.facilityID;
         jwt = { Authorization: res.headers.authorization };
         // console.log(jwt);
@@ -34,22 +34,22 @@ describe('facility email api', function() {
       });
   });
 
-  it('should reject invalid get requests', function(done) {
+  it('should reject invalid get requests', function (done) {
     request.get('/api/facilityemail/facility/')
       .expect(404)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         expect(res.body).to.be.an('object');
         expect(err).to.be.a('null');
         done();
       });
   });
 
-  it('should respond with empty array with unknown facility', function(done) {
+  it('should respond with empty array with unknown facility', function (done) {
     request.get('/api/facilityemail/facility/abc')
       .expect(200)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.an('array');
         expect(res.body.rows).to.be.empty;
@@ -59,7 +59,7 @@ describe('facility email api', function() {
   });
 
   // let r2;
-  // it('should create a facility', function(done) {
+  // it('should create a facility', function (done) {
   //   request.post('/api/facility')
   //     .send({
   //       facilityName: uuid.v4(),
@@ -69,7 +69,7 @@ describe('facility email api', function() {
   //     })
   //     .set(jwt)
   //     .expect(200)
-  //     .end(function(err, res) {
+  //     .end(function (err, res) {
   //       r2 = res.body.rows;
   //       expect(r2).to.be.an('object');
   //       expect(r2.insertId).to.be.an('number');
@@ -78,14 +78,14 @@ describe('facility email api', function() {
   //     });
   // });
 
-  it('insert email 1 given a facility id', function(done) {
+  it('insert email 1 given a facility id', function (done) {
     request.post('/api/facilityemail/facility/' + r1)
       .send({
         emailAddress: uuid.v4(),
       })
       .set(jwt)
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         expect(res).to.be.an('object');
         expect(res.body.rows.insertId).to.be.an('number');
         expect(err).to.be.a('null');
@@ -93,14 +93,14 @@ describe('facility email api', function() {
       });
   });
 
-  it('insert email 2 given a facility id', function(done) {
+  it('insert email 2 given a facility id', function (done) {
     request.post('/api/facilityemail/facility/' + r1)
       .send({
         emailAddress: uuid.v4(),
       })
       .set(jwt)
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         expect(res).to.be.an('object');
         expect(res.body.rows.insertId).to.be.an('number');
         expect(err).to.be.a('null');
@@ -109,11 +109,11 @@ describe('facility email api', function() {
   });
 
   let a1;
-  it('should have 2 email addresses given a facility id', function(done) {
+  it('should have 2 email addresses given a facility id', function (done) {
     request.get('/api/facilityemail/facility/' + r1)
       .expect(200)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -126,11 +126,11 @@ describe('facility email api', function() {
       });
   });
 
-  it('should 200 for same request', function(done) {
+  it('should 200 for same request', function (done) {
     request.get('/api/facilityemail/facility/' + r1)
       .expect(200)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -143,11 +143,11 @@ describe('facility email api', function() {
       });
   });
 
-  it('should delete email 1 given an email ID', function(done) {
+  it('should delete email 1 given an email ID', function (done) {
     request.delete('/api/facilityemail/facility/' + r1 + '/email/' + a1)
       .expect(200)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
         done();
@@ -155,11 +155,11 @@ describe('facility email api', function() {
   });
 
   let a2;
-  it('should have 1 email instead of 2', function(done) {
+  it('should have 1 email instead of 2', function (done) {
     request.get('/api/facilityemail/facility/' + r1)
       .expect(200)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -173,14 +173,14 @@ describe('facility email api', function() {
   });
 
   const newemail = uuid.v4();
-  it('should update an email given an email id', function(done) {
+  it('should update an email given an email id', function (done) {
     request.put('/api/facilityemail/facility/' + r1 + '/email/' + a2)
       .send({
         emailAddress: newemail,
       })
       .set(jwt)
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -190,11 +190,11 @@ describe('facility email api', function() {
       });
   });
 
-  it('should have an updated email', function(done) {
+  it('should have an updated email', function (done) {
     request.get('/api/facilityemail/facility/' + r1)
       .expect(200)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
@@ -206,22 +206,22 @@ describe('facility email api', function() {
       });
   });
 
-  it('should delete email 2 given an email ID', function(done) {
+  it('should delete email 2 given an email ID', function (done) {
     request.delete('/api/facilityemail/facility/' + r1 + '/email/' + a2)
       .expect(200)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
         done();
       });
   });
 
-  it('should have 0 address instead of 1', function(done) {
+  it('should have 0 address instead of 1', function (done) {
     request.get('/api/facilityemail/facility/' + r1)
       .expect(200)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
@@ -233,22 +233,22 @@ describe('facility email api', function() {
       });
   });
 
-  it('should delete a facility given a correct facility id', function(done) {
+  it('should delete a facility given a correct facility id', function (done) {
     request.delete('/api/facility/' + r1)
       .expect(200)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
         done();
       });
   });
 
-  it('the deleted facility should not exist', function(done) {
+  it('the deleted facility should not exist', function (done) {
     request.get('/api/facility/' + r1)
       .expect(200)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');

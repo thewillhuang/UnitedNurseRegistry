@@ -5,13 +5,13 @@ var rename       = require('gulp-rename');
 var handleErrors = require('../../lib/handleErrors');
 var gutil        = require("gulp-util")
 
-module.exports = function(glyphs, options) {
+module.exports = function (glyphs, options) {
   gutil.log(gutil.colors.blue('Generating ' + config.sassDest + '/' + config.sassOutputName))
   render.nunjucks.configure(config.nunjucks, {watch: false });
 
   return gulp.src(config.template)
     .pipe(render({
-      icons: glyphs.map(function(glyph) {
+      icons: glyphs.map(function (glyph) {
         gutil.log(gutil.colors.green('+ adding ' + glyph.name + ' glyph'))
         return {
           name: glyph.name,

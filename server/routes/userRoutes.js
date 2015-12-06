@@ -1,7 +1,7 @@
 'use strict';
 
 // all user related routes
-module.exports = function(app) {
+module.exports = function (app) {
   require('./user')(app);
   require('./userAddress')(app);
   require('./userEmail')(app);

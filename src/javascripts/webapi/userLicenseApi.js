@@ -12,7 +12,7 @@ userLicenseApi.createUserLicense = (userID, licenseNumber, licenseState, license
     .send({licenseNumber, licenseState, licensePhotoUrl, expiration})
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -26,7 +26,7 @@ userLicenseApi.updateUserLicense = (userID, userLicenseID, licenseNumber, licens
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -39,7 +39,7 @@ userLicenseApi.getUserLicense = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -52,7 +52,7 @@ userLicenseApi.deleteUserAddress = (userID, userLicenseID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;

@@ -10,9 +10,9 @@ geoHashApi.addressLatLng = (address) => {
     .post(prefix + '/')
     .set(token)
     .send({address})
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;

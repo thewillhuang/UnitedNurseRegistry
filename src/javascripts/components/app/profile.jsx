@@ -15,7 +15,7 @@ const Profile = React.createClass({
     children: React.PropTypes.node,
   },
 
-  render: function() {
+  render: function () {
     return (
       <div className='appProfile'>
         <div className='appProfileList'>

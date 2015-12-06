@@ -5,17 +5,17 @@ import {IconMenu, IconButton} from 'material-ui';
 const MenuItem = require('material-ui/lib/menus/menu-item');
 
 const AppBar = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       userName: 'User First Name',
     };
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount: function () {
     window.sessionStorage.clear();
   },
 
-  render: function() {
+  render: function () {
     return (
       <div className='appBar'>
         <div className='appBarUser'>

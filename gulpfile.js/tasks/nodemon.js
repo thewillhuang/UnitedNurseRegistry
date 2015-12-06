@@ -6,7 +6,7 @@ const nodemon = require('gulp-nodemon');
 const config = require('../config/nodemon');
 const BROWSER_SYNC_RELOAD_DELAY = 2000;
 
-gulp.task('nodemon', function(cb) {
+gulp.task('nodemon', function (cb) {
   let called = false;
   return nodemon(config)
     .on('start', function onStart() {
@@ -21,12 +21,12 @@ gulp.task('nodemon', function(cb) {
         cb();
       }
     })
-    .on('crash', function(error) {
+    .on('crash', function (error) {
       console.log('server crashed');
       console.error(error);
       this.emit('end');
     })
-    .on('exit', function() {
+    .on('exit', function () {
       console.log('server stopped');
     })
     .on('restart', function onRestart() {

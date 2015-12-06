@@ -12,7 +12,7 @@ userEmailApi.createUserEmail = (userID, emailAddress, emailType) => {
     .send({emailAddress, emailType})
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -26,7 +26,7 @@ userEmailApi.updateUserEmail = (userID, emailID, emailAddress, emailType) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -39,7 +39,7 @@ userEmailApi.getUserEmail = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -52,7 +52,7 @@ userEmailApi.deleteUserAddress = (userID, emailID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;

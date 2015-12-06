@@ -8,7 +8,7 @@ const options = {
 };
 
 const getCurrentGeoHash = () => {
-  return new Promise(function(fulfill, reject) {
+  return new Promise(function (fulfill, reject) {
     const success = (pos) => {
       const geoHash = geohash.encode(pos.coords.latitude, pos.coords.longitude, 3);
       const geoHashSet = geohash.neighbors(geoHash);

@@ -31,7 +31,7 @@ function returnWidth(offset = -360) {
 }
 
 const ShiftHospitalTable = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       table: [
         ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
@@ -48,7 +48,7 @@ const ShiftHospitalTable = React.createClass({
     return this.state.table[rowIndex];
   },
 
-  searchFailed: function() {
+  searchFailed: function () {
     const ctx = this;
     async function retry() {
       try {
@@ -78,7 +78,7 @@ const ShiftHospitalTable = React.createClass({
     retry();
   },
 
-  setLocation: function() {
+  setLocation: function () {
     const ctx = this;
     async function setHash() {
       try {
@@ -102,7 +102,7 @@ const ShiftHospitalTable = React.createClass({
     setHash();
   },
 
-  constructTable: function() {
+  constructTable: function () {
     const ctx = this;
     async function search() {
       try {
@@ -177,7 +177,7 @@ const ShiftHospitalTable = React.createClass({
     search();
   },
 
-  resize: function() {
+  resize: function () {
     this.setState({
       w: returnWidth(),
       h: returnHeight(),
@@ -188,11 +188,11 @@ const ShiftHospitalTable = React.createClass({
     window.onresize = this.resize;
     this.setLocation();
 
-    // socket.on('connect', function() {
+    // socket.on('connect', function () {
     //   console.log('table connected');
     // });
 
-    socket.on('updated', function(data) {
+    socket.on('updated', function (data) {
       console.log('server received a new shift regarding facility', data.facility);
       // console.log(this);
       if (_.includes(this.state.facilityIDs, data.facility)) {

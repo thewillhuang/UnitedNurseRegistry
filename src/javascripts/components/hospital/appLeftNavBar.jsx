@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AppLeftNavBar = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       userName: 'User',
       shift: '',

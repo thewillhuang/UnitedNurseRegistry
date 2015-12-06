@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AppLeftNavBar = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       userName: 'User',
       shift: '',
@@ -14,16 +14,16 @@ const AppLeftNavBar = React.createClass({
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount: function () {
     window.addEventListener('hashchange', this.hashChange, false);
     this.hashChange();
   },
 
-  componentWillUnmount: function() {
+  componentWillUnmount: function () {
     window.removeEventListener('hashchange', this.hashChange, false);
   },
 
-  hashChange: function() {
+  hashChange: function () {
     const route = window.location.hash;
     if (route.indexOf('#/app/shifts') !== -1) {
       this.setState({
@@ -147,7 +147,7 @@ const AppLeftNavBar = React.createClass({
     }
   },
 
-  render: function() {
+  render: function () {
     return (
       <div className='appNavBar'>
         <link rel='stylesheet' href='/stylesheets/app.css' />

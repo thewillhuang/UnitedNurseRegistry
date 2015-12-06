@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Reviews = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <div className='appShift'>
         <div className='appShiftResult'>

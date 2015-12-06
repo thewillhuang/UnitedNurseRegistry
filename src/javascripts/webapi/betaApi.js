@@ -9,7 +9,7 @@ betaApi.signup = (email, password) => {
   return request
     .post(prefix + '/signup')
     .send({email, password})
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();
@@ -20,7 +20,7 @@ betaApi.signup = (email, password) => {
 betaApi.getAllBeta = () => {
   return request
     .post(prefix + '/signup')
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();

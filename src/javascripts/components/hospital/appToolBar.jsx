@@ -7,7 +7,7 @@ import facilityApi from '../../webapi/facilityApi.js';
 
 const AppBar = React.createClass({
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       userName: 'Hospital Name',
     };

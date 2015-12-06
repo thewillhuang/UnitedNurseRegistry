@@ -41,31 +41,31 @@ passport.use(new LocalStrategy({
   passwordField: 'password',
   session: false,
 },
-  function(email, password, done) {
+  function (email, password, done) {
     const q = {};
     q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'userID', 'User', 'email', email];
-    query(q).bind({}).then(function(result) {
+    query(q).bind({}).then(function (result) {
       // console.log(result);
       if (result.rows.length === 0) { throw new NoAccountError('no such user found'); }
       this.userID = result.rows[0].userID;
       return validatePw(password, result.rows[0].userPwHash);
-    }).then(function(isMatch) {
+    }).then(function (isMatch) {
       // console.log(this.userID);
       return !isMatch ?
-        this.done = [false, {message: 'incorrect password'}] :
+        this.done = [false, { message: 'incorrect password' }] :
         this.done = [
-          {email: email, scope: {userID: this.userID}},
-          {message: 'Auth Success'},
+          { email: email, scope: { userID: this.userID } },
+          { message: 'Auth Success' },
         ];
-    }).catch(NoAccountError, function() {
-      this.done = [false, {message: 'incorrect email'}];
-    }).catch(function(e) {
+    }).catch(NoAccountError, function () {
+      this.done = [false, { message: 'incorrect email' }];
+    }).catch(function (e) {
       console.log(e);
-      this.done = [false, {message: e}];
-    }).then(function() {
+      this.done = [false, { message: e }];
+    }).then(function () {
       return this.done;
-    }).nodeify(done, {spread: true});
+    }).nodeify(done, { spread: true });
   }
 ));
 
@@ -75,17 +75,17 @@ passport.use('facility-login', new LocalStrategy({
   passwordField: 'password',
   session: false,
 },
-  function(email, password, done) {
+  function (email, password, done) {
     const q = {};
     q.sql = 'SELECT ??, ?? FROM ?? WHERE ?? = ?';
     q.values = ['facilityPwHash', 'facilityID', 'Facility', 'facilityEmail', email];
-    query(q).bind({}).then(function(result) {
+    query(q).bind({}).then(function (result) {
       // console.log(result);
       // console.log('facility result', result);
       if (result.rows.length === 0) { throw new NoAccountError('no such facility found'); }
       this.facilityID = result.rows[0].facilityID;
       return validatePw(password, result.rows[0].facilityPwHash);
-    }).then(function(isMatch) {
+    }).then(function (isMatch) {
       // console.log(this.userID);
       return !isMatch ?
         this.done = [false, {message: 'incorrect password'}] :
@@ -93,12 +93,12 @@ passport.use('facility-login', new LocalStrategy({
           {email: email, scope: {facilityID: this.facilityID}},
           {message: 'Auth Success'},
         ];
-    }).catch(NoAccountError, function() {
+    }).catch(NoAccountError, function () {
       this.done = [false, {message: 'incorrect email'}];
-    }).catch(function(e) {
+    }).catch(function (e) {
       console.log(e);
       this.done = [false, {message: e}];
-    }).then(function() {
+    }).then(function () {
       return this.done;
     }).nodeify(done, {spread: true});
   }
@@ -110,17 +110,17 @@ passport.use('facility-signup', new LocalStrategy({
   passwordField: 'password',
   session: false,
 },
-  function(email, password, done) {
+  function (email, password, done) {
     // console.log(email, password);
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['facilityPwHash', 'Facility', 'facilityemail', email];
-    query(q).bind({}).then(function(result) {
+    query(q).bind({}).then(function (result) {
       // console.log(result);
       // console.log('facility result', result);
       if (result.rows.length !== 0) { throw new EmailTaken('email taken'); }
       return genHash(password);
-    }).then(function(pwhash) {
+    }).then(function (pwhash) {
       const q2 = {};
       const userData = {};
       userData.facilityEmail = email;
@@ -128,19 +128,19 @@ passport.use('facility-signup', new LocalStrategy({
       q2.sql = 'INSERT INTO ?? SET ?';
       q2.values = ['Facility', userData];
       return query(q2);
-    }).then(function(result) {
+    }).then(function (result) {
       // console.log('facility q2', result);
       const insertId = result.rows.insertId;
       this.done = [
         {email: email, scope: {facilityID: insertId}},
         {message: 'Registeration successful'},
       ];
-    }).catch(EmailTaken, function() {
+    }).catch(EmailTaken, function () {
       this.done = [false, {message: 'email taken'}];
-    }).catch(function(e) {
+    }).catch(function (e) {
       console.log(e);
       this.done = [false, {message: e}];
-    }).then(function() {
+    }).then(function () {
       return this.done;
     }).nodeify(done, {spread: true});
   }
@@ -152,15 +152,15 @@ passport.use('local-signup', new LocalStrategy({
   passwordField: 'password',
   session: false,
 },
-  function(email, password, done) {
+  function (email, password, done) {
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userPwHash', 'User', 'email', email];
-    query(q).bind({}).then(function(result) {
+    query(q).bind({}).then(function (result) {
       // console.log(result);
       if (result.rows.length !== 0) { throw new EmailTaken('email taken'); }
       return genHash(password);
-    }).then(function(pwhash) {
+    }).then(function (pwhash) {
       const q2 = {};
       const userData = {};
       userData.email = email;
@@ -168,18 +168,18 @@ passport.use('local-signup', new LocalStrategy({
       q2.sql = 'INSERT INTO ?? SET ?';
       q2.values = ['User', userData];
       return query(q2);
-    }).then(function(result) {
+    }).then(function (result) {
       const insertId = result.rows.insertId;
       this.done = [
         {email: email, scope: {userID: insertId}},
         {message: 'Registeration successful'},
       ];
-    }).catch(EmailTaken, function() {
+    }).catch(EmailTaken, function () {
       this.done = [false, {message: 'email taken'}];
-    }).catch(function(e) {
+    }).catch(function (e) {
       console.log(e);
       this.done = [false, {message: e}];
-    }).then(function() {
+    }).then(function () {
       return this.done;
     }).nodeify(done, {spread: true});
   }
@@ -187,7 +187,7 @@ passport.use('local-signup', new LocalStrategy({
 
 // bearer strategy
 passport.use(new BearerStrategy(
-  function(token, done) {
+  function (token, done) {
     jwt.verifyDecrypt(token, done);
   }
 ));
@@ -197,18 +197,18 @@ passport.use(new StripeStrategy({
   clientSecret: 'sk_test_QhkM0TkqmtZinr5Gy7P4CtIq',
   callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/api/auth/stripe/callback',
 },
-  function(accessToken, refreshToken, stripeProperties, done) {
+  function (accessToken, refreshToken, stripeProperties, done) {
     // console.log(accessToken, refreshToken, stripeProperties, done);
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userID', 'User', 'stripe_user_id', stripeProperties.stripe_user_id];
-    query(q).bind({}).then(function(result) {
+    query(q).bind({}).then(function (result) {
       // console.log(result);
       if (result.rows.length !== 0) {
         this.userID = result.rows[0].userID;
         throw new UserExist('stripe user exists');
       }
-    }).then(function() {
+    }).then(function () {
       const q2 = {};
       const userData = {};
       userData.stripe_publishable_key = stripeProperties.stripe_publishable_key;
@@ -219,22 +219,22 @@ passport.use(new StripeStrategy({
       q2.sql = 'INSERT INTO ?? SET ?';
       q2.values = ['User', userData];
       return query(q2);
-    }).then(function(result) {
+    }).then(function (result) {
       // console.log(result);
       const insertId = result.rows.insertId;
       this.done = [
         {userID: insertId, scope: {userID: insertId}},
         {message: 'Registeration successful'},
       ];
-    }).catch(UserExist, function() {
+    }).catch(UserExist, function () {
       this.done = [
         {userID: this.userID, scope: {userID: this.userID}},
         {message: 'Auth successful'},
       ];
-    }).catch(function(e) {
+    }).catch(function (e) {
       console.log(e);
       this.done = [false, {message: e}];
-    }).then(function() {
+    }).then(function () {
       return this.done;
     }).nodeify(done, {spread: true});
   }
@@ -251,20 +251,20 @@ passport.use(new FacebookStrategy({
   callbackURL: 'http://localhost:' + (process.env.PORT || 3000) + '/api/auth/facebook/callback',
   session: false,
 },
-  function(token, refreshToken, profile, done) {
+  function (token, refreshToken, profile, done) {
     // console.log('token\n', token, 'refreshToken\n', refreshToken, 'profile\n', profile);
     const fbprofile = profile._json;
     const q = {};
     q.sql = 'SELECT ?? FROM ?? WHERE ?? = ?';
     q.values = ['userID', 'User', 'fb_id', fbprofile.id];
-    query(q).bind({}).then(function(result) {
+    query(q).bind({}).then(function (result) {
       // console.log(result);
       if (result.rows.length !== 0) {
         // skip to userExists block in catch
         this.userID = result.rows[0].userID;
         throw new UserExist('fb user exists');
       }
-    }).then(function() {
+    }).then(function () {
       // else create a new user with the given info
       const q2 = {};
       const userData = {};
@@ -277,21 +277,21 @@ passport.use(new FacebookStrategy({
       q2.sql = 'INSERT INTO ?? SET ?';
       q2.values = ['user', userData];
       return query(q2);
-    }).then(function(result) {
+    }).then(function (result) {
       const insertId = result.rows.insertId;
       this.done = [
         {userID: insertId, scope: {userID: insertId}},
         {message: 'Registeration successful'},
       ];
-    }).catch(UserExist, function() {
+    }).catch(UserExist, function () {
       this.done = [
         {userID: this.userID, scope: {userID: this.userID}},
         {message: 'Auth successful'},
       ];
-    }).catch(function(e) {
+    }).catch(function (e) {
       console.log(e);
       this.done = [false, {message: e}];
-    }).then(function() {
+    }).then(function () {
       return this.done;
     }).nodeify(done, {spread: true});
   }

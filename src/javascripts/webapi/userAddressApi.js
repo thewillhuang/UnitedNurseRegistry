@@ -14,7 +14,7 @@ userAddressApi.createUserAddress = (userID, address, address2, city, state, zip,
     .send(payload)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -29,7 +29,7 @@ userAddressApi.updateUserAddress = (userID, addressID, address, address2, city, 
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -42,7 +42,7 @@ userAddressApi.getUserAddress = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -55,7 +55,7 @@ userAddressApi.deleteUserAddress = (userID, addressID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;

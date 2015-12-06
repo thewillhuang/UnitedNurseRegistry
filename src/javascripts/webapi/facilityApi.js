@@ -12,9 +12,9 @@ facilityApi.getFacilityInfo = (facilityID) => {
   return request
     .get(prefix + '/' + facilityID)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -28,9 +28,9 @@ facilityApi.updateFacilityInfo = (facilityID, facilityEmail, facilityName, facil
     .put(`${prefix}/${facilityID}`)
     .set(token)
     .send(payload)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -41,9 +41,9 @@ facilityApi.deleteFacility = (facilityID) => {
   return request
     .delete(prefix + '/' + facilityID)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;

@@ -5,7 +5,7 @@ import validator from 'validator';
 import setToken from '../../utils/setToken.js';
 
 const SignupBox = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       signupButton: 'Sign up',
     };
@@ -26,7 +26,7 @@ const SignupBox = React.createClass({
           email: this.refs.email.getValue(),
           password: this.refs.password.getValue(),
         })
-        .end(function(err, res) {
+        .end(function (err, res) {
           // console.log(err);
           // console.log(res.body);
           // console.log(res.headers);

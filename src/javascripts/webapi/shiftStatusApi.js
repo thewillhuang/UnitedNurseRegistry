@@ -11,7 +11,7 @@ shiftStatusApi.grabShiftStatus = (shiftID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -24,7 +24,7 @@ shiftStatusApi.viewedShift = (shiftID, userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -37,7 +37,7 @@ shiftStatusApi.getViewCount = (shiftID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -50,7 +50,7 @@ shiftStatusApi.markShiftAsComplete = (shiftID, facilityID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -63,7 +63,7 @@ shiftStatusApi.markShiftAsPending = (shiftID, userID, facilityID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -76,7 +76,7 @@ shiftStatusApi.markShiftAsAccepted = (shiftID, userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -102,7 +102,7 @@ shiftStatusApi.markShiftAsOpen = (shiftID, facilityID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -115,7 +115,7 @@ shiftStatusApi.viewOpenShiftsByHospitalID = (facilityID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -128,7 +128,7 @@ shiftStatusApi.viewAllShiftByUserID = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -155,7 +155,7 @@ shiftStatusApi.deleteFacilityReview = (facilityID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -168,7 +168,7 @@ shiftStatusApi.deleteUserReview = (shiftID, userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;

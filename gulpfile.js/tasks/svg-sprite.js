@@ -4,7 +4,7 @@ var gulp        = require('gulp');
 var imagemin    = require('gulp-imagemin');
 var svgstore    = require('gulp-svgstore');
 
-gulp.task('svg-sprite', function() {
+gulp.task('svg-sprite', function () {
   return gulp.src(config.src)
     .pipe(imagemin())
     .pipe(svgstore())

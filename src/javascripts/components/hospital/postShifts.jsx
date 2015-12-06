@@ -9,7 +9,7 @@ const socket = io.connect();
 
 const ShiftHospitalTable = React.createClass({
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       shiftID: null,
     };

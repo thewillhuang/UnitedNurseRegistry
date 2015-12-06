@@ -3,11 +3,11 @@
 // import shiftActions from '../../actions/shiftActionCreators.js';
 //
 // const ShiftFilter = React.createClass({
-//   componentDidMount: function() {
+//   componentDidMount: function () {
 //     shiftActions.loadCurrent();
 //   },
 //
-//   onAddressChange: function(e, selected) {
+//   onAddressChange: function (e, selected) {
 //     if (selected === 'currentLocation') {
 //       shiftActions.loadCurrent();
 //       this.refs.address.setValue('');
@@ -16,7 +16,7 @@
 //     }
 //   },
 //
-//   onPriceChange: function(e, selected) {
+//   onPriceChange: function (e, selected) {
 //     if (selected === 'BestPaying') {
 //       shiftActions.sortByBestPaying();
 //     } else {
@@ -24,15 +24,15 @@
 //     }
 //   },
 //
-//   selectAddress: function() {
+//   selectAddress: function () {
 //     this.refs.searchAreaRadio.setSelectedValue('address');
 //   },
 //
-//   loadAddress: function() {
+//   loadAddress: function () {
 //     shiftActions.loadAddress(this.refs.address.getValue());
 //   },
 //
-//   render: function() {
+//   render: function () {
 //     return (
 //       <div>
 //         <RadioButtonGroup ref='searchAreaRadio' name='searchArea' onChange={this.onAddressChange} defaultSelected='currentLocation'>

@@ -21,7 +21,7 @@ const input = {
 
 const ProfileCard = React.createClass({
 
-  handleSubmit: function() {
+  handleSubmit: function () {
     const address = this.refs.address.getValue() || null;
     const city = this.refs.city.getValue() || '';
     const state = this.refs.state.getValue() || '';
@@ -42,7 +42,7 @@ const ProfileCard = React.createClass({
     getGeoHash();
   },
 
-  render: function() {
+  render: function () {
     return (
       <div className='card'>
         <div className='cardTitle'>

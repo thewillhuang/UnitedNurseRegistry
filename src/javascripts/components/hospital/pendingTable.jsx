@@ -11,7 +11,7 @@ const socket = io.connect();
 import checkoutApi from '../../webapi/checkout.js';
 
 const ShiftHospitalTable = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       table: [
         ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
@@ -82,12 +82,12 @@ const ShiftHospitalTable = React.createClass({
       }
     }
 
-    socket.on('connect', function() {
+    socket.on('connect', function () {
       console.log('table connected');
     });
 
     // console.log('about to run socket.on');
-    socket.on('updated', function(data) {
+    socket.on('updated', function (data) {
       // console.log('hospital received a new shift :D ');
       console.log(data.facility, facilityID);
       if (data.facility === facilityID) {
@@ -122,7 +122,7 @@ const ShiftHospitalTable = React.createClass({
     const handler = window.StripeCheckout.configure({
       key: 'pk_test_pUdeTIh8WRLykG3RSugGr5yg',
       locale: 'auto',
-      token: async function(token) {
+      token: async function (token) {
         // console.log('amount', parseInt(ctx.state.focus[4], 10) * 100);
         console.log('amount', parseInt(ctx.state.focus[4].split(' ')[1], 10));
         await checkoutApi.saveCharges(token, ctx.state.focus[0], parseInt(ctx.state.focus[4].split(' ')[1], 10) * 100);

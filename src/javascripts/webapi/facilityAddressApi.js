@@ -10,7 +10,7 @@ facilityAddressApi.getFacilityAddress = (facilityID) => {
   return request
     .put(prefix + '/facility/' + facilityID)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
     }).catch(()=> {
       window.sessionStorage.clear();
@@ -22,9 +22,9 @@ facilityAddressApi.addFacilityAddress = (facilityID, address, address2, city, st
     .post(prefix + '/facility/' + facilityID)
     .set(token)
     .send(_.omit({address, address2, city, state, zip}, _.isNull))
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       return err;
     }).catch(()=> {
       window.sessionStorage.clear();
@@ -37,9 +37,9 @@ facilityAddressApi.updateFacilityAddress = (facilityID, addressID, address, addr
     .put(`${prefix}/facility/${facilityID}/address/${addressID}`)
     .set(token)
     .send(_.omit({address, address2, city, state, zip}, _.isNull))
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -51,9 +51,9 @@ facilityAddressApi.deleteFacilityAddress = (facilityID, addressID) => {
   return request
     .delete(prefix + '/facilit/' + facilityID + '/address/' + addressID)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;

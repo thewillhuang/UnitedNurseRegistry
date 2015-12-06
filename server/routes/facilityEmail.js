@@ -8,7 +8,7 @@ const query = require('../services/query');
 const getTransaction = require('../services/getTransaction');
 const Promise = require('bluebird');
 
-module.exports = function(app) {
+module.exports = function (app) {
   facilityEmail
 
   // create new user email with user id
@@ -20,10 +20,10 @@ module.exports = function(app) {
       const q = {};
       q.sql = 'INSERT INTO ?? SET ?;';
       q.values = ['Email', requestJson];
-      this.body = yield Promise.using(getTransaction(), function(tx) {
-        return tx.queryAsync(q).then(function(rows) {
+      this.body = yield Promise.using(getTransaction(), function (tx) {
+        return tx.queryAsync(q).then(function (rows) {
           return {rows};
-        }).then(function(result) {
+        }).then(function (result) {
           const email = {};
           email.fk_facilityEmail_facilityID = facilityID;
           email.fk_facilityEmail_emailID = result.rows.insertId;
@@ -31,11 +31,11 @@ module.exports = function(app) {
           q2.sql = 'INSERT INTO ?? SET ?;';
           q2.values = ['FacilityEmail', email];
           return q2;
-        }).then(function(q2) {
-          return tx.queryAsync(q2).then(function(rows) {
+        }).then(function (q2) {
+          return tx.queryAsync(q2).then(function (rows) {
             return {rows};
           });
-        }).catch(function(error) {
+        }).catch(function (error) {
           return error;
         });
       });

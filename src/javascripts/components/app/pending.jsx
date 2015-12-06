@@ -2,7 +2,7 @@ import React from 'react';
 import Pending from './pendingShifts.jsx';
 
 const Shift = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <div className='appShift'>
         <div className='appShiftResult'>

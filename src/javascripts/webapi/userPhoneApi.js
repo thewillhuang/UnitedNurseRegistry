@@ -12,7 +12,7 @@ userPhoneApi.createUserPhone = (userID, phoneNumber, ext, phoneType) => {
     .send({phoneNumber, ext, phoneType})
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -26,7 +26,7 @@ userPhoneApi.updateUserPhone = (userID, phoneID, phoneNumber, ext, phoneType) =>
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -39,7 +39,7 @@ userPhoneApi.getUserPhone = (userID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -52,7 +52,7 @@ userPhoneApi.deleteUserAddress = (userID, phoneID) => {
     .set(token)
     .endAsync().then(res => {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;

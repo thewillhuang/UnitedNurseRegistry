@@ -12,7 +12,7 @@ import ForReferrals from './forReferrals.jsx';
 // // const ThemeManager = new mui.Styles.ThemeManager();
 
 const Home = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <div>
         <div className='alpha'>

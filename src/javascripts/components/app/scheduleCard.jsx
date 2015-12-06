@@ -2,7 +2,7 @@ import React from 'react';
 import {TextField, Checkbox} from 'material-ui';
 
 const ScheduleCard = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <div className='card'>
         <div className='cardTitle'>

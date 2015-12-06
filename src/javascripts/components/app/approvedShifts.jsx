@@ -22,7 +22,7 @@ const SortTypes = {
 };
 
 const ShiftHospitalTable = React.createClass({
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       table: [
         ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
@@ -33,11 +33,11 @@ const ShiftHospitalTable = React.createClass({
     };
   },
 
-  rowGetter: function(rowIndex) {
+  rowGetter: function (rowIndex) {
     return this.state.table[rowIndex];
   },
 
-  componentDidMount: function() {
+  componentDidMount: function () {
     // grab geohash then execute the search
     const ctx = this;
     async function search() {
@@ -133,11 +133,11 @@ const ShiftHospitalTable = React.createClass({
       }
     }
 
-    socket.on('connect', function() {
+    socket.on('connect', function () {
       console.log('table connected');
     });
 
-    socket.on('updated', function(data) {
+    socket.on('updated', function (data) {
       console.log('server received a new shift regarding facility', data.facility);
       if (_.includes(ctx.state.facilityIDs, data.facility)) {
         // ctx.refs.submitted.show();
@@ -148,7 +148,7 @@ const ShiftHospitalTable = React.createClass({
     search();
   },
 
-  _sortRowsBy: function(cellDataKey) {
+  _sortRowsBy: function (cellDataKey) {
     let sortDir = this.state.sortDir;
     const sortBy = cellDataKey;
     if (sortBy === this.state.sortBy) {
@@ -181,13 +181,13 @@ const ShiftHospitalTable = React.createClass({
     });
   },
 
-  _renderHeader: function(label, cellDataKey) {
+  _renderHeader: function (label, cellDataKey) {
     return (
       <a onClick={this._sortRowsBy.bind(null, cellDataKey)} style={{cursor: 'pointer', color: '#00526c'}}>{label}</a>
     );
   },
 
-  onRowClick: function(a, b, c) {
+  onRowClick: function (a, b, c) {
     console.log(a, b, c);
     this.setState({
       focus: c,
@@ -195,16 +195,16 @@ const ShiftHospitalTable = React.createClass({
     this.refs.confirm.show();
   },
 
-  dialogDismiss: function() {
+  dialogDismiss: function () {
     this.refs.confirm.dismiss();
   },
 
-  dialogOkay: function() {
+  dialogOkay: function () {
     this.refs.confirm.dismiss();
     this.refs.reconfirm.show();
   },
 
-  dialogAccept: function() {
+  dialogAccept: function () {
     console.log('dialogAccept called');
     this.refs.reconfirm.dismiss();
     const ctx = this;
@@ -223,7 +223,7 @@ const ShiftHospitalTable = React.createClass({
     checkThenUpdate();
   },
 
-  render: function() {
+  render: function () {
     // console.log(this.state);
     let sortDirArrow = '';
 

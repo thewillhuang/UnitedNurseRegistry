@@ -4,11 +4,11 @@ var logger       = require('../lib/compileLogger')
 var webpack      = require('webpack')
 var browserSync  = require('browser-sync')
 
-gulp.task('webpack:development', function(callback) {
+gulp.task('webpack:development', function (callback) {
   var built = false
 
   if(global.watch) {
-    webpack(config).watch(200, function(err, stats) {
+    webpack(config).watch(200, function (err, stats) {
       logger(err, stats)
       // let nodemon restart and reload instead
       browserSync.reload();
@@ -16,7 +16,7 @@ gulp.task('webpack:development', function(callback) {
       if(!built) { built = true; callback() }
     })
   } else {
-    webpack(config, function(err, stats) {
+    webpack(config, function (err, stats) {
       logger(err, stats)
       callback()
     })

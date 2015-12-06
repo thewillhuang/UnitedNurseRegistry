@@ -13,7 +13,7 @@ const Checkout = React.createClass({
     const handler = window.StripeCheckout.configure({
       key: 'pk_test_pUdeTIh8WRLykG3RSugGr5yg',
       locale: 'auto',
-      token: async function(token) {
+      token: async function (token) {
         console.log(token);
         await checkoutApi.saveCharges();
       },

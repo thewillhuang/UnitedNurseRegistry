@@ -69,7 +69,7 @@ const options = {
 };
 
 const Balance = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <div className='appShift'>
         <div className='appShiftResult'>

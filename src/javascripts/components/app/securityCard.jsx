@@ -2,7 +2,7 @@ import React from 'react';
 import {TextField} from 'material-ui';
 
 const SecurityCard = React.createClass({
-  render: function() {
+  render: function () {
     return (
       <div className='card'>
         <div className='cardTitle'>

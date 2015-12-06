@@ -7,18 +7,18 @@ const app = require('../server');
 const request = supertest(app.listen());
 const uuid = require('node-uuid');
 
-describe('geohash api', function() {
+describe('geohash api', function () {
   const email2 = uuid.v4();
   const password2 = uuid.v4();
   let jwt;
-  it('should signup with /signup', function(done) {
+  it('should signup with /signup', function (done) {
     request.post('/api/auth/signup')
       .send({
         password: password2,
         email: email2,
       })
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         jwt = { Authorization: res.headers.authorization };
         // console.log(jwt);
         // console.log(res.headers);
@@ -31,14 +31,14 @@ describe('geohash api', function() {
         done();
       });
   });
-  it('should make a call to google api to get long and lat', function(done) {
+  it('should make a call to google api to get long and lat', function (done) {
     request.post('/api/geohash')
       .send({
         address: '2950 arboridge ct fullerton ca 92835',
       })
       .set(jwt)
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
         // expect(res.body.rows.affectedRows).to.equal(1);
@@ -46,14 +46,14 @@ describe('geohash api', function() {
         done();
       });
   });
-  it('should make a call to google api to get long and lat', function(done) {
+  it('should make a call to google api to get long and lat', function (done) {
     request.post('/api/geohash')
       .send({
         address: '2950 arboridge ct fullerton ca 92835',
       })
       .set(jwt)
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
         // expect(res.body.rows.affectedRows).to.equal(1);

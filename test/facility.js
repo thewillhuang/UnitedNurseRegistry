@@ -8,19 +8,19 @@ const request = supertest(app.listen());
 const uuid = require('node-uuid');
 
 // store primary key
-describe('facility api', function() {
+describe('facility api', function () {
   const email2 = uuid.v4();
   const password2 = uuid.v4();
   let jwt;
   let r1;
-  it('should signup with /signup', function(done) {
+  it('should signup with /signup', function (done) {
     request.post('/api/auth/facility/signup')
       .send({
         password: password2,
         email: email2,
       })
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         jwt = { Authorization: res.headers.authorization };
         // console.log(jwt);
         // console.log(res.headers);
@@ -34,11 +34,11 @@ describe('facility api', function() {
       });
   });
 
-  it('should reject invalid get requests', function(done) {
+  it('should reject invalid get requests', function (done) {
     request.get('/api/facility/')
       .expect(404)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(err).to.be.a('null');
@@ -46,11 +46,11 @@ describe('facility api', function() {
       });
   });
 
-  it('should respond with empty array with unknown facility', function(done) {
+  it('should respond with empty array with unknown facility', function (done) {
     request.get('/api/facility/abc')
       .set(jwt)
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         // console.log(res.headers);
         // console.log(res.body);
         expect(res.body).to.be.an('object');
@@ -64,7 +64,7 @@ describe('facility api', function() {
 
   // const facilityName = uuid.v4();
   // const facilityPwHash = uuid.v4();
-  // it('should insert a new facility given a correct object', function(done) {
+  // it('should insert a new facility given a correct object', function (done) {
   //   request.put('/api/facility/')
   //     .send({
   //       facilityName: facilityName,
@@ -74,7 +74,7 @@ describe('facility api', function() {
   //     })
   //     .set(jwt)
   //     .expect(200)
-  //     .end(function(err, res) {
+  //     .end(function (err, res) {
   //       r1 = res.body.rows;
   //       expect(r1).to.be.an('object');
   //       expect(r1.insertId).to.be.an('number');
@@ -83,7 +83,7 @@ describe('facility api', function() {
   //     });
   // });
 
-  // it('should validate facility password and facilityname', function(done) {
+  // it('should validate facility password and facilityname', function (done) {
   //   request.post('/api/facility/validate/')
   //     .send({
   //       facilityID: r1.insertId,
@@ -91,7 +91,7 @@ describe('facility api', function() {
   //     })
   //     .set(jwt)
   //     .expect(200)
-  //     .end(function(err, res) {
+  //     .end(function (err, res) {
   //       console.log(res.headers);
   //       console.log(res.body);
   //       expect(res.body).to.be.an('object');
@@ -101,11 +101,11 @@ describe('facility api', function() {
   //     });
   // });
 
-  it('should grab a facility given a correct facility id', function(done) {
+  it('should grab a facility given a correct facility id', function (done) {
     request.get('/api/facility/' + r1)
       .set(jwt)
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
         expect(res.body.rows).to.be.an('array');
@@ -115,11 +115,11 @@ describe('facility api', function() {
       });
   });
 
-  it('should return a 200 for the same data', function(done) {
+  it('should return a 200 for the same data', function (done) {
     request.get('/api/facility/' + r1)
       .set(jwt)
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         // console.log(res.body);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -131,7 +131,7 @@ describe('facility api', function() {
   });
 
   const updateinfo = uuid.v4();
-  it('should update facility info given a correct object and facility id', function(done) {
+  it('should update facility info given a correct object and facility id', function (done) {
     request.put('/api/facility/' + r1)
       .send({
         facilityName: uuid.v4(),
@@ -141,7 +141,7 @@ describe('facility api', function() {
       })
       .set(jwt)
       .expect(200)
-      .end(function(err, res) {
+      .end(function (err, res) {
         // console.log(res.headers);
         // console.log(res.body);
         expect(res.body.rows.affectedRows).to.equal(1);
@@ -150,11 +150,11 @@ describe('facility api', function() {
       });
   });
 
-  it('should get an updated facility info', function(done) {
+  it('should get an updated facility info', function (done) {
     request.get('/api/facility/' + r1)
       .expect(200)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         expect(res.body.rows[0].facilityEMR).to.equal(updateinfo);
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.not.empty;
@@ -165,22 +165,22 @@ describe('facility api', function() {
       });
   });
 
-  it('should delete a facility given a correct facility id', function(done) {
+  it('should delete a facility given a correct facility id', function (done) {
     request.delete('/api/facility/' + r1)
       .expect(200)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         expect(res.body.rows.affectedRows).to.equal(1);
         expect(err).to.be.a('null');
         done();
       });
   });
 
-  it('the deleted facility should not exist', function(done) {
+  it('the deleted facility should not exist', function (done) {
     request.get('/api/facility/' + r1)
       .expect(200)
       .set(jwt)
-      .end(function(err, res) {
+      .end(function (err, res) {
         expect(res.body).to.be.an('object');
         expect(res.body.rows).to.be.empty;
         expect(res.body.rows).to.be.an('array');

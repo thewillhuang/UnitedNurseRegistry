@@ -9,9 +9,9 @@ facilityEmailApi.getFacilityEmail = (facilityID) => {
   return request
     .put(prefix + '/facility/' + facilityID)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -23,9 +23,9 @@ facilityEmailApi.addFacilityEmail = (facilityID, emailAddress, emailType) => {
     .post(prefix + '/facility/' + facilityID)
     .set(token)
     .send({emailAddress, emailType})
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -37,9 +37,9 @@ facilityEmailApi.updateFacilityEmail = (facilityID, emailID, emailAddress, email
     .put(prefix + '/facilit/' + facilityID + '/email/' + emailID)
     .set(token)
     .send({emailAddress, emailType})
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;
@@ -51,9 +51,9 @@ facilityEmailApi.deleteFacilityEmail = (facilityID, emailID) => {
   return request
     .delete(prefix + '/facilit/' + facilityID + '/email/' + emailID)
     .set(token)
-    .endAsync().then(function(res) {
+    .endAsync().then(function (res) {
       return res.body;
-    }).catch(function(err) {
+    }).catch(function (err) {
       window.sessionStorage.clear();
       window.location.assign('/');
       return err;

@@ -11,7 +11,7 @@ const key = config.encryption.key;
 // console.log(key);
 // console.log(key.toString('hex'));
 
-aes.encrypt = function(string) {
+aes.encrypt = function (string) {
   // console.time('encrypt');
   // iv must be a buffer, the length must be 16.
   // every single iv for every single message that is encrypted will be different
@@ -24,7 +24,7 @@ aes.encrypt = function(string) {
   return {payload: crypted, iv: iv.toString('base64')};
 };
 
-aes.decrypt = function(string, iv) {
+aes.decrypt = function (string, iv) {
   // console.time('decrypt');
   // convert iv from hex coding to a buffer, default is utf-8, will get error wrong length
   const ivbuf = new Buffer(iv, 'base64');

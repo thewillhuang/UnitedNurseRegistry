@@ -7,7 +7,7 @@ const facility = new Router({
 const query = require('../services/query');
 const genHash = require('../services/genHash');
 
-module.exports = function(app) {
+module.exports = function (app) {
   facility
 
   // // create facility

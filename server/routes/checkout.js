@@ -26,13 +26,13 @@ module.exports = function authRoutes(app) {
       yield stripe.customers.create({
         source: token.id,
         description: email,
-      }).then(function(customer) {
+      }).then(function (customer) {
         return stripe.charges.create({
           amount: cents, // amount in cents, again
           currency: 'usd',
           customer: customer.id,
         });
-      }).then(function(charge) {
+      }).then(function (charge) {
         // '# YOUR CODE: Save the customer ID and other info in a database for later!'
         // console.log(charge);
         const payload = {};
@@ -42,7 +42,7 @@ module.exports = function authRoutes(app) {
         q.sql = 'UPDATE ?? SET ? WHERE ?? = ?';
         q.values = ['Shift', payload, 'shiftID', shiftID];
         return q;
-      }).then(function(q) {
+      }).then(function (q) {
         return query(q);
       }).then(() => {
         ctx.body = {message: 'charge stored'};

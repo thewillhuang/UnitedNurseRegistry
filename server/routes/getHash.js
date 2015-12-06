@@ -27,10 +27,10 @@ module.exports = function authRoutes(app) {
         // console.log('google', dbquery.rows);
         const url = googleUrl + address + API_KEY;
         const response = yield request.get(url)
-        .endAsync().then(function(res) {
+        .endAsync().then(function (res) {
           // console.log(res.body.results[0].geometry.location);
           return res.body.results[0].geometry.location;
-        }).catch(function(err) {
+        }).catch(function (err) {
           return err;
         });
 

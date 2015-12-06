@@ -115,8 +115,8 @@ require('./server/routes/checkout')(app);
 // socket io for real time updates
 const server = require('http').createServer(app.callback());
 const io = require('socket.io')(server);
-io.on('connection', function(socket) {
-  socket.on('update', function(data) {
+io.on('connection', function (socket) {
+  socket.on('update', function (data) {
     io.sockets.emit('updated', data);
   });
 });

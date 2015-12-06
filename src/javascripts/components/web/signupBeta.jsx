@@ -5,7 +5,7 @@ import validator from 'validator';
 
 const BetaSignup = React.createClass({
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       signupButton: 'Sign up',
     };
@@ -23,7 +23,7 @@ const BetaSignup = React.createClass({
         .send({
           email: this.refs.email.getValue(),
         })
-        .end(function(err, res) {
+        .end(function (err, res) {
           if (res.status === 200) {
             ctx.setState({
               signupButton: 'Success',

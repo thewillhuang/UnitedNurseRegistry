@@ -10,7 +10,7 @@ const socket = io.connect();
 
 const ShiftHospitalTable = React.createClass({
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       table: [
         ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
@@ -85,11 +85,11 @@ const ShiftHospitalTable = React.createClass({
       }
     }
 
-    socket.on('connect', function() {
+    socket.on('connect', function () {
       console.log('table connected');
     });
 
-    socket.on('updated', function(data) {
+    socket.on('updated', function (data) {
       console.log('server received a new shift');
       if (data.facility === facilityID) {
         getSpecialtyID();

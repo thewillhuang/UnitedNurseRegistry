@@ -7,14 +7,19 @@ import routes from '../src/javascripts/routes';
 import React from 'react';
 import etag from 'etag';
 
-const html = {};
-const serveCachedHtml = (ctx, agent, renderProps) => {
-  if (html[agent]) {
-    ctx.set('ETag', etag(html[agent]));
-    return html[agent];
+const cache = {};
+const serveCachedHtml = (ctx, path, agent, renderProps) => {
+  if (cache[agent]) {
+    if (cache[agent][path].body) {
+      console.log('path', path);
+      ctx.set('ETag', cache[agent][path].etag);
+      return cache[agent][path].body;
+    }
   }
   global.navigator = { userAgent: agent };
-  html[agent] = renderToStaticMarkup(
+  cache[agent] = {};
+  cache[agent][path] = {};
+  cache[agent][path].body = renderToStaticMarkup(
     <html lang='en'>
     <head>
       <meta charSet='UTF-8' />
@@ -32,8 +37,9 @@ const serveCachedHtml = (ctx, agent, renderProps) => {
     </body>
     </html>
   );
-  ctx.set('ETag', etag(html[agent]));
-  return html[agent];
+  cache[agent][path].etag = etag(cache[agent][path].body);
+  ctx.set('ETag', cache[agent][path].etag);
+  return cache[agent][path].body;
 };
 
 module.exports = function reactRender(app) {
@@ -46,7 +52,7 @@ module.exports = function reactRender(app) {
         this.redirect(redirectLocation.pathname + redirectLocation.search);
       } else if (renderProps) {
         const userAgent = this.request.headers['user-agent'];
-        this.body = serveCachedHtml(this, userAgent, renderProps);
+        this.body = serveCachedHtml(this, this.path, userAgent, renderProps);
       } else {
         this.status = 404;
         this.body = 'Not Found';

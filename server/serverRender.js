@@ -11,7 +11,6 @@ const cache = {};
 const serveCachedHtml = (ctx, path, agent, renderProps) => {
   if (cache[agent]) {
     if (cache[agent][path].body) {
-      console.log('path', path);
       ctx.set('ETag', cache[agent][path].etag);
       return cache[agent][path].body;
     }

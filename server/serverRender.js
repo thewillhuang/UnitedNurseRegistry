@@ -38,6 +38,7 @@ const serveCachedHtml = (ctx, path, agent, renderProps) => {
   );
   cache[agent][path].etag = etag(cache[agent][path].body);
   ctx.set('ETag', cache[agent][path].etag);
+  ctx.type = 'html';
   return cache[agent][path].body;
 };
 

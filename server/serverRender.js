@@ -12,13 +12,12 @@ const serveCachedHtml = (ctx, path, agent, renderProps) => {
   if (cache[agent]) {
     if (cache[agent][path].body) {
       ctx.set('ETag', cache[agent][path].etag);
+      ctx.type = 'html';
       return cache[agent][path].body;
     }
   }
   global.navigator = { userAgent: agent };
-  cache[agent] = {};
-  cache[agent][path] = {};
-  cache[agent][path].body = renderToStaticMarkup(
+  const html = renderToStaticMarkup(
     <html lang='en'>
     <head>
       <meta charSet='UTF-8' />
@@ -36,6 +35,9 @@ const serveCachedHtml = (ctx, path, agent, renderProps) => {
     </body>
     </html>
   );
+  cache[agent] = {};
+  cache[agent][path] = {};
+  cache[agent][path].body = html;
   cache[agent][path].etag = etag(cache[agent][path].body);
   ctx.set('ETag', cache[agent][path].etag);
   ctx.type = 'html';

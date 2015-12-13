@@ -50,12 +50,9 @@ module.exports = function reactRender(app) {
         this.body = error.message;
       } else if (redirectLocation) {
         this.redirect(redirectLocation.pathname + redirectLocation.search);
-      } else if (renderProps) {
+      } else {
         const userAgent = this.request.headers['user-agent'];
         this.body = serveCachedHtml(this, this.path, userAgent, renderProps);
-      } else {
-        this.status = 404;
-        this.body = 'Not Found';
       }
     });
   });

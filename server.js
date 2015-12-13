@@ -34,7 +34,7 @@ app.use(helmet());
 // compress everything before exiting
 app.use(compress());
 
-// server side react components
+// serve root '/' (react server side rendering)
 require('./server/serverRender')(app);
 
 // static file services

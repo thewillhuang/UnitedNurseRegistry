@@ -34,6 +34,8 @@ app.use(helmet());
 // compress everything before exiting
 app.use(compress());
 
+app.use(serve(buildPath), { defer: true });
+
 // serve root '/' (react server side rendering)
 require('./server/serverRender')(app);
 
@@ -60,8 +62,6 @@ if (env === 'development') {
     dynamic: true,
   }));
 }
-
-app.use(serve(buildPath));
 
 // parse body to json
 app.use(bodyParser());

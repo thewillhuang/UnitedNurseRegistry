@@ -34,6 +34,9 @@ app.use(helmet());
 // compress everything before exiting
 app.use(compress());
 
+// serve root '/' (react server side rendering)
+require('./server/serverRender')(app);
+
 // static file services
 if (env === 'development') {
   console.log('server running in development mode');

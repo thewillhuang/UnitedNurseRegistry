@@ -9,10 +9,11 @@ import SignupBeta from './signupBeta.jsx';
 import ForNurses from './forNurses.jsx';
 import ForHospitals from './forHospitals.jsx';
 import ForReferrals from './forReferrals.jsx';
+
 // // const ThemeManager = new mui.Styles.ThemeManager();
 
 const Home = React.createClass({
-  render: function () {
+  render() {
     return (
       <div>
         <div className='alpha'>

@@ -4,7 +4,10 @@ import routes from './routes.js';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { Router } from 'react-router';
 const rootElement = document.getElementById('root');
-
+// window.Raygun.init('UgAzJsDSFIE5iozXGjsGqQ==').attach();
+// window.Raygun('apiKey', 'UgAzJsDSFIE5iozXGjsGqQ==');
+// window.Raygun('enableCrashReporting', true);
+// window.Raygun('enablePulse', true);
 injectTapEventPlugin();
 
 render(<Router routes={routes}/>, rootElement);

@@ -34,18 +34,20 @@ app.use(helmet());
 // compress everything before exiting
 app.use(compress());
 
-// serve root '/' (react server side rendering)
-require('./server/serverRender')(app);
-
 // static file services
 if (env === 'development') {
   console.log('server running in development mode');
-  app.use(serve(buildPath));
 } else {
   console.log('server running in production mode');
   // extra security for production
   app.use(helmet.contentSecurityPolicy({
-    scriptSrc: ['\'self\'', 'https://checkout.stripe.com', '\'unsafe-eval\''],
+    scriptSrc: [
+      '\'self\'',
+      'https://checkout.stripe.com',
+      'http://cdn.raygun.io/raygun4js/raygun.min.js',
+      '\'unsafe-inline\'',
+      '\'unsafe-eval\'',
+    ],
   }));
   // serve gzipped cached files for faster speed
   app.use(staticCache(buildPath, {
@@ -55,6 +57,8 @@ if (env === 'development') {
     dynamic: true,
   }));
 }
+
+app.use(serve(buildPath));
 
 // parse body to json
 app.use(bodyParser());

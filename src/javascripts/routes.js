@@ -7,11 +7,14 @@ const routes = (
     // web routes
     <IndexRoute component={Home} />
 
-    <Route path='hospitalLogin' getComponents={(location, cb) => {
-      require.ensure([], (require) => {
-        cb(null, require('./components/web/hospitalLogin.jsx').default);
-      });
-    }}/>
+    <Route
+      path='hospitalLogin'
+      getComponents={(location, cb) => {
+        require.ensure([], (require) => {
+          cb(null, require('./components/web/hospitalLogin.jsx').default);
+        });
+      }}
+    />
 
     <Route path='hospitalSignup' getComponents={(location, cb) => {
       require.ensure([], (require) => {

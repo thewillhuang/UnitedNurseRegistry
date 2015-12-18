@@ -36,8 +36,8 @@ app.use(compress());
 
 app.use(serve(buildPath), { defer: true });
 
-// serve root '/' (react server side rendering)
-require('./server/serverRender')(app);
+// // serve root '/' (react server side rendering)
+// require('./server/serverRender')(app);
 
 // static file services
 if (env === 'development') {

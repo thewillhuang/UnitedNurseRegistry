@@ -13,3 +13,6 @@ plugins
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+
+Dockerfile
+server/config.js

@@ -17,8 +17,18 @@ module.exports = function (env) {
     resolve: {
       extensions: ['', '.js'],
     },
+    eslint: {
+      configFile: jsSrc + '/.eslintrc',
+    },
 
     module: {
+      preLoaders: [
+        {
+          test: /\.jsx$/,
+          loader: 'eslint-loader',
+          exclude: /(node_modules|bower_components)/,
+        },
+      ],
       loaders: [
         {
           test: /\.jsx?$/,

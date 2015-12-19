@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatButton} from 'material-ui';
+import { FlatButton } from 'material-ui';
 import ProfileCard from './profileCard.jsx';
 
 const ProfileList = React.createClass({
@@ -22,13 +22,15 @@ const ProfileList = React.createClass({
                 linkButton
                 href='#hospital/profile/profile'
                 label='Profile'
-                secondary />
+                secondary
+              />
               <br/>
               <FlatButton
                 linkButton
                 href='#hospital/profile/security'
                 label='Security'
-                secondary />
+                secondary
+              />
             </div>
           </div>
         </div>

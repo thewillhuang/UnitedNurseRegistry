@@ -1,11 +1,11 @@
 import React from 'react';
-import { Card, TextField, CardActions, RaisedButton} from 'material-ui';
+import { Card, TextField, CardActions, RaisedButton } from 'material-ui';
 import request from 'superagent';
 import validator from 'validator';
 import setToken from '../../utils/setToken.js';
 
 const SignupBox = React.createClass({
-  getInitialState: function () {
+  getInitialState() {
     return {
       signupButton: 'Sign up',
     };

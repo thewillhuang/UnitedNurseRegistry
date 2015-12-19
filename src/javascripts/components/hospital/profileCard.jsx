@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField, RaisedButton, Snackbar} from 'material-ui';
+import { TextField, RaisedButton, Snackbar } from 'material-ui';
 import user from '../../utils/grabUser.js';
 const facilityID = user.scope.facilityID;
 const input = {
@@ -21,7 +21,7 @@ import facilityAddressApi from '../../webapi/facilityAddressApi.js';
 const ProfileCard = React.createClass({
   componentDidMount() {
     facilityApi.getFacilityInfo(facilityID)
-    .then(data=> {
+    .then(data => {
       console.log(data);
     });
   },
@@ -36,15 +36,15 @@ const ProfileCard = React.createClass({
     const zip = this.refs.zip.getValue() || '';
     const ext = this.refs.ext.getValue() || null;
     const phoneType = this.refs.phoneType.getValue() || null;
-    const facilityID = user.scope.facilityID;
+    // const facilityID = user.scope.facilityID;
     const ctx = this;
     async function getGeoHash() {
       try {
         await geoHashApi.addressLatLng(`${address} ${city} ${state} ${zip}`)
-        .then(data=> {
+        .then(data => {
           console.log(data);
           return geohash.encode(data.lat, data.lng);
-        }).then(hash=> {
+        }).then(hash => {
           facilityApi.updateFacilityInfo(user.scope.facilityID, null, name, hash, null, emr);
           ctx.refs.submitted.show();
         });
@@ -85,55 +85,64 @@ const ProfileCard = React.createClass({
               ref='name'
               floatingLabelText='Hospital Name'
               onEnterKeyDown={this.handleSubmit}
-              hintText='Name' />
+              hintText='Name'
+            />
             <br/>
             <TextField
               ref='emr'
               onEnterKeyDown={this.handleSubmit}
               floatingLabelText='Hospital EMR'
-              hintText='EMR' />
+              hintText='EMR'
+            />
             <br/>
             <TextField
               ref='phone'
               onEnterKeyDown={this.handleSubmit}
               floatingLabelText='Phone Number'
-              hintText='Phone Number' />
+              hintText='Phone Number'
+            />
             <br/>
             <TextField
               ref='ext'
               onEnterKeyDown={this.handleSubmit}
               floatingLabelText='Phone Number ext'
-              hintText='Ext' />
+              hintText='Ext'
+            />
             <br/>
             <TextField
               ref='phoneType'
               onEnterKeyDown={this.handleSubmit}
               floatingLabelText='Phone Type'
-              hintText='Phone Type' />
+              hintText='Phone Type'
+            />
             <br/>
             <TextField
               ref='address'
               onEnterKeyDown={this.handleSubmit}
               floatingLabelText='Address'
-              hintText='Address' />
+              hintText='Address'
+            />
             <br/>
             <TextField
               ref='city'
               onEnterKeyDown={this.handleSubmit}
               floatingLabelText='City'
-              hintText='City' />
+              hintText='City'
+            />
             <br/>
             <TextField
               ref='state'
               onEnterKeyDown={this.handleSubmit}
               floatingLabelText='State'
-              hintText='State' />
+              hintText='State'
+            />
             <br/>
             <TextField
               ref='zip'
               onEnterKeyDown={this.handleSubmit}
               floatingLabelText='Zip'
-              hintText='Zip' />
+              hintText='Zip'
+            />
             <br/>
             <RaisedButton primary label='Upload Facility Images'>
               <input type='file' style={input}></input>

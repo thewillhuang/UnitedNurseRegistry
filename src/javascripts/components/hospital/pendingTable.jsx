@@ -1,7 +1,7 @@
 // TODO need to change dialog message
 import React from 'react';
-import {FlatButton, Dialog} from 'material-ui';
-import {Table, Column} from 'fixed-data-table';
+import { FlatButton, Dialog } from 'material-ui';
+import { Table, Column } from 'fixed-data-table';
 import io from 'socket.io-client';
 import userSpecialtyApi from '../../webapi/userSpecialtyApi.js';
 import shiftStatusApi from '../../webapi/shiftStatusApi.js';
@@ -11,7 +11,7 @@ const socket = io.connect();
 import checkoutApi from '../../webapi/checkout.js';
 
 const ShiftHospitalTable = React.createClass({
-  getInitialState: function () {
+  getInitialState() {
     return {
       table: [
         ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
@@ -30,7 +30,7 @@ const ShiftHospitalTable = React.createClass({
       // console.log('this', ctx);
       try {
         await shiftStatusApi.getPendingApprovalShift(facilityID)
-        .then(res=> {
+        .then(res => {
           return res.rows;
         }).then(rows => {
           console.log(rows);
@@ -58,7 +58,7 @@ const ShiftHospitalTable = React.createClass({
           }
           return table.reverse();
         }).then(table => {
-          ctx.setState({table: table});
+          ctx.setState({ table });
         });
       } catch (e) {
         console.log('get table error', e);
@@ -74,7 +74,7 @@ const ShiftHospitalTable = React.createClass({
           // console.log(specialtyArray.rows[i]);
           specialties[`${specialtyArray.rows[i].specialtyID}`] = specialtyArray.rows[i].specialty;
         }
-        ctx.setState({specialty: specialties});
+        ctx.setState({ specialty: specialties });
         // console.log('specialties', specialties);
         getTableRows();
       } catch (e) {
@@ -122,7 +122,7 @@ const ShiftHospitalTable = React.createClass({
     const handler = window.StripeCheckout.configure({
       key: 'pk_test_pUdeTIh8WRLykG3RSugGr5yg',
       locale: 'auto',
-      token: async function (token) {
+      async token(token) {
         // console.log('amount', parseInt(ctx.state.focus[4], 10) * 100);
         console.log('amount', parseInt(ctx.state.focus[4].split(' ')[1], 10));
         await checkoutApi.saveCharges(token, ctx.state.focus[0], parseInt(ctx.state.focus[4].split(' ')[1], 10) * 100);
@@ -143,7 +143,7 @@ const ShiftHospitalTable = React.createClass({
       const setState = await shiftStatusApi.markShiftAsPending(ctx.state.focus[0], ctx.state.focus[8], facilityID);
       if (setState.rows.affectedRows !== 0) {
         console.log('emit update shift');
-        socket.emit('update', {facility: user.scope.facilityID});
+        socket.emit('update', { facility: user.scope.facilityID });
       }
     }
     set();
@@ -159,22 +159,26 @@ const ShiftHospitalTable = React.createClass({
       <FlatButton
         label='Cancel'
         secondary
-        onTouchTap={this.dialogDismiss} />,
+        onTouchTap={this.dialogDismiss}
+      />,
       <FlatButton
         label='Request for Approval'
         primary
-        onTouchTap={this.dialogOkay} />,
+        onTouchTap={this.dialogOkay}
+      />,
     ];
 
     const reconfirmActions = [
       <FlatButton
         label='Cancel'
         secondary
-        onTouchTap={this.dialogDismiss} />,
+        onTouchTap={this.dialogDismiss}
+      />,
       <FlatButton
         label='Request for Approval'
         primary
-        onTouchTap={this.dialogAccept} />,
+        onTouchTap={this.dialogAccept}
+      />,
     ];
     return (
       <div className='tableWrap'>
@@ -182,7 +186,8 @@ const ShiftHospitalTable = React.createClass({
           ref='confirm'
           title='confirm Contract'
           actions={customActions}
-          modal={this.state.modal}>
+          modal={this.state.modal}
+        >
           Do you want to accept shift #<b>{this.state.focus[0] }</b> from <b>{this.state.focus[1] }</b>. The hospital will pay you <b>{this.state.focus[4] }</b> as an emplyee or <b>{this.state.focus[5] }</b> as an independent contractor.
           The shift starts at <b>{this.state.focus[9] }</b> at <b>{this.state.focus[10] }</b> in <b>{this.state.focus[3]}</b> and last for <b>{this.state.focus[2]}</b>.
           <br/>
@@ -193,7 +198,8 @@ const ShiftHospitalTable = React.createClass({
           ref='reconfirm'
           title='Are you sure?'
           actions={reconfirmActions}
-          modal={this.state.modal}>
+          modal={this.state.modal}
+        >
           Are you sure you want to accept shift #<b>{this.state.focus[0] }</b> from <b>{this.state.focus[1] }</b>. The hospital will pay you <b>{this.state.focus[4] }</b> as an emplyee or <b>{this.state.focus[5] }</b> as an independent contractor.
           The shift starts at <b>{this.state.focus[9] }</b> at <b>{this.state.focus[10] }</b> in <b>{this.state.focus[3]}</b> and last for <b>{this.state.focus[2]}</b>.
           <br/>
@@ -207,7 +213,8 @@ const ShiftHospitalTable = React.createClass({
           onRowClick={this.onRowClick}
           width={1050}
           height={500}
-          headerHeight={50}>
+          headerHeight={50}
+        >
           <Column
             label='Shift ID'
             width={110}

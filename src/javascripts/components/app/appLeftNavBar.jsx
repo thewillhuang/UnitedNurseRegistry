@@ -1,7 +1,7 @@
 import React from 'react';
 
 const AppLeftNavBar = React.createClass({
-  getInitialState: function () {
+  getInitialState() {
     return {
       userName: 'User',
       shift: '',
@@ -14,16 +14,16 @@ const AppLeftNavBar = React.createClass({
     };
   },
 
-  componentDidMount: function () {
+  componentDidMount() {
     window.addEventListener('hashchange', this.hashChange, false);
     this.hashChange();
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount() {
     window.removeEventListener('hashchange', this.hashChange, false);
   },
 
-  hashChange: function () {
+  hashChange() {
     const route = window.location.hash;
     if (route.indexOf('#/app/shifts') !== -1) {
       this.setState({
@@ -147,77 +147,84 @@ const AppLeftNavBar = React.createClass({
     }
   },
 
-  render: function () {
+  render() {
     return (
       <div className='appNavBar'>
         <link rel='stylesheet' href='/stylesheets/app.css' />
         <ul className='appNavMenu'>
           <li
-            onClick={()=> {window.location.assign('#app/shifts'); }}
-            className={'appNavItems ' + this.state.shift} >
+            onClick={() => {window.location.assign('#app/shifts'); }}
+            className={'appNavItems ' + this.state.shift}
+          >
             <div className={'appNameItemWrap ' + this.state.shift}>
               <i className={'icon-briefcase fa-2x ' + this.state.shift}/>
-              <a href='#/app/shifts' style={{color: this.state.shiftColor}} className={'appNavText ' + this.state.shift}>
+              <a href='#/app/shifts' style={{ color: this.state.shiftColor }} className={'appNavText ' + this.state.shift}>
                 Shifts
               </a>
             </div>
           </li>
           <li
-            onClick={()=> {window.location.assign('#app/pending'); }}
-            className={'appNavItems ' + this.state.pending} >
+            onClick={() => {window.location.assign('#app/pending'); }}
+            className={'appNavItems ' + this.state.pending}
+          >
             <div className={'appNameItemWrap ' + this.state.pending}>
               <i className={'icon-clock fa-2x ' + this.state.pending}/>
-              <a href='#/app/pending' style={{color: this.state.pendingColor}} className={'appNavText ' + this.state.pending}>
+              <a href='#/app/pending' style={{ color: this.state.pendingColor }} className={'appNavText ' + this.state.pending}>
                 Requested Shifts
               </a>
             </div>
           </li>
           <li
-            onClick={()=> {window.location.assign('#app/approved'); }}
-            className={'appNavItems ' + this.state.approved} >
+            onClick={() => {window.location.assign('#app/approved'); }}
+            className={'appNavItems ' + this.state.approved}
+          >
             <div className={'appNameItemWrap ' + this.state.approved}>
               <i className={'icon-check fa-2x ' + this.state.approved}/>
-              <a href='#/app/approved' style={{color: this.state.approvedColor}} className={'appNavText ' + this.state.approved}>
+              <a href='#/app/approved' style={{ color: this.state.approvedColor }} className={'appNavText ' + this.state.approved}>
                 Approved Shifts
               </a>
             </div>
           </li>
           <li
-            onClick={()=> {window.location.assign('#app/profile'); }}
-            className={'appNavItems ' + this.state.profile}>
+            onClick={() => {window.location.assign('#app/profile'); }}
+            className={'appNavItems ' + this.state.profile}
+          >
             <div className={'appNameItemWrap ' + this.state.profile}>
               <i className={'icon-user fa-2x ' + this.state.profile}/>
-              <a href='#/app/profile' style={{color: this.state.profileColor}} className={'appNavText ' + this.state.profile}>
+              <a href='#/app/profile' style={{ color: this.state.profileColor }} className={'appNavText ' + this.state.profile}>
                 Profile
               </a>
             </div>
           </li>
           <li
-            onClick={()=> {window.location.assign('#app/balance'); }}
-            className={'appNavItems ' + this.state.balance}>
+            onClick={() => {window.location.assign('#app/balance'); }}
+            className={'appNavItems ' + this.state.balance}
+          >
             <div className={'appNameItemWrap ' + this.state.balance}>
               <i className={'icon-graph fa-2x ' + this.state.balance}/>
-              <a href='#/app/balance' style={{color: this.state.balanceColor}} className={'appNavText ' + this.state.balance}>
+              <a href='#/app/balance' style={{ color: this.state.balanceColor }} className={'appNavText ' + this.state.balance}>
                 Balance
               </a>
             </div>
           </li>
           <li
-            onClick={()=> {window.location.assign('#app/reviews'); }}
-            className={'appNavItems ' + this.state.reviews}>
+            onClick={() => {window.location.assign('#app/reviews'); }}
+            className={'appNavItems ' + this.state.reviews}
+          >
             <div className={'appNameItemWrap ' + this.state.reviews}>
               <i className={'icon-star fa-2x ' + this.state.reviews}/>
-              <a href='#/app/reviews' style={{color: this.state.reviewsColor}} className={'appNavText ' + this.state.reviews}>
+              <a href='#/app/reviews' style={{ color: this.state.reviewsColor }} className={'appNavText ' + this.state.reviews}>
                 Reviews
               </a>
             </div>
           </li>
           <li
-            onClick={()=> {window.location.assign('#app/referrals'); }}
-            className={'appNavItems ' + this.state.referrals}>
+            onClick={() => {window.location.assign('#app/referrals'); }}
+            className={'appNavItems ' + this.state.referrals}
+          >
             <div className={'appNameItemWrap ' + this.state.referrals}>
               <i className={'icon-heart fa-2x ' + this.state.referrals}/>
-              <a href='#/app/referrals' style={{color: this.state.referralsColor}} className={'appNavText ' + this.state.referrals}>
+              <a href='#/app/referrals' style={{ color: this.state.referralsColor }} className={'appNavText ' + this.state.referrals}>
                 referrals
               </a>
             </div>

@@ -1,6 +1,6 @@
 import React from 'react';
-import {Snackbar, Dialog, FlatButton} from 'material-ui';
-import {Table, Column} from 'fixed-data-table';
+import { Snackbar, Dialog, FlatButton } from 'material-ui';
+import { Table, Column } from 'fixed-data-table';
 import getGeoHash from '../../utils/getGeoHash.js';
 import shiftApi from '../../webapi/shiftApi.js';
 import shiftStatusApi from '../../webapi/shiftStatusApi.js';
@@ -31,7 +31,7 @@ function returnWidth(offset = -360) {
 }
 
 const ShiftHospitalTable = React.createClass({
-  getInitialState: function () {
+  getInitialState() {
     return {
       table: [
         ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
@@ -48,7 +48,7 @@ const ShiftHospitalTable = React.createClass({
     return this.state.table[rowIndex];
   },
 
-  searchFailed: function () {
+  searchFailed() {
     const ctx = this;
     async function retry() {
       try {
@@ -68,7 +68,7 @@ const ShiftHospitalTable = React.createClass({
         geoHash.geoHashSet = geoHashSet;
         console.log('hash set from user info', geoHash);
         ctx.setState({
-          geoHash: geoHash,
+          geoHash,
         });
         ctx.constructTable();
       } catch (e) {
@@ -78,14 +78,14 @@ const ShiftHospitalTable = React.createClass({
     retry();
   },
 
-  setLocation: function () {
+  setLocation() {
     const ctx = this;
     async function setHash() {
       try {
         const geoHash = await getGeoHash();
         console.log('location set', geoHash);
         ctx.setState({
-          geoHash: geoHash,
+          geoHash,
         });
         // use geo hash to grab search results
         const latlong = ghash.decode(geoHash.geoHash);
@@ -102,7 +102,7 @@ const ShiftHospitalTable = React.createClass({
     setHash();
   },
 
-  constructTable: function () {
+  constructTable() {
     const ctx = this;
     async function search() {
       try {
@@ -136,8 +136,8 @@ const ShiftHospitalTable = React.createClass({
             const lat = latlng.latitude;
             const lng = latlng.longitude;
             const distKm = geolib.getDistance(
-              {latitude: lat, longitude: lng},
-              {latitude: ctx.state.lat, longitude: ctx.state.lng}
+              { latitude: lat, longitude: lng },
+              { latitude: ctx.state.lat, longitude: ctx.state.lng }
             );
             const distMi = distKm / 1000 * 0.621371;
             const total = el.payPerHour * el.shiftDuration;
@@ -165,7 +165,7 @@ const ShiftHospitalTable = React.createClass({
         }
         // console.log('table', table);
         ctx.setState({
-          table: table,
+          table,
           sortDir: SortTypes.ASC,
         });
         // sort the table
@@ -177,7 +177,7 @@ const ShiftHospitalTable = React.createClass({
     search();
   },
 
-  resize: function () {
+  resize() {
     this.setState({
       w: returnWidth(),
       h: returnHeight(),
@@ -237,7 +237,7 @@ const ShiftHospitalTable = React.createClass({
 
   _renderHeader(label, cellDataKey) {
     return (
-      <a onClick={this._sortRowsBy.bind(null, cellDataKey)} style={{cursor: 'pointer', color: '#00526c'}}>{label}</a>
+      <a onClick={this._sortRowsBy.bind(null, cellDataKey)} style={{ cursor: 'pointer', color: '#00526c' }}>{label}</a>
     );
   },
 
@@ -266,7 +266,7 @@ const ShiftHospitalTable = React.createClass({
       if (!userAccepted.rows.length) {
         console.log('accept job ', ctx.state.focus[0]);
         await shiftStatusApi.markShiftAsAccepted(ctx.state.focus[0], userID);
-        socket.emit('update', {facility: ctx.state.focus[1]});
+        socket.emit('update', { facility: ctx.state.focus[1] });
       } else {
         ctx.refs.error.show();
       }
@@ -287,22 +287,26 @@ const ShiftHospitalTable = React.createClass({
       <FlatButton
         label='Cancel'
         secondary
-        onTouchTap={this.dialogDismiss} />,
+        onTouchTap={this.dialogDismiss}
+      />,
       <FlatButton
         label='Request for Approval'
         primary
-        onTouchTap={this.dialogOkay} />,
+        onTouchTap={this.dialogOkay}
+      />,
     ];
 
     const reconfirmActions = [
       <FlatButton
         label='Cancel'
         secondary
-        onTouchTap={this.dialogDismiss} />,
+        onTouchTap={this.dialogDismiss}
+      />,
       <FlatButton
         label='Request for Approval'
         primary
-        onTouchTap={this.dialogAccept} />,
+        onTouchTap={this.dialogAccept}
+      />,
     ];
 
     return (
@@ -312,7 +316,8 @@ const ShiftHospitalTable = React.createClass({
           ref='confirm'
           title='Confirm Contract'
           actions={customActions}
-          modal={this.state.modal}>
+          modal={this.state.modal}
+        >
           Do you want to accept shift #<b>{this.state.focus[0] }</b> from <b>{this.state.focus[1] }</b>. The hospital will pay you <b>{this.state.focus[4] }</b> as an emplyee or <b>{this.state.focus[5] }</b> as an independent contractor.
           The shift starts at <b>{this.state.focus[9] }</b> at <b>{this.state.focus[10] }</b> in <b>{this.state.focus[3]}</b> and last for <b>{this.state.focus[2]}</b>.
           <br/>
@@ -323,7 +328,8 @@ const ShiftHospitalTable = React.createClass({
           ref='reconfirm'
           title='Are you sure?'
           actions={reconfirmActions}
-          modal={this.state.modal}>
+          modal={this.state.modal}
+        >
           Are you sure you want to accept shift #<b>{this.state.focus[0] }</b> from <b>{this.state.focus[1] }</b>. The hospital will pay you <b>{this.state.focus[4] }</b> as an emplyee or <b>{this.state.focus[5] }</b> as an independent contractor.
           The shift starts at <b>{this.state.focus[9] }</b> at <b>{this.state.focus[10] }</b> in <b>{this.state.focus[3]}</b> and last for <b>{this.state.focus[2]}</b>.
           <br/>
@@ -335,13 +341,13 @@ const ShiftHospitalTable = React.createClass({
           action='OK'
           message='Shift Added'
           autoHideDuration={1000}
-          />
+        />
         <Snackbar
           ref='error'
           action='OK'
           message='ERROR! You may only queue for one shift a day.'
           autoHideDuration={10000}
-          />
+        />
         <Table
           rowHeight={50}
           rowGetter={this.rowGetter}
@@ -349,7 +355,8 @@ const ShiftHospitalTable = React.createClass({
           onRowClick={this.onRowClick}
           width={this.state.w}
           height={this.state.h}
-          headerHeight={50}>
+          headerHeight={50}
+        >
           <Column
             label={'Facility Name' + (this.state.sortBy === 2 ? sortDirArrow : '')}
             headerRenderer={this._renderHeader}

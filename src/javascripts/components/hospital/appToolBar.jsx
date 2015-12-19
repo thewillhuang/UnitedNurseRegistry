@@ -1,5 +1,5 @@
 import React from 'react';
-import {IconMenu, IconButton} from 'material-ui';
+import { IconMenu, IconButton } from 'material-ui';
 const MenuItem = require('material-ui/lib/menus/menu-item');
 import user from '../../utils/grabUser.js';
 const facilityID = user.scope.facilityID;
@@ -7,7 +7,7 @@ import facilityApi from '../../webapi/facilityApi.js';
 
 const AppBar = React.createClass({
 
-  getInitialState: function () {
+  getInitialState() {
     return {
       userName: 'Hospital Name',
     };
@@ -16,8 +16,8 @@ const AppBar = React.createClass({
   componentDidMount() {
     const ctx = this;
     facilityApi.getFacilityInfo(facilityID)
-    .then(data=> {
-      ctx.setState({userName: data.rows[0].facilityName});
+    .then(data => {
+      ctx.setState({ userName: data.rows[0].facilityName });
     });
   },
 
@@ -43,13 +43,16 @@ const AppBar = React.createClass({
             openDirection='bottom-left'
             iconButtonElement={
               <IconButton
-                style={{color: 'rgb(180, 180, 180)'}}
+                style={{ color: 'rgb(180, 180, 180)' }}
                 iconClassName='icon-menu'
-                tooltip='menu'/>
-            }>
+                tooltip='menu'
+              />
+            }
+          >
             <MenuItem
-              onClick={()=> {window.location.assign('/'); }}
-              primaryText='Logout'/>
+              onClick={() => {window.location.assign('/'); }}
+              primaryText='Logout'
+            />
           </IconMenu>
         </div>
         <div className='appBarTitle'>

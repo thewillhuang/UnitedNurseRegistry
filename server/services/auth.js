@@ -55,7 +55,7 @@ passport.use(new LocalStrategy({
       return !isMatch ?
         this.done = [false, { message: 'incorrect password' }] :
         this.done = [
-          { email: email, scope: { userID: this.userID } },
+          { email, scope: { userID: this.userID } },
           { message: 'Auth Success' },
         ];
     }).catch(NoAccountError, function () {
@@ -65,7 +65,7 @@ passport.use(new LocalStrategy({
       this.done = [false, { message: e }];
     }).then(function () {
       return this.done;
-    }).nodeify(done, { spread: true });
+    }).asCallback(done, { spread: true });
   }
 ));
 
@@ -88,19 +88,19 @@ passport.use('facility-login', new LocalStrategy({
     }).then(function (isMatch) {
       // console.log(this.userID);
       return !isMatch ?
-        this.done = [false, {message: 'incorrect password'}] :
+        this.done = [false, { message: 'incorrect password' }] :
         this.done = [
-          {email: email, scope: {facilityID: this.facilityID}},
-          {message: 'Auth Success'},
+          { email, scope: { facilityID: this.facilityID } },
+          { message: 'Auth Success' },
         ];
     }).catch(NoAccountError, function () {
-      this.done = [false, {message: 'incorrect email'}];
+      this.done = [false, { message: 'incorrect email' }];
     }).catch(function (e) {
       console.log(e);
-      this.done = [false, {message: e}];
+      this.done = [false, { message: e }];
     }).then(function () {
       return this.done;
-    }).nodeify(done, {spread: true});
+    }).asCallback(done, { spread: true });
   }
 ));
 
@@ -142,7 +142,7 @@ passport.use('facility-signup', new LocalStrategy({
       this.done = [false, {message: e}];
     }).then(function () {
       return this.done;
-    }).nodeify(done, {spread: true});
+    }).asCallback(done, {spread: true});
   }
 ));
 
@@ -181,7 +181,7 @@ passport.use('local-signup', new LocalStrategy({
       this.done = [false, {message: e}];
     }).then(function () {
       return this.done;
-    }).nodeify(done, {spread: true});
+    }).asCallback(done, {spread: true});
   }
 ));
 
@@ -236,7 +236,7 @@ passport.use(new StripeStrategy({
       this.done = [false, {message: e}];
     }).then(function () {
       return this.done;
-    }).nodeify(done, {spread: true});
+    }).asCallback(done, {spread: true});
   }
 ));
 
@@ -293,6 +293,6 @@ passport.use(new FacebookStrategy({
       this.done = [false, {message: e}];
     }).then(function () {
       return this.done;
-    }).nodeify(done, {spread: true});
+    }).asCallback(done, {spread: true});
   }
 ));

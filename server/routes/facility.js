@@ -70,7 +70,7 @@ module.exports = function (app) {
       q.values = ['Facility', requestJson, 'facilityID', facilityID];
       this.body = yield query(q);
     } else {
-      this.body = {message: 'no permission'};
+      this.body = { message: 'no permission' };
     }
   })
 
@@ -84,7 +84,7 @@ module.exports = function (app) {
       q.values = ['Facility', 'facilityID', facilityID];
       this.body = yield query(q);
     } else {
-      this.body = {message: 'no permission'};
+      this.body = { message: 'no permission' };
     }
   });
 

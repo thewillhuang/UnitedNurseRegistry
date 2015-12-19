@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField} from 'material-ui';
+import { TextField } from 'material-ui';
 
 const SpecialtyCard = React.createClass({
 
@@ -14,12 +14,14 @@ const SpecialtyCard = React.createClass({
           <TextField
             ref='specialty'
             floatingLabelText='Clinical Specialty Or Other skills'
-            hintText='Clinical Specialty Or Other skills' />
+            hintText='Clinical Specialty Or Other skills'
+          />
           <br/>
           <TextField
             ref='specialtyExp'
             floatingLabelText='Years of Experience'
-            hintText='Years of Experience' />
+            hintText='Years of Experience'
+          />
           <br/>
         </div>
       </div>

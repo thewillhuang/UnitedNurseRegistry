@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField, RaisedButton} from 'material-ui';
+import { TextField, RaisedButton } from 'material-ui';
 // const ThemeManager = new mui.Styles.ThemeManager();
 
 const input = {
@@ -14,7 +14,7 @@ const input = {
 };
 
 const LicenseCard = React.createClass({
-  render: function () {
+  render() {
     return (
       <div className='card'>
         <div className='cardTitle'>
@@ -25,17 +25,20 @@ const LicenseCard = React.createClass({
           <TextField
             ref='licenseNumber'
             floatingLabelText='License Number'
-            hintText='License Number' />
+            hintText='License Number'
+          />
           <br/>
           <TextField
             ref='licenseState'
             floatingLabelText='License State'
-            hintText='License State' />
+            hintText='License State'
+          />
           <br/>
           <TextField
             ref='licenseExp'
             floatingLabelText='License Expiration Date'
-            hintText='License Expiration Date' />
+            hintText='License Expiration Date'
+          />
           <br/>
           <RaisedButton primary label='Choose an Image'>
             <input type='file' style={input}></input>

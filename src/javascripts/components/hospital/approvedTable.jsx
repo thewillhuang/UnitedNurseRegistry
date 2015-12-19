@@ -1,5 +1,5 @@
 import React from 'react';
-import {Table, Column} from 'fixed-data-table';
+import { Table, Column } from 'fixed-data-table';
 import io from 'socket.io-client';
 import shiftApi from '../../webapi/shiftApi.js';
 import userSpecialtyApi from '../../webapi/userSpecialtyApi.js';
@@ -9,7 +9,7 @@ const socket = io.connect();
 
 const ShiftHospitalTable = React.createClass({
 
-  getInitialState: function () {
+  getInitialState() {
     return {
       table: [
         ['data', 'data', 'data', 'data', 'data', 'data', 'data', 'data'],
@@ -27,7 +27,7 @@ const ShiftHospitalTable = React.createClass({
       // console.log('this', ctx);
       try {
         await shiftApi.getPendingHospitalShift(facilityID)
-        .then(res=> {
+        .then(res => {
           return res.rows;
         }).then(rows => {
           console.log(rows);
@@ -54,7 +54,7 @@ const ShiftHospitalTable = React.createClass({
           }
           return table.reverse();
         }).then(table => {
-          ctx.setState({table: table});
+          ctx.setState({ table });
         });
       } catch (e) {
         console.log('get table error', e);
@@ -70,7 +70,7 @@ const ShiftHospitalTable = React.createClass({
           // console.log(specialtyArray.rows[i]);
           specialties[`${specialtyArray.rows[i].specialtyID}`] = specialtyArray.rows[i].specialty;
         }
-        ctx.setState({specialty: specialties});
+        ctx.setState({ specialty: specialties });
         // console.log('specialties', specialties);
         getTableRows();
       } catch (e) {
@@ -105,7 +105,8 @@ const ShiftHospitalTable = React.createClass({
           rowsCount={this.state.table.length}
           width={1050}
           height={500}
-          headerHeight={50}>
+          headerHeight={50}
+        >
           <Column
             label='Shift ID'
             width={110}

@@ -19,6 +19,7 @@ module.exports = function (env) {
     },
     eslint: {
       configFile: jsSrc + '/.eslintrc',
+      fix: true,
     },
 
     module: {
@@ -35,7 +36,7 @@ module.exports = function (env) {
           exclude: /(node_modules|bower_components)/,
           loader: 'babel',
           query: {
-            presets: ['es2015', 'react', 'stage-3'],
+            presets: ['es2015', 'react', 'stage-1'],
             cacheDirectory: true,
             plugins: ['transform-runtime'],
           },
@@ -55,7 +56,7 @@ module.exports = function (env) {
     webpackConfig.output = {
       path: jsDest,
       filename: '[name].js',
-      publicPath: publicPath,
+      publicPath,
     };
 
     // Factor out common dependencies into a shared.js
@@ -84,7 +85,7 @@ module.exports = function (env) {
           NODE_ENV: JSON.stringify(process.env.NODE_ENV),
         },
       }),
-      // new webpack.optimize.AggressiveMergingPlugin(),
+      new webpack.optimize.AggressiveMergingPlugin(),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: {

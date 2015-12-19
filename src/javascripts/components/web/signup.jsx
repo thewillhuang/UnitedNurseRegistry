@@ -12,7 +12,7 @@ const Signup = React.createClass({
           <HomeToolBar/>
           <div className='spacing' />
           <div className='signup-wrap'>
-            <h3 style={{color: 'white', textAlign: 'center'}}>Sign up</h3>
+            <h3 style={{ color: 'white', textAlign: 'center' }}>Sign up</h3>
             <SignupBox />
           </div>
         </div>

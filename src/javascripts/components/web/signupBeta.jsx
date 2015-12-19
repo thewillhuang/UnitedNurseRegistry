@@ -5,7 +5,7 @@ import validator from 'validator';
 
 const BetaSignup = React.createClass({
 
-  getInitialState: function () {
+  getInitialState() {
     return {
       signupButton: 'Sign up',
     };
@@ -73,11 +73,12 @@ const BetaSignup = React.createClass({
         action='Dismiss'
         onActionTouchTap={this.handleDismiss}
         message='We received your email, thank you for your interest'
-        autoHideDuration={5000} />
-      <h3 style={{color: 'white'}}>
+        autoHideDuration={5000}
+      />
+      <h3 style={{ color: 'white' }}>
         Sign up for Beta Launch
       </h3>
-        <Card style={{paddingTop: 30}}>
+        <Card style={{ paddingTop: 30 }}>
           <TextField
             floatingLabelText='Email Address'
             ref='email'

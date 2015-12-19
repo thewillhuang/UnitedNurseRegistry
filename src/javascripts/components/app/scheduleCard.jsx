@@ -1,8 +1,8 @@
 import React from 'react';
-import {TextField, Checkbox} from 'material-ui';
+import { TextField, Checkbox } from 'material-ui';
 
 const ScheduleCard = React.createClass({
-  render: function () {
+  render() {
     return (
       <div className='card'>
         <div className='cardTitle'>
@@ -13,43 +13,53 @@ const ScheduleCard = React.createClass({
           <TextField
             ref='pay'
             floatingLabelText='Minimum Pay Per Hour'
-            hintText='Minimum Pay Per Hour' />
+            hintText='Minimum Pay Per Hour'
+          />
           <Checkbox
             name='mon'
             value='mon'
-            label='Monday'/>
+            label='Monday'
+          />
           <Checkbox
             name='tu'
             value='tu'
-            label='Tuesday'/>
+            label='Tuesday'
+          />
           <Checkbox
             name='wed'
             value='wed'
-            label='Wednesday'/>
+            label='Wednesday'
+          />
           <Checkbox
             name='th'
             value='th'
-            label='Thursday'/>
+            label='Thursday'
+          />
           <Checkbox
             name='fri'
             value='fri'
-            label='Friday'/>
+            label='Friday'
+          />
           <Checkbox
             name='sat'
             value='sat'
-            label='Saturday'/>
+            label='Saturday'
+          />
           <Checkbox
             name='sun'
             value='sun'
-            label='Sunday'/>
+            label='Sunday'
+          />
           <Checkbox
             name='day'
             value='day'
-            label='Day Shift'/>
+            label='Day Shift'
+          />
           <Checkbox
             name='night'
             value='night'
-            label='Night Shift'/>
+            label='Night Shift'
+          />
         </div>
       </div>
     );

@@ -69,7 +69,7 @@ const options = {
 };
 
 const Balance = React.createClass({
-  render: function () {
+  render() {
     return (
       <div className='appShift'>
         <div className='appShiftResult'>
@@ -79,7 +79,7 @@ const Balance = React.createClass({
             </div>
             <hr className='cardDivider'/>
             <div className='cardBody'>
-              <LineChart data={data} style={{height: '100%', width: '100%'}} options={options}/>
+              <LineChart data={data} style={{ height: '100%', width: '100%' }} options={options}/>
             </div>
           </div>
         </div>

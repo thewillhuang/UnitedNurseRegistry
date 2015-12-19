@@ -5,14 +5,14 @@ import Footer from './footer.jsx';
 
 const Hospital = React.createClass({
 
-  render: function () {
+  render() {
     return (
       <div>
         <div className='hospitalAlpha'>
           <HomeToolBar/>
           <div className='spacing' />
           <div className='signup-wrap'>
-            <h3 style={{color: 'white', textAlign: 'center'}}>Hospital Login</h3>
+            <h3 style={{ color: 'white', textAlign: 'center' }}>Hospital Login</h3>
             <HospitalLoginBox />
           </div>
         </div>

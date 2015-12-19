@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import {FlatButton} from 'material-ui';
+import { FlatButton } from 'material-ui';
 import ProfileCard from './profileCard.jsx';
 // import ShiftFilter from './shiftFilter.jsx';
 // import ShiftHospital from './shiftHospitalTable.jsx';
@@ -15,7 +15,7 @@ const Profile = React.createClass({
     children: React.PropTypes.node,
   },
 
-  render: function () {
+  render() {
     return (
       <div className='appProfile'>
         <div className='appProfileList'>
@@ -29,37 +29,43 @@ const Profile = React.createClass({
                 linkButton
                 href='#app/profile/profile'
                 label='Profile'
-                secondary />
+                secondary
+              />
               <br/>
               <FlatButton
                 linkButton
                 href='#app/profile/workHistory'
                 label='Work History'
-                secondary />
+                secondary
+              />
               <br/>
               <FlatButton
                 linkButton
                 href='#app/profile/license'
                 label='License and Certifications'
-                secondary />
+                secondary
+              />
               <br/>
               <FlatButton
                 linkButton
                 href='#app/profile/specialty'
                 label='Specialty'
-                secondary />
+                secondary
+              />
               <br/>
               <FlatButton
                 linkButton
                 href='#app/profile/schedule'
                 label='Work Schedule'
-                secondary />
+                secondary
+              />
               <br/>
               <FlatButton
                 linkButton
                 href='#app/profile/security'
                 label='Security'
-                secondary />
+                secondary
+              />
               <br/>
             </div>
           </div>

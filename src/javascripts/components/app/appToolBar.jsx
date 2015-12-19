@@ -1,21 +1,21 @@
 
 
 import React from 'react';
-import {IconMenu, IconButton} from 'material-ui';
+import { IconMenu, IconButton } from 'material-ui';
 const MenuItem = require('material-ui/lib/menus/menu-item');
 
 const AppBar = React.createClass({
-  getInitialState: function () {
+  getInitialState() {
     return {
       userName: 'User First Name',
     };
   },
 
-  componentWillUnmount: function () {
+  componentWillUnmount() {
     window.sessionStorage.clear();
   },
 
-  render: function () {
+  render() {
     return (
       <div className='appBar'>
         <div className='appBarUser'>
@@ -33,13 +33,16 @@ const AppBar = React.createClass({
             openDirection='bottom-left'
             iconButtonElement={
               <IconButton
-                style={{color: 'rgb(180, 180, 180)'}}
+                style={{ color: 'rgb(180, 180, 180)' }}
                 iconClassName='icon-menu'
-                tooltip='menu'/>
-            }>
+                tooltip='menu'
+              />
+            }
+          >
             <MenuItem
-              onClick={()=> {window.location.assign('/'); }}
-              primaryText='Logout'/>
+              onClick={() => {window.location.assign('/'); }}
+              primaryText='Logout'
+            />
           </IconMenu>
         </div>
         <div className='appBarTitle'>

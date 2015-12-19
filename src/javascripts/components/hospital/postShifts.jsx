@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField, RaisedButton, Snackbar} from 'material-ui';
+import { TextField, RaisedButton, Snackbar } from 'material-ui';
 import shiftApi from '../../webapi/shiftApi.js';
 import specialtyApi from '../../webapi/userSpecialtyApi.js';
 import user from '../../utils/grabUser.js';
@@ -9,7 +9,7 @@ const socket = io.connect();
 
 const ShiftHospitalTable = React.createClass({
 
-  getInitialState: function () {
+  getInitialState() {
     return {
       shiftID: null,
     };
@@ -81,7 +81,7 @@ const ShiftHospitalTable = React.createClass({
       // then, store the shift with the specialtyID
       .then(res => {
         return shiftApi.createShift(facilityID, res.specialtyID, shiftStartHour, shiftDuration, payPerHour, date, shiftDressCode);
-      }).then((saved)=> {
+      }).then((saved) => {
         console.log(saved);
         ctx.setState({
           shiftID: saved.rows.insertId,
@@ -93,7 +93,7 @@ const ShiftHospitalTable = React.createClass({
         // ctx.refs.date.clearValue();
         // ctx.refs.shiftDressCode.clearValue();
         ctx.refs.submitted.show();
-        socket.emit('update', {facility: user.scope.facilityID});
+        socket.emit('update', { facility: user.scope.facilityID });
       });
     } else {
       this.validateShift();
@@ -109,13 +109,14 @@ const ShiftHospitalTable = React.createClass({
           action='OK'
           message='Shift Added'
           autoHideDuration={5000}
-          />
+        />
         <TextField
           ref='specialty'
           onChange={this.validateShift}
           onEnterKeyDown={this.handleSubmit}
           floatingLabelText='Shift Specialty'
-          hintText='Shift Specialty' />
+          hintText='Shift Specialty'
+        />
         <br/>
         <TextField
           ref='startHour'
@@ -123,7 +124,8 @@ const ShiftHospitalTable = React.createClass({
           onEnterKeyDown={this.handleSubmit}
           floatingLabelText='Shift Start Hour'
           defaultValue='07'
-          hintText='Shift Start Hour' />
+          hintText='Shift Start Hour'
+        />
         <br/>
         <TextField
           ref='duration'
@@ -131,7 +133,8 @@ const ShiftHospitalTable = React.createClass({
           onEnterKeyDown={this.handleSubmit}
           defaultValue='12'
           floatingLabelText='Shift Duration'
-          hintText='Shift Duration' />
+          hintText='Shift Duration'
+        />
         <br/>
         <TextField
           ref='shiftDressCode'
@@ -139,7 +142,8 @@ const ShiftHospitalTable = React.createClass({
           onEnterKeyDown={this.handleSubmit}
           floatingLabelText='Dress Code'
           defaultValue='clean scrubs'
-          hintText='Dress Code' />
+          hintText='Dress Code'
+        />
         <br/>
         <TextField
           ref='payPerHour'
@@ -147,7 +151,8 @@ const ShiftHospitalTable = React.createClass({
           onEnterKeyDown={this.handleSubmit}
           floatingLabelText='Pay Per Hour'
           defaultValue='53'
-          hintText='Pay Per Hour' />
+          hintText='Pay Per Hour'
+        />
         <br/>
         <TextField
           ref='date'
@@ -155,7 +160,8 @@ const ShiftHospitalTable = React.createClass({
           onEnterKeyDown={this.handleSubmit}
           floatingLabelText='Shift Date'
           defaultValue={moment().format('YYYY-MM-DD')}
-          hintText='Shift Date' />
+          hintText='Shift Date'
+        />
         <RaisedButton label='submit' onClick={this.handleSubmit} secondary/>
       </div>
     );

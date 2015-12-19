@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField, Snackbar} from 'material-ui';
+import { TextField, Snackbar } from 'material-ui';
 import user from '../../utils/grabUser.js';
 import facilityApi from '../../webapi/facilityApi.js';
 
@@ -37,14 +37,16 @@ const SecurityCard = React.createClass({
             onEnterKeyDown={this.handleSubmit}
             type='password'
             floatingLabelText='New Password'
-            hintText='New Password' />
+            hintText='New Password'
+          />
           <br/>
           <TextField
             ref='nPassword2'
             onEnterKeyDown={this.handleSubmit}
             type='password'
             floatingLabelText='Repeat New Password'
-            hintText='Repeat New Password' />
+            hintText='Repeat New Password'
+          />
           <br/>
         </div>
       </div>

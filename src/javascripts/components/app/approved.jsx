@@ -2,7 +2,7 @@ import React from 'react';
 import Approved from './approvedShifts.jsx';
 
 const Shift = React.createClass({
-  render: function () {
+  render() {
     return (
       <div className='appShift'>
         <div className='appShiftResult'>

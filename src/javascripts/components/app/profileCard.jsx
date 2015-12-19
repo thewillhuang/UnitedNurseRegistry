@@ -1,5 +1,5 @@
 import React from 'react';
-import {TextField, RaisedButton} from 'material-ui';
+import { TextField, RaisedButton } from 'material-ui';
 import geoHashApi from '../../webapi/geoHashApi.js';
 import geohash from 'ngeohash';
 import userAddressApi from '../../webapi/userAddressApi.js';
@@ -21,7 +21,7 @@ const input = {
 
 const ProfileCard = React.createClass({
 
-  handleSubmit: function () {
+  handleSubmit() {
     const address = this.refs.address.getValue() || null;
     const city = this.refs.city.getValue() || '';
     const state = this.refs.state.getValue() || '';
@@ -42,7 +42,7 @@ const ProfileCard = React.createClass({
     getGeoHash();
   },
 
-  render: function () {
+  render() {
     return (
       <div className='card'>
         <div className='cardTitle'>
@@ -56,61 +56,71 @@ const ProfileCard = React.createClass({
               onEnterKeyDown={this.handleSubmit}
               ref='fName'
               floatingLabelText='First Name'
-              hintText='First Name' />
+              hintText='First Name'
+            />
             <br/>
             <TextField
               onEnterKeyDown={this.handleSubmit}
               ref='mName'
               floatingLabelText='Middle Name'
-              hintText='Middle Name' />
+              hintText='Middle Name'
+            />
             <br/>
             <TextField
               onEnterKeyDown={this.handleSubmit}
               ref='lName'
               floatingLabelText='Last Name'
-              hintText='Last Name' />
+              hintText='Last Name'
+            />
             <br/>
             <TextField
               onEnterKeyDown={this.handleSubmit}
               ref='dob'
               floatingLabelText='Date of Birth'
-              hintText='Date of Birth' />
+              hintText='Date of Birth'
+            />
             <br/>
             <TextField
               onEnterKeyDown={this.handleSubmit}
               ref='phone'
               floatingLabelText='Phone Number'
-              hintText='Phone Number' />
+              hintText='Phone Number'
+            />
             <br/>
             <TextField
               onEnterKeyDown={this.handleSubmit}
               ref='ssn'
               floatingLabelText='Social Security Number'
-              hintText='Social Security Number' />
+              hintText='Social Security Number'
+            />
             <br/>
             <TextField
               onEnterKeyDown={this.handleSubmit}
               ref='address'
               floatingLabelText='Address'
-              hintText='Address' />
+              hintText='Address'
+            />
             <br/>
             <TextField
               onEnterKeyDown={this.handleSubmit}
               ref='city'
               floatingLabelText='City'
-              hintText='City' />
+              hintText='City'
+            />
             <br/>
             <TextField
               onEnterKeyDown={this.handleSubmit}
               ref='state'
               floatingLabelText='State'
-              hintText='State' />
+              hintText='State'
+            />
             <br/>
             <TextField
               onEnterKeyDown={this.handleSubmit}
               ref='zip'
               floatingLabelText='Zip'
-              hintText='Zip' />
+              hintText='Zip'
+            />
             <br/>
             <a href='/api/auth/stripe' className='stripe-connect'><span>Connect with Stripe</span></a>
             <br/>

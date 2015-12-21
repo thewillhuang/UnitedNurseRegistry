@@ -89,9 +89,8 @@ module.exports = function (env) {
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.UglifyJsPlugin({
         compress: {
-          warnings: false,
+          warnings: true,
         },
-        sourceMap: true,
       }),
       new webpack.optimize.OccurenceOrderPlugin(true),
       new webpack.NoErrorsPlugin()

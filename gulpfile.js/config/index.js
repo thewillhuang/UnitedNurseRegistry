@@ -1,8 +1,8 @@
-var config = {}
+const config = {};
 
-config.publicDirectory = "./public"
-config.sourceDirectory = "./src"
-config.publicAssets    = config.publicDirectory
-config.sourceAssets    = config.sourceDirectory
+config.publicDirectory = './public';
+config.sourceDirectory = './src';
+config.publicAssets = config.publicDirectory;
+config.sourceAssets = config.sourceDirectory;
 
-module.exports = config
+module.exports = config;

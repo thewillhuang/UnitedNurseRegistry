@@ -110,6 +110,7 @@
     "nuke": "rm -rf node_modules src/bower_components; npm install; npm run development",
     "production": "NODE_ENV='production' gulp build:production;",
     "prod": "npm run production;",
+    "publish": "NODE_ENV='production' gulp build:production && gulp publish",
     "dev": "npm run development",
     "postinstall": "npm run version; npm run bower;",
     "version": "node -v;",

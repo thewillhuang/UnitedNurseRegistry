@@ -3,7 +3,6 @@ const gulpFilter = require('gulp-filter');
 const awspublish = require('gulp-awspublish');
 const parallelize = require('concurrent-transform');
 const config = require('../config/awspublish');
-console.log(config);
 if (!config) return;
 
 gulp.task('publish', function () {

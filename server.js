@@ -48,7 +48,6 @@ if (env === 'development') {
   app.use(helmet.contentSecurityPolicy({
     scriptSrc: [
       '\'self\'',
-      '*.unitednurseregistry.com',
       'https://checkout.stripe.com',
       'http://cdn.raygun.io/raygun4js/raygun.min.js',
       '\'unsafe-inline\'',
@@ -62,6 +61,13 @@ if (env === 'development') {
     gzip: true,
     dynamic: true,
   }));
+
+  // set cors
+  app.use(function *(next) {
+    yield next;
+    this.set('Access-Control-Allow-Origin', 'http://unitednurseregistry.com, http://www.unitednurseregistry.com');
+    this.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+  });
 }
 
 // parse body to json

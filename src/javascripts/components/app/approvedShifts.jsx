@@ -6,7 +6,7 @@ import getGeoHash from '../../utils/getGeoHash.js';
 import shiftApi from '../../webapi/shiftApi.js';
 import shiftStatusApi from '../../webapi/shiftStatusApi.js';
 import io from 'socket.io-client';
-const socket = io.connect();
+const socket = io.connect('http://api.unitednurseregistry.com');
 import _ from 'lodash';
 import ghash from 'ngeohash';
 import moment from 'moment';

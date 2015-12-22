@@ -7,7 +7,7 @@ import userSpecialtyApi from '../../webapi/userSpecialtyApi.js';
 import shiftStatusApi from '../../webapi/shiftStatusApi.js';
 import user from '../../utils/grabUser.js';
 const facilityID = user.scope.facilityID;
-const socket = io.connect();
+const socket = io.connect('http://api.unitednurseregistry.com');
 import checkoutApi from '../../webapi/checkout.js';
 
 const ShiftHospitalTable = React.createClass({

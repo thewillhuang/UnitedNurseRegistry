@@ -48,6 +48,7 @@ if (env === 'development') {
   app.use(helmet.contentSecurityPolicy({
     scriptSrc: [
       '\'self\'',
+      '*.unitednurseregistry.com',
       'https://checkout.stripe.com',
       'http://cdn.raygun.io/raygun4js/raygun.min.js',
       '\'unsafe-inline\'',

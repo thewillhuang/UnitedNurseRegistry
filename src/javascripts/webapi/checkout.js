@@ -14,7 +14,7 @@ checkoutApi.saveCharges = (token, shiftID, price) => {
     .send({token})
     .endAsync().then(res => {
       return res.body;
-    }).catch((e)=> {
+    }).catch((e) => {
       console.log(e);
       window.sessionStorage.clear();
       window.location.assign('/');

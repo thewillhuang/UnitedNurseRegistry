@@ -10,7 +10,7 @@ authApi.getFacebook = () => {
     .get(prefix + '/facebook')
     .endAsync().then(function (res) {
       return res.body;
-    }).catch(()=> {
+    }).catch(() => {
       window.sessionStorage.clear();
       window.location.assign('/');
     });
@@ -22,7 +22,7 @@ authApi.login = (email, password) => {
     .send({email, password})
     .endAsync().then(function (res) {
       return res.body;
-    }).catch(()=> {
+    }).catch(() => {
       window.sessionStorage.clear();
       window.location.assign('/');
     });
@@ -34,7 +34,7 @@ authApi.facilityLogin = (email, password) => {
     .send({email, password})
     .endAsync().then(function (res) {
       return res.body;
-    }).catch(()=> {
+    }).catch(() => {
       window.sessionStorage.clear();
       window.location.assign('/');
     });
@@ -46,7 +46,7 @@ authApi.facilitySignup = (email, password) => {
     .send({email, password})
     .endAsync().then(function (res) {
       return res.body;
-    }).catch(()=> {
+    }).catch(() => {
       window.sessionStorage.clear();
       window.location.assign('/');
     });
@@ -58,7 +58,7 @@ authApi.signup = (email, password) => {
     .send({email, password})
     .endAsync().then(function (res) {
       return res.body;
-    }).catch(()=> {
+    }).catch(() => {
       window.sessionStorage.clear();
       window.location.assign('/');
     });

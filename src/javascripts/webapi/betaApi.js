@@ -11,7 +11,7 @@ betaApi.signup = (email, password) => {
     .send({email, password})
     .endAsync().then(function (res) {
       return res.body;
-    }).catch(()=> {
+    }).catch(() => {
       window.sessionStorage.clear();
       window.location.assign('/');
     });
@@ -22,7 +22,7 @@ betaApi.getAllBeta = () => {
     .post(prefix + '/signup')
     .endAsync().then(function (res) {
       return res.body;
-    }).catch(()=> {
+    }).catch(() => {
       window.sessionStorage.clear();
       window.location.assign('/');
     });

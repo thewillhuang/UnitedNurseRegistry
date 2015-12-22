@@ -12,7 +12,7 @@ facilityAddressApi.getFacilityAddress = (facilityID) => {
     .set(token)
     .endAsync().then(function (res) {
       return res.body;
-    }).catch(()=> {
+    }).catch(() => {
       window.sessionStorage.clear();
     });
 };
@@ -26,7 +26,7 @@ facilityAddressApi.addFacilityAddress = (facilityID, address, address2, city, st
       return res.body;
     }).catch(function (err) {
       return err;
-    }).catch(()=> {
+    }).catch(() => {
       window.sessionStorage.clear();
       window.location.assign('/');
     });

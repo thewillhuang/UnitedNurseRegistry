@@ -39,6 +39,18 @@ app.use(serve(buildPath), { defer: true });
 // // serve root '/' (react server side rendering)
 // require('./server/serverRender')(app);
 
+// cors that allows for subdomains
+app.use(function *(next) {
+  yield next;
+  if (this.request.origin.indexOf('unitednurseregistry.com') !== -1) {
+    this.set('Access-Control-Allow-Origin', this.request.origin);
+    this.set('Access-Control-Allow-Methods', 'POST, GET, PUT, OPTIONS, DELETE');
+    this.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  } else {
+    this.set('Access-Control-Allow-Origin', 'none');
+  }
+});
+
 // static file services
 if (env === 'development') {
   console.log('server running in development mode');
@@ -61,14 +73,6 @@ if (env === 'development') {
     gzip: true,
     dynamic: true,
   }));
-
-  // set cors
-  app.use(function *(next) {
-    yield next;
-    this.set('Access-Control-Allow-Origin', 'http://unitednurseregistry.com');
-    this.set('Access-Control-Allow-Methods', 'POST, GET, PUT, OPTIONS, DELETE');
-    this.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  });
 }
 
 // parse body to json

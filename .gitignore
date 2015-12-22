@@ -13,3 +13,4 @@ plugins
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+.awspublish-unitednurseregistry.com

@@ -6,7 +6,7 @@ import shiftStatusApi from '../../webapi/shiftStatusApi.js';
 import user from '../../utils/grabUser.js';
 const facilityID = user.scope.facilityID;
 import moment from 'moment';
-const socket = io.connect('http://api.unitednurseregistry.com');
+const socket = io.connect('//api.unitednurseregistry.com');
 
 const ShiftHospitalTable = React.createClass({
 

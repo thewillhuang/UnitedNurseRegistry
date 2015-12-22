@@ -19,7 +19,7 @@ const BetaSignup = React.createClass({
         signupButton: 'Sending Data...',
       });
       request
-        .post('http://api.unitednurseregistry.com/api/beta/signup')
+        .post('//api.unitednurseregistry.com/api/beta/signup')
         .send({
           email: this.refs.email.getValue(),
         })

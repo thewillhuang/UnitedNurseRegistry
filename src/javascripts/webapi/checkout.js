@@ -3,7 +3,7 @@ import superagent from 'superagent';
 import jwt from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
 
-const prefix = 'http://api.unitednurseregistry.com/api/checkout';
+const prefix = '//api.unitednurseregistry.com/api/checkout';
 const checkoutApi = {};
 
 checkoutApi.saveCharges = (token, shiftID, price) => {

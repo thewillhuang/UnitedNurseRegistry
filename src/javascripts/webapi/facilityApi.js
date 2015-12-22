@@ -2,7 +2,7 @@ import Promise from 'bluebird';
 import superagent from 'superagent';
 import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = 'http://api.unitednurseregistry.com/api/facility';
+const prefix = '//api.unitednurseregistry.com/api/facility';
 const facilityApi = {};
 import _ from 'lodash';
 

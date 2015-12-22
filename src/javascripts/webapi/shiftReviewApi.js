@@ -2,7 +2,7 @@ import Promise from 'bluebird';
 import superagent from 'superagent';
 import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = 'api.unitednurseregistry.com/api/shiftReview';
+const prefix = 'http://api.unitednurseregistry.com/api/shiftReview';
 const shiftReviewApi = {};
 
 shiftReviewApi.createUserReview = (shiftID, review) => {

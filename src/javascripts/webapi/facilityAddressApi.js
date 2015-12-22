@@ -3,7 +3,7 @@ import superagent from 'superagent';
 import token from '../utils/grabToken.js';
 import _ from 'lodash';
 const request = Promise.promisifyAll(superagent);
-const prefix = 'api.unitednurseregistry.com/api/facilityAddress';
+const prefix = 'http://api.unitednurseregistry.com/api/facilityAddress';
 const facilityAddressApi = {};
 
 facilityAddressApi.getFacilityAddress = (facilityID) => {

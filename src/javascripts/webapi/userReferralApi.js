@@ -2,7 +2,7 @@ import Promise from 'bluebird';
 import superagent from 'superagent';
 import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = 'api.unitednurseregistry.com/api/referral';
+const prefix = 'http://api.unitednurseregistry.com/api/referral';
 const referralApi = {};
 
 referralApi.createUserReferral = (parentId) => {

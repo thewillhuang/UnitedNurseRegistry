@@ -10,7 +10,7 @@ const LoginBox = React.createClass({
     if (validator.isEmail(this.refs.email.getValue()) && this.refs.password.getValue().length > 5) {
       this.refs.email.setErrorText('');
       request
-        .post('api.unitednurseregistry.com/api/auth/login')
+        .post('http://api.unitednurseregistry.com/api/auth/login')
         .send({
           email: this.refs.email.getValue(),
           password: this.refs.password.getValue(),

@@ -2,7 +2,7 @@ import Promise from 'bluebird';
 import superagent from 'superagent';
 const request = Promise.promisifyAll(superagent);
 
-const prefix = 'api.unitednurseregistry.com/api/auth';
+const prefix = 'http://api.unitednurseregistry.com/api/auth';
 const authApi = {};
 
 authApi.getFacebook = () => {

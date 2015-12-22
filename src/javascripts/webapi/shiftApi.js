@@ -2,7 +2,7 @@ import Promise from 'bluebird';
 import superagent from 'superagent';
 import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = '/api/shift';
+const prefix = 'api.unitednurseregistry.com/api/shift';
 const shiftApi = {};
 
 shiftApi.createShift = (facilityID, specialtyID, shiftStartHour, shiftDuration, payPerHour, date, shiftDressCode) => {

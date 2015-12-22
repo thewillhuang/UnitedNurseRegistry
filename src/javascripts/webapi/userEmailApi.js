@@ -2,7 +2,7 @@ import Promise from 'bluebird';
 import superagent from 'superagent';
 import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = '/api/useremail';
+const prefix = 'api.unitednurseregistry.com/api/useremail';
 const userEmailApi = {};
 
 userEmailApi.createUserEmail = (userID, emailAddress, emailType) => {

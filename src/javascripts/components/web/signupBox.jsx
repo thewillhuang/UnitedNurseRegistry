@@ -21,7 +21,7 @@ const SignupBox = React.createClass({
       });
       this.refs.email.setErrorText('');
       request
-        .post('/api/auth/signup')
+        .post('api.unitednurseregistry.com/api/auth/signup')
         .send({
           email: this.refs.email.getValue(),
           password: this.refs.password.getValue(),

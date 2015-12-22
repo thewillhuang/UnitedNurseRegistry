@@ -2,7 +2,7 @@ import Promise from 'bluebird';
 import superagent from 'superagent';
 import token from '../utils/grabToken.js';
 const request = Promise.promisifyAll(superagent);
-const prefix = '/api/userlicense';
+const prefix = 'api.unitednurseregistry.com/api/userlicense';
 const userLicenseApi = {};
 
 userLicenseApi.createUserLicense = (userID, licenseNumber, licenseState, licensePhotoUrl, expiration) => {

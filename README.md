@@ -37,5 +37,6 @@ docker run --restart=always -d -p 80:8080 thewillhuang/unitednurseregistry; exit
 ```
 #### subsequent loads
 ```sh
-sudo yum update -y; docker pull thewillhuang/unitednurseregistry; docker rm --force `docker ps -qa`; docker rmi $(docker images -q --filter "dangling=true"); docker run --restart=always -d -p 80:8080 thewillhuang/unitednurseregistry; exit
+sudo yum update -y; docker pull thewillhuang/unitednurseregistry; docker stop $(docker ps -a -q);
+docker rm $(docker ps -a -q); docker rmi $(docker images | grep “^<none>” | awk ‘{print $3}’); docker run --restart=always -d -p 80:8080 thewillhuang/unitednurseregistry; exit
 ```

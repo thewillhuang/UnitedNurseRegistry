@@ -15,8 +15,6 @@ module.exports = {
   },
   'headers': {
     'Cache-Control': 'max-age=315360000, no-transform, public',
-    // 'Access-Control-Allow-Origin': 'http://unitednurseregistry.com',
-    // 'Access-Control-Allow-Methods': 'POST, GET, OPTIONS',
   },
   'filter': [
     '**/*.js',

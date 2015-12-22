@@ -65,8 +65,9 @@ if (env === 'development') {
   // set cors
   app.use(function *(next) {
     yield next;
-    this.set('Access-Control-Allow-Origin', 'http://www.unitednurseregistry.com');
-    this.set('Access-Control-Allow-Methods', 'POST, GET, PUT, OPTIONS');
+    this.set('Access-Control-Allow-Origin', 'http://unitednurseregistry.com');
+    this.set('Access-Control-Allow-Methods', 'POST, GET, PUT, OPTIONS, DELETE');
+    this.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   });
 }
 
@@ -102,6 +103,7 @@ app.use(function* bearerAuthentication(next) {
       ctx.set({ Authorization: token });
       yield next;
     } else {
+      console.log('bearer auth');
       ctx.status = 401;
     }
   }).call(this, next);

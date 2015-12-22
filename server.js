@@ -65,8 +65,8 @@ if (env === 'development') {
   // set cors
   app.use(function *(next) {
     yield next;
-    this.set('Access-Control-Allow-Origin', 'http://unitednurseregistry.com, http://www.unitednurseregistry.com');
-    this.set('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
+    this.set('Access-Control-Allow-Origin', 'http://unitednurseregistry.com, http://www.unitednurseregistry.com, http://api.unitednurseregistry.com');
+    this.set('Access-Control-Allow-Methods', 'POST, GET, PUT, OPTIONS');
   });
 }
 

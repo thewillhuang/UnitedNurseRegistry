@@ -40,7 +40,8 @@ app.use(function* (next) {
   if (this.get('Origin').indexOf('unitednurseregistry.com') !== -1) {
     this.set({
       'Access-Control-Allow-Origin': this.get('Origin'),
-      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+      'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE',
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
     });
   }
 });
@@ -112,17 +113,17 @@ app.use(function* bearerAuthentication(next) {
   }).call(this, next);
 });
 
-// app.use(function* ensureAuthenticated(next) {
-//   if (this.path.indexOf('socket.io') !== -1) {
-//     yield next;
-//   }
-//   if (this.isAuthenticated()) {
-//     yield next;
-//   } else {
-//     ctx.body = 'not authenticated';
-//     this.status = 401;
-//   }
-// });
+app.use(function* ensureAuthenticated(next) {
+  if (this.path.indexOf('socket.io') !== -1) {
+    yield next;
+  }
+  if (this.isAuthenticated()) {
+    yield next;
+  } else {
+    this.body = 'not authenticated';
+    this.status = 401;
+  }
+});
 
 // secured routes
 require('./server/routes/userRoutes')(app);

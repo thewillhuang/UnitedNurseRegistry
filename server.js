@@ -93,7 +93,7 @@ app.use(function* bearerAuthentication(next) {
   const ctx = this;
   yield passport.authenticate('bearer', { session: false }, function* (err, user) {
     if (err) {
-      console.log(err);
+      ctx.body = err;
       ctx.status = 500;
     }
     if (user) {

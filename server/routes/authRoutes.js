@@ -8,6 +8,9 @@ const passport = require('koa-passport');
 const jwt = require('../services/jwt');
 
 module.exports = function authRoutes(app) {
+  app.use(auth.routes());
+  app.use(auth.allowedMethods());
+
   auth
 
   .get('/facebook',
@@ -128,7 +131,4 @@ module.exports = function authRoutes(app) {
       }
     }).call(this, next);
   });
-
-  app.use(auth.routes());
-  app.use(auth.allowedMethods());
 };

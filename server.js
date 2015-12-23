@@ -38,7 +38,7 @@ app.use(compress());
 app.use(function* (next) {
   yield next;
   this.set({
-    'Access-Control-Allow-Origin': 'www.unitednurseregistry.com',
+    'Access-Control-Allow-Origin': 'http://www.unitednurseregistry.com',
     'Access-Control-Allow-Methods': 'POST, GET, PUT, OPTIONS, DELETE',
     'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
   });

@@ -38,9 +38,12 @@ app.use(compress());
 app.use(function* (next) {
   yield next;
   if (this.get('Origin') && this.get('Origin').indexOf('unitednurseregistry.com') !== -1) {
+    console.log(this.header);
     this.set({
       'Access-Control-Allow-Origin': this.get('Origin'),
       'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+      'Access-Control-Allow-Credentials': 'true',
     });
   }
 });

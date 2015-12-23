@@ -37,10 +37,12 @@ app.use(compress());
 // cors that allows for subdomains
 app.use(function* (next) {
   yield next;
-  this.set({
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
-  });
+  if (this.get('Origin').indexOf('unitednurseregistry.com') !== -1) {
+    this.set({
+      'Access-Control-Allow-Origin': this.get('Origin'),
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept',
+    });
+  }
 });
 
 app.use(serve(buildPath), { defer: true });

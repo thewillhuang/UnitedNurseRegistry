@@ -58,6 +58,7 @@ module.exports = function authRoutes(app) {
   });
 
   auth.post(`${prefix}/login`, function*(next) {
+    console.log('login called');
     const ctx = this;
     yield passport.authenticate('local', { session: false }, function*(err, user, info) {
       if (err) console.log('error', err);
@@ -125,7 +126,7 @@ module.exports = function authRoutes(app) {
       }
     }).call(this, next);
   });
+
   app.use(auth.routes());
   app.use(auth.allowedMethods());
-  console.log('auth2', auth);
 };

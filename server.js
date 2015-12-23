@@ -37,10 +37,9 @@ app.use(compress());
 // cors that allows for subdomains
 app.use(function* (next) {
   yield next;
-  if (this.get('Origin').indexOf('unitednurseregistry.com') !== -1) {
+  if (this.get('Origin') && this.get('Origin').indexOf('unitednurseregistry.com') !== -1) {
     this.set({
       'Access-Control-Allow-Origin': this.get('Origin'),
-      'Access-Control-Allow-Methods': 'GET, PUT, POST, DELETE',
       'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
     });
   }
@@ -88,6 +87,14 @@ app.use(passport.initialize());
 // Set bearer tokens for different auth strategies
 require('./server/routes/authRoutes')(app);
 
+app.use(function* handleOptions(next) {
+  if (this.request.method === 'OPTIONS') {
+    this.status = 200;
+  } else {
+    yield next;
+  }
+});
+
 // authorize any requests that has a valid bearer token
 app.use(function* bearerAuthentication(next) {
   if (this.path.indexOf('socket.io') !== -1) {
@@ -107,7 +114,7 @@ app.use(function* bearerAuthentication(next) {
       ctx.set({ Authorization: token });
       yield next;
     } else {
-      ctx.body = 'failed bearer auth';
+      ctx.body = { 'msg': 'failed bearer auth' };
       ctx.status = 401;
     }
   }).call(this, next);
@@ -120,7 +127,7 @@ app.use(function* ensureAuthenticated(next) {
   if (this.isAuthenticated()) {
     yield next;
   } else {
-    this.body = 'not authenticated';
+    this.body = { 'msg': 'failed ensureAuthenticated' };
     this.status = 401;
   }
 });

@@ -104,22 +104,23 @@ app.use(function* bearerAuthentication(next) {
       ctx.set({ Authorization: token });
       yield next;
     } else {
-      console.log('bearer auth');
+      ctx.body = 'failed bearer auth';
       ctx.status = 401;
     }
   }).call(this, next);
 });
 
-app.use(function* ensureAuthenticated(next) {
-  if (this.path.indexOf('socket.io') !== -1) {
-    yield next;
-  }
-  if (this.isAuthenticated()) {
-    yield next;
-  } else {
-    this.status = 401;
-  }
-});
+// app.use(function* ensureAuthenticated(next) {
+//   if (this.path.indexOf('socket.io') !== -1) {
+//     yield next;
+//   }
+//   if (this.isAuthenticated()) {
+//     yield next;
+//   } else {
+//     ctx.body = 'not authenticated';
+//     this.status = 401;
+//   }
+// });
 
 // secured routes
 require('./server/routes/userRoutes')(app);

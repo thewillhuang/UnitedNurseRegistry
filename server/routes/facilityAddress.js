@@ -87,6 +87,6 @@ module.exports = function (app) {
     }
   });
 
-  app.use(facilityAddress.routes())
-    .use(facilityAddress.allowedMethods());
+  app.use(facilityAddress.routes());
+  app.use(facilityAddress.allowedMethods());
 };

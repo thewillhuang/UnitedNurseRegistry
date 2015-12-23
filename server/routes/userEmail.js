@@ -84,6 +84,6 @@ module.exports = function (app) {
     }
   });
 
-  app.use(userEmail.routes())
-    .use(userEmail.allowedMethods());
+  app.use(userEmail.routes());
+  app.use(userEmail.allowedMethods());
 };

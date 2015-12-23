@@ -74,6 +74,6 @@ module.exports = function (app) {
     }
   });
 
-  app.use(userLicense.routes())
-    .use(userLicense.allowedMethods());
+  app.use(userLicense.routes());
+  app.use(userLicense.allowedMethods());
 };

@@ -35,6 +35,6 @@ module.exports = function authRoutes(app) {
     this.body = yield query(q);
   });
 
-  app.use(beta.routes())
-    .use(beta.allowedMethods());
+  app.use(beta.routes());
+  app.use(beta.allowedMethods());
 };

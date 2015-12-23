@@ -161,6 +161,6 @@ module.exports = function shiftStatusRoutes(app) {
     this.body = yield query(q);
   });
 
-  app.use(shiftStatus.routes())
-    .use(shiftStatus.allowedMethods());
+  app.use(shiftStatus.routes());
+  app.use(shiftStatus.allowedMethods());
 };

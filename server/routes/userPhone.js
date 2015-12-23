@@ -84,6 +84,6 @@ module.exports = function (app) {
     }
   });
 
-  app.use(userPhone.routes())
-    .use(userPhone.allowedMethods());
+  app.use(userPhone.routes());
+  app.use(userPhone.allowedMethods());
 };

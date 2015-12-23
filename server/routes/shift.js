@@ -289,6 +289,6 @@ module.exports = function shiftRoutes(app) {
     }
   });
 
-  app.use(shift.routes())
-    .use(shift.allowedMethods());
+  app.use(shift.routes());
+  app.use(shift.allowedMethods());
 };

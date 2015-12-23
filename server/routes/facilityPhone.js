@@ -85,6 +85,6 @@ module.exports = function (app) {
     }
   });
 
-  app.use(facilityphone.routes())
-    .use(facilityphone.allowedMethods());
+  app.use(facilityphone.routes());
+  app.use(facilityphone.allowedMethods());
 };

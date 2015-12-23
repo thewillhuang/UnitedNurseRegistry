@@ -129,6 +129,6 @@ module.exports = function authRoutes(app) {
     }).call(this, next);
   });
 
-  app.use(auth.routes())
-    .use(auth.allowedMethods());
+  app.use(auth.routes());
+  app.use(auth.allowedMethods());
 };

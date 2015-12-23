@@ -127,6 +127,6 @@ module.exports = function (app) {
     }
   });
 
-  app.use(userSpecialty.routes())
-    .use(userSpecialty.allowedMethods());
+  app.use(userSpecialty.routes());
+  app.use(userSpecialty.allowedMethods());
 };

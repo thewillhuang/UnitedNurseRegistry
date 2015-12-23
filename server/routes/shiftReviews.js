@@ -178,6 +178,6 @@ module.exports = function shiftReviewRoutes(app) {
     }
   });
 
-  app.use(shiftReview.routes())
-    .use(shiftReview.allowedMethods());
+  app.use(shiftReview.routes());
+  app.use(shiftReview.allowedMethods());
 };

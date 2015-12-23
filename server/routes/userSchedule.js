@@ -66,6 +66,6 @@ module.exports = function (app) {
     }
   });
 
-  app.use(userSchedule.routes())
-    .use(userSchedule.allowedMethods());
+  app.use(userSchedule.routes());
+  app.use(userSchedule.allowedMethods());
 };

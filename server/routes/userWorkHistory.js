@@ -75,6 +75,6 @@ module.exports = function (app) {
     }
   });
 
-  app.use(userWorkHistory.routes())
-    .use(userWorkHistory.allowedMethods());
+  app.use(userWorkHistory.routes());
+  app.use(userWorkHistory.allowedMethods());
 };

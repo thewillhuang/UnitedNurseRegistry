@@ -45,9 +45,9 @@ module.exports = function authRoutes(app) {
       }).then(function (q) {
         return query(q);
       }).then(() => {
-        ctx.body = {message: 'charge stored'};
+        ctx.body = { message: 'charge stored' };
       }).catch(error => {
-        ctx.body = {message: error};
+        ctx.body = { message: error };
       });
     }
   })
@@ -61,6 +61,6 @@ module.exports = function authRoutes(app) {
     this.body = shiftInfo;
   });
 
-  app.use(checkout.routes())
-    .use(checkout.allowedMethods());
+  app.use(checkout.routes());
+  app.use(checkout.allowedMethods());
 };

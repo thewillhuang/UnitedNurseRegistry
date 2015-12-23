@@ -80,6 +80,6 @@ module.exports = function userRoutes(app) {
     }
   });
 
-  app.use(users.routes())
-    .use(users.allowedMethods());
+  app.use(users.routes());
+  app.use(users.allowedMethods());
 };

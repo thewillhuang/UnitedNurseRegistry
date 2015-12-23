@@ -101,6 +101,6 @@ module.exports = function (app) {
     }
   });
 
-  app.use(facilityuser.routes())
-    .use(facilityuser.allowedMethods());
+  app.use(facilityuser.routes());
+  app.use(facilityuser.allowedMethods());
 };

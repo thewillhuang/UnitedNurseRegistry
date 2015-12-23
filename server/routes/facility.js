@@ -88,6 +88,6 @@ module.exports = function (app) {
     }
   });
 
-  app.use(facility.routes())
-    .use(facility.allowedMethods());
+  app.use(facility.routes());
+  app.use(facility.allowedMethods());
 };

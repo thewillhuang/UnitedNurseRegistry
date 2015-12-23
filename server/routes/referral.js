@@ -65,6 +65,6 @@ module.exports = function userRoutes(app) {
     this.body = yield query(q);
   });
 
-  app.use(referral.routes())
-    .use(referral.allowedMethods());
+  app.use(referral.routes());
+  app.use(referral.allowedMethods());
 };

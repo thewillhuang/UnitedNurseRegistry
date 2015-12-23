@@ -84,6 +84,6 @@ module.exports = function (app) {
     }
   });
 
-  app.use(facilityEmail.routes())
-    .use(facilityEmail.allowedMethods());
+  app.use(facilityEmail.routes());
+  app.use(facilityEmail.allowedMethods());
 };

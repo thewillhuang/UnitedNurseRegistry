@@ -54,6 +54,6 @@ module.exports = function authRoutes(app) {
     }
   });
 
-  app.use(geohash.routes())
-    .use(geohash.allowedMethods());
+  app.use(geohash.routes());
+  app.use(geohash.allowedMethods());
 };

@@ -7,9 +7,6 @@ const jwt = require('../services/jwt');
 const prefix = '/api/auth';
 
 module.exports = function authRoutes(app) {
-  app.use(auth.routes());
-  app.use(auth.allowedMethods());
-
   auth.get(`${prefix}/facebook`,
     passport.authenticate('facebook')
   );
@@ -128,4 +125,7 @@ module.exports = function authRoutes(app) {
       }
     }).call(this, next);
   });
+  app.use(auth.routes());
+  app.use(auth.allowedMethods());
+  console.log('auth2', auth);
 };

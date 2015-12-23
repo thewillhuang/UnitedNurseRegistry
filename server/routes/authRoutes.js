@@ -11,13 +11,11 @@ module.exports = function authRoutes(app) {
   app.use(auth.routes());
   app.use(auth.allowedMethods());
 
-  auth
-
-  .get('/facebook',
+  auth.get('/facebook',
     passport.authenticate('facebook')
-  )
+  );
 
-  .get('/facebook/callback', function* (next) {
+  auth.get('/facebook/callback', function* (next) {
     const ctx = this;
     yield passport.authenticate('facebook', {
       failureRedirect: '/login',
@@ -36,13 +34,13 @@ module.exports = function authRoutes(app) {
         ctx.body = { message: user };
       }
     }).call(this, next);
-  })
+  });
 
-  .get('/stripe',
+  auth.get('/stripe',
     passport.authenticate('stripe')
-  )
+  );
 
-  .get('/stripe/callback', function* (next) {
+  auth.get('/stripe/callback', function* (next) {
     const ctx = this;
     yield passport.authenticate('stripe', {
       failureRedirect: '/login',
@@ -61,9 +59,9 @@ module.exports = function authRoutes(app) {
         ctx.body = { message: user };
       }
     }).call(this, next);
-  })
+  });
 
-  .post('/login', function*(next) {
+  auth.post('/login', function*(next) {
     const ctx = this;
     yield passport.authenticate('local', { session: false }, function*(err, user, info) {
       if (err) console.log('error', err);
@@ -78,9 +76,9 @@ module.exports = function authRoutes(app) {
         ctx.body = { message: user };
       }
     }).call(this, next);
-  })
+  });
 
-  .post('/facility/login', function*(next) {
+  auth.post('/facility/login', function*(next) {
     const ctx = this;
     yield passport.authenticate('facility-login', { session: false }, function*(err, user, info) {
       if (err) console.log('error', err);
@@ -95,9 +93,9 @@ module.exports = function authRoutes(app) {
         ctx.body = { message: user };
       }
     }).call(this, next);
-  })
+  });
 
-  .post('/facility/signup', function*(next) {
+  auth.post('/facility/signup', function*(next) {
     const ctx = this;
     yield passport.authenticate('facility-signup', { session: false }, function*(err, user, info) {
       // console.log('user', user, 'info', info);
@@ -113,9 +111,9 @@ module.exports = function authRoutes(app) {
         ctx.body = { message: user };
       }
     }).call(this, next);
-  })
+  });
 
-  .post('/signup', function*(next) {
+  auth.post('/signup', function*(next) {
     const ctx = this;
     yield passport.authenticate('local-signup', { session: false }, function*(err, user, info) {
       if (err) console.log('error', err);

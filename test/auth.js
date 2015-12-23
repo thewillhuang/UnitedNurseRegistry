@@ -17,28 +17,28 @@ describe('authentication api', function () {
   let u1;
   let u1jwt;
 
-  it('should respond to a options signup with /signup', function (done) {
-    request.options('/api/auth/signup')
-      .send({
-        password: password2,
-        email: email2,
-      })
-      .expect(200)
-      .end(function (err, res) {
-        // console.log(res);
-        // console.log(res.headers.authorization.split(' ').pop());
-        console.log(res.status);
-        console.log(res.headers);
-        console.log(res.body);
-        u1jwt = { Authorization: res.headers.authorization };
-        u1 = res.body.message.scope.userID;
-        expect(res.body).to.be.an('object');
-        expect(res.headers.authorization).to.be.a('string');
-        expect(res.headers.authorization).to.contain('Bearer');
-        expect(err).to.be.a('null');
-        done();
-      });
-  });
+  // it('should respond to a options signup with /signup', function (done) {
+  //   request.options('/api/auth/signup')
+  //     .send({
+  //       password: password2,
+  //       email: email2,
+  //     })
+  //     .expect(200)
+  //     .end(function (err, res) {
+  //       // console.log(res);
+  //       // console.log(res.headers.authorization.split(' ').pop());
+  //       console.log(res.status);
+  //       console.log(res.headers);
+  //       console.log(res.body);
+  //       u1jwt = { Authorization: res.headers.authorization };
+  //       u1 = res.body.message.scope.userID;
+  //       expect(res.body).to.be.an('object');
+  //       expect(res.headers.authorization).to.be.a('string');
+  //       expect(res.headers.authorization).to.contain('Bearer');
+  //       expect(err).to.be.a('null');
+  //       done();
+  //     });
+  // });
 
   it('should signup with /signup', function (done) {
     request.post('/api/auth/signup')

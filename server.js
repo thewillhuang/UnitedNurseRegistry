@@ -87,9 +87,9 @@ app.use(passport.initialize());
 // Set bearer tokens for different auth strategies
 require('./server/routes/authRoutes')(app);
 
-app.use(function* handleOptions(next) {
+app.use(function* handleCors(next) {
   if (this.request.method === 'OPTIONS') {
-    this.status = 200;
+    this.status = 204;
   } else {
     yield next;
   }

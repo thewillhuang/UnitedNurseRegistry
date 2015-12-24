@@ -24,7 +24,7 @@ if (env === 'development') {
 
 // cors that allows for subdomains
 app.use(function* (next) {
-  if (this.get('Origin') && this.get('Origin').indexOf('unitednurseregistry.com') !== -1) {
+  if (this.get('Origin') && this.get('Origin').toLowerCase().indexOf('unitednurseregistry.com') !== -1) {
     this.set({
       'Access-Control-Allow-Origin': this.get('Origin'),
       'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',

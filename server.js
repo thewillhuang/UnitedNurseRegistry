@@ -24,7 +24,7 @@ if (env === 'development') {
 
 // cors that allows for subdomains
 app.use(function* (next) {
-  if (this.request.method === 'OPTIONS' &&
+  if (
   this.get('Origin') &&
   this.get('Origin').indexOf('unitednurseregistry.com') !== -1) {
     this.set({
@@ -33,6 +33,8 @@ app.use(function* (next) {
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
       'Access-Control-Allow-Credentials': 'true',
     });
+  }
+  if (this.request.method === 'OPTIONS') {
     this.status = 204;
   }
   yield next;

@@ -22,6 +22,22 @@ if (env === 'development') {
   app.use(logger());
 }
 
+// cors that allows for subdomains
+app.use(function* (next) {
+  if (this.request.method === 'OPTIONS' &&
+  this.get('Origin') &&
+  this.get('Origin').indexOf('unitednurseregistry.com') !== -1) {
+    this.set({
+      'Access-Control-Allow-Origin': this.get('Origin'),
+      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
+      'Access-Control-Allow-Credentials': 'true',
+    });
+    this.status = 204;
+  }
+  yield next;
+});
+
 // cacheing
 app.use(conditional());
 
@@ -34,26 +50,8 @@ app.use(helmet());
 // compress everything before exiting
 app.use(compress());
 
-// cors that allows for subdomains
-app.use(function* (next) {
-  if (this.request.method === 'OPTIONS'
-      && this.get('Origin')
-      && this.get('Origin').indexOf('unitednurseregistry.com') !== -1) {
-    this.set({
-      'Access-Control-Allow-Origin': this.get('Origin'),
-      'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-      'Access-Control-Allow-Credentials': 'true',
-    });
-    this.status = 204;
-  }
-  yield next;
-});
 
 app.use(serve(buildPath), { defer: true });
-
-// // serve root '/' (react server side rendering)
-// require('./server/serverRender')(app);
 
 // static file services
 if (env === 'development') {

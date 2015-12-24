@@ -102,11 +102,8 @@ app.use(function* bearerAuthentication(next) {
       ctx.status = 500;
     }
     if (user) {
-      // const token = 'Bearer ' + jwt.encryptSign(user);
-      // copy the token and send it right back
-      const token = ctx.header.authorization;
       ctx.passport.user = user;
-      ctx.set({ Authorization: token });
+      ctx.set({ Authorization: ctx.header.authorization });
       yield next;
     } else {
       ctx.body = { 'msg': 'failed bearer auth' };

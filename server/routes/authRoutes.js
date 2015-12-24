@@ -58,7 +58,6 @@ module.exports = function authRoutes(app) {
   });
 
   auth.post(`${prefix}/login`, function*(next) {
-    console.log('login called');
     const ctx = this;
     yield passport.authenticate('local', { session: false }, function*(err, user, info) {
       if (err) console.log('error', err);

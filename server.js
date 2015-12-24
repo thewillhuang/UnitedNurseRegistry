@@ -52,7 +52,6 @@ app.use(helmet());
 // compress everything before exiting
 app.use(compress());
 
-
 app.use(serve(buildPath), { defer: true });
 
 // static file services

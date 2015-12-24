@@ -36,16 +36,18 @@ app.use(compress());
 
 // cors that allows for subdomains
 app.use(function* (next) {
-  yield next;
-  if (this.get('Origin') && this.get('Origin').indexOf('unitednurseregistry.com') !== -1) {
-    console.log(this.header);
+  if (this.request.method === 'OPTIONS'
+      && this.get('Origin')
+      && this.get('Origin').indexOf('unitednurseregistry.com') !== -1) {
     this.set({
       'Access-Control-Allow-Origin': this.get('Origin'),
       'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
       'Access-Control-Allow-Credentials': 'true',
     });
+    this.status = 204;
   }
+  yield next;
 });
 
 app.use(serve(buildPath), { defer: true });
@@ -89,14 +91,6 @@ app.use(passport.initialize());
 
 // Set bearer tokens for different auth strategies
 require('./server/routes/authRoutes')(app);
-
-app.use(function* handleCors(next) {
-  if (this.request.method === 'OPTIONS') {
-    this.status = 204;
-  } else {
-    yield next;
-  }
-});
 
 // authorize any requests that has a valid bearer token
 app.use(function* bearerAuthentication(next) {

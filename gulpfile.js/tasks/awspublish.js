@@ -13,7 +13,7 @@ gulp.task('publish', function () {
     .pipe(awspublish.gzip())
     .pipe(filter.restore)
     .pipe(parallelize(publisher.publish(config.headers), 100))
-    // .pipe(publisher.cache())
+    .pipe(publisher.cache())
     .pipe(publisher.sync())
     .pipe(awspublish.reporter());
 });

@@ -115,18 +115,6 @@ app.use(function* bearerAuthentication(next) {
   }).call(this, next);
 });
 
-app.use(function* ensureAuthenticated(next) {
-  if (this.path.indexOf('socket.io') !== -1) {
-    yield next;
-  }
-  if (this.isAuthenticated()) {
-    yield next;
-  } else {
-    this.body = { 'msg': 'failed ensureAuthenticated' };
-    this.status = 401;
-  }
-});
-
 // secured routes
 require('./server/routes/userRoutes')(app);
 require('./server/routes/facilityRoutes')(app);

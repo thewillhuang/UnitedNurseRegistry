@@ -5,4 +5,5 @@ if (!sessionStorage.getItem('token')) {
 } else {
   token = { Authorization: sessionStorage.getItem('token') };
 }
+console.log(token);
 export default token;

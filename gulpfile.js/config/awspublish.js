@@ -16,6 +16,9 @@ module.exports = {
   'headers': {
     'Cache-Control': 'max-age=3600, no-transform, public',
   },
+  'no-cache': {
+    'Cache-Control': 'max-age=0, no-transform, public',
+  },
   'filter': [
     '**/*.js',
     '**/*.html',
@@ -27,5 +30,8 @@ module.exports = {
     '**/*.otf',
     '**/*.ttf',
     '**/*.map',
+  ],
+  'html': [
+    '**/*.html',
   ],
 };

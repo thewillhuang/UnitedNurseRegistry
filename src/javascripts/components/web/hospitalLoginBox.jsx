@@ -23,8 +23,8 @@ const LoginBox = React.createClass({
           // console.log(res.status);
           if (res.status === 200) {
             console.log('headers', res.headers);
-            console.log(res.headers.Authorization, res.body.message.scope);
-            setToken(res.headers.authorization, res.body.message);
+            console.log(res.body.authorization, res.body.message.scope);
+            setToken(res.body.authorization, res.body.message);
             window.location.assign('#hospital');
             // console.log(localStorage.getItem('token'));
           } else if (res.status === 406) {

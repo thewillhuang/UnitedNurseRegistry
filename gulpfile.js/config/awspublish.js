@@ -14,7 +14,7 @@ module.exports = {
     'region': 'us-west-2',
   },
   'headers': {
-    'Cache-Control': 'max-age=315360000, no-transform, public',
+    'Cache-Control': 'max-age=300, no-transform, public',
   },
   'filter': [
     '**/*.js',

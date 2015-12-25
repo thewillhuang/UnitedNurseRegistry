@@ -29,7 +29,7 @@ app.use(function* (next) {
       'Access-Control-Allow-Origin': this.get('Origin'),
       'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
       'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE',
-      'Access-Control-Allow-Credentials': 'true',
+      // 'Access-Control-Allow-Credentials': 'true',
     });
   }
   if (this.request.method === 'OPTIONS') {

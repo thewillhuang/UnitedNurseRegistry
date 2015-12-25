@@ -16,7 +16,7 @@ module.exports = {
   'headers': {
     'Cache-Control': 'max-age=3600, no-transform, public',
   },
-  'no-cache': {
+  'noCache': {
     'Cache-Control': 'max-age=0, no-transform, public',
   },
   'filter': [

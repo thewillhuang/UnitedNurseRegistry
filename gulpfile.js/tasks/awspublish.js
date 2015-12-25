@@ -14,7 +14,7 @@ gulp.task('publish', function () {
     .pipe(awspublish.gzip())
     .pipe(filter.restore)
     .pipe(htmlFilter)
-    .pipe(parallelize(publisher.publish(config['no-cache']), 100))
+    .pipe(parallelize(publisher.publish(config.noCache), 100))
     .pipe(htmlFilter.restore)
     .pipe(parallelize(publisher.publish(config.headers), 100))
     .pipe(publisher.cache())

@@ -23,6 +23,9 @@ module.exports = {
     '**/*.js',
     '**/*.html',
     '**/*.css',
+    '**/*.less',
+    '**/*.scss',
+    '**/*.sass',
     '**/*.svg',
     '**/*.txt',
     '**/*.json',
@@ -30,6 +33,7 @@ module.exports = {
     '**/*.otf',
     '**/*.ttf',
     '**/*.map',
+    '**/*.md',
   ],
   'html': [
     '**/*.html',

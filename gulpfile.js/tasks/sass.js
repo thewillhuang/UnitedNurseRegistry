@@ -1,14 +1,14 @@
 'use strict';
 
-const gulp         = require('gulp');
-const browserSync  = require('browser-sync');
-const sass         = require('gulp-sass');
-const sourcemaps   = require('gulp-sourcemaps');
+const gulp = require('gulp');
+const browserSync = require('browser-sync');
+const sass = require('gulp-sass');
+const sourcemaps = require('gulp-sourcemaps');
 const handleErrors = require('../lib/handleErrors');
-const config       = require('../config/sass');
+const config = require('../config/sass');
 const autoprefixer = require('gulp-autoprefixer');
 const minifyCSS = require('gulp-minify-css');
-const gulpif       = require('gulp-if');
+const gulpif = require('gulp-if');
 
 gulp.task('sass', function () {
   return gulp.src(config.src)
@@ -19,5 +19,5 @@ gulp.task('sass', function () {
     .pipe(gulpif(process.env.NODE_ENV === 'production', minifyCSS(config.minify)))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest(config.dest))
-    .pipe(browserSync.reload({stream: true}));
+    .pipe(browserSync.reload({ stream: true }));
 });

@@ -3,7 +3,7 @@ const gulp = require('gulp');
 const config = require('../config/markup');
 const browserSync = require('browser-sync');
 const minifyHTML = require('gulp-htmlmin');
-const gulpif       = require('gulp-if');
+const gulpif = require('gulp-if');
 
 gulp.task('markup', function () {
   return gulp.src(config.src)

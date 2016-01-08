@@ -1,0 +1,6 @@
+machine:
+  services:
+    - docker
+dependencies:
+  pre:
+    - docker build -t circleci/unr:$CIRCLE_SHA1 .

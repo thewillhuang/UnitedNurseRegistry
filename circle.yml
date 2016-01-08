@@ -4,13 +4,13 @@ machine:
 dependencies:
   override:
     - docker info
-    - docker build -t thewillhuang/UnitedNurseRegistry .
+    - docker build -t thewillhuang/unitednurseregistry .
 test:
   override:
-    - docker run thewillhuang/UnitedNurseRegistry npm test
+    - docker run thewillhuang/unitednurseregistry npm test
 deployment:
   prod:
     branch: master
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push thewillhuang/UnitedNurseRegistry
+      - docker push thewillhuang/unitednurseregistry

@@ -36,7 +36,7 @@ module.exports = function (env) {
           exclude: /(node_modules|bower_components)/,
           loader: 'babel',
           query: {
-            presets: ['es2015', 'react', 'stage-1'],
+            presets: ['es2015', 'react', 'stage-3'],
             cacheDirectory: true,
             plugins: ['transform-runtime'],
           },

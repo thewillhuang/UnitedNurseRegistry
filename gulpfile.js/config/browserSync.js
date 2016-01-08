@@ -1,4 +1,4 @@
-'use strict';
+
 // var config = require('./')
 // const morgan = require('morgan');
 

@@ -1,4 +1,4 @@
-'use strict';
+
 const path = require('path');
 const paths = require('./');
 const webpack = require('webpack');

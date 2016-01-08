@@ -1,4 +1,4 @@
-[![Circle CI Master](https://circleci.com/gh/thewillhuang/unitednurseregistry/tree/master.svg?style=shield&circle-token=8457dbb63525c6b57f10c6601060360a6c34a4a1)](https://circleci.com/gh/thewillhuang/unitednurseregistry/tree/master) Master
+[![Circle CI Master](https://circleci.com/gh/thewillhuang/unitednurseregistry/tree/repo.svg?style=shield&circle-token=8457dbb63525c6b57f10c6601060360a6c34a4a1)](https://circleci.com/gh/thewillhuang/unitednurseregistry/tree/master) Master
 # United Nurse Registry
 the last registry to rule them all.
 

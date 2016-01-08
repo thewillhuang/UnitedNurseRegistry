@@ -4,10 +4,10 @@ machine:
 dependencies:
   override:
     - docker info
-    - docker build -t thewillhuang/unitednurseregistry .
+    - docker build -t thewillhuang/unitednurseregistry:latest .
 test:
   override:
-    - docker run thewillhuang/unitednurseregistry npm test
+    - docker run -e GITHUB_OAUTH=$GITHUB_OAUTH -e NODE_VERSION=$NODE_VERSION thewillhuang/unitednurseregistry npm test
 deployment:
   prod:
     branch: master

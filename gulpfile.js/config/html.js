@@ -1,4 +1,5 @@
-var config = require('./')
+'use strict';
+const config = require('./');
 
 module.exports = {
   watch: config.sourceDirectory + '/html/**/*.html',
@@ -6,6 +7,6 @@ module.exports = {
   dest: config.publicDirectory,
   nunjucks: [config.sourceDirectory + '/html/'],
   htmlmin: {
-    collapseWhitespace: true
-  }
-}
+    collapseWhitespace: true,
+  },
+};

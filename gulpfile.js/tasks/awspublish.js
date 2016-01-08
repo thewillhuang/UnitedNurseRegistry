@@ -1,3 +1,4 @@
+'use strict';
 const gulp = require('gulp');
 const gulpFilter = require('gulp-filter');
 const awspublish = require('gulp-awspublish');

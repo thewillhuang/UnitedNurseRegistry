@@ -1,4 +1,4 @@
-
+'use strict';
 const gulp = require('gulp');
 const config = require('../config/markup');
 const browserSync = require('browser-sync');

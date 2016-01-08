@@ -51,9 +51,7 @@ USER nonroot
 ENV HOME /usr/local/nonroot
 
 # install the files to cache them.
-RUN npm install \
-    && npm run test \
-    && npm run production;
+RUN npm install;
 
-# run the server when docker image is ran.
-CMD ["node", "index"]
+# # run the server when docker image is ran.
+# CMD ["node", "index"]

@@ -4,6 +4,7 @@ machine:
 dependencies:
   override:
     - docker info
+    - docker build --help
     - docker build -t thewillhuang/unitednurseregistry:latest --build-arg=NODE_VERSION=$NODE_VERSION --build-arg=GITHUB_OAUTH=$GITHUB_OAUTH .
 test:
   override:

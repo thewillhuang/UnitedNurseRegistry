@@ -14,3 +14,4 @@ deployment:
     commands:
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push thewillhuang/unitednurseregistry
+      - docker run thewillhuang/unitednurseregistry npm run production; npm run publish

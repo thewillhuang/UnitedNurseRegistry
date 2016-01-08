@@ -24,8 +24,8 @@ RUN rm /bin/sh && ln -s /bin/bash /bin/sh
 ENV NVM_DIR /usr/local/nvm
 
 # install node
-ENV NODE_VERSION v$NODE_VERSION
-ENV NODE_BRANCH node/vNODE_VERSION
+ENV NODE_VERSION v${NODE_VERSION}
+ENV NODE_BRANCH node/v${NODE_VERSION}
 
 
 # Install nvm and use node version defined above.
@@ -42,6 +42,7 @@ WORKDIR /app
 ENV PORT 8080
 EXPOSE $PORT
 
+ENV GITHUB_OAUTH ${GITHUB_OAUTH}
 RUN git clone https://$GITHUB_OAUTH:x-oauth-basic@github.com/thewillhuang/UnitedNurseRegistry.git /app
 
 # make user and set /app as project folder with only user privelages. *running as root will make bower and npm go nuts*

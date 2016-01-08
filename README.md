@@ -1,5 +1,4 @@
-![Build Status][logo]
-[logo]: https://api.shippable.com/projects/55a6ef89edd7f2c05270ba75/badge/master
+[![Circle CI Master](https://circleci.com/gh/thewillhuang/unitednurseregistry/tree/master.svg?style=svg&circle-token=8457dbb63525c6b57f10c6601060360a6c34a4a1)](https://circleci.com/gh/thewillhuang/unitednurseregistry/tree/master) Master
 # United Nurse Registry
 the last registry to rule them all.
 
